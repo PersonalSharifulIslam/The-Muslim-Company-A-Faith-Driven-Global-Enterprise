@@ -897,8 +897,8 @@ export default function Home() {
       {/* ── FOUNDER ── */}
       <ExpandableSection
         id="founder"
-        label="Founder's Statement"
-        summary="Founder & CEO Shariful Islam's personal aspiration is not wealth or fame — but to seek the pleasure of Allah and leave behind something ethical, beneficial, and just."
+        label="Founder & CEO"
+        summary="Shariful Islam's personal aspiration is not wealth or fame — but to seek the pleasure of Allah and leave behind something ethical, beneficial, and just."
         summaryNode={
           <InlineQuote author="Shariful Islam, Founder & CEO">True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.</InlineQuote>
         }

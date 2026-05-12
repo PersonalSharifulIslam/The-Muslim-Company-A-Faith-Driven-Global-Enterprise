@@ -199,6 +199,15 @@ const NAV_LINKS = [
   { label: "Founder", href: "#founder" },
 ];
 
+const NAV_LINKS_DESKTOP = [
+  { label: "Mission", href: "#mission" },
+  { label: "Sectors", href: "#sectors" },
+  { label: "Governance", href: "#governance" },
+  { label: "Vision", href: "#vision" },
+  { label: "Constitution", href: "#constitution" },
+  { label: "Founder", href: "#founder" },
+];
+
 /* ─── component ─── */
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -210,13 +219,18 @@ export default function Home() {
 
       {/* ── NAV ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary-foreground/10">
-        <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
-          <a href="#" className="flex items-center gap-3 font-serif text-base font-bold tracking-widest uppercase text-primary-foreground">
-            <img src={logo} alt="The Muslim Company Logo" className="w-8 h-8 invert opacity-90" />
-            The Muslim Company
+        <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-[4.5rem]">
+          {/* Left — logo + brand name + tagline stacked */}
+          <a href="#" className="flex items-center gap-3">
+            <img src={logo} alt="The Muslim Company Logo" className="w-9 h-9 invert opacity-90 flex-shrink-0" />
+            <div className="flex flex-col leading-tight">
+              <span className="font-serif text-sm font-bold tracking-widest uppercase text-primary-foreground">The Muslim Company</span>
+              <span className="hidden xl:block font-sans text-[8.5px] tracking-[0.28em] uppercase text-secondary/75 mt-0.5">A Faith-Driven Global Enterprise</span>
+            </div>
           </a>
-          <div className="hidden xl:flex items-center gap-5">
-            {NAV_LINKS.map(link => (
+          {/* Right — nav links + CTA */}
+          <div className="hidden xl:flex items-center gap-4 justify-end">
+            {NAV_LINKS_DESKTOP.map(link => (
               <a
                 key={link.href}
                 href={link.href}

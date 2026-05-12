@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import heroBg from "@/assets/images/hero-bg.png";
 import visionBg from "@/assets/images/vision.png";
+import logo from "@/assets/images/logo.png";
 
 /* ─── animation variants ─── */
 const fadeIn = {
@@ -210,7 +211,8 @@ export default function Home() {
       {/* ── NAV ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary-foreground/10">
         <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
-          <a href="#" className="font-serif text-base font-bold tracking-widest uppercase text-primary-foreground">
+          <a href="#" className="flex items-center gap-3 font-serif text-base font-bold tracking-widest uppercase text-primary-foreground">
+            <img src={logo} alt="The Muslim Company Logo" className="w-8 h-8 invert opacity-90" />
             The Muslim Company
           </a>
           <div className="hidden xl:flex items-center gap-5">

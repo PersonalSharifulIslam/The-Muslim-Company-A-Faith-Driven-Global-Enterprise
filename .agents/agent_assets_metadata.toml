@@ -1,0 +1,14 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "ghk_AZX60Wxc3LucDvQfV"
+uri = "file://artifacts/the-muslim-company/src/assets/images/hero-bg.png"
+type = "image"
+title = "Islamic geometric hero background"
+
+[[generated]]
+id = "kEu9ewGxcy_FA3ooQSKA9"
+uri = "file://artifacts/the-muslim-company/src/assets/images/vision.png"
+type = "image"
+title = "Modern Islamic university library"

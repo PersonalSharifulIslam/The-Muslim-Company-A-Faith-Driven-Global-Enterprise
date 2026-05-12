@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "The Muslim Company"
+version = "1.0.0"
+id = "artifacts/the-muslim-company"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18516
+
+[services.development]
+run = "pnpm --filter @workspace/the-muslim-company run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/the-muslim-company", "run", "build" ]
+publicDir = "artifacts/the-muslim-company/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18516"
+BASE_PATH = "/"

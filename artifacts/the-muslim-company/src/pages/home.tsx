@@ -219,55 +219,38 @@ export default function Home() {
 
       {/* ── NAV ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary-foreground/10">
-        <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-[4.5rem]">
-          {/* Left — logo + brand name + tagline stacked */}
+        {/* Row 1 — logo · title · hamburger */}
+        <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-12">
           <a href="#" className="flex items-center gap-3">
-            <img src={logo} alt="The Muslim Company Logo" className="w-9 h-9 invert opacity-90 flex-shrink-0" />
-            <div className="flex flex-col leading-tight">
-              <span className="font-serif text-sm font-bold tracking-widest uppercase text-primary-foreground">The Muslim Company</span>
-              <span className="hidden xl:block font-sans text-[8.5px] tracking-[0.28em] uppercase text-secondary/75 mt-0.5">A Faith-Driven Global Enterprise</span>
-            </div>
+            <img src={logo} alt="The Muslim Company Logo" className="w-7 h-7 invert opacity-90 flex-shrink-0" />
+            <span className="font-serif text-sm font-bold tracking-widest uppercase text-primary-foreground">
+              The Muslim Company
+            </span>
           </a>
-          {/* Right — nav links + CTA */}
-          <div className="hidden xl:flex items-center gap-4 justify-end">
-            {NAV_LINKS_DESKTOP.map(link => (
-              <a
-                key={link.href}
-                href={link.href}
-                data-testid={`nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/55 hover:text-secondary transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-            <a href="#contact">
-              <Button
-                data-testid="nav-join-us"
-                variant="outline"
-                size="sm"
-                className="border-secondary text-secondary hover:bg-secondary hover:text-primary rounded-none font-sans uppercase tracking-widest text-[10px]"
-              >
-                Join Us
-              </Button>
-            </a>
-          </div>
           <button
             data-testid="nav-mobile-toggle"
-            className="xl:hidden text-primary-foreground"
+            className="text-primary-foreground/70 hover:text-secondary transition-colors"
             onClick={() => setNavOpen(!navOpen)}
           >
             {navOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
+        {/* Row 2 — centred tagline */}
+        <div className="border-t border-primary-foreground/10 py-1.5 text-center">
+          <p className="font-sans text-[8.5px] tracking-[0.32em] uppercase text-secondary/75 select-none">
+            A Faith-Driven Global Enterprise
+          </p>
+        </div>
+        {/* Dropdown nav */}
         <AnimatePresence>
           {navOpen && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="xl:hidden bg-primary border-t border-primary-foreground/10 overflow-hidden"
+              className="bg-primary border-t border-primary-foreground/10 overflow-hidden"
             >
-              <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
+              <div className="container mx-auto px-6 py-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-3">
                 {NAV_LINKS.map(link => (
                   <a
                     key={link.href}
@@ -278,6 +261,10 @@ export default function Home() {
                     {link.label}
                   </a>
                 ))}
+                <a href="#contact" onClick={() => setNavOpen(false)}
+                  className="font-sans text-xs tracking-widest uppercase text-secondary hover:text-secondary/80 transition-colors font-bold">
+                  Join Us →
+                </a>
               </div>
             </motion.div>
           )}

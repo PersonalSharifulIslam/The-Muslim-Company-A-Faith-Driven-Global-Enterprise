@@ -56,14 +56,14 @@ function InlineQuote({ children, author, light = false }: { children: React.Reac
   );
 }
 
-function AccordionItem({ title, children }: { title: string; children: React.ReactNode }) {
+function AccordionItem({ title, children, light = false }: { title: string; children: React.ReactNode; light?: boolean }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-primary/10">
+    <div className={`border-b ${light ? "border-primary-foreground/15" : "border-primary/10"}`}>
       <button
         data-testid={`accordion-${title.toLowerCase().replace(/\s+/g, "-")}`}
         onClick={() => setOpen(!open)}
-        className="w-full flex justify-between items-center py-4 text-left font-serif text-base text-primary hover:text-secondary transition-colors"
+        className={`w-full flex justify-between items-center py-4 text-left font-serif text-base transition-colors ${light ? "text-primary-foreground hover:text-secondary" : "text-primary hover:text-secondary"}`}
       >
         <span>{title}</span>
         {open ? <ChevronUp className="w-4 h-4 flex-shrink-0" /> : <ChevronDown className="w-4 h-4 flex-shrink-0" />}
@@ -854,32 +854,32 @@ export default function Home() {
         }
       >
         <div className="space-y-0 border border-primary-foreground/15">
-          <AccordionItem title="Mission Preservation Obligation">
+          <AccordionItem light title="Mission Preservation Obligation">
             <p className="font-sans text-sm text-primary-foreground/65">All future chairpersons, CEOs, executive councils, directors, investors, and strategic leaders carry a moral and constitutional responsibility to preserve the company according to Quran, Sahih Hadith, Prophetic ethics, Supreme Shariah Board principles, and the original constitutional framework. No leadership authority should have the right to intentionally destroy the company's ethical mission or convert the company into a harmful institution.</p>
           </AccordionItem>
-          <AccordionItem title="Emergency Ethical Dissolution Clause">
+          <AccordionItem light title="Emergency Ethical Dissolution Clause">
             <p className="font-sans text-sm text-primary-foreground/65 mb-3">If the company is intentionally transformed away from its Islamic foundation, a dissolution mechanism may be activated:</p>
             <Bullets light items={["99% of remaining eligible wealth redirected toward humanitarian, educational, charitable, and social welfare causes", "1% allocated for workers who served throughout the company's history", "Resources would support Islamic organizations, humanitarian NGOs, educational institutions, and poverty relief"]} />
           </AccordionItem>
-          <AccordionItem title="Constitutional Safeguards Against Hostile Takeover">
+          <AccordionItem light title="Constitutional Safeguards Against Hostile Takeover">
             <p className="font-sans text-sm text-primary-foreground/65 mb-3">Strict protections against forced sale, hostile takeover, mission destruction, political capture, and removal of Shariah governance. Mechanisms include:</p>
             <Bullets light items={["Supreme Shariah Board intervention powers", "Mission preservation voting protections", "Emergency ethical review systems", "Long-term constitutional enforcement clauses"]} />
           </AccordionItem>
-          <AccordionItem title="Internal Ethics & Whistleblower System">
+          <AccordionItem light title="Internal Ethics & Whistleblower System">
             <p className="font-sans text-sm text-primary-foreground/65 mb-3">A confidential internal division accountable to the Founder may prevent corruption, detect unethical behavior, and protect organizational integrity. Whistleblower protections include:</p>
             <Bullets light items={["Offline complaint boxes & online anonymous reporting", "Confidentiality & anti-retaliation protection", "Fair investigation systems & evidence-based review"]} />
           </AccordionItem>
-          <AccordionItem title="Post-Founder Continuity Doctrine">
+          <AccordionItem light title="Post-Founder Continuity Doctrine">
             <p className="font-sans text-sm text-primary-foreground/65 mb-3">The company recognizes many institutions collapse after the founder's death. Therefore:</p>
             <Bullets light items={["Founder philosophy archives", "Institutional continuity systems", "Leadership transition frameworks", "Long-term mission preservation protocols", "Ethical succession systems"]} />
           </AccordionItem>
-          <AccordionItem title="Political Neutrality Policy">
+          <AccordionItem light title="Political Neutrality Policy">
             <p className="font-sans text-sm text-primary-foreground/65 mb-3">The company will not become a political party or tool of political power. It will avoid political exploitation, unethical lobbying, bribery-based influence, hate and division politics, and abuse of authority. Contribution through: knowledge, ethical business, humanitarian work, employment creation, peaceful cooperation.</p>
           </AccordionItem>
-          <AccordionItem title="Global Governance Architecture">
+          <AccordionItem light title="Global Governance Architecture">
             <p className="font-sans text-sm text-primary-foreground/65">The company may establish international governance councils, regional leadership structures, country-level operational boards, global ethical coordination systems, and international Shariah compliance divisions — all aligned with halal ethics, human welfare, and long-term civilization benefit.</p>
           </AccordionItem>
-          <AccordionItem title="Enterprise Risk Management">
+          <AccordionItem light title="Enterprise Risk Management">
             <p className="font-sans text-sm text-primary-foreground/65">Systems for financial crisis management, cybersecurity threats, supply chain disruption, political instability, environmental disasters, leadership corruption prevention, AI misuse protection, and emergency operational continuity. Prevention and preparation are forms of amanah.</p>
           </AccordionItem>
         </div>

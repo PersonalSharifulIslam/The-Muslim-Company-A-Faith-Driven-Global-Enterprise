@@ -219,27 +219,29 @@ export default function Home() {
 
       {/* ── NAV ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary-foreground/10">
-        {/* Row 1 — logo · title · hamburger */}
-        <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-12">
+        {/* Single row — logo+title · tagline · hamburger */}
+        <div className="container mx-auto px-6 lg:px-12 grid grid-cols-[1fr_auto_1fr] items-center h-14">
+          {/* Left */}
           <a href="#" className="flex items-center gap-3">
             <img src={logo} alt="The Muslim Company Logo" className="w-7 h-7 invert opacity-90 flex-shrink-0" />
-            <span className="font-serif text-sm font-bold tracking-widest uppercase text-primary-foreground">
+            <span className="font-serif text-sm font-bold tracking-widest uppercase text-primary-foreground whitespace-nowrap">
               The Muslim Company
             </span>
           </a>
-          <button
-            data-testid="nav-mobile-toggle"
-            className="text-primary-foreground/70 hover:text-secondary transition-colors"
-            onClick={() => setNavOpen(!navOpen)}
-          >
-            {navOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
-        {/* Row 2 — centred tagline */}
-        <div className="border-t border-primary-foreground/10 py-1.5 text-center">
-          <p className="font-sans text-[8.5px] tracking-[0.32em] uppercase text-secondary/75 select-none">
+          {/* Centre — tagline */}
+          <p className="font-sans text-[8.5px] tracking-[0.32em] uppercase text-secondary whitespace-nowrap select-none px-6">
             A Faith-Driven Global Enterprise
           </p>
+          {/* Right */}
+          <div className="flex justify-end">
+            <button
+              data-testid="nav-mobile-toggle"
+              className="text-primary-foreground/70 hover:text-secondary transition-colors"
+              onClick={() => setNavOpen(!navOpen)}
+            >
+              {navOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
         {/* Dropdown nav */}
         <AnimatePresence>

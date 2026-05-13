@@ -372,6 +372,100 @@ export default function Home() {
         </p>
       </ExpandableSection>
 
+      {/* ── OUR STORY ── */}
+      <ExpandableSection
+        id="our-story"
+        label="Our Story"
+        summary="From observing a world drifting from ethics to envisioning a civilization-scale ethical enterprise — this is how The Muslim Company was born."
+        dark
+        summaryNode={
+          <InlineQuote light author="Shariful Islam, Founder & CEO">
+            Can there not be a global institution built upon ethics, transparency, halal economics, knowledge, research, technology, humanitarian responsibility, and Prophetic principles?
+          </InlineQuote>
+        }
+      >
+        <div className="space-y-10">
+
+          {/* Observation */}
+          <div>
+            <h3 className="font-serif text-2xl mb-5">From Observation, Pain & Responsibility</h3>
+            <p className="font-sans text-sm text-primary-foreground/65 leading-relaxed mb-5">
+              Shariful Islam spent much of his early life observing society, people, technology, education, economics, media, and the changing direction of the modern world. Over time, he realized that although humanity was advancing technologically, many societies were simultaneously moving away from morality, humanity, justice, and true peace.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="p-5 bg-primary-foreground/5 border border-primary-foreground/10">
+                <h4 className="font-serif text-base mb-3">What He Observed in Corporations</h4>
+                <Bullets light items={[
+                  "Focus only on profit, market domination, and power",
+                  "People exploited through addiction-based business models",
+                  "Misleading marketing manipulating public emotions",
+                  "Workers underpaid and treated unfairly",
+                  "Corruption and bribery controlling markets",
+                  "Environmental destruction normalized for profit",
+                  "Technology used more for control than human benefit",
+                  "Knowledge commercialized while true education is neglected",
+                ]} />
+              </div>
+              <div className="p-5 bg-primary-foreground/5 border border-primary-foreground/10">
+                <h4 className="font-serif text-base mb-3">What Muslims Were Facing</h4>
+                <Bullets light items={[
+                  "Visible Islamic identity discouraged in workplaces",
+                  "Halal professional ecosystems limited globally",
+                  "Modest and respectful work systems for women rare",
+                  "Ethical workplace culture largely absent",
+                  "Muslim youth lacking organized opportunities for innovation",
+                  "Islamic values treated as obstacles rather than strengths",
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          {/* Vision Beyond Business */}
+          <div>
+            <h3 className="font-serif text-2xl mb-5">A Vision Beyond Business</h3>
+            <p className="font-sans text-sm text-primary-foreground/65 leading-relaxed mb-5">
+              The Muslim Company was never intended to become only a traditional business corporation. Its vision was always much larger.
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {["Ethical Business Ecosystem", "Halal Economic Model", "Humanitarian Development Platform", "Knowledge & Research Revival", "Ethical Technology Ecosystem", "Transparent Institution", "Civilization-Focused Enterprise", "Environmental Stewardship"].map((v, i) => (
+                <div key={i} className="p-3 border border-secondary/20 text-center">
+                  <p className="font-sans text-[10px] tracking-wide uppercase text-primary-foreground/60">{v}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Islamic Civilization Inspiration */}
+          <div className="p-6 bg-primary-foreground/10 border border-secondary/20">
+            <h3 className="font-serif text-xl mb-4">Inspired by Islamic Civilization</h3>
+            <p className="font-sans text-sm text-primary-foreground/65 leading-relaxed mb-4">
+              Shariful Islam has always been deeply inspired by the Islamic Golden Age — a time when Muslims contributed greatly not only to religious scholarship but also to science, medicine, mathematics, astronomy, engineering, economics, architecture, philosophy, and literature.
+            </p>
+            <p className="font-sans text-sm text-primary-foreground/65 leading-relaxed mb-5">
+              He believes Islam never teaches ignorance, injustice, corruption, or backwardness — but encourages knowledge, ethics, justice, research, discipline, compassion, and balanced civilization-building. He believes Muslims can once again contribute positively to humanity if knowledge, ethics, innovation, technology, and humanitarian responsibility are developed together.
+            </p>
+            <Bullets light items={[
+              "The Muslim world once led in science, medicine, mathematics, and philosophy",
+              "Islam inherently encourages knowledge, justice, and ethical progress",
+              "Muslims can contribute again through ethics, innovation, and responsibility",
+              "Faith and technology are not opposites — they complement each other",
+            ]} />
+          </div>
+
+          {/* Dream */}
+          <div>
+            <h3 className="font-serif text-2xl mb-5">A Dream for Muslims & Humanity</h3>
+            <p className="font-sans text-sm text-primary-foreground/65 leading-relaxed mb-5">
+              Shariful Islam's dream is not limited to business success alone. He hopes to help create ethical professional ecosystems for Muslims, halal economic systems, opportunities for practicing Muslims to work with dignity, and civilization-level positive contribution from the Muslim world once again.
+            </p>
+            <InlineQuote light author="Shariful Islam">
+              I envision a future where faith exists alongside technology, ethics exists alongside innovation, research exists alongside spirituality, and humanity remains at the center of development.
+            </InlineQuote>
+          </div>
+
+        </div>
+      </ExpandableSection>
+
       {/* ── ISLAMIC FOUNDATION ── */}
       <ExpandableSection
         id="foundation"
@@ -908,27 +1002,87 @@ export default function Home() {
           <InlineQuote author="Shariful Islam, Founder & CEO">True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.</InlineQuote>
         }
       >
-        <div className="space-y-8 max-w-3xl">
-          <div className="p-8 bg-card border border-primary/10">
-            <Quote className="w-8 h-8 text-secondary/40 mb-4" />
-            <p className="font-serif text-xl italic text-primary/85 leading-relaxed mb-5">
-              "I do not know whether this company will become successful in the future, or whether I will be able to fully implement all of these plans properly. But my intention is to seek the pleasure of Allah alone and to try, as much as possible, to build something ethical, beneficial, and just by loving and following Prophet Muhammad ﷺ."
+        <div className="space-y-8">
+
+          {/* Bio card */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 p-8 bg-card border border-primary/10">
+              <Quote className="w-8 h-8 text-secondary/40 mb-4" />
+              <p className="font-serif text-xl italic text-primary/85 leading-relaxed mb-5">
+                "I do not know whether this company will fully succeed, how far it will go, or whether I will be able to implement every part of this vision. But my intention is to seek the pleasure of Allah and, by following the teachings and ethics of Prophet Muhammad ﷺ as much as possible, try to build something beneficial for humanity."
+              </p>
+              <p className="font-sans text-xs tracking-widest uppercase text-secondary/60">— Shariful Islam, Founder & CEO</p>
+            </div>
+            <div className="p-6 bg-card border border-primary/10 space-y-3">
+              <h4 className="font-serif text-base text-primary mb-2">Profile</h4>
+              {[
+                { l: "Born", v: "2001, Jamalpur, Bangladesh" },
+                { l: "Degree", v: "B.E. Electrical Engineering" },
+                { l: "University", v: "The University of Burdwan, India" },
+                { l: "Founded", v: "The Muslim Company, January 2025" },
+                { l: "Role", v: "Founder & CEO" },
+              ].map((r, i) => (
+                <div key={i}>
+                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40">{r.l}</p>
+                  <p className="font-sans text-sm text-primary/80">{r.v}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* About */}
+          <div className="p-6 bg-card border border-primary/10">
+            <h3 className="font-serif text-lg text-primary mb-3">About Shariful Islam</h3>
+            <p className="font-sans text-sm text-primary/65 leading-relaxed">
+              Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur dedicated to ethical innovation, humanitarian development, knowledge-driven progress, and civilization-focused institution building. From an early age he developed strong interests in technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies.
             </p>
-            <p className="font-sans text-xs tracking-widest uppercase text-secondary/60">— Shariful Islam, Founder & CEO</p>
+          </div>
+
+          {/* Areas of interest */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-6 bg-card border border-primary/10">
+              <h4 className="font-serif text-base text-primary mb-4">Academic & Intellectual Interests</h4>
+              <Bullets items={[
+                "Electrical engineering & smart power grid systems",
+                "Solar and photovoltaic (PV) technology",
+                "Renewable and green energy",
+                "Artificial intelligence & ethical technology",
+                "International business and relations",
+                "Media, journalism & humanitarian development",
+                "Islamic civilization, education & research",
+                "Future-focused ethical innovation",
+              ]} />
+            </div>
+            <div className="p-6 bg-card border border-primary/10">
+              <h4 className="font-serif text-base text-primary mb-4">Inspirations & Influences</h4>
+              <p className="font-sans text-sm text-primary/65 leading-relaxed mb-4">
+                Inspired by Islamic ethics, Prophetic principles, humanitarian responsibility, and the legacy of past Muslim scholars, scientists, philosophers, and the Sahabah of Prophet Muhammad ﷺ.
+              </p>
+              <Bullets items={[
+                "The life and example of Prophet Muhammad ﷺ",
+                "The Sahabah and the scholars of Islamic civilization",
+                "Dr. Zakir Naik — Islamic knowledge and comparative religion",
+                "Imran Khan — principled leadership against corruption",
+              ]} />
+            </div>
+          </div>
+
+          {/* Personal aspiration */}
+          <div className="p-6 bg-card border border-primary/10">
+            <h4 className="font-serif text-lg text-primary mb-4">Personal Aspiration</h4>
+            <p className="font-sans text-sm text-primary/65 leading-relaxed mb-4">
+              Shariful Islam holds a personal aspiration that goes beyond conventional ambition. He hopes, InshaAllah:
+            </p>
+            <Bullets items={[
+              "The Muslim Company becomes one of the world's most trusted, respected, and influential ethical Muslim-led enterprises",
+              "\"InshaAllah, one day I want to become the world's number one Muslim billionaire through halal, ethical, and humanity-centered systems\"",
+              "Wealth becomes a tool for humanitarian development, education, research, ethical systems, and long-term benefit for humanity — not luxury or personal status",
+              "A practicing Muslim-led ethical civilization-scale company becomes globally successful and a model for others",
+            ]} />
           </div>
 
           <InlineQuote author="Shariful Islam">Allah is the owner of everything. Rizq, honor, power, and success come only from Allah.</InlineQuote>
-          <InlineQuote author="Shariful Islam">Human beings plan, work, and struggle, but ultimate success, rizq, honor, and results belong only to Allah.</InlineQuote>
-
-          <div className="p-6 bg-card border border-primary/10">
-            <h4 className="font-serif text-lg text-primary mb-4">Founder's Long-Term Aspiration</h4>
-            <Bullets items={[
-              "The Muslim Company becomes globally recognized",
-              "The company becomes one of the world's most trusted ethical corporations",
-              "A practicing Muslim-led ethical civilization-scale company becomes globally successful",
-              "The company's vision is not based on wealth alone, but humanitarian benefit, ethical leadership, Muslim empowerment, knowledge revival, halal economic development, and global civilization-building",
-            ]} />
-          </div>
+          <InlineQuote author="Shariful Islam">True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.</InlineQuote>
 
           <p className="font-sans text-sm text-primary/55 leading-relaxed">
             The Muslim Company does not claim perfection. The company will correct mistakes when discovered, accept truth when it becomes clear, protect ethics and justice, benefit humanity, and keep accountability and humility. The journey continues through tawakkul upon Allah, sincerity, halal effort, Prophetic ethics, and continuous striving for goodness. <span className="font-serif italic text-secondary">InshaAllah, as far as Allah allows.</span>

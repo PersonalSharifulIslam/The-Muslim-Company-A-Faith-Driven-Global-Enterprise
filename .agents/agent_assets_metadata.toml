@@ -1,5 +1,4 @@
 uploads = []
-outputs = []
 
 [[generated]]
 id = "ghk_AZX60Wxc3LucDvQfV"
@@ -12,3 +11,9 @@ id = "kEu9ewGxcy_FA3ooQSKA9"
 uri = "file://artifacts/the-muslim-company/src/assets/images/vision.png"
 type = "image"
 title = "Modern Islamic university library"
+
+[[outputs]]
+id = "VzZWh1dHuCJHIjWL8_PAy"
+uri = "file://the-muslim-company-full-code.txt"
+type = "text"
+title = "The Muslim Company — Full Website Source Code"

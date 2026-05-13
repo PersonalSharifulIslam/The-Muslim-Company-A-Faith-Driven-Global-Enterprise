@@ -1,0 +1,1405 @@
+
+================================================================================
+  THE MUSLIM COMPANY — FULL WEBSITE SOURCE CODE
+  All files in one place. Last updated: May 2025
+================================================================================
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FILE 1: artifacts/the-muslim-company/src/main.tsx
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import "./index.css";
+
+createRoot(document.getElementById("root")!).render(<App />);
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FILE 2: artifacts/the-muslim-company/src/App.tsx
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import { Switch, Route, Router as WouterRouter } from "wouter";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import NotFound from "@/pages/not-found";
+import Home from "@/pages/home";
+
+const queryClient = new QueryClient();
+
+function Router() {
+  return (
+    <Switch>
+      <Route path="/" component={Home} />
+      <Route component={NotFound} />
+    </Switch>
+  );
+}
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+          <Router />
+        </WouterRouter>
+        <Toaster />
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+}
+
+export default App;
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FILE 3: artifacts/the-muslim-company/src/index.css
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover-border: hsl(var(--popover-border));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary-border: var(--primary-border);
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-secondary-border: var(--secondary-border);
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted-border: var(--muted-border);
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent-border: var(--accent-border);
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-destructive-border: var(--destructive-border);
+
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  --color-sidebar: hsl(var(--sidebar));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-primary-border: var(--sidebar-primary-border);
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-accent-border: var(--sidebar-accent-border);
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+
+  --font-sans: var(--app-font-sans);
+  --font-serif: var(--app-font-serif);
+  --font-mono: var(--app-font-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --button-outline: rgba(0,0,0, .10);
+  --badge-outline: rgba(0,0,0, .05);
+  --opaque-button-border-intensity: -8;
+  --elevate-1: rgba(0,0,0, .03);
+  --elevate-2: rgba(0,0,0, .08);
+
+  /* Light mode - Parchment / Warm */
+  --background: 43 33% 94%;
+  --foreground: 153 30% 15%;
+  --border: 41 23% 78%;
+
+  --card: 43 40% 96%;
+  --card-foreground: 153 30% 15%;
+  --card-border: 41 23% 78%;
+
+  --sidebar: 43 33% 94%;
+  --sidebar-foreground: 153 30% 15%;
+  --sidebar-border: 41 23% 78%;
+  --sidebar-primary: 154 32% 10%;
+  --sidebar-primary-foreground: 43 33% 94%;
+  --sidebar-accent: 42 30% 88%;
+  --sidebar-accent-foreground: 153 30% 15%;
+  --sidebar-ring: 40 43% 58%;
+
+  --popover: 43 40% 96%;
+  --popover-foreground: 153 30% 15%;
+  --popover-border: 41 23% 78%;
+
+  --primary: 154 32% 10%;
+  --primary-foreground: 43 33% 94%;
+
+  --secondary: 40 43% 58%;
+  --secondary-foreground: 154 32% 10%;
+
+  --muted: 42 30% 88%;
+  --muted-foreground: 153 10% 40%;
+
+  --accent: 40 43% 58%;
+  --accent-foreground: 154 32% 10%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+
+  --input: 41 23% 78%;
+  --ring: 154 32% 10%;
+  --chart-1: 154 32% 10%;
+  --chart-2: 40 43% 58%;
+  --chart-3: 153 30% 15%;
+  --chart-4: 42 30% 88%;
+  --chart-5: 41 23% 78%;
+
+  --app-font-sans: 'Outfit', sans-serif;
+  --app-font-serif: 'Cormorant Garamond', serif;
+  --app-font-mono: Menlo, monospace;
+  --radius: 0rem;
+  --shadow-2xs: 0px 2px 0px 0px rgba(0,0,0,0.02);
+  --shadow-xs: 0px 2px 0px 0px rgba(0,0,0,0.03);
+  --shadow-sm: 0px 2px 0px 0px rgba(0,0,0,0.03), 0px 1px 2px -1px rgba(0,0,0,0.03);
+  --shadow: 0px 2px 0px 0px rgba(0,0,0,0.03), 0px 1px 2px -1px rgba(0,0,0,0.03);
+  --shadow-md: 0px 2px 0px 0px rgba(0,0,0,0.03), 0px 2px 4px -1px rgba(0,0,0,0.03);
+  --shadow-lg: 0px 2px 0px 0px rgba(0,0,0,0.03), 0px 4px 6px -1px rgba(0,0,0,0.03);
+  --shadow-xl: 0px 2px 0px 0px rgba(0,0,0,0.03), 0px 8px 10px -1px rgba(0,0,0,0.03);
+  --shadow-2xl: 0px 2px 0px 0px rgba(0,0,0,0.03);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+
+  --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+}
+
+.dark {
+  --button-outline: rgba(255,255,255, .10);
+  --badge-outline: rgba(255,255,255, .05);
+  --opaque-button-border-intensity: 9;
+  --elevate-1: rgba(255,255,255, .04);
+  --elevate-2: rgba(255,255,255, .09);
+
+  /* Dark Mode - Deep Forest Green / Rich Gold */
+  --background: 154 32% 8%;
+  --foreground: 43 33% 94%;
+  --border: 153 20% 20%;
+
+  --card: 154 30% 12%;
+  --card-foreground: 43 33% 94%;
+  --card-border: 153 20% 20%;
+
+  --sidebar: 154 32% 8%;
+  --sidebar-foreground: 43 33% 94%;
+  --sidebar-border: 153 20% 20%;
+  --sidebar-primary: 40 43% 58%;
+  --sidebar-primary-foreground: 154 32% 8%;
+  --sidebar-accent: 153 20% 16%;
+  --sidebar-accent-foreground: 43 33% 94%;
+  --sidebar-ring: 40 43% 58%;
+
+  --popover: 154 30% 12%;
+  --popover-foreground: 43 33% 94%;
+  --popover-border: 153 20% 20%;
+
+  --primary: 40 43% 58%;
+  --primary-foreground: 154 32% 8%;
+
+  --secondary: 153 20% 20%;
+  --secondary-foreground: 43 33% 94%;
+
+  --muted: 153 20% 16%;
+  --muted-foreground: 42 10% 60%;
+
+  --accent: 40 43% 58%;
+  --accent-foreground: 154 32% 8%;
+
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 43 33% 94%;
+
+  --input: 153 20% 20%;
+  --ring: 40 43% 58%;
+
+  --chart-1: 40 43% 58%;
+  --chart-2: 153 20% 40%;
+  --chart-3: 154 32% 20%;
+  --chart-4: 43 33% 70%;
+  --chart-5: 41 23% 50%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground
+           selection:bg-primary selection:text-primary-foreground;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight;
+  }
+}
+
+@layer utilities {
+  input[type="search"]::-webkit-search-cancel-button {
+    @apply hidden;
+  }
+  [contenteditable][data-placeholder]:empty::before {
+    content: attr(data-placeholder);
+    color: hsl(var(--muted-foreground));
+    pointer-events: none;
+  }
+}
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FILE 4: artifacts/the-muslim-company/vite.config.ts
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import path from "path";
+import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+
+const rawPort = process.env.PORT;
+if (!rawPort) {
+  throw new Error("PORT environment variable is required but was not provided.");
+}
+const port = Number(rawPort);
+if (Number.isNaN(port) || port <= 0) {
+  throw new Error(`Invalid PORT value: "${rawPort}"`);
+}
+const basePath = process.env.BASE_PATH;
+if (!basePath) {
+  throw new Error("BASE_PATH environment variable is required but was not provided.");
+}
+
+export default defineConfig({
+  base: basePath,
+  plugins: [
+    react(),
+    tailwindcss(),
+    runtimeErrorOverlay(),
+    ...(process.env.NODE_ENV !== "production" && process.env.REPL_ID !== undefined
+      ? [
+          await import("@replit/vite-plugin-cartographer").then((m) =>
+            m.cartographer({ root: path.resolve(import.meta.dirname, "..") })
+          ),
+          await import("@replit/vite-plugin-dev-banner").then((m) => m.devBanner()),
+        ]
+      : []),
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve(import.meta.dirname, "src"),
+      "@assets": path.resolve(import.meta.dirname, "..", "..", "attached_assets"),
+    },
+    dedupe: ["react", "react-dom"],
+  },
+  root: path.resolve(import.meta.dirname),
+  build: {
+    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    emptyOutDir: true,
+  },
+  server: {
+    port,
+    strictPort: true,
+    host: "0.0.0.0",
+    allowedHosts: true,
+    fs: { strict: true },
+  },
+  preview: {
+    port,
+    host: "0.0.0.0",
+    allowedHosts: true,
+  },
+});
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FILE 5: artifacts/the-muslim-company/package.json
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{
+  "name": "@workspace/the-muslim-company",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config vite.config.ts --host 0.0.0.0",
+    "build": "vite build --config vite.config.ts",
+    "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@hookform/resolvers": "^3.10.0",
+    "@radix-ui/react-accordion": "^1.2.4",
+    "@radix-ui/react-alert-dialog": "^1.1.7",
+    "@radix-ui/react-aspect-ratio": "^1.1.3",
+    "@radix-ui/react-avatar": "^1.1.4",
+    "@radix-ui/react-checkbox": "^1.1.5",
+    "@radix-ui/react-collapsible": "^1.1.4",
+    "@radix-ui/react-context-menu": "^2.2.7",
+    "@radix-ui/react-dialog": "^1.1.7",
+    "@radix-ui/react-dropdown-menu": "^2.1.7",
+    "@radix-ui/react-hover-card": "^1.1.7",
+    "@radix-ui/react-label": "^2.1.3",
+    "@radix-ui/react-menubar": "^1.1.7",
+    "@radix-ui/react-navigation-menu": "^1.2.6",
+    "@radix-ui/react-popover": "^1.1.7",
+    "@radix-ui/react-progress": "^1.1.3",
+    "@radix-ui/react-radio-group": "^1.2.4",
+    "@radix-ui/react-scroll-area": "^1.2.4",
+    "@radix-ui/react-select": "^2.1.7",
+    "@radix-ui/react-separator": "^1.1.3",
+    "@radix-ui/react-slider": "^1.2.4",
+    "@radix-ui/react-slot": "^1.2.0",
+    "@radix-ui/react-switch": "^1.1.4",
+    "@radix-ui/react-tabs": "^1.1.4",
+    "@radix-ui/react-toast": "^1.2.7",
+    "@radix-ui/react-toggle": "^1.1.3",
+    "@radix-ui/react-toggle-group": "^1.1.3",
+    "@radix-ui/react-tooltip": "^1.2.0",
+    "@replit/vite-plugin-cartographer": "catalog:",
+    "@replit/vite-plugin-dev-banner": "catalog:",
+    "@replit/vite-plugin-runtime-error-modal": "catalog:",
+    "@tailwindcss/typography": "^0.5.15",
+    "@tailwindcss/vite": "catalog:",
+    "@tanstack/react-query": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "@workspace/api-client-react": "workspace:*",
+    "class-variance-authority": "catalog:",
+    "clsx": "catalog:",
+    "cmdk": "^1.1.1",
+    "date-fns": "^3.6.0",
+    "embla-carousel-react": "^8.6.0",
+    "framer-motion": "catalog:",
+    "input-otp": "^1.4.2",
+    "lucide-react": "catalog:",
+    "next-themes": "^0.4.6",
+    "react": "catalog:",
+    "react-day-picker": "^9.11.1",
+    "react-dom": "catalog:",
+    "react-hook-form": "^7.55.0",
+    "react-icons": "^5.4.0",
+    "react-resizable-panels": "^2.1.7",
+    "recharts": "^2.15.2",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "catalog:",
+    "tailwindcss": "catalog:",
+    "tw-animate-css": "^1.4.0",
+    "vaul": "^1.1.2",
+    "vite": "catalog:",
+    "wouter": "^3.3.5",
+    "zod": "catalog:"
+  }
+}
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FILE 6: artifacts/the-muslim-company/src/pages/home.tsx  [MAIN PAGE — ALL CONTENT]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import { useState, useEffect } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import {
+  MoveRight, Globe2, Leaf, HeartHandshake, ShieldCheck, ArrowUpRight,
+  BookOpen, Scale, Users, Sprout, Cpu, Building2, Heart,
+  GraduationCap, Handshake, ChevronDown, ChevronUp, Microscope, Megaphone,
+  TreePine, Zap, FlaskConical, Truck, ShoppingBag, Factory,
+  DollarSign, BookMarked, Atom, HandHeart, Radio, Bot, Ship,
+  Home as LucideHome, UserCheck, Baby, Clock, Award, Briefcase, Shield,
+  Gavel, Globe, Flame, Check, Quote, Menu, X, Plus, Minus
+} from "lucide-react";
+import heroBg from "@/assets/images/hero-bg.png";
+import visionBg from "@/assets/images/vision.png";
+import logo from "@/assets/images/logo.png";
+
+/* ─── animation variants ─── */
+const fadeIn = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+};
+const stagger = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.07 } },
+};
+
+/* ─── small helpers ─── */
+function Label({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-xs font-sans tracking-[0.35em] uppercase text-secondary font-bold mb-3">
+      {children}
+    </p>
+  );
+}
+
+function Bullets({ items, light = false }: { items: string[]; light?: boolean }) {
+  return (
+    <ul className="space-y-2.5">
+      {items.map((item, i) => (
+        <li key={i} className={`flex items-start gap-3 font-sans text-sm ${light ? "text-primary-foreground/70" : "text-primary/70"}`}>
+          <div className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 flex-shrink-0" />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function InlineQuote({ children, author, light = false }: { children: React.ReactNode; author?: string; light?: boolean }) {
+  return (
+    <div className="border-l-4 border-secondary pl-5 py-1 my-6">
+      <p className={`font-serif text-lg italic leading-relaxed ${light ? "text-primary-foreground/90" : "text-primary/80"}`}>
+        "{children}"
+      </p>
+      {author && <p className={`mt-3 font-sans text-xs tracking-widest uppercase ${light ? "text-secondary/70" : "text-primary/40"}`}>— {author}</p>}
+    </div>
+  );
+}
+
+function AccordionItem({ title, children, light = false }: { title: string; children: React.ReactNode; light?: boolean }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`border-b ${light ? "border-primary-foreground/15" : "border-primary/10"}`}>
+      <button
+        data-testid={`accordion-${title.toLowerCase().replace(/\s+/g, "-")}`}
+        onClick={() => setOpen(!open)}
+        className={`w-full flex justify-between items-center py-4 text-left font-serif text-base transition-colors ${light ? "text-primary-foreground hover:text-secondary" : "text-primary hover:text-secondary"}`}
+      >
+        <span>{title}</span>
+        {open ? <ChevronUp className="w-4 h-4 flex-shrink-0" /> : <ChevronDown className="w-4 h-4 flex-shrink-0" />}
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <div className="pb-5 space-y-3">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* ─── ExpandableSection ─── */
+function ExpandableSection({
+  id,
+  label,
+  summary,
+  summaryNode,
+  children,
+  dark = false,
+}: {
+  id?: string;
+  label: string;
+  summary: string;
+  summaryNode?: React.ReactNode;
+  children: React.ReactNode;
+  dark?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const fg = dark ? "text-primary-foreground" : "text-primary";
+  const fg2 = dark ? "text-primary-foreground/60" : "text-primary/60";
+  const border = dark ? "border-primary-foreground/15" : "border-primary/10";
+
+  return (
+    <section
+      id={id}
+      className={`py-20 lg:py-28 px-6 lg:px-12 border-t ${border} ${dark ? "bg-primary text-primary-foreground" : "bg-background"}`}
+    >
+      <div className="container mx-auto max-w-5xl">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={fadeIn}
+        >
+          <Label>{label}</Label>
+          <p className={`font-sans text-sm tracking-[0.2em] uppercase mb-5 ${fg2}`}>{summary}</p>
+
+          {summaryNode && (
+            <div className="mb-6">{summaryNode}</div>
+          )}
+
+          <button
+            data-testid={`expand-${label.toLowerCase().replace(/\s+/g, "-")}`}
+            onClick={() => setOpen(!open)}
+            className={`flex items-center gap-2 font-sans text-xs tracking-widest uppercase font-bold transition-colors ${
+              dark
+                ? "text-secondary hover:text-secondary/80"
+                : "text-secondary hover:text-secondary/80"
+            }`}
+          >
+            {open ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+            {open ? "Collapse" : "Read Full Detail"}
+          </button>
+        </motion.div>
+
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              key="content"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.45, ease: "easeInOut" }}
+              className="overflow-hidden"
+            >
+              <div className="pt-10 space-y-8">{children}</div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </section>
+  );
+}
+
+/* ─── data ─── */
+const SECTORS = [
+  { label: "Agriculture & Food", icon: <Sprout className="w-5 h-5" /> },
+  { label: "Education & Research", icon: <GraduationCap className="w-5 h-5" /> },
+  { label: "Technology & AI", icon: <Cpu className="w-5 h-5" /> },
+  { label: "Healthcare & Medicine", icon: <Heart className="w-5 h-5" /> },
+  { label: "Construction & Housing", icon: <Building2 className="w-5 h-5" /> },
+  { label: "Renewable Energy", icon: <Zap className="w-5 h-5" /> },
+  { label: "Media & Journalism", icon: <Radio className="w-5 h-5" /> },
+  { label: "Software & Cybersecurity", icon: <Shield className="w-5 h-5" /> },
+  { label: "Manufacturing & Industry", icon: <Factory className="w-5 h-5" /> },
+  { label: "Islamic Finance & FinTech", icon: <DollarSign className="w-5 h-5" /> },
+  { label: "Transportation & Logistics", icon: <Truck className="w-5 h-5" /> },
+  { label: "E-commerce", icon: <ShoppingBag className="w-5 h-5" /> },
+  { label: "Literature & Publishing", icon: <BookMarked className="w-5 h-5" /> },
+  { label: "Philosophy & Civilization Studies", icon: <BookOpen className="w-5 h-5" /> },
+  { label: "Scientific Research", icon: <FlaskConical className="w-5 h-5" /> },
+  { label: "Social Welfare & Humanitarian Work", icon: <HandHeart className="w-5 h-5" /> },
+  { label: "Environmental Protection", icon: <TreePine className="w-5 h-5" /> },
+  { label: "Robotics & Automation", icon: <Bot className="w-5 h-5" /> },
+  { label: "International Trade", icon: <Ship className="w-5 h-5" /> },
+  { label: "Community Development", icon: <LucideHome className="w-5 h-5" /> },
+];
+
+const NAV_LINKS = [
+  { label: "Mission", href: "#mission" },
+  { label: "Foundation", href: "#foundation" },
+  { label: "Sectors", href: "#sectors" },
+  { label: "Governance", href: "#governance" },
+  { label: "Our People", href: "#people" },
+  { label: "Environment", href: "#environment" },
+  { label: "Humanitarian", href: "#humanitarian" },
+  { label: "Technology", href: "#technology" },
+  { label: "Vision", href: "#vision" },
+  { label: "Constitution", href: "#constitution" },
+  { label: "Founder", href: "#founder" },
+];
+
+/* ─── component ─── */
+export default function Home() {
+  const { scrollYProgress } = useScroll();
+  const yHero = useTransform(scrollYProgress, [0, 0.3], ["0%", "30%"]);
+  const [navOpen, setNavOpen] = useState(false);
+
+  useEffect(() => {
+    history.pushState(null, "", window.location.href);
+    const onPop = () => {
+      history.pushState(null, "", window.location.href);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+  return (
+    <div className="w-full bg-background text-foreground overflow-hidden">
+
+      {/* ── NAV ── */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary-foreground/10">
+        <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-14">
+          <a href="#" className="flex items-center gap-3">
+            <img src={logo} alt="The Muslim Company Logo" className="w-7 h-7 invert opacity-90 flex-shrink-0" />
+            <span className="font-serif text-sm font-bold tracking-widest uppercase text-primary-foreground whitespace-nowrap">
+              The Muslim Company
+            </span>
+          </a>
+          <div className="flex justify-end">
+            <button
+              data-testid="nav-mobile-toggle"
+              className="text-primary-foreground/70 hover:text-secondary transition-colors"
+              onClick={() => setNavOpen(!navOpen)}
+            >
+              {navOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+        <AnimatePresence>
+          {navOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="bg-primary border-t border-primary-foreground/10 overflow-hidden"
+            >
+              <div className="container mx-auto px-6 py-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-3">
+                {NAV_LINKS.map(link => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setNavOpen(false)}
+                    className="font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <a href="#contact" onClick={() => setNavOpen(false)}
+                  className="font-sans text-xs tracking-widest uppercase text-secondary hover:text-secondary/80 transition-colors font-bold">
+                  Join Us →
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+
+      {/* ── HERO ── */}
+      <section id="hero" className="relative h-[100svh] w-full flex items-center justify-center overflow-hidden">
+        <motion.div className="absolute inset-0 z-0" style={{ y: yHero }}>
+          <div className="absolute inset-0 bg-primary/75 mix-blend-multiply z-10" />
+          <img src={heroBg} alt="Islamic architecture" className="w-full h-full object-cover" />
+        </motion.div>
+        <div className="relative z-10 container px-6 mx-auto flex flex-col items-center text-center">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="font-sans text-xs tracking-[0.4em] uppercase text-secondary mb-8"
+          >
+            Faith — Knowledge — Justice — Civilization
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.2 }}
+            className="text-5xl md:text-7xl lg:text-9xl font-serif text-primary-foreground max-w-5xl leading-[0.9]"
+          >
+            Building Human Civilization
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="mt-8 text-lg md:text-xl text-primary-foreground/80 max-w-3xl font-sans font-light"
+          >
+            A faith-driven, civilization-oriented global company built upon the Quran and authentic Sunnah.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1.2 }}
+            className="mt-12 flex gap-4 flex-wrap justify-center"
+          >
+            <a href="#mission">
+              <Button data-testid="hero-explore" size="lg" className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans h-12 px-8 text-xs font-bold">
+                Explore Our Mission <MoveRight className="ml-2 w-4 h-4" />
+              </Button>
+            </a>
+            <a href="#foundation">
+              <Button data-testid="hero-foundation" variant="outline" size="lg" className="border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10 rounded-none uppercase tracking-widest font-sans h-12 px-8 text-xs">
+                Our Foundation
+              </Button>
+            </a>
+          </motion.div>
+        </div>
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+          <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
+            <ChevronDown className="w-6 h-6 text-primary-foreground/40" />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── MISSION ── */}
+      <ExpandableSection
+        id="mission"
+        label="Core Mission"
+        summary="Serving humanity through ethical business, knowledge, justice, and the revival of Islamic civilization."
+        summaryNode={
+          <p className="font-serif text-2xl md:text-3xl text-primary leading-tight max-w-3xl">
+            "To build a civilization-driven global company inspired by the Quran, authentic Sunnah, and the Prophetic model — empowering humanity through ethical business, knowledge, innovation, justice, sustainability, and social development."
+          </p>
+        }
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div>
+            <h3 className="font-serif text-2xl text-primary mb-5">What We Are Here to Do</h3>
+            <Bullets items={[
+              "Serve humanity through ethical and Shariah-compliant systems",
+              "Build a global Islamic ethical business ecosystem",
+              "Ensure human welfare and social justice",
+              "Make food, clothing, housing, education, and healthcare more accessible",
+              "Support research, science, innovation, and technology",
+              "Create sustainable economic opportunities",
+              "Promote knowledge, morality, and human dignity",
+              "Revive the legacy of Muslim civilization through ethical development",
+            ]} />
+          </div>
+          <div>
+            <h3 className="font-serif text-2xl text-primary mb-5">Organizational Philosophy</h3>
+            <Bullets items={[
+              "Business should serve humanity",
+              "Knowledge and morality must go together",
+              "Economic development must remain ethical",
+              "Nature and creation are trusts from Allah",
+              "Human welfare is a responsibility, not only a strategy",
+              "Long-term success comes through honesty, justice, discipline, and service",
+              "Ethical and halal wealth contains true barakah",
+            ]} />
+          </div>
+        </div>
+        <p className="font-sans text-sm text-primary/60 leading-relaxed max-w-3xl">
+          The purpose of the company is not only commercial success, but also the development of humanity, establishment of justice, protection of moral values, advancement of knowledge, and rebuilding a strong ethical civilization.
+        </p>
+      </ExpandableSection>
+
+      {/* ── OUR STORY ── */}
+      <ExpandableSection
+        id="our-story"
+        label="Our Story"
+        summary="From observing a world drifting from ethics to envisioning a civilization-scale ethical enterprise — this is how The Muslim Company was born."
+        dark
+        summaryNode={
+          <InlineQuote light author="Shariful Islam, Founder & CEO">
+            Can there not be a global institution built upon ethics, transparency, halal economics, knowledge, research, technology, humanitarian responsibility, and Prophetic principles?
+          </InlineQuote>
+        }
+      >
+        <div className="space-y-10">
+          <div>
+            <h3 className="font-serif text-2xl mb-5">From Observation, Pain & Responsibility</h3>
+            <p className="font-sans text-sm text-primary-foreground/65 leading-relaxed mb-5">
+              Shariful Islam spent much of his early life observing society, people, technology, education, economics, media, and the changing direction of the modern world.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="p-5 bg-primary-foreground/5 border border-primary-foreground/10">
+                <h4 className="font-serif text-base mb-3">What He Observed in Corporations</h4>
+                <Bullets light items={[
+                  "Focus only on profit, market domination, and power",
+                  "People exploited through addiction-based business models",
+                  "Misleading marketing manipulating public emotions",
+                  "Workers underpaid and treated unfairly",
+                  "Corruption and bribery controlling markets",
+                  "Environmental destruction normalized for profit",
+                  "Technology used more for control than human benefit",
+                  "Knowledge commercialized while true education is neglected",
+                ]} />
+              </div>
+              <div className="p-5 bg-primary-foreground/5 border border-primary-foreground/10">
+                <h4 className="font-serif text-base mb-3">What Muslims Were Facing</h4>
+                <Bullets light items={[
+                  "Visible Islamic identity discouraged in workplaces",
+                  "Halal professional ecosystems limited globally",
+                  "Modest and respectful work systems for women rare",
+                  "Ethical workplace culture largely absent",
+                  "Muslim youth lacking organized opportunities for innovation",
+                  "Islamic values treated as obstacles rather than strengths",
+                ]} />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-serif text-2xl mb-5">A Vision Beyond Business</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {["Ethical Business Ecosystem", "Halal Economic Model", "Humanitarian Development Platform", "Knowledge & Research Revival", "Ethical Technology Ecosystem", "Transparent Institution", "Civilization-Focused Enterprise", "Environmental Stewardship"].map((v, i) => (
+                <div key={i} className="p-3 border border-secondary/20 text-center">
+                  <p className="font-sans text-[10px] tracking-wide uppercase text-primary-foreground/60">{v}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="p-6 bg-primary-foreground/10 border border-secondary/20">
+            <h3 className="font-serif text-xl mb-4">Inspired by Islamic Civilization</h3>
+            <p className="font-sans text-sm text-primary-foreground/65 leading-relaxed mb-5">
+              Shariful Islam has always been deeply inspired by the Islamic Golden Age — a time when Muslims contributed greatly not only to religious scholarship but also to science, medicine, mathematics, astronomy, engineering, economics, architecture, philosophy, and literature.
+            </p>
+            <Bullets light items={[
+              "The Muslim world once led in science, medicine, mathematics, and philosophy",
+              "Islam inherently encourages knowledge, justice, and ethical progress",
+              "Muslims can contribute again through ethics, innovation, and responsibility",
+              "Faith and technology are not opposites — they complement each other",
+            ]} />
+          </div>
+
+          <div>
+            <h3 className="font-serif text-2xl mb-5">A Dream for Muslims & Humanity</h3>
+            <InlineQuote light author="Shariful Islam">
+              I envision a future where faith exists alongside technology, ethics exists alongside innovation, research exists alongside spirituality, and humanity remains at the center of development.
+            </InlineQuote>
+          </div>
+        </div>
+      </ExpandableSection>
+
+      {/* ── ISLAMIC FOUNDATION ── */}
+      <ExpandableSection
+        id="foundation"
+        label="Islamic Foundation"
+        summary="Every operation follows the Quran, authentic Hadith, and the Prophetic Model — completely free from riba, bribery, corruption, and exploitation."
+        dark
+        summaryNode={
+          <div className="grid grid-cols-3 gap-6 max-w-lg">
+            {[
+              { icon: <BookOpen className="w-5 h-5" />, title: "Quran & Sunnah" },
+              { icon: <ShieldCheck className="w-5 h-5" />, title: "Halal Only" },
+              { icon: <Scale className="w-5 h-5" />, title: "Riba-Free" },
+            ].map((item, i) => (
+              <div key={i} className="text-center">
+                <div className="text-secondary mb-2 flex justify-center">{item.icon}</div>
+                <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/50">{item.title}</p>
+              </div>
+            ))}
+          </div>
+        }
+      >
+        <div className="space-y-8">
+          <div>
+            <h3 className="font-serif text-2xl mb-5">Primary Sources</h3>
+            <Bullets light items={[
+              "The Holy Quran — the absolute, unchangeable, final, and supreme source of guidance",
+              "Authentic (Sahih) Hadith of Prophet Muhammad ﷺ",
+              "Prophetic Model (Seerah) — a complete guide for business, leadership, and life",
+              "Ijma (scholarly consensus) and Qiyas (reasoned analogy) — applied through Shariah Board",
+              "Verified scientific evidence consistent with Quran and authentic Sunnah",
+            ]} />
+          </div>
+          <div>
+            <h3 className="font-serif text-2xl mb-5">Absolute Prohibitions</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              {[
+                "Interest (Riba)", "Bribery", "Corruption", "Fraud & Deception",
+                "Gambling", "Alcohol & Drugs", "Weapons for civilian harm",
+                "Unethical entertainment", "Exploitation", "Injustice",
+                "Environmental destruction", "Harmful AI systems",
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-2 p-2 border border-primary-foreground/10 font-sans text-xs text-primary-foreground/55">
+                  <X className="w-3 h-3 text-red-400 flex-shrink-0" />{item}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="font-serif text-2xl mb-5">Islamic Business Principles</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Bullets light items={[
+                "Amanah (trustworthiness) — sacred commitment",
+                "Sadaqah (truthfulness) — zero deception",
+                "Adl (justice) — fair treatment of all",
+                "Ihsan (excellence) — doing more than required",
+              ]} />
+              <Bullets light items={[
+                "Tawakkul — trust in Allah after sincere effort",
+                "Shura — collective consultation in decisions",
+                "Zakat & Sadaqah — obligatory wealth purification",
+                "Islah — continuous improvement and ethical renewal",
+              ]} />
+            </div>
+          </div>
+        </div>
+      </ExpandableSection>
+
+      {/* ── SECTORS ── */}
+      <ExpandableSection
+        id="sectors"
+        label="Sectors of Work"
+        summary="20+ ethical sectors — from agriculture and technology to Islamic finance, education, healthcare, media, and humanitarian development."
+        summaryNode={
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl"
+          >
+            {SECTORS.slice(0, 8).map((s, i) => (
+              <motion.div key={i} variants={fadeIn} className="flex items-center gap-2">
+                <span className="text-secondary w-4 h-4 flex-shrink-0">{s.icon}</span>
+                <span className="font-sans text-xs text-primary/65">{s.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        }
+      >
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          {SECTORS.map((s, i) => (
+            <div key={i} className="flex items-center gap-3 p-3 border border-primary/10 bg-card">
+              <span className="text-secondary flex-shrink-0">{s.icon}</span>
+              <span className="font-sans text-xs text-primary/70">{s.label}</span>
+            </div>
+          ))}
+        </div>
+        <p className="font-sans text-sm text-primary/55 leading-relaxed">
+          The company does not limit itself to a single product, industry, or region. The Muslim Company is built as a civilization-scale institution that aims to serve humanity across all essential sectors of life — from food and shelter to knowledge and technology.
+        </p>
+      </ExpandableSection>
+
+      {/* ── GOVERNANCE ── */}
+      <ExpandableSection
+        id="governance"
+        label="Governance Structure"
+        summary="Supreme Shariah Board oversight on all major decisions, Amanah-based leadership, Shura consultation framework, and Maqasid al-Shariah review for every policy."
+        dark
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="p-6 bg-primary-foreground/5 border border-primary-foreground/10">
+            <Gavel className="w-6 h-6 text-secondary mb-3" />
+            <h3 className="font-serif text-xl mb-3">Supreme Shariah Board</h3>
+            <p className="font-sans text-sm text-primary-foreground/60 mb-4">The highest ethical authority. No major project, product, technology, investment, service, research, media activity, marketing campaign, financial structure, or partnership can begin without Board approval.</p>
+            <p className="font-sans text-xs text-primary-foreground/45 mb-3">Evaluates based on: Quran, Sahih Hadith, Ijma, Qiyas, scientific evidence, ethical reasoning, social impact, human welfare, environmental effect, and long-term civilization consequences.</p>
+          </div>
+          <div className="p-6 bg-primary-foreground/5 border border-primary-foreground/10">
+            <UserCheck className="w-6 h-6 text-secondary mb-3" />
+            <h3 className="font-serif text-xl mb-3">Amanah-Based Leadership</h3>
+            <p className="font-sans text-sm text-primary-foreground/60 mb-4">Leadership is not privilege — it is amanah (trust) and accountability before Allah.</p>
+            <Bullets light items={["Serve people with humility", "Protect justice and fairness", "Avoid arrogance and abuse of power", "Remain transparent and accountable", "Prioritize truth over personal benefit"]} />
+          </div>
+          <div className="p-6 bg-primary-foreground/5 border border-primary-foreground/10">
+            <Users className="w-6 h-6 text-secondary mb-3" />
+            <h3 className="font-serif text-xl mb-3">Shura — Consultation Framework</h3>
+            <Bullets light items={["Expert consultation councils", "Strategic advisory committees", "Ethical review sessions", "Community feedback systems", "Emergency consultation mechanisms"]} />
+          </div>
+          <div className="p-6 bg-primary-foreground/5 border border-primary-foreground/10">
+            <Scale className="w-6 h-6 text-secondary mb-3" />
+            <h3 className="font-serif text-xl mb-3">Maqasid al-Shariah</h3>
+            <Bullets light items={["Faith and religious integrity", "Human life and safety", "Human intellect and education", "Wealth and economic justice", "Family and social stability", "Human dignity and honor", "Environmental balance"]} />
+          </div>
+        </div>
+      </ExpandableSection>
+
+      {/* ── OUR PEOPLE ── */}
+      <ExpandableSection
+        id="people"
+        label="Our People"
+        summary="Fair wages, dignified workplaces, women's separate facilities, 1–1.5 year maternity leave, 15-year pension qualification, and family welfare programs."
+        summaryNode={
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-xl">
+            {[
+              { v: "1.5 Yrs", l: "Maternity Leave" },
+              { v: "30%", l: "Salary During Leave" },
+              { v: "15 Yrs", l: "Pension Threshold" },
+              { v: "Huffaz", l: "Leadership Priority" },
+            ].map((s, i) => (
+              <div key={i} className="text-center">
+                <p className="font-serif text-xl text-secondary">{s.v}</p>
+                <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mt-1">{s.l}</p>
+              </div>
+            ))}
+          </div>
+        }
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="p-6 bg-card border border-primary/10">
+            <Baby className="w-6 h-6 text-secondary mb-3" />
+            <h3 className="font-serif text-lg text-primary mb-3">Women's Workplace & Maternity</h3>
+            <Bullets items={["Maternity leave: 1 to 1.5 years", "30% salary continued at home", "70% may fund a temporary replacement", "Original position retained upon return"]} />
+          </div>
+          <div className="p-6 bg-card border border-primary/10">
+            <Clock className="w-6 h-6 text-secondary mb-3" />
+            <h3 className="font-serif text-lg text-primary mb-3">Long-Term Pension</h3>
+            <Bullets items={["Pension systems & monthly retirement support", "One-time retirement assistance", "Emergency welfare support", "Family assistance programs"]} />
+          </div>
+          <div className="p-6 bg-card border border-primary/10">
+            <Heart className="w-6 h-6 text-secondary mb-3" />
+            <h3 className="font-serif text-lg text-primary mb-3">Family Welfare System</h3>
+            <Bullets items={["Educational scholarships for children", "Emergency family support", "Healthcare assistance", "Housing assistance programs", "Mental wellness & emotional support"]} />
+          </div>
+        </div>
+      </ExpandableSection>
+
+      {/* ── ENVIRONMENT ── */}
+      <ExpandableSection
+        id="environment"
+        label="Environmental Stewardship"
+        summary="Nature is a trust from Allah. No development will intentionally destroy the environment. The company supports renewable energy, wildlife protection, and ecological restoration."
+        summaryNode={
+          <InlineQuote>Human development should never come through the destruction of Allah's creation.</InlineQuote>
+        }
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {[
+            { icon: <TreePine />, title: "No Intentional Destruction", desc: "No development will intentionally destroy nature. Environmental balance must be protected in all operations." },
+            { icon: <Zap />, title: "Renewable Energy", desc: "Clean and renewable energy encouraged across all operations. Pollution and waste minimized." },
+            { icon: <Globe />, title: "Wildlife Protection", desc: "Animals and wildlife treated with mercy and responsibility. Biodiversity protection initiatives supported." },
+            { icon: <Sprout />, title: "Reforestation", desc: "Tree plantation and ecological restoration programs actively encouraged and funded." },
+            { icon: <Leaf />, title: "Minimal Waste Policy", desc: "Sustainable production, waste reduction, recyclable systems, eco-friendly packaging, and repair-friendly products." },
+            { icon: <Globe2 />, title: "Environmental Restoration", desc: "Active restoration including reforestation, water restoration, wildlife rehabilitation, and ecological balance projects." },
+          ].map((item, i) => (
+            <div key={i} className="p-5 bg-card border border-primary/10">
+              <div className="text-secondary mb-3 w-5 h-5">{item.icon}</div>
+              <h4 className="font-serif text-base text-primary mb-2">{item.title}</h4>
+              <p className="font-sans text-xs text-primary/55 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </ExpandableSection>
+
+      {/* ── HUMANITARIAN ── */}
+      <ExpandableSection
+        id="humanitarian"
+        label="Humanitarian Development"
+        summary="10% of monthly net profit goes to charity. The company supports disaster relief, orphans, widows, affordable education, healthcare, housing, and social welfare globally."
+        dark
+        summaryNode={
+          <div className="flex flex-wrap gap-6">
+            {["Disaster Relief", "Orphan Support", "Widow Support", "Education Access", "Healthcare Support", "Housing Assistance"].map((v, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <Check className="w-3 h-3 text-secondary" />
+                <span className="font-sans text-xs text-primary-foreground/55">{v}</span>
+              </div>
+            ))}
+          </div>
+        }
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="p-6 bg-primary-foreground/5 border border-primary-foreground/10">
+            <HandHeart className="w-6 h-6 text-secondary mb-3" />
+            <h3 className="font-serif text-xl mb-3">Social Welfare & Human Dignity</h3>
+            <Bullets light items={["Scholarship systems for education", "Healthcare support funds", "Affordable food systems", "Housing support projects", "Worker welfare programs", "Skill development centers"]} />
+          </div>
+          <div className="p-6 bg-primary-foreground/5 border border-primary-foreground/10">
+            <Flame className="w-6 h-6 text-secondary mb-3" />
+            <h3 className="font-serif text-xl mb-3">Disaster Response & Relief</h3>
+            <Bullets light items={["Floods & earthquakes", "Famines & drought response", "War-related humanitarian crises", "Refugee support", "Emergency food & medical aid"]} />
+          </div>
+        </div>
+      </ExpandableSection>
+
+      {/* ── TECHNOLOGY & AI ── */}
+      <ExpandableSection
+        id="technology"
+        label="Technology & AI Ethics"
+        summary="Technology must remain under ethical supervision. The company opposes harmful AI, addiction-based systems, privacy abuse, and mass misinformation."
+        summaryNode={
+          <p className="font-sans text-sm text-primary/60 max-w-xl">Not every technologically possible action is ethically acceptable. Advanced technology must remain human-centered and under Shariah supervision.</p>
+        }
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="p-6 bg-card border border-primary/10">
+            <Cpu className="w-6 h-6 text-secondary mb-3" />
+            <h3 className="font-serif text-lg text-primary mb-3">Ethical AI Policy</h3>
+            <Bullets items={["Human exploitation & addiction-based manipulation", "Mass misinformation & privacy abuse", "Psychological harm & unethical surveillance", "Harmful automation practices"]} />
+          </div>
+          <div className="p-6 bg-card border border-primary/10">
+            <Shield className="w-6 h-6 text-secondary mb-3" />
+            <h3 className="font-serif text-lg text-primary mb-3">Data Privacy & Cybersecurity</h3>
+            <Bullets items={["Strong cybersecurity systems", "Encrypted communication systems", "Secure cloud infrastructure", "Access-controlled databases", "Responsible data management frameworks"]} />
+          </div>
+        </div>
+      </ExpandableSection>
+
+      {/* ── FINANCE & COMMERCE ── */}
+      <ExpandableSection
+        id="finance"
+        label="Ethical Finance & Commerce"
+        summary="Fully Shariah-compliant. Transparent pricing, no riba, no exploitation, fair wages, ethical supply chains, and product verification systems."
+        dark
+        summaryNode={
+          <div className="flex flex-wrap gap-3">
+            {["No Riba", "No Bribery", "No Fraud", "No Gambling", "Transparent Pricing", "Fair Wages"].map((v, i) => (
+              <span key={i} className="font-sans text-xs border border-secondary/30 text-secondary/70 px-3 py-1">{v}</span>
+            ))}
+          </div>
+        }
+      >
+        <div className="p-6 bg-primary-foreground/10 border border-secondary/20">
+          <Scale className="w-6 h-6 text-secondary mb-3" />
+          <h3 className="font-serif text-xl mb-3">Fair Wage & Worker Dignity Charter</h3>
+          <InlineQuote light>Workers are not disposable resources, but valuable human beings.</InlineQuote>
+        </div>
+      </ExpandableSection>
+
+      {/* ── VISION IMAGE BREAK ── */}
+      <section id="vision" className="relative h-[65svh] flex items-center justify-center overflow-hidden bg-primary">
+        <motion.div className="absolute inset-0 z-0"
+          initial={{ scale: 1.08 }} whileInView={{ scale: 1 }}
+          transition={{ duration: 1.5 }} viewport={{ once: true }}
+        >
+          <div className="absolute inset-0 bg-primary/70 z-10" />
+          <img src={visionBg} alt="Vision" className="w-full h-full object-cover" />
+        </motion.div>
+        <div className="relative z-10 container px-6 mx-auto text-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1 }}>
+            <p className="font-sans text-xs tracking-[0.4em] uppercase text-secondary mb-5">Long-Term Vision</p>
+            <h2 className="text-4xl md:text-6xl font-serif text-primary-foreground mb-6">The Future is Ethical</h2>
+            <p className="font-sans text-lg text-primary-foreground/75 max-w-2xl mx-auto">
+              Universities. Research centers. Hospitals. Innovation hubs. Ethical AI institutions. Civilization-scale development — guided by faith, knowledge, and justice.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── KNOWLEDGE & LONG-TERM VISION ── */}
+      <ExpandableSection
+        id="knowledge"
+        label="Knowledge Revival & Long-Term Vision"
+        summary="The company aims to revive the Muslim world's tradition of science, philosophy, and innovation — building universities, research centers, hospitals, and smart cities for future generations."
+        summaryNode={
+          <p className="font-sans text-sm text-primary/60 max-w-2xl">The Muslim world once contributed greatly to human civilization and can contribute positively again through knowledge, ethics, and responsible development.</p>
+        }
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {[
+            { icon: <GraduationCap />, title: "Corporate University & Academies", items: ["Universities & leadership academies", "Islamic economics institutes", "AI research centers", "Technology training institutes"] },
+            { icon: <Microscope />, title: "Future Civilization Research Center", items: ["Islamic civilization studies", "Ethical economics & AI ethics", "Environmental sustainability", "Education reform"] },
+            { icon: <Globe2 />, title: "Global Muslim Innovation Network", items: ["Muslim scientists & engineers", "Ethical entrepreneurs & AI specialists", "Islamic scholars & educators"] },
+            { icon: <Building2 />, title: "Ethical Smart Cities", items: ["Knowledge-centered urban systems", "Sustainable communities", "Halal economic districts"] },
+            { icon: <BookOpen />, title: "Civilization Archive & Waqf", items: ["Educational, healthcare & research waqf systems", "Humanitarian waqf funds", "Multi-language knowledge accessibility"] },
+            { icon: <Atom />, title: "Strategic Vision Office", items: ["50-year & 100-year civilization planning", "Ethical future development", "Human survival challenge research"] },
+          ].map((item, i) => (
+            <div key={i} className="p-5 bg-card border border-primary/10">
+              <div className="text-secondary mb-3 w-5 h-5">{item.icon}</div>
+              <h4 className="font-serif text-base text-primary mb-3">{item.title}</h4>
+              <Bullets items={item.items} />
+            </div>
+          ))}
+        </div>
+      </ExpandableSection>
+
+      {/* ── CONSTITUTION ── */}
+      <ExpandableSection
+        id="constitution"
+        label="Constitutional Framework"
+        summary="A permanent constitutional framework protects the company's mission from corruption, hostile takeover, and ethical drift — for generations to come."
+        dark
+        summaryNode={
+          <InlineQuote light>If an institution can no longer remain faithful to truth, justice, ethics, and the pleasure of Allah, then its wealth and power should continue benefiting humanity rather than becoming tools of corruption.</InlineQuote>
+        }
+      >
+        <div className="space-y-0 border border-primary-foreground/15">
+          <AccordionItem light title="Mission Preservation Obligation">
+            <p className="font-sans text-sm text-primary-foreground/65">All future chairpersons, CEOs, executive councils, directors, investors, and strategic leaders carry a moral and constitutional responsibility to preserve the company according to Quran, Sahih Hadith, Prophetic ethics, Supreme Shariah Board principles, and the original constitutional framework.</p>
+          </AccordionItem>
+          <AccordionItem light title="Emergency Ethical Dissolution Clause">
+            <p className="font-sans text-sm text-primary-foreground/65 mb-3">If the company is intentionally transformed away from its Islamic foundation, a dissolution mechanism may be activated:</p>
+            <Bullets light items={["99% of remaining eligible wealth redirected toward humanitarian, educational, charitable, and social welfare causes", "1% allocated for workers who served throughout the company's history"]} />
+          </AccordionItem>
+          <AccordionItem light title="Constitutional Safeguards Against Hostile Takeover">
+            <Bullets light items={["Supreme Shariah Board intervention powers", "Mission preservation voting protections", "Emergency ethical review systems", "Long-term constitutional enforcement clauses"]} />
+          </AccordionItem>
+          <AccordionItem light title="Internal Ethics & Whistleblower System">
+            <Bullets light items={["Offline complaint boxes & online anonymous reporting", "Confidentiality & anti-retaliation protection", "Fair investigation systems & evidence-based review"]} />
+          </AccordionItem>
+          <AccordionItem light title="Post-Founder Continuity Doctrine">
+            <Bullets light items={["Founder philosophy archives", "Institutional continuity systems", "Leadership transition frameworks", "Long-term mission preservation protocols"]} />
+          </AccordionItem>
+          <AccordionItem light title="Political Neutrality Policy">
+            <p className="font-sans text-sm text-primary-foreground/65">The company will not become a political party or tool of political power. Contribution through: knowledge, ethical business, humanitarian work, employment creation, peaceful cooperation.</p>
+          </AccordionItem>
+          <AccordionItem light title="Global Governance Architecture">
+            <p className="font-sans text-sm text-primary-foreground/65">The company may establish international governance councils, regional leadership structures, country-level operational boards, and international Shariah compliance divisions.</p>
+          </AccordionItem>
+          <AccordionItem light title="Enterprise Risk Management">
+            <p className="font-sans text-sm text-primary-foreground/65">Systems for financial crisis management, cybersecurity threats, supply chain disruption, political instability, environmental disasters, and emergency operational continuity. Prevention and preparation are forms of amanah.</p>
+          </AccordionItem>
+        </div>
+        <div className="p-6 bg-primary-foreground/5 border border-primary-foreground/10">
+          <h3 className="font-serif text-lg mb-4">The Global Civilization Blueprint</h3>
+          <div className="flex flex-wrap gap-3">
+            {["Faith", "Knowledge", "Justice", "Ethics", "Compassion", "Innovation", "Responsibility"].map((v, i) => (
+              <div key={i} className="px-5 py-2 border border-secondary/30 font-serif text-sm text-secondary">{v}</div>
+            ))}
+          </div>
+        </div>
+      </ExpandableSection>
+
+      {/* ── FOUNDER ── */}
+      <ExpandableSection
+        id="founder"
+        label="Founder & CEO"
+        summary="Shariful Islam's personal aspiration is not wealth or fame — but to seek the pleasure of Allah and leave behind something ethical, beneficial, and just."
+        summaryNode={
+          <InlineQuote author="Shariful Islam, Founder & CEO">True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.</InlineQuote>
+        }
+      >
+        <div className="space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 p-8 bg-card border border-primary/10">
+              <Quote className="w-8 h-8 text-secondary/40 mb-4" />
+              <p className="font-serif text-xl italic text-primary/85 leading-relaxed mb-5">
+                "I do not know whether this company will fully succeed, how far it will go, or whether I will be able to implement every part of this vision. But my intention is to seek the pleasure of Allah and, by following the teachings and ethics of Prophet Muhammad ﷺ as much as possible, try to build something beneficial for humanity."
+              </p>
+              <p className="font-sans text-xs tracking-widest uppercase text-secondary/60">— Shariful Islam, Founder & CEO</p>
+            </div>
+            <div className="p-6 bg-card border border-primary/10 space-y-3">
+              <h4 className="font-serif text-base text-primary mb-2">Profile</h4>
+              {[
+                { l: "Born", v: "2001, Jamalpur, Bangladesh" },
+                { l: "Degree", v: "B.E. Electrical Engineering" },
+                { l: "University", v: "The University of Burdwan, India" },
+                { l: "Founded", v: "The Muslim Company, January 2025" },
+                { l: "Role", v: "Founder & CEO" },
+              ].map((r, i) => (
+                <div key={i}>
+                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40">{r.l}</p>
+                  <p className="font-sans text-sm text-primary/80">{r.v}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-6 bg-card border border-primary/10">
+              <h4 className="font-serif text-base text-primary mb-4">Academic & Intellectual Interests</h4>
+              <Bullets items={[
+                "Electrical engineering & smart power grid systems",
+                "Solar and photovoltaic (PV) technology",
+                "Renewable and green energy",
+                "Artificial intelligence & ethical technology",
+                "International business and relations",
+                "Media, journalism & humanitarian development",
+                "Islamic civilization, education & research",
+              ]} />
+            </div>
+            <div className="p-6 bg-card border border-primary/10">
+              <h4 className="font-serif text-base text-primary mb-4">Inspirations & Influences</h4>
+              <Bullets items={[
+                "The life and example of Prophet Muhammad ﷺ",
+                "The Sahabah and the scholars of Islamic civilization",
+                "Dr. Zakir Naik — Islamic knowledge and comparative religion",
+                "Imran Khan — principled leadership against corruption",
+              ]} />
+            </div>
+          </div>
+
+          <div className="p-6 bg-card border border-primary/10">
+            <h4 className="font-serif text-lg text-primary mb-4">Personal Aspiration</h4>
+            <Bullets items={[
+              "The Muslim Company becomes one of the world's most trusted, respected, and influential ethical Muslim-led enterprises",
+              "\"InshaAllah, one day I want to become the world's number one Muslim billionaire through halal, ethical, and humanity-centered systems\"",
+              "Wealth becomes a tool for humanitarian development, education, research, ethical systems, and long-term benefit for humanity — not luxury or personal status",
+            ]} />
+          </div>
+
+          <InlineQuote author="Shariful Islam">Allah is the owner of everything. Rizq, honor, power, and success come only from Allah.</InlineQuote>
+        </div>
+      </ExpandableSection>
+
+      {/* ── FINAL PHILOSOPHY ── */}
+      <ExpandableSection
+        id="philosophy"
+        label="Final Philosophy"
+        summary="The Muslim Company seeks a future where faith and technology work together, business and morality remain connected, and economic systems serve humanity rather than exploit it."
+        summaryNode={
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            className="space-y-3 max-w-2xl"
+          >
+            {["Faith and technology work together", "Business and morality remain connected", "Human development remains ethical", "Nature and civilization remain balanced", "Knowledge, justice, and compassion guide leadership", "Economic systems serve humanity rather than exploit it"].map((item, i) => (
+              <motion.div key={i} variants={fadeIn} className="flex items-center gap-4">
+                <span className="font-sans text-[10px] text-secondary/50 w-6 flex-shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                <p className="font-sans text-sm text-primary/70">{item}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        }
+      >
+        <p className="font-sans text-sm text-primary/65 leading-relaxed max-w-3xl">
+          The Muslim Company ultimately aims to build a global ethical civilization model inspired by Islamic values, knowledge, justice, sustainability, and service to humanity — not only as a successful institution, but as a protected ethical legacy designed to survive beyond individuals, generations, and changing times.
+        </p>
+      </ExpandableSection>
+
+      {/* ── CTA FOOTER ── */}
+      <section id="contact" className="py-24 lg:py-32 px-6 lg:px-12 bg-primary text-primary-foreground border-t border-primary-foreground/10">
+        <div className="container mx-auto">
+          <div className="max-w-3xl mx-auto text-center mb-20">
+            <Label>Join the Effort</Label>
+            <h2 className="text-4xl md:text-5xl font-serif mb-6">Be Part of Something Historic</h2>
+            <p className="font-sans text-base text-primary-foreground/60 mb-10 leading-relaxed">
+              Whether you are an investor, scientist, scholar, engineer, educator, or professional — if you share our vision for an ethical global civilization, the door is open.
+            </p>
+            <div className="flex gap-4 flex-wrap justify-center">
+              <Button data-testid="cta-contact" size="lg"
+                className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans h-12 px-8 text-xs font-bold">
+                Contact Us <MoveRight className="ml-2 w-4 h-4" />
+              </Button>
+              <Button data-testid="cta-partner" variant="outline" size="lg"
+                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 rounded-none uppercase tracking-widest font-sans h-12 px-8 text-xs">
+                Partner With Us
+              </Button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-primary-foreground/10 pt-14 mb-14">
+            {[
+              { v: "20+", l: "Sectors of Work" },
+              { v: "10%", l: "Monthly Profit to Charity" },
+              { v: "1.5 Yrs", l: "Maternity Leave" },
+              { v: "15 Yrs", l: "Pension Threshold" },
+            ].map((stat, i) => (
+              <div key={i} className="text-center">
+                <p className="font-serif text-3xl text-secondary mb-1">{stat.v}</p>
+                <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/40">{stat.l}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t border-primary-foreground/10 pt-10 flex flex-col md:flex-row justify-between items-center text-xs font-sans text-primary-foreground/35">
+            <div>
+              <p className="font-serif text-base text-primary-foreground/50 mb-1">The Muslim Company</p>
+              <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
+            </div>
+            <div className="flex gap-6 mt-4 md:mt-0">
+              <span className="hover:text-primary-foreground cursor-pointer transition-colors">Privacy Policy</span>
+              <span className="hover:text-primary-foreground cursor-pointer transition-colors">Terms of Service</span>
+              <span className="hover:text-primary-foreground cursor-pointer transition-colors">Shariah Compliance</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  );
+}
+
+
+================================================================================
+  END OF FILE
+  Assets (images) are located at:
+    src/assets/images/logo.png      — TMC circular logo (background removed)
+    src/assets/images/hero-bg.png   — Hero section background
+    src/assets/images/vision.png    — Vision section background
+================================================================================

@@ -220,7 +220,7 @@ export default function Home() {
       {/* ── NAV ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary-foreground/10">
         {/* Single row — logo+title · tagline · hamburger */}
-        <div className="container mx-auto px-6 lg:px-12 grid grid-cols-[1fr_auto_1fr] items-center h-14">
+        <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-14">
           {/* Left */}
           <a href="#" className="flex items-center gap-3">
             <img src={logo} alt="The Muslim Company Logo" className="w-7 h-7 invert opacity-90 flex-shrink-0" />
@@ -228,10 +228,6 @@ export default function Home() {
               The Muslim Company
             </span>
           </a>
-          {/* Centre — tagline */}
-          <p className="font-sans text-[8.5px] tracking-[0.32em] uppercase text-secondary whitespace-nowrap select-none px-6">
-            A Faith-Driven Global Enterprise
-          </p>
           {/* Right */}
           <div className="flex justify-end">
             <button

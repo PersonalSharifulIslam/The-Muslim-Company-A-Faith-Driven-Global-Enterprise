@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -213,6 +213,16 @@ export default function Home() {
   const { scrollYProgress } = useScroll();
   const yHero = useTransform(scrollYProgress, [0, 0.3], ["0%", "30%"]);
   const [navOpen, setNavOpen] = useState(false);
+
+  useEffect(() => {
+    history.pushState(null, "", window.location.href);
+    const onPop = () => {
+      history.pushState(null, "", window.location.href);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
 
   return (
     <div className="w-full bg-background text-foreground overflow-hidden">

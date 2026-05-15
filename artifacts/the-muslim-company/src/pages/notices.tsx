@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search, Bell, FileText, Download, ExternalLink, Pin } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
-import { supabase, isSupabaseConfigured, type Notice } from "@/lib/supabase";
+import { api } from "@/lib/api";
+import type { Notice } from "@/lib/supabase";
 
 const CATEGORIES = ["All", "General Notice", "Important", "Circular", "Recruitment", "Event", "Announcement"];
 const YEARS = ["All", "2026", "2025", "2024", "2023"];
@@ -19,11 +20,7 @@ export default function Notices() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    if (!isSupabaseConfigured) { setLoading(false); return; }
-    supabase.from("notices").select("*").order("pinned", { ascending: false }).order("created_at", { ascending: false }).then(({ data }) => {
-      if (data) setNotices(data as Notice[]);
-      setLoading(false);
-    });
+    api.get("/notices").then((data) => setNotices(data as Notice[])).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   const filtered = notices.filter((n) => {
@@ -73,13 +70,7 @@ export default function Notices() {
 
       <section className="py-12 px-6 lg:px-12 bg-background min-h-[40vh]">
         <div className="container mx-auto max-w-5xl">
-          {!isSupabaseConfigured ? (
-            <div className="text-center py-20">
-              <Bell className="w-10 h-10 text-secondary/40 mx-auto mb-4" />
-              <h3 className="font-serif text-2xl text-primary mb-3">Setup Required</h3>
-              <p className="font-sans text-sm text-primary/50 max-w-md mx-auto">Connect Supabase to manage and display notices.</p>
-            </div>
-          ) : loading ? (
+          {loading ? (
             <div className="space-y-2">{[...Array(5)].map((_, i) => <div key={i} className="h-14 bg-primary/5 animate-pulse" />)}</div>
           ) : paged.length === 0 ? (
             <div className="text-center py-20">

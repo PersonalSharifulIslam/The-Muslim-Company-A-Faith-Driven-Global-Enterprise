@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Plus, Edit2, Trash2, Eye, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminLayout from "@/components/AdminLayout";
 import { useAuth } from "@/lib/auth";
-import { supabase, isSupabaseConfigured, type Job } from "@/lib/supabase";
+import { api } from "@/lib/api";
+import type { Job } from "@/lib/supabase";
 
 const DEPTS = ["Technology", "Engineering", "Operations", "Finance", "Marketing", "HR", "Research", "Media", "Legal"];
 const TYPES = ["Full-time", "Part-time", "Remote", "Contract", "Internship"];
@@ -21,52 +21,49 @@ export default function AdminCareers() {
   const [editing, setEditing] = useState<Job | null>(null);
   const [form, setForm] = useState<JobForm>(BLANK);
   const [saving, setSaving] = useState(false);
-  const [deleting, setDeleting] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState<number | null>(null);
 
   useEffect(() => { if (!loading && !user) window.location.href = "/admin"; }, [user, loading]);
 
   const load = async () => {
-    if (!isSupabaseConfigured) return;
-    const { data } = await supabase.from("jobs").select("*").order("created_at", { ascending: false });
-    if (data) setJobs(data as Job[]);
+    try {
+      const data = await api.get("/admin/jobs", true);
+      setJobs(data as Job[]);
+    } catch {}
   };
 
-  useEffect(() => { load(); }, [user]);
+  useEffect(() => { if (user) load(); }, [user]);
 
   const openNew = () => { setEditing(null); setForm(BLANK); setModal(true); };
   const openEdit = (j: Job) => {
     setEditing(j);
-    setForm({ title: j.title, department: j.department, employment_type: j.employment_type, location: j.location, description: j.description, responsibilities: j.responsibilities, requirements: j.requirements, preferred: j.preferred || "", benefits: j.benefits || "", salary: j.salary || "", deadline: j.deadline, status: j.status });
+    setForm({ title: j.title, department: j.department, employment_type: j.employment_type, location: j.location, description: j.description, responsibilities: j.responsibilities, requirements: j.requirements, preferred: j.preferred || "", benefits: j.benefits || "", salary: j.salary || "", deadline: j.deadline.split("T")[0], status: j.status });
     setModal(true);
-  };
-
-  const getNextJobId = async () => {
-    const { data } = await supabase.from("jobs").select("job_id").order("job_id", { ascending: false }).limit(1);
-    return data && data.length > 0 ? data[0].job_id + 1 : 10925;
   };
 
   const save = async () => {
     setSaving(true);
-    if (editing) {
-      await supabase.from("jobs").update({ ...form, slug: slugify(form.title) }).eq("id", editing.id);
-    } else {
-      const nextId = await getNextJobId();
-      await supabase.from("jobs").insert({ ...form, job_id: nextId, slug: `${slugify(form.title)}-${nextId}` });
-    }
-    await load();
-    setModal(false);
+    const data = { ...form, slug: editing ? slugify(form.title) : `${slugify(form.title)}-${Date.now()}` };
+    try {
+      if (editing) await api.put(`/admin/jobs/${editing.id}`, data, true);
+      else await api.post("/admin/jobs", data, true);
+      await load();
+      setModal(false);
+    } catch {}
     setSaving(false);
   };
 
-  const del = async (id: string) => {
+  const del = async (id: number) => {
     if (!confirm("Delete this job posting?")) return;
     setDeleting(id);
-    await supabase.from("jobs").delete().eq("id", id);
-    await load();
+    try {
+      await api.del(`/admin/jobs/${id}`, true);
+      await load();
+    } catch {}
     setDeleting(null);
   };
 
-  const set = (k: keyof JobForm) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+  const setField = (k: keyof JobForm) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
   if (loading) return null;
@@ -78,19 +75,12 @@ export default function AdminCareers() {
           <h1 className="font-serif text-3xl text-primary mb-1">Careers</h1>
           <p className="font-sans text-sm text-primary/50">Manage job postings</p>
         </div>
-        {isSupabaseConfigured && (
-          <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
-            <Plus className="w-3.5 h-3.5 mr-2" />New Job
-          </Button>
-        )}
+        <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
+          <Plus className="w-3.5 h-3.5 mr-2" />New Job
+        </Button>
       </div>
 
-      {!isSupabaseConfigured ? (
-        <div className="text-center py-20 bg-card border border-primary/10">
-          <p className="font-serif text-xl text-primary mb-2">Supabase Required</p>
-          <p className="font-sans text-sm text-primary/50">Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to manage jobs.</p>
-        </div>
-      ) : jobs.length === 0 ? (
+      {jobs.length === 0 ? (
         <div className="text-center py-20 bg-card border border-primary/10">
           <p className="font-serif text-xl text-primary mb-4">No job postings yet</p>
           <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
@@ -128,7 +118,7 @@ export default function AdminCareers() {
                       <button onClick={() => openEdit(j)} className="text-primary/40 hover:text-secondary transition-colors" title="Edit">
                         <Edit2 className="w-4 h-4" />
                       </button>
-                      <button onClick={() => del(j.id)} disabled={deleting === j.id} className="text-primary/40 hover:text-red-400 transition-colors" title="Delete">
+                      <button onClick={() => del(j.id)} disabled={deleting === j.id} className="text-primary/40 hover:text-red-400 transition-colors disabled:opacity-30" title="Delete">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
@@ -152,32 +142,32 @@ export default function AdminCareers() {
                 {([["title", "Job Title"], ["location", "Location"]] as const).map(([k, l]) => (
                   <div key={k}>
                     <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">{l} *</label>
-                    <input required value={form[k]} onChange={set(k)} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+                    <input required value={form[k]} onChange={setField(k)} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                   </div>
                 ))}
                 <div>
                   <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Department</label>
-                  <select value={form.department} onChange={set("department")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
+                  <select value={form.department} onChange={setField("department")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     {DEPTS.map((d) => <option key={d}>{d}</option>)}
                   </select>
                 </div>
                 <div>
                   <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Employment Type</label>
-                  <select value={form.employment_type} onChange={set("employment_type")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
+                  <select value={form.employment_type} onChange={setField("employment_type")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     {TYPES.map((t) => <option key={t}>{t}</option>)}
                   </select>
                 </div>
                 <div>
                   <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Deadline *</label>
-                  <input type="date" value={form.deadline} onChange={set("deadline")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+                  <input type="date" value={form.deadline} onChange={setField("deadline")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
                 <div>
                   <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Salary (Optional)</label>
-                  <input value={form.salary} onChange={set("salary")} placeholder="e.g. Competitive / $X per month" className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+                  <input value={form.salary} onChange={setField("salary")} placeholder="e.g. Competitive / $X per month" className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
                 <div>
                   <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Status</label>
-                  <select value={form.status} onChange={set("status")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
+                  <select value={form.status} onChange={setField("status")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
                   </select>
@@ -188,7 +178,7 @@ export default function AdminCareers() {
                 return (
                   <div key={k}>
                     <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">{labels[k]}</label>
-                    <textarea rows={4} value={form[k]} onChange={set(k)} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
+                    <textarea rows={4} value={form[k]} onChange={setField(k)} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
                   </div>
                 );
               })}

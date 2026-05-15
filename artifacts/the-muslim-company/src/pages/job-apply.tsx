@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { ArrowLeft, CheckCircle, AlertCircle, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SiteLayout from "@/components/SiteLayout";
-import { supabase, isSupabaseConfigured, generateRefNumber, type Job } from "@/lib/supabase";
+import { api } from "@/lib/api";
+import type { Job } from "@/lib/supabase";
 
 const fadeIn = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 
@@ -25,11 +26,10 @@ export default function JobApply({ params }: { params: { slug: string } }) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!isSupabaseConfigured) { setLoading(false); return; }
-    supabase.from("jobs").select("*").eq("slug", params.slug).single().then(({ data }) => {
-      if (data) setJob(data as Job);
-      setLoading(false);
-    });
+    api.get(`/jobs/${params.slug}`)
+      .then((data) => setJob(data as Job))
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, [params.slug]);
 
   const set = (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
@@ -41,44 +41,30 @@ export default function JobApply({ params }: { params: { slug: string } }) {
     setSubmitting(true);
     setError("");
 
-    const refNumber = generateRefNumber(form.name, job.job_id);
-    let cvUrl = "";
+    try {
+      const formData = new FormData();
+      Object.entries(form).forEach(([k, v]) => formData.append(k, v));
+      formData.append("job_db_id", String(job.id));
+      if (cvFile) formData.append("cv", cvFile);
 
-    if (cvFile && isSupabaseConfigured) {
-      const ext = cvFile.name.split(".").pop();
-      const path = `cvs/${refNumber.replace(/\//g, "-")}.${ext}`;
-      const { data: uploadData } = await supabase.storage.from("applications").upload(path, cvFile);
-      if (uploadData) {
-        const { data: urlData } = supabase.storage.from("applications").getPublicUrl(path);
-        cvUrl = urlData.publicUrl;
+      const token = api.getToken();
+      const res = await fetch("/api/applications", {
+        method: "POST",
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        body: formData,
+      });
+
+      if (!res.ok) {
+        let msg = "Submission failed. Please try again.";
+        try { const j = await res.json(); msg = j.error || msg; } catch { /* noop */ }
+        throw new Error(msg);
       }
+
+      const data = await res.json() as { reference_number: string };
+      setSubmitted({ ref: data.reference_number, date: new Date().toLocaleString("en-GB", { dateStyle: "long", timeStyle: "short" }) });
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Submission failed. Please try again.");
     }
-
-    const { error: insertError } = await supabase.from("applications").insert({
-      reference_number: refNumber,
-      job_id: job.job_id,
-      job_title: job.title,
-      name: form.name,
-      email: form.email,
-      phone: form.phone,
-      address: form.address,
-      education: form.education,
-      experience: form.experience,
-      skills: form.skills,
-      portfolio: form.portfolio,
-      cover_letter: form.cover_letter,
-      cv_url: cvUrl,
-      status: "submitted",
-      updated_at: new Date().toISOString(),
-    });
-
-    if (insertError) {
-      setError("Submission failed. Please try again.");
-      setSubmitting(false);
-      return;
-    }
-
-    setSubmitted({ ref: refNumber, date: new Date().toLocaleString("en-GB", { dateStyle: "long", timeStyle: "short" }) });
     setSubmitting(false);
   };
 
@@ -139,16 +125,11 @@ export default function JobApply({ params }: { params: { slug: string } }) {
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Job Details
           </a>
 
-          {!isSupabaseConfigured ? (
-            <div className="text-center py-20">
-              <AlertCircle className="w-10 h-10 text-secondary/40 mx-auto mb-4" />
-              <h3 className="font-serif text-2xl text-primary mb-3">Setup Required</h3>
-              <p className="font-sans text-sm text-primary/50">Connect Supabase to enable applications.</p>
-            </div>
-          ) : loading ? (
+          {loading ? (
             <div className="h-96 bg-primary/5 animate-pulse" />
           ) : !job ? (
             <div className="text-center py-20">
+              <AlertCircle className="w-10 h-10 text-secondary/40 mx-auto mb-4" />
               <h3 className="font-serif text-2xl text-primary">Position Not Found</h3>
             </div>
           ) : (

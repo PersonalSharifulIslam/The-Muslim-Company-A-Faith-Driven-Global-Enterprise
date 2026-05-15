@@ -3,7 +3,8 @@ import { Plus, Edit2, Trash2, X, Pin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminLayout from "@/components/AdminLayout";
 import { useAuth } from "@/lib/auth";
-import { supabase, isSupabaseConfigured, type Notice } from "@/lib/supabase";
+import { api } from "@/lib/api";
+import type { Notice } from "@/lib/supabase";
 
 const CATS = ["General Notice", "Important", "Circular", "Recruitment", "Event", "Announcement"];
 type Form = { title: string; category: string; content: string; pdf_url: string; important: boolean; pinned: boolean };
@@ -16,16 +17,18 @@ export default function AdminNotices() {
   const [editing, setEditing] = useState<Notice | null>(null);
   const [form, setForm] = useState<Form>(BLANK);
   const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState<number | null>(null);
 
   useEffect(() => { if (!loading && !user) window.location.href = "/admin"; }, [user, loading]);
 
   const load = async () => {
-    if (!isSupabaseConfigured) return;
-    const { data } = await supabase.from("notices").select("*").order("pinned", { ascending: false }).order("created_at", { ascending: false });
-    if (data) setNotices(data as Notice[]);
+    try {
+      const data = await api.get("/admin/notices", true);
+      setNotices(data as Notice[]);
+    } catch {}
   };
 
-  useEffect(() => { load(); }, [user]);
+  useEffect(() => { if (user) load(); }, [user]);
 
   const openNew = () => { setEditing(null); setForm(BLANK); setModal(true); };
   const openEdit = (n: Notice) => {
@@ -36,20 +39,26 @@ export default function AdminNotices() {
 
   const save = async () => {
     setSaving(true);
-    if (editing) await supabase.from("notices").update(form).eq("id", editing.id);
-    else await supabase.from("notices").insert(form);
-    await load();
-    setModal(false);
+    try {
+      if (editing) await api.put(`/admin/notices/${editing.id}`, form, true);
+      else await api.post("/admin/notices", form, true);
+      await load();
+      setModal(false);
+    } catch {}
     setSaving(false);
   };
 
-  const del = async (id: string) => {
+  const del = async (id: number) => {
     if (!confirm("Delete this notice?")) return;
-    await supabase.from("notices").delete().eq("id", id);
-    await load();
+    setDeleting(id);
+    try {
+      await api.del(`/admin/notices/${id}`, true);
+      await load();
+    } catch {}
+    setDeleting(null);
   };
 
-  const set = (k: keyof Form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+  const setField = (k: keyof Form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.type === "checkbox" ? (e.target as HTMLInputElement).checked : e.target.value }));
 
   if (loading) return null;
@@ -61,18 +70,12 @@ export default function AdminNotices() {
           <h1 className="font-serif text-3xl text-primary mb-1">Notice & Event</h1>
           <p className="font-sans text-sm text-primary/50">Manage official notices and announcements</p>
         </div>
-        {isSupabaseConfigured && (
-          <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
-            <Plus className="w-3.5 h-3.5 mr-2" />New Notice
-          </Button>
-        )}
+        <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
+          <Plus className="w-3.5 h-3.5 mr-2" />New Notice
+        </Button>
       </div>
 
-      {!isSupabaseConfigured ? (
-        <div className="text-center py-20 bg-card border border-primary/10">
-          <p className="font-serif text-xl text-primary mb-2">Supabase Required</p>
-        </div>
-      ) : notices.length === 0 ? (
+      {notices.length === 0 ? (
         <div className="text-center py-20 bg-card border border-primary/10">
           <p className="font-serif text-xl text-primary mb-4">No notices yet</p>
           <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5"><Plus className="w-3.5 h-3.5 mr-2" />Add First Notice</Button>
@@ -103,7 +106,7 @@ export default function AdminNotices() {
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
                       <button onClick={() => openEdit(n)} className="text-primary/40 hover:text-secondary transition-colors"><Edit2 className="w-4 h-4" /></button>
-                      <button onClick={() => del(n.id)} className="text-primary/40 hover:text-red-400 transition-colors"><Trash2 className="w-4 h-4" /></button>
+                      <button onClick={() => del(n.id)} disabled={deleting === n.id} className="text-primary/40 hover:text-red-400 transition-colors disabled:opacity-30"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   </td>
                 </tr>
@@ -123,31 +126,31 @@ export default function AdminNotices() {
             <div className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
               <div>
                 <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Title *</label>
-                <input value={form.title} onChange={set("title")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+                <input value={form.title} onChange={setField("title")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Category</label>
-                  <select value={form.category} onChange={set("category")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
+                  <select value={form.category} onChange={setField("category")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     {CATS.map((c) => <option key={c}>{c}</option>)}
                   </select>
                 </div>
                 <div>
                   <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">PDF URL (Optional)</label>
-                  <input value={form.pdf_url} onChange={set("pdf_url")} placeholder="https://..." className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+                  <input value={form.pdf_url} onChange={setField("pdf_url")} placeholder="https://..." className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
               </div>
               <div>
                 <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Content (Optional)</label>
-                <textarea rows={5} value={form.content} onChange={set("content")} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
+                <textarea rows={5} value={form.content} onChange={setField("content")} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
               </div>
               <div className="flex gap-6">
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" checked={form.important} onChange={set("important")} className="accent-secondary" />
+                  <input type="checkbox" checked={form.important} onChange={setField("important")} className="accent-secondary" />
                   <span className="font-sans text-sm text-primary/70">Mark as Important</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" checked={form.pinned} onChange={set("pinned")} className="accent-secondary" />
+                  <input type="checkbox" checked={form.pinned} onChange={setField("pinned")} className="accent-secondary" />
                   <span className="font-sans text-sm text-primary/70">Pin to Top</span>
                 </label>
               </div>

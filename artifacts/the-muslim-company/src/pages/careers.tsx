@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { Search, MapPin, Clock, Calendar, ArrowRight, Briefcase, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SiteLayout from "@/components/SiteLayout";
-import { supabase, isSupabaseConfigured, type Job } from "@/lib/supabase";
+import { api } from "@/lib/api";
+import type { Job } from "@/lib/supabase";
 
 const DEPARTMENTS = ["All", "Technology", "Engineering", "Operations", "Finance", "Marketing", "HR", "Research", "Media"];
 const TYPES = ["All", "Full-time", "Part-time", "Remote", "Contract", "Internship"];
@@ -24,15 +25,9 @@ function JobCard({ job }: { job: Job }) {
         </span>
       </div>
       <div className="flex flex-wrap gap-4 mb-5">
-        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/55">
-          <Briefcase className="w-3.5 h-3.5" />{job.department}
-        </div>
-        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/55">
-          <MapPin className="w-3.5 h-3.5" />{job.location}
-        </div>
-        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/55">
-          <Clock className="w-3.5 h-3.5" />{job.employment_type}
-        </div>
+        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/55"><Briefcase className="w-3.5 h-3.5" />{job.department}</div>
+        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/55"><MapPin className="w-3.5 h-3.5" />{job.location}</div>
+        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/55"><Clock className="w-3.5 h-3.5" />{job.employment_type}</div>
         <div className="flex items-center gap-1.5 font-sans text-xs text-primary/55">
           <Calendar className="w-3.5 h-3.5" />Deadline: {new Date(job.deadline).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
         </div>
@@ -54,13 +49,7 @@ export default function Careers() {
   const [type, setType] = useState("All");
 
   useEffect(() => {
-    async function fetchJobs() {
-      if (!isSupabaseConfigured) { setLoading(false); return; }
-      const { data } = await supabase.from("jobs").select("*").eq("status", "active").order("created_at", { ascending: false });
-      if (data) setJobs(data as Job[]);
-      setLoading(false);
-    }
-    fetchJobs();
+    api.get("/jobs").then((data) => setJobs(data as Job[])).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   const filtered = jobs.filter((j) => {
@@ -94,26 +83,12 @@ export default function Careers() {
           <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-primary/30" />
-              <input
-                type="text"
-                placeholder="Search positions..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-11 pr-4 h-11 bg-background border border-primary/15 font-sans text-sm text-primary placeholder:text-primary/30 focus:outline-none focus:border-secondary"
-              />
+              <input type="text" placeholder="Search positions..." value={search} onChange={(e) => setSearch(e.target.value)} className="w-full pl-11 pr-4 h-11 bg-background border border-primary/15 font-sans text-sm text-primary placeholder:text-primary/30 focus:outline-none focus:border-secondary" />
             </div>
-            <select
-              value={dept}
-              onChange={(e) => setDept(e.target.value)}
-              className="h-11 px-4 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary"
-            >
+            <select value={dept} onChange={(e) => setDept(e.target.value)} className="h-11 px-4 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
               {DEPARTMENTS.map((d) => <option key={d}>{d}</option>)}
             </select>
-            <select
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-              className="h-11 px-4 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary"
-            >
+            <select value={type} onChange={(e) => setType(e.target.value)} className="h-11 px-4 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
               {TYPES.map((t) => <option key={t}>{t}</option>)}
             </select>
           </div>
@@ -122,18 +97,8 @@ export default function Careers() {
 
       <section className="py-16 px-6 lg:px-12 bg-background min-h-[40vh]">
         <div className="container mx-auto max-w-5xl">
-          {!isSupabaseConfigured ? (
-            <div className="text-center py-20">
-              <Briefcase className="w-10 h-10 text-secondary/40 mx-auto mb-4" />
-              <h3 className="font-serif text-2xl text-primary mb-3">Setup Required</h3>
-              <p className="font-sans text-sm text-primary/50 max-w-md mx-auto">Connect Supabase to manage and display job listings. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your environment variables.</p>
-            </div>
-          ) : loading ? (
-            <div className="space-y-4">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="h-40 bg-primary/5 animate-pulse" />
-              ))}
-            </div>
+          {loading ? (
+            <div className="space-y-4">{[1, 2, 3].map((i) => <div key={i} className="h-40 bg-primary/5 animate-pulse" />)}</div>
           ) : filtered.length === 0 ? (
             <div className="text-center py-20">
               <Briefcase className="w-10 h-10 text-secondary/40 mx-auto mb-4" />

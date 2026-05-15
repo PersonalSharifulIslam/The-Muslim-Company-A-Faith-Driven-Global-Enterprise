@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { Search, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SiteLayout from "@/components/SiteLayout";
-import { supabase, isSupabaseConfigured, STATUS_LABELS, STATUS_COLORS, type Application } from "@/lib/supabase";
+import { api } from "@/lib/api";
+import { STATUS_LABELS, STATUS_COLORS, type Application } from "@/lib/supabase";
 
 const fadeIn = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 
@@ -18,14 +19,12 @@ export default function RecruitmentStatus() {
     if (!ref.trim()) return;
     setSearching(true);
     setSearched(false);
-
-    const { data } = await supabase
-      .from("applications")
-      .select("*")
-      .eq("reference_number", ref.trim().toUpperCase())
-      .single();
-
-    setResult(data ? (data as Application) : "not_found");
+    try {
+      const data = await api.get(`/applications/lookup/${encodeURIComponent(ref.trim().toUpperCase())}`);
+      setResult(data as Application);
+    } catch {
+      setResult("not_found");
+    }
     setSearched(true);
     setSearching(false);
   };
@@ -48,76 +47,66 @@ export default function RecruitmentStatus() {
 
       <section className="py-16 px-6 lg:px-12 bg-background">
         <div className="container mx-auto max-w-3xl">
-          {!isSupabaseConfigured ? (
-            <div className="text-center py-12">
-              <AlertCircle className="w-10 h-10 text-secondary/40 mx-auto mb-4" />
-              <h3 className="font-serif text-2xl text-primary mb-3">Setup Required</h3>
-              <p className="font-sans text-sm text-primary/50">Connect Supabase to enable status tracking.</p>
+          <form onSubmit={handleSearch} className="mb-10">
+            <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-3">Application Reference Number</label>
+            <div className="flex gap-3 flex-col sm:flex-row">
+              <input
+                type="text"
+                value={ref}
+                onChange={(e) => setRef(e.target.value)}
+                placeholder="e.g. BD/AI/10925/2026/X7K9P2"
+                className="flex-1 h-12 px-4 bg-background border border-primary/15 font-mono text-sm text-primary placeholder:text-primary/25 focus:outline-none focus:border-secondary tracking-wider"
+              />
+              <Button type="submit" disabled={searching || !ref.trim()} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans h-12 px-8 text-xs font-bold disabled:opacity-50">
+                {searching ? "Searching..." : <><Search className="w-4 h-4 mr-2" />Search</>}
+              </Button>
             </div>
-          ) : (
-            <>
-              <form onSubmit={handleSearch} className="mb-10">
-                <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-3">Application Reference Number</label>
-                <div className="flex gap-3 flex-col sm:flex-row">
-                  <input
-                    type="text"
-                    value={ref}
-                    onChange={(e) => setRef(e.target.value)}
-                    placeholder="e.g. BD/AI/10925/2026/X7K9P2"
-                    className="flex-1 h-12 px-4 bg-background border border-primary/15 font-mono text-sm text-primary placeholder:text-primary/25 focus:outline-none focus:border-secondary tracking-wider"
-                  />
-                  <Button type="submit" disabled={searching || !ref.trim()} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans h-12 px-8 text-xs font-bold disabled:opacity-50">
-                    {searching ? "Searching..." : <><Search className="w-4 h-4 mr-2" />Search</>}
-                  </Button>
+            <p className="font-sans text-xs text-primary/35 mt-2">Reference numbers are case-insensitive. Format: BD/XX/XXXXX/XXXX/XXXXXX</p>
+          </form>
+
+          {searched && result === "not_found" && (
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-start gap-4 p-6 border border-red-400/20 bg-red-50/50">
+              <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-serif text-base text-primary mb-1">Application reference number not found.</p>
+                <p className="font-sans text-xs text-primary/50">Please check the reference number and try again. Ensure it matches exactly as provided in your confirmation.</p>
+              </div>
+            </motion.div>
+          )}
+
+          {app && (
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+              <div className="bg-primary text-primary-foreground p-8 mb-6">
+                <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/60 mb-6">Application Found</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  {[
+                    { l: "Applicant Name", v: app.name },
+                    { l: "Applied Position", v: app.job_title },
+                    { l: "Job ID", v: `#${app.job_id}` },
+                    { l: "Reference Number", v: app.reference_number, mono: true },
+                    { l: "Submission Date", v: new Date(app.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) },
+                    { l: "Last Updated", v: new Date(app.updated_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) },
+                  ].map(({ l, v, mono }) => (
+                    <div key={l}>
+                      <p className="font-sans text-[10px] tracking-widests uppercase text-primary-foreground/35 mb-1">{l}</p>
+                      <p className={`${mono ? "font-mono text-secondary" : "font-sans text-primary-foreground"} text-sm`}>{v}</p>
+                    </div>
+                  ))}
                 </div>
-                <p className="font-sans text-xs text-primary/35 mt-2">Reference numbers are case-insensitive. Format: BD/XX/XXXXX/XXXX/XXXXXX</p>
-              </form>
+                <div className="pt-6 border-t border-primary-foreground/10">
+                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/35 mb-2">Current Status</p>
+                  <span className={`inline-flex items-center px-4 py-2 font-sans text-sm font-semibold border ${STATUS_COLORS[app.status] || "text-primary-foreground"}`}>
+                    {STATUS_LABELS[app.status] || app.status}
+                  </span>
+                </div>
+              </div>
 
-              {searched && result === "not_found" && (
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-start gap-4 p-6 border border-red-400/20 bg-red-50/50">
-                  <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-serif text-base text-primary mb-1">Application reference number not found.</p>
-                    <p className="font-sans text-xs text-primary/50">Please check the reference number and try again. Ensure it matches exactly as provided in your confirmation.</p>
-                  </div>
-                </motion.div>
-              )}
-
-              {app && (
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-                  <div className="bg-primary text-primary-foreground p-8 mb-6">
-                    <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/60 mb-6">Application Found</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                      {[
-                        { l: "Applicant Name", v: app.name },
-                        { l: "Applied Position", v: app.job_title },
-                        { l: "Job ID", v: `#${app.job_id}` },
-                        { l: "Reference Number", v: app.reference_number, mono: true },
-                        { l: "Submission Date", v: new Date(app.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) },
-                        { l: "Last Updated", v: new Date(app.updated_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) },
-                      ].map(({ l, v, mono }) => (
-                        <div key={l}>
-                          <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/35 mb-1">{l}</p>
-                          <p className={`${mono ? "font-mono text-secondary" : "font-sans text-primary-foreground"} text-sm`}>{v}</p>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="pt-6 border-t border-primary-foreground/10">
-                      <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/35 mb-2">Current Status</p>
-                      <span className={`inline-flex items-center px-4 py-2 font-sans text-sm font-semibold border ${STATUS_COLORS[app.status] || "text-primary-foreground"}`}>
-                        {STATUS_LABELS[app.status] || app.status}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="p-5 border border-secondary/20 bg-secondary/5">
-                    <p className="font-sans text-xs text-primary/55 leading-relaxed">
-                      Our recruitment team reviews all applications carefully. If you are shortlisted, we will contact you through the email or phone number provided. May Allah bless your efforts.
-                    </p>
-                  </div>
-                </motion.div>
-              )}
-            </>
+              <div className="p-5 border border-secondary/20 bg-secondary/5">
+                <p className="font-sans text-xs text-primary/55 leading-relaxed">
+                  Our recruitment team reviews all applications carefully. If you are shortlisted, we will contact you through the email or phone number provided. May Allah bless your efforts.
+                </p>
+              </div>
+            </motion.div>
           )}
         </div>
       </section>

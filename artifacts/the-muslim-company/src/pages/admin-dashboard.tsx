@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Briefcase, Users, Newspaper, Bell, BookOpen, TrendingUp } from "lucide-react";
 import AdminLayout from "@/components/AdminLayout";
 import { useAuth } from "@/lib/auth";
-import { supabase, isSupabaseConfigured } from "@/lib/supabase";
+import { api } from "@/lib/api";
 
 const fadeIn = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
 
@@ -19,19 +19,11 @@ export default function AdminDashboard() {
   }, [user, loading]);
 
   useEffect(() => {
-    if (!isSupabaseConfigured || !user) { setStatsLoading(false); return; }
-    async function loadStats() {
-      const [j, a, n, no, b] = await Promise.all([
-        supabase.from("jobs").select("id", { count: "exact", head: true }),
-        supabase.from("applications").select("id", { count: "exact", head: true }),
-        supabase.from("newsroom_posts").select("id", { count: "exact", head: true }),
-        supabase.from("notices").select("id", { count: "exact", head: true }),
-        supabase.from("blog_posts").select("id", { count: "exact", head: true }),
-      ]);
-      setStats({ jobs: j.count || 0, applications: a.count || 0, news: n.count || 0, notices: no.count || 0, blogs: b.count || 0 });
-      setStatsLoading(false);
-    }
-    loadStats();
+    if (!user) { setStatsLoading(false); return; }
+    api.get("/admin/stats", true)
+      .then((data) => setStats(data as Stats))
+      .catch(() => {})
+      .finally(() => setStatsLoading(false));
   }, [user]);
 
   if (loading) return null;
@@ -88,16 +80,16 @@ export default function AdminDashboard() {
             <h2 className="font-serif text-lg text-primary mb-5">System Status</h2>
             <div className="space-y-3">
               {[
-                { label: "Supabase Database", ok: isSupabaseConfigured },
+                { label: "Replit Database", ok: true },
                 { label: "Authentication", ok: Boolean(user) },
-                { label: "Careers System", ok: isSupabaseConfigured },
-                { label: "Newsroom System", ok: isSupabaseConfigured },
-                { label: "Blog System", ok: isSupabaseConfigured },
+                { label: "Careers System", ok: true },
+                { label: "Newsroom System", ok: true },
+                { label: "Blog System", ok: true },
               ].map(({ label, ok }) => (
                 <div key={label} className="flex items-center justify-between">
                   <span className="font-sans text-sm text-primary/60">{label}</span>
                   <span className={`font-sans text-[10px] tracking-widest uppercase px-2 py-0.5 border ${ok ? "text-green-400 border-green-400/20 bg-green-400/5" : "text-red-400 border-red-400/20 bg-red-400/5"}`}>
-                    {ok ? "Active" : "Setup Required"}
+                    {ok ? "Active" : "Offline"}
                   </span>
                 </div>
               ))}

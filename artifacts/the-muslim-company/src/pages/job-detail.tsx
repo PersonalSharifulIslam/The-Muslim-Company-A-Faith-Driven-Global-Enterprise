@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { MapPin, Clock, Calendar, Briefcase, ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SiteLayout from "@/components/SiteLayout";
-import { supabase, isSupabaseConfigured, type Job } from "@/lib/supabase";
+import { api } from "@/lib/api";
+import type { Job } from "@/lib/supabase";
 
 const fadeIn = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 
@@ -12,13 +13,10 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchJob() {
-      if (!isSupabaseConfigured) { setLoading(false); return; }
-      const { data } = await supabase.from("jobs").select("*").eq("slug", params.slug).single();
-      if (data) setJob(data as Job);
-      setLoading(false);
-    }
-    fetchJob();
+    api.get(`/jobs/${params.slug}`)
+      .then((data) => setJob(data as Job))
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, [params.slug]);
 
   const isExpired = job ? new Date(job.deadline) < new Date() : false;

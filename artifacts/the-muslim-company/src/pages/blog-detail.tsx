@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
-import { supabase, isSupabaseConfigured, type BlogPost } from "@/lib/supabase";
+import { api } from "@/lib/api";
+import type { BlogPost } from "@/lib/supabase";
 
 const fadeIn = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 
@@ -11,11 +12,10 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!isSupabaseConfigured) { setLoading(false); return; }
-    supabase.from("blog_posts").select("*").eq("slug", params.slug).eq("published", true).single().then(({ data }) => {
-      if (data) setPost(data as BlogPost);
-      setLoading(false);
-    });
+    api.get(`/blog/${params.slug}`)
+      .then((data) => setPost(data as BlogPost))
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, [params.slug]);
 
   return (

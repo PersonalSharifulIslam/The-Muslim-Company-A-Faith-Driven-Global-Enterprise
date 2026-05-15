@@ -3,7 +3,8 @@ import { Plus, Edit2, Trash2, Eye, X, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminLayout from "@/components/AdminLayout";
 import { useAuth } from "@/lib/auth";
-import { supabase, isSupabaseConfigured, type NewsPost } from "@/lib/supabase";
+import { api } from "@/lib/api";
+import type { NewsPost } from "@/lib/supabase";
 
 const CATS = ["Press Release", "Company Update", "Partnership", "Media Coverage", "Announcement"];
 type Form = { title: string; slug: string; category: string; excerpt: string; content: string; image_url: string; featured: boolean; published: boolean };
@@ -18,16 +19,18 @@ export default function AdminNewsroom() {
   const [editing, setEditing] = useState<NewsPost | null>(null);
   const [form, setForm] = useState<Form>(BLANK);
   const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState<number | null>(null);
 
   useEffect(() => { if (!loading && !user) window.location.href = "/admin"; }, [user, loading]);
 
   const load = async () => {
-    if (!isSupabaseConfigured) return;
-    const { data } = await supabase.from("newsroom_posts").select("*").order("created_at", { ascending: false });
-    if (data) setPosts(data as NewsPost[]);
+    try {
+      const data = await api.get("/admin/newsroom", true);
+      setPosts(data as NewsPost[]);
+    } catch {}
   };
 
-  useEffect(() => { load(); }, [user]);
+  useEffect(() => { if (user) load(); }, [user]);
 
   const openNew = () => { setEditing(null); setForm(BLANK); setModal(true); };
   const openEdit = (p: NewsPost) => {
@@ -39,20 +42,26 @@ export default function AdminNewsroom() {
   const save = async () => {
     setSaving(true);
     const data = { ...form, slug: form.slug || slugify(form.title) };
-    if (editing) await supabase.from("newsroom_posts").update(data).eq("id", editing.id);
-    else await supabase.from("newsroom_posts").insert(data);
-    await load();
-    setModal(false);
+    try {
+      if (editing) await api.put(`/admin/newsroom/${editing.id}`, data, true);
+      else await api.post("/admin/newsroom", data, true);
+      await load();
+      setModal(false);
+    } catch {}
     setSaving(false);
   };
 
-  const del = async (id: string) => {
+  const del = async (id: number) => {
     if (!confirm("Delete this article?")) return;
-    await supabase.from("newsroom_posts").delete().eq("id", id);
-    await load();
+    setDeleting(id);
+    try {
+      await api.del(`/admin/newsroom/${id}`, true);
+      await load();
+    } catch {}
+    setDeleting(null);
   };
 
-  const set = (k: keyof Form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+  const setField = (k: keyof Form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.type === "checkbox" ? (e.target as HTMLInputElement).checked : e.target.value }));
 
   if (loading) return null;
@@ -64,18 +73,12 @@ export default function AdminNewsroom() {
           <h1 className="font-serif text-3xl text-primary mb-1">Newsroom & PR</h1>
           <p className="font-sans text-sm text-primary/50">Manage press releases and news articles</p>
         </div>
-        {isSupabaseConfigured && (
-          <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
-            <Plus className="w-3.5 h-3.5 mr-2" />New Article
-          </Button>
-        )}
+        <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
+          <Plus className="w-3.5 h-3.5 mr-2" />New Article
+        </Button>
       </div>
 
-      {!isSupabaseConfigured ? (
-        <div className="text-center py-20 bg-card border border-primary/10">
-          <p className="font-serif text-xl text-primary mb-2">Supabase Required</p>
-        </div>
-      ) : posts.length === 0 ? (
+      {posts.length === 0 ? (
         <div className="text-center py-20 bg-card border border-primary/10">
           <p className="font-serif text-xl text-primary mb-4">No articles yet</p>
           <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5"><Plus className="w-3.5 h-3.5 mr-2" />Write First Article</Button>
@@ -106,7 +109,7 @@ export default function AdminNewsroom() {
                     <div className="flex items-center gap-3">
                       <a href={`/newsroom/${p.slug}`} target="_blank" className="text-primary/40 hover:text-secondary transition-colors"><Eye className="w-4 h-4" /></a>
                       <button onClick={() => openEdit(p)} className="text-primary/40 hover:text-secondary transition-colors"><Edit2 className="w-4 h-4" /></button>
-                      <button onClick={() => del(p.id)} className="text-primary/40 hover:text-red-400 transition-colors"><Trash2 className="w-4 h-4" /></button>
+                      <button onClick={() => del(p.id)} disabled={deleting === p.id} className="text-primary/40 hover:text-red-400 transition-colors disabled:opacity-30"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   </td>
                 </tr>
@@ -126,35 +129,35 @@ export default function AdminNewsroom() {
             <div className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
               <div>
                 <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Title *</label>
-                <input value={form.title} onChange={set("title")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+                <input value={form.title} onChange={setField("title")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Category</label>
-                  <select value={form.category} onChange={set("category")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
+                  <select value={form.category} onChange={setField("category")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     {CATS.map((c) => <option key={c}>{c}</option>)}
                   </select>
                 </div>
                 <div>
                   <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Image URL</label>
-                  <input value={form.image_url} onChange={set("image_url")} placeholder="https://..." className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+                  <input value={form.image_url} onChange={setField("image_url")} placeholder="https://..." className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
               </div>
               <div>
                 <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Excerpt / Summary</label>
-                <textarea rows={2} value={form.excerpt} onChange={set("excerpt")} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
+                <textarea rows={2} value={form.excerpt} onChange={setField("excerpt")} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
               </div>
               <div>
                 <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Content *</label>
-                <textarea rows={10} value={form.content} onChange={set("content")} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
+                <textarea rows={10} value={form.content} onChange={setField("content")} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
               </div>
               <div className="flex gap-6">
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" checked={form.featured} onChange={set("featured")} className="accent-secondary" />
+                  <input type="checkbox" checked={form.featured} onChange={setField("featured")} className="accent-secondary" />
                   <span className="font-sans text-sm text-primary/70">Featured Article</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" checked={form.published} onChange={set("published")} className="accent-secondary" />
+                  <input type="checkbox" checked={form.published} onChange={setField("published")} className="accent-secondary" />
                   <span className="font-sans text-sm text-primary/70">Published</span>
                 </label>
               </div>

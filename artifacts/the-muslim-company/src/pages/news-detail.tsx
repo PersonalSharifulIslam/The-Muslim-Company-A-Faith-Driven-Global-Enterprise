@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
-import { supabase, isSupabaseConfigured, type NewsPost } from "@/lib/supabase";
+import { api } from "@/lib/api";
+import type { NewsPost } from "@/lib/supabase";
 
 const fadeIn = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 
@@ -11,11 +12,10 @@ export default function NewsDetail({ params }: { params: { slug: string } }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!isSupabaseConfigured) { setLoading(false); return; }
-    supabase.from("newsroom_posts").select("*").eq("slug", params.slug).eq("published", true).single().then(({ data }) => {
-      if (data) setPost(data as NewsPost);
-      setLoading(false);
-    });
+    api.get(`/newsroom/${params.slug}`)
+      .then((data) => setPost(data as NewsPost))
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, [params.slug]);
 
   return (

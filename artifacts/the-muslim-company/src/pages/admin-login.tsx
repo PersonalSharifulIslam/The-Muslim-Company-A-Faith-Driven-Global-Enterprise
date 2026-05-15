@@ -3,32 +3,61 @@ import { motion } from "framer-motion";
 import { Lock, AlertCircle, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/auth";
+import { api } from "@/lib/api";
 import logo from "@/assets/images/logo.png";
 
 export default function AdminLogin() {
-  const { signIn, user, loading, configured } = useAuth();
+  const { signIn, user, loading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [setupMode, setSetupMode] = useState(false);
+  const [checkingSetup, setCheckingSetup] = useState(true);
+  const [noAdmin, setNoAdmin] = useState(false);
 
   useEffect(() => {
     if (!loading && user) window.location.href = "/admin/dashboard";
   }, [user, loading]);
 
+  useEffect(() => {
+    fetch("/api/auth/setup", { method: "HEAD" })
+      .then((r) => {
+        if (r.status === 405) setNoAdmin(false);
+        else setNoAdmin(false);
+      })
+      .catch(() => setNoAdmin(false))
+      .finally(() => setCheckingSetup(false));
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     setError("");
-    const { error } = await signIn(email, password);
-    if (error) {
+
+    if (setupMode) {
+      try {
+        const data = await api.post("/auth/setup", { email, password }) as { token: string; email: string };
+        api.setToken(data.token);
+        window.location.href = "/admin/dashboard";
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : "Setup failed");
+        setSubmitting(false);
+      }
+      return;
+    }
+
+    const { error: signInError } = await signIn(email, password);
+    if (signInError) {
       setError("Invalid email or password. Please try again.");
       setSubmitting(false);
     } else {
       window.location.href = "/admin/dashboard";
     }
   };
+
+  if (loading || checkingSetup) return null;
 
   return (
     <div className="min-h-screen bg-primary flex items-center justify-center px-6">
@@ -40,18 +69,21 @@ export default function AdminLogin() {
       >
         <div className="text-center mb-10">
           <img src={logo} alt="TMC" className="w-12 h-12 invert opacity-80 mx-auto mb-4" />
-          <h1 className="font-serif text-2xl text-primary-foreground mb-1">Admin Access</h1>
+          <h1 className="font-serif text-2xl text-primary-foreground mb-1">
+            {setupMode ? "Create Admin Account" : "Admin Access"}
+          </h1>
           <p className="font-sans text-xs text-primary-foreground/40 tracking-widest uppercase">The Muslim Company</p>
         </div>
 
-        {!configured && (
+        {noAdmin && !setupMode && (
           <div className="mb-6 p-4 border border-yellow-400/30 bg-yellow-400/5">
             <div className="flex items-start gap-2">
               <AlertCircle className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-sans text-xs text-yellow-400 font-semibold mb-1">Supabase Not Configured</p>
+                <p className="font-sans text-xs text-yellow-400 font-semibold mb-1">First Time Setup</p>
                 <p className="font-sans text-[11px] text-primary-foreground/40 leading-relaxed">
-                  Add <code className="text-yellow-400">VITE_SUPABASE_URL</code> and <code className="text-yellow-400">VITE_SUPABASE_ANON_KEY</code> to your environment variables to enable admin login.
+                  No admin account found.{" "}
+                  <button onClick={() => setSetupMode(true)} className="text-secondary underline">Create one now.</button>
                 </p>
               </div>
             </div>
@@ -66,21 +98,20 @@ export default function AdminLogin() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              disabled={!configured}
-              className="w-full h-11 px-4 bg-primary-foreground/5 border border-primary-foreground/15 font-sans text-sm text-primary-foreground placeholder:text-primary-foreground/20 focus:outline-none focus:border-secondary disabled:opacity-40"
+              className="w-full h-11 px-4 bg-primary-foreground/5 border border-primary-foreground/15 font-sans text-sm text-primary-foreground placeholder:text-primary-foreground/20 focus:outline-none focus:border-secondary"
               placeholder="admin@themuslim.company"
             />
           </div>
           <div>
-            <label className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/40 block mb-2">Password</label>
+            <label className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/40 block mb-2">Password{setupMode && " (min 8 chars)"}</label>
             <div className="relative">
               <input
                 type={showPw ? "text" : "password"}
                 required
+                minLength={setupMode ? 8 : undefined}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                disabled={!configured}
-                className="w-full h-11 px-4 pr-12 bg-primary-foreground/5 border border-primary-foreground/15 font-sans text-sm text-primary-foreground placeholder:text-primary-foreground/20 focus:outline-none focus:border-secondary disabled:opacity-40"
+                className="w-full h-11 px-4 pr-12 bg-primary-foreground/5 border border-primary-foreground/15 font-sans text-sm text-primary-foreground placeholder:text-primary-foreground/20 focus:outline-none focus:border-secondary"
                 placeholder="••••••••"
               />
               <button
@@ -102,17 +133,25 @@ export default function AdminLogin() {
 
           <Button
             type="submit"
-            disabled={submitting || !configured}
+            disabled={submitting}
             className="w-full bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans h-11 text-xs font-bold disabled:opacity-40 mt-2"
           >
             <Lock className="w-3.5 h-3.5 mr-2" />
-            {submitting ? "Signing in..." : "Sign In"}
+            {submitting ? (setupMode ? "Creating..." : "Signing in...") : (setupMode ? "Create Account" : "Sign In")}
           </Button>
         </form>
 
-        <p className="text-center font-sans text-[10px] text-primary-foreground/20 mt-8">
-          Restricted access. Authorised personnel only.
-        </p>
+        {setupMode && (
+          <button onClick={() => setSetupMode(false)} className="w-full text-center font-sans text-[10px] text-primary-foreground/30 hover:text-secondary mt-4 transition-colors">
+            ← Back to Login
+          </button>
+        )}
+
+        {!setupMode && (
+          <p className="text-center font-sans text-[10px] text-primary-foreground/20 mt-8">
+            Restricted access. Authorised personnel only.
+          </p>
+        )}
         <div className="text-center mt-4">
           <a href="/" className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/25 hover:text-secondary transition-colors">
             ← Back to Website

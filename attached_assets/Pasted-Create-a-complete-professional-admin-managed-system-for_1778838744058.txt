@@ -1,0 +1,665 @@
+Create a complete professional admin-managed system for The Muslim Company website with fully integrated Careers, Newsroom & PR, Notice & Event, and Blog systems.
+
+==================================================
+IMPORTANT CORE REQUIREMENTS
+==================================================
+
+Do not redesign the website.
+
+Use the exact same existing:
+- Design language
+- Typography
+- Layout structure
+- Header/navbar
+- Hamburger/mobile menu
+- Footer
+- Buttons
+- Cards
+- Colors
+- Spacing
+- Animations
+- Responsive behavior
+- UI consistency
+
+The new systems and pages must feel like native internal pages of the current website, not a separate template or different website.
+
+Maintain complete visual consistency with the existing website.
+
+Use scalable architecture and reusable components for future expansion.
+
+==================================================
+HAMBURGER MENU / MOBILE MENU REQUIREMENT
+==================================================
+
+The website already has an existing hamburger/mobile menu system.
+
+Inside the existing hamburger/mobile menu these menu items already exist:
+
+- Careers
+- Newsroom & PR
+- Notice & Event
+- Blog
+
+Do not redesign or replace the current hamburger/mobile menu system.
+
+Keep the exact same:
+- Hamburger menu style
+- Open/close animation
+- Typography
+- Layout
+- Spacing
+- Colors
+- Responsive behavior
+
+Only make these menu items functional.
+
+Navigation behavior:
+
+- Careers
+→ /careers
+
+- Newsroom & PR
+→ /newsroom
+
+- Notice & Event
+→ /notices
+
+- Blog
+→ /blog
+
+Users must be able to open these pages directly from the existing hamburger/mobile menu.
+
+The new pages must open using the same:
+- Header/navbar
+- Footer
+- Layout system
+- Mobile responsiveness
+- Visual style
+
+These pages must feel like native internal pages of the current website.
+
+==================================================
+ADMIN LOGIN ACCESS
+==================================================
+
+Add a small professional footer link named:
+
+- Login
+
+When clicked:
+→ open:
+ /admin
+
+Do not place admin login in the main navigation menu.
+
+==================================================
+ADMIN AUTHENTICATION SYSTEM
+==================================================
+
+Use Supabase Auth for the complete admin authentication system.
+
+Use:
+- Secure email/password login
+- Protected admin routes
+- Session management
+- Forgot password
+- Reset password
+- Secure logout
+
+Store authentication securely using Supabase Auth.
+
+Do not store passwords manually inside website code.
+
+==================================================
+INITIAL ADMIN ACCOUNT
+==================================================
+
+Create the initial admin account using Supabase Auth.
+
+Initial admin credentials:
+
+Email:
+ceo@themuslim.company
+
+Password:
+[SET_TEMP_PASSWORD]
+
+After first login:
+- Admin must be able to change password
+- Forgot password system must work
+- Password reset email system must work
+
+==================================================
+ADMIN PANEL
+==================================================
+
+Admin URL:
+- /admin
+
+Create a professional admin dashboard with sidebar navigation:
+
+- Dashboard
+- Careers
+- Applications
+- Newsroom & PR
+- Notice & Event
+- Blog
+- Logout
+
+==================================================
+SUPABASE INTEGRATION
+==================================================
+
+Use Supabase for:
+- Database
+- Authentication
+- File storage
+
+Use environment variables:
+- SUPABASE_URL
+- SUPABASE_ANON_KEY
+
+Use Supabase PostgreSQL database for:
+- Careers/jobs
+- Applications
+- Recruitment statuses
+- Notices
+- Events
+- Newsroom posts
+- Blog posts
+- Categories
+- URLs/slugs
+- Metadata
+
+Use Supabase Storage for:
+- CV uploads
+- PDFs
+- Featured images
+- Notice attachments
+- Blog images
+- Generated confirmation PDFs
+- Media files
+
+Create scalable database tables and organized storage buckets.
+
+==================================================
+NETLIFY & HOSTING
+==================================================
+
+Use Netlify for:
+- Hosting
+- Frontend
+- Functions/serverless backend
+
+Maintain compatibility with the current Netlify deployment structure.
+
+==================================================
+RESEND EMAIL SYSTEM
+==================================================
+
+Use Resend for all transactional and applicant confirmation emails.
+
+Use environment variable:
+- RESEND_API_KEY
+
+Use this sender identity:
+
+The Muslim Company (Careers) <careers@themuslim.company>
+
+Do not use generic noreply emails.
+
+Applicant confirmation emails must include:
+- Applicant name
+- Applied position
+- Job ID
+- Application reference number
+- Submission date/time
+- PDF attachment
+- Recruitment Status tracking link
+
+==================================================
+CAREERS SYSTEM
+==================================================
+
+Main URL:
+- /careers
+
+Create professional careers page with:
+- Job cards/list
+- Search/filter system
+- Responsive design
+
+Each job card must contain:
+- Job title
+- Department
+- Employment type
+- Location
+- Posted date
+- Application deadline
+- Status badge
+- View Details button
+
+==================================================
+JOB DETAILS PAGE
+==================================================
+
+Example:
+- /careers/marketing-manager
+
+Include:
+- Job title
+- Job ID
+- Department
+- Location
+- Employment type
+- Posted date
+- Deadline
+- Full description
+- Responsibilities
+- Requirements
+- Preferred qualifications
+- Benefits
+- Salary (optional)
+- Apply Now button
+
+==================================================
+APPLICATION PAGE
+==================================================
+
+Example:
+- /careers/marketing-manager/apply
+
+Application form fields:
+- Full Name
+- Email Address
+- Phone Number
+- Address
+- Education
+- Experience
+- Skills
+- Portfolio/LinkedIn
+- Cover Letter
+- CV Upload (PDF/DOC)
+
+Email field must be validated.
+
+==================================================
+JOB ID SYSTEM
+==================================================
+
+Use numeric Job IDs only.
+
+Start from:
+- 10925
+
+Automatically increment for every new job.
+
+Example:
+- 10925
+- 10926
+- 10927
+
+==================================================
+APPLICATION REFERENCE NUMBER SYSTEM
+==================================================
+
+Automatically generate secure unique reference numbers.
+
+Format:
+
+BD/[Applicant Initials]/[JOB ID]/[YEAR]/[RANDOM UNIQUE CODE]
+
+Example:
+- BD/AI/10925/2026/X7K9P2
+
+Requirements:
+- Random non-predictable code
+- Uppercase letters + numbers
+- 6–8 characters
+- Fully unique
+- Difficult to guess
+
+==================================================
+RECRUITMENT STATUS SYSTEM
+==================================================
+
+Create:
+- /recruitment-status
+
+Also add “Recruitment Status” button on Careers page top-right section.
+
+The page must include:
+- Reference number input
+- Search button
+
+==================================================
+RECRUITMENT STATUS SYSTEM LOGIC
+==================================================
+
+The Recruitment Status system must work using the exact same application reference number that is automatically generated and given to the applicant after successful job application submission.
+
+The applicant will use that same reference number to check application/recruitment status.
+
+Example reference number:
+
+BD/AI/10925/2026/X7K9P2
+
+This reference number must be:
+- Automatically generated after application submission
+- Saved in the database
+- Shown on success page
+- Included in confirmation PDF
+- Sent in applicant confirmation email
+- Used for Recruitment Status tracking
+
+==================================================
+HOW THE SYSTEM SHOULD WORK
+==================================================
+
+Step 1:
+Applicant submits job application.
+
+Step 2:
+System automatically generates a unique application reference number.
+
+Step 3:
+System saves all applicant information and status in the database.
+
+Step 4:
+Applicant receives:
+- Success page
+- Confirmation PDF
+- Confirmation email
+- Unique reference number
+
+Step 5:
+Applicant visits:
+- /recruitment-status
+
+Step 6:
+Applicant enters the same reference number received after application submission.
+
+Example:
+BD/AI/10925/2026/X7K9P2
+
+Step 7:
+System searches the database using that exact reference number.
+
+Step 8:
+System automatically displays the matching applicant/application details and current recruitment status.
+
+==================================================
+DETAILS TO SHOW AFTER STATUS CHECK
+==================================================
+
+After entering a valid reference number, display:
+
+- Applicant Name
+- Applied Position
+- Job ID
+- Application Reference Number
+- Submission Date
+- Last Updated Date
+- Current Recruitment Status
+
+Possible statuses:
+- Submitted
+- Under Review
+- Shortlisted
+- Interview Scheduled
+- Pending
+- Accepted
+- Rejected
+
+==================================================
+ADMIN STATUS UPDATE SYSTEM
+==================================================
+
+When admin updates an applicant’s recruitment/application status from the admin dashboard:
+
+- The updated status must automatically save in the database
+- The Recruitment Status page must instantly show the updated status using the same reference number
+
+==================================================
+INVALID REFERENCE HANDLING
+==================================================
+
+If an applicant enters an invalid or non-existing reference number:
+
+Show professional error message:
+
+“Application reference number not found.”
+
+Do not expose database information or other applicants’ data.
+
+==================================================
+SECURITY REQUIREMENT
+==================================================
+
+The Recruitment Status system must only show the data linked to the exact reference number entered by the applicant.
+
+Do not allow access to:
+- Other applicants’ data
+- Sequential application records
+- Public application database browsing
+
+The secure random reference number structure must prevent users from guessing other applicants’ reference numbers.
+
+==================================================
+APPLICATION STORAGE SYSTEM
+==================================================
+
+Store all applications securely in Supabase database.
+
+Do not send applications directly to inbox only.
+
+Admin dashboard must support:
+- View applications
+- Search/filter
+- Open details
+- Download PDF
+- Update status
+
+==================================================
+CONFIRMATION PDF SYSTEM
+==================================================
+
+Automatically generate professional PDF after application submission.
+
+Include:
+- Company logo
+- Company name
+- Applicant name
+- Position
+- Job ID
+- Reference number
+- Submission date/time
+- Applicant information
+
+Applicant can:
+- Download instantly
+- Receive via email attachment
+
+==================================================
+AUTO EMAIL TEMPLATE
+==================================================
+
+Subject format:
+
+Application Confirmation – [REFERENCE NUMBER] – [POST NAME] ([JOB ID])
+
+Example:
+
+Application Confirmation – BD/AI/10925/2026/X7K9P2 – Marketing Manager (10925)
+
+Use this sender:
+
+The Muslim Company (Careers) <careers@themuslim.company>
+
+The email must include:
+- Thank you message
+- Applicant name
+- Applied position
+- Job ID
+- Reference number
+- Submission date/time
+- Attached confirmation PDF
+- Recruitment status tracking link
+
+Use this email body style:
+
+Assalamu Alaikum [Applicant Name],
+
+Thank you for applying for the position of [Post Name] at The Muslim Company.
+
+We sincerely appreciate your interest in becoming part of our mission-driven organization and contributing your skills, dedication, and values toward meaningful and ethical work.
+
+Your application has been successfully submitted and recorded in our recruitment system.
+
+Application Reference Number:
+[Reference Number]
+
+Job ID:
+[Job ID]
+
+Submitted On:
+[Date & Time]
+
+Our recruitment team will carefully review your application. If your profile matches our current requirements, we will contact you through the provided email or phone number, In Sha Allah.
+
+You can check your application status anytime using the Recruitment Status system from our Careers page.
+
+Application Tracking Link:
+https://www.themuslim.company/recruitment-status
+
+Use your application reference number to track:
+- Submitted status
+- Under Review
+- Shortlisted
+- Interview updates
+- Final decision
+
+Please check the attached document for your official application confirmation PDF.
+
+May Allah bless you with success and beneficial opportunities.
+
+Warm regards,
+
+The Muslim Company (Careers)
+careers@themuslim.company
+https://www.themuslim.company
+
+==================================================
+NEWSROOM & PR SYSTEM
+==================================================
+
+URL:
+- /newsroom
+
+Features:
+- Featured articles
+- News cards/grid
+- Search
+- Category filter
+
+Categories:
+- Press Release
+- Company Update
+- Partnership
+- Media Coverage
+- Announcement
+
+Admin can:
+- Add/edit/delete posts
+- Upload images
+- Draft/publish
+- Feature articles
+
+==================================================
+NOTICE & EVENT SYSTEM
+==================================================
+
+URL:
+- /notices
+
+Features:
+- 10 notices per page
+- Pagination
+- Search
+- Category/year filter
+- Important badge
+- Pinned notice
+
+Table columns:
+- Serial Number
+- Date
+- Title
+- PDF
+- Actions
+
+Actions:
+- View PDF
+- Download PDF
+
+Categories:
+- General Notice
+- Important
+- Circular
+- Recruitment
+- Event
+- Announcement
+
+Admin can:
+- Add/edit/delete notices
+- Upload PDFs
+- Upload cover images
+- Use rich text editor
+
+==================================================
+BLOG SYSTEM
+==================================================
+
+URL:
+- /blog
+
+Features:
+- Featured image
+- Title
+- Author
+- Publish date
+- Reading time
+- Category
+- Read More
+
+Categories:
+- Technology
+- Ethics
+- Islamic Civilization
+- Business
+- Education
+- Global Affairs
+
+Admin can:
+- Add/edit/delete blogs
+- Upload images
+- SEO title
+- Meta description
+- Draft/publish
+
+==================================================
+GENERAL REQUIREMENTS
+==================================================
+
+Create:
+- Fully responsive pages
+- SEO-friendly architecture
+- Fast-loading pages
+- Smooth animations
+- Dynamic page titles
+- Open Graph meta tags
+- Favicon support
+- Clean URLs
+- Mobile optimization
+- Reusable scalable components
+
+Ensure the complete system works professionally in production with Netlify + Supabase + Resend integration.

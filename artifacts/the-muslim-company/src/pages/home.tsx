@@ -17,7 +17,7 @@ import logo from "@/assets/images/logo.png";
 /* ─── animation variants ─── */
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
 };
 const stagger = {
   hidden: { opacity: 0 },
@@ -197,6 +197,10 @@ const NAV_LINKS = [
   { label: "Vision", href: "#vision" },
   { label: "Constitution", href: "#constitution" },
   { label: "Founder", href: "#founder" },
+  { label: "Careers", href: "/careers" },
+  { label: "Newsroom & PR", href: "/newsroom" },
+  { label: "Notice & Event", href: "/notices" },
+  { label: "Blog", href: "/blog" },
 ];
 
 const NAV_LINKS_DESKTOP = [
@@ -1160,10 +1164,15 @@ export default function Home() {
               <p className="font-serif text-base text-primary-foreground/50 mb-1">The Muslim Company</p>
               <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
             </div>
-            <div className="flex gap-6 mt-4 md:mt-0">
+            <div className="flex flex-wrap gap-6 mt-4 md:mt-0">
               <span className="hover:text-primary-foreground cursor-pointer transition-colors">Privacy Policy</span>
               <span className="hover:text-primary-foreground cursor-pointer transition-colors">Terms of Service</span>
               <span className="hover:text-primary-foreground cursor-pointer transition-colors">Shariah Compliance</span>
+              <a href="/careers" className="hover:text-primary-foreground transition-colors">Careers</a>
+              <a href="/newsroom" className="hover:text-primary-foreground transition-colors">Newsroom</a>
+              <a href="/notices" className="hover:text-primary-foreground transition-colors">Notices</a>
+              <a href="/blog" className="hover:text-primary-foreground transition-colors">Blog</a>
+              <a href="/admin" className="hover:text-primary-foreground transition-colors">Login</a>
             </div>
           </div>
         </div>

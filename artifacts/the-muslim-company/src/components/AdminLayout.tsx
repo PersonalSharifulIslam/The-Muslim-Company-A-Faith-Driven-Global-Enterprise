@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "@/lib/auth";
 import {
-  LayoutDashboard, Briefcase, Users, Newspaper, Bell, BookOpen, LogOut, Menu, X,
+  LayoutDashboard, Briefcase, Users, Newspaper, Bell, BookOpen, LogOut, Menu, X, UserSquare2,
 } from "lucide-react";
 import logo from "@/assets/images/logo.png";
 
@@ -12,6 +12,7 @@ const ADMIN_NAV = [
   { label: "Newsroom & PR", href: "/admin/newsroom", icon: Newspaper },
   { label: "Notice & Event", href: "/admin/notices", icon: Bell },
   { label: "Blog", href: "/admin/blog", icon: BookOpen },
+  { label: "Employees", href: "/admin/employees", icon: UserSquare2 },
 ];
 
 export default function AdminLayout({ children, current }: { children: React.ReactNode; current: string }) {

@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/lib/auth";
+import { EmployeeAuthProvider } from "@/lib/employee-auth";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Careers from "@/pages/careers";
@@ -21,6 +22,16 @@ import AdminApplications from "@/pages/admin-applications";
 import AdminNewsroom from "@/pages/admin-newsroom";
 import AdminNotices from "@/pages/admin-notices";
 import AdminBlog from "@/pages/admin-blog";
+import AdminEmployees from "@/pages/admin-employees";
+import EmployeeLogin from "@/pages/employee-login";
+import EmployeeDashboard from "@/pages/employee-dashboard";
+import EmployeeAttendance from "@/pages/employee-attendance";
+import EmployeeLeave from "@/pages/employee-leave";
+import EmployeeTasks from "@/pages/employee-tasks";
+import EmployeeNotifications from "@/pages/employee-notifications";
+import EmployeeDocuments from "@/pages/employee-documents";
+import EmployeeProfile from "@/pages/employee-profile";
+import EmployeeSettings from "@/pages/employee-settings";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +55,16 @@ function Router() {
       <Route path="/admin/newsroom" component={AdminNewsroom} />
       <Route path="/admin/notices" component={AdminNotices} />
       <Route path="/admin/blog" component={AdminBlog} />
+      <Route path="/admin/employees" component={AdminEmployees} />
+      <Route path="/employee" component={EmployeeLogin} />
+      <Route path="/employee/dashboard" component={EmployeeDashboard} />
+      <Route path="/employee/attendance" component={EmployeeAttendance} />
+      <Route path="/employee/leave" component={EmployeeLeave} />
+      <Route path="/employee/tasks" component={EmployeeTasks} />
+      <Route path="/employee/notifications" component={EmployeeNotifications} />
+      <Route path="/employee/documents" component={EmployeeDocuments} />
+      <Route path="/employee/profile" component={EmployeeProfile} />
+      <Route path="/employee/settings" component={EmployeeSettings} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -54,10 +75,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AuthProvider>
-          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-            <Router />
-          </WouterRouter>
-          <Toaster />
+          <EmployeeAuthProvider>
+            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+              <Router />
+            </WouterRouter>
+            <Toaster />
+          </EmployeeAuthProvider>
         </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>

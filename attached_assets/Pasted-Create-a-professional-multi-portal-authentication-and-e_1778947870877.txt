@@ -1,0 +1,388 @@
+Create a professional multi-portal authentication and employee management system for my company website.
+
+IMPORTANT:
+The current Admin Panel and all existing functionalities MUST remain exactly as they are and continue working properly without breaking anything.
+
+Existing features that must stay unchanged:
+- Job Management System
+- Applicant Management
+- Applicant ID Generation
+- PDF Download System
+- Event Management
+- Notifications
+- Current Admin Dashboard
+- Existing Database Data
+- Existing Admin Login System
+- Existing UI/Design Structure
+
+Only extend the system professionally by adding a separate Employee Portal architecture.
+
+========================================
+MAIN WEBSITE LOGIN STRUCTURE
+========================================
+
+In the website footer, there should only be a single button/menu:
+
+Login
+
+When users click Login, open a professional popup/modal or login selection page with two options:
+
+1. Corporate Login
+2. Employee Portal
+
+========================================
+CORPORATE LOGIN
+========================================
+
+Corporate Login URL:
+
+/admin
+
+This must continue using the existing Admin Panel and existing authentication system exactly as it currently works.
+
+DO NOT remove or redesign existing admin features unless necessary for compatibility.
+
+All existing admin functionalities must remain operational.
+
+========================================
+EMPLOYEE PORTAL LOGIN
+========================================
+
+Employee Portal URL:
+
+/employee
+
+Create a fully separate secure employee authentication system.
+
+Employees will log in using:
+- Employee ID or Email
+- Password
+
+========================================
+EMPLOYEE ACCOUNT CREATION FLOW
+========================================
+
+Only the Main Admin can create employee accounts.
+
+Inside the existing Admin Panel, add a new section:
+
+Employee Management
+
+Admin can:
+- Create Employee
+- Generate Employee ID
+- Assign Username
+- Assign Password
+- Assign Department
+- Assign Role
+- Set Permissions
+- Activate/Deactivate Employee
+- Reset Password
+- Edit Employee Information
+- Delete Employee
+
+When a new employee is created:
+- Generate a unique Employee ID automatically
+- Store employee securely in database
+- Password must be encrypted/hashed
+
+========================================
+ROLE BASED ACCESS SYSTEM
+========================================
+
+Implement role-based access control.
+
+Example roles:
+- HR
+- Accountant
+- Manager
+- Moderator
+- Support Team
+- Employee
+
+Each role should only access permitted pages and features.
+
+Use middleware/protected routes.
+
+Unauthorized users cannot access restricted URLs.
+
+========================================
+EMPLOYEE PORTAL STRUCTURE
+========================================
+
+After login, employees should access:
+
+/employee/dashboard
+
+Create a modern professional dashboard.
+
+========================================
+EMPLOYEE DASHBOARD FEATURES
+========================================
+
+Dashboard should display:
+- Welcome message
+- Employee name
+- Employee ID
+- Department
+- Position
+- Attendance status
+- Notifications
+- Assigned tasks
+- Upcoming meetings/events
+- Company announcements
+
+========================================
+EMPLOYEE PORTAL URL STRUCTURE
+========================================
+
+/employee/dashboard
+/employee/profile
+/employee/attendance
+/employee/tasks
+/employee/leave
+/employee/documents
+/employee/notifications
+/employee/settings
+
+========================================
+ATTENDANCE SYSTEM
+========================================
+
+Employees can:
+- Check In
+- Check Out
+
+Admin can monitor:
+- Attendance logs
+- Working hours
+- Late entries
+- Daily reports
+
+Attendance data should be stored properly in database.
+
+========================================
+LEAVE MANAGEMENT SYSTEM
+========================================
+
+Employees can:
+- Submit leave requests
+- Select leave dates
+- Write reason
+
+Admin can:
+- Approve leave
+- Reject leave
+- View leave history
+
+Leave status:
+- Pending
+- Approved
+- Rejected
+
+========================================
+TASK MANAGEMENT SYSTEM
+========================================
+
+Admin can:
+- Assign tasks
+- Set deadlines
+- Set priority levels
+
+Employees can:
+- View assigned tasks
+- Update task progress
+- Upload files/documents
+
+========================================
+DOCUMENT CENTER
+========================================
+
+Employees can access/download:
+- Appointment Letter
+- Offer Letter
+- Salary Slips
+- Certificates
+- Company Documents
+
+Use secure protected document access.
+
+========================================
+NOTIFICATION SYSTEM
+========================================
+
+Create an internal notification system.
+
+Admin can send:
+- Company notices
+- Meeting reminders
+- Important announcements
+- HR updates
+
+Employees see notifications inside dashboard.
+
+========================================
+PROFILE MANAGEMENT
+========================================
+
+Employees can update:
+- Profile photo
+- Phone number
+- Address
+- Emergency contact
+- Password
+
+========================================
+SECURITY REQUIREMENTS
+========================================
+
+Implement:
+- JWT Authentication or Secure Session Authentication
+- Password Hashing
+- Protected Routes
+- Role Middleware
+- Session Timeout
+- Login Activity Tracking
+- Secure API Validation
+
+Employees must not access admin routes.
+
+========================================
+DATABASE REQUIREMENTS
+========================================
+
+Create professional scalable database structure.
+
+Suggested tables:
+
+Employees
+Attendance
+LeaveRequests
+Tasks
+Notifications
+Documents
+Roles
+Permissions
+
+========================================
+EMPLOYEES TABLE EXAMPLE
+========================================
+
+id
+employee_id
+name
+email
+password
+department
+role
+status
+joining_date
+phone
+profile_image
+created_at
+
+========================================
+ATTENDANCE TABLE EXAMPLE
+========================================
+
+id
+employee_id
+check_in
+check_out
+working_hours
+date
+
+========================================
+LEAVE REQUEST TABLE EXAMPLE
+========================================
+
+id
+employee_id
+leave_type
+reason
+status
+start_date
+end_date
+
+========================================
+UI/UX REQUIREMENTS
+========================================
+
+Design style:
+- Modern SaaS Dashboard
+- Professional Enterprise UI
+- Fully Responsive
+- Desktop + Mobile Friendly
+
+Use:
+- Sidebar Navigation
+- Top Navigation Bar
+- Notification Bell
+- Dashboard Cards
+- Analytics Widgets
+
+Theme:
+- Premium Black + Gold
+OR
+- Existing company theme consistency
+
+========================================
+IMPORTANT REQUIREMENTS
+========================================
+
+1. Existing Admin Panel must remain fully functional.
+
+2. Existing data must not be deleted.
+
+3. Existing admin login system must continue working.
+
+4. Employee Portal must be separate from Admin Portal.
+
+5. All routes must be protected properly.
+
+6. Use scalable clean architecture.
+
+7. Use reusable components.
+
+8. Optimize performance and security.
+
+9. Create clean folder structure.
+
+10. Ensure future scalability for:
+- Payroll
+- AI HR System
+- Multi-branch Management
+- Mobile App Integration
+- Advanced Analytics
+
+========================================
+RECOMMENDED TECH STACK
+========================================
+
+Frontend:
+- React / Next.js
+
+Backend:
+- Node.js + Express
+
+Database:
+- PostgreSQL / Supabase
+
+Authentication:
+- JWT / Firebase Auth
+
+Storage:
+- Supabase Storage / Cloudinary
+
+========================================
+FINAL GOAL
+========================================
+
+The system should look and behave like a professional enterprise company management platform with:
+- Secure Admin Panel
+- Separate Employee Portal
+- Role Based Access
+- Modern Dashboard
+- Internal Company Management System
+
+while preserving all current admin functionalities and existing website systems perfectly.

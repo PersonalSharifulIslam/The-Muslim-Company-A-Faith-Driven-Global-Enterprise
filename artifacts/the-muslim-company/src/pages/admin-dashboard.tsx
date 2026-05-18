@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Briefcase, Users, Newspaper, Bell, BookOpen, TrendingUp } from "lucide-react";
 import AdminLayout from "@/components/AdminLayout";
-import { useAuth } from "@/lib/auth";
+import { useAuth } from "@/lib/auth-context";
 import { api } from "@/lib/api";
 
 const fadeIn = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } };

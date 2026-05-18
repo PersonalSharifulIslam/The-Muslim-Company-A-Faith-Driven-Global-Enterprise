@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CheckSquare, Calendar, AlertCircle } from "lucide-react";
 import EmployeeLayout from "@/components/EmployeeLayout";
-import { useEmployeeAuth, empApi } from "@/lib/employee-auth";
+import { useEmployeeAuth, empApi } from "@/lib/auth-context";
 
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
 type Task = { id: number; title: string; description: string; priority: string; status: string; progress: number; deadline: string | null; assigned_by: string; created_at: string };

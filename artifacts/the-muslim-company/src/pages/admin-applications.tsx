@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Search, X, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminLayout from "@/components/AdminLayout";
-import { useAuth } from "@/lib/auth";
+import { useAuth } from "@/lib/auth-context";
 import { api } from "@/lib/api";
 import { STATUS_LABELS, STATUS_COLORS, type Application } from "@/lib/supabase";
 

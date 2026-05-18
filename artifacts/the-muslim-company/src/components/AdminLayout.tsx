@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "@/lib/auth";
+import { useAuth } from "@/lib/auth-context";
 import {
   LayoutDashboard, Briefcase, Users, Newspaper, Bell, BookOpen, LogOut, Menu, X, UserSquare2,
 } from "lucide-react";

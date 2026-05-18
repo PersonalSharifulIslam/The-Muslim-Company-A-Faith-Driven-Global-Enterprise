@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LayoutDashboard, Clock, Calendar, CheckSquare, FileText, Bell, User, Settings, LogOut, Menu, X, ChevronRight } from "lucide-react";
-import { useEmployeeAuth } from "@/lib/employee-auth";
+import { useEmployeeAuth } from "@/lib/auth-context";
 import logo from "@/assets/images/logo.png";
 
 const NAV = [

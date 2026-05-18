@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { User, Lock, CheckCircle, AlertCircle, Edit3, Save, X } from "lucide-react";
 import EmployeeLayout from "@/components/EmployeeLayout";
-import { useEmployeeAuth, empApi } from "@/lib/employee-auth";
+import { useEmployeeAuth, empApi } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };

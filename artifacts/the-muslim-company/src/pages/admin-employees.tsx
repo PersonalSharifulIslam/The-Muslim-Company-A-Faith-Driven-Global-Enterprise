@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Plus, Edit2, Trash2, Key, UserCheck, UserX, X, AlertCircle, CheckCircle, Users } from "lucide-react";
 import AdminLayout from "@/components/AdminLayout";
-import { useAuth } from "@/lib/auth";
+import { useAuth } from "@/lib/auth-context";
 import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 

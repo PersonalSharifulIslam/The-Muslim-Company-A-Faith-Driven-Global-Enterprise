@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Lock, User, AlertCircle } from "lucide-react";
-import { useEmployeeAuth } from "@/lib/employee-auth";
+import { useEmployeeAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/images/logo.png";
 

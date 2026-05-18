@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Plus, Edit2, Trash2, X, Pin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminLayout from "@/components/AdminLayout";
-import { useAuth } from "@/lib/auth";
+import { useAuth } from "@/lib/auth-context";
 import { api } from "@/lib/api";
 import type { Notice } from "@/lib/supabase";
 

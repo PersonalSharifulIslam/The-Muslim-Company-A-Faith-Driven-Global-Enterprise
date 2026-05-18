@@ -26,50 +26,64 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   })
 
   async function loadProfile(user: User) {
-    const { data: roleData } = await supabase
-      .from('user_roles')
-      .select('role, employee_id')
-      .eq('id', user.id)
-      .single()
+    try {
+      const { data: roleData, error } = await supabase
+        .from('user_roles')
+        .select('role, employee_id')
+        .eq('id', user.id)
+        .maybeSingle()
 
-    if (!roleData) { setState(s => ({ ...s, loading: false })); return }
+      if (error || !roleData) {
+        // No role found — check user metadata as fallback
+        const metaRole = user.user_metadata?.role as UserRole | undefined
+        if (metaRole === 'admin') {
+          setState(s => ({ ...s, role: 'admin', profile: { id: user.id, role: 'admin', email: user.email ?? '' }, loading: false }))
+        } else {
+          setState(s => ({ ...s, loading: false }))
+        }
+        return
+      }
 
-    const role = roleData.role as UserRole
+      const role = roleData.role as UserRole
 
-    if (role === 'admin') {
-      setState(s => ({ ...s, role, profile: { id: user.id, role: 'admin', email: user.email ?? '' }, loading: false }))
-      return
+      if (role === 'admin') {
+        setState(s => ({ ...s, role, profile: { id: user.id, role: 'admin', email: user.email ?? '' }, loading: false }))
+        return
+      }
+
+      const { data: emp } = await supabase
+        .from('employees')
+        .select('*')
+        .eq('employee_id', roleData.employee_id)
+        .maybeSingle()
+
+      setState(s => ({
+        ...s, role,
+        profile: {
+          id: user.id, role: 'employee', email: user.email ?? '',
+          employee_id: roleData.employee_id,
+          name: emp?.name, department: emp?.department,
+          position: emp?.position, profile_image: emp?.profile_image,
+        },
+        loading: false,
+      }))
+    } catch (e) {
+      console.error('loadProfile error:', e)
+      setState(s => ({ ...s, loading: false }))
     }
-
-    const { data: emp } = await supabase
-      .from('employees')
-      .select('*')
-      .eq('employee_id', roleData.employee_id)
-      .single()
-
-    setState(s => ({
-      ...s, role,
-      profile: {
-        id: user.id, role: 'employee', email: user.email ?? '',
-        employee_id: roleData.employee_id,
-        name: emp?.name, department: emp?.department,
-        position: emp?.position, profile_image: emp?.profile_image,
-      },
-      loading: false,
-    }))
   }
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setState(s => ({ ...s, session, user: session?.user ?? null }))
-      if (session?.user) loadProfile(session.user)
-      else setState(s => ({ ...s, loading: false }))
-    })
-
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setState(s => ({ ...s, session, user: session?.user ?? null }))
       if (session?.user) await loadProfile(session.user)
       else setState(s => ({ ...s, profile: null, role: null, loading: false }))
+    })
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setState(s => ({ ...s, session, user: session?.user ?? null }))
+      if (session?.user) loadProfile(session.user)
+      else setState(s => ({ ...s, loading: false }))
     })
 
     return () => subscription.unsubscribe()

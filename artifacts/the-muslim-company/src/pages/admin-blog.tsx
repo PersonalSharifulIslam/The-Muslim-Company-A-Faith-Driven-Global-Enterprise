@@ -63,7 +63,6 @@ export default function AdminBlog() {
   const setField = (k: keyof Form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.type === "checkbox" ? (e.target as HTMLInputElement).checked : e.target.value }));
 
-  if (loading) return null;
 
   return (
     <AdminLayout current="/admin/blog">

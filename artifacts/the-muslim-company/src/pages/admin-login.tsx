@@ -54,7 +54,6 @@ export default function AdminLogin() {
     }
   };
 
-  if (loading || checkingSetup) return null;
 
   return (
     <div className="min-h-screen bg-primary flex items-center justify-center px-6">

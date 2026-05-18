@@ -91,7 +91,6 @@ export default function AdminEmployees() {
     search === "" || e.name.toLowerCase().includes(search.toLowerCase()) || e.employee_id.toLowerCase().includes(search.toLowerCase()) || e.department.toLowerCase().includes(search.toLowerCase())
   );
 
-  if (loading) return null;
 
   return (
     <AdminLayout current="/admin/employees">

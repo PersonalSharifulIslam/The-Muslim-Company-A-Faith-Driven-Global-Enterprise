@@ -1,270 +1,262 @@
-// api.ts — Supabase-based drop-in replacement for the old Express API
 import { supabase } from './supabase'
 
-export const api = {
-  // ─── Jobs ───────────────────────────────────────────────
-  async getJobs() {
+// Route mapper — maps old Express routes to Supabase calls
+async function routeGet(path: string): Promise<any> {
+  if (path === '/admin/jobs' || path === '/jobs') {
     const { data, error } = await supabase.from('jobs').select('*').order('created_at', { ascending: false })
-    if (error) throw error
-    return data
-  },
-  async getJob(id: number) {
-    const { data, error } = await supabase.from('jobs').select('*').eq('job_id', id).single()
-    if (error) throw error
-    return data
-  },
-  async getJobBySlug(slug: string) {
-    const { data, error } = await supabase.from('jobs').select('*').eq('slug', slug).single()
-    if (error) throw error
-    return data
-  },
-  async createJob(job: any) {
-    const { data, error } = await supabase.from('jobs').insert(job).select().single()
-    if (error) throw error
-    return data
-  },
-  async updateJob(id: number, job: any) {
-    const { data, error } = await supabase.from('jobs').update(job).eq('id', id).select().single()
-    if (error) throw error
-    return data
-  },
-  async deleteJob(id: number) {
-    const { error } = await supabase.from('jobs').delete().eq('id', id)
-    if (error) throw error
-  },
-
-  // ─── Applications ────────────────────────────────────────
-  async getApplications() {
+    if (error) throw error; return data
+  }
+  if (path === '/admin/applications' || path === '/applications') {
     const { data, error } = await supabase.from('applications').select('*').order('created_at', { ascending: false })
-    if (error) throw error
-    return data
-  },
-  async getApplication(ref: string) {
-    const { data, error } = await supabase.from('applications').select('*').eq('reference_number', ref).single()
-    if (error) throw error
-    return data
-  },
-  async createApplication(app: any) {
-    const { data, error } = await supabase.from('applications').insert(app).select().single()
-    if (error) throw error
-    return data
-  },
-  async updateApplication(id: number, updates: any) {
-    const { data, error } = await supabase.from('applications').update(updates).eq('id', id).select().single()
-    if (error) throw error
-    return data
-  },
-
-  // ─── Newsroom ────────────────────────────────────────────
-  async getNewsroomPosts() {
-    const { data, error } = await supabase.from('newsroom_posts').select('*').order('created_at', { ascending: false })
-    if (error) throw error
-    return data
-  },
-  async getNewsroomPost(slug: string) {
-    const { data, error } = await supabase.from('newsroom_posts').select('*').eq('slug', slug).single()
-    if (error) throw error
-    return data
-  },
-  async createNewsroomPost(post: any) {
-    const { data, error } = await supabase.from('newsroom_posts').insert(post).select().single()
-    if (error) throw error
-    return data
-  },
-  async updateNewsroomPost(id: number, post: any) {
-    const { data, error } = await supabase.from('newsroom_posts').update(post).eq('id', id).select().single()
-    if (error) throw error
-    return data
-  },
-  async deleteNewsroomPost(id: number) {
-    const { error } = await supabase.from('newsroom_posts').delete().eq('id', id)
-    if (error) throw error
-  },
-
-  // ─── Notices ─────────────────────────────────────────────
-  async getNotices() {
-    const { data, error } = await supabase.from('notices').select('*').order('created_at', { ascending: false })
-    if (error) throw error
-    return data
-  },
-  async createNotice(notice: any) {
-    const { data, error } = await supabase.from('notices').insert(notice).select().single()
-    if (error) throw error
-    return data
-  },
-  async updateNotice(id: number, notice: any) {
-    const { data, error } = await supabase.from('notices').update(notice).eq('id', id).select().single()
-    if (error) throw error
-    return data
-  },
-  async deleteNotice(id: number) {
-    const { error } = await supabase.from('notices').delete().eq('id', id)
-    if (error) throw error
-  },
-
-  // ─── Blog ────────────────────────────────────────────────
-  async getBlogPosts() {
-    const { data, error } = await supabase.from('blog_posts').select('*').order('created_at', { ascending: false })
-    if (error) throw error
-    return data
-  },
-  async getBlogPost(slug: string) {
-    const { data, error } = await supabase.from('blog_posts').select('*').eq('slug', slug).single()
-    if (error) throw error
-    return data
-  },
-  async createBlogPost(post: any) {
-    const { data, error } = await supabase.from('blog_posts').insert(post).select().single()
-    if (error) throw error
-    return data
-  },
-  async updateBlogPost(id: number, post: any) {
-    const { data, error } = await supabase.from('blog_posts').update(post).eq('id', id).select().single()
-    if (error) throw error
-    return data
-  },
-  async deleteBlogPost(id: number) {
-    const { error } = await supabase.from('blog_posts').delete().eq('id', id)
-    if (error) throw error
-  },
-
-  // ─── Employees ───────────────────────────────────────────
-  async getEmployees() {
-    const { data, error } = await supabase.from('employees').select('*').order('created_at', { ascending: false })
-    if (error) throw error
-    return data
-  },
-  async getEmployee(employeeId: string) {
-    const { data, error } = await supabase.from('employees').select('*').eq('employee_id', employeeId).single()
-    if (error) throw error
-    return data
-  },
-  async updateEmployee(id: number, updates: any) {
-    const { data, error } = await supabase.from('employees').update(updates).eq('id', id).select().single()
-    if (error) throw error
-    return data
-  },
-  async deleteEmployee(id: number) {
-    const { error } = await supabase.from('employees').delete().eq('id', id)
-    if (error) throw error
-  },
-
-  // ─── Tasks ───────────────────────────────────────────────
-  async getTasks(employeeId?: string) {
-    let query = supabase.from('tasks').select('*').order('created_at', { ascending: false })
-    if (employeeId) query = query.eq('employee_id', employeeId)
-    const { data, error } = await query
-    if (error) throw error
-    return data
-  },
-  async createTask(task: any) {
-    const { data, error } = await supabase.from('tasks').insert(task).select().single()
-    if (error) throw error
-    return data
-  },
-  async updateTask(id: number, updates: any) {
-    const { data, error } = await supabase.from('tasks').update(updates).eq('id', id).select().single()
-    if (error) throw error
-    return data
-  },
-  async deleteTask(id: number) {
-    const { error } = await supabase.from('tasks').delete().eq('id', id)
-    if (error) throw error
-  },
-
-  // ─── Attendance ──────────────────────────────────────────
-  async getAttendance(employeeId?: string) {
-    let query = supabase.from('attendance').select('*').order('date', { ascending: false })
-    if (employeeId) query = query.eq('employee_id', employeeId)
-    const { data, error } = await query
-    if (error) throw error
-    return data
-  },
-  async createAttendance(record: any) {
-    const { data, error } = await supabase.from('attendance').insert(record).select().single()
-    if (error) throw error
-    return data
-  },
-  async updateAttendance(id: number, updates: any) {
-    const { data, error } = await supabase.from('attendance').update(updates).eq('id', id).select().single()
-    if (error) throw error
-    return data
-  },
-
-  // ─── Leave Requests ──────────────────────────────────────
-  async getLeaveRequests(employeeId?: string) {
-    let query = supabase.from('leave_requests').select('*').order('created_at', { ascending: false })
-    if (employeeId) query = query.eq('employee_id', employeeId)
-    const { data, error } = await query
-    if (error) throw error
-    return data
-  },
-  async createLeaveRequest(req: any) {
-    const { data, error } = await supabase.from('leave_requests').insert(req).select().single()
-    if (error) throw error
-    return data
-  },
-  async updateLeaveRequest(id: number, updates: any) {
-    const { data, error } = await supabase.from('leave_requests').update(updates).eq('id', id).select().single()
-    if (error) throw error
-    return data
-  },
-
-  // ─── Notifications ───────────────────────────────────────
-  async getNotifications(employeeId?: string) {
-    let query = supabase.from('employee_notifications').select('*').order('created_at', { ascending: false })
-    if (employeeId) query = query.or(`employee_id.eq.${employeeId},broadcast.eq.true`)
-    const { data, error } = await query
-    if (error) throw error
-    return data
-  },
-  async createNotification(notif: any) {
-    const { data, error } = await supabase.from('employee_notifications').insert(notif).select().single()
-    if (error) throw error
-    return data
-  },
-  async markNotificationRead(id: number) {
-    const { error } = await supabase.from('employee_notifications').update({ is_read: true }).eq('id', id)
-    if (error) throw error
-  },
-
-  // ─── Documents ───────────────────────────────────────────
-  async getDocuments(employeeId?: string) {
-    let query = supabase.from('employee_documents').select('*').order('created_at', { ascending: false })
-    if (employeeId) query = query.eq('employee_id', employeeId)
-    const { data, error } = await query
-    if (error) throw error
-    return data
-  },
-  async createDocument(doc: any) {
-    const { data, error } = await supabase.from('employee_documents').insert(doc).select().single()
-    if (error) throw error
-    return data
-  },
-  async deleteDocument(id: number) {
-    const { error } = await supabase.from('employee_documents').delete().eq('id', id)
-    if (error) throw error
-  },
-
-  // ─── Stats (admin dashboard) ─────────────────────────────
-  async getStats() {
-    const [jobs, applications, news, notices, blogs, employees] = await Promise.all([
-      supabase.from('jobs').select('id', { count: 'exact', head: true }),
-      supabase.from('applications').select('id', { count: 'exact', head: true }),
-      supabase.from('newsroom_posts').select('id', { count: 'exact', head: true }),
-      supabase.from('notices').select('id', { count: 'exact', head: true }),
-      supabase.from('blog_posts').select('id', { count: 'exact', head: true }),
-      supabase.from('employees').select('id', { count: 'exact', head: true }),
+    if (error) throw error; return data
+  }
+  if (path === '/admin/stats') {
+    const [j,a,n,no,b,e] = await Promise.all([
+      supabase.from('jobs').select('id',{count:'exact',head:true}),
+      supabase.from('applications').select('id',{count:'exact',head:true}),
+      supabase.from('newsroom_posts').select('id',{count:'exact',head:true}),
+      supabase.from('notices').select('id',{count:'exact',head:true}),
+      supabase.from('blog_posts').select('id',{count:'exact',head:true}),
+      supabase.from('employees').select('id',{count:'exact',head:true}),
     ])
-    return {
-      jobs:         jobs.count         ?? 0,
-      applications: applications.count ?? 0,
-      news:         news.count         ?? 0,
-      notices:      notices.count      ?? 0,
-      blogs:        blogs.count        ?? 0,
-      employees:    employees.count    ?? 0,
+    return { jobs: j.count??0, applications: a.count??0, news: n.count??0, notices: no.count??0, blogs: b.count??0, employees: e.count??0 }
+  }
+  if (path === '/admin/newsroom' || path === '/newsroom') {
+    const { data, error } = await supabase.from('newsroom_posts').select('*').order('created_at', { ascending: false })
+    if (error) throw error; return data
+  }
+  if (path === '/admin/notices' || path === '/notices') {
+    const { data, error } = await supabase.from('notices').select('*').order('created_at', { ascending: false })
+    if (error) throw error; return data
+  }
+  if (path === '/admin/blog' || path === '/blog') {
+    const { data, error } = await supabase.from('blog_posts').select('*').order('created_at', { ascending: false })
+    if (error) throw error; return data
+  }
+  if (path === '/admin/employees' || path === '/employees') {
+    const { data, error } = await supabase.from('employees').select('*').order('created_at', { ascending: false })
+    if (error) throw error; return data
+  }
+  if (path.startsWith('/jobs/')) {
+    const slug = path.replace('/jobs/', '')
+    const { data, error } = await supabase.from('jobs').select('*').eq('slug', slug).single()
+    if (error) throw error; return data
+  }
+  if (path.startsWith('/newsroom/')) {
+    const slug = path.replace('/newsroom/', '')
+    const { data, error } = await supabase.from('newsroom_posts').select('*').eq('slug', slug).single()
+    if (error) throw error; return data
+  }
+  if (path.startsWith('/blog/')) {
+    const slug = path.replace('/blog/', '')
+    const { data, error } = await supabase.from('blog_posts').select('*').eq('slug', slug).single()
+    if (error) throw error; return data
+  }
+  if (path.startsWith('/recruitment-status/')) {
+    const ref = path.replace('/recruitment-status/', '')
+    const { data, error } = await supabase.from('applications').select('*').eq('reference_number', ref).single()
+    if (error) throw error; return data
+  }
+  if (path === '/employee/notifications') {
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
+    if (!role?.employee_id) return []
+    const { data, error } = await supabase.from('employee_notifications').select('*')
+      .or(`employee_id.eq.${role.employee_id},broadcast.eq.true`).order('created_at', { ascending: false })
+    if (error) throw error; return data
+  }
+  if (path === '/employee/documents') {
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
+    if (!role?.employee_id) return []
+    const { data, error } = await supabase.from('employee_documents').select('*').eq('employee_id', role.employee_id)
+    if (error) throw error; return data
+  }
+  if (path === '/employee/profile') {
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
+    if (!role?.employee_id) return null
+    const { data, error } = await supabase.from('employees').select('*').eq('employee_id', role.employee_id).single()
+    if (error) throw error; return data
+  }
+  if (path === '/employee/tasks') {
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
+    if (!role?.employee_id) return []
+    const { data, error } = await supabase.from('tasks').select('*').eq('employee_id', role.employee_id)
+    if (error) throw error; return data
+  }
+  if (path === '/employee/attendance') {
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
+    if (!role?.employee_id) return []
+    const { data, error } = await supabase.from('attendance').select('*').eq('employee_id', role.employee_id).order('date', { ascending: false })
+    if (error) throw error; return data
+  }
+  if (path === '/employee/leave') {
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
+    if (!role?.employee_id) return []
+    const { data, error } = await supabase.from('leave_requests').select('*').eq('employee_id', role.employee_id).order('created_at', { ascending: false })
+    if (error) throw error; return data
+  }
+  throw new Error(`GET ${path} not implemented`)
+}
+
+async function routePost(path: string, body: any): Promise<any> {
+  if (path === '/admin/jobs') {
+    const { data, error } = await supabase.from('jobs').insert(body).select().single()
+    if (error) throw error; return data
+  }
+  if (path === '/admin/newsroom') {
+    const { data, error } = await supabase.from('newsroom_posts').insert(body).select().single()
+    if (error) throw error; return data
+  }
+  if (path === '/admin/notices') {
+    const { data, error } = await supabase.from('notices').insert(body).select().single()
+    if (error) throw error; return data
+  }
+  if (path === '/admin/blog') {
+    const { data, error } = await supabase.from('blog_posts').insert(body).select().single()
+    if (error) throw error; return data
+  }
+  if (path === '/apply' || path.startsWith('/jobs/') && path.endsWith('/apply')) {
+    const { data, error } = await supabase.from('applications').insert(body).select().single()
+    if (error) throw error; return data
+  }
+  if (path === '/employee/leave') {
+    const { data, error } = await supabase.from('leave_requests').insert(body).select().single()
+    if (error) throw error; return data
+  }
+  if (path === '/employee/attendance') {
+    const { data, error } = await supabase.from('attendance').insert(body).select().single()
+    if (error) throw error; return data
+  }
+  throw new Error(`POST ${path} not implemented`)
+}
+
+async function routePut(path: string, body: any): Promise<any> {
+  // jobs
+  const jobMatch = path.match(/^\/admin\/jobs\/(\d+)$/)
+  if (jobMatch) {
+    const { data, error } = await supabase.from('jobs').update(body).eq('id', parseInt(jobMatch[1])).select().single()
+    if (error) throw error; return data
+  }
+  // applications
+  const appMatch = path.match(/^\/admin\/applications\/(\d+)$/)
+  if (appMatch) {
+    const { data, error } = await supabase.from('applications').update(body).eq('id', parseInt(appMatch[1])).select().single()
+    if (error) throw error; return data
+  }
+  // newsroom
+  const newsMatch = path.match(/^\/admin\/newsroom\/(\d+)$/)
+  if (newsMatch) {
+    const { data, error } = await supabase.from('newsroom_posts').update(body).eq('id', parseInt(newsMatch[1])).select().single()
+    if (error) throw error; return data
+  }
+  // notices
+  const noticeMatch = path.match(/^\/admin\/notices\/(\d+)$/)
+  if (noticeMatch) {
+    const { data, error } = await supabase.from('notices').update(body).eq('id', parseInt(noticeMatch[1])).select().single()
+    if (error) throw error; return data
+  }
+  // blog
+  const blogMatch = path.match(/^\/admin\/blog\/(\d+)$/)
+  if (blogMatch) {
+    const { data, error } = await supabase.from('blog_posts').update(body).eq('id', parseInt(blogMatch[1])).select().single()
+    if (error) throw error; return data
+  }
+  // employee profile
+  if (path === '/employee/profile') {
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
+    if (!role?.employee_id) throw new Error('No employee')
+    const { data, error } = await supabase.from('employees').update(body).eq('employee_id', role.employee_id).select().single()
+    if (error) throw error; return data
+  }
+  // employee password update
+  if (path === '/employee/profile/password') {
+    const { error } = await supabase.auth.updateUser({ password: body.new_password })
+    if (error) throw error; return { success: true }
+  }
+  // notification read
+  const notifMatch = path.match(/^\/employee\/notifications\/(\d+)\/read$/)
+  if (notifMatch) {
+    const { error } = await supabase.from('employee_notifications').update({ is_read: true }).eq('id', parseInt(notifMatch[1]))
+    if (error) throw error; return { success: true }
+  }
+  if (path === '/employee/notifications/read-all') {
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
+    if (role?.employee_id) {
+      await supabase.from('employee_notifications').update({ is_read: true }).eq('employee_id', role.employee_id)
     }
-  },
+    return { success: true }
+  }
+  // task progress
+  const taskMatch = path.match(/^\/employee\/tasks\/(\d+)$/)
+  if (taskMatch) {
+    const { data, error } = await supabase.from('tasks').update(body).eq('id', parseInt(taskMatch[1])).select().single()
+    if (error) throw error; return data
+  }
+  // attendance
+  const attMatch = path.match(/^\/employee\/attendance\/(\d+)$/)
+  if (attMatch) {
+    const { data, error } = await supabase.from('attendance').update(body).eq('id', parseInt(attMatch[1])).select().single()
+    if (error) throw error; return data
+  }
+  throw new Error(`PUT ${path} not implemented`)
+}
+
+async function routeDel(path: string): Promise<any> {
+  const jobMatch = path.match(/^\/admin\/jobs\/(\d+)$/)
+  if (jobMatch) {
+    const { error } = await supabase.from('jobs').delete().eq('id', parseInt(jobMatch[1]))
+    if (error) throw error; return { success: true }
+  }
+  const newsMatch = path.match(/^\/admin\/newsroom\/(\d+)$/)
+  if (newsMatch) {
+    const { error } = await supabase.from('newsroom_posts').delete().eq('id', parseInt(newsMatch[1]))
+    if (error) throw error; return { success: true }
+  }
+  const noticeMatch = path.match(/^\/admin\/notices\/(\d+)$/)
+  if (noticeMatch) {
+    const { error } = await supabase.from('notices').delete().eq('id', parseInt(noticeMatch[1]))
+    if (error) throw error; return { success: true }
+  }
+  const blogMatch = path.match(/^\/admin\/blog\/(\d+)$/)
+  if (blogMatch) {
+    const { error } = await supabase.from('blog_posts').delete().eq('id', parseInt(blogMatch[1]))
+    if (error) throw error; return { success: true }
+  }
+  const empMatch = path.match(/^\/admin\/employees\/(\d+)$/)
+  if (empMatch) {
+    const { error } = await supabase.from('employees').delete().eq('id', parseInt(empMatch[1]))
+    if (error) throw error; return { success: true }
+  }
+  throw new Error(`DELETE ${path} not implemented`)
+}
+
+export const api = {
+  get:  (path: string, _auth?: boolean) => routeGet(path),
+  post: (path: string, body: any, _auth?: boolean) => routePost(path, body),
+  put:  (path: string, body: any, _auth?: boolean) => routePut(path, body),
+  del:  (path: string, _auth?: boolean) => routeDel(path),
+  patch:(path: string, body: any, _auth?: boolean) => routePut(path, body),
+  // New style helpers
+  getStats: () => routeGet('/admin/stats'),
+  getJobs: () => routeGet('/admin/jobs'),
+  getJob: (id: number) => routeGet(`/jobs/${id}`),
+  createJob: (data: any) => routePost('/admin/jobs', data),
+  updateJob: (id: number, data: any) => routePut(`/admin/jobs/${id}`, data),
+  deleteJob: (id: number) => routeDel(`/admin/jobs/${id}`),
+  getApplications: () => routeGet('/admin/applications'),
+  updateApplication: (id: number, data: any) => routePut(`/admin/applications/${id}`, data),
+  getNotifications: (empId: string) => routeGet('/employee/notifications'),
+  markNotificationRead: (id: number) => routePut(`/employee/notifications/${id}/read`, {}),
+  getDocuments: (empId: string) => routeGet('/employee/documents'),
+  getEmployee: (empId: string) => routeGet('/employee/profile'),
+  updateEmployee: (id: number, data: any) => routePut('/employee/profile', data),
 }
 
 export default api

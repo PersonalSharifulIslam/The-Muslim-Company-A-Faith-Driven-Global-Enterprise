@@ -19,7 +19,7 @@ export default function AdminDashboard() {
     if (!session) return;
     api.getStats()
       .then((data) => setStats(data as Stats))
-      .catch(() => {})
+      .catch((e) => console.error("Stats error:", e))
       .finally(() => setStatsLoading(false));
   }, [session, loading]);
 

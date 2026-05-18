@@ -1,8 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { api } from "./api";
+import { supabase } from "./supabase";
 
 type AdminUser = { email: string };
-
 type AuthContextType = {
   user: AdminUser | null;
   loading: boolean;
@@ -24,32 +23,38 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!api.hasToken()) {
+    // Check existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user?.email) {
+        setUser({ email: session.user.email });
+      }
       setLoading(false);
-      return;
-    }
-    api.get("/auth/me", true)
-      .then((data) => {
-        const d = data as { user: AdminUser };
-        setUser(d.user);
-      })
-      .catch(() => api.clearToken())
-      .finally(() => setLoading(false));
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user?.email) {
+        setUser({ email: session.user.email });
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const signIn = async (email: string, password: string) => {
     try {
-      const data = await api.post("/auth/login", { email, password }) as { token: string; email: string };
-      api.setToken(data.token);
-      setUser({ email: data.email });
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
       return { error: null };
     } catch (err: unknown) {
       return { error: err instanceof Error ? err : new Error(String(err)) };
     }
   };
 
-  const signOut = () => {
-    api.clearToken();
+  const signOut = async () => {
+    await supabase.auth.signOut();
     setUser(null);
   };
 

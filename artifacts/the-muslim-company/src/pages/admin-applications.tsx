@@ -43,7 +43,7 @@ export default function AdminApplications() {
     setUpdating(false);
   };
 
-  if (loading) return null;
+
 
   return (
     <AdminLayout current="/admin/applications">

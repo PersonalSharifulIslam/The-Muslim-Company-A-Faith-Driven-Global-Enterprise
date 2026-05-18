@@ -25,7 +25,6 @@ export default function AdminDashboard() {
       .finally(() => setStatsLoading(false));
   }, [user]);
 
-  if (loading) return null;
 
   const CARDS = [
     { label: "Active Jobs", value: stats.jobs, icon: Briefcase, href: "/admin/careers", color: "text-blue-400" },

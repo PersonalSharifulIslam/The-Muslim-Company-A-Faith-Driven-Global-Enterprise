@@ -27,7 +27,7 @@ export default function AdminNotices() {
     } catch {}
   };
 
-  useEffect(() => { if (user) load(); }, [user]);
+  useEffect(() => { load(); }, []);
 
   const openNew = () => { setEditing(null); setForm(BLANK); setModal(true); };
   const openEdit = (n: Notice) => {

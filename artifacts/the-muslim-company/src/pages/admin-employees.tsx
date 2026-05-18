@@ -44,7 +44,7 @@ export default function AdminEmployees() {
     api.get("/admin/employees", true).then((d) => setEmployees(d as Employee[])).catch(() => {}).finally(() => setFetching(false));
   };
 
-  useEffect(() => { if (user) load(); }, [user]);
+  useEffect(() => { load(); }, []);
 
   const openCreate = () => { setEditing(null); setForm(EMPTY); setShowForm(true); setMsg(null); };
   const openEdit = (e: Employee) => { setEditing(e); setForm({ name: e.name, email: e.email, password: "", department: e.department, role: e.role, position: e.position || "", phone: e.phone || "", address: "", joining_date: e.joining_date?.split("T")[0] || "" }); setShowForm(true); setMsg(null); };

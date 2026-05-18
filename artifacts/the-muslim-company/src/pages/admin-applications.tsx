@@ -25,7 +25,7 @@ export default function AdminApplications() {
     } catch {}
   };
 
-  useEffect(() => { if (user) load(); }, [user]);
+  useEffect(() => { load(); }, []);
 
   const filtered = apps.filter((a) => {
     const matchSearch = a.name.toLowerCase().includes(search.toLowerCase()) || a.reference_number.toLowerCase().includes(search.toLowerCase()) || a.job_title.toLowerCase().includes(search.toLowerCase());

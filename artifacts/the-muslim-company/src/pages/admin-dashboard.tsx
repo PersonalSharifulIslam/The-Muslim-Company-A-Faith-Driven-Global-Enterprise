@@ -23,7 +23,7 @@ export default function AdminDashboard() {
       .then((data) => setStats(data as Stats))
       .catch(() => {})
       .finally(() => setStatsLoading(false));
-  }, [user]);
+  }, []);
 
 
   const CARDS = [

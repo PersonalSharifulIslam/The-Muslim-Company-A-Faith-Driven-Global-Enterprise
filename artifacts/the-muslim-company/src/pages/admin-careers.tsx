@@ -65,8 +65,6 @@ export default function AdminCareers() {
   const setField = (k: keyof JobForm) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  if (loading) return null;
-
   return (
     <AdminLayout current="/admin/careers">
       <div className="flex items-center justify-between mb-6">

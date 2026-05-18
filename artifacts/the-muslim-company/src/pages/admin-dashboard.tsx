@@ -19,7 +19,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     if (!user) { setStatsLoading(false); return; }
-    api.get("/admin/stats", true)
+    api.getStats()
       .then((data) => setStats(data as Stats))
       .catch(() => {})
       .finally(() => setStatsLoading(false));

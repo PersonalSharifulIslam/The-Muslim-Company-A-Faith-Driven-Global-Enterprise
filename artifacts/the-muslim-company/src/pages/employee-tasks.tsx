@@ -16,7 +16,6 @@ export default function EmployeeTasks() {
   const [updating, setUpdating] = useState<number | null>(null);
   const api = empApi();
 
-  useEffect(() => { if (!loading && !employee) window.location.href = "/employee"; }, [employee, loading]);
   useEffect(() => { if (employee) api.get("/employee/tasks").then((d) => setTasks(d as Task[])).catch(() => {}); }, [employee]);
 
   const update = async (id: number, status: string, progress: number) => {

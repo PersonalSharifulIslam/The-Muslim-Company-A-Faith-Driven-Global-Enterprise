@@ -19,7 +19,6 @@ export default function AdminNotices() {
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState<number | null>(null);
 
-  useEffect(() => { if (!loading && !user) window.location.href = "/admin"; }, [user, loading]);
 
   const load = async () => {
     try {

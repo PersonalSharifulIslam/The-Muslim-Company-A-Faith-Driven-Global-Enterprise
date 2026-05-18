@@ -15,7 +15,6 @@ export default function AdminDashboard() {
   const [statsLoading, setStatsLoading] = useState(true);
 
   useEffect(() => {
-    if (!loading && !user) window.location.href = "/admin";
   }, [user, loading]);
 
   useEffect(() => {

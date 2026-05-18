@@ -14,7 +14,6 @@ export default function EmployeeLogin() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!loading && employee) window.location.href = "/employee/dashboard";
   }, [employee, loading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -23,7 +22,6 @@ export default function EmployeeLogin() {
     setError("");
     try {
       await login(identifier, password);
-      window.location.href = "/employee/dashboard";
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Login failed");
     }

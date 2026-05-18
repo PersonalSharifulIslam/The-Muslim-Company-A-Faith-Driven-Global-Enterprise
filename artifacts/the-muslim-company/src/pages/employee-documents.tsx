@@ -14,7 +14,6 @@ export default function EmployeeDocuments() {
   const [filter, setFilter] = useState("all");
   const api = empApi();
 
-  useEffect(() => { if (!loading && !employee) window.location.href = "/employee"; }, [employee, loading]);
   useEffect(() => { if (employee) api.get("/employee/documents").then((d) => setDocs(d as Doc[])).catch(() => {}); }, [employee]);
 
   const categories = ["all", ...Array.from(new Set(docs.map((d) => d.category)))];

@@ -21,7 +21,6 @@ export default function EmployeeNotifications() {
   const [filter, setFilter] = useState<"all" | "unread">("all");
   const api = empApi();
 
-  useEffect(() => { if (!loading && !employee) window.location.href = "/employee"; }, [employee, loading]);
   const load = async () => { if (employee) setNotifs(await api.get("/employee/notifications") as Notif[]); };
   useEffect(() => { load(); }, [employee]);
 

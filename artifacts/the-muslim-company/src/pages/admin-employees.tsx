@@ -38,7 +38,6 @@ export default function AdminEmployees() {
   const [msg, setMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
   const [search, setSearch] = useState("");
 
-  useEffect(() => { if (!loading && !user) window.location.href = "/admin"; }, [user, loading]);
 
   const load = async () => {
     setFetching(true);

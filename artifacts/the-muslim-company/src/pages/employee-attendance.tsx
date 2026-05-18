@@ -24,7 +24,6 @@ export default function EmployeeAttendance() {
   const api = empApi();
 
   useEffect(() => {
-    if (!loading && !employee) window.location.href = "/employee";
   }, [employee, loading]);
 
   const loadRecords = async () => {

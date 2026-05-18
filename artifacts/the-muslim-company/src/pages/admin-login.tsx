@@ -18,7 +18,6 @@ export default function AdminLogin() {
   const [noAdmin, setNoAdmin] = useState(false);
 
   useEffect(() => {
-    if (!loading && user) window.location.href = "/admin/dashboard";
   }, [user, loading]);
 
   useEffect(() => {
@@ -40,7 +39,6 @@ export default function AdminLogin() {
       try {
         const data = await api.post("/auth/setup", { email, password }) as { token: string; email: string };
         api.setToken(data.token);
-        window.location.href = "/admin/dashboard";
       } catch (err: unknown) {
         setError(err instanceof Error ? err.message : "Setup failed");
         setSubmitting(false);
@@ -53,7 +51,6 @@ export default function AdminLogin() {
       setError("Invalid email or password. Please try again.");
       setSubmitting(false);
     } else {
-      window.location.href = "/admin/dashboard";
     }
   };
 

@@ -32,7 +32,6 @@ export default function EmployeeDashboard() {
   const api = empApi();
 
   useEffect(() => {
-    if (!loading && !employee) window.location.href = "/employee";
   }, [employee, loading]);
 
   useEffect(() => {

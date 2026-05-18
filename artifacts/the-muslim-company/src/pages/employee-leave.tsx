@@ -24,7 +24,6 @@ export default function EmployeeLeave() {
   const [success, setSuccess] = useState("");
   const api = empApi();
 
-  useEffect(() => { if (!loading && !employee) window.location.href = "/employee"; }, [employee, loading]);
   useEffect(() => { if (employee) api.get("/employee/leave").then((d) => setLeaves(d as LeaveReq[])).catch(() => {}); }, [employee]);
 
   const handleSubmit = async (e: React.FormEvent) => {

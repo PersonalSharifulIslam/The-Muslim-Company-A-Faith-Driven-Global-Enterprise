@@ -17,7 +17,6 @@ export default function AdminApplications() {
   const [selected, setSelected] = useState<Application | null>(null);
   const [updating, setUpdating] = useState(false);
 
-  useEffect(() => { if (!loading && !user) window.location.href = "/admin"; }, [user, loading]);
 
   const load = async () => {
     try {

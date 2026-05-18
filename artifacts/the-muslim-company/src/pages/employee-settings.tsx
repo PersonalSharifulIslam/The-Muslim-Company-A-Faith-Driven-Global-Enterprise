@@ -8,7 +8,6 @@ const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, trans
 
 export default function EmployeeSettings() {
   const { employee, loading, logout } = useEmployeeAuth();
-  useEffect(() => { if (!loading && !employee) window.location.href = "/employee"; }, [employee, loading]);
   if (loading || !employee) return null;
   return (
     <EmployeeLayout current="/employee/settings">

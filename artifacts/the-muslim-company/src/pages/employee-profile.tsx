@@ -22,7 +22,6 @@ export default function EmployeeProfile() {
   const [pwErr, setPwErr] = useState("");
   const api = empApi();
 
-  useEffect(() => { if (!loading && !employee) window.location.href = "/employee"; }, [employee, loading]);
   useEffect(() => {
     if (employee) api.get("/employee/profile").then((d) => {
       const p = d as Profile;

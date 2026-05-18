@@ -18,7 +18,7 @@ export default function AdminDashboard() {
   }, [user, loading]);
 
   useEffect(() => {
-    if (!user) { setStatsLoading(false); return; }
+    // removed user check
     api.getStats()
       .then((data) => setStats(data as Stats))
       .catch(() => {})

@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useLocation } from 'wouter'
 import { useAuth } from '../lib/auth-context'
 
 export default function LoginPage() {
   const { signIn, resetPassword } = useAuth()
-  const navigate  = useNavigate()
-  const location  = useLocation()
+  const [, setLocation] = useLocation()
   const [mode,     setMode]     = useState<'login' | 'forgot'>('login')
   const [email,    setEmail]    = useState('')
   const [password, setPassword] = useState('')
   const [error,    setError]    = useState('')
   const [info,     setInfo]     = useState('')
   const [busy,     setBusy]     = useState(false)
-  const from = (location.state as any)?.from?.pathname
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault()
@@ -20,7 +18,7 @@ export default function LoginPage() {
     const { error: err } = await signIn(email, password)
     setBusy(false)
     if (err) { setError('Invalid email or password.'); return }
-    setTimeout(() => navigate(from && from !== '/login' ? from : '/auth-redirect', { replace: true }), 100)
+    setTimeout(() => setLocation('/auth-redirect'), 100)
   }
 
   async function handleForgot(e: React.FormEvent) {

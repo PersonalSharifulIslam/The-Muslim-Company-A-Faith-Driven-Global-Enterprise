@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate, useLocation } from 'react-router-dom'
+import { useLocation } from 'wouter'
 import { useAuth } from './auth-context'
 
 function LoadingScreen() {
@@ -16,18 +16,20 @@ function LoadingScreen() {
 
 export function AdminRoute({ children }: { children: React.ReactNode }) {
   const { loading, role, session } = useAuth()
-  const location = useLocation()
+  const [, setLocation] = useLocation()
+
   if (loading) return <LoadingScreen />
-  if (!session) return <Navigate to="/login" state={{ from: location }} replace />
-  if (role !== 'admin') return <Navigate to="/employee/dashboard" replace />
+  if (!session) { setLocation('/login'); return null }
+  if (role !== 'admin') { setLocation('/employee/dashboard'); return null }
   return <>{children}</>
 }
 
 export function EmployeeRoute({ children }: { children: React.ReactNode }) {
   const { loading, role, session } = useAuth()
-  const location = useLocation()
+  const [, setLocation] = useLocation()
+
   if (loading) return <LoadingScreen />
-  if (!session) return <Navigate to="/login" state={{ from: location }} replace />
-  if (role !== 'employee') return <Navigate to="/admin/dashboard" replace />
+  if (!session) { setLocation('/login'); return null }
+  if (role !== 'employee') { setLocation('/admin/dashboard'); return null }
   return <>{children}</>
 }

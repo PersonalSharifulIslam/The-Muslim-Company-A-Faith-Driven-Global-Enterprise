@@ -9,6 +9,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnon, {
     autoRefreshToken: true,
     detectSessionInUrl: true,
     storageKey: 'tmc_session',
+    storage: window.localStorage,
   },
 })
 
@@ -25,7 +26,6 @@ export interface UserProfile {
   profile_image?: string
 }
 
-// ─── Legacy exports (used by recruitment-status.tsx) ────────
 export type Application = {
   id: number
   reference_number: string

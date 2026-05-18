@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FileText, Download, FolderOpen } from "lucide-react";
 import EmployeeLayout from "@/components/EmployeeLayout";
-import { useEmployeeAuth, empApi } from "@/lib/auth-context";
+import { useAuth } from "@/lib/auth-context";
 
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
 type Doc = { id: number; name: string; category: string; file_url: string; description: string; is_public: boolean; created_at: string };
 const CAT_ICONS: Record<string, string> = { appointment: "📋", offer: "📄", salary: "💰", certificate: "🎓", general: "📁", policy: "📜", training: "📚" };
 
 export default function EmployeeDocuments() {
-  const { employee, loading } = useEmployeeAuth();
+  const { employee, loading } = useAuth();
   const [docs, setDocs] = useState<Doc[]>([]);
   const [filter, setFilter] = useState("all");
   const api = empApi();

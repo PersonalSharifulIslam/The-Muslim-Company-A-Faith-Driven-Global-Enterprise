@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Clock, Calendar, CheckSquare, Bell, LogIn, LogOut, TrendingUp, AlertCircle } from "lucide-react";
 import EmployeeLayout from "@/components/EmployeeLayout";
-import { useEmployeeAuth, empApi } from "@/lib/auth-context";
+import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
@@ -25,7 +25,7 @@ function fmt(dt: string) { return new Date(dt).toLocaleTimeString("en-GB", { hou
 function fmtDate(dt: string) { return new Date(dt).toLocaleDateString("en-GB", { day: "numeric", month: "short" }); }
 
 export default function EmployeeDashboard() {
-  const { employee, loading } = useEmployeeAuth();
+  const { employee, loading } = useAuth();
   const [data, setData] = useState<DashData | null>(null);
   const [checkinLoading, setCheckinLoading] = useState(false);
   const [error, setError] = useState("");

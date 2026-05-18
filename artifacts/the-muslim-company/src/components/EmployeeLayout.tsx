@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LayoutDashboard, Clock, Calendar, CheckSquare, FileText, Bell, User, Settings, LogOut, Menu, X, ChevronRight } from "lucide-react";
-import { useEmployeeAuth } from "@/lib/auth-context";
+import { useAuth } from "@/lib/auth-context";
 import logo from "@/assets/images/logo.png";
 
 const NAV = [
@@ -16,7 +16,7 @@ const NAV = [
 ];
 
 export default function EmployeeLayout({ children, current }: { children: React.ReactNode; current: string }) {
-  const { employee, logout } = useEmployeeAuth();
+  const { employee, logout } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [unread, setUnread] = useState(0);
 

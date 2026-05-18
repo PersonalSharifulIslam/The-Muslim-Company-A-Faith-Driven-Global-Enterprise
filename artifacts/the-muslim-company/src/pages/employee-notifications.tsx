@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Bell, CheckCheck } from "lucide-react";
 import EmployeeLayout from "@/components/EmployeeLayout";
-import { useEmployeeAuth, empApi } from "@/lib/auth-context";
+import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
@@ -16,7 +16,7 @@ const TYPE_CONFIG: Record<string, { icon: string; color: string; bg: string }> =
 };
 
 export default function EmployeeNotifications() {
-  const { employee, loading } = useEmployeeAuth();
+  const { employee, loading } = useAuth();
   const [notifs, setNotifs] = useState<Notif[]>([]);
   const [filter, setFilter] = useState<"all" | "unread">("all");
   const api = empApi();

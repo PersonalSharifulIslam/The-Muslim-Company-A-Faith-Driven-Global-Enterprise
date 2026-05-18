@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { LogIn, LogOut, Clock, AlertCircle, CheckCircle } from "lucide-react";
 import EmployeeLayout from "@/components/EmployeeLayout";
-import { useEmployeeAuth, empApi } from "@/lib/auth-context";
+import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
@@ -13,7 +13,7 @@ function fmt(dt: string) { return new Date(dt).toLocaleTimeString("en-GB", { hou
 function fmtDate(d: string) { return new Date(d).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", year: "numeric" }); }
 
 export default function EmployeeAttendance() {
-  const { employee, loading } = useEmployeeAuth();
+  const { employee, loading } = useAuth();
   const [records, setRecords] = useState<AttRecord[]>([]);
   const [today, setToday] = useState<AttRecord | null>(null);
   const [submitting, setSubmitting] = useState(false);

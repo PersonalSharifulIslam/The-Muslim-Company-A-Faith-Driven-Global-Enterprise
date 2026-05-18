@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Lock, User, AlertCircle } from "lucide-react";
-import { useEmployeeAuth } from "@/lib/auth-context";
+import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/images/logo.png";
 
 export default function EmployeeLogin() {
-  const { employee, loading, login } = useEmployeeAuth();
+  const { employee, loading, login } = useAuth();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);

@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { Settings, Shield, Globe, Bell } from "lucide-react";
 import EmployeeLayout from "@/components/EmployeeLayout";
-import { useEmployeeAuth } from "@/lib/auth-context";
+import { useAuth } from "@/lib/auth-context";
 import { useEffect } from "react";
 
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
 
 export default function EmployeeSettings() {
-  const { employee, loading, logout } = useEmployeeAuth();
+  const { employee, loading, logout } = useAuth();
   if (loading || !employee) return null;
   return (
     <EmployeeLayout current="/employee/settings">

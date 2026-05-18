@@ -28,19 +28,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function loadProfile(user: User) {
     try {
-      const { data: roleData } = await supabase
+      const { data: roleData, error: roleError } = await supabase
         .from('user_roles')
         .select('role, employee_id')
         .eq('id', user.id)
         .maybeSingle()
 
-      if (!roleData) {
+      // ✅ FIX: roleError বা roleData না থাকলেও loading false করো
+      if (roleError || !roleData) {
         const metaRole = user.user_metadata?.role as UserRole | undefined
         setState(s => ({
           ...s,
           role: metaRole ?? null,
           profile: metaRole ? { id: user.id, role: metaRole, email: user.email ?? '' } : null,
-          loading: false,
+          loading: false, // ✅ সবসময় false করো
         }))
         return
       }
@@ -51,7 +52,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setState(s => ({
           ...s, role,
           profile: { id: user.id, role: 'admin', email: user.email ?? '' },
-          loading: false,
+          loading: false, // ✅
         }))
         return
       }
@@ -70,33 +71,57 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           name: emp?.name, department: emp?.department,
           position: emp?.position, profile_image: emp?.profile_image,
         },
-        loading: false,
+        loading: false, // ✅
       }))
     } catch (e) {
       console.error('loadProfile error:', e)
-      setState(s => ({ ...s, loading: false }))
+      setState(s => ({ ...s, loading: false })) // ✅ catch এ সবসময় false
     }
   }
 
   useEffect(() => {
+    // ✅ FIX: Timeout দিয়ে loading infinite loop থেকে রক্ষা
+    const timeout = setTimeout(() => {
+      setState(s => {
+        if (s.loading) {
+          console.warn('Auth timeout — forcing loading to false')
+          return { ...s, loading: false }
+        }
+        return s
+      })
+    }, 8000) // 8 সেকেন্ডের বেশি loading থাকলে force করে বন্ধ করো
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (!initialized.current && event === 'INITIAL_SESSION') {
         initialized.current = true
         setState(s => ({ ...s, session, user: session?.user ?? null }))
-        if (session?.user) await loadProfile(session.user)
-        else setState(s => ({ ...s, loading: false }))
+
+        if (session?.user) {
+          await loadProfile(session.user)
+        } else {
+          // ✅ FIX: session না থাকলেও loading false করো
+          setState(s => ({ ...s, loading: false }))
+        }
+        clearTimeout(timeout)
         return
       }
+
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
         setState(s => ({ ...s, session, user: session?.user ?? null }))
         if (session?.user) await loadProfile(session.user)
+        clearTimeout(timeout)
       }
+
       if (event === 'SIGNED_OUT') {
         setState({ session: null, user: null, profile: null, role: null, loading: false })
+        clearTimeout(timeout)
       }
     })
 
-    return () => subscription.unsubscribe()
+    return () => {
+      subscription.unsubscribe()
+      clearTimeout(timeout)
+    }
   }, [])
 
   async function signIn(email: string, password: string) {

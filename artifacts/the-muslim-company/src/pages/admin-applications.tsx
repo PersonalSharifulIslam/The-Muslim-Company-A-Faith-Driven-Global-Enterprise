@@ -20,7 +20,7 @@ export default function AdminApplications() {
 
   const load = async () => {
     try {
-      const data = await api.get("/admin/applications", true);
+      const data = await api.getApplications();
       setApps(data as Application[]);
     } catch {}
   };
@@ -36,7 +36,7 @@ export default function AdminApplications() {
   const updateStatus = async (id: number, status: string) => {
     setUpdating(true);
     try {
-      await api.put(`/admin/applications/${id}`, { status }, true);
+      await api.updateApplication(id, { status });
       await load();
       if (selected?.id === id) setSelected((prev) => prev ? { ...prev, status: status as Application["status"] } : null);
     } catch {}

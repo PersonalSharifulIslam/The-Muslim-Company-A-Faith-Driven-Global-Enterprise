@@ -26,7 +26,7 @@ export default function AdminCareers() {
 
   const load = async () => {
     try {
-      const data = await api.get("/admin/jobs", true);
+      const data = await api.getJobs();
       setJobs(data as Job[]);
     } catch {}
   };
@@ -44,8 +44,8 @@ export default function AdminCareers() {
     setSaving(true);
     const data = { ...form, slug: editing ? slugify(form.title) : `${slugify(form.title)}-${Date.now()}` };
     try {
-      if (editing) await api.put(`/admin/jobs/${editing.id}`, data, true);
-      else await api.post("/admin/jobs", data, true);
+      if (editing) await api.updateJob(editing.id, data);
+      else await api.createJob(data);
       await load();
       setModal(false);
     } catch {}
@@ -56,7 +56,7 @@ export default function AdminCareers() {
     if (!confirm("Delete this job posting?")) return;
     setDeleting(id);
     try {
-      await api.del(`/admin/jobs/${id}`, true);
+      await api.deleteJob(id);
       await load();
     } catch {}
     setDeleting(null);

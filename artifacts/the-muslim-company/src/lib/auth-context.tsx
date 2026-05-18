@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
 import { supabase } from './supabase'
 import type { UserProfile, UserRole } from './supabase'
@@ -12,9 +12,9 @@ interface AuthState {
 }
 
 interface AuthContextValue extends AuthState {
-  signIn:        (email: string, password: string) => Promise<{ error: string | null }>
-  signOut:       () => Promise<void>
-  resetPassword: (email: string) => Promise<{ error: string | null }>
+  signIn:         (email: string, password: string) => Promise<{ error: string | null }>
+  signOut:        () => Promise<void>
+  resetPassword:  (email: string) => Promise<{ error: string | null }>
   refreshProfile: () => Promise<void>
 }
 
@@ -24,30 +24,35 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<AuthState>({
     session: null, user: null, profile: null, role: null, loading: true,
   })
+  const initialized = useRef(false)
 
   async function loadProfile(user: User) {
     try {
-      const { data: roleData, error } = await supabase
+      const { data: roleData } = await supabase
         .from('user_roles')
         .select('role, employee_id')
         .eq('id', user.id)
         .maybeSingle()
 
-      if (error || !roleData) {
-        // No role found — check user metadata as fallback
+      if (!roleData) {
         const metaRole = user.user_metadata?.role as UserRole | undefined
-        if (metaRole === 'admin') {
-          setState(s => ({ ...s, role: 'admin', profile: { id: user.id, role: 'admin', email: user.email ?? '' }, loading: false }))
-        } else {
-          setState(s => ({ ...s, loading: false }))
-        }
+        setState(s => ({
+          ...s,
+          role: metaRole ?? null,
+          profile: metaRole ? { id: user.id, role: metaRole, email: user.email ?? '' } : null,
+          loading: false,
+        }))
         return
       }
 
       const role = roleData.role as UserRole
 
       if (role === 'admin') {
-        setState(s => ({ ...s, role, profile: { id: user.id, role: 'admin', email: user.email ?? '' }, loading: false }))
+        setState(s => ({
+          ...s, role,
+          profile: { id: user.id, role: 'admin', email: user.email ?? '' },
+          loading: false,
+        }))
         return
       }
 
@@ -74,16 +79,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      setState(s => ({ ...s, session, user: session?.user ?? null }))
-      if (session?.user) await loadProfile(session.user)
-      else setState(s => ({ ...s, profile: null, role: null, loading: false }))
-    })
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setState(s => ({ ...s, session, user: session?.user ?? null }))
-      if (session?.user) loadProfile(session.user)
-      else setState(s => ({ ...s, loading: false }))
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (!initialized.current && event === 'INITIAL_SESSION') {
+        initialized.current = true
+        setState(s => ({ ...s, session, user: session?.user ?? null }))
+        if (session?.user) await loadProfile(session.user)
+        else setState(s => ({ ...s, loading: false }))
+        return
+      }
+      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        setState(s => ({ ...s, session, user: session?.user ?? null }))
+        if (session?.user) await loadProfile(session.user)
+      }
+      if (event === 'SIGNED_OUT') {
+        setState({ session: null, user: null, profile: null, role: null, loading: false })
+      }
     })
 
     return () => subscription.unsubscribe()

@@ -132,28 +132,12 @@ async function routePost(path: string, body: any): Promise<any> {
   }
   if (path === '/admin/employees') {
     const { email, password, ...empData } = body
-    // 1. Create auth user
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { data: { role: 'employee', employee_id: empData.employee_id, name: empData.name } }
-    })
-    if (authError) throw authError
-    // 2. Insert employee record
+    // Only create employee record (auth user created separately via Supabase dashboard)
     const { data, error } = await supabase.from('employees').insert({
       ...empData,
       email,
-      auth_user_id: authData.user?.id,
     }).select().single()
     if (error) throw error
-    // 3. Insert user_roles
-    if (authData.user?.id) {
-      await supabase.from('user_roles').upsert({
-        id: authData.user.id,
-        role: 'employee',
-        employee_id: empData.employee_id,
-      })
-    }
     return data
   }
   throw new Error(`POST ${path} not implemented`)

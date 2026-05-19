@@ -56,7 +56,7 @@ async function generatePDF(submitted: SubmittedState) {
   doc.setFillColor(...DARK); doc.rect(0, 0, W, 60, "F");
   doc.setFillColor(...GOLD); doc.rect(0, 58, W, 2, "F");
   doc.setTextColor(...GOLD); doc.setFont("helvetica", "normal"); doc.setFontSize(14);
-  doc.text("\u0628\u0650\u0633\u0645\u0650 \u0627\u0644\u0644\u0651\u064e\u0647\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0645\u0646\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0650\u064a\u0645\u0650", W / 2, 14, { align: "center" });
+  doc.text("Bismillah ir-Rahman ir-Raheem", W / 2, 14, { align: "center" });
   doc.setTextColor(...WHITE); doc.setFont("helvetica", "bold"); doc.setFontSize(22);
   doc.text("THE MUSLIM COMPANY", W / 2, 30, { align: "center" });
   doc.setFont("helvetica", "normal"); doc.setFontSize(8); doc.setTextColor(...LIGHT_GOLD);

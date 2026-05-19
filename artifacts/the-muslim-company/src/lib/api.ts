@@ -52,8 +52,8 @@ async function routeGet(path: string): Promise<any> {
     if (error) throw error; return data
   }
   if (path.startsWith('/recruitment-status/')) {
-    const ref = path.replace('/recruitment-status/', '')
-    const { data, error } = await supabase.from('applications').select('*').eq('reference_number', ref).single()
+    const ref = decodeURIComponent(path.replace('/recruitment-status/', '')).toUpperCase()
+    const { data, error } = await supabase.from('applications').select('*').ilike('reference_number', ref).single()
     if (error) throw error; return data
   }
   if (path === '/employee/notifications') {

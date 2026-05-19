@@ -20,7 +20,7 @@ export default function RecruitmentStatus() {
     setSearching(true);
     setSearched(false);
     try {
-      const data = await api.get(`/applications/lookup/${encodeURIComponent(ref.trim().toUpperCase())}`);
+      const data = await api.get(`/recruitment-status/${encodeURIComponent(ref.trim().toUpperCase())}`);
       setResult(data as Application);
     } catch {
       setResult("not_found");

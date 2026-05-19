@@ -131,14 +131,15 @@ async function routePost(path: string, body: any): Promise<any> {
     if (error) throw error; return data
   }
   if (path === '/admin/employees') {
-    const { email, password, ...empData } = body
-    // Only create employee record (auth user created separately via Supabase dashboard)
-    const { data, error } = await supabase.from('employees').insert({
-      ...empData,
-      email,
-    }).select().single()
-    if (error) throw error
-    return data
+    const { data: { session } } = await supabase.auth.getSession()
+    const token = session?.access_token ?? ''
+    const res = await fetch('/api/admin/create-employee', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify(body),
+    })
+    const result = await res.json() as any
+    return result.employee
   }
   throw new Error(`POST ${path} not implemented`)
 }

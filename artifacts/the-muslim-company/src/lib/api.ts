@@ -1,15 +1,6 @@
 import { supabase } from './supabase'
 
-// Route mapper — maps old Express routes to Supabase calls
 async function routeGet(path: string): Promise<any> {
-  if (path === '/admin/jobs' || path === '/jobs') {
-    const { data, error } = await supabase.from('jobs').select('*').order('created_at', { ascending: false })
-    if (error) throw error; return data
-  }
-  if (path === '/admin/applications' || path === '/applications') {
-    const { data, error } = await supabase.from('applications').select('*').order('created_at', { ascending: false })
-    if (error) throw error; return data
-  }
   if (path === '/admin/stats') {
     const [j,a,n,no,b,e] = await Promise.all([
       supabase.from('jobs').select('id'),
@@ -21,15 +12,13 @@ async function routeGet(path: string): Promise<any> {
     ])
     return { jobs: j.data?.length??0, applications: a.data?.length??0, news: n.data?.length??0, notices: no.data?.length??0, blogs: b.data?.length??0, employees: e.data?.length??0 }
   }
-    const [j,a,n,no,b,e] = await Promise.all([
-      supabase.from('jobs').select('id', { count: 'exact', head: true }),
-      supabase.from('applications').select('id',{count:'exact',head:true}),
-      supabase.from('newsroom_posts').select('id',{count:'exact',head:true}),
-      supabase.from('notices').select('id',{count:'exact',head:true}),
-      supabase.from('blog_posts').select('id',{count:'exact',head:true}),
-      supabase.from('employees').select('id',{count:'exact',head:true}),
-    ])
-    return { jobs: j.count??0, applications: a.count??0, news: n.count??0, notices: no.count??0, blogs: b.count??0, employees: e.count??0 }
+  if (path === '/admin/jobs' || path === '/jobs') {
+    const { data, error } = await supabase.from('jobs').select('*').order('created_at', { ascending: false })
+    if (error) throw error; return data
+  }
+  if (path === '/admin/applications' || path === '/applications') {
+    const { data, error } = await supabase.from('applications').select('*').order('created_at', { ascending: false })
+    if (error) throw error; return data
   }
   if (path === '/admin/newsroom' || path === '/newsroom') {
     const { data, error } = await supabase.from('newsroom_posts').select('*').order('created_at', { ascending: false })
@@ -71,8 +60,7 @@ async function routeGet(path: string): Promise<any> {
     const { data: { user } } = await supabase.auth.getUser()
     const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
     if (!role?.employee_id) return []
-    const { data, error } = await supabase.from('employee_notifications').select('*')
-      .or(`employee_id.eq.${role.employee_id},broadcast.eq.true`).order('created_at', { ascending: false })
+    const { data, error } = await supabase.from('employee_notifications').select('*').or(`employee_id.eq.${role.employee_id},broadcast.eq.true`).order('created_at', { ascending: false })
     if (error) throw error; return data
   }
   if (path === '/employee/documents') {
@@ -130,7 +118,7 @@ async function routePost(path: string, body: any): Promise<any> {
     const { data, error } = await supabase.from('blog_posts').insert(body).select().single()
     if (error) throw error; return data
   }
-  if (path === '/apply' || path.startsWith('/jobs/') && path.endsWith('/apply')) {
+  if (path === '/apply' || path.includes('/apply')) {
     const { data, error } = await supabase.from('applications').insert(body).select().single()
     if (error) throw error; return data
   }
@@ -146,37 +134,36 @@ async function routePost(path: string, body: any): Promise<any> {
 }
 
 async function routePut(path: string, body: any): Promise<any> {
-  // jobs
   const jobMatch = path.match(/^\/admin\/jobs\/(\d+)$/)
   if (jobMatch) {
     const { data, error } = await supabase.from('jobs').update(body).eq('id', parseInt(jobMatch[1])).select().single()
     if (error) throw error; return data
   }
-  // applications
   const appMatch = path.match(/^\/admin\/applications\/(\d+)$/)
   if (appMatch) {
     const { data, error } = await supabase.from('applications').update(body).eq('id', parseInt(appMatch[1])).select().single()
     if (error) throw error; return data
   }
-  // newsroom
   const newsMatch = path.match(/^\/admin\/newsroom\/(\d+)$/)
   if (newsMatch) {
     const { data, error } = await supabase.from('newsroom_posts').update(body).eq('id', parseInt(newsMatch[1])).select().single()
     if (error) throw error; return data
   }
-  // notices
   const noticeMatch = path.match(/^\/admin\/notices\/(\d+)$/)
   if (noticeMatch) {
     const { data, error } = await supabase.from('notices').update(body).eq('id', parseInt(noticeMatch[1])).select().single()
     if (error) throw error; return data
   }
-  // blog
   const blogMatch = path.match(/^\/admin\/blog\/(\d+)$/)
   if (blogMatch) {
     const { data, error } = await supabase.from('blog_posts').update(body).eq('id', parseInt(blogMatch[1])).select().single()
     if (error) throw error; return data
   }
-  // employee profile
+  const empMatch = path.match(/^\/admin\/employees\/(\d+)$/)
+  if (empMatch) {
+    const { data, error } = await supabase.from('employees').update(body).eq('id', parseInt(empMatch[1])).select().single()
+    if (error) throw error; return data
+  }
   if (path === '/employee/profile') {
     const { data: { user } } = await supabase.auth.getUser()
     const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
@@ -184,12 +171,10 @@ async function routePut(path: string, body: any): Promise<any> {
     const { data, error } = await supabase.from('employees').update(body).eq('employee_id', role.employee_id).select().single()
     if (error) throw error; return data
   }
-  // employee password update
   if (path === '/employee/profile/password') {
     const { error } = await supabase.auth.updateUser({ password: body.new_password })
     if (error) throw error; return { success: true }
   }
-  // notification read
   const notifMatch = path.match(/^\/employee\/notifications\/(\d+)\/read$/)
   if (notifMatch) {
     const { error } = await supabase.from('employee_notifications').update({ is_read: true }).eq('id', parseInt(notifMatch[1]))
@@ -203,13 +188,11 @@ async function routePut(path: string, body: any): Promise<any> {
     }
     return { success: true }
   }
-  // task progress
   const taskMatch = path.match(/^\/employee\/tasks\/(\d+)$/)
   if (taskMatch) {
     const { data, error } = await supabase.from('tasks').update(body).eq('id', parseInt(taskMatch[1])).select().single()
     if (error) throw error; return data
   }
-  // attendance
   const attMatch = path.match(/^\/employee\/attendance\/(\d+)$/)
   if (attMatch) {
     const { data, error } = await supabase.from('attendance').update(body).eq('id', parseInt(attMatch[1])).select().single()
@@ -253,20 +236,18 @@ export const api = {
   put:  (path: string, body: any, _auth?: boolean) => routePut(path, body),
   del:  (path: string, _auth?: boolean) => routeDel(path),
   patch:(path: string, body: any, _auth?: boolean) => routePut(path, body),
-  // New style helpers
   getStats: () => routeGet('/admin/stats'),
   getJobs: () => routeGet('/admin/jobs'),
-  getJob: (id: number) => routeGet(`/jobs/${id}`),
   createJob: (data: any) => routePost('/admin/jobs', data),
   updateJob: (id: number, data: any) => routePut(`/admin/jobs/${id}`, data),
   deleteJob: (id: number) => routeDel(`/admin/jobs/${id}`),
   getApplications: () => routeGet('/admin/applications'),
   updateApplication: (id: number, data: any) => routePut(`/admin/applications/${id}`, data),
-  getNotifications: (empId: string) => routeGet('/employee/notifications'),
+  getNotifications: (_empId: string) => routeGet('/employee/notifications'),
   markNotificationRead: (id: number) => routePut(`/employee/notifications/${id}/read`, {}),
-  getDocuments: (empId: string) => routeGet('/employee/documents'),
-  getEmployee: (empId: string) => routeGet('/employee/profile'),
-  updateEmployee: (id: number, data: any) => routePut('/employee/profile', data),
+  getDocuments: (_empId: string) => routeGet('/employee/documents'),
+  getEmployee: (_empId: string) => routeGet('/employee/profile'),
+  updateEmployee: (_id: number, data: any) => routePut('/employee/profile', data),
 }
 
 export default api

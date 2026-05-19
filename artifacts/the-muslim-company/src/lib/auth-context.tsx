@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
 import { supabase } from './supabase'
 import type { UserProfile, UserRole } from './supabase'
@@ -24,11 +24,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<AuthState>({
     session: null, user: null, profile: null, role: null, loading: true,
   })
-  const profileLoading = useRef(false)
 
-  async function loadProfile(user: User) {
-    if (profileLoading.current) return
-    profileLoading.current = true
+  async function loadProfile(user: User, session: Session) {
     try {
       const { data: roleData } = await supabase
         .from('user_roles')
@@ -36,12 +33,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         .eq('id', user.id)
         .single()
 
-      if (!roleData) { setState(s => ({ ...s, loading: false })); return }
+      if (!roleData) {
+        setState({ session, user, profile: null, role: null, loading: false })
+        return
+      }
 
       const role = roleData.role as UserRole
 
       if (role === 'admin') {
-        setState(s => ({ ...s, role, profile: { id: user.id, role: 'admin', email: user.email ?? '' }, loading: false }))
+        setState({
+          session, user, role,
+          profile: { id: user.id, role: 'admin', email: user.email ?? '' },
+          loading: false
+        })
         return
       }
 
@@ -49,8 +53,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         .from('employees').select('*')
         .eq('employee_id', roleData.employee_id).single()
 
-      setState(s => ({
-        ...s, role,
+      setState({
+        session, user, role,
         profile: {
           id: user.id, role: 'employee', email: user.email ?? '',
           employee_id: roleData.employee_id,
@@ -58,45 +62,40 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           position: emp?.position, profile_image: emp?.profile_image,
         },
         loading: false,
-      }))
-    } finally {
-      profileLoading.current = false
+      })
+    } catch {
+      setState({ session, user, profile: null, role: null, loading: false })
     }
   }
 
   useEffect(() => {
-    // Get initial session
-    // Add timeout to prevent infinite spinning
-    const timer = setTimeout(() => {
-      setState(s => s.loading ? { ...s, loading: false } : s)
-    }, 5000)
+    let mounted = true
+
+    // Restore session from localStorage
     supabase.auth.getSession().then(({ data: { session } }) => {
-      clearTimeout(timer)
+      if (!mounted) return
       if (session?.user) {
-        setState(s => ({ ...s, session, user: session.user }))
-        loadProfile(session.user)
+        loadProfile(session.user, session)
       } else {
         setState(s => ({ ...s, loading: false }))
       }
-    }).catch(() => {
-      clearTimeout(timer)
-      setState(s => ({ ...s, loading: false }))
     })
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'SIGNED_OUT') {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (!mounted) return
+      if (event === 'SIGNED_OUT' || !session) {
         setState({ session: null, user: null, profile: null, role: null, loading: false })
         return
       }
-      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
-        if (session?.user) {
-          setState(s => ({ ...s, session, user: session.user }))
-          await loadProfile(session.user)
-        }
+      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        if (session?.user) loadProfile(session.user, session)
       }
     })
 
-    return () => subscription.unsubscribe()
+    return () => {
+      mounted = false
+      subscription.unsubscribe()
+    }
   }, [])
 
   async function signIn(email: string, password: string) {
@@ -109,7 +108,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   async function signOut() {
-    setState(s => ({ ...s, loading: true }))
     await supabase.auth.signOut()
     setState({ session: null, user: null, profile: null, role: null, loading: false })
   }
@@ -122,7 +120,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   async function refreshProfile() {
-    if (state.user) await loadProfile(state.user)
+    const { data: { session } } = await supabase.auth.getSession()
+    if (session?.user) await loadProfile(session.user, session)
   }
 
   return (

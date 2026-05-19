@@ -9,7 +9,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnon, {
     autoRefreshToken:   true,
     detectSessionInUrl: true,
     storageKey:         'tmc_auth',
-    flowType:           'implicit',
+    flowType:           'pkce',
   },
 })
 

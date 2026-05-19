@@ -7,7 +7,7 @@ import { useAuth } from "@/lib/auth-context";
 import { api } from "@/lib/api";
 import { STATUS_LABELS, STATUS_COLORS, type Application } from "@/lib/supabase";
 
-const ALL_STATUSES = ["submitted", "under_review", "shortlisted", "interview_scheduled", "pending", "accepted", "rejected"];
+const ALL_STATUSES = ["submitted", "reviewing", "shortlisted", "interview", "offered", "hired", "rejected"];
 
 export default function AdminApplications() {
   const { user, loading } = useAuth();

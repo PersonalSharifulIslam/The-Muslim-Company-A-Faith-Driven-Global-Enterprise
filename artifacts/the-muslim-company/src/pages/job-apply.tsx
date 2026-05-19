@@ -171,7 +171,7 @@ export default function JobApply({ params }: { params: { slug: string } }) {
         }
       }
       const { error: insertError } = await supabase.from("applications").insert({
-        job_id: job.id,
+        job_id: job.job_id,
         job_title: job.title,
         reference_number: ref,
         name: form.name,

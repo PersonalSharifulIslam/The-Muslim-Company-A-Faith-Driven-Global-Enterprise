@@ -54,14 +54,14 @@ export default function RecruitmentStatus() {
                 type="text"
                 value={ref}
                 onChange={(e) => setRef(e.target.value)}
-                placeholder="e.g. BD/AI/10925/2026/X7K9P2"
+                placeholder="e.g. TMC/SI/10925/2026/ABC123"
                 className="flex-1 h-12 px-4 bg-background border border-primary/15 font-mono text-sm text-primary placeholder:text-primary/25 focus:outline-none focus:border-secondary tracking-wider"
               />
               <Button type="submit" disabled={searching || !ref.trim()} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans h-12 px-8 text-xs font-bold disabled:opacity-50">
                 {searching ? "Searching..." : <><Search className="w-4 h-4 mr-2" />Search</>}
               </Button>
             </div>
-            <p className="font-sans text-xs text-primary/35 mt-2">Reference numbers are case-insensitive. Format: BD/XX/XXXXX/XXXX/XXXXXX</p>
+            <p className="font-sans text-xs text-primary/35 mt-2">Reference numbers are case-insensitive. Format: TMC/XX/XXXXX/XXXX/XXXXXX</p>
           </form>
 
           {searched && result === "not_found" && (

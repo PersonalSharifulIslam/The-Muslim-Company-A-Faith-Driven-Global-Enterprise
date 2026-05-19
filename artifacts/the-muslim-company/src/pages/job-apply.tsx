@@ -154,7 +154,10 @@ export default function JobApply({ params }: { params: { slug: string } }) {
     setSubmitting(true);
     setError("");
     try {
-      const ref = `TMC/${new Date().getFullYear()}/${String(Math.floor(Math.random() * 900000) + 100000)}`;
+      const nameParts = form.name.trim().split(' ');
+      const initials = (nameParts[0]?.[0] ?? 'X').toUpperCase() + (nameParts[1]?.[0] ?? 'X').toUpperCase();
+      const randomStr = Math.random().toString(36).substring(2, 8).toUpperCase();
+      const ref = `TMC/${initials}/${job.job_id}/${new Date().getFullYear()}/${randomStr}`;
       let cv_url = "";
       if (cvFile) {
         const fileExt = cvFile.name.split(".").pop();

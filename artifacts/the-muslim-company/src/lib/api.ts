@@ -12,6 +12,16 @@ async function routeGet(path: string): Promise<any> {
   }
   if (path === '/admin/stats') {
     const [j,a,n,no,b,e] = await Promise.all([
+      supabase.from('jobs').select('id'),
+      supabase.from('applications').select('id'),
+      supabase.from('newsroom_posts').select('id'),
+      supabase.from('notices').select('id'),
+      supabase.from('blog_posts').select('id'),
+      supabase.from('employees').select('id'),
+    ])
+    return { jobs: j.data?.length??0, applications: a.data?.length??0, news: n.data?.length??0, notices: no.data?.length??0, blogs: b.data?.length??0, employees: e.data?.length??0 }
+  }
+    const [j,a,n,no,b,e] = await Promise.all([
       supabase.from('jobs').select('id', { count: 'exact', head: true }),
       supabase.from('applications').select('id',{count:'exact',head:true}),
       supabase.from('newsroom_posts').select('id',{count:'exact',head:true}),

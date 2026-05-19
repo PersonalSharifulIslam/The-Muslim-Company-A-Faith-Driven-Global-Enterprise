@@ -66,13 +66,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Get initial session
+    // Add timeout to prevent infinite spinning
+    const timer = setTimeout(() => {
+      setState(s => s.loading ? { ...s, loading: false } : s)
+    }, 5000)
     supabase.auth.getSession().then(({ data: { session } }) => {
+      clearTimeout(timer)
       if (session?.user) {
         setState(s => ({ ...s, session, user: session.user }))
         loadProfile(session.user)
       } else {
         setState(s => ({ ...s, loading: false }))
       }
+    }).catch(() => {
+      clearTimeout(timer)
+      setState(s => ({ ...s, loading: false }))
     })
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {

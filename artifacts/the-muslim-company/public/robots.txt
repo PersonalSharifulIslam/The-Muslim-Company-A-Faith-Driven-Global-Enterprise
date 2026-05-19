@@ -1,2 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /employee
+Disallow: /employee/
+Disallow: /login
+Disallow: /auth-redirect
+
+Sitemap: https://www.themuslim.company/sitemap.xml

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Briefcase, Users, Newspaper, Bell, BookOpen, TrendingUp } from "lucide-react";
 import AdminLayout from "@/components/AdminLayout";
 import { supabase } from "@/lib/supabase";
+import { Link } from "wouter";
 
 const fadeIn = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
 
@@ -57,11 +58,11 @@ export default function AdminDashboard() {
 
         <motion.div variants={fadeIn} className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
           {CARDS.map(({ label, value, icon: Icon, href, color }) => (
-            <a key={label} href={href} className="bg-card border border-border rounded-xl p-5 hover:border-primary/40 transition-colors">
+            <Link key={label} href={href} className="bg-card border border-border rounded-xl p-5 hover:border-primary/40 transition-colors">
               <Icon className={`${color} mb-3`} size={22} />
               <p className="font-serif text-2xl text-primary mb-1">{value}</p>
               <p className="text-xs text-muted-foreground uppercase tracking-wider">{label}</p>
-            </a>
+            </Link>
           ))}
         </motion.div>
 
@@ -76,9 +77,9 @@ export default function AdminDashboard() {
               { label: "Write Blog Post",    href: "/admin/blog" },
               { label: "Manage Employees",   href: "/admin/employees" },
             ].map(({ label, href }) => (
-              <a key={label} href={href} className="bg-card border border-border rounded-lg px-4 py-3 text-sm text-center hover:border-primary/40 hover:text-primary transition-colors">
+              <Link key={label} href={href} className="bg-card border border-border rounded-lg px-4 py-3 text-sm text-center hover:border-primary/40 hover:text-primary transition-colors">
                 {label}
-              </a>
+              </Link>
             ))}
           </div>
         </motion.div>

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
 import { supabase } from './supabase'
 import type { UserProfile, UserRole } from './supabase'
@@ -24,104 +24,55 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<AuthState>({
     session: null, user: null, profile: null, role: null, loading: true,
   })
-  const initialized = useRef(false)
 
   async function loadProfile(user: User) {
-    try {
-      const { data: roleData, error: roleError } = await supabase
-        .from('user_roles')
-        .select('role, employee_id')
-        .eq('id', user.id)
-        .maybeSingle()
+    const { data: roleData } = await supabase
+      .from('user_roles')
+      .select('role, employee_id')
+      .eq('id', user.id)
+      .single()
 
-      // ✅ FIX: roleError বা roleData না থাকলেও loading false করো
-      if (roleError || !roleData) {
-        const metaRole = user.user_metadata?.role as UserRole | undefined
-        setState(s => ({
-          ...s,
-          role: metaRole ?? null,
-          profile: metaRole ? { id: user.id, role: metaRole, email: user.email ?? '' } : null,
-          loading: false, // ✅ সবসময় false করো
-        }))
-        return
-      }
+    if (!roleData) { setState(s => ({ ...s, loading: false })); return }
 
-      const role = roleData.role as UserRole
+    const role = roleData.role as UserRole
 
-      if (role === 'admin') {
-        setState(s => ({
-          ...s, role,
-          profile: { id: user.id, role: 'admin', email: user.email ?? '' },
-          loading: false, // ✅
-        }))
-        return
-      }
-
-      const { data: emp } = await supabase
-        .from('employees')
-        .select('*')
-        .eq('employee_id', roleData.employee_id)
-        .maybeSingle()
-
-      setState(s => ({
-        ...s, role,
-        profile: {
-          id: user.id, role: 'employee', email: user.email ?? '',
-          employee_id: roleData.employee_id,
-          name: emp?.name, department: emp?.department,
-          position: emp?.position, profile_image: emp?.profile_image,
-        },
-        loading: false, // ✅
-      }))
-    } catch (e) {
-      console.error('loadProfile error:', e)
-      setState(s => ({ ...s, loading: false })) // ✅ catch এ সবসময় false
+    if (role === 'admin') {
+      setState(s => ({ ...s, role, profile: { id: user.id, role: 'admin', email: user.email ?? '' }, loading: false }))
+      return
     }
+
+    const { data: emp } = await supabase
+      .from('employees')
+      .select('*')
+      .eq('employee_id', roleData.employee_id)
+      .single()
+
+    setState(s => ({
+      ...s, role,
+      profile: {
+        id: user.id, role: 'employee', email: user.email ?? '',
+        employee_id: roleData.employee_id,
+        name: emp?.name, department: emp?.department,
+        position: emp?.position, profile_image: emp?.profile_image,
+      },
+      loading: false,
+    }))
   }
 
   useEffect(() => {
-    // ✅ FIX: Timeout দিয়ে loading infinite loop থেকে রক্ষা
-    const timeout = setTimeout(() => {
-      setState(s => {
-        if (s.loading) {
-          console.warn('Auth timeout — forcing loading to false')
-          return { ...s, loading: false }
-        }
-        return s
-      })
-    }, 8000) // 8 সেকেন্ডের বেশি loading থাকলে force করে বন্ধ করো
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (!initialized.current && event === 'INITIAL_SESSION') {
-        initialized.current = true
-        setState(s => ({ ...s, session, user: session?.user ?? null }))
-
-        if (session?.user) {
-          await loadProfile(session.user)
-        } else {
-          // ✅ FIX: session না থাকলেও loading false করো
-          setState(s => ({ ...s, loading: false }))
-        }
-        clearTimeout(timeout)
-        return
-      }
-
-      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        setState(s => ({ ...s, session, user: session?.user ?? null }))
-        if (session?.user) await loadProfile(session.user)
-        clearTimeout(timeout)
-      }
-
-      if (event === 'SIGNED_OUT') {
-        setState({ session: null, user: null, profile: null, role: null, loading: false })
-        clearTimeout(timeout)
-      }
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setState(s => ({ ...s, session, user: session?.user ?? null }))
+      if (session?.user) loadProfile(session.user)
+      else setState(s => ({ ...s, loading: false }))
     })
 
-    return () => {
-      subscription.unsubscribe()
-      clearTimeout(timeout)
-    }
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      setState(s => ({ ...s, session, user: session?.user ?? null }))
+      if (session?.user) await loadProfile(session.user)
+      else setState({ session: null, user: null, profile: null, role: null, loading: false })
+    })
+
+    return () => subscription.unsubscribe()
   }, [])
 
   async function signIn(email: string, password: string) {
@@ -132,6 +83,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   async function signOut() {
     await supabase.auth.signOut()
     setState({ session: null, user: null, profile: null, role: null, loading: false })
+    window.location.href = '/login'
   }
 
   async function resetPassword(email: string) {

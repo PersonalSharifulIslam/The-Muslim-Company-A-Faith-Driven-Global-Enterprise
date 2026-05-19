@@ -130,6 +130,13 @@ async function routePost(path: string, body: any): Promise<any> {
     const { data, error } = await supabase.from('attendance').insert(body).select().single()
     if (error) throw error; return data
   }
+  if (path === '/admin/employees') {
+    // Create employee in employees table
+    // Note: Auth user creation requires service role key (server-side only)
+    // Here we create the employee record; auth user must be created separately
+    const { data, error } = await supabase.from('employees').insert(body).select().single()
+    if (error) throw error; return data
+  }
   throw new Error(`POST ${path} not implemented`)
 }
 

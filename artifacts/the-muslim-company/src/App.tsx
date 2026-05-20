@@ -31,6 +31,9 @@ import EmployeeProfile from "@/pages/employee-profile";
 import EmployeeSettings from "@/pages/employee-settings";
 import LoginPage from "@/pages/LoginPage";
 import AuthRedirect from "@/pages/AuthRedirect";
+import FounderPage from "@/pages/founder";
+import VisionPage from "@/pages/vision";
+import MissionPage from "@/pages/mission";
 import { AdminRoute, EmployeeRoute } from "@/lib/protected-routes";
 
 const queryClient = new QueryClient();
@@ -55,6 +58,9 @@ function Router() {
       <Route path="/admin" component={LoginPage} />
       <Route path="/employee" component={LoginPage} />
       <Route path="/auth-redirect" component={AuthRedirect} />
+      <Route path="/founder" component={FounderPage} />
+      <Route path="/vision" component={VisionPage} />
+      <Route path="/mission" component={MissionPage} />
 
       {/* Admin protected routes */}
       <Route path="/admin/dashboard">

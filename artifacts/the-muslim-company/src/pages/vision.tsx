@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import SiteLayout from "@/components/SiteLayout";
-import visionBg from "@/assets/images/vision.png";
+import visionBg from "@/assets/images/vision.webp";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },

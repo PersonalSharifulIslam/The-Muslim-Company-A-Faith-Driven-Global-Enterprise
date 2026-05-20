@@ -10,8 +10,8 @@ import {
   Home as LucideHome, UserCheck, Baby, Clock, Award, Briefcase, Shield,
   Gavel, Globe, Flame, Check, Quote, Menu, X, Plus, Minus
 } from "lucide-react";
-import heroBg from "@/assets/images/hero-bg.png";
-import visionBg from "@/assets/images/vision.png";
+import heroBg from "@/assets/images/hero-bg.webp";
+import visionBg from "@/assets/images/vision.webp";
 import logo from "@/assets/images/logo.png";
 
 /* ─── animation variants ─── */

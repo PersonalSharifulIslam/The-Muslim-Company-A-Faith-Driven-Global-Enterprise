@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 import { Quote } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 
@@ -32,6 +34,13 @@ function InlineQuote({ children, author }: { children: React.ReactNode; author?:
 export default function FounderPage() {
   return (
     <SiteLayout>
+      <Helmet>
+        <title>Shariful Islam – Founder & CEO | The Muslim Company</title>
+        <meta name="description" content="Shariful Islam is a Bangladeshi Engineer, Ethical Visionary and Entrepreneur. Founder & CEO of The Muslim Company." />
+        <link rel="canonical" href="https://www.themuslim.company/founder" />
+        <meta property="og:title" content="Shariful Islam – Founder & CEO | The Muslim Company" />
+        <meta property="og:url" content="https://www.themuslim.company/founder" />
+      </Helmet>
       <div className="bg-background min-h-screen">
         {/* Hero */}
         <section className="bg-primary py-24 px-6">

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import SiteLayout from "@/components/SiteLayout";
 import visionBg from "@/assets/images/vision.png";
 
@@ -23,6 +24,13 @@ function Bullets({ items }: { items: string[] }) {
 export default function VisionPage() {
   return (
     <SiteLayout>
+      <Helmet>
+        <title>Our Vision – The Future is Ethical | The Muslim Company</title>
+        <meta name="description" content="The Muslim Company's long-term vision: universities, research centers, hospitals, innovation hubs, and ethical AI institutions guided by faith, knowledge, and justice." />
+        <link rel="canonical" href="https://www.themuslim.company/vision" />
+        <meta property="og:title" content="Our Vision | The Muslim Company" />
+        <meta property="og:url" content="https://www.themuslim.company/vision" />
+      </Helmet>
       <div className="bg-background min-h-screen">
         {/* Hero */}
         <section className="relative h-[50vh] flex items-center justify-center overflow-hidden bg-primary">

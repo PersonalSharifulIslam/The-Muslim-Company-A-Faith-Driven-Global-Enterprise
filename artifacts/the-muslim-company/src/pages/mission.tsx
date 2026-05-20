@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import SiteLayout from "@/components/SiteLayout";
 
 const fadeIn = {
@@ -22,6 +23,13 @@ function Bullets({ items }: { items: string[] }) {
 export default function MissionPage() {
   return (
     <SiteLayout>
+      <Helmet>
+        <title>Our Mission – Building Human Civilization | The Muslim Company</title>
+        <meta name="description" content="The Muslim Company's mission: to build a civilization-driven global company inspired by the Quran, authentic Sunnah, and the Prophetic model." />
+        <link rel="canonical" href="https://www.themuslim.company/mission" />
+        <meta property="og:title" content="Our Mission | The Muslim Company" />
+        <meta property="og:url" content="https://www.themuslim.company/mission" />
+      </Helmet>
       <div className="bg-background min-h-screen">
         {/* Hero */}
         <section className="bg-primary py-24 px-6">

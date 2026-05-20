@@ -1,22 +1,23 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Search, X, ExternalLink } from "lucide-react";
+import { Search, X, ExternalLink, Send, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminLayout from "@/components/AdminLayout";
-import { useAuth } from "@/lib/auth-context";
 import { api } from "@/lib/api";
+import { supabase } from "@/lib/supabase";
+import { sendOfferEmail } from "@/lib/email";
 import { STATUS_LABELS, STATUS_COLORS, type Application } from "@/lib/supabase";
 
 const ALL_STATUSES = ["submitted", "reviewing", "shortlisted", "interview", "offered", "hired", "rejected"];
 
 export default function AdminApplications() {
-  const { user, loading } = useAuth();
   const [apps, setApps] = useState<Application[]>([]);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [selected, setSelected] = useState<Application | null>(null);
   const [updating, setUpdating] = useState(false);
-
+  const [sendingOffer, setSendingOffer] = useState(false);
+  const [offerSent, setOfferSent] = useState(false);
 
   const load = async () => {
     try {
@@ -28,7 +29,9 @@ export default function AdminApplications() {
   useEffect(() => { load(); }, []);
 
   const filtered = apps.filter((a) => {
-    const matchSearch = a.name.toLowerCase().includes(search.toLowerCase()) || a.reference_number.toLowerCase().includes(search.toLowerCase()) || a.job_title.toLowerCase().includes(search.toLowerCase());
+    const matchSearch = a.name.toLowerCase().includes(search.toLowerCase()) ||
+      a.reference_number.toLowerCase().includes(search.toLowerCase()) ||
+      a.job_title.toLowerCase().includes(search.toLowerCase());
     const matchStatus = statusFilter === "all" || a.status === statusFilter;
     return matchSearch && matchStatus;
   });
@@ -43,7 +46,38 @@ export default function AdminApplications() {
     setUpdating(false);
   };
 
+  const sendOffer = async () => {
+    if (!selected) return;
+    setSendingOffer(true);
+    setOfferSent(false);
+    try {
+      const expiresAt = new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString();
 
+      // Update Supabase
+      await supabase.from('applications').update({
+        status: 'offered',
+        offer_sent_at: new Date().toISOString(),
+        offer_expires_at: expiresAt,
+        offer_status: 'pending',
+      }).eq('id', selected.id);
+
+      // Send email
+      await sendOfferEmail({
+        to: selected.email,
+        name: selected.name,
+        position: selected.job_title,
+        reference: selected.reference_number,
+        expiresAt,
+      });
+
+      await load();
+      setSelected((prev) => prev ? { ...prev, status: 'offered' as Application["status"] } : null);
+      setOfferSent(true);
+    } catch (err) {
+      alert('Failed to send offer. Please try again.');
+    }
+    setSendingOffer(false);
+  };
 
   return (
     <AdminLayout current="/admin/applications">
@@ -57,9 +91,12 @@ export default function AdminApplications() {
       <div className="flex flex-col sm:flex-row gap-4 mb-5">
         <div className="relative flex-1">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-primary/30" />
-          <input type="text" placeholder="Search by name, reference, or position..." value={search} onChange={(e) => setSearch(e.target.value)} className="w-full pl-11 pr-4 h-10 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+          <input type="text" placeholder="Search by name, reference, or position..." value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full pl-11 pr-4 h-10 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
         </div>
-        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
+        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}
+          className="h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
           <option value="all">All Statuses</option>
           {ALL_STATUSES.map((s) => <option key={s} value={s}>{STATUS_LABELS[s]}</option>)}
         </select>
@@ -81,7 +118,7 @@ export default function AdminApplications() {
             </thead>
             <tbody>
               {filtered.map((a) => (
-                <tr key={a.id} className="border-t border-primary/8 hover:bg-secondary/5 transition-colors cursor-pointer" onClick={() => setSelected(a)}>
+                <tr key={a.id} className="border-t border-primary/8 hover:bg-secondary/5 transition-colors cursor-pointer" onClick={() => { setSelected(a); setOfferSent(false); }}>
                   <td className="px-5 py-4 font-sans text-sm text-primary">{a.name}</td>
                   <td className="px-5 py-4 font-sans text-xs text-primary/60">{a.job_title}</td>
                   <td className="px-5 py-4 font-mono text-xs text-primary/50">{a.reference_number}</td>
@@ -92,12 +129,8 @@ export default function AdminApplications() {
                     </span>
                   </td>
                   <td className="px-5 py-4" onClick={(e) => e.stopPropagation()}>
-                    <select
-                      value={a.status}
-                      onChange={(e) => updateStatus(a.id, e.target.value)}
-                      disabled={updating}
-                      className="h-8 px-2 bg-background border border-primary/15 font-sans text-xs text-primary focus:outline-none focus:border-secondary"
-                    >
+                    <select value={a.status} onChange={(e) => updateStatus(a.id, e.target.value)} disabled={updating}
+                      className="h-8 px-2 bg-background border border-primary/15 font-sans text-xs text-primary focus:outline-none focus:border-secondary">
                       {ALL_STATUSES.map((s) => <option key={s} value={s}>{STATUS_LABELS[s]}</option>)}
                     </select>
                   </td>
@@ -110,12 +143,8 @@ export default function AdminApplications() {
 
       {selected && (
         <div className="fixed inset-0 z-50 flex items-start justify-end bg-black/50">
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            className="w-full max-w-lg bg-background h-full overflow-y-auto shadow-2xl"
-          >
+          <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }}
+            className="w-full max-w-lg bg-background h-full overflow-y-auto shadow-2xl">
             <div className="flex items-center justify-between px-6 py-4 border-b border-primary/10 sticky top-0 bg-background">
               <h2 className="font-serif text-lg text-primary">Application Details</h2>
               <button onClick={() => setSelected(null)} className="text-primary/40 hover:text-primary"><X className="w-5 h-5" /></button>
@@ -125,6 +154,7 @@ export default function AdminApplications() {
                 <p className="font-mono text-sm text-secondary mb-1">{selected.reference_number}</p>
                 <p className="font-sans text-[10px] text-primary-foreground/40 tracking-widest uppercase">Reference Number</p>
               </div>
+
               {[
                 { l: "Full Name", v: selected.name },
                 { l: "Email", v: selected.email },
@@ -139,6 +169,7 @@ export default function AdminApplications() {
                   <p className="font-sans text-sm text-primary">{v}</p>
                 </div>
               ))}
+
               {[
                 { l: "Education", v: selected.education },
                 { l: "Experience", v: selected.experience },
@@ -150,29 +181,63 @@ export default function AdminApplications() {
                   <p className="font-sans text-sm text-primary/70 leading-relaxed whitespace-pre-line">{v}</p>
                 </div>
               ))}
+
               {selected.portfolio && (
                 <div>
                   <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-2">Portfolio / LinkedIn</p>
-                  <a href={selected.portfolio} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-sans text-sm text-secondary hover:underline">
+                  <a href={selected.portfolio} target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-2 font-sans text-sm text-secondary hover:underline">
                     {selected.portfolio} <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 </div>
               )}
+
               {selected.cv_url && (
                 <a href={selected.cv_url} target="_blank" rel="noopener noreferrer">
-                  <Button className="w-full bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-10">Download CV</Button>
+                  <Button className="w-full bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-10">
+                    Download CV
+                  </Button>
                 </a>
               )}
+
+              {/* Send Offer Section */}
+              <div className="border border-secondary/30 bg-secondary/5 p-5">
+                <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-3 flex items-center gap-2">
+                  <Send className="w-3.5 h-3.5" /> Send Job Offer
+                </p>
+                {offerSent ? (
+                  <div className="bg-green-50 border border-green-200 p-3 rounded">
+                    <p className="font-sans text-sm text-green-700 font-semibold">✓ Offer email sent successfully!</p>
+                    <p className="font-sans text-xs text-green-600 mt-1">Expires in 72 hours. Candidate notified at {selected.email}</p>
+                  </div>
+                ) : (
+                  <>
+                    <p className="font-sans text-xs text-primary/60 mb-3 leading-relaxed">
+                      This will send a formal offer letter to <strong>{selected.email}</strong> with a 72-hour acceptance window.
+                    </p>
+                    <div className="flex items-center gap-2 mb-4 text-primary/50">
+                      <Clock className="w-3.5 h-3.5" />
+                      <span className="font-sans text-xs">Offer expires 72 hours after sending</span>
+                    </div>
+                    <Button
+                      onClick={sendOffer}
+                      disabled={sendingOffer}
+                      className="w-full bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-10 gap-2 disabled:opacity-50">
+                      <Send className="w-3.5 h-3.5" />
+                      {sendingOffer ? "Sending Offer..." : "Send Job Offer Email"}
+                    </Button>
+                  </>
+                )}
+              </div>
+
+              {/* Update Status */}
               <div className="border-t border-primary/10 pt-5">
                 <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-3">Update Status</p>
                 <div className="grid grid-cols-2 gap-2">
                   {ALL_STATUSES.map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => updateStatus(selected.id, s)}
+                    <button key={s} onClick={() => updateStatus(selected.id, s)}
                       disabled={updating || selected.status === s}
-                      className={`px-3 py-2 font-sans text-[10px] tracking-widest uppercase border transition-colors disabled:opacity-40 ${selected.status === s ? "bg-secondary text-primary border-secondary" : "border-primary/15 text-primary/50 hover:border-secondary/50"}`}
-                    >
+                      className={`px-3 py-2 font-sans text-[10px] tracking-widest uppercase border transition-colors disabled:opacity-40 ${selected.status === s ? "bg-secondary text-primary border-secondary" : "border-primary/15 text-primary/50 hover:border-secondary/50"}`}>
                       {STATUS_LABELS[s]}
                     </button>
                   ))}

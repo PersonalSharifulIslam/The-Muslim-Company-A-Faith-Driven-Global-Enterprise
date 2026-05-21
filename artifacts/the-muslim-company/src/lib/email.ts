@@ -35,7 +35,18 @@ export async function sendInterviewEmail(data: {
   interviewType: string
   interviewLocation: string
 }) {
-  return callInterviewEdgeFunction(data)  // type field লাগবে না
+  const isOnline = data.interviewType === 'Online (Google Meet)'
+  return callInterviewEdgeFunction({
+    to: data.to,
+    name: data.name,
+    position: data.position,
+    reference: data.reference,
+    interviewDate: data.interviewDatetime,
+    interviewTime: new Date(data.interviewDatetime).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
+    interviewType: isOnline ? 'online' : 'in-person',
+    interviewLink: isOnline ? data.interviewLocation : undefined,
+    interviewVenue: isOnline ? undefined : data.interviewLocation,
+  })
 }
 
 export async function sendOfferEmail(data: {

@@ -1,1 +1,9 @@
-/* /index.html 200
+/admin/* /index.html 200
+/employee/* /index.html 200
+/careers/* /index.html 200
+/newsroom/* /index.html 200
+/blog/* /index.html 200
+/notices /index.html 200
+/recruitment-status /index.html 200
+/login /index.html 200
+/auth-redirect /index.html 200

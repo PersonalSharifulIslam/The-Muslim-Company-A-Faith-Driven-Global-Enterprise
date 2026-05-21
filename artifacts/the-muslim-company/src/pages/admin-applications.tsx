@@ -422,5 +422,3 @@ export default function AdminApplications() {
     </AdminLayout>
   );
 }
-ENDOFFILE
-echo "Done"

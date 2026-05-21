@@ -1,4 +1,3 @@
-cat > ~/workspace/artifacts/the-muslim-company/src/pages/admin-applications.tsx << 'ENDOFFILE'
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search, X, ExternalLink, Send, Clock, Calendar, CheckSquare, Square } from "lucide-react";

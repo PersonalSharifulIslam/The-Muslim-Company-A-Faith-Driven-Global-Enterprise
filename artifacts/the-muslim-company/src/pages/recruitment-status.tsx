@@ -1,4 +1,3 @@
-cat > artifacts/the-muslim-company/src/pages/recruitment-status.tsx << 'ENDOFFILE'
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search, AlertCircle, Clock, CheckCircle, XCircle, Download, MapPin, Video, Calendar } from "lucide-react";
@@ -384,4 +383,3 @@ export default function RecruitmentStatus() {
     </SiteLayout>
   );
 }
-ENDOFFILE

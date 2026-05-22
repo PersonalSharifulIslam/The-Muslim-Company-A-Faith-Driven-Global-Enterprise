@@ -62,12 +62,6 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                 >
                   Track Application →
                 </a>
-                <button
-                  onClick={() => { setLoginOpen(true); setNavOpen(false); }}
-                  className="font-sans text-xs tracking-widest uppercase text-primary-foreground/40 hover:text-secondary transition-colors text-left"
-                >
-                  Staff Login
-                </button>
               </div>
             </motion.div>
           )}

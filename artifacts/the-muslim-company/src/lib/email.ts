@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 // ✅ এভাবে বদলান
+=======
+>>>>>>> 349b40772b6977e7b75786b0226cd761d841be72
 async function callOfferEdgeFunction(payload: object) {
   const res = await fetch('https://zutzpbwxvpricifpcgaj.supabase.co/functions/v1/send-offer-email', {
     method: 'POST',

@@ -1,4 +1,3 @@
-cat > ~/workspace/artifacts/the-muslim-company/src/pages/admin-applications.tsx << 'ENDOFFILE'
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search, X, ExternalLink, Send, Clock, Calendar, CheckSquare, Square } from "lucide-react";
@@ -102,7 +101,7 @@ export default function AdminApplications() {
         await sendInterviewEmail({
           to: app.email, name: app.name, position: app.job_title,
           reference: app.reference_number,
-          interviewDatetime: new Date(interviewDatetime).toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' }),
+          interviewDatetime: interviewDatetime,
           interviewType: interviewType, interviewLocation: location,
         });
       }
@@ -423,5 +422,3 @@ export default function AdminApplications() {
     </AdminLayout>
   );
 }
-ENDOFFILE
-echo "Done"

@@ -17,7 +17,6 @@ const ALL_NAV = [
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   const [navOpen, setNavOpen] = useState(false);
-  const [loginModal, setLoginModal] = useState(false);
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground flex flex-col">
@@ -63,10 +62,8 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                   Track Application →
                 </a>
                 <button
-                  onClick={() => { setNavOpen(false); setLoginModal(true); }}
                   className="font-sans text-xs tracking-widest uppercase text-primary-foreground/40 hover:text-secondary transition-colors text-left"
                 >
-                  Portal Login
                 </button>
               </div>
             </motion.div>
@@ -88,17 +85,13 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
             <a href="/notices" className="hover:text-primary-foreground transition-colors">Notices</a>
             <a href="/blog" className="hover:text-primary-foreground transition-colors">Blog</a>
             <a href="/recruitment-status" className="hover:text-primary-foreground transition-colors">Track Application</a>
-            <button onClick={() => setLoginModal(true)} className="hover:text-primary-foreground transition-colors flex items-center gap-1.5">
-              <LogIn className="w-3 h-3" /> Login
             </button>
           </div>
         </div>
       </footer>
 
       <AnimatePresence>
-        {loginModal && (
           <>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/70 z-[100] backdrop-blur-sm" onClick={() => setLoginModal(false)} />
             <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} transition={{ duration: 0.25 }}
               className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[101] w-full max-w-sm mx-4">
               <div className="bg-primary border border-primary-foreground/15 shadow-2xl overflow-hidden">
@@ -110,26 +103,21 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                       <p className="font-sans text-[9px] tracking-widest uppercase text-secondary/60">Select Portal</p>
                     </div>
                   </div>
-                  <button onClick={() => setLoginModal(false)} className="text-primary-foreground/30 hover:text-primary-foreground transition-colors">
                     <X className="w-4 h-4" />
                   </button>
                 </div>
                 <div className="p-5 space-y-3">
-                  <a href="/admin" onClick={() => setLoginModal(false)}
                     className="flex items-center justify-between w-full p-4 border border-secondary/25 hover:border-secondary/60 bg-secondary/5 hover:bg-secondary/10 transition-all group">
                     <div>
                       <p className="font-sans text-xs font-bold tracking-widest uppercase text-primary-foreground group-hover:text-secondary transition-colors">Corporate Admin</p>
                       <p className="font-sans text-[10px] text-primary-foreground/35 mt-0.5">Management dashboard access</p>
                     </div>
-                    <LogIn className="w-4 h-4 text-secondary/50 group-hover:text-secondary transition-colors" />
                   </a>
-                  <a href="/employee" onClick={() => setLoginModal(false)}
                     className="flex items-center justify-between w-full p-4 border border-primary-foreground/15 hover:border-secondary/40 bg-white/3 hover:bg-secondary/5 transition-all group">
                     <div>
                       <p className="font-sans text-xs font-bold tracking-widest uppercase text-primary-foreground group-hover:text-secondary transition-colors">Employee Portal</p>
                       <p className="font-sans text-[10px] text-primary-foreground/35 mt-0.5">Staff attendance, tasks & leave</p>
                     </div>
-                    <LogIn className="w-4 h-4 text-primary-foreground/30 group-hover:text-secondary transition-colors" />
                   </a>
                 </div>
                 <div className="px-5 pb-5">

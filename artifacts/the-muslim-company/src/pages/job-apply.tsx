@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import SiteLayout from "@/components/SiteLayout";
 import { api } from "@/lib/api";
 import { supabase } from "@/lib/supabase";
+import { sendApplicationConfirmation } from "@/lib/email";
 import type { Job } from "@/lib/supabase";
 const fadeIn = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 type FormData = {
@@ -187,6 +188,19 @@ export default function JobApply({ params }: { params: { slug: string } }) {
         status: "submitted",
       });
       if (insertError) throw new Error(insertError.message);
+      // Silent confirmation email — user sees nothing, email arrives silently
+      try {
+        await sendApplicationConfirmation({
+          to: form.email,
+          name: form.name,
+          reference: ref,
+          position: job.title,
+          jobId: job.job_id,
+          department: job.department,
+          location: job.location,
+          submittedDate: new Date().toLocaleString('en-GB', { dateStyle: 'long', timeStyle: 'short' }),
+        });
+      } catch {}
       setSubmitted({
         ref,
         date: new Date().toLocaleString("en-GB", { dateStyle: "long", timeStyle: "short" }),

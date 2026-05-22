@@ -101,7 +101,7 @@ export default function AdminApplications() {
         await sendInterviewEmail({
           to: app.email, name: app.name, position: app.job_title,
           reference: app.reference_number,
-          interviewDatetime: new Date(interviewDatetime).toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' }),
+          interviewDatetime: interviewDatetime,
           interviewType: interviewType, interviewLocation: location,
         });
       }

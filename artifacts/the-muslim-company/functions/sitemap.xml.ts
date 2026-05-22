@@ -4,7 +4,6 @@ export async function onRequestGet(context: any) {
   const SUPABASE_KEY  = env.VITE_SUPABASE_ANON_KEY || env.SUPABASE_ANON_KEY
   const BASE          = 'https://www.themuslim.company'
 
-  // Fetch dynamic content from Supabase
   async function fetchTable(table: string, select: string) {
     const res = await fetch(
       `${SUPABASE_URL}/rest/v1/${table}?${select}&order=created_at.desc`,
@@ -44,6 +43,8 @@ ${url(`${BASE}/newsroom`,            'weekly',  '0.8', now)}
 ${url(`${BASE}/blog`,                'weekly',  '0.8', now)}
 ${url(`${BASE}/notices`,             'weekly',  '0.7', now)}
 ${url(`${BASE}/recruitment-status`,  'monthly', '0.6')}
+${url(`${BASE}/privacy-policy`,      'yearly',  '0.5')}
+${url(`${BASE}/terms-of-service`,    'yearly',  '0.5')}
 ${url(`${BASE}/#mission`,            'monthly', '0.5')}
 ${url(`${BASE}/#vision`,             'monthly', '0.5')}
 ${url(`${BASE}/#foundation`,         'monthly', '0.5')}

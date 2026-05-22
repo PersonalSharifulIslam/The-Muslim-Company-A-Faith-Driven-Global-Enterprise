@@ -1165,9 +1165,9 @@ export default function Home() {
               <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
             </div>
             <div className="flex flex-wrap gap-6 mt-4 md:mt-0">
-              <span className="hover:text-primary-foreground cursor-pointer transition-colors">Privacy Policy</span>
-              <span className="hover:text-primary-foreground cursor-pointer transition-colors">Terms of Service</span>
-              <span className="hover:text-primary-foreground cursor-pointer transition-colors">Shariah Compliance</span>
+              <a href="/privacy-policy" className="hover:text-primary-foreground transition-colors">Privacy Policy</a>
+              <a href="/terms-of-service" className="hover:text-primary-foreground transition-colors">Terms of Service</a>
+              <a href="/#constitution" className="hover:text-primary-foreground transition-colors">Shariah Compliance</a>
               <a href="/careers" className="hover:text-primary-foreground transition-colors">Careers</a>
               <a href="/newsroom" className="hover:text-primary-foreground transition-colors">Newsroom</a>
               <a href="/notices" className="hover:text-primary-foreground transition-colors">Notices</a>

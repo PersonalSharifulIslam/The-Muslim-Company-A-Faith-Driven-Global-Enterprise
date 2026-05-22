@@ -34,6 +34,8 @@ import AuthRedirect from "@/pages/AuthRedirect";
 import FounderPage from "@/pages/founder";
 import VisionPage from "@/pages/vision";
 import MissionPage from "@/pages/mission";
+import PrivacyPolicy from "@/pages/privacy-policy";
+import TermsOfService from "@/pages/terms-of-service";
 import { AdminRoute, EmployeeRoute } from "@/lib/protected-routes";
 
 const queryClient = new QueryClient();
@@ -61,6 +63,8 @@ function Router() {
       <Route path="/founder" component={FounderPage} />
       <Route path="/vision" component={VisionPage} />
       <Route path="/mission" component={MissionPage} />
+      <Route path="/privacy-policy" component={PrivacyPolicy} />
+      <Route path="/terms-of-service" component={TermsOfService} />
 
       {/* Admin protected routes */}
       <Route path="/admin/dashboard">

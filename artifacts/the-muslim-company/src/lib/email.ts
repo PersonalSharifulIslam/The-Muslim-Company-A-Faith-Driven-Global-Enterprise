@@ -60,3 +60,16 @@ export async function sendOfferEmail(data: {
 }) {
   return callEdgeFunction('send-offer-email', data)
 }
+
+export async function sendApplicationConfirmation(data: {
+  to: string
+  name: string
+  reference: string
+  position: string
+  jobId: number
+  department: string
+  location: string
+  submittedDate: string
+}) {
+  return callEdgeFunction('send-application-confirmation', data)
+}

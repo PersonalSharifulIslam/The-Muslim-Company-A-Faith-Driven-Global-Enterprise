@@ -26,13 +26,17 @@ export async function sendInterviewEmail(data: {
 }) {
   const isOnline = data.interviewType === 'Online (Google Meet)'
 
-  const dateObj = new Date(data.interviewDatetime)
-  const interviewDate = dateObj.toLocaleDateString('en-GB', {
-    day: 'numeric', month: 'long', year: 'numeric'
-  })
-  const interviewTime = dateObj.toLocaleTimeString('en-GB', {
-    hour: '2-digit', minute: '2-digit'
-  })
+  const [datePart, timePart] = data.interviewDatetime.split('T')
+  const [year, month, day] = datePart.split('-').map(Number)
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December']
+  const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+  const dayName = dayNames[new Date(year, month - 1, day).getDay()]
+  const interviewDate = `${dayName}, ${day} ${monthNames[month - 1]} ${year}`
+
+  const [h, m] = timePart.substring(0, 5).split(':').map(Number)
+  const ampm = h >= 12 ? 'PM' : 'AM'
+  const hour12 = h % 12 === 0 ? 12 : h % 12
+  const interviewTime = `${hour12}:${m.toString().padStart(2, '0')} ${ampm} (BST)`
 
   return callEdgeFunction('send-interview-email', {
     to: data.to,

@@ -4,7 +4,7 @@ import { useAuth } from "@/lib/auth-context";
 import {
   LayoutDashboard, Briefcase, Users, Newspaper, Bell, BookOpen, LogOut, Menu, X, UserSquare2,
 } from "lucide-react";
-import logo from "@/assets/images/logo.png";
+import logo from "@/assets/images/logo.webp";
 
 const ADMIN_NAV = [
   { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LayoutDashboard, Clock, Calendar, CheckSquare, FileText, Bell, User, Settings, LogOut, Menu, X, ChevronRight } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
-import logo from "@/assets/images/logo.png";
+import logo from "@/assets/images/logo.webp";
 
 const NAV = [
   { label: "Dashboard", href: "/employee/dashboard", icon: LayoutDashboard },

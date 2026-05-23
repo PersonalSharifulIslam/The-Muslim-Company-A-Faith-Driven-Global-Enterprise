@@ -33,6 +33,20 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'motion': ['framer-motion'],
+          'ui': ['lucide-react'],
+          'supabase': ['@supabase/supabase-js'],
+          'router': ['wouter'],
+          'query': ['@tanstack/react-query'],
+          'pdf': ['jspdf'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
   },
   server: {
     port,

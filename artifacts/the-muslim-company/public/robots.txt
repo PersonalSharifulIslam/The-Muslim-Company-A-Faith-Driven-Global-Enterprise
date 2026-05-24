@@ -7,4 +7,16 @@ Disallow: /employee/
 Disallow: /login
 Disallow: /auth-redirect
 
+User-agent: Googlebot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 Sitemap: https://www.themuslim.company/sitemap.xml

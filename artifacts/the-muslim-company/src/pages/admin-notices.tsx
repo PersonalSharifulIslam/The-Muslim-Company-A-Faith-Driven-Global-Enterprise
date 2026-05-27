@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
-import { Plus, Edit2, Trash2, X, Pin } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Plus, Edit2, Trash2, X, Pin, Upload, FileText, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminLayout from "@/components/AdminLayout";
 import { useAuth } from "@/lib/auth-context";
 import { api } from "@/lib/api";
+import { supabase } from "@/lib/supabase";
 import type { Notice } from "@/lib/supabase";
 
 const CATS = ["General Notice", "Important", "Circular", "Recruitment", "Event", "Announcement"];
@@ -18,7 +19,9 @@ export default function AdminNotices() {
   const [form, setForm] = useState<Form>(BLANK);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState<number | null>(null);
-
+  const [uploading, setUploading] = useState(false);
+  const [uploadedFileName, setUploadedFileName] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const load = async () => {
     try {
@@ -29,11 +32,60 @@ export default function AdminNotices() {
 
   useEffect(() => { load(); }, []);
 
-  const openNew = () => { setEditing(null); setForm(BLANK); setModal(true); };
+  const openNew = () => {
+    setEditing(null);
+    setForm(BLANK);
+    setUploadedFileName("");
+    setModal(true);
+  };
+
   const openEdit = (n: Notice) => {
     setEditing(n);
     setForm({ title: n.title, category: n.category, content: n.content || "", pdf_url: n.pdf_url || "", important: n.important, pinned: n.pinned });
+    setUploadedFileName(n.pdf_url ? "Existing PDF" : "");
     setModal(true);
+  };
+
+  const handlePdfUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (file.type !== "application/pdf") {
+      alert("Only PDF files are allowed.");
+      return;
+    }
+
+    // Validate file size (20MB limit)
+    if (file.size > 20 * 1024 * 1024) {
+      alert("File size must be under 20MB.");
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const fileName = `notices/${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
+      const { data, error } = await supabase.storage
+        .from("documents")
+        .upload(fileName, file, { cacheControl: "3600", upsert: false });
+
+      if (error) throw error;
+
+      const { data: urlData } = supabase.storage.from("documents").getPublicUrl(data.path);
+      setForm((f) => ({ ...f, pdf_url: urlData.publicUrl }));
+      setUploadedFileName(file.name);
+    } catch (err) {
+      alert("Upload failed. Please try again.");
+      console.error(err);
+    }
+    setUploading(false);
+    // Reset input so same file can be re-selected
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const removePdf = () => {
+    setForm((f) => ({ ...f, pdf_url: "" }));
+    setUploadedFileName("");
   };
 
   const save = async () => {
@@ -60,7 +112,6 @@ export default function AdminNotices() {
   const setField = (k: keyof Form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.type === "checkbox" ? (e.target as HTMLInputElement).checked : e.target.value }));
 
-
   return (
     <AdminLayout current="/admin/notices">
       <div className="flex items-center justify-between mb-6">
@@ -76,7 +127,9 @@ export default function AdminNotices() {
       {notices.length === 0 ? (
         <div className="text-center py-20 bg-card border border-primary/10">
           <p className="font-serif text-xl text-primary mb-4">No notices yet</p>
-          <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5"><Plus className="w-3.5 h-3.5 mr-2" />Add First Notice</Button>
+          <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
+            <Plus className="w-3.5 h-3.5 mr-2" />Add First Notice
+          </Button>
         </div>
       ) : (
         <div className="border border-primary/10 overflow-x-auto">
@@ -134,8 +187,37 @@ export default function AdminNotices() {
                   </select>
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">PDF URL (Optional)</label>
-                  <input value={form.pdf_url} onChange={setField("pdf_url")} placeholder="https://..." className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">PDF File (Optional)</label>
+                  {form.pdf_url ? (
+                    // PDF uploaded — show filename with remove option
+                    <div className="flex items-center gap-2 h-10 px-3 bg-secondary/10 border border-secondary/30">
+                      <FileText className="w-4 h-4 text-secondary shrink-0" />
+                      <span className="font-sans text-xs text-primary truncate flex-1">{uploadedFileName}</span>
+                      <button onClick={removePdf} className="text-primary/40 hover:text-red-400 transition-colors shrink-0">
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ) : (
+                    // No PDF — show upload button
+                    <button
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={uploading}
+                      className="w-full h-10 px-3 bg-background border border-primary/15 border-dashed font-sans text-xs text-primary/50 hover:border-secondary/50 hover:text-secondary transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                    >
+                      {uploading ? (
+                        <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading...</>
+                      ) : (
+                        <><Upload className="w-3.5 h-3.5" /> Upload PDF</>
+                      )}
+                    </button>
+                  )}
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="application/pdf"
+                    onChange={handlePdfUpload}
+                    className="hidden"
+                  />
                 </div>
               </div>
               <div>
@@ -154,7 +236,7 @@ export default function AdminNotices() {
               </div>
             </div>
             <div className="px-6 py-4 border-t border-primary/10 flex gap-3">
-              <Button onClick={save} disabled={saving || !form.title} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-6 disabled:opacity-40">
+              <Button onClick={save} disabled={saving || !form.title || uploading} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-6 disabled:opacity-40">
                 {saving ? "Saving..." : editing ? "Save Changes" : "Publish Notice"}
               </Button>
               <Button variant="outline" onClick={() => setModal(false)} className="border-primary/20 text-primary rounded-none font-sans text-xs h-9 px-5">Cancel</Button>

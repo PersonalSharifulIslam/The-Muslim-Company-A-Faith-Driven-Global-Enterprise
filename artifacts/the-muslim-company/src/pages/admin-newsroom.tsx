@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
-import { Plus, Edit2, Trash2, Eye, X, Star } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Plus, Edit2, Trash2, Eye, X, Star, Upload, ImageIcon, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminLayout from "@/components/AdminLayout";
 import { useAuth } from "@/lib/auth-context";
 import { api } from "@/lib/api";
+import { supabase } from "@/lib/supabase";
 import type { NewsPost } from "@/lib/supabase";
 
 const CATS = ["Press Release", "Company Update", "Partnership", "Media Coverage", "Announcement"];
@@ -20,7 +21,8 @@ export default function AdminNewsroom() {
   const [form, setForm] = useState<Form>(BLANK);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState<number | null>(null);
-
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const load = async () => {
     try {
@@ -37,6 +39,42 @@ export default function AdminNewsroom() {
     setForm({ title: p.title, slug: p.slug, category: p.category, excerpt: p.excerpt || "", content: p.content, image_url: p.image_url || "", featured: p.featured, published: p.published });
     setModal(true);
   };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const allowed = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    if (!allowed.includes(file.type)) {
+      alert("Only JPG, PNG, WebP, or GIF images are allowed.");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Image must be under 5MB.");
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const ext = file.name.split(".").pop();
+      const fileName = `newsroom/${Date.now()}.${ext}`;
+      const { data, error } = await supabase.storage
+        .from("media")
+        .upload(fileName, file, { cacheControl: "3600", upsert: false });
+
+      if (error) throw error;
+
+      const { data: urlData } = supabase.storage.from("media").getPublicUrl(data.path);
+      setForm((f) => ({ ...f, image_url: urlData.publicUrl }));
+    } catch (err) {
+      alert("Upload failed. Please try again.");
+      console.error(err);
+    }
+    setUploading(false);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const removeImage = () => setForm((f) => ({ ...f, image_url: "" }));
 
   const save = async () => {
     setSaving(true);
@@ -63,7 +101,6 @@ export default function AdminNewsroom() {
   const setField = (k: keyof Form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.type === "checkbox" ? (e.target as HTMLInputElement).checked : e.target.value }));
 
-
   return (
     <AdminLayout current="/admin/newsroom">
       <div className="flex items-center justify-between mb-6">
@@ -79,7 +116,9 @@ export default function AdminNewsroom() {
       {posts.length === 0 ? (
         <div className="text-center py-20 bg-card border border-primary/10">
           <p className="font-serif text-xl text-primary mb-4">No articles yet</p>
-          <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5"><Plus className="w-3.5 h-3.5 mr-2" />Write First Article</Button>
+          <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
+            <Plus className="w-3.5 h-3.5 mr-2" />Write First Article
+          </Button>
         </div>
       ) : (
         <div className="border border-primary/10 overflow-x-auto">
@@ -137,8 +176,40 @@ export default function AdminNewsroom() {
                   </select>
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Image URL</label>
-                  <input value={form.image_url} onChange={setField("image_url")} placeholder="https://..." className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Image</label>
+                  {form.image_url ? (
+                    // Preview uploaded image
+                    <div className="relative h-10 border border-secondary/30 overflow-hidden group">
+                      <img src={form.image_url} alt="preview" className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                        <button onClick={() => fileInputRef.current?.click()} className="text-white">
+                          <Upload className="w-3.5 h-3.5" />
+                        </button>
+                        <button onClick={removeImage} className="text-white">
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={uploading}
+                      className="w-full h-10 px-3 bg-background border border-primary/15 border-dashed font-sans text-xs text-primary/50 hover:border-secondary/50 hover:text-secondary transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                    >
+                      {uploading ? (
+                        <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading...</>
+                      ) : (
+                        <><ImageIcon className="w-3.5 h-3.5" /> Upload Image</>
+                      )}
+                    </button>
+                  )}
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,image/gif"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                  />
                 </div>
               </div>
               <div>
@@ -161,7 +232,7 @@ export default function AdminNewsroom() {
               </div>
             </div>
             <div className="px-6 py-4 border-t border-primary/10 flex gap-3">
-              <Button onClick={save} disabled={saving || !form.title} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-6 disabled:opacity-40">
+              <Button onClick={save} disabled={saving || !form.title || uploading} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-6 disabled:opacity-40">
                 {saving ? "Saving..." : editing ? "Save Changes" : "Publish"}
               </Button>
               <Button variant="outline" onClick={() => setModal(false)} className="border-primary/20 text-primary rounded-none font-sans text-xs h-9 px-5">Cancel</Button>

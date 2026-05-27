@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
-import { Plus, Edit2, Trash2, Eye, X } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Plus, Edit2, Trash2, Eye, X, Upload, ImageIcon, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminLayout from "@/components/AdminLayout";
 import { useAuth } from "@/lib/auth-context";
 import { api } from "@/lib/api";
+import { supabase } from "@/lib/supabase";
 import type { BlogPost } from "@/lib/supabase";
 
 const CATS = ["Technology", "Ethics", "Islamic Civilization", "Business", "Education", "Global Affairs"];
-type Form = { title: string; slug: string; category: string; excerpt: string; content: string; image_url: string; author: string; reading_time: string; seo_title: string; meta_description: string; published: boolean };
-const BLANK: Form = { title: "", slug: "", category: CATS[0], excerpt: "", content: "", image_url: "", author: "The Muslim Company", reading_time: "5", seo_title: "", meta_description: "", published: false };
+type Form = { title: string; slug: string; category: string; excerpt: string; content: string; image_url: string; author: string; reading_time: number; seo_title: string; meta_description: string; published: boolean };
+const BLANK: Form = { title: "", slug: "", category: CATS[0], excerpt: "", content: "", image_url: "", author: "The Muslim Company", reading_time: 5, seo_title: "", meta_description: "", published: false };
 
 function slugify(s: string) { return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") + "-" + Date.now(); }
 
@@ -20,7 +21,8 @@ export default function AdminBlog() {
   const [form, setForm] = useState<Form>(BLANK);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState<number | null>(null);
-
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const load = async () => {
     try {
@@ -34,13 +36,54 @@ export default function AdminBlog() {
   const openNew = () => { setEditing(null); setForm(BLANK); setModal(true); };
   const openEdit = (p: BlogPost) => {
     setEditing(p);
-    setForm({ title: p.title, slug: p.slug, category: p.category, excerpt: p.excerpt || "", content: p.content, image_url: p.image_url || "", author: p.author, reading_time: String(p.reading_time), seo_title: p.seo_title || "", meta_description: p.meta_description || "", published: p.published });
+    setForm({
+      title: p.title, slug: p.slug, category: p.category, excerpt: p.excerpt || "",
+      content: p.content, image_url: p.image_url || "", author: p.author,
+      reading_time: p.reading_time || 5, seo_title: p.seo_title || "",
+      meta_description: p.meta_description || "", published: p.published,
+    });
     setModal(true);
   };
 
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const allowed = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    if (!allowed.includes(file.type)) {
+      alert("Only JPG, PNG, WebP, or GIF images are allowed.");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Image must be under 5MB.");
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const ext = file.name.split(".").pop();
+      const fileName = `blog/${Date.now()}.${ext}`;
+      const { data, error } = await supabase.storage
+        .from("media")
+        .upload(fileName, file, { cacheControl: "3600", upsert: false });
+
+      if (error) throw error;
+
+      const { data: urlData } = supabase.storage.from("media").getPublicUrl(data.path);
+      setForm((f) => ({ ...f, image_url: urlData.publicUrl }));
+    } catch (err) {
+      alert("Upload failed. Please try again.");
+      console.error(err);
+    }
+    setUploading(false);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const removeImage = () => setForm((f) => ({ ...f, image_url: "" }));
+
   const save = async () => {
     setSaving(true);
-    const data = { ...form, slug: form.slug || slugify(form.title), reading_time: parseInt(form.reading_time) || 5 };
+    const data = { ...form, slug: form.slug || slugify(form.title) };
     try {
       if (editing) await api.put(`/admin/blog/${editing.id}`, data, true);
       else await api.post("/admin/blog", data, true);
@@ -51,7 +94,7 @@ export default function AdminBlog() {
   };
 
   const del = async (id: number) => {
-    if (!confirm("Delete this blog post?")) return;
+    if (!confirm("Delete this post?")) return;
     setDeleting(id);
     try {
       await api.del(`/admin/blog/${id}`, true);
@@ -61,15 +104,14 @@ export default function AdminBlog() {
   };
 
   const setField = (k: keyof Form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    setForm((f) => ({ ...f, [k]: e.target.type === "checkbox" ? (e.target as HTMLInputElement).checked : e.target.value }));
-
+    setForm((f) => ({ ...f, [k]: e.target.type === "checkbox" ? (e.target as HTMLInputElement).checked : e.target.type === "number" ? Number(e.target.value) : e.target.value }));
 
   return (
     <AdminLayout current="/admin/blog">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="font-serif text-3xl text-primary mb-1">Blog</h1>
-          <p className="font-sans text-sm text-primary/50">Manage blog articles and posts</p>
+          <p className="font-sans text-sm text-primary/50">Manage blog posts and articles</p>
         </div>
         <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
           <Plus className="w-3.5 h-3.5 mr-2" />New Post
@@ -78,8 +120,10 @@ export default function AdminBlog() {
 
       {posts.length === 0 ? (
         <div className="text-center py-20 bg-card border border-primary/10">
-          <p className="font-serif text-xl text-primary mb-4">No blog posts yet</p>
-          <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5"><Plus className="w-3.5 h-3.5 mr-2" />Write First Post</Button>
+          <p className="font-serif text-xl text-primary mb-4">No posts yet</p>
+          <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
+            <Plus className="w-3.5 h-3.5 mr-2" />Write First Post
+          </Button>
         </div>
       ) : (
         <div className="border border-primary/10 overflow-x-auto">
@@ -96,7 +140,7 @@ export default function AdminBlog() {
                 <tr key={p.id} className="border-t border-primary/8 hover:bg-secondary/5 transition-colors">
                   <td className="px-5 py-4 font-sans text-sm text-primary max-w-xs truncate">{p.title}</td>
                   <td className="px-5 py-4 font-sans text-xs text-primary/60">{p.category}</td>
-                  <td className="px-5 py-4 font-sans text-xs text-primary/60">{p.author}</td>
+                  <td className="px-5 py-4 font-sans text-xs text-primary/50">{p.author}</td>
                   <td className="px-5 py-4 font-sans text-xs text-primary/50">{new Date(p.created_at).toLocaleDateString("en-GB")}</td>
                   <td className="px-5 py-4">
                     <span className={`font-sans text-[10px] tracking-widest uppercase px-2 py-0.5 border ${p.published ? "text-green-400 border-green-400/20" : "text-gray-400 border-gray-400/20"}`}>
@@ -140,13 +184,46 @@ export default function AdminBlog() {
                   <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Author</label>
                   <input value={form.author} onChange={setField("author")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Reading Time (mins)</label>
-                  <input type="number" value={form.reading_time} onChange={setField("reading_time")} min="1" className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+                  <input type="number" value={form.reading_time} onChange={setField("reading_time")} min={1} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Image URL</label>
-                  <input value={form.image_url} onChange={setField("image_url")} placeholder="https://..." className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Image</label>
+                  {form.image_url ? (
+                    <div className="relative h-10 border border-secondary/30 overflow-hidden group">
+                      <img src={form.image_url} alt="preview" className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                        <button onClick={() => fileInputRef.current?.click()} className="text-white">
+                          <Upload className="w-3.5 h-3.5" />
+                        </button>
+                        <button onClick={removeImage} className="text-white">
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={uploading}
+                      className="w-full h-10 px-3 bg-background border border-primary/15 border-dashed font-sans text-xs text-primary/50 hover:border-secondary/50 hover:text-secondary transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                    >
+                      {uploading ? (
+                        <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading...</>
+                      ) : (
+                        <><ImageIcon className="w-3.5 h-3.5" /> Upload Image</>
+                      )}
+                    </button>
+                  )}
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,image/gif"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                  />
                 </div>
               </div>
               <div>
@@ -155,26 +232,17 @@ export default function AdminBlog() {
               </div>
               <div>
                 <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Content *</label>
-                <textarea rows={12} value={form.content} onChange={setField("content")} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
+                <textarea rows={10} value={form.content} onChange={setField("content")} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
               </div>
-              <div className="grid grid-cols-1 gap-4 pt-2 border-t border-primary/10">
-                <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40">SEO (Optional)</p>
-                <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">SEO Title</label>
-                  <input value={form.seo_title} onChange={setField("seo_title")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
-                </div>
-                <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Meta Description</label>
-                  <textarea rows={2} value={form.meta_description} onChange={setField("meta_description")} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
-                </div>
+              <div className="flex gap-6">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" checked={form.published} onChange={setField("published")} className="accent-secondary" />
+                  <span className="font-sans text-sm text-primary/70">Published</span>
+                </label>
               </div>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" checked={form.published} onChange={setField("published")} className="accent-secondary" />
-                <span className="font-sans text-sm text-primary/70">Publish immediately</span>
-              </label>
             </div>
             <div className="px-6 py-4 border-t border-primary/10 flex gap-3">
-              <Button onClick={save} disabled={saving || !form.title} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-6 disabled:opacity-40">
+              <Button onClick={save} disabled={saving || !form.title || uploading} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-6 disabled:opacity-40">
                 {saving ? "Saving..." : editing ? "Save Changes" : "Create Post"}
               </Button>
               <Button variant="outline" onClick={() => setModal(false)} className="border-primary/20 text-primary rounded-none font-sans text-xs h-9 px-5">Cancel</Button>

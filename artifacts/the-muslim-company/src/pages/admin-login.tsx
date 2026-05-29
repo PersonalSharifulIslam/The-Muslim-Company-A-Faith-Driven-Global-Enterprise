@@ -64,7 +64,7 @@ export default function AdminLogin() {
         className="w-full max-w-sm"
       >
         <div className="text-center mb-10">
-          <img src={logo} alt="TMC" className="w-12 h-12 invert opacity-80 mx-auto mb-4" />
+          <img src={logo} alt="TMC" className="w-12 h-12 opacity-80 mx-auto mb-4" />
           <h1 className="font-serif text-2xl text-primary-foreground mb-1">
             {setupMode ? "Create Admin Account" : "Admin Access"}
           </h1>

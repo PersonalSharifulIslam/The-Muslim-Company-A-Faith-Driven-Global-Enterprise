@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import heroBg from "@/assets/images/hero-bg.webp";
 import visionBg from "@/assets/images/vision.webp";
-import logo from "@/assets/images/logo.webp";
+import logo from "@/assets/images/logo.png";
 
 /* ─── animation variants ─── */
 const fadeIn = {

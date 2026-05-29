@@ -54,55 +54,6 @@ function InlineQuote({ children, author, light = false }: { children: React.Reac
         "{children}"
       </p>
       {author && <p className={`mt-3 font-sans text-xs tracking-widest uppercase ${light ? "text-secondary/70" : "text-primary/40"}`}>— {author}</p>}
-      {/* ── EMAIL MODAL ── */}
-      <AnimatePresence>
-        {contactModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4"
-            onClick={() => setContactModal(null)}
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 30 }}
-              transition={{ duration: 0.3 }}
-              className="bg-background w-full max-w-md p-8 relative"
-              onClick={e => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setContactModal(null)}
-                className="absolute top-4 right-4 text-primary/40 hover:text-primary transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-              <p className="font-sans text-xs tracking-[0.3em] uppercase text-secondary mb-2">
-                {contactModal === "contact" ? "Contact Us" : "Partner With Us"}
-              </p>
-              <h3 className="font-serif text-2xl text-primary mb-2">
-                {contactModal === "contact" ? "How can we help?" : "Let's work together"}
-              </h3>
-              <p className="font-sans text-xs text-primary/40 mb-6">
-                {contactModal === "contact" ? "help@themuslim.company" : "ceo@themuslim.company"}
-              </p>
-              <div className="space-y-2">
-                {(contactModal === "contact" ? CONTACT_OPTIONS : PARTNER_OPTIONS).map((option) => (
-                  <button
-                    key={option}
-                    onClick={() => handleOptionClick(option, contactModal === "contact" ? "help@themuslim.company" : "ceo@themuslim.company")}
-                    className="w-full text-left px-5 py-3 border border-primary/10 font-sans text-sm text-primary/70 hover:border-secondary hover:text-secondary transition-colors flex justify-between items-center group"
-                  >
-                    {option}
-                    <ArrowUpRight className="w-4 h-4 text-primary/20 group-hover:text-secondary transition-colors" />
-                  </button>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
     </div>
   );
@@ -130,55 +81,6 @@ function AccordionItem({ title, children, light = false }: { title: string; chil
             className="overflow-hidden"
           >
             <div className="pb-5 space-y-3">{children}</div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      {/* ── EMAIL MODAL ── */}
-      <AnimatePresence>
-        {contactModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4"
-            onClick={() => setContactModal(null)}
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 30 }}
-              transition={{ duration: 0.3 }}
-              className="bg-background w-full max-w-md p-8 relative"
-              onClick={e => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setContactModal(null)}
-                className="absolute top-4 right-4 text-primary/40 hover:text-primary transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-              <p className="font-sans text-xs tracking-[0.3em] uppercase text-secondary mb-2">
-                {contactModal === "contact" ? "Contact Us" : "Partner With Us"}
-              </p>
-              <h3 className="font-serif text-2xl text-primary mb-2">
-                {contactModal === "contact" ? "How can we help?" : "Let's work together"}
-              </h3>
-              <p className="font-sans text-xs text-primary/40 mb-6">
-                {contactModal === "contact" ? "help@themuslim.company" : "ceo@themuslim.company"}
-              </p>
-              <div className="space-y-2">
-                {(contactModal === "contact" ? CONTACT_OPTIONS : PARTNER_OPTIONS).map((option) => (
-                  <button
-                    key={option}
-                    onClick={() => handleOptionClick(option, contactModal === "contact" ? "help@themuslim.company" : "ceo@themuslim.company")}
-                    className="w-full text-left px-5 py-3 border border-primary/10 font-sans text-sm text-primary/70 hover:border-secondary hover:text-secondary transition-colors flex justify-between items-center group"
-                  >
-                    {option}
-                    <ArrowUpRight className="w-4 h-4 text-primary/20 group-hover:text-secondary transition-colors" />
-                  </button>
-                ))}
-              </div>
-            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

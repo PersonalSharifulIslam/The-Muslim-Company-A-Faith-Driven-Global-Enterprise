@@ -4,7 +4,7 @@ import { useAuth } from "@/lib/auth-context";
 import {
   LayoutDashboard, Briefcase, Users, Newspaper, Bell, BookOpen, LogOut, Menu, X, UserSquare2,
 } from "lucide-react";
-import logo from "@/assets/images/logo.webp";
+import logo from "@/assets/images/logo.png";
 
 const ADMIN_NAV = [
   { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
@@ -30,7 +30,7 @@ export default function AdminLayout({ children, current }: { children: React.Rea
     <div className="min-h-screen bg-background flex">
       <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-primary flex flex-col transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}>
         <div className="flex items-center gap-3 px-6 py-5 border-b border-primary-foreground/10">
-          <img src={logo} alt="TMC" className="w-7 h-7 invert opacity-90 flex-shrink-0" />
+          <img src={logo} alt="TMC" className="w-7 h-7 opacity-90 flex-shrink-0" />
           <div>
             <p className="font-serif text-xs font-bold tracking-widest uppercase text-primary-foreground leading-tight">
               The Muslim Company

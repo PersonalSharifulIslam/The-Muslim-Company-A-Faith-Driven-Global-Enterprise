@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LayoutDashboard, Clock, Calendar, CheckSquare, FileText, Bell, User, Settings, LogOut, Menu, X, ChevronRight } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
-import logo from "@/assets/images/logo.webp";
+import logo from "@/assets/images/logo.png";
 
 const NAV = [
   { label: "Dashboard", href: "/employee/dashboard", icon: LayoutDashboard },
@@ -31,7 +31,7 @@ export default function EmployeeLayout({ children, current }: { children: React.
     <div className={`flex flex-col h-full ${mobile ? "w-72" : "w-64"} bg-[#0a1a0e] border-r border-[#b08d57]/20`}>
       <div className="p-5 border-b border-[#b08d57]/20">
         <div className="flex items-center gap-3">
-          <img src={logo} alt="TMC" className="w-8 h-8 invert opacity-80" />
+          <img src={logo} alt="TMC" className="w-8 h-8 opacity-80" />
           <div>
             <p className="font-serif text-sm font-bold text-white tracking-widest">THE MUSLIM</p>
             <p className="font-serif text-sm font-bold text-[#b08d57] tracking-widest">COMPANY</p>

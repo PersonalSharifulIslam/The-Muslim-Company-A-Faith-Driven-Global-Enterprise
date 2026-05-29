@@ -8,7 +8,8 @@ import {
   TreePine, Zap, FlaskConical, Truck, ShoppingBag, Factory,
   DollarSign, BookMarked, Atom, HandHeart, Radio, Bot, Ship,
   Home as LucideHome, UserCheck, Baby, Clock, Award, Briefcase, Shield,
-  Gavel, Globe, Flame, Check, Quote, Menu, X, Plus, Minus
+  Gavel, Globe, Flame, Check, Quote, Menu, X, Plus, Minus,
+  ShoppingCart, Shirt, Sparkles
 } from "lucide-react";
 import heroBg from "@/assets/images/hero-bg.webp";
 import visionBg from "@/assets/images/vision.webp";
@@ -183,6 +184,9 @@ const SECTORS = [
   { label: "Robotics & Automation", icon: <Bot className="w-5 h-5" /> },
   { label: "International Trade", icon: <Ship className="w-5 h-5" /> },
   { label: "Community Development", icon: <LucideHome className="w-5 h-5" /> },
+  { label: "Retail Business", icon: <ShoppingCart className="w-5 h-5" /> },
+  { label: "Fashion & Apparel", icon: <Shirt className="w-5 h-5" /> },
+  { label: "Lifestyle & Personal Care", icon: <Sparkles className="w-5 h-5" /> },
 ];
 
 const NAV_LINKS = [
@@ -556,7 +560,7 @@ export default function Home() {
               </span>
             ))}
             <span className="font-sans text-xs tracking-wide bg-card border border-primary/10 text-secondary px-3 py-1">
-              +14 more
+              +17 more
             </span>
           </div>
         }

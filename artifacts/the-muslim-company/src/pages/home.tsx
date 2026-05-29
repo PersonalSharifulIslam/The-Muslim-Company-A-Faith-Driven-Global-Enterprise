@@ -267,7 +267,7 @@ export default function Home() {
         <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-14">
           {/* Left */}
           <a href="#" className="flex items-center gap-3">
-            <img src={logo} alt="The Muslim Company Logo" className="w-7 h-7 flex-shrink-0" />
+            <img src={logo} alt="The Muslim Company Logo" className="w-7 h-7 opacity-90 flex-shrink-0" />
             <span className="font-serif text-sm font-bold tracking-widest uppercase text-primary-foreground whitespace-nowrap">
               The Muslim Company
             </span>

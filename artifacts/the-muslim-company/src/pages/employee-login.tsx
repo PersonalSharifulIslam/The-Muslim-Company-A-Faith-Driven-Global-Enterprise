@@ -48,7 +48,7 @@ export default function EmployeeLogin() {
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="w-full max-w-md relative z-10">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#b08d57]/10 border border-[#b08d57]/30 mb-4">
-            <img src={logo} alt="TMC" className="w-8 h-8 invert opacity-80" />
+            <img src={logo} alt="TMC" className="w-8 h-8 opacity-80" />
           </div>
           <p className="font-sans text-[11px] tracking-[0.3em] uppercase text-[#b08d57]/60 mb-1">Employee Portal</p>
           <h1 className="font-serif text-3xl text-white mb-1">Welcome Back</h1>

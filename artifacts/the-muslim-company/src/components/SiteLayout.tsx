@@ -13,6 +13,7 @@ const ALL_NAV = [
   { label: "Newsroom & PR", href: "/newsroom" },
   { label: "Notice & Event", href: "/notices" },
   { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
@@ -77,6 +78,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
             <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
           </div>
           <div className="flex flex-wrap gap-6 mt-4 md:mt-0">
+            <a href="/contact" className="hover:text-primary-foreground transition-colors">Contact Us</a>
             <a href="/careers" className="hover:text-primary-foreground transition-colors">Careers</a>
             <a href="/newsroom" className="hover:text-primary-foreground transition-colors">Newsroom</a>
             <a href="/notices" className="hover:text-primary-foreground transition-colors">Notices</a>

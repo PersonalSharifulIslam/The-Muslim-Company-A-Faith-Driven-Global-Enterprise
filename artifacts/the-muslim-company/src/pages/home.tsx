@@ -191,23 +191,26 @@ const SECTORS = [
   { label: "Lifestyle & Personal Care", icon: <Sparkles className="w-5 h-5" /> },
 ];
 
-const NAV_LINKS = [
+const NAV_LINKS_LEFT = [
   { label: "Mission", href: "#mission" },
-  { label: "Foundation", href: "#foundation" },
+  { label: "Vision", href: "#vision" },
+  { label: "Founder", href: "/founder" },
   { label: "Sectors", href: "#sectors" },
   { label: "Governance", href: "#governance" },
-  { label: "Our People", href: "#people" },
-  { label: "Environment", href: "#environment" },
-  { label: "Humanitarian", href: "#humanitarian" },
-  { label: "Technology", href: "#technology" },
-  { label: "Vision", href: "#vision" },
   { label: "Constitution", href: "#constitution" },
-  { label: "Founder", href: "#founder" },
+  { label: "Our People", href: "#people" },
+];
+
+const NAV_LINKS_RIGHT = [
   { label: "Careers", href: "/careers" },
   { label: "Newsroom & PR", href: "/newsroom" },
   { label: "Notice & Event", href: "/notices" },
+  { label: "Get Involved", href: "/get-involved" },
+  { label: "Transparency", href: "/transparency" },
   { label: "Blog", href: "/blog" },
 ];
+
+const NAV_LINKS = [...NAV_LINKS_LEFT, ...NAV_LINKS_RIGHT];
 
 const NAV_LINKS_DESKTOP = [
   { label: "Mission", href: "#mission" },
@@ -292,21 +295,37 @@ export default function Home() {
               exit={{ height: 0, opacity: 0 }}
               className="bg-primary border-t border-primary-foreground/10 overflow-hidden"
             >
-              <div className="container mx-auto px-6 py-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-3">
-                {NAV_LINKS.map(link => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setNavOpen(false)}
-                    className="font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary transition-colors"
-                  >
-                    {link.label}
+              <div className="container mx-auto px-6 py-5 grid grid-cols-2 gap-x-12">
+                {/* Left column */}
+                <div className="flex flex-col gap-3">
+                  {NAV_LINKS_LEFT.map(link => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setNavOpen(false)}
+                      className="font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+                {/* Right column */}
+                <div className="flex flex-col gap-3">
+                  {NAV_LINKS_RIGHT.map(link => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setNavOpen(false)}
+                      className="font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                  <a href="#contact" onClick={() => setNavOpen(false)}
+                    className="font-sans text-xs tracking-widest uppercase text-secondary hover:text-secondary/80 transition-colors font-bold">
+                    Join Us →
                   </a>
-                ))}
-                <a href="#contact" onClick={() => setNavOpen(false)}
-                  className="font-sans text-xs tracking-widest uppercase text-secondary hover:text-secondary/80 transition-colors font-bold">
-                  Join Us →
-                </a>
+                </div>
               </div>
             </motion.div>
           )}

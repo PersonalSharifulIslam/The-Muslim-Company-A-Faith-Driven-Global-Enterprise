@@ -12,6 +12,28 @@ const PER_PAGE = 10;
 const fadeIn = { hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } };
 
 export default function Notices() {
+  useEffect(() => {
+    document.title = "Notices & Events — The Muslim Company";
+    const _md = document.querySelector('meta[name="description"]');
+    if (_md) _md.setAttribute('content', "Official notices, announcements, and upcoming events from The Muslim Company.");
+    const _ogt = document.querySelector('meta[property="og:title"]');
+    if (_ogt) _ogt.setAttribute('content', "Notices & Events — The Muslim Company");
+    const _ogd = document.querySelector('meta[property="og:description"]');
+    if (_ogd) _ogd.setAttribute('content', "Official notices, announcements, and upcoming events from The Muslim Company.");
+    const _ogu = document.querySelector('meta[property="og:url"]');
+    if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/notices");
+
+    document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
+    [{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Notices & Events", "item": "https://www.themuslim.company/notices"}]}, {"@context": "https://schema.org", "@type": "WebPage", "name": "Notices & Events \u2014 The Muslim Company", "description": "Official notices, announcements, and upcoming events from The Muslim Company.", "url": "https://www.themuslim.company/notices", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.setAttribute('data-page-schema', 'true');
+      s.textContent = JSON.stringify(schema);
+      document.head.appendChild(s);
+    });
+    return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
+  }, []);
+
   const [notices, setNotices] = useState<Notice[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");

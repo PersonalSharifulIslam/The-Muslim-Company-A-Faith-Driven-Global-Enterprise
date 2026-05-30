@@ -42,6 +42,28 @@ function JobCard({ job }: { job: Job }) {
 }
 
 export default function Careers() {
+  useEffect(() => {
+    document.title = "Careers — The Muslim Company";
+    const _md = document.querySelector('meta[name="description"]');
+    if (_md) _md.setAttribute('content', "Join The Muslim Company — explore career opportunities in a faith-driven, ethical, and civilization-focused global enterprise. Open positions in technology, research, media, and more.");
+    const _ogt = document.querySelector('meta[property="og:title"]');
+    if (_ogt) _ogt.setAttribute('content', "Careers — The Muslim Company");
+    const _ogd = document.querySelector('meta[property="og:description"]');
+    if (_ogd) _ogd.setAttribute('content', "Join The Muslim Company — explore career opportunities in a faith-driven, ethical, and civilization-focused global enterprise. Open positions in technology, research, media, and more.");
+    const _ogu = document.querySelector('meta[property="og:url"]');
+    if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/careers");
+
+    document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
+    [{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Careers", "item": "https://www.themuslim.company/careers"}]}, {"@context": "https://schema.org", "@type": "WebPage", "name": "Careers at The Muslim Company", "description": "Join The Muslim Company \u2014 explore career opportunities in a faith-driven, ethical, and civilization-focused global enterprise. Open positions in technology, research, media, and more.", "url": "https://www.themuslim.company/careers", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.setAttribute('data-page-schema', 'true');
+      s.textContent = JSON.stringify(schema);
+      document.head.appendChild(s);
+    });
+    return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
+  }, []);
+
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");

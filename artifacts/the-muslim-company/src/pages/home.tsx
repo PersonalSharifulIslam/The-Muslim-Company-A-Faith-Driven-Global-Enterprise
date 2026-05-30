@@ -316,9 +316,13 @@ export default function Home() {
                       key={link.href}
                       href={link.href}
                       onClick={() => setNavOpen(false)}
-                      className="font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary transition-colors"
+                      className={`font-sans text-xs tracking-widest uppercase transition-colors ${
+                        link.label === "Join Us"
+                          ? "text-secondary hover:text-secondary/80 font-bold"
+                          : "text-primary-foreground/60 hover:text-secondary"
+                      }`}
                     >
-                      {link.label}
+                      {link.label}{link.label === "Join Us" ? " →" : ""}
                     </a>
                   ))}
                   <a href="#contact" onClick={() => setNavOpen(false)}

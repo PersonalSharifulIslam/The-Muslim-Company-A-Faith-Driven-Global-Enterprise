@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { useEffect, motion } from "framer-motion";
 import SiteLayout from "@/components/SiteLayout";
 
 const fadeIn = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
@@ -18,6 +18,28 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 }
 
 export default function PrivacyPolicy() {
+  useEffect(() => {
+    document.title = "Privacy Policy — The Muslim Company";
+    const _md = document.querySelector('meta[name="description"]');
+    if (_md) _md.setAttribute('content', "Privacy Policy of The Muslim Company — how we collect, use, and protect your personal information in accordance with Islamic ethics and international standards.");
+    const _ogt = document.querySelector('meta[property="og:title"]');
+    if (_ogt) _ogt.setAttribute('content', "Privacy Policy — The Muslim Company");
+    const _ogd = document.querySelector('meta[property="og:description"]');
+    if (_ogd) _ogd.setAttribute('content', "Privacy Policy of The Muslim Company — how we collect, use, and protect your personal information in accordance with Islamic ethics and international standards.");
+    const _ogu = document.querySelector('meta[property="og:url"]');
+    if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/privacy-policy");
+
+    document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
+    [{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://www.themuslim.company/privacy-policy"}]}, {"@context": "https://schema.org", "@type": "WebPage", "name": "Privacy Policy \u2014 The Muslim Company", "description": "Privacy Policy of The Muslim Company \u2014 how we collect, use, and protect your personal information in accordance with Islamic ethics and international standards.", "url": "https://www.themuslim.company/privacy-policy", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.setAttribute('data-page-schema', 'true');
+      s.textContent = JSON.stringify(schema);
+      document.head.appendChild(s);
+    });
+    return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
+  }, []);
+
   return (
     <SiteLayout>
       <section className="bg-primary text-primary-foreground py-20 lg:py-28 px-6 lg:px-12">

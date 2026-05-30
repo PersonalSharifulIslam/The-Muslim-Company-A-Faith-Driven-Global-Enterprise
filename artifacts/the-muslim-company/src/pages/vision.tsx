@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import SiteLayout from "@/components/SiteLayout";
@@ -22,6 +23,27 @@ function Bullets({ items }: { items: string[] }) {
 }
 
 export default function VisionPage() {
+  useEffect(() => {
+    document.title = "Vision — The Muslim Company";
+    const _md = document.querySelector('meta[name="description"]');
+    if (_md) _md.setAttribute('content', "The Muslim Company's long-term vision: universities, research centers, hospitals, ethical AI institutions, and civilization-scale development guided by faith, knowledge, and justice.");
+    const _ogt = document.querySelector('meta[property="og:title"]');
+    if (_ogt) _ogt.setAttribute('content', "Vision — The Muslim Company");
+    const _ogd = document.querySelector('meta[property="og:description"]');
+    if (_ogd) _ogd.setAttribute('content', "The Muslim Company's long-term vision: universities, research centers, hospitals, ethical AI institutions, and civilization-scale development guided by faith, knowledge, and justice.");
+    const _ogu = document.querySelector('meta[property="og:url"]');
+    if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/vision");
+    document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
+    [{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Vision", "item": "https://www.themuslim.company/vision"}]}, {"@context": "https://schema.org", "@type": "WebPage", "name": "Vision \u2014 The Muslim Company", "description": "The Muslim Company's long-term vision for ethical civilization-scale development.", "url": "https://www.themuslim.company/vision", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.setAttribute('data-page-schema', 'true');
+      s.textContent = JSON.stringify(schema);
+      document.head.appendChild(s);
+    });
+    return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
+  }, []);
+
   return (
     <SiteLayout>
       <Helmet>

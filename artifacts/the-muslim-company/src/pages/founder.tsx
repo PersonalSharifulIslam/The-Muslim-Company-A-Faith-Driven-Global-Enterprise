@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { Helmet } from "react-helmet-async";
@@ -32,6 +33,27 @@ function InlineQuote({ children, author }: { children: React.ReactNode; author?:
 }
 
 export default function FounderPage() {
+  useEffect(() => {
+    document.title = "Founder & CEO — Shariful Islam — The Muslim Company";
+    const _md = document.querySelector('meta[name="description"]');
+    if (_md) _md.setAttribute('content', "Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur — Founder & CEO of The Muslim Company, a faith-driven global enterprise built on Islamic principles.");
+    const _ogt = document.querySelector('meta[property="og:title"]');
+    if (_ogt) _ogt.setAttribute('content', "Shariful Islam — Founder & CEO of The Muslim Company");
+    const _ogd = document.querySelector('meta[property="og:description"]');
+    if (_ogd) _ogd.setAttribute('content', "Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur — Founder & CEO of The Muslim Company, a faith-driven global enterprise built on Islamic principles.");
+    const _ogu = document.querySelector('meta[property="og:url"]');
+    if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/founder");
+    document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
+    [{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Founder \u2014 Shariful Islam", "item": "https://www.themuslim.company/founder"}]}, {"@context": "https://schema.org", "@type": "ProfilePage", "name": "Shariful Islam \u2014 Founder & CEO", "description": "Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur \u2014 Founder & CEO of The Muslim Company.", "url": "https://www.themuslim.company/founder", "mainEntity": {"@type": "Person", "name": "Shariful Islam", "jobTitle": "Founder & CEO", "worksFor": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}, "nationality": "Bangladeshi", "url": "https://sharifulislam.engineer", "sameAs": ["https://sharifulislam.engineer", "https://www.linkedin.com/in/personalsharifulislam", "https://x.com/PersonalSIslam", "https://orcid.org/0000-0002-6634-5090", "https://www.crunchbase.com/person/shariful-islam-4eee"]}}].forEach(schema => {
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.setAttribute('data-page-schema', 'true');
+      s.textContent = JSON.stringify(schema);
+      document.head.appendChild(s);
+    });
+    return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
+  }, []);
+
   return (
     <SiteLayout>
       <Helmet>

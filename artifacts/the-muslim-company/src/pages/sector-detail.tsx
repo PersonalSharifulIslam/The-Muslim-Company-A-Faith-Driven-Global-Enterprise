@@ -802,7 +802,80 @@ export default function SectorDetail() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [slug]);
+    if (!sector) return;
+
+    // Inject dynamic schema for this sector page
+    const schemas = [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
+          { "@type": "ListItem", "position": 2, "name": "Sectors", "item": "https://www.themuslim.company/#sectors" },
+          { "@type": "ListItem", "position": 3, "name": sector.label, "item": `https://www.themuslim.company/sectors/${sector.slug}` }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": `${sector.label} — The Muslim Company`,
+        "description": sector.tagline,
+        "url": `https://www.themuslim.company/sectors/${sector.slug}`,
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
+            { "@type": "ListItem", "position": 2, "name": "Sectors", "item": "https://www.themuslim.company/#sectors" },
+            { "@type": "ListItem", "position": 3, "name": sector.label, "item": `https://www.themuslim.company/sectors/${sector.slug}` }
+          ]
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "The Muslim Company",
+          "url": "https://www.themuslim.company",
+          "logo": "https://www.themuslim.company/favicon.png"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": sector.label,
+        "description": sector.overview,
+        "provider": {
+          "@type": "Organization",
+          "name": "The Muslim Company",
+          "url": "https://www.themuslim.company"
+        },
+        "serviceType": sector.label,
+        "url": `https://www.themuslim.company/sectors/${sector.slug}`
+      }
+    ];
+
+    // Remove old injected schemas
+    document.querySelectorAll('script[data-sector-schema]').forEach(el => el.remove());
+
+    // Inject new schemas
+    schemas.forEach(schema => {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.setAttribute('data-sector-schema', 'true');
+      script.textContent = JSON.stringify(schema);
+      document.head.appendChild(script);
+    });
+
+    // Update page title and meta description
+    document.title = `${sector.label} — The Muslim Company`;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', sector.tagline);
+    const metaOgTitle = document.querySelector('meta[property="og:title"]');
+    if (metaOgTitle) metaOgTitle.setAttribute('content', `${sector.label} — The Muslim Company`);
+    const metaOgDesc = document.querySelector('meta[property="og:description"]');
+    if (metaOgDesc) metaOgDesc.setAttribute('content', sector.tagline);
+
+    return () => {
+      document.querySelectorAll('script[data-sector-schema]').forEach(el => el.remove());
+    };
+  }, [slug, sector]);
 
   if (!sector) {
     return (

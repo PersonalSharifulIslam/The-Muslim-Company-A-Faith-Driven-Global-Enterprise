@@ -52,6 +52,9 @@ export async function onRequestGet(context: any) {
     url(`${BASE}/notices`,            'weekly',  '0.7', now),
     url(`${BASE}/recruitment-status`, 'monthly', '0.6'),
     url(`${BASE}/contact`,             'monthly', '0.7', now),
+    url(`${BASE}/founder`,             'monthly', '0.8', now),
+    url(`${BASE}/vision`,              'monthly', '0.7', now),
+    url(`${BASE}/mission`,             'monthly', '0.7', now),
     url(`${BASE}/privacy-policy`,     'yearly',  '0.3'),
     url(`${BASE}/terms-of-service`,   'yearly',  '0.3'),
   ].join('\n')

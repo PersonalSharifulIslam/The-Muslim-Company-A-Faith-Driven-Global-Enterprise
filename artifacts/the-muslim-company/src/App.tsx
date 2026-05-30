@@ -35,6 +35,7 @@ import FounderPage from "@/pages/founder";
 import VisionPage from "@/pages/vision";
 import MissionPage from "@/pages/mission";
 import SectorDetail from "@/pages/sector-detail";
+import ContactPage from "@/pages/contact";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import TermsOfService from "@/pages/terms-of-service";
 import PrivacyPolicy from "@/pages/privacy-policy";
@@ -58,6 +59,7 @@ function Router() {
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={({ params }) => <BlogDetail params={params} />} />
       <Route path="/sectors/:slug" component={SectorDetail} />
+      <Route path="/contact" component={ContactPage} />
 
       {/* Unified login */}
       <Route path="/login" component={LoginPage} />

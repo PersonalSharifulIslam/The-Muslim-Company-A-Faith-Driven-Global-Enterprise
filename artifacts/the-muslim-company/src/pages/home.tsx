@@ -1213,6 +1213,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex flex-wrap gap-6 mt-4 md:mt-0">
+              <a href="/contact" className="hover:text-primary-foreground transition-colors">Contact Us</a>
               <a href="/privacy-policy" className="hover:text-primary-foreground transition-colors">Privacy Policy</a>
               <a href="/terms-of-service" className="hover:text-primary-foreground transition-colors">Terms of Service</a>
               <a href="/#constitution" className="hover:text-primary-foreground transition-colors">Shariah Compliance</a>

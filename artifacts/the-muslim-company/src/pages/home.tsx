@@ -1216,10 +1216,8 @@ export default function Home() {
               <a href="/contact" className="hover:text-primary-foreground transition-colors">Contact Us</a>
               <a href="/privacy-policy" className="hover:text-primary-foreground transition-colors">Privacy Policy</a>
               <a href="/terms-of-service" className="hover:text-primary-foreground transition-colors">Terms of Service</a>
-              <a href="/#constitution" className="hover:text-primary-foreground transition-colors">Shariah Compliance</a>
               <a href="/careers" className="hover:text-primary-foreground transition-colors">Careers</a>
               <a href="/newsroom" className="hover:text-primary-foreground transition-colors">Newsroom</a>
-              <a href="/notices" className="hover:text-primary-foreground transition-colors">Notices</a>
               <a href="/blog" className="hover:text-primary-foreground transition-colors">Blog</a>
               
             </div>

@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
+Allow: /sectors/
+Allow: /blog/
+Allow: /newsroom/
+Allow: /careers/
+Allow: /notices/
 Disallow: /admin
 Disallow: /admin/
 Disallow: /employee
@@ -9,6 +14,9 @@ Disallow: /auth-redirect
 
 User-agent: Googlebot
 Allow: /
+Allow: /sectors/
+Allow: /blog/
+Allow: /newsroom/
 
 User-agent: GPTBot
 Allow: /

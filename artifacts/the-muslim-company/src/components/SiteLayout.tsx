@@ -3,19 +3,23 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/images/logo.png";
 
-const ALL_NAV = [
-  { label: "Home", href: "/" },
-  { label: "Mission", href: "/#mission" },
-  { label: "Sectors", href: "/#sectors" },
-  { label: "Vision", href: "/#vision" },
+const NAV_LEFT = [
+  { label: "Mission", href: "/mission" },
+  { label: "Vision", href: "/vision" },
   { label: "Founder", href: "/#founder" },
+  { label: "Sectors", href: "/#sectors" },
+  { label: "Governance", href: "/#governance" },
+  { label: "Constitution", href: "/#constitution" },
+  { label: "Our People", href: "/#people" },
+];
+
+const NAV_RIGHT = [
   { label: "Careers", href: "/careers" },
   { label: "Newsroom & PR", href: "/newsroom" },
   { label: "Notice & Event", href: "/notices" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
   { label: "Get Involved", href: "/get-involved" },
   { label: "Transparency", href: "/transparency" },
+  { label: "Blog", href: "/blog" },
 ];
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {

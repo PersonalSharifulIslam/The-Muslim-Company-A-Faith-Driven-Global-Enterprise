@@ -47,24 +47,40 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
               exit={{ height: 0, opacity: 0 }}
               className="bg-primary border-t border-primary-foreground/10 overflow-hidden"
             >
-              <div className="container mx-auto px-6 py-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-3">
-                {ALL_NAV.map((link) => (
+              <div className="container mx-auto px-6 py-5 grid grid-cols-2 gap-x-12">
+                {/* Left column */}
+                <div className="flex flex-col gap-3">
+                  {NAV_LEFT.map(link => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setNavOpen(false)}
+                      className="font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+                {/* Right column */}
+                <div className="flex flex-col gap-3">
+                  {NAV_RIGHT.map(link => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setNavOpen(false)}
+                      className="font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
                   <a
-                    key={link.href}
-                    href={link.href}
+                    href="/#contact"
                     onClick={() => setNavOpen(false)}
-                    className="font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary transition-colors"
+                    className="font-sans text-xs tracking-widest uppercase text-secondary hover:text-secondary/80 transition-colors font-bold"
                   >
-                    {link.label}
+                    Join Us →
                   </a>
-                ))}
-                <a
-                  href="/recruitment-status"
-                  onClick={() => setNavOpen(false)}
-                  className="font-sans text-xs tracking-widest uppercase text-secondary hover:text-secondary/80 transition-colors font-bold"
-                >
-                  Track Application →
-                </a>
+                </div>
               </div>
             </motion.div>
           )}

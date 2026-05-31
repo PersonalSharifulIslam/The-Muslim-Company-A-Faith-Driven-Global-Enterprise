@@ -194,7 +194,7 @@ const SECTORS = [
 const NAV_LINKS_LEFT = [
   { label: "Mission", href: "#mission" },
   { label: "Vision", href: "#vision" },
-  { label: "Founder", href: "/founder" },
+  { label: "Founder", href: "/#founder" },
   { label: "Sectors", href: "#sectors" },
   { label: "Governance", href: "#governance" },
   { label: "Constitution", href: "#constitution" },

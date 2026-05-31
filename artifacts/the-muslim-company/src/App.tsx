@@ -36,6 +36,8 @@ import VisionPage from "@/pages/vision";
 import MissionPage from "@/pages/mission";
 import SectorDetail from "@/pages/sector-detail";
 import ContactPage from "@/pages/contact";
+import TransparencyPage from "@/pages/transparency";
+import GetInvolvedPage from "@/pages/get-involved";
 import GetInvolvedPage from "@/pages/get-involved";
 import TransparencyPage from "@/pages/transparency";
 import PrivacyPolicy from "@/pages/privacy-policy";
@@ -62,6 +64,8 @@ function Router() {
       <Route path="/blog/:slug" component={({ params }) => <BlogDetail params={params} />} />
       <Route path="/sectors/:slug" component={SectorDetail} />
       <Route path="/contact" component={ContactPage} />
+      <Route path="/transparency" component={TransparencyPage} />
+      <Route path="/get-involved" component={GetInvolvedPage} />
       <Route path="/get-involved" component={GetInvolvedPage} />
       <Route path="/transparency" component={TransparencyPage} />
 

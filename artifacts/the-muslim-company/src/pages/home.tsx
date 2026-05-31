@@ -1235,14 +1235,17 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="flex flex-wrap gap-6 mt-4 md:mt-0">
-              <a href="/contact" className="hover:text-primary-foreground transition-colors">Contact Us</a>
-              <a href="/privacy-policy" className="hover:text-primary-foreground transition-colors">Privacy Policy</a>
-              <a href="/terms-of-service" className="hover:text-primary-foreground transition-colors">Terms of Service</a>
-              <a href="/careers" className="hover:text-primary-foreground transition-colors">Careers</a>
-              <a href="/newsroom" className="hover:text-primary-foreground transition-colors">Newsroom</a>
-              <a href="/blog" className="hover:text-primary-foreground transition-colors">Blog</a>
-              
+            <div className="flex flex-col gap-2 mt-4 md:mt-0">
+              <div className="flex gap-5">
+                <a href="/privacy-policy" className="hover:text-primary-foreground transition-colors">Privacy Policy</a>
+                <a href="/terms-of-service" className="hover:text-primary-foreground transition-colors">Terms of Service</a>
+                <a href="/contact" className="hover:text-primary-foreground transition-colors">Contact Us</a>
+              </div>
+              <div className="flex gap-5">
+                <a href="/careers" className="hover:text-primary-foreground transition-colors">Careers</a>
+                <a href="/newsroom" className="hover:text-primary-foreground transition-colors">Newsroom</a>
+                <a href="/blog" className="hover:text-primary-foreground transition-colors">Blog</a>
+              </div>
             </div>
           </div>
         </div>

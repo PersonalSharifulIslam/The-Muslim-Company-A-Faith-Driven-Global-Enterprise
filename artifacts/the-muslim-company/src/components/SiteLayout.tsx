@@ -14,6 +14,8 @@ const ALL_NAV = [
   { label: "Notice & Event", href: "/notices" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
+  { label: "Get Involved", href: "/get-involved" },
+  { label: "Transparency", href: "/transparency" },
 ];
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
@@ -79,6 +81,8 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
           </div>
           <div className="flex flex-wrap gap-6 mt-4 md:mt-0">
             <a href="/contact" className="hover:text-primary-foreground transition-colors">Contact Us</a>
+            <a href="/get-involved" className="hover:text-primary-foreground transition-colors">Get Involved</a>
+            <a href="/transparency" className="hover:text-primary-foreground transition-colors">Transparency</a>
             <a href="/careers" className="hover:text-primary-foreground transition-colors">Careers</a>
             <a href="/newsroom" className="hover:text-primary-foreground transition-colors">Newsroom</a>
             <a href="/notices" className="hover:text-primary-foreground transition-colors">Notices</a>

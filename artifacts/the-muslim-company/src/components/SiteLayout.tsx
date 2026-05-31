@@ -99,17 +99,17 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
             <p className="font-serif text-base text-primary-foreground/50 mb-1">The Muslim Company</p>
             <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
           </div>
-          <div className="flex flex-wrap gap-6 mt-4 md:mt-0">
-            <a href="/contact" className="hover:text-primary-foreground transition-colors">Contact Us</a>
-            <a href="/get-involved" className="hover:text-primary-foreground transition-colors">Get Involved</a>
-            <a href="/transparency" className="hover:text-primary-foreground transition-colors">Transparency</a>
-            <a href="/careers" className="hover:text-primary-foreground transition-colors">Careers</a>
-            <a href="/newsroom" className="hover:text-primary-foreground transition-colors">Newsroom</a>
-            <a href="/notices" className="hover:text-primary-foreground transition-colors">Notices</a>
-            <a href="/blog" className="hover:text-primary-foreground transition-colors">Blog</a>
-            <a href="/recruitment-status" className="hover:text-primary-foreground transition-colors">Track Application</a>
-            <a href="/privacy-policy" className="hover:text-primary-foreground transition-colors">Privacy Policy</a>
-            <a href="/terms-of-service" className="hover:text-primary-foreground transition-colors">Terms of Service</a>
+          <div className="flex flex-col gap-2 mt-4 md:mt-0">
+            <div className="flex gap-5">
+              <a href="/privacy-policy" className="hover:text-primary-foreground transition-colors">Privacy Policy</a>
+              <a href="/terms-of-service" className="hover:text-primary-foreground transition-colors">Terms of Service</a>
+              <a href="/contact" className="hover:text-primary-foreground transition-colors">Contact Us</a>
+            </div>
+            <div className="flex gap-5">
+              <a href="/careers" className="hover:text-primary-foreground transition-colors">Careers</a>
+              <a href="/newsroom" className="hover:text-primary-foreground transition-colors">Newsroom</a>
+              <a href="/blog" className="hover:text-primary-foreground transition-colors">Blog</a>
+            </div>
           </div>
         </div>
       </footer>

@@ -21,34 +21,88 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     if (!job) return;
+    const pageUrl = `https://www.themuslim.company/careers/${params.slug}`;
+    const desc = `${job.title} — ${job.department || 'The Muslim Company'}. Apply now at The Muslim Company.`;
+    const ogImage = "https://www.themuslim.company/og-image.png";
+
     document.title = `${job.title} — Careers at The Muslim Company`;
+
     const md = document.querySelector('meta[name="description"]');
-    if (md) md.setAttribute('content', `${job.title} — ${job.department || 'The Muslim Company'}. Apply now at The Muslim Company.`);
-    const ogt = document.querySelector('meta[property="og:title"]');
-    if (ogt) ogt.setAttribute('content', `${job.title} — The Muslim Company`);
-    const ogu = document.querySelector('meta[property="og:url"]');
-    if (ogu) ogu.setAttribute('content', `https://www.themuslim.company/careers/${params.slug}`);
+    if (md) md.setAttribute('content', desc);
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) { canonical = document.createElement('link'); canonical.setAttribute('rel', 'canonical'); document.head.appendChild(canonical); }
+    canonical.setAttribute('href', pageUrl);
+
+    const ogTags: Record<string, string> = {
+      'og:title': `${job.title} — The Muslim Company`,
+      'og:description': desc,
+      'og:url': pageUrl,
+      'og:image': ogImage,
+      'og:image:width': '1200',
+      'og:image:height': '630',
+      'og:type': 'website',
+    };
+    Object.entries(ogTags).forEach(([prop, val]) => {
+      let el = document.querySelector(`meta[property="${prop}"]`);
+      if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el); }
+      el.setAttribute('content', val);
+    });
+
+    const twTags: Record<string, string> = {
+      'twitter:title': `${job.title} — The Muslim Company`,
+      'twitter:description': desc,
+      'twitter:image': ogImage,
+      'twitter:card': 'summary_large_image',
+    };
+    Object.entries(twTags).forEach(([name, val]) => {
+      let el = document.querySelector(`meta[name="${name}"]`);
+      if (!el) { el = document.createElement('meta'); el.setAttribute('name', name); document.head.appendChild(el); }
+      el.setAttribute('content', val);
+    });
+
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
     const schemas = [
-      { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
-        { "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://www.themuslim.company/careers" },
-        { "@type": "ListItem", "position": 3, "name": job.title, "item": `https://www.themuslim.company/careers/${params.slug}` }
-      ]},
+      { "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
+          { "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://www.themuslim.company/careers" },
+          { "@type": "ListItem", "position": 3, "name": job.title, "item": pageUrl }
+        ]
+      },
       { "@context": "https://schema.org", "@type": "JobPosting",
-        "title": job.title, "description": job.description || job.title,
-        "datePosted": job.created_at, "validThrough": job.deadline,
+        "title": job.title,
+        "description": job.description || desc,
+        "datePosted": job.created_at,
+        "validThrough": job.deadline,
         "employmentType": job.type || "FULL_TIME",
-        "hiringOrganization": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company", "logo": "https://www.themuslim.company/favicon.png" },
-        "jobLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "BD" } },
-        "url": `https://www.themuslim.company/careers/${params.slug}` }
+        "image": ogImage,
+        "url": pageUrl,
+        "hiringOrganization": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company", "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png" } },
+        "jobLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressRegion": "Dhaka Division", "addressCountry": "BD" } },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl }
+      },
+      { "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": `What is the ${job.title} role at The Muslim Company?`,
+            "acceptedAnswer": { "@type": "Answer", "text": job.description || `The Muslim Company is hiring for ${job.title}. Join a faith-driven global enterprise building ethical civilization.` }
+          },
+          { "@type": "Question", "name": "How can I apply for this position?",
+            "acceptedAnswer": { "@type": "Answer", "text": `Apply directly at https://www.themuslim.company/careers/${params.slug}/apply or email careers@themuslim.company.` }
+          }
+        ]
+      }
     ];
     schemas.forEach(schema => {
       const s = document.createElement('script'); s.type = 'application/ld+json';
       s.setAttribute('data-page-schema', 'true'); s.textContent = JSON.stringify(schema);
       document.head.appendChild(s);
     });
-    return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
+    return () => {
+      document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
+      const c = document.querySelector('link[rel="canonical"]');
+      if (c) c.setAttribute('href', 'https://www.themuslim.company/');
+    };
   }, [job, params.slug]);
 
   const isExpired = job ? new Date(job.deadline) < new Date() : false;

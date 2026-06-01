@@ -20,33 +20,86 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     if (!post) return;
+    const pageUrl = `https://www.themuslim.company/blog/${params.slug}`;
+    const ogImage = post.image_url || "https://www.themuslim.company/og-image.png";
+    const desc = post.excerpt || post.title;
+
     document.title = `${post.title} — The Muslim Company Blog`;
+
+    // Meta description
     const md = document.querySelector('meta[name="description"]');
-    if (md) md.setAttribute('content', post.excerpt || post.title);
-    const ogt = document.querySelector('meta[property="og:title"]');
-    if (ogt) ogt.setAttribute('content', `${post.title} — The Muslim Company`);
-    const ogd = document.querySelector('meta[property="og:description"]');
-    if (ogd) ogd.setAttribute('content', post.excerpt || post.title);
-    const ogu = document.querySelector('meta[property="og:url"]');
-    if (ogu) ogu.setAttribute('content', `https://www.themuslim.company/blog/${params.slug}`);
+    if (md) md.setAttribute('content', desc);
+
+    // Canonical
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) { canonical = document.createElement('link'); canonical.setAttribute('rel', 'canonical'); document.head.appendChild(canonical); }
+    canonical.setAttribute('href', pageUrl);
+
+    // OG tags
+    const ogTags: Record<string, string> = {
+      'og:title': `${post.title} — The Muslim Company`,
+      'og:description': desc,
+      'og:url': pageUrl,
+      'og:image': ogImage,
+      'og:image:width': '1200',
+      'og:image:height': '630',
+      'og:type': 'article',
+      'article:author': post.author || 'The Muslim Company',
+      'article:published_time': post.created_at,
+    };
+    Object.entries(ogTags).forEach(([prop, val]) => {
+      let el = document.querySelector(`meta[property="${prop}"]`);
+      if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el); }
+      el.setAttribute('content', val);
+    });
+
+    // Twitter
+    const twTags: Record<string, string> = {
+      'twitter:title': `${post.title} — The Muslim Company`,
+      'twitter:description': desc,
+      'twitter:image': ogImage,
+      'twitter:card': 'summary_large_image',
+    };
+    Object.entries(twTags).forEach(([name, val]) => {
+      let el = document.querySelector(`meta[name="${name}"]`);
+      if (!el) { el = document.createElement('meta'); el.setAttribute('name', name); document.head.appendChild(el); }
+      el.setAttribute('content', val);
+    });
+
+    // Schemas
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
     const schemas = [
-      { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
-        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.themuslim.company/blog" },
-        { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://www.themuslim.company/blog/${params.slug}` }
-      ]},
-      { "@context": "https://schema.org", "@type": "BlogPosting", "headline": post.title,
-        "description": post.excerpt || post.title, "author": { "@type": "Person", "name": post.author || "The Muslim Company" },
-        "publisher": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company" },
-        "datePublished": post.created_at, "url": `https://www.themuslim.company/blog/${params.slug}` }
+      { "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.themuslim.company/blog" },
+          { "@type": "ListItem", "position": 3, "name": post.title, "item": pageUrl }
+        ]
+      },
+      { "@context": "https://schema.org", "@type": "BlogPosting",
+        "headline": post.title, "description": desc,
+        "image": ogImage,
+        "url": pageUrl,
+        "datePublished": post.created_at,
+        "author": { "@type": "Person", "name": post.author || "The Muslim Company", "url": "https://sharifulislam.engineer" },
+        "publisher": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company", "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png" } },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl }
+      },
+      ...(post.excerpt ? [{ "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": [{ "@type": "Question", "name": `What is this article about?`,
+          "acceptedAnswer": { "@type": "Answer", "text": post.excerpt } }]
+      }] : [])
     ];
     schemas.forEach(schema => {
       const s = document.createElement('script'); s.type = 'application/ld+json';
       s.setAttribute('data-page-schema', 'true'); s.textContent = JSON.stringify(schema);
       document.head.appendChild(s);
     });
-    return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
+    return () => {
+      document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
+      const c = document.querySelector('link[rel="canonical"]');
+      if (c) c.setAttribute('href', 'https://www.themuslim.company/');
+    };
   }, [post, params.slug]);
 
   return (

@@ -18,6 +18,37 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
       .finally(() => setLoading(false));
   }, [params.slug]);
 
+  useEffect(() => {
+    if (!post) return;
+    document.title = `${post.title} — The Muslim Company Blog`;
+    const md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute('content', post.excerpt || post.title);
+    const ogt = document.querySelector('meta[property="og:title"]');
+    if (ogt) ogt.setAttribute('content', `${post.title} — The Muslim Company`);
+    const ogd = document.querySelector('meta[property="og:description"]');
+    if (ogd) ogd.setAttribute('content', post.excerpt || post.title);
+    const ogu = document.querySelector('meta[property="og:url"]');
+    if (ogu) ogu.setAttribute('content', `https://www.themuslim.company/blog/${params.slug}`);
+    document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
+    const schemas = [
+      { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.themuslim.company/blog" },
+        { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://www.themuslim.company/blog/${params.slug}` }
+      ]},
+      { "@context": "https://schema.org", "@type": "BlogPosting", "headline": post.title,
+        "description": post.excerpt || post.title, "author": { "@type": "Person", "name": post.author || "The Muslim Company" },
+        "publisher": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company" },
+        "datePublished": post.created_at, "url": `https://www.themuslim.company/blog/${params.slug}` }
+    ];
+    schemas.forEach(schema => {
+      const s = document.createElement('script'); s.type = 'application/ld+json';
+      s.setAttribute('data-page-schema', 'true'); s.textContent = JSON.stringify(schema);
+      document.head.appendChild(s);
+    });
+    return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
+  }, [post, params.slug]);
+
   return (
     <SiteLayout>
       <div className="py-12 px-6 lg:px-12">

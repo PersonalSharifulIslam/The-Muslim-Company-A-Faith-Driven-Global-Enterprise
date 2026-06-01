@@ -19,6 +19,38 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
       .finally(() => setLoading(false));
   }, [params.slug]);
 
+  useEffect(() => {
+    if (!job) return;
+    document.title = `${job.title} — Careers at The Muslim Company`;
+    const md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute('content', `${job.title} — ${job.department || 'The Muslim Company'}. Apply now at The Muslim Company.`);
+    const ogt = document.querySelector('meta[property="og:title"]');
+    if (ogt) ogt.setAttribute('content', `${job.title} — The Muslim Company`);
+    const ogu = document.querySelector('meta[property="og:url"]');
+    if (ogu) ogu.setAttribute('content', `https://www.themuslim.company/careers/${params.slug}`);
+    document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
+    const schemas = [
+      { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
+        { "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://www.themuslim.company/careers" },
+        { "@type": "ListItem", "position": 3, "name": job.title, "item": `https://www.themuslim.company/careers/${params.slug}` }
+      ]},
+      { "@context": "https://schema.org", "@type": "JobPosting",
+        "title": job.title, "description": job.description || job.title,
+        "datePosted": job.created_at, "validThrough": job.deadline,
+        "employmentType": job.type || "FULL_TIME",
+        "hiringOrganization": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company", "logo": "https://www.themuslim.company/favicon.png" },
+        "jobLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "BD" } },
+        "url": `https://www.themuslim.company/careers/${params.slug}` }
+    ];
+    schemas.forEach(schema => {
+      const s = document.createElement('script'); s.type = 'application/ld+json';
+      s.setAttribute('data-page-schema', 'true'); s.textContent = JSON.stringify(schema);
+      document.head.appendChild(s);
+    });
+    return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
+  }, [job, params.slug]);
+
   const isExpired = job ? new Date(job.deadline) < new Date() : false;
 
   return (

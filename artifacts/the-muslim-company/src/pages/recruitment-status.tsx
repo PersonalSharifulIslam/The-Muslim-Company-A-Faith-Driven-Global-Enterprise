@@ -33,6 +33,24 @@ function CountdownTimer({ expiresAt, label }: { expiresAt: string; label?: strin
 }
 
 export default function RecruitmentStatus() {
+  useEffect(() => {
+    document.title = "Recruitment Status — The Muslim Company";
+    const md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute('content', 'Track your job application status at The Muslim Company using your reference number.');
+    const ogt = document.querySelector('meta[property="og:title"]');
+    if (ogt) ogt.setAttribute('content', 'Recruitment Status — The Muslim Company');
+    document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
+    const s = document.createElement('script'); s.type = 'application/ld+json';
+    s.setAttribute('data-page-schema', 'true');
+    s.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
+      { "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://www.themuslim.company/careers" },
+      { "@type": "ListItem", "position": 3, "name": "Recruitment Status", "item": "https://www.themuslim.company/recruitment-status" }
+    ]});
+    document.head.appendChild(s);
+    return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
+  }, []);
+
   const [ref, setRef] = useState("");
   const [result, setResult] = useState<any | null | "not_found">(null);
   const [searching, setSearching] = useState(false);

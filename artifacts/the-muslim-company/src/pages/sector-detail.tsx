@@ -855,7 +855,27 @@ export default function SectorDetail() {
     document.querySelectorAll('script[data-sector-schema]').forEach(el => el.remove());
 
     // Inject new schemas
-    schemas.forEach(schema => {
+    // FAQ schema for sector
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question",
+          "name": `What does The Muslim Company do in ${sector.label}?`,
+          "acceptedAnswer": { "@type": "Answer", "text": sector.overview }
+        },
+        { "@type": "Question",
+          "name": `Why is ${sector.label} important from an Islamic perspective?`,
+          "acceptedAnswer": { "@type": "Answer", "text": sector.islamicContext }
+        },
+        { "@type": "Question",
+          "name": `What are the goals of The Muslim Company in ${sector.label}?`,
+          "acceptedAnswer": { "@type": "Answer", "text": sector.goals.short.join('. ') }
+        }
+      ]
+    };
+
+    [...schemas, faqSchema].forEach(schema => {
       const script = document.createElement('script');
       script.type = 'application/ld+json';
       script.setAttribute('data-sector-schema', 'true');
@@ -863,14 +883,48 @@ export default function SectorDetail() {
       document.head.appendChild(script);
     });
 
-    // Update page title and meta description
+    // Dynamic SEO
+    const pageUrl = `https://www.themuslim.company/sectors/${sector.slug}`;
+    const ogImage = "https://www.themuslim.company/og-image.png";
+
     document.title = `${sector.label} — The Muslim Company`;
+
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', sector.tagline);
-    const metaOgTitle = document.querySelector('meta[property="og:title"]');
-    if (metaOgTitle) metaOgTitle.setAttribute('content', `${sector.label} — The Muslim Company`);
-    const metaOgDesc = document.querySelector('meta[property="og:description"]');
-    if (metaOgDesc) metaOgDesc.setAttribute('content', sector.tagline);
+
+    // Canonical
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) { canonical = document.createElement('link'); canonical.setAttribute('rel', 'canonical'); document.head.appendChild(canonical); }
+    canonical.setAttribute('href', pageUrl);
+
+    // OG tags
+    const ogTags: Record<string, string> = {
+      'og:title': `${sector.label} — The Muslim Company`,
+      'og:description': sector.tagline,
+      'og:url': pageUrl,
+      'og:image': ogImage,
+      'og:image:width': '1200',
+      'og:image:height': '630',
+      'og:type': 'website',
+    };
+    Object.entries(ogTags).forEach(([prop, val]) => {
+      let el = document.querySelector(`meta[property="${prop}"]`);
+      if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el); }
+      el.setAttribute('content', val);
+    });
+
+    // Twitter
+    const twTags: Record<string, string> = {
+      'twitter:title': `${sector.label} — The Muslim Company`,
+      'twitter:description': sector.tagline,
+      'twitter:image': ogImage,
+      'twitter:card': 'summary_large_image',
+    };
+    Object.entries(twTags).forEach(([name, val]) => {
+      let el = document.querySelector(`meta[name="${name}"]`);
+      if (!el) { el = document.createElement('meta'); el.setAttribute('name', name); document.head.appendChild(el); }
+      el.setAttribute('content', val);
+    });
 
     return () => {
       document.querySelectorAll('script[data-sector-schema]').forEach(el => el.remove());

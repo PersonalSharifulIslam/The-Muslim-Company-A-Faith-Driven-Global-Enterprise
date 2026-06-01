@@ -142,6 +142,24 @@ export default function JobApply({ params }: { params: { slug: string } }) {
   const [error, setError] = useState("");
   const [pdfLoading, setPdfLoading] = useState(false);
   useEffect(() => {
+    document.title = "Apply — Careers at The Muslim Company";
+    const md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute('content', 'Apply for a position at The Muslim Company — a faith-driven global enterprise building ethical civilization.');
+    const ogt = document.querySelector('meta[property="og:title"]');
+    if (ogt) ogt.setAttribute('content', 'Apply — The Muslim Company');
+    document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
+    const s = document.createElement('script'); s.type = 'application/ld+json';
+    s.setAttribute('data-page-schema', 'true');
+    s.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
+      { "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://www.themuslim.company/careers" },
+      { "@type": "ListItem", "position": 3, "name": "Apply", "item": `https://www.themuslim.company/careers/${params.slug}/apply` }
+    ]});
+    document.head.appendChild(s);
+    return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
+  }, [params.slug]);
+
+  useEffect(() => {
     api.get(`/jobs/${params.slug}`)
       .then((data) => setJob(data as Job))
       .catch(() => {})

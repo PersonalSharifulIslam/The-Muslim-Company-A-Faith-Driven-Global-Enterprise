@@ -35,6 +35,8 @@ function CountdownTimer({ expiresAt, label }: { expiresAt: string; label?: strin
 export default function RecruitmentStatus() {
   useEffect(() => {
     document.title = "Recruitment Status — The Muslim Company";
+    const robots = document.querySelector('meta[name="robots"]');
+    if (robots) robots.setAttribute('content', 'noindex, nofollow');
     const md = document.querySelector('meta[name="description"]');
     if (md) md.setAttribute('content', 'Track your job application status at The Muslim Company using your reference number.');
     const ogt = document.querySelector('meta[property="og:title"]');

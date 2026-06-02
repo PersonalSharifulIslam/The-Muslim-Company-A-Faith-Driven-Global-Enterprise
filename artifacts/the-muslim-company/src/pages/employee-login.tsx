@@ -6,6 +6,16 @@ import { Button } from "@/components/ui/button";
 import logo from "@/assets/images/logo.png";
 
 export default function EmployeeLogin() {
+  useEffect(() => {
+    document.title = "The Muslim Company";
+    const robots = document.querySelector('meta[name="robots"]');
+    if (robots) robots.setAttribute('content', 'noindex, nofollow');
+    return () => {
+      const r = document.querySelector('meta[name="robots"]');
+      if (r) r.setAttribute('content', 'index, follow');
+    };
+  }, []);
+
   const { employee, loading, login } = useAuth();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");

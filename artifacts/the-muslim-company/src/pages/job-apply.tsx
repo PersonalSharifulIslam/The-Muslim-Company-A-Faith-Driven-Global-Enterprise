@@ -143,6 +143,8 @@ export default function JobApply({ params }: { params: { slug: string } }) {
   const [pdfLoading, setPdfLoading] = useState(false);
   useEffect(() => {
     document.title = "Apply — Careers at The Muslim Company";
+    const robots = document.querySelector('meta[name="robots"]');
+    if (robots) robots.setAttribute('content', 'noindex, nofollow');
     const md = document.querySelector('meta[name="description"]');
     if (md) md.setAttribute('content', 'Apply for a position at The Muslim Company — a faith-driven global enterprise building ethical civilization.');
     const ogt = document.querySelector('meta[property="og:title"]');

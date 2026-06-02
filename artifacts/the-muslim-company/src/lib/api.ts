@@ -139,6 +139,9 @@ async function routePost(path: string, body: any): Promise<any> {
       body: JSON.stringify(body),
     })
     const result = await res.json() as any
+    if (!res.ok || result.error) {
+      throw new Error(result.error || 'Failed to create employee')
+    }
     return result.employee
   }
   throw new Error(`POST ${path} not implemented`)

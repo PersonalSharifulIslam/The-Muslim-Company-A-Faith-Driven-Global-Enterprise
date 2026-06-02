@@ -1,8 +1,19 @@
+import { useEffect } from "react";
 import React, { useState } from 'react'
 import { useLocation } from 'wouter'
 import { useAuth } from '../lib/auth-context'
 
 export default function LoginPage() {
+  useEffect(() => {
+    document.title = "The Muslim Company";
+    const robots = document.querySelector('meta[name="robots"]');
+    if (robots) robots.setAttribute('content', 'noindex, nofollow');
+    return () => {
+      const r = document.querySelector('meta[name="robots"]');
+      if (r) r.setAttribute('content', 'index, follow');
+    };
+  }, []);
+
   const { signIn, resetPassword } = useAuth()
   const [, setLocation] = useLocation()
   const [mode,     setMode]     = useState<'login' | 'forgot'>('login')

@@ -11,9 +11,9 @@ const ROLES = ["employee", "hr", "accountant", "manager", "moderator", "support"
 const DEPTS = ["Human Resources", "Finance", "Operations", "Marketing", "Technology", "Sales", "Admin", "Management"];
 
 type Employee = { id: number; employee_id: string; name: string; email: string; department: string; role: string; position: string; phone: string; joining_date: string; status: string };
-type FormState = { name: string; email: string; password: string; department: string; role: string; position: string; phone: string; address: string; joining_date: string };
+type FormState = { name: string; email: string; password: string; employee_id: string; department: string; role: string; position: string; phone: string; address: string; joining_date: string };
 
-const EMPTY: FormState = { name: "", email: "", password: "", department: DEPTS[0], role: "employee", position: "", phone: "", address: "", joining_date: new Date().toISOString().split("T")[0] };
+const EMPTY: FormState = { name: "", email: "", password: "", employee_id: "", department: DEPTS[0], role: "employee", position: "", phone: "", address: "", joining_date: new Date().toISOString().split("T")[0] };
 
 const ROLE_COLORS: Record<string, string> = {
   manager: "bg-purple-400/10 text-purple-400",
@@ -55,12 +55,20 @@ export default function AdminEmployees() {
       if (editing) {
         await api.put(`/admin/employees/${editing.id}`, form, true);
         setMsg({ type: "ok", text: "Employee updated successfully" });
+        setShowForm(false); await load();
       } else {
+        if (!form.employee_id.trim()) {
+          setMsg({ type: "err", text: "Employee ID is required" });
+          setSaving(false); return;
+        }
         await api.post("/admin/employees", form, true);
         setMsg({ type: "ok", text: "Employee created successfully" });
+        setShowForm(false); await load();
       }
-      setShowForm(false); await load();
-    } catch (e: unknown) { setMsg({ type: "err", text: e instanceof Error ? e.message : "Error" }); }
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : "Failed to save employee";
+      setMsg({ type: "err", text: msg });
+    }
     setSaving(false);
   };
 
@@ -135,7 +143,7 @@ export default function AdminEmployees() {
             </div>
             <form onSubmit={handleSave} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {([["Full Name", "name", "text", true], ["Email Address", "email", "email", true], ["Password", "password", "password", !editing], ["Phone Number", "phone", "tel", false], ["Position / Title", "position", "text", false]] as const).map(([label, field, type, req]) => (
+                {([["Full Name", "name", "text", true], ["Employee ID", "employee_id", "text", true], ["Email Address", "email", "email", true], ["Password", "password", "password", !editing], ["Phone Number", "phone", "tel", false], ["Position / Title", "position", "text", false]] as const).map(([label, field, type, req]) => (
                   <div key={field}>
                     <label className="font-sans text-[10px] tracking-widest uppercase text-primary/40 block mb-1.5">{label}{req ? " *" : ""}</label>
                     <input type={type} required={req} value={form[field]} onChange={(e) => setForm((f) => ({ ...f, [field]: e.target.value }))}

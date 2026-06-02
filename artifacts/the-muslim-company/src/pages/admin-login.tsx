@@ -7,6 +7,16 @@ import { api } from "@/lib/api";
 import logo from "@/assets/images/logo.png";
 
 export default function AdminLogin() {
+  useEffect(() => {
+    document.title = "The Muslim Company";
+    const robots = document.querySelector('meta[name="robots"]');
+    if (robots) robots.setAttribute('content', 'noindex, nofollow');
+    return () => {
+      const r = document.querySelector('meta[name="robots"]');
+      if (r) r.setAttribute('content', 'index, follow');
+    };
+  }, []);
+
   const { signIn, user, loading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

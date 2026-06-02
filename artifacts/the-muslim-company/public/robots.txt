@@ -4,19 +4,31 @@ Allow: /sectors/
 Allow: /blog/
 Allow: /newsroom/
 Allow: /careers/
-Allow: /notices/
+Allow: /contact
+Allow: /get-involved
+Allow: /transparency
+Allow: /founder
+Allow: /vision
+Allow: /mission
 Disallow: /admin
 Disallow: /admin/
 Disallow: /employee
 Disallow: /employee/
 Disallow: /login
 Disallow: /auth-redirect
+Disallow: /recruitment-status
+Disallow: /careers/*/apply
 
 User-agent: Googlebot
 Allow: /
 Allow: /sectors/
 Allow: /blog/
 Allow: /newsroom/
+Allow: /careers/
+Disallow: /admin
+Disallow: /employee
+Disallow: /recruitment-status
+Disallow: /careers/*/apply
 
 User-agent: GPTBot
 Allow: /

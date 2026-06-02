@@ -20,9 +20,11 @@ export async function onRequestPost(context: any) {
   if (!roles[0] || roles[0].role !== 'admin') return Response.json({ error: 'Forbidden' }, { status: 403 })
 
   const body = await request.json() as any
-  const { email, password, name, employee_id, department, position, phone, address, joining_date } = body
-  if (!email || !password || !name || !employee_id || !department || !position)
-    return Response.json({ error: 'Missing required fields' }, { status: 400 })
+  const { email, password, name, department, position, phone, address, joining_date } = body
+  // Auto-generate employee_id if not provided
+  const employee_id = body.employee_id?.trim() || `TMC-${Date.now().toString(36).toUpperCase()}`
+  if (!email || !password || !name || !department || !position)
+    return Response.json({ error: 'Missing required fields: email, password, name, department, position' }, { status: 400 })
 
   const createRes = await fetch(`${SUPABASE_URL}/auth/v1/admin/users`, {
     method: 'POST',

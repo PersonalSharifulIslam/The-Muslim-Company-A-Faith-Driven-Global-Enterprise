@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Lock, User, AlertCircle } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/images/logo.png";
 
@@ -16,7 +17,8 @@ export default function EmployeeLogin() {
     };
   }, []);
 
-  const { employee, loading, login } = useAuth();
+  const { signIn, role, loading } = useAuth();
+  const [, setLocation] = useLocation();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);
@@ -24,17 +26,16 @@ export default function EmployeeLogin() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-  }, [employee, loading]);
+    if (!loading && role === 'employee') setLocation('/employee/dashboard');
+    if (!loading && role === 'admin') setLocation('/admin/dashboard');
+  }, [role, loading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     setError("");
-    try {
-      await login(identifier, password);
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Login failed");
-    }
+    const { error: err } = await signIn(identifier, password);
+    if (err) setError(err);
     setSubmitting(false);
   };
 

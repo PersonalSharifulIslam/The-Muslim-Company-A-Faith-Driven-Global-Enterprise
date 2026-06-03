@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { CheckSquare, Calendar, AlertCircle } from "lucide-react";
 import EmployeeLayout from "@/components/EmployeeLayout";
 import { useAuth } from "@/lib/auth-context";
+import { api } from "@/lib/api";
 
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
 type Task = { id: number; title: string; description: string; priority: string; status: string; progress: number; deadline: string | null; assigned_by: string; created_at: string };
@@ -10,13 +11,13 @@ const PRIORITY: Record<string, string> = { high: "text-red-400 border-red-400/30
 const STATUS_TABS = ["all", "pending", "in-progress", "completed"];
 
 export default function EmployeeTasks() {
-  const { employee, loading } = useAuth();
+  const { profile, session, loading } = useAuth();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [filter, setFilter] = useState("all");
   const [updating, setUpdating] = useState<number | null>(null);
-  const api = empApi();
+  
 
-  useEffect(() => { if (employee) api.get("/employee/tasks").then((d) => setTasks(d as Task[])).catch(() => {}); }, [employee]);
+  useEffect(() => { if (employee) api.get("/employee/tasks").then((d) => setTasks(d as Task[])).catch(() => {}); }, [session, profile]);
 
   const update = async (id: number, status: string, progress: number) => {
     setUpdating(id);
@@ -28,7 +29,7 @@ export default function EmployeeTasks() {
   };
 
   const filtered = filter === "all" ? tasks : tasks.filter((t) => t.status === filter);
-  if (loading || !employee) return null;
+  if (loading || !session || !profile) return null;
 
   return (
     <EmployeeLayout current="/employee/tasks">

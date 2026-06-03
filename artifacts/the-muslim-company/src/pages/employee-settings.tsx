@@ -43,7 +43,7 @@ export default function EmployeeSettings() {
             <div><p className="font-sans text-sm font-semibold text-white">Account</p><p className="font-sans text-xs text-white/30">Session and account management</p></div>
           </div>
           <div className="pl-11">
-            <button onClick={logout} className="font-sans text-xs text-red-400/70 hover:text-red-400 transition-colors uppercase tracking-widest">Sign Out of Portal →</button>
+            <button onClick={signOut} className="font-sans text-xs text-red-400/70 hover:text-red-400 transition-colors uppercase tracking-widest">Sign Out of Portal →</button>
           </div>
         </motion.div>
       </motion.div>

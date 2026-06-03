@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Clock, Calendar, CheckSquare, Bell, LogIn, LogOut, TrendingUp, AlertCircle } from "lucide-react";
 import EmployeeLayout from "@/components/EmployeeLayout";
 import { useAuth } from "@/lib/auth-context";
+import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
@@ -25,19 +26,15 @@ function fmt(dt: string) { return new Date(dt).toLocaleTimeString("en-GB", { hou
 function fmtDate(dt: string) { return new Date(dt).toLocaleDateString("en-GB", { day: "numeric", month: "short" }); }
 
 export default function EmployeeDashboard() {
-  const { employee, loading } = useAuth();
+  const { profile, loading, session } = useAuth();
   const [data, setData] = useState<DashData | null>(null);
   const [checkinLoading, setCheckinLoading] = useState(false);
   const [error, setError] = useState("");
-  const api = empApi();
 
   useEffect(() => {
-  }, [employee, loading]);
-
-  useEffect(() => {
-    if (!employee) return;
+    if (!session || !profile) return;
     api.get("/employee/dashboard").then((d) => setData(d as DashData)).catch(() => {});
-  }, [employee]);
+  }, [session, profile]);
 
   const handleAttendance = async (type: "checkin" | "checkout") => {
     setCheckinLoading(true); setError("");
@@ -49,7 +46,14 @@ export default function EmployeeDashboard() {
     setCheckinLoading(false);
   };
 
-  if (loading || !employee) return null;
+  if (loading) return (
+    <div className="min-h-screen bg-[#0a1a0e] flex items-center justify-center">
+      <div style={{ width: 36, height: 36, border: "3px solid #b08d57", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
+      <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
+    </div>
+  );
+
+  if (!session || !profile) return null;
 
   const hour = new Date().getHours();
   const greeting = hour < 12 ? "Assalamu Alaikum" : hour < 17 ? "Good Afternoon" : "Good Evening";

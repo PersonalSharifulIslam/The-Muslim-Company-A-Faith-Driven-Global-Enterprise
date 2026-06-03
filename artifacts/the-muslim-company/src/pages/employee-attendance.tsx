@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { LogIn, LogOut, Clock, AlertCircle, CheckCircle } from "lucide-react";
 import EmployeeLayout from "@/components/EmployeeLayout";
 import { useAuth } from "@/lib/auth-context";
+import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
@@ -13,7 +14,7 @@ function fmt(dt: string) { return new Date(dt).toLocaleTimeString("en-GB", { hou
 function fmtDate(d: string) { return new Date(d).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", year: "numeric" }); }
 
 export default function EmployeeAttendance() {
-  const { employee, loading } = useAuth();
+  const { profile, session, loading } = useAuth();
   const [records, setRecords] = useState<AttRecord[]>([]);
   const [today, setToday] = useState<AttRecord | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -21,10 +22,10 @@ export default function EmployeeAttendance() {
   const [success, setSuccess] = useState("");
   const [now, setNow] = useState(new Date());
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const api = empApi();
+  
 
   useEffect(() => {
-  }, [employee, loading]);
+  }, [session, profile, loading]);
 
   const loadRecords = async () => {
     const d = await api.get("/employee/attendance") as AttRecord[];
@@ -33,7 +34,7 @@ export default function EmployeeAttendance() {
     setToday(d.find((r) => r.date.startsWith(todayStr)) || null);
   };
 
-  useEffect(() => { if (employee) loadRecords(); }, [employee]);
+  useEffect(() => { if (employee) loadRecords(); }, [session, profile]);
 
   useEffect(() => {
     timerRef.current = setInterval(() => setNow(new Date()), 1000);
@@ -57,7 +58,7 @@ export default function EmployeeAttendance() {
     ? `${String(Math.floor(elapsed / 3600)).padStart(2, "0")}:${String(Math.floor((elapsed % 3600) / 60)).padStart(2, "0")}:${String(elapsed % 60).padStart(2, "0")}`
     : null;
 
-  if (loading || !employee) return null;
+  if (loading || !session || !profile) return null;
 
   return (
     <EmployeeLayout current="/employee/attendance">

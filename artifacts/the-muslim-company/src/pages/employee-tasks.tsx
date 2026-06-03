@@ -28,7 +28,7 @@ export default function EmployeeTasks() {
     setUpdating(null);
   };
 
-  const filtered = filter === "all" ? tasks : tasks.filter((t) => t.status === filter);
+  const filtered = filter === "all" ? tasks : tasks?.filter((t) => t.status === filter);
   if (loading || !session || !profile) return null;
 
   return (
@@ -40,7 +40,7 @@ export default function EmployeeTasks() {
         </motion.div>
 
         <motion.div variants={fade} className="grid grid-cols-4 gap-3">
-          {[["Total", tasks.length, "text-white"], ["Pending", tasks.filter((t) => t.status === "pending").length, "text-yellow-400"], ["In Progress", tasks.filter((t) => t.status === "in-progress").length, "text-blue-400"], ["Completed", tasks.filter((t) => t.status === "completed").length, "text-green-400"]].map(([label, val, color]) => (
+          {[["Total", tasks?.length, "text-white"], ["Pending", tasks?.filter((t) => t.status === "pending").length, "text-yellow-400"], ["In Progress", tasks?.filter((t) => t.status === "in-progress").length, "text-blue-400"], ["Completed", tasks?.filter((t) => t.status === "completed").length, "text-green-400"]].map(([label, val, color]) => (
             <div key={label as string} className="bg-[#0f2314]/60 border border-[#b08d57]/15 p-4 text-center">
               <p className={`font-serif text-3xl font-bold ${color}`}>{val}</p>
               <p className="font-sans text-[10px] tracking-widest uppercase text-white/30 mt-1">{label}</p>

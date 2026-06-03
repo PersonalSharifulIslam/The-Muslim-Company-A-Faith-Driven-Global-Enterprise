@@ -56,6 +56,63 @@ async function routeGet(path: string): Promise<any> {
     const { data, error } = await supabase.from('applications').select('*').ilike('reference_number', ref).single()
     if (error) throw error; return data
   }
+  if (path === '/employee/dashboard') {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) throw new Error('Unauthorized')
+
+    // Get employee profile
+    const { data: roleData } = await supabase
+      .from('user_roles').select('employee_id').eq('id', user.id).single()
+    if (!roleData?.employee_id) throw new Error('Employee not found')
+
+    const { data: emp, error: empErr } = await supabase
+      .from('employees').select('*').eq('employee_id', roleData.employee_id).single()
+    if (empErr) throw empErr
+
+    // Get attendance summary (this month)
+    const startOfMonth = new Date(); startOfMonth.setDate(1); startOfMonth.setHours(0,0,0,0);
+    const { data: attendance } = await supabase
+      .from('attendance').select('*')
+      .eq('employee_id', roleData.employee_id)
+      .gte('date', startOfMonth.toISOString().split('T')[0])
+
+    // Get pending leave requests
+    const { data: leaves } = await supabase
+      .from('leave_requests').select('*')
+      .eq('employee_id', roleData.employee_id)
+      .eq('status', 'pending')
+
+    // Get pending tasks
+    const { data: tasks } = await supabase
+      .from('tasks').select('*')
+      .eq('employee_id', roleData.employee_id)
+      .eq('status', 'pending')
+
+    // Get unread notifications
+    const { data: notifications } = await supabase
+      .from('employee_notifications').select('*')
+      .eq('employee_id', roleData.employee_id)
+      .eq('read', false)
+
+    const presentDays = attendance?.filter((a: any) => a.status === 'present').length || 0
+    const absentDays = attendance?.filter((a: any) => a.status === 'absent').length || 0
+
+    return {
+      employee: emp,
+      stats: {
+        present: presentDays,
+        absent: absentDays,
+        totalAttendance: attendance?.length || 0,
+        pendingLeaves: leaves?.length || 0,
+        pendingTasks: tasks?.length || 0,
+        unreadNotifications: notifications?.length || 0,
+      },
+      recentAttendance: attendance?.slice(0, 5) || [],
+      pendingLeaves: leaves || [],
+      pendingTasks: tasks || [],
+      recentNotifications: notifications?.slice(0, 5) || [],
+    }
+  }
   if (path === '/employee/notifications') {
     const { data: { user } } = await supabase.auth.getUser()
     const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()

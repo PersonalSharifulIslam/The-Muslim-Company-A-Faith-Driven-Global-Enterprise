@@ -2,13 +2,14 @@ import { motion } from "framer-motion";
 import { Settings, Shield, Globe, Bell } from "lucide-react";
 import EmployeeLayout from "@/components/EmployeeLayout";
 import { useAuth } from "@/lib/auth-context";
+import { api } from "@/lib/api";
 import { useEffect } from "react";
 
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
 
 export default function EmployeeSettings() {
   const { employee, loading, logout } = useAuth();
-  if (loading || !employee) return null;
+  if (loading || !session || !profile) return null;
   return (
     <EmployeeLayout current="/employee/settings">
       <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.07 } } }} className="space-y-6 max-w-3xl">

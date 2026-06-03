@@ -16,7 +16,7 @@ const NAV = [
 ];
 
 export default function EmployeeLayout({ children, current }: { children: React.ReactNode; current: string }) {
-  const { employee, logout } = useAuth();
+  const { profile, signOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [unread, setUnread] = useState(0);
 
@@ -25,7 +25,7 @@ export default function EmployeeLayout({ children, current }: { children: React.
     if (!api) return;
   }, []);
 
-  const initials = employee?.name?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase() || "?";
+  const initials = profile?.name?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase() || "?";
 
   const Sidebar = ({ mobile = false }: { mobile?: boolean }) => (
     <div className={`flex flex-col h-full ${mobile ? "w-72" : "w-64"} bg-[#0a1a0e] border-r border-[#b08d57]/20`}>
@@ -46,8 +46,8 @@ export default function EmployeeLayout({ children, current }: { children: React.
             <span className="font-sans text-xs font-bold text-[#b08d57]">{initials}</span>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="font-sans text-sm font-semibold text-white truncate">{employee?.name}</p>
-            <p className="font-sans text-[10px] text-white/40 truncate">{employee?.employee_id}</p>
+            <p className="font-sans text-sm font-semibold text-white truncate">{profile?.name}</p>
+            <p className="font-sans text-[10px] text-white/40 truncate">{profile?.employee_id}</p>
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@ export default function EmployeeLayout({ children, current }: { children: React.
       </nav>
 
       <div className="p-4 border-t border-[#b08d57]/10">
-        <button onClick={logout} className="flex items-center gap-3 w-full px-3 py-2.5 text-xs font-sans uppercase tracking-widest text-red-400/70 hover:text-red-400 hover:bg-red-400/5 transition-all">
+        <button onClick={signOut} className="flex items-center gap-3 w-full px-3 py-2.5 text-xs font-sans uppercase tracking-widest text-red-400/70 hover:text-red-400 hover:bg-red-400/5 transition-all">
           <LogOut className="w-4 h-4" />
           Sign Out
         </button>

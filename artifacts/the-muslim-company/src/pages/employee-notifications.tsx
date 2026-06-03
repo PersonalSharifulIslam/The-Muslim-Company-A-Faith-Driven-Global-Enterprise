@@ -12,10 +12,10 @@ export default function EmployeeNotifications() {
   const [notifs, setNotifs] = useState<Notif[]>([])
 
   useEffect(() => {
-    if (employee?.employee_id) {
+    if (profile?.employee_id) {
       api.getNotifications(employee.employee_id).then(d => setNotifs(d || [])).catch(() => {})
     }
-  }, [employee])
+  }, [profile])
 
   async function markRead(id: number) {
     await api.markNotificationRead(id)

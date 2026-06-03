@@ -26,6 +26,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   })
 
   async function loadProfile(user: User, session: Session) {
+    // Keep existing role/session while loading to prevent flicker
+    setState(prev => ({ ...prev, loading: true }))
     try {
       const { data: roleData } = await supabase
         .from('user_roles')
@@ -87,8 +89,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setState({ session: null, user: null, profile: null, role: null, loading: false })
         return
       }
-      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+      if (event === 'SIGNED_IN') {
         if (session?.user) loadProfile(session.user, session)
+      }
+      // TOKEN_REFRESHED: just update session/user, keep existing role/profile
+      if (event === 'TOKEN_REFRESHED' && session?.user) {
+        setState(prev => ({
+          ...prev,
+          session,
+          user: session.user,
+        }))
       }
     })
 

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Plus, X, Calendar, CheckCircle, AlertCircle, Clock } from "lucide-react";
 import EmployeeLayout from "@/components/EmployeeLayout";
 import { useAuth } from "@/lib/auth-context";
+import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
@@ -15,16 +16,16 @@ const STATUS_MAP: Record<string, { color: string; bg: string; icon: React.FC<{ c
 };
 
 export default function EmployeeLeave() {
-  const { employee, loading } = useAuth();
+  const { profile, session, loading } = useAuth();
   const [leaves, setLeaves] = useState<LeaveReq[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ leave_type: LEAVE_TYPES[0], reason: "", start_date: "", end_date: "" });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const api = empApi();
+  
 
-  useEffect(() => { if (employee) api.get("/employee/leave").then((d) => setLeaves(d as LeaveReq[])).catch(() => {}); }, [employee]);
+  useEffect(() => { if (employee) api.get("/employee/leave").then((d) => setLeaves(d as LeaveReq[])).catch(() => {}); }, [session, profile]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); setSubmitting(true); setError(""); setSuccess("");
@@ -40,7 +41,7 @@ export default function EmployeeLeave() {
   };
 
   const stats = { total: leaves.length, pending: leaves.filter((l) => l.status === "pending").length, approved: leaves.filter((l) => l.status === "approved").length };
-  if (loading || !employee) return null;
+  if (loading || !session || !profile) return null;
 
   return (
     <EmployeeLayout current="/employee/leave">

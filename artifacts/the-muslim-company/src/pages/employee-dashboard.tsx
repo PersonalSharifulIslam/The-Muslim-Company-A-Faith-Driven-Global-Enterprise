@@ -53,7 +53,7 @@ export default function EmployeeDashboard() {
 
   const employee = data?.employee;
 
-  if (loading) return (
+  if (loading || !data) return (
     <div className="min-h-screen bg-[#0a1a0e] flex items-center justify-center">
       <div style={{ width: 36, height: 36, border: "3px solid #b08d57", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
       <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
@@ -64,9 +64,9 @@ export default function EmployeeDashboard() {
 
   const hour = new Date().getHours();
   const greeting = hour < 12 ? "Assalamu Alaikum" : hour < 17 ? "Good Afternoon" : "Good Evening";
-  const pendingLeaves = data?.leave_stats.find((s) => s.status === "pending")?.count || "0";
-  const completedTasks = data?.task_stats.find((s) => s.status === "completed")?.count || "0";
-  const pendingTasks = data?.task_stats.find((s) => s.status === "pending")?.count || "0";
+  const pendingLeaves = data?.leave_stats?.find((s) => s.status === "pending")?.count || "0";
+  const completedTasks = data?.task_stats?.find((s) => s.status === "completed")?.count || "0";
+  const pendingTasks = data?.task_stats?.find((s) => s.status === "pending")?.count || "0";
 
   return (
     <EmployeeLayout current="/employee/dashboard">
@@ -111,15 +111,15 @@ export default function EmployeeDashboard() {
             <div className="grid grid-cols-2 gap-3 mb-4">
               <div>
                 <p className="font-sans text-[9px] tracking-widest uppercase text-white/25 mb-1">Check In</p>
-                <p className="font-mono text-lg text-white">{data?.today_attendance?.check_in ? fmt(data.today_attendance.check_in) : "—:——"}</p>
+                <p className="font-mono text-lg text-white">{data?.today_attendance?.check_in ? fmt(data?.today_attendance?.check_in) : "—:——"}</p>
               </div>
               <div>
                 <p className="font-sans text-[9px] tracking-widest uppercase text-white/25 mb-1">Check Out</p>
-                <p className="font-mono text-lg text-white">{data?.today_attendance?.check_out ? fmt(data.today_attendance.check_out) : "—:——"}</p>
+                <p className="font-mono text-lg text-white">{data?.today_attendance?.check_out ? fmt(data?.today_attendance?.check_out) : "—:——"}</p>
               </div>
               <div>
                 <p className="font-sans text-[9px] tracking-widest uppercase text-white/25 mb-1">Hours Worked</p>
-                <p className="font-mono text-lg text-[#b08d57]">{data?.today_attendance?.working_hours ? `${data.today_attendance.working_hours}h` : "—"}</p>
+                <p className="font-mono text-lg text-[#b08d57]">{data?.today_attendance?.working_hours ? `${data?.today_attendance?.working_hours}h` : "—"}</p>
               </div>
             </div>
             {error && <p className="font-sans text-xs text-red-400 mb-3 flex items-center gap-1"><AlertCircle className="w-3.5 h-3.5" />{error}</p>}
@@ -139,7 +139,7 @@ export default function EmployeeDashboard() {
               <p className="font-sans text-sm text-white/20 text-center py-6">No tasks assigned yet</p>
             ) : (
               <div className="space-y-2">
-                {data.recent_tasks.map((t) => (
+                {data?.recent_tasks?.map((t) => (
                   <div key={t.id} className="flex items-center justify-between py-2 border-b border-[#b08d57]/8">
                     <div className="flex-1 min-w-0">
                       <p className="font-sans text-sm text-white truncate">{t.title}</p>
@@ -163,7 +163,7 @@ export default function EmployeeDashboard() {
             <p className="font-sans text-sm text-white/20 text-center py-4">No notifications</p>
           ) : (
             <div className="space-y-3">
-              {data.recent_notifications.map((n) => (
+              {data?.recent_notifications?.map((n) => (
                 <div key={n.id} className={`flex items-start gap-3 p-3 border ${n.is_read ? "border-[#b08d57]/8 bg-white/2" : "border-[#b08d57]/20 bg-[#b08d57]/5"}`}>
                   <span className="text-base mt-0.5">{NOTIF_ICON[n.type] || "🔵"}</span>
                   <div className="flex-1 min-w-0">

@@ -40,7 +40,7 @@ export default function EmployeeLeave() {
     setSubmitting(false);
   };
 
-  const stats = { total: leaves.length, pending: leaves.filter((l) => l.status === "pending").length, approved: leaves.filter((l) => l.status === "approved").length };
+  const stats = { total: leaves?.length, pending: leaves?.filter((l) => l.status === "pending").length, approved: leaves?.filter((l) => l.status === "approved").length };
   if (loading || !session || !profile) return null;
 
   return (
@@ -118,11 +118,11 @@ export default function EmployeeLeave() {
           <div className="px-5 py-4 border-b border-[#b08d57]/10">
             <p className="font-sans text-[10px] tracking-widest uppercase text-white/40">Leave History</p>
           </div>
-          {leaves.length === 0 ? (
+          {leaves?.length === 0 ? (
             <p className="font-sans text-sm text-white/20 text-center py-12">No leave requests submitted yet</p>
           ) : (
             <div className="divide-y divide-[#b08d57]/8">
-              {leaves.map((l) => {
+              {leaves?.map((l) => {
                 const s = STATUS_MAP[l.status] || STATUS_MAP.pending;
                 const Icon = s.icon;
                 return (

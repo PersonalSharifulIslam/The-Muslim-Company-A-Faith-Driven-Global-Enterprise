@@ -12,7 +12,7 @@ export default function EmployeeDocuments() {
 
   useEffect(() => {
     if (profile?.employee_id) {
-      api.getDocuments(profile.employee_id).then(d => setDocs(d || [])).catch(() => {})
+      api.getDocuments(profile?.employee_id).then(d => setDocs(d || [])).catch(() => {})
     }
   }, [profile])
 

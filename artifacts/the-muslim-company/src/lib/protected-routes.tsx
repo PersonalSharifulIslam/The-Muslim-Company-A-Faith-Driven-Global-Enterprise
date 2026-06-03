@@ -41,11 +41,14 @@ export function EmployeeRoute({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (loading) return
-    if (!session) setLocation('/login')
-    else if (role && role !== 'employee') setLocation('/admin/dashboard')
+    if (!session) { setLocation('/employee'); return; }
+    if (role && role !== 'employee') { setLocation('/admin/dashboard'); return; }
   }, [loading, session, role])
 
+  // Show spinner while loading OR while session exists but role not yet fetched
   if (loading) return <Spinner />
-  if (!session || role !== 'employee') return <Spinner />
+  if (!session) return <Spinner />
+  if (session && !role) return <Spinner />
+  if (role !== 'employee') return <Spinner />
   return <>{children}</>
 }

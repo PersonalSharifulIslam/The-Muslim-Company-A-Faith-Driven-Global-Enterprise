@@ -8,7 +8,7 @@ import { useEffect } from "react";
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
 
 export default function EmployeeSettings() {
-  const { employee, loading, logout } = useAuth();
+  const { profile, session, loading, signOut } = useAuth();
   if (loading || !session || !profile) return null;
   return (
     <EmployeeLayout current="/employee/settings">

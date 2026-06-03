@@ -16,6 +16,11 @@ type DashData = {
   unread_notifications: number;
   recent_tasks: { id: number; title: string; priority: string; status: string; deadline: string }[];
   recent_notifications: { id: number; title: string; message: string; type: string; created_at: string; is_read: boolean }[];
+  stats?: { present: number; absent: number; pendingLeaves: number; pendingTasks: number; unreadNotifications: number };
+  recentAttendance?: any[];
+  pendingLeaves?: any[];
+  pendingTasks?: any[];
+  recentNotifications?: any[];
 };
 
 const PRIORITY_COLOR: Record<string, string> = { high: "text-red-400 bg-red-400/10", medium: "text-yellow-400 bg-yellow-400/10", low: "text-green-400 bg-green-400/10" };
@@ -46,6 +51,8 @@ export default function EmployeeDashboard() {
     setCheckinLoading(false);
   };
 
+  const employee = data?.employee;
+
   if (loading) return (
     <div className="min-h-screen bg-[#0a1a0e] flex items-center justify-center">
       <div style={{ width: 36, height: 36, border: "3px solid #b08d57", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
@@ -67,12 +74,12 @@ export default function EmployeeDashboard() {
         <motion.div variants={fade} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <p className="font-sans text-xs tracking-widest uppercase text-[#b08d57]/60 mb-1">{greeting}</p>
-            <h1 className="font-serif text-3xl text-white">{employee.name}</h1>
-            <p className="font-sans text-sm text-white/30 mt-0.5">{data?.employee.position || data?.employee.role} · {data?.employee.department}</p>
+            <h1 className="font-serif text-3xl text-white">{data?.employee?.name || profile?.name}</h1>
+            <p className="font-sans text-sm text-white/30 mt-0.5">{data?.employee?.position || data?.employee?.role} · {data?.employee?.department}</p>
           </div>
           <div className="text-right">
             <p className="font-sans text-[10px] tracking-widest uppercase text-white/20">Employee ID</p>
-            <p className="font-mono text-base text-[#b08d57] font-bold">{employee.employee_id}</p>
+            <p className="font-mono text-base text-[#b08d57] font-bold">{data?.employee?.employee_id || profile?.employee_id}</p>
           </div>
         </motion.div>
 

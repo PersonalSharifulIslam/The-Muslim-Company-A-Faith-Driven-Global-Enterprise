@@ -207,18 +207,15 @@ async function routePost(path: string, body: any): Promise<any> {
     if (!user) throw new Error('Unauthorized')
     const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user.id).single()
     if (!role?.employee_id) throw new Error('Employee not found')
-    const today = new Date().toISOString().split('T')[0]
-    const now = new Date().toTimeString().slice(0, 5)
-    // Check if already checked in today
+    const now = new Date()
+    const today = now.toISOString().split('T')[0]
     const { data: existing } = await supabase.from('attendance')
-      .select('*').eq('employee_id', role.employee_id).eq('date', today).single()
-    if (existing) {
-      if (existing.check_in) throw new Error('Already checked in today')
-    }
+      .select('*').eq('employee_id', role.employee_id).eq('date', today).maybeSingle()
+    if (existing?.check_in) throw new Error('Already checked in today')
     const { data: att, error } = await supabase.from('attendance').upsert({
       employee_id: role.employee_id,
       date: today,
-      check_in: now,
+      check_in: now.toISOString(),
       status: 'present',
     }, { onConflict: 'employee_id,date' }).select().single()
     if (error) throw error
@@ -231,17 +228,15 @@ async function routePost(path: string, body: any): Promise<any> {
     if (!user) throw new Error('Unauthorized')
     const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user.id).single()
     if (!role?.employee_id) throw new Error('Employee not found')
-    const today = new Date().toISOString().split('T')[0]
-    const now = new Date().toTimeString().slice(0, 5)
+    const now = new Date()
+    const today = now.toISOString().split('T')[0]
     const { data: existing } = await supabase.from('attendance')
-      .select('*').eq('employee_id', role.employee_id).eq('date', today).single()
+      .select('*').eq('employee_id', role.employee_id).eq('date', today).maybeSingle()
     if (!existing?.check_in) throw new Error('Please check in first')
-    // Calculate hours worked
-    const [inH, inM] = existing.check_in.split(':').map(Number)
-    const [outH, outM] = now.split(':').map(Number)
-    const hoursWorked = ((outH * 60 + outM) - (inH * 60 + inM)) / 60
+    const checkInTime = new Date(existing.check_in)
+    const hoursWorked = (now.getTime() - checkInTime.getTime()) / (1000 * 60 * 60)
     const { data: att, error } = await supabase.from('attendance')
-      .update({ check_out: now, working_hours: Math.round(hoursWorked * 10) / 10 })
+      .update({ check_out: now.toISOString(), working_hours: Math.round(hoursWorked * 10) / 10 })
       .eq('employee_id', role.employee_id).eq('date', today).select().single()
     if (error) throw error
     return att

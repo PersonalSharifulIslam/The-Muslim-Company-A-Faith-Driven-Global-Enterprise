@@ -17,7 +17,10 @@ export default function EmployeeTasks() {
   const [updating, setUpdating] = useState<number | null>(null);
   
 
-  useEffect(() => { if (employee) api.get("/employee/tasks").then((d) => setTasks(d as Task[])).catch(() => {}); }, [session, profile]);
+  useEffect(() => {
+    if (!session || !profile) return;
+    api.get("/employee/tasks").then((d) => setTasks(d as Task[])).catch(() => {});
+  }, [session, profile]);
 
   const update = async (id: number, status: string, progress: number) => {
     setUpdating(id);

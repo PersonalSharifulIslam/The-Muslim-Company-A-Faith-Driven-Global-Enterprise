@@ -25,7 +25,9 @@ export default function EmployeeAttendance() {
   
 
   useEffect(() => {
-  }, [session, profile, loading]);
+    if (!session || !profile) return;
+    loadRecords();
+  }, [session, profile]);
 
   const loadRecords = async () => {
     const d = await api.get("/employee/attendance") as AttRecord[];

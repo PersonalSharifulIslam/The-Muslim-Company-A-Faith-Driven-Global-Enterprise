@@ -13,7 +13,7 @@ export default function EmployeeNotifications() {
 
   useEffect(() => {
     if (profile?.employee_id) {
-      api.getNotifications(employee.employee_id).then(d => setNotifs(d || [])).catch(() => {})
+      api.get("/employee/notifications").then(d => setNotifs(d || [])).catch(() => {})
     }
   }, [profile])
 

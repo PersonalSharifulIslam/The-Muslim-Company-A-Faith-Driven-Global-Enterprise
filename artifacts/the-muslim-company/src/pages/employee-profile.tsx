@@ -12,7 +12,7 @@ export default function EmployeeProfile() {
 
   useEffect(() => {
     if (profile?.employee_id) {
-      api.getEmployee(profile?.employee_id).then(e => {
+      api.get("/employee/profile").then(e => {
         if (e) setForm({ name: e.name || '', phone: e.phone || '', address: e.address || '', emergency_contact: e.emergency_contact || '' })
       }).catch(() => {})
     }

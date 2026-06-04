@@ -201,6 +201,72 @@ async function routePost(path: string, body: any): Promise<any> {
     }
     return result.employee
   }
+  // Employee attendance checkin
+  if (path === '/employee/attendance/checkin') {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) throw new Error('Unauthorized')
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user.id).single()
+    if (!role?.employee_id) throw new Error('Employee not found')
+    const today = new Date().toISOString().split('T')[0]
+    const now = new Date().toTimeString().slice(0, 5)
+    // Check if already checked in today
+    const { data: existing } = await supabase.from('attendance')
+      .select('*').eq('employee_id', role.employee_id).eq('date', today).single()
+    if (existing) {
+      if (existing.check_in) throw new Error('Already checked in today')
+    }
+    const { data: att, error } = await supabase.from('attendance').upsert({
+      employee_id: role.employee_id,
+      date: today,
+      check_in: now,
+      status: 'present',
+    }, { onConflict: 'employee_id,date' }).select().single()
+    if (error) throw error
+    return att
+  }
+
+  // Employee attendance checkout
+  if (path === '/employee/attendance/checkout') {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) throw new Error('Unauthorized')
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user.id).single()
+    if (!role?.employee_id) throw new Error('Employee not found')
+    const today = new Date().toISOString().split('T')[0]
+    const now = new Date().toTimeString().slice(0, 5)
+    const { data: existing } = await supabase.from('attendance')
+      .select('*').eq('employee_id', role.employee_id).eq('date', today).single()
+    if (!existing?.check_in) throw new Error('Please check in first')
+    // Calculate hours worked
+    const [inH, inM] = existing.check_in.split(':').map(Number)
+    const [outH, outM] = now.split(':').map(Number)
+    const hoursWorked = ((outH * 60 + outM) - (inH * 60 + inM)) / 60
+    const { data: att, error } = await supabase.from('attendance')
+      .update({ check_out: now, working_hours: Math.round(hoursWorked * 10) / 10 })
+      .eq('employee_id', role.employee_id).eq('date', today).select().single()
+    if (error) throw error
+    return att
+  }
+
+  // Employee leave request
+  if (path === '/employee/leave') {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) throw new Error('Unauthorized')
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user.id).single()
+    if (!role?.employee_id) throw new Error('Employee not found')
+    const { leave_type, start_date, end_date, reason } = body
+    if (!leave_type || !start_date || !end_date) throw new Error('Missing required fields')
+    const { data: leave, error } = await supabase.from('leave_requests').insert({
+      employee_id: role.employee_id,
+      leave_type,
+      start_date,
+      end_date,
+      reason: reason || '',
+      status: 'pending',
+    }).select().single()
+    if (error) throw error
+    return leave
+  }
+
   throw new Error(`POST ${path} not implemented`)
 }
 

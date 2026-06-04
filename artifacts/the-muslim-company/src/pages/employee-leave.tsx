@@ -25,7 +25,10 @@ export default function EmployeeLeave() {
   const [success, setSuccess] = useState("");
   
 
-  useEffect(() => { if (employee) api.get("/employee/leave").then((d) => setLeaves(d as LeaveReq[])).catch(() => {}); }, [session, profile]);
+  useEffect(() => {
+    if (!session || !profile) return;
+    api.get("/employee/leave").then((d) => setLeaves(d as LeaveReq[])).catch(() => {});
+  }, [session, profile]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); setSubmitting(true); setError(""); setSuccess("");

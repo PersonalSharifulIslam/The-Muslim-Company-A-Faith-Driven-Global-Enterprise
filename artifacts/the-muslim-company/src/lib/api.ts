@@ -69,6 +69,14 @@ async function routeGet(path: string): Promise<any> {
       .from('employees').select('*').eq('employee_id', roleData.employee_id).single()
     if (empErr) throw empErr
 
+    // Get today's attendance
+    const todayStr = new Date().toISOString().split('T')[0]
+    const { data: todayAtt } = await supabase
+      .from('attendance').select('*')
+      .eq('employee_id', roleData.employee_id)
+      .eq('date', todayStr)
+      .maybeSingle()
+
     // Get attendance summary (this month)
     const startOfMonth = new Date(); startOfMonth.setDate(1); startOfMonth.setHours(0,0,0,0);
     const { data: attendance } = await supabase
@@ -96,21 +104,37 @@ async function routeGet(path: string): Promise<any> {
 
     const presentDays = attendance?.filter((a: any) => a.status === 'present').length || 0
     const absentDays = attendance?.filter((a: any) => a.status === 'absent').length || 0
+    const doneTasks = tasks?.filter((t: any) => t.status === 'done' || t.status === 'completed').length || 0
 
     return {
       employee: emp,
+      today_attendance: todayAtt ? {
+        check_in: todayAtt.check_in,
+        check_out: todayAtt.check_out,
+        working_hours: todayAtt.working_hours,
+        status: todayAtt.status,
+      } : null,
       stats: {
         present: presentDays,
         absent: absentDays,
         totalAttendance: attendance?.length || 0,
         pendingLeaves: leaves?.length || 0,
         pendingTasks: tasks?.length || 0,
+        doneTasks,
         unreadNotifications: notifications?.length || 0,
       },
+      leave_stats: [
+        { status: 'pending', count: String(leaves?.length || 0) },
+      ],
+      task_stats: [
+        { status: 'pending', count: String(tasks?.length || 0) },
+        { status: 'done', count: String(doneTasks) },
+      ],
+      unread_notifications: notifications?.length || 0,
+      recent_tasks: tasks?.slice(0, 5) || [],
+      recent_notifications: notifications?.slice(0, 5) || [],
       recentAttendance: attendance?.slice(0, 5) || [],
       pendingLeaves: leaves || [],
-      pendingTasks: tasks || [],
-      recentNotifications: notifications?.slice(0, 5) || [],
     }
   }
   if (path === '/employee/notifications') {

@@ -249,16 +249,22 @@ async function routePost(path: string, body: any): Promise<any> {
     const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user.id).single()
     if (!role?.employee_id) throw new Error('Employee not found')
     const { leave_type, start_date, end_date, reason } = body
-    if (!leave_type || !start_date || !end_date) throw new Error('Missing required fields')
+    if (!leave_type || !start_date || !end_date || !reason) throw new Error('All fields are required')
+    // Calculate days
+    const start = new Date(start_date)
+    const end = new Date(end_date)
+    const days = Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1
+    if (days < 1) throw new Error('End date must be after start date')
     const { data: leave, error } = await supabase.from('leave_requests').insert({
       employee_id: role.employee_id,
       leave_type,
       start_date,
       end_date,
-      reason: reason || '',
+      reason,
+      days,
       status: 'pending',
     }).select().single()
-    if (error) throw error
+    if (error) throw new Error(error.message)
     return leave
   }
 

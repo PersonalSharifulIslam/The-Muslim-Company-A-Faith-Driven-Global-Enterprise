@@ -179,6 +179,16 @@ async function routeGet(path: string): Promise<any> {
     const { data, error } = await supabase.from('leave_requests').select('*').eq('employee_id', role.employee_id).order('created_at', { ascending: false })
     if (error) throw error; return data
   }
+  // Admin: get all leave requests
+  if (path === '/admin/leaves') {
+    const { data, error } = await supabase
+      .from('leave_requests')
+      .select('*, employees(name, department, position)')
+      .order('created_at', { ascending: false })
+    if (error) throw new Error(error.message)
+    return data
+  }
+
   throw new Error(`GET ${path} not implemented`)
 }
 
@@ -360,6 +370,27 @@ async function routePut(path: string, body: any): Promise<any> {
     const { data, error } = await supabase.from('attendance').update(body).eq('id', parseInt(attMatch[1])).select().single()
     if (error) throw error; return data
   }
+  // Admin: update leave status
+  const leaveMatch = path.match(/^\/admin\/leaves\/(\d+)$/)
+  if (leaveMatch) {
+    const { status, admin_note, start_date, end_date } = body
+    const updates: any = {}
+    if (status) updates.status = status
+    if (admin_note !== undefined) updates.admin_note = admin_note
+    if (start_date) updates.start_date = start_date
+    if (end_date) updates.end_date = end_date
+    if (start_date && end_date) {
+      const days = Math.ceil((new Date(end_date).getTime() - new Date(start_date).getTime()) / (1000*60*60*24)) + 1
+      updates.days = days
+    }
+    updates.updated_at = new Date().toISOString()
+    const { data, error } = await supabase
+      .from('leave_requests').update(updates)
+      .eq('id', leaveMatch[1]).select().single()
+    if (error) throw new Error(error.message)
+    return data
+  }
+
   throw new Error(`PUT ${path} not implemented`)
 }
 

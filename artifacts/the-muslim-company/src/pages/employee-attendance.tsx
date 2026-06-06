@@ -60,7 +60,12 @@ export default function EmployeeAttendance() {
     ? `${String(Math.floor(elapsed / 3600)).padStart(2, "0")}:${String(Math.floor((elapsed % 3600) / 60)).padStart(2, "0")}:${String(elapsed % 60).padStart(2, "0")}`
     : null;
 
-  if (loading || !session || !profile) return null;
+  if (loading || !session || !profile) return (
+    <div className="min-h-screen bg-[#0a1a0e] flex items-center justify-center">
+      <div style={{ width: 36, height: 36, border: "3px solid #b08d57", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
+      <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
+    </div>
+  );
 
   return (
     <EmployeeLayout current="/employee/attendance">

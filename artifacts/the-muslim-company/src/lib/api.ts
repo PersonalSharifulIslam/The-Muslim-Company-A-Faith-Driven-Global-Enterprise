@@ -214,13 +214,27 @@ async function routePost(path: string, body: any): Promise<any> {
     if (error) throw error; return data
   }
   if (path === '/employee/leave') {
-    const { data, error } = await supabase.from('leave_requests').insert(body).select().single()
-    if (error) throw error; return data
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) throw new Error('Unauthorized')
+    const { data: roleData } = await supabase.from('user_roles').select('employee_id').eq('id', user.id).single()
+    if (!roleData?.employee_id) throw new Error('Employee not found')
+    const { leave_type, start_date, end_date, reason } = body
+    if (!leave_type || !start_date || !end_date || !reason) throw new Error('All fields are required')
+    const days = Math.ceil((new Date(end_date).getTime() - new Date(start_date).getTime()) / (1000*60*60*24)) + 1
+    if (days < 1) throw new Error('End date must be after start date')
+    const { data, error } = await supabase.from('leave_requests').insert({
+      employee_id: roleData.employee_id,
+      leave_type,
+      start_date,
+      end_date,
+      reason,
+      days,
+      status: 'pending',
+    }).select().single()
+    if (error) throw new Error(error.message)
+    return data
   }
-  if (path === '/employee/attendance') {
-    const { data, error } = await supabase.from('attendance').insert(body).select().single()
-    if (error) throw error; return data
-  }
+
   if (path === '/admin/employees') {
     const { data: { session } } = await supabase.auth.getSession()
     const token = session?.access_token ?? ''

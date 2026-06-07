@@ -189,6 +189,53 @@ async function routeGet(path: string): Promise<any> {
     return data
   }
 
+  // Admin: Attendance
+  if (path === '/admin/attendance') {
+    const { data, error } = await supabase
+      .from('attendance').select('*, employees(name, department, position)')
+      .order('date', { ascending: false }).limit(200)
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Admin: Tasks
+  if (path === '/admin/tasks') {
+    const { data, error } = await supabase
+      .from('tasks').select('*, employees(name, department)')
+      .order('created_at', { ascending: false })
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Admin: Payroll
+  if (path === '/admin/payroll') {
+    const { data, error } = await supabase
+      .from('payroll').select('*, employees(name, department, position)')
+      .order('month', { ascending: false })
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Admin: Departments
+  if (path === '/admin/departments') {
+    const { data, error } = await supabase
+      .from('departments').select('*').order('name')
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Employee: own payslips
+  if (path === '/employee/payroll') {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) throw new Error('Unauthorized')
+    const { data: roleData } = await supabase.from('user_roles').select('employee_id').eq('id', user.id).single()
+    if (!roleData?.employee_id) throw new Error('Employee not found')
+    const { data, error } = await supabase.from('payroll').select('*')
+      .eq('employee_id', roleData.employee_id).order('month', { ascending: false })
+    if (error) throw new Error(error.message)
+    return data
+  }
+
   throw new Error(`GET ${path} not implemented`)
 }
 
@@ -316,6 +363,68 @@ async function routePost(path: string, body: any): Promise<any> {
     return leave
   }
 
+  // Admin: Create task
+  if (path === '/admin/tasks') {
+    const { employee_id, title, description, priority, deadline } = body
+    if (!employee_id || !title) throw new Error('Employee and title required')
+    const { data, error } = await supabase.from('tasks').insert({
+      employee_id, title,
+      description: description || '',
+      priority: priority || 'medium',
+      deadline: deadline || null,
+      status: 'pending',
+      assigned_by: 'admin',
+      progress: 0,
+    }).select().single()
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Admin: Manual attendance entry
+  if (path === '/admin/attendance') {
+    const { employee_id, date, check_in, check_out, status, working_hours } = body
+    if (!employee_id || !date) throw new Error('Employee and date required')
+    const { data, error } = await supabase.from('attendance').upsert({
+      employee_id, date,
+      check_in: check_in || null,
+      check_out: check_out || null,
+      status: status || 'present',
+      working_hours: working_hours || null,
+    }, { onConflict: 'employee_id,date' }).select().single()
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Admin: Create payroll
+  if (path === '/admin/payroll') {
+    const { employee_id, month, basic_salary, allowances, deductions, payment_method, notes } = body
+    if (!employee_id || !month) throw new Error('Employee and month required')
+    const net = (Number(basic_salary) || 0) + (Number(allowances) || 0) - (Number(deductions) || 0)
+    const { data, error } = await supabase.from('payroll').upsert({
+      employee_id, month,
+      basic_salary: Number(basic_salary) || 0,
+      allowances: Number(allowances) || 0,
+      deductions: Number(deductions) || 0,
+      net_salary: net,
+      payment_method: payment_method || 'bank_transfer',
+      notes: notes || '',
+      status: 'pending',
+    }, { onConflict: 'employee_id,month' }).select().single()
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Admin: Create department
+  if (path === '/admin/departments') {
+    const { name, description, head_employee_id } = body
+    if (!name) throw new Error('Department name required')
+    const { data, error } = await supabase.from('departments').insert({
+      name, description: description || '', head_employee_id: head_employee_id || ''
+    }).select().single()
+    if (error) throw new Error(error.message)
+    return data
+  }
+
   throw new Error(`POST ${path} not implemented`)
 }
 
@@ -405,6 +514,59 @@ async function routePut(path: string, body: any): Promise<any> {
     return data
   }
 
+  // Admin: Update task
+  const taskMatch = path.match(/^\/admin\/tasks\/(\d+)$/)
+  if (taskMatch) {
+    const { data, error } = await supabase.from('tasks')
+      .update({ ...body, updated_at: new Date().toISOString() })
+      .eq('id', taskMatch[1]).select().single()
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Employee: Update own task progress
+  const empTaskMatch = path.match(/^\/employee\/tasks\/(\d+)$/)
+  if (empTaskMatch) {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) throw new Error('Unauthorized')
+    const { data: roleData } = await supabase.from('user_roles').select('employee_id').eq('id', user.id).single()
+    const { status, progress } = body
+    const { data, error } = await supabase.from('tasks')
+      .update({ status, progress, updated_at: new Date().toISOString() })
+      .eq('id', empTaskMatch[1]).eq('employee_id', roleData?.employee_id).select().single()
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Admin: Update payroll status
+  const payrollMatch = path.match(/^\/admin\/payroll\/(\d+)$/)
+  if (payrollMatch) {
+    const updates: any = { ...body, updated_at: new Date().toISOString() }
+    if (body.status === 'paid' && !body.payment_date) updates.payment_date = new Date().toISOString().split('T')[0]
+    const { data, error } = await supabase.from('payroll')
+      .update(updates).eq('id', payrollMatch[1]).select().single()
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Admin: Update attendance
+  const attMatch = path.match(/^\/admin\/attendance\/(\d+)$/)
+  if (attMatch) {
+    const { data, error } = await supabase.from('attendance')
+      .update(body).eq('id', attMatch[1]).select().single()
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Admin: Update department
+  const deptMatch = path.match(/^\/admin\/departments\/(\d+)$/)
+  if (deptMatch) {
+    const { data, error } = await supabase.from('departments')
+      .update({ ...body, updated_at: new Date().toISOString() }).eq('id', deptMatch[1]).select().single()
+    if (error) throw new Error(error.message)
+    return data
+  }
+
   throw new Error(`PUT ${path} not implemented`)
 }
 
@@ -434,6 +596,22 @@ async function routeDel(path: string): Promise<any> {
     const { error } = await supabase.from('employees').delete().eq('id', parseInt(empMatch[1]))
     if (error) throw error; return { success: true }
   }
+  // Admin: Delete task
+  const delTaskMatch = path.match(/^\/admin\/tasks\/(\d+)$/)
+  if (delTaskMatch) {
+    const { error } = await supabase.from('tasks').delete().eq('id', delTaskMatch[1])
+    if (error) throw new Error(error.message)
+    return { success: true }
+  }
+
+  // Admin: Delete department
+  const delDeptMatch = path.match(/^\/admin\/departments\/(\d+)$/)
+  if (delDeptMatch) {
+    const { error } = await supabase.from('departments').delete().eq('id', delDeptMatch[1])
+    if (error) throw new Error(error.message)
+    return { success: true }
+  }
+
   throw new Error(`DELETE ${path} not implemented`)
 }
 

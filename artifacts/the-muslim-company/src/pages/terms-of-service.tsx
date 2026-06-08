@@ -28,7 +28,11 @@ export default function TermsOfService() {
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "Terms of Service of The Muslim Company — the rules, obligations, and agreements governing use of our platforms and services.");
     const _ogu = document.querySelector('meta[property="og:url"]');
-    if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/terms-of-service");
+    const _ogi = document.querySelector('meta[property="og:image"]');
+    if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-terms.png');
+    const _twi = document.querySelector('meta[name="twitter:image"]');
+    if (_twi) _twi.setAttribute('content', 'https://www.themuslim.company/og-terms.png');
+        if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/terms-of-service");
 
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
     [{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Terms of Service", "item": "https://www.themuslim.company/terms-of-service"}]}, {"@context": "https://schema.org", "@type": "WebPage", "name": "Terms of Service \u2014 The Muslim Company", "description": "Terms of Service of The Muslim Company \u2014 the rules, obligations, and agreements governing use of our platforms and services.", "url": "https://www.themuslim.company/terms-of-service", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {

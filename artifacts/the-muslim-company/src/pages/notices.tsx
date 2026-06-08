@@ -21,7 +21,11 @@ export default function Notices() {
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "Official notices, announcements, and upcoming events from The Muslim Company.");
     const _ogu = document.querySelector('meta[property="og:url"]');
-    if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/notices");
+    const _ogi = document.querySelector('meta[property="og:image"]');
+    if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-notices.png');
+    const _twi = document.querySelector('meta[name="twitter:image"]');
+    if (_twi) _twi.setAttribute('content', 'https://www.themuslim.company/og-notices.png');
+        if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/notices");
 
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
     [{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Notices & Events", "item": "https://www.themuslim.company/notices"}]}, {"@context": "https://schema.org", "@type": "WebPage", "name": "Notices & Events \u2014 The Muslim Company", "description": "Official notices, announcements, and upcoming events from The Muslim Company.", "url": "https://www.themuslim.company/notices", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {

@@ -51,7 +51,11 @@ export default function Careers() {
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "Join The Muslim Company — explore career opportunities in a faith-driven, ethical, and civilization-focused global enterprise. Open positions in technology, research, media, and more.");
     const _ogu = document.querySelector('meta[property="og:url"]');
-    if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/careers");
+    const _ogi = document.querySelector('meta[property="og:image"]');
+    if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-careers.png');
+    const _twi = document.querySelector('meta[name="twitter:image"]');
+    if (_twi) _twi.setAttribute('content', 'https://www.themuslim.company/og-careers.png');
+        if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/careers");
 
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
     [{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Careers", "item": "https://www.themuslim.company/careers"}]}, {"@context": "https://schema.org", "@type": "WebPage", "name": "Careers at The Muslim Company", "description": "Join The Muslim Company \u2014 explore career opportunities in a faith-driven, ethical, and civilization-focused global enterprise. Open positions in technology, research, media, and more.", "url": "https://www.themuslim.company/careers", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {

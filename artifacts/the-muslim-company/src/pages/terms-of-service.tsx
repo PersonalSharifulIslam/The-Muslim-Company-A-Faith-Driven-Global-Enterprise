@@ -21,6 +21,18 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 export default function TermsOfService() {
   useEffect(() => {
     document.title = "Terms of Service — The Muslim Company";
+    const _ogi = document.querySelector('meta[property="og:image"]');
+    if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-terms.png');
+    else {
+      const _m = document.createElement('meta'); _m.setAttribute('property', 'og:image');
+      _m.setAttribute('content', 'https://www.themuslim.company/og-terms.png'); document.head.appendChild(_m);
+    }
+    const _twi = document.querySelector('meta[name="twitter:image"]');
+    if (_twi) _twi.setAttribute('content', 'https://www.themuslim.company/og-terms.png');
+    else {
+      const _t = document.createElement('meta'); _t.setAttribute('name', 'twitter:image');
+      _t.setAttribute('content', 'https://www.themuslim.company/og-terms.png'); document.head.appendChild(_t);
+    }
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "Terms of Service of The Muslim Company — the rules, obligations, and agreements governing use of our platforms and services.");
     const _ogt = document.querySelector('meta[property="og:title"]');

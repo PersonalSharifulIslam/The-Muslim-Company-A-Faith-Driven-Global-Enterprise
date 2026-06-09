@@ -102,6 +102,18 @@ export default function ContactPage() {
     ];
 
     document.title = "Contact — The Muslim Company";
+    const _ogi = document.querySelector('meta[property="og:image"]');
+    if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-contact.png');
+    else {
+      const _m = document.createElement('meta'); _m.setAttribute('property', 'og:image');
+      _m.setAttribute('content', 'https://www.themuslim.company/og-contact.png'); document.head.appendChild(_m);
+    }
+    const _twi = document.querySelector('meta[name="twitter:image"]');
+    if (_twi) _twi.setAttribute('content', 'https://www.themuslim.company/og-contact.png');
+    else {
+      const _t = document.createElement('meta'); _t.setAttribute('name', 'twitter:image');
+      _t.setAttribute('content', 'https://www.themuslim.company/og-contact.png'); document.head.appendChild(_t);
+    }
     const _ogt2 = document.querySelector('meta[property="og:title"]');
     if (_ogt2) _ogt2.setAttribute('content', 'Contact — The Muslim Company');
     const _ogd2 = document.querySelector('meta[property="og:description"]');

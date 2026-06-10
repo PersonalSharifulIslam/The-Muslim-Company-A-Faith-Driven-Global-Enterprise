@@ -44,14 +44,6 @@ function JobCard({ job }: { job: Job }) {
 export default function Careers() {
   useEffect(() => {
     document.title = "Careers — The Muslim Company";
-    else {
-      const _m = document.createElement('meta'); _m.setAttribute('property', 'og:image');
-      _m.setAttribute('content', 'https://www.themuslim.company/og-careers.png'); document.head.appendChild(_m);
-    }
-    else {
-      const _t = document.createElement('meta'); _t.setAttribute('name', 'twitter:image');
-      _t.setAttribute('content', 'https://www.themuslim.company/og-careers.png'); document.head.appendChild(_t);
-    }
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "Join The Muslim Company — explore career opportunities in a faith-driven, ethical, and civilization-focused global enterprise. Open positions in technology, research, media, and more.");
     const _ogt = document.querySelector('meta[property="og:title"]');

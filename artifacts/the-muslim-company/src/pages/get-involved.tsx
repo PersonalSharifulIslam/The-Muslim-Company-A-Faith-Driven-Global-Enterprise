@@ -82,6 +82,14 @@ export default function GetInvolvedPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     document.title = "Get Involved — The Muslim Company";
+    const _can = document.querySelector('link[rel="canonical"]');
+    if (_can) _can.setAttribute('href', 'https://www.themuslim.company/get-involved');
+    else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/get-involved'; document.head.appendChild(_cl); }
+    const _ogu_pg = document.querySelector('meta[property="og:url"]');
+    if (_ogu_pg) _ogu_pg.setAttribute('content', 'https://www.themuslim.company/get-involved');
+    const _rob = document.querySelector('meta[name="robots"]');
+    if (_rob) _rob.setAttribute('content', 'index, follow');
+    else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const md = document.querySelector('meta[name="description"]');
     if (md) md.setAttribute("content", "Join The Muslim Company's mission — volunteer, intern, research, advise, or mentor. The best of people are those most beneficial to people.");
     const ogt = document.querySelector('meta[property="og:title"]');

@@ -14,14 +14,10 @@ const fadeIn = { hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, tra
 export default function Notices() {
   useEffect(() => {
     document.title = "Notices & Events — The Muslim Company";
-    const _ogi = document.querySelector('meta[property="og:image"]');
-    if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-notices.png');
     else {
       const _m = document.createElement('meta'); _m.setAttribute('property', 'og:image');
       _m.setAttribute('content', 'https://www.themuslim.company/og-notices.png'); document.head.appendChild(_m);
     }
-    const _twi = document.querySelector('meta[name="twitter:image"]');
-    if (_twi) _twi.setAttribute('content', 'https://www.themuslim.company/og-notices.png');
     else {
       const _t = document.createElement('meta'); _t.setAttribute('name', 'twitter:image');
       _t.setAttribute('content', 'https://www.themuslim.company/og-notices.png'); document.head.appendChild(_t);
@@ -34,13 +30,9 @@ export default function Notices() {
     if (_ogd) _ogd.setAttribute('content', "Official notices, announcements, and upcoming events from The Muslim Company.");
     const _ogi = document.querySelector('meta[property="og:image"]');
     if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-notices.png');
-    const _ogtw = document.querySelector('meta[name="twitter:image"]');
-    if (_ogtw) _ogtw.setAttribute('content', 'https://www.themuslim.company/og-notices.png');
-    const _ogu = document.querySelector('meta[property="og:url"]');
-    const _ogi = document.querySelector('meta[property="og:image"]');
-    if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-notices.png');
     const _twi = document.querySelector('meta[name="twitter:image"]');
     if (_twi) _twi.setAttribute('content', 'https://www.themuslim.company/og-notices.png');
+        const _ogu = document.querySelector('meta[property="og:url"]');
         if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/notices");
 
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());

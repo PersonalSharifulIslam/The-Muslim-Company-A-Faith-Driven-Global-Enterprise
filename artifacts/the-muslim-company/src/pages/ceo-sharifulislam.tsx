@@ -1,303 +1,570 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { Quote } from "lucide-react";
+import { Quote, Globe, Award, BookOpen, Briefcase, GraduationCap, Building2, Star, ExternalLink, Linkedin } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 
 const fadeIn = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
-function Bullets({ items }: { items: string[] }) {
+const stagger = {
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <ul className="space-y-2.5">
-      {items.map((item, i) => (
-        <li key={i} className="flex items-start gap-3 font-sans text-sm text-primary/70">
-          <div className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 flex-shrink-0" />
-          <span>{item}</span>
-        </li>
-      ))}
-    </ul>
+    <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-secondary mb-3 flex items-center gap-2">
+      <span className="inline-block w-5 h-px bg-secondary" />
+      {children}
+    </p>
   );
 }
 
-function InlineQuote({ children, author }: { children: React.ReactNode; author?: string }) {
+function StatCard({ value, label }: { value: string; label: string }) {
   return (
-    <div className="border-l-4 border-secondary pl-5 py-1 my-6">
-      <p className="font-serif text-lg italic leading-relaxed text-primary/80">"{children}"</p>
-      {author && <p className="mt-3 font-sans text-xs tracking-widest uppercase text-primary/40">— {author}</p>}
+    <div className="text-center p-6 border border-primary/10 bg-card">
+      <p className="font-serif text-3xl md:text-4xl text-secondary mb-1">{value}</p>
+      <p className="font-sans text-xs tracking-widest uppercase text-primary/50">{label}</p>
     </div>
   );
 }
 
+function InfoRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="py-3 border-b border-primary/8 last:border-0">
+      <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-primary/35 mb-0.5">{label}</p>
+      <p className="font-sans text-sm text-primary/80">{value}</p>
+    </div>
+  );
+}
+
+function PillarCard({ icon: Icon, title, items }: { icon: React.ElementType; title: string; items: string[] }) {
+  return (
+    <div className="p-7 bg-card border border-primary/10 hover:border-secondary/30 transition-colors duration-300">
+      <Icon className="w-5 h-5 text-secondary mb-4" />
+      <h4 className="font-serif text-base text-primary mb-4">{title}</h4>
+      <ul className="space-y-2">
+        {items.map((item, i) => (
+          <li key={i} className="flex items-start gap-3 font-sans text-sm text-primary/65">
+            <span className="w-1 h-1 bg-secondary/60 rounded-full mt-2.5 flex-shrink-0" />
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+const PERSON_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://www.themuslim.company/ceo/Sharifulislam#person",
+  "name": "Shariful Islam",
+  "givenName": "Shariful",
+  "familyName": "Islam",
+  "birthName": "Shariful Islam",
+  "birthDate": "2001",
+  "birthPlace": { "@type": "Place", "name": "Jamalpur, Bangladesh" },
+  "nationality": { "@type": "Country", "name": "Bangladesh" },
+  "gender": "Male",
+  "knowsLanguage": ["Bengali", "English"],
+  "jobTitle": "Founder, Chief Executive Officer & Managing Director",
+  "description": "Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur. He is the Founder, CEO & Managing Director of The Muslim Company — a faith-driven global conglomerate built on Islamic principles, prophetic values, and civilization-focused leadership. He is also a Peace Ambassador for the Global Peace Chain (Bangladesh).",
+  "url": "https://www.themuslim.company/ceo/Sharifulislam",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://www.themuslim.company/og-image.png",
+    "width": 1200,
+    "height": 630
+  },
+  "worksFor": {
+    "@type": "Organization",
+    "@id": "https://www.themuslim.company/#organization",
+    "name": "The Muslim Company",
+    "url": "https://www.themuslim.company"
+  },
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "The University of Burdwan",
+    "address": { "@type": "PostalAddress", "addressCountry": "IN" },
+    "url": "https://www.buruniv.ac.in"
+  },
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "credentialCategory": "degree",
+    "name": "Bachelor of Engineering in Electrical Engineering",
+    "educationalLevel": "Bachelor's Degree"
+  },
+  "award": ["Peace Ambassador — Global Peace Chain (Bangladesh)"],
+  "knowsAbout": [
+    "Islamic Business Ethics", "Ethical Innovation", "Electrical Engineering",
+    "Renewable Energy", "Artificial Intelligence", "Global Entrepreneurship",
+    "Islamic Civilization", "Humanitarian Development", "Corporate Governance", "Faith-Driven Enterprise"
+  ],
+  "sameAs": [
+    "https://sharifulislam.engineer",
+    "https://g.co/kgs/4n3CijW",
+    "https://www.google.com/search?kgmid=/g/11n_vfnlwt",
+    "https://www.google.com/search?kgmid=/g/11n4vqbl3_",
+    "http://viaf.org/viaf/503162664557855002426",
+    "https://isni.org/isni/0000000502719745",
+    "https://www.facebook.com/PersonalSharifulIslam/",
+    "https://www.facebook.com/PageSharifulIslam/",
+    "https://x.com/PersonalSIslam",
+    "https://x.com/Sharifultweet",
+    "https://www.linkedin.com/in/personalsharifulislam",
+    "https://www.linkedin.com/in/personalsharifulislam0",
+    "https://www.instagram.com/personalsharifulislam/",
+    "https://www.youtube.com/@PersonalSharifulIslam",
+    "https://www.researchgate.net/profile/Shariful-Islam-130",
+    "https://scholar.google.com/citations?user=8gtOT3AAAAAJ&hl=en",
+    "https://orcid.org/0000-0002-6634-5090",
+    "https://www.imdb.com/name/nm12843320/",
+    "https://www.crunchbase.com/person/shariful-islam-4eee",
+    "https://about.me/Personalsharifulislam/"
+  ]
+};
+
+const ORG_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.themuslim.company/#organization",
+  "name": "The Muslim Company",
+  "legalName": "The Muslim Company LTD",
+  "alternateName": ["TMC", "TMC Bangladesh", "TheMuslimCompany"],
+  "url": "https://www.themuslim.company",
+  "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 },
+  "description": "The Muslim Company is a faith-driven global conglomerate built on Islamic principles, ethical innovation, and civilization-focused leadership. Founded by Shariful Islam in Dhaka, Bangladesh.",
+  "foundingDate": "2025-01-09",
+  "foundingLocation": { "@type": "Place", "name": "Dhaka, Bangladesh" },
+  "founder": {
+    "@type": "Person",
+    "@id": "https://www.themuslim.company/ceo/Sharifulislam#person",
+    "name": "Shariful Islam",
+    "jobTitle": "Founder & CEO"
+  },
+  "employee": [{
+    "@type": "OrganizationRole",
+    "roleName": "Chief Executive Officer & Managing Director",
+    "startDate": "2025",
+    "member": {
+      "@type": "Person",
+      "@id": "https://www.themuslim.company/ceo/Sharifulislam#person",
+      "name": "Shariful Islam"
+    }
+  }],
+  "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "BD" },
+  "sameAs": [
+    "https://www.facebook.com/TheMuslimCompany",
+    "https://www.instagram.com/officialTheMuslimCompany",
+    "https://www.youtube.com/@TheMuslimCompany",
+    "https://www.linkedin.com/company/themuslimcompany",
+    "https://x.com/officialtmchq",
+    "https://www.crunchbase.com/organization/the-muslim-company"
+  ]
+};
+
+const PROFILE_PAGE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "name": "Shariful Islam — Founder, CEO & MD | The Muslim Company",
+  "description": "Official CEO profile of Shariful Islam — Founder, Chief Executive Officer & Managing Director of The Muslim Company, a faith-driven global Islamic conglomerate headquartered in Dhaka, Bangladesh.",
+  "url": "https://www.themuslim.company/ceo/Sharifulislam",
+  "dateModified": "2025-06-01",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
+      { "@type": "ListItem", "position": 2, "name": "CEO Profile — Shariful Islam", "item": "https://www.themuslim.company/ceo/Sharifulislam" }
+    ]
+  },
+  "mainEntity": { "@id": "https://www.themuslim.company/ceo/Sharifulislam#person" }
+};
+
 export default function CeoSharifulIslamPage() {
   useEffect(() => {
-    document.title = "CEO/MD Profile — The Muslim Company";
-    const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Shariful Islam is the Chief Executive Officer and Managing Director of The Muslim Company — a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur building a faith-driven global enterprise on Islamic principles.");
-    const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', "CEO/MD Profile — Shariful Islam | The Muslim Company");
-    const _ogd = document.querySelector('meta[property="og:description"]');
-    if (_ogd) _ogd.setAttribute('content', "Shariful Islam is the Chief Executive Officer and Managing Director of The Muslim Company — a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur building a faith-driven global enterprise on Islamic principles.");
-    const _ogu = document.querySelector('meta[property="og:url"]');
-    if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/ceo/Sharifulislam");
-    document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
-    [
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
-          { "@type": "ListItem", "position": 2, "name": "CEO/MD Profile — Shariful Islam", "item": "https://www.themuslim.company/ceo/Sharifulislam" }
-        ]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfilePage",
-        "name": "CEO/MD Profile — Shariful Islam | The Muslim Company",
-        "description": "Shariful Islam is the Chief Executive Officer and Managing Director of The Muslim Company — a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur.",
-        "url": "https://www.themuslim.company/ceo/Sharifulislam",
-        "mainEntity": {
-          "@type": "Person",
-          "name": "Shariful Islam",
-          "givenName": "Shariful",
-          "familyName": "Islam",
-          "birthName": "Shariful Islam",
-          "nationality": "Bangladeshi",
-          "jobTitle": ["Founder & CEO", "Chief Executive Officer", "Managing Director", "Bangladeshi Engineer", "Ethical Visionary", "Entrepreneur", "Peace Activist", "Preacher", "Social Commentator"],
-          "description": "Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur. He is the Founder & CEO of The Muslim Company, a faith-driven global enterprise built on Islamic principles. He is also a Peace Ambassador for the Global Peace Chain (Bangladesh).",
-          "url": "https://sharifulislam.engineer",
-          "worksFor": {
-            "@type": "Organization",
-            "name": "The Muslim Company",
-            "url": "https://www.themuslim.company"
-          },
-          "alumniOf": {
-            "@type": "CollegeOrUniversity",
-            "name": "The University of Burdwan",
-            "url": "https://www.buruniv.ac.in"
-          },
-          "hasCredential": {
-            "@type": "EducationalOccupationalCredential",
-            "credentialCategory": "degree",
-            "name": "Bachelor of Engineering in Electrical Engineering",
-            "educationalLevel": "Bachelor's Degree"
-          },
-          "sameAs": [
-            "https://sharifulislam.engineer",
-            "https://g.co/kgs/4n3CijW",
-            "https://www.google.com/search?kgmid=/g/11n_vfnlwt",
-            "https://www.google.com/search?kgmid=/g/11n4vqbl3_",
-            "http://viaf.org/viaf/503162664557855002426",
-            "https://isni.org/isni/0000000502719745",
-            "https://www.facebook.com/PersonalSharifulIslam/",
-            "https://www.facebook.com/PageSharifulIslam/",
-            "https://x.com/PersonalSIslam",
-            "https://x.com/Sharifultweet",
-            "https://www.linkedin.com/in/personalsharifulislam",
-            "https://www.linkedin.com/in/personalsharifulislam0",
-            "https://www.instagram.com/personalsharifulislam/",
-            "https://www.youtube.com/@PersonalSharifulIslam",
-            "https://www.researchgate.net/profile/Shariful-Islam-130",
-            "https://scholar.google.com/citations?user=8gtOT3AAAAAJ&hl=en",
-            "https://orcid.org/0000-0002-6634-5090",
-            "https://www.imdb.com/name/nm12843320/",
-            "https://www.crunchbase.com/person/shariful-islam-4eee",
-            "https://about.me/Personalsharifulislam/"
-          ]
-        }
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "The Muslim Company",
-        "legalName": "The Muslim Company LTD",
-        "url": "https://www.themuslim.company",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://www.themuslim.company/favicon.png",
-          "width": 512,
-          "height": 512
-        },
-        "foundingDate": "2025-01-09",
-        "foundingLocation": { "@type": "Place", "name": "Dhaka, Bangladesh" },
-        "founder": {
-          "@type": "Person",
-          "name": "Shariful Islam",
-          "jobTitle": "Founder & CEO",
-          "url": "https://sharifulislam.engineer"
-        },
-        "employee": {
-          "@type": "OrganizationRole",
-          "roleName": "Chief Executive Officer",
-          "startDate": "2025",
-          "member": {
-            "@type": "Person",
-            "name": "Shariful Islam",
-            "url": "https://sharifulislam.engineer"
-          }
-        },
-        "sameAs": [
-          "https://www.facebook.com/TheMuslimCompany",
-          "https://www.instagram.com/officialTheMuslimCompany",
-          "https://www.youtube.com/@TheMuslimCompany",
-          "https://www.linkedin.com/company/themuslimcompany",
-          "https://x.com/officialtmchq",
-          "https://www.crunchbase.com/organization/the-muslim-company"
-        ]
-      }
-    ].forEach(schema => {
-      const s = document.createElement('script');
-      s.type = 'application/ld+json';
-      s.setAttribute('data-page-schema', 'true');
+    document.title = "Shariful Islam — Founder, CEO & MD | The Muslim Company";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", "Shariful Islam is the Founder, Chief Executive Officer & Managing Director of The Muslim Company — a faith-driven global Islamic conglomerate built on prophetic values, ethical innovation, and civilization-focused leadership.");
+
+    document.querySelectorAll("script[data-page-schema]").forEach(el => el.remove());
+    [PERSON_SCHEMA, ORG_SCHEMA, PROFILE_PAGE_SCHEMA].forEach(schema => {
+      const s = document.createElement("script");
+      s.type = "application/ld+json";
+      s.setAttribute("data-page-schema", "true");
       s.textContent = JSON.stringify(schema);
       document.head.appendChild(s);
     });
-    return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
+    return () => { document.querySelectorAll("script[data-page-schema]").forEach(el => el.remove()); };
   }, []);
 
   return (
     <SiteLayout>
       <Helmet>
-        <title>CEO/MD Profile — The Muslim Company</title>
-        <meta name="description" content="Shariful Islam is the Chief Executive Officer and Managing Director of The Muslim Company — a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur building a faith-driven global enterprise on Islamic principles." />
+        <title>Shariful Islam — Founder, CEO &amp; MD | The Muslim Company</title>
+        <meta name="description" content="Shariful Islam is the Founder, Chief Executive Officer & Managing Director of The Muslim Company — a faith-driven global Islamic conglomerate built on prophetic values, ethical innovation, and civilization-focused leadership." />
         <link rel="canonical" href="https://www.themuslim.company/ceo/Sharifulislam" />
-        <meta property="og:title" content="CEO/MD Profile — Shariful Islam | The Muslim Company" />
+        {/* Open Graph */}
+        <meta property="og:type" content="profile" />
+        <meta property="og:title" content="Shariful Islam — Founder, CEO & MD | The Muslim Company" />
+        <meta property="og:description" content="Shariful Islam is the Founder, CEO & MD of The Muslim Company — a faith-driven global Islamic conglomerate built on prophetic values and civilization-focused leadership." />
         <meta property="og:url" content="https://www.themuslim.company/ceo/Sharifulislam" />
-        <meta name="robots" content="index, follow" />
+        <meta property="og:image" content="https://www.themuslim.company/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="The Muslim Company" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="profile:first_name" content="Shariful" />
+        <meta property="profile:last_name" content="Islam" />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Shariful Islam — Founder, CEO & MD | The Muslim Company" />
+        <meta name="twitter:description" content="Founder, CEO & MD of The Muslim Company — faith-driven global Islamic conglomerate built on prophetic values and ethical innovation." />
+        <meta name="twitter:image" content="https://www.themuslim.company/og-image.png" />
+        <meta name="twitter:site" content="@PersonalSIslam" />
+        <meta name="twitter:creator" content="@PersonalSIslam" />
+        {/* SEO */}
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta name="keywords" content="Shariful Islam, Shariful Islam CEO, Shariful Islam The Muslim Company, Shariful Islam Founder, CEO The Muslim Company, The Muslim Company CEO, The Muslim Company founder, Islamic CEO Bangladesh, Muslim entrepreneur Bangladesh, faith driven company CEO, Islamic conglomerate founder, Shariful Islam engineer, Shariful Islam entrepreneur, Shariful Islam visionary" />
+        <meta name="author" content="Shariful Islam" />
+        {/* rel=me for Knowledge Panel entity disambiguation */}
+        <link rel="me" href="https://www.linkedin.com/in/personalsharifulislam" />
+        <link rel="me" href="https://x.com/PersonalSIslam" />
+        <link rel="me" href="https://www.facebook.com/PersonalSharifulIslam/" />
       </Helmet>
+
       <div className="bg-background min-h-screen">
-        {/* Hero */}
-        <section className="bg-primary py-24 px-6">
-          <div className="container mx-auto max-w-4xl text-center">
-            <motion.div initial="hidden" animate="visible" variants={fadeIn}>
-              <p className="font-sans text-xs tracking-[0.4em] uppercase text-secondary mb-4">Chief Executive Officer & Managing Director</p>
-              <h1 className="font-serif text-5xl md:text-7xl text-primary-foreground mb-6">Shariful Islam</h1>
-              <p className="font-sans text-base text-primary-foreground/60 max-w-2xl mx-auto">
-                Bangladeshi Engineer, Ethical Visionary & Entrepreneur dedicated to building a faith-driven global civilization.
-              </p>
-              <div className="mt-8 flex flex-col items-center gap-5">
+
+        {/* ══════════════════════════════ HERO ══════════════════════════════ */}
+        <section className="relative bg-primary overflow-hidden">
+          <div
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(0deg, transparent, transparent 39px, var(--color-secondary) 39px, var(--color-secondary) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, var(--color-secondary) 39px, var(--color-secondary) 40px)",
+            }}
+          />
+          <div className="relative container mx-auto max-w-5xl px-6 py-28 md:py-36">
+            <motion.div initial="hidden" animate="visible" variants={stagger} className="flex flex-col items-center text-center">
+              <motion.div variants={fadeIn}>
+                <SectionLabel>The Muslim Company · Global Headquarters · Dhaka, Bangladesh</SectionLabel>
+              </motion.div>
+              <motion.h1 variants={fadeIn} className="font-serif text-5xl md:text-7xl lg:text-8xl text-primary-foreground mt-2 mb-4 tracking-tight">
+                Shariful Islam
+              </motion.h1>
+              <motion.p variants={fadeIn} className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-6">
+                Founder &nbsp;·&nbsp; Chief Executive Officer &nbsp;·&nbsp; Managing Director
+              </motion.p>
+              <motion.p variants={fadeIn} className="font-sans text-base text-primary-foreground/55 max-w-xl mx-auto leading-relaxed">
+                Bangladeshi Engineer, Ethical Visionary &amp; Entrepreneur — building a faith-driven global civilization on Prophetic values.
+              </motion.p>
+
+              {/* CTA Buttons */}
+              <motion.div variants={fadeIn} className="mt-10 flex flex-wrap justify-center items-center gap-3">
                 <a
                   href="https://g.co/kgs/4n3CijW"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-secondary text-primary hover:bg-secondary/90 font-sans text-xs font-bold uppercase tracking-widest h-12 px-8 transition-colors"
+                  className="inline-flex items-center gap-2 bg-secondary text-primary font-sans text-[11px] font-bold uppercase tracking-widest h-11 px-7 hover:bg-secondary/90 transition-colors"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
                     <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
                     <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
                     <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.45 2.09 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
                   </svg>
-                  View on Google
+                  Google Knowledge Panel
                 </a>
-                {/* Social Media Icons */}
-                <div className="flex items-center gap-4">
-                  {[
-                    { href: "https://www.facebook.com/PersonalSharifulIslam/", label: "Facebook", icon: <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> },
-                    { href: "https://x.com/PersonalSIslam", label: "X / Twitter", icon: <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> },
-                    { href: "https://www.instagram.com/personalsharifulislam/", label: "Instagram", icon: <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg> },
-                    { href: "https://www.linkedin.com/in/personalsharifulislam", label: "LinkedIn", icon: <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> },
-                    { href: "https://www.youtube.com/@PersonalSharifulIslam", label: "YouTube", icon: <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> },
-                  ].map(({ href, label, icon }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={label}
-                      className="text-primary-foreground/50 hover:text-secondary transition-colors"
-                    >
-                      {icon}
-                    </a>
-                  ))}
-                </div>
-              </div>
+                <a
+                  href="https://www.linkedin.com/in/personalsharifulislam"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-primary-foreground/10 border border-primary-foreground/15 text-primary-foreground font-sans text-[11px] uppercase tracking-widest h-11 px-7 hover:bg-primary-foreground/15 transition-colors"
+                >
+                  <Linkedin className="w-3.5 h-3.5" />
+                  LinkedIn Profile
+                </a>
+              </motion.div>
+
+              {/* Social icons */}
+              <motion.div variants={fadeIn} className="mt-7 flex items-center gap-5">
+                {[
+                  { href: "https://www.facebook.com/PersonalSharifulIslam/", label: "Facebook", d: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" },
+                  { href: "https://x.com/PersonalSIslam", label: "X", d: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z" },
+                  { href: "https://www.instagram.com/personalsharifulislam/", label: "Instagram", d: "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" },
+                  { href: "https://www.youtube.com/@PersonalSharifulIslam", label: "YouTube", d: "M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" },
+                ].map(({ href, label, d }) => (
+                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                    className="text-primary-foreground/35 hover:text-secondary transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d={d} /></svg>
+                  </a>
+                ))}
+              </motion.div>
             </motion.div>
           </div>
         </section>
 
-        {/* Content */}
-        <section className="py-20 px-6">
-          <div className="container mx-auto max-w-5xl space-y-12">
+        {/* ══════════════════════════════ STATS BAR ══════════════════════════════ */}
+        <motion.section
+          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+          className="border-y border-primary/10 bg-card"
+        >
+          <div className="container mx-auto max-w-5xl px-6 py-2">
+            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-primary/10">
+              {[
+                { value: "2025", label: "Founded The Muslim Company" },
+                { value: "B.E.", label: "Electrical Engineering" },
+                { value: "7+", label: "Business Sectors" },
+                { value: "Global", label: "Civilizational Vision" },
+              ].map((s) => (
+                <motion.div key={s.label} variants={fadeIn}>
+                  <StatCard value={s.value} label={s.label} />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
 
+        {/* ══════════════════════════════ BODY ══════════════════════════════ */}
+        <section className="py-24 px-6">
+          <div className="container mx-auto max-w-5xl space-y-16">
+
+            {/* —— STATEMENT + PROFILE CARD —— */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2 p-8 bg-card border border-primary/10">
-                <Quote className="w-8 h-8 text-secondary/40 mb-4" />
-                <p className="font-serif text-xl italic text-primary/85 leading-relaxed mb-5">
-                  "I do not know whether this company will fully succeed, how far it will go, or whether I will be able to implement every part of this vision. But my intention is to seek the pleasure of Allah and, by following the teachings and ethics of Prophet Muhammad ﷺ as much as possible, try to build something beneficial for humanity."
+              className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+              <div className="lg:col-span-3 p-8 bg-card border border-primary/10">
+                <Quote className="w-7 h-7 text-secondary/40 mb-5" />
+                <p className="font-serif text-xl md:text-2xl italic text-primary/85 leading-relaxed mb-6">
+                  &ldquo;I do not know whether this company will fully succeed, how far it will go, or whether I will be able to implement every part of this vision. But my intention is to seek the pleasure of Allah and, by following the teachings and ethics of Prophet Muhammad ﷺ as much as possible, try to build something beneficial for humanity.&rdquo;
                 </p>
-                <p className="font-sans text-xs tracking-widest uppercase text-secondary/60">— Shariful Islam, Founder & CEO</p>
+                <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-secondary/60">&mdash; Shariful Islam, Founder &amp; CEO</p>
               </div>
-              <div className="p-6 bg-card border border-primary/10 space-y-3">
-                <h4 className="font-serif text-base text-primary mb-2">Profile</h4>
+              <div className="lg:col-span-2 p-7 bg-card border border-primary/10">
+                <SectionLabel>Executive Profile</SectionLabel>
                 {[
-                  { l: "Born", v: "2001, Jamalpur, Bangladesh" },
-                  { l: "Degree", v: "B.E. Electrical Engineering" },
-                  { l: "University", v: "The University of Burdwan, India" },
-                  { l: "Founded", v: "The Muslim Company, January 2025" },
-                  { l: "Role", v: "Founder, CEO & Managing Director" },
-                ].map((r, i) => (
-                  <div key={i}>
-                    <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40">{r.l}</p>
-                    <p className="font-sans text-sm text-primary/80">{r.v}</p>
+                  { label: "Full Name", value: "Shariful Islam" },
+                  { label: "Born", value: "2001, Jamalpur, Bangladesh" },
+                  { label: "Nationality", value: "Bangladeshi" },
+                  { label: "Degree", value: "B.E. in Electrical Engineering" },
+                  { label: "University", value: "University of Burdwan, India" },
+                  { label: "Role", value: "Founder, CEO & Managing Director" },
+                  { label: "Company", value: "The Muslim Company" },
+                  { label: "Founded", value: "January 2025, Dhaka" },
+                  { label: "Other Role", value: "Peace Ambassador, Global Peace Chain (BD)" },
+                ].map((r) => <InfoRow key={r.label} label={r.label} value={r.value} />)}
+              </div>
+            </motion.div>
+
+            {/* —— BIOGRAPHY —— */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="p-8 bg-card border border-primary/10">
+              <SectionLabel>Biography</SectionLabel>
+              <h2 className="font-serif text-2xl text-primary mb-5">About Shariful Islam</h2>
+              <div className="space-y-4 font-sans text-sm text-primary/65 leading-relaxed">
+                <p>
+                  Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur dedicated to ethical innovation, humanitarian development, knowledge-driven progress, and civilization-focused institution building. Born in 2001 in Jamalpur, Bangladesh, he graduated with a Bachelor of Engineering in Electrical Engineering from The University of Burdwan, India.
+                </p>
+                <p>
+                  From an early age, Shariful developed strong interests spanning technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies. His intellectual journey led him to found <strong className="text-primary/80">The Muslim Company</strong> in January 2025 — a faith-driven global enterprise built on the principles of Islam and the prophetic model of ethical leadership.
+                </p>
+                <p>
+                  As Founder, CEO and Managing Director, he leads the company across seven key sectors: Technology &amp; AI, Media &amp; Journalism, Education &amp; Research, Humanitarian Development, Governance &amp; Policy, Renewable Energy, and Ethical Commerce. He also serves as a Peace Ambassador for the Global Peace Chain (Bangladesh), reflecting his commitment to dialogue, unity, and global humanitarian responsibility.
+                </p>
+                <p>
+                  Shariful's leadership philosophy is grounded in the Quran and the Sunnah of Prophet Muhammad ﷺ — combining ancient prophetic wisdom with modern global corporate strategy to create a model of enterprise that is simultaneously world-class and deeply principled.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* —— VISION QUOTE —— */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="border-l-4 border-secondary pl-8 py-3">
+              <SectionLabel>Founding Vision</SectionLabel>
+              <p className="font-serif text-xl md:text-2xl italic text-primary/80 leading-relaxed">
+                &ldquo;True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.&rdquo;
+              </p>
+              <p className="mt-4 font-sans text-xs tracking-widest uppercase text-primary/35">&mdash; Shariful Islam</p>
+            </motion.div>
+
+            {/* —— LEADERSHIP PILLARS —— */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+              <SectionLabel>Executive Leadership</SectionLabel>
+              <h2 className="font-serif text-2xl text-primary mb-8">Leadership Pillars</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {[
+                  {
+                    icon: Star, title: "Faith & Ethics",
+                    items: ["Quran and Sunnah as the constitutional foundation", "Prophetic model of ethical business conduct", "Halal, transparent & shariah-conscious operations", "Accountability to Allah above all stakeholders"]
+                  },
+                  {
+                    icon: Globe, title: "Global Vision",
+                    items: ["Building a world-class Islamic conglomerate", "Civilization-scale institution for humanity", "Operating across seven strategic sectors", "Long-term 50–100 year civilizational thinking"]
+                  },
+                  {
+                    icon: Briefcase, title: "Corporate Governance",
+                    items: ["Global professional corporate standards", "Ethical innovation over profit-first models", "Transparent reporting & accountability", "Servant-leadership model inspired by the Prophet ﷺ"]
+                  },
+                  {
+                    icon: BookOpen, title: "Knowledge & Research",
+                    items: ["Electrical engineering & smart power systems", "AI, technology & ethical digital innovation", "Islamic civilization scholarship", "Academic publishing & research culture"]
+                  },
+                  {
+                    icon: Award, title: "Humanitarian Mission",
+                    items: ["Wealth as a tool for human benefit, not hoarding", "Peace Ambassador — Global Peace Chain (BD)", "Education, development & poverty alleviation", "Upliftment of Muslim communities globally"]
+                  },
+                  {
+                    icon: Building2, title: "Entrepreneurship",
+                    items: ["Faith-driven startup methodology", "Growing from Bangladesh to global markets", "Muslim-led enterprise as a model for the Ummah", "Sustainability and long-term value creation"]
+                  },
+                ].map((card) => (
+                  <motion.div key={card.title} variants={fadeIn}>
+                    <PillarCard {...card} />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* —— ACADEMIC + INSPIRATIONS —— */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="p-7 bg-card border border-primary/10">
+                <GraduationCap className="w-5 h-5 text-secondary mb-4" />
+                <SectionLabel>Expertise</SectionLabel>
+                <h3 className="font-serif text-base text-primary mb-4">Academic &amp; Intellectual Interests</h3>
+                <ul className="space-y-2.5">
+                  {[
+                    "Electrical engineering & smart power grid systems",
+                    "Solar and photovoltaic (PV) technology",
+                    "Renewable and green energy",
+                    "Artificial intelligence & ethical technology",
+                    "International business and relations",
+                    "Media, journalism & humanitarian development",
+                    "Islamic civilization, education & research",
+                    "Future-focused ethical innovation",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 font-sans text-sm text-primary/65">
+                      <span className="w-1 h-1 bg-secondary/60 rounded-full mt-2.5 flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="p-7 bg-card border border-primary/10">
+                <Star className="w-5 h-5 text-secondary mb-4" />
+                <SectionLabel>Inspirations</SectionLabel>
+                <h3 className="font-serif text-base text-primary mb-4">Inspirations &amp; Influences</h3>
+                <p className="font-sans text-sm text-primary/60 leading-relaxed mb-5">
+                  Shariful Islam's worldview and leadership style are deeply shaped by the prophetic tradition, the scholarly legacy of Islamic civilization, and contemporary leaders of principle.
+                </p>
+                <ul className="space-y-2.5">
+                  {[
+                    "The life and example of Prophet Muhammad ﷺ — the ultimate model",
+                    "The Sahabah and the scholars of Islamic civilization",
+                    "Dr. Zakir Naik — Islamic knowledge and comparative religion",
+                    "Imran Khan — principled leadership against corruption",
+                    "The great Muslim scientists, philosophers, and civilizational builders",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 font-sans text-sm text-primary/65">
+                      <span className="w-1 h-1 bg-secondary/60 rounded-full mt-2.5 flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+
+            {/* —— ASPIRATIONS DARK BLOCK —— */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="p-8 bg-primary text-primary-foreground">
+              <SectionLabel>Vision Statement</SectionLabel>
+              <h2 className="font-serif text-2xl text-primary-foreground mb-6">The Aspiration</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                {[
+                  { num: "01", text: "The Muslim Company becomes one of the world's most trusted, respected, and influential ethical Muslim-led enterprises." },
+                  { num: "02", text: "Wealth becomes a tool for humanitarian development, education, research, ethical systems, and long-term benefit for humanity." },
+                  { num: "03", text: "A practicing Muslim-led ethical civilization-scale company becomes globally successful and a model for the entire Ummah." },
+                ].map((item) => (
+                  <div key={item.num} className="border border-primary-foreground/15 p-6">
+                    <p className="font-serif text-4xl text-secondary/40 mb-3">{item.num}</p>
+                    <p className="font-sans text-sm text-primary-foreground/65 leading-relaxed">{item.text}</p>
                   </div>
                 ))}
               </div>
             </motion.div>
 
+            {/* —— SECOND QUOTE —— */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="p-6 bg-card border border-primary/10">
-              <h3 className="font-serif text-lg text-primary mb-3">About Shariful Islam</h3>
-              <p className="font-sans text-sm text-primary/65 leading-relaxed">
-                Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur dedicated to ethical innovation, humanitarian development, knowledge-driven progress, and civilization-focused institution building. From an early age he developed strong interests in technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies.
+              className="border-l-4 border-secondary pl-8 py-2">
+              <p className="font-serif text-xl italic text-primary/80 leading-relaxed">
+                &ldquo;Allah is the owner of everything. Rizq, honor, power, and success come only from Allah.&rdquo;
+              </p>
+              <p className="mt-4 font-sans text-[10px] tracking-[0.35em] uppercase text-primary/35">
+                &mdash; Shariful Islam, Founder &amp; CEO — The Muslim Company
               </p>
             </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-6 bg-card border border-primary/10">
-                <h4 className="font-serif text-base text-primary mb-4">Academic & Intellectual Interests</h4>
-                <Bullets items={[
-                  "Electrical engineering & smart power grid systems",
-                  "Solar and photovoltaic (PV) technology",
-                  "Renewable and green energy",
-                  "Artificial intelligence & ethical technology",
-                  "International business and relations",
-                  "Media, journalism & humanitarian development",
-                  "Islamic civilization, education & research",
-                  "Future-focused ethical innovation",
-                ]} />
-              </div>
-              <div className="p-6 bg-card border border-primary/10">
-                <h4 className="font-serif text-base text-primary mb-4">Inspirations & Influences</h4>
-                <p className="font-sans text-sm text-primary/65 leading-relaxed mb-4">
-                  Inspired by Islamic ethics, Prophetic principles, humanitarian responsibility, and the legacy of past Muslim scholars, scientists, philosophers, and the Sahabah of Prophet Muhammad ﷺ.
-                </p>
-                <Bullets items={[
-                  "The life and example of Prophet Muhammad ﷺ",
-                  "The Sahabah and the scholars of Islamic civilization",
-                  "Dr. Zakir Naik — Islamic knowledge and comparative religion",
-                  "Imran Khan — principled leadership against corruption",
-                ]} />
+            {/* —— VERIFIED EXTERNAL PROFILES —— */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+              <SectionLabel>Official Presence</SectionLabel>
+              <h2 className="font-serif text-2xl text-primary mb-7">Verified External Profiles</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                  { label: "Google Knowledge Panel", sub: "g.co/kgs/4n3CijW", href: "https://g.co/kgs/4n3CijW" },
+                  { label: "LinkedIn", sub: "linkedin.com/in/personalsharifulislam", href: "https://www.linkedin.com/in/personalsharifulislam" },
+                  { label: "Personal Website", sub: "sharifulislam.engineer", href: "https://sharifulislam.engineer" },
+                  { label: "ORCID", sub: "0000-0002-6634-5090", href: "https://orcid.org/0000-0002-6634-5090" },
+                  { label: "VIAF", sub: "viaf.org", href: "http://viaf.org/viaf/503162664557855002426" },
+                  { label: "ISNI", sub: "isni.org", href: "https://isni.org/isni/0000000502719745" },
+                  { label: "ResearchGate", sub: "researchgate.net", href: "https://www.researchgate.net/profile/Shariful-Islam-130" },
+                  { label: "Crunchbase", sub: "crunchbase.com", href: "https://www.crunchbase.com/person/shariful-islam-4eee" },
+                  { label: "IMDB", sub: "imdb.com", href: "https://www.imdb.com/name/nm12843320/" },
+                ].map((link) => (
+                  <motion.a
+                    key={link.label}
+                    variants={fadeIn}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between p-5 bg-card border border-primary/10 hover:border-secondary/40 transition-colors"
+                  >
+                    <div>
+                      <p className="font-sans text-sm font-medium text-primary group-hover:text-secondary transition-colors">{link.label}</p>
+                      <p className="font-sans text-xs text-primary/40 mt-0.5">{link.sub}</p>
+                    </div>
+                    <ExternalLink className="w-3.5 h-3.5 text-primary/25 group-hover:text-secondary/60 transition-colors" />
+                  </motion.a>
+                ))}
               </div>
             </motion.div>
 
+            {/* —— CONNECT —— */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="p-6 bg-card border border-primary/10">
-              <h4 className="font-serif text-lg text-primary mb-4">Personal Aspiration</h4>
-              <Bullets items={[
-                "The Muslim Company becomes one of the world's most trusted, respected, and influential ethical Muslim-led enterprises",
-                "Wealth becomes a tool for humanitarian development, education, research, ethical systems, and long-term benefit for humanity",
-                "A practicing Muslim-led ethical civilization-scale company becomes globally successful and a model for others",
-              ]} />
-            </motion.div>
-
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <InlineQuote author="Shariful Islam">True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.</InlineQuote>
-              <InlineQuote author="Shariful Islam">Allah is the owner of everything. Rizq, honor, power, and success come only from Allah.</InlineQuote>
+              className="flex flex-col md:flex-row items-center justify-between gap-6 py-10 border-t border-primary/10">
+              <div>
+                <p className="font-sans text-xs tracking-widest uppercase text-secondary mb-2">Connect</p>
+                <p className="font-serif text-xl text-primary">Follow Shariful Islam</p>
+                <p className="font-sans text-sm text-primary/50 mt-1">For updates on The Muslim Company &amp; thought leadership.</p>
+              </div>
+              <div className="flex gap-3 flex-wrap">
+                {[
+                  { label: "X / Twitter", href: "https://x.com/PersonalSIslam" },
+                  { label: "YouTube", href: "https://www.youtube.com/@PersonalSharifulIslam" },
+                  { label: "Instagram", href: "https://www.instagram.com/personalsharifulislam/" },
+                  { label: "Facebook", href: "https://www.facebook.com/PersonalSharifulIslam/" },
+                ].map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-sans text-[11px] uppercase tracking-widest h-10 px-6 border border-primary/20 text-primary/70 hover:border-secondary hover:text-secondary transition-colors inline-flex items-center"
+                  >
+                    {s.label}
+                  </a>
+                ))}
+              </div>
             </motion.div>
 
           </div>

@@ -14,14 +14,6 @@ const fadeIn = { hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, tra
 export default function Notices() {
   useEffect(() => {
     document.title = "Notices & Events — The Muslim Company";
-    else {
-      const _m = document.createElement('meta'); _m.setAttribute('property', 'og:image');
-      _m.setAttribute('content', 'https://www.themuslim.company/og-notices.png'); document.head.appendChild(_m);
-    }
-    else {
-      const _t = document.createElement('meta'); _t.setAttribute('name', 'twitter:image');
-      _t.setAttribute('content', 'https://www.themuslim.company/og-notices.png'); document.head.appendChild(_t);
-    }
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "Official notices, announcements, and upcoming events from The Muslim Company.");
     const _ogt = document.querySelector('meta[property="og:title"]');

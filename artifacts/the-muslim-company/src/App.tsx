@@ -32,6 +32,7 @@ import EmployeeSettings from "@/pages/employee-settings";
 import LoginPage from "@/pages/LoginPage";
 import AuthRedirect from "@/pages/AuthRedirect";
 import FounderPage from "@/pages/founder";
+import CeoSharifulIslamPage from "@/pages/ceo-sharifulislam";
 import VisionPage from "@/pages/vision";
 import MissionPage from "@/pages/mission";
 import SectorDetail from "@/pages/sector-detail";
@@ -75,6 +76,7 @@ function Router() {
       <Route path="/employee" component={LoginPage} />
       <Route path="/auth-redirect" component={AuthRedirect} />
       <Route path="/founder" component={FounderPage} />
+      <Route path="/ceo/Sharifulislam" component={CeoSharifulIslamPage} />
       <Route path="/vision" component={VisionPage} />
       <Route path="/mission" component={MissionPage} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
@@ -152,3 +154,4 @@ function App() {
 }
 
 export default App;
+

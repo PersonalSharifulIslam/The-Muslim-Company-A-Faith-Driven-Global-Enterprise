@@ -32,6 +32,10 @@ export default function Notices() {
     if (_ogt) _ogt.setAttribute('content', "Notices & Events — The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "Official notices, announcements, and upcoming events from The Muslim Company.");
+    const _ogi = document.querySelector('meta[property="og:image"]');
+    if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-notices.png');
+    const _ogtw = document.querySelector('meta[name="twitter:image"]');
+    if (_ogtw) _ogtw.setAttribute('content', 'https://www.themuslim.company/og-notices.png');
     const _ogu = document.querySelector('meta[property="og:url"]');
     const _ogi = document.querySelector('meta[property="og:image"]');
     if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-notices.png');

@@ -40,14 +40,6 @@ function NewsCard({ post, featured }: { post: NewsPost; featured?: boolean }) {
 export default function Newsroom() {
   useEffect(() => {
     document.title = "Newsroom & Press — The Muslim Company";
-    else {
-      const _m = document.createElement('meta'); _m.setAttribute('property', 'og:image');
-      _m.setAttribute('content', 'https://www.themuslim.company/og-newsroom.png'); document.head.appendChild(_m);
-    }
-    else {
-      const _t = document.createElement('meta'); _t.setAttribute('name', 'twitter:image');
-      _t.setAttribute('content', 'https://www.themuslim.company/og-newsroom.png'); document.head.appendChild(_t);
-    }
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "Latest news, press releases, and media coverage of The Muslim Company — a faith-driven global enterprise building ethical civilization.");
     const _ogt = document.querySelector('meta[property="og:title"]');

@@ -691,8 +691,8 @@ async function routePut(path: string, body: any): Promise<any> {
     if (error) throw error; return data
   }
   // Admin: update task
-  const taskMatch = path.match(/^\/admin\/tasks\/(\d+)$/)
-  if (taskMatch) {
+  const taskMatch_2 = path.match(/^\/admin\/tasks\/(\d+)$/)
+  if (taskMatch_2) {
     const { data, error } = await supabase.from('tasks')
       .update({ ...body, updated_at: new Date().toISOString() })
       .eq('id', taskMatch[1]).select().single()
@@ -724,8 +724,8 @@ async function routePut(path: string, body: any): Promise<any> {
   }
 
   // Admin: update attendance
-  const attMatch = path.match(/^\/admin\/attendance\/(\d+)$/)
-  if (attMatch) {
+  const attMatch_2 = path.match(/^\/admin\/attendance\/(\d+)$/)
+  if (attMatch_2) {
     const { data, error } = await supabase.from('attendance')
       .update(body).eq('id', attMatch[1]).select().single()
     if (error) throw new Error(error.message)
@@ -754,8 +754,8 @@ async function routePut(path: string, body: any): Promise<any> {
   }
 
   // Admin: Update task
-  const taskMatch = path.match(/^\/admin\/tasks\/(\d+)$/)
-  if (taskMatch) {
+  const taskMatch_3 = path.match(/^\/admin\/tasks\/(\d+)$/)
+  if (taskMatch_3) {
     const { data, error } = await supabase.from('tasks')
       .update({ ...body, updated_at: new Date().toISOString() })
       .eq('id', taskMatch[1]).select().single()
@@ -778,8 +778,8 @@ async function routePut(path: string, body: any): Promise<any> {
   }
 
   // Admin: Update payroll status
-  const payrollMatch = path.match(/^\/admin\/payroll\/(\d+)$/)
-  if (payrollMatch) {
+  const payrollMatch_2 = path.match(/^\/admin\/payroll\/(\d+)$/)
+  if (payrollMatch_2) {
     const updates: any = { ...body, updated_at: new Date().toISOString() }
     if (body.status === 'paid' && !body.payment_date) updates.payment_date = new Date().toISOString().split('T')[0]
     const { data, error } = await supabase.from('payroll')
@@ -789,8 +789,8 @@ async function routePut(path: string, body: any): Promise<any> {
   }
 
   // Admin: Update attendance
-  const attMatch = path.match(/^\/admin\/attendance\/(\d+)$/)
-  if (attMatch) {
+  const attMatch_3 = path.match(/^\/admin\/attendance\/(\d+)$/)
+  if (attMatch_3) {
     const { data, error } = await supabase.from('attendance')
       .update(body).eq('id', attMatch[1]).select().single()
     if (error) throw new Error(error.message)
@@ -798,8 +798,8 @@ async function routePut(path: string, body: any): Promise<any> {
   }
 
   // Admin: Update department
-  const deptMatch = path.match(/^\/admin\/departments\/(\d+)$/)
-  if (deptMatch) {
+  const deptMatch_2 = path.match(/^\/admin\/departments\/(\d+)$/)
+  if (deptMatch_2) {
     const { data, error } = await supabase.from('departments')
       .update({ ...body, updated_at: new Date().toISOString() }).eq('id', deptMatch[1]).select().single()
     if (error) throw new Error(error.message)
@@ -807,8 +807,8 @@ async function routePut(path: string, body: any): Promise<any> {
   }
 
   // Admin: Update Task
-  const taskMatch = path.match(/^\/admin\/tasks\/(\d+)$/)
-  if (taskMatch) {
+  const taskMatch_4 = path.match(/^\/admin\/tasks\/(\d+)$/)
+  if (taskMatch_4) {
     const { data, error } = await supabase
       .from('tasks').update({ ...body, updated_at: new Date().toISOString() })
       .eq('id', taskMatch[1]).select().single()
@@ -817,8 +817,8 @@ async function routePut(path: string, body: any): Promise<any> {
   }
 
   // Admin: Update Payroll
-  const payrollMatch = path.match(/^\/admin\/payroll\/(\d+)$/)
-  if (payrollMatch) {
+  const payrollMatch_3 = path.match(/^\/admin\/payroll\/(\d+)$/)
+  if (payrollMatch_3) {
     const updates = { ...body, updated_at: new Date().toISOString() }
     if (body.basic_salary !== undefined) {
       updates.net_salary = Number(body.basic_salary) + Number(body.allowances || 0) - Number(body.deductions || 0)
@@ -831,8 +831,8 @@ async function routePut(path: string, body: any): Promise<any> {
   }
 
   // Admin: Update Department
-  const deptMatch = path.match(/^\/admin\/departments\/(\d+)$/)
-  if (deptMatch) {
+  const deptMatch_3 = path.match(/^\/admin\/departments\/(\d+)$/)
+  if (deptMatch_3) {
     const { data, error } = await supabase
       .from('departments').update({ ...body, updated_at: new Date().toISOString() })
       .eq('id', deptMatch[1]).select().single()
@@ -841,8 +841,8 @@ async function routePut(path: string, body: any): Promise<any> {
   }
 
   // Admin: Update Attendance
-  const attMatch = path.match(/^\/admin\/attendance\/(\d+)$/)
-  if (attMatch) {
+  const attMatch_4 = path.match(/^\/admin\/attendance\/(\d+)$/)
+  if (attMatch_4) {
     const { data, error } = await supabase
       .from('attendance').update(body)
       .eq('id', attMatch[1]).select().single()
@@ -854,28 +854,28 @@ async function routePut(path: string, body: any): Promise<any> {
 }
 
 async function routeDel(path: string): Promise<any> {
-  const jobMatch = path.match(/^\/admin\/jobs\/(\d+)$/)
-  if (jobMatch) {
+  const jobMatch_2 = path.match(/^\/admin\/jobs\/(\d+)$/)
+  if (jobMatch_2) {
     const { error } = await supabase.from('jobs').delete().eq('id', parseInt(jobMatch[1]))
     if (error) throw error; return { success: true }
   }
-  const newsMatch = path.match(/^\/admin\/newsroom\/(\d+)$/)
-  if (newsMatch) {
+  const newsMatch_2 = path.match(/^\/admin\/newsroom\/(\d+)$/)
+  if (newsMatch_2) {
     const { error } = await supabase.from('newsroom_posts').delete().eq('id', parseInt(newsMatch[1]))
     if (error) throw error; return { success: true }
   }
-  const noticeMatch = path.match(/^\/admin\/notices\/(\d+)$/)
-  if (noticeMatch) {
+  const noticeMatch_2 = path.match(/^\/admin\/notices\/(\d+)$/)
+  if (noticeMatch_2) {
     const { error } = await supabase.from('notices').delete().eq('id', parseInt(noticeMatch[1]))
     if (error) throw error; return { success: true }
   }
-  const blogMatch = path.match(/^\/admin\/blog\/(\d+)$/)
-  if (blogMatch) {
+  const blogMatch_2 = path.match(/^\/admin\/blog\/(\d+)$/)
+  if (blogMatch_2) {
     const { error } = await supabase.from('blog_posts').delete().eq('id', parseInt(blogMatch[1]))
     if (error) throw error; return { success: true }
   }
-  const empMatch = path.match(/^\/admin\/employees\/(\d+)$/)
-  if (empMatch) {
+  const empMatch_2 = path.match(/^\/admin\/employees\/(\d+)$/)
+  if (empMatch_2) {
     const { error } = await supabase.from('employees').delete().eq('id', parseInt(empMatch[1]))
     if (error) throw error; return { success: true }
   }
@@ -917,8 +917,8 @@ async function routeDel(path: string): Promise<any> {
   }
 
   // Admin: Delete Task
-  const delTaskMatch = path.match(/^\/admin\/tasks\/(\d+)$/)
-  if (delTaskMatch) {
+  const delTaskMatch_2 = path.match(/^\/admin\/tasks\/(\d+)$/)
+  if (delTaskMatch_2) {
     const { error } = await supabase.from('tasks').delete().eq('id', delTaskMatch[1])
     if (error) throw new Error(error.message)
     return { success: true }
@@ -933,8 +933,8 @@ async function routeDel(path: string): Promise<any> {
   }
 
   // Admin: Delete Department
-  const delDeptMatch = path.match(/^\/admin\/departments\/(\d+)$/)
-  if (delDeptMatch) {
+  const delDeptMatch_2 = path.match(/^\/admin\/departments\/(\d+)$/)
+  if (delDeptMatch_2) {
     const { error } = await supabase.from('departments').delete().eq('id', delDeptMatch[1])
     if (error) throw new Error(error.message)
     return { success: true }

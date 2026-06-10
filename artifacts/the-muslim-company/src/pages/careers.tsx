@@ -44,14 +44,10 @@ function JobCard({ job }: { job: Job }) {
 export default function Careers() {
   useEffect(() => {
     document.title = "Careers — The Muslim Company";
-    const _ogi = document.querySelector('meta[property="og:image"]');
-    if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-careers.png');
     else {
       const _m = document.createElement('meta'); _m.setAttribute('property', 'og:image');
       _m.setAttribute('content', 'https://www.themuslim.company/og-careers.png'); document.head.appendChild(_m);
     }
-    const _twi = document.querySelector('meta[name="twitter:image"]');
-    if (_twi) _twi.setAttribute('content', 'https://www.themuslim.company/og-careers.png');
     else {
       const _t = document.createElement('meta'); _t.setAttribute('name', 'twitter:image');
       _t.setAttribute('content', 'https://www.themuslim.company/og-careers.png'); document.head.appendChild(_t);
@@ -64,13 +60,9 @@ export default function Careers() {
     if (_ogd) _ogd.setAttribute('content', "Join The Muslim Company — explore career opportunities in a faith-driven, ethical, and civilization-focused global enterprise. Open positions in technology, research, media, and more.");
     const _ogi = document.querySelector('meta[property="og:image"]');
     if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-careers.png');
-    const _ogtw = document.querySelector('meta[name="twitter:image"]');
-    if (_ogtw) _ogtw.setAttribute('content', 'https://www.themuslim.company/og-careers.png');
-    const _ogu = document.querySelector('meta[property="og:url"]');
-    const _ogi = document.querySelector('meta[property="og:image"]');
-    if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-careers.png');
     const _twi = document.querySelector('meta[name="twitter:image"]');
     if (_twi) _twi.setAttribute('content', 'https://www.themuslim.company/og-careers.png');
+        const _ogu = document.querySelector('meta[property="og:url"]');
         if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/careers");
 
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());

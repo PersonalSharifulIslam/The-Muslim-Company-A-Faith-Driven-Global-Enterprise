@@ -5,6 +5,9 @@ import { AlertCircle } from "lucide-react";
 export default function NotFound() {
   useEffect(() => {
     document.title = "404 — Page Not Found — The Muslim Company";
+    const _rob = document.querySelector('meta[name="robots"]');
+    if (_rob) _rob.setAttribute('content', 'noindex, nofollow');
+    else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'noindex, nofollow'; document.head.appendChild(_rl); }
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "The page you are looking for could not be found. Return to The Muslim Company homepage.");
     const _ogt = document.querySelector('meta[property="og:title"]');

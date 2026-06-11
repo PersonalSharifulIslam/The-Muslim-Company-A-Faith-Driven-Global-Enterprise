@@ -312,7 +312,7 @@ export default function CeoSharifulIslamPage() {
                   From an early age, Shariful developed strong interests spanning technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies. His intellectual journey led him to found <strong className="text-primary/80">The Muslim Company</strong> in January 2025. He currently serves as the Chief Executive Officer (CEO) of The Muslim Company, guiding the organization's long-term vision, leadership, and strategic growth.
                 </p>
                 <p>
-                  As Chief Executive Officer (CEO), he leads the company across seven key sectors: Technology &amp; AI, Media &amp; Journalism, Education &amp; Research, Humanitarian Development, Governance &amp; Policy, Renewable Energy, and Ethical Commerce. He also serves as a Peace Ambassador for the Global Peace Chain (Bangladesh), reflecting his commitment to dialogue, unity, and global humanitarian responsibility.
+                  As Chief Executive Officer (CEO), he leads the company across multiple key sectors: Technology &amp; AI, Media &amp; Journalism, Education &amp; Research, Humanitarian Development, Governance &amp; Policy, Renewable Energy, Ethical Commerce, Social Welfare &amp; Humanitarian Work, Retail Business, Fashion &amp; Apparel, Agriculture &amp; Food, Manufacturing &amp; Industry, and Lifestyle &amp; Personal Care. He also serves as a Peace Ambassador for the Global Peace Chain (Bangladesh), reflecting his commitment to dialogue, unity, and global humanitarian responsibility.
                 </p>
                 <p>
                   Shariful's leadership philosophy is grounded in the Quran and the Sunnah of Prophet Muhammad ﷺ — combining ancient prophetic wisdom with modern global corporate strategy to create a model of enterprise that is simultaneously world-class and deeply principled.
@@ -368,7 +368,7 @@ export default function CeoSharifulIslamPage() {
                   },
                   {
                     icon: Globe, title: "Global Vision",
-                    items: ["Building a world-class Islamic conglomerate", "Civilization-scale institution for humanity", "Operating across seven strategic sectors", "Long-term 50–100 year civilizational thinking"]
+                    items: ["Building a world-class Islamic conglomerate", "Civilization-scale institution for humanity", "Operating across diverse strategic sectors", "Long-term 50–100 year civilizational thinking"]
                   },
                   {
                     icon: Briefcase, title: "Corporate Governance",

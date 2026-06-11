@@ -90,6 +90,12 @@ export default function FounderPage() {
                   </svg>
                   View on Google
                 </a>
+                <a
+                  href="/ceo/Sharifulislam"
+                  className="inline-flex items-center gap-2 border border-secondary text-secondary hover:bg-secondary hover:text-primary font-sans text-xs font-bold uppercase tracking-widest h-12 px-8 transition-colors mt-3"
+                >
+                  CEO Profile
+                </a>
               </div>
             </motion.div>
           </div>

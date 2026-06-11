@@ -28,9 +28,9 @@ export default function PrivacyPolicy() {
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "Privacy Policy of The Muslim Company — how we collect, use, and protect your personal information in accordance with Islamic ethics and international standards.");
     const _ogi = document.querySelector('meta[property="og:image"]');
-    if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-image.png');
+    if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-privacy.jpg');
     const _twi = document.querySelector('meta[name="twitter:image"]');
-    if (_twi) _twi.setAttribute('content', 'https://www.themuslim.company/og-image.png');
+    if (_twi) _twi.setAttribute('content', 'https://www.themuslim.company/og-privacy.jpg');
         const _ogu = document.querySelector('meta[property="og:url"]');
         if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/privacy-policy");
 

@@ -24,6 +24,8 @@ function Bullets({ items }: { items: string[] }) {
 export default function MissionPage() {
   useEffect(() => {
     document.title = "Mission — The Muslim Company";
+    const _rob = document.querySelector('meta[name="robots"]');
+    if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "The Muslim Company's mission: to build a civilization-driven global company inspired by the Quran, authentic Sunnah, and the Prophetic model — empowering humanity through ethical business, knowledge, innovation, and justice.");
     const _ogt = document.querySelector('meta[property="og:title"]');

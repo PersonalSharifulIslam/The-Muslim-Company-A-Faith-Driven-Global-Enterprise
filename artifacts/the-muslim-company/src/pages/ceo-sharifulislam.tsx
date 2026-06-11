@@ -360,6 +360,16 @@ export default function CeoSharifulIslamPage() {
               </div>
             </motion.div>
 
+            {/* —— VISION STATEMENT QUOTE —— */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+              <div className="border-l-4 border-secondary pl-6 py-2">
+                <p className="font-serif text-lg md:text-xl italic leading-relaxed text-primary/80">
+                  "I do not know whether this company will fully succeed, how far it will go, or whether I will be able to implement every part of this vision. But my intention is to seek the pleasure of Allah and, by following the teachings and ethics of Prophet Muhammad ﷺ as much as possible, try to build something beneficial for humanity."
+                </p>
+                <p className="mt-4 font-sans text-xs tracking-widest uppercase text-secondary/60">— Shariful Islam, CEO — The Muslim Company</p>
+              </div>
+            </motion.div>
+
             {/* —— LEADERSHIP PILLARS —— */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
               <SectionLabel>Executive Leadership</SectionLabel>

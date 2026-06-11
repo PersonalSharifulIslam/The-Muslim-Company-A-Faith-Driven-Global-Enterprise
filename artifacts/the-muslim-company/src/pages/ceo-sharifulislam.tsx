@@ -70,8 +70,8 @@ const PERSON_SCHEMA = {
   "nationality": { "@type": "Country", "name": "Bangladesh" },
   "gender": "Male",
   "knowsLanguage": ["Bengali", "English"],
-  "jobTitle": "Founder, Chief Executive Officer & Managing Director",
-  "description": "Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur. He is the Founder, CEO & Managing Director of The Muslim Company — a faith-driven global conglomerate built on Islamic principles, prophetic values, and civilization-focused leadership. He is also a Peace Ambassador for the Global Peace Chain (Bangladesh).",
+  "jobTitle": "Chief Executive Officer",
+  "description": "Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur. He is the Chief Executive Officer (CEO) of The Muslim Company — a faith-driven global enterprise built on Islamic principles and prophetic values. He is also a Peace Ambassador for the Global Peace Chain (Bangladesh).",
   "url": "https://www.themuslim.company/ceo/Sharifulislam",
   "image": {
     "@type": "ImageObject",
@@ -147,7 +147,7 @@ const ORG_SCHEMA = {
   },
   "employee": [{
     "@type": "OrganizationRole",
-    "roleName": "Chief Executive Officer & Managing Director",
+    "roleName": "Chief Executive Officer",
     "startDate": "2025",
     "member": {
       "@type": "Person",
@@ -169,8 +169,8 @@ const ORG_SCHEMA = {
 const PROFILE_PAGE_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
-  "name": "Shariful Islam — Founder, CEO & MD | The Muslim Company",
-  "description": "Official CEO profile of Shariful Islam — Founder, Chief Executive Officer & Managing Director of The Muslim Company, a faith-driven global Islamic conglomerate headquartered in Dhaka, Bangladesh.",
+  "name": "Shariful Islam | CEO of The Muslim Company",
+  "description": "Official CEO profile of Shariful Islam, Chief Executive Officer of The Muslim Company.",
   "url": "https://www.themuslim.company/ceo/Sharifulislam",
   "dateModified": "2025-06-01",
   "breadcrumb": {
@@ -185,9 +185,9 @@ const PROFILE_PAGE_SCHEMA = {
 
 export default function CeoSharifulIslamPage() {
   useEffect(() => {
-    document.title = "Shariful Islam — Founder, CEO & MD | The Muslim Company";
+    document.title = "Shariful Islam | CEO of The Muslim Company";
     const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute("content", "Shariful Islam is the Founder, Chief Executive Officer & Managing Director of The Muslim Company — a faith-driven global Islamic conglomerate built on prophetic values, ethical innovation, and civilization-focused leadership.");
+    if (metaDesc) metaDesc.setAttribute("content", "Shariful Islam is the Chief Executive Officer (CEO) of The Muslim Company, a faith-driven global enterprise headquartered in Dhaka, Bangladesh.");
 
     document.querySelectorAll("script[data-page-schema]").forEach(el => el.remove());
     [PERSON_SCHEMA, ORG_SCHEMA, PROFILE_PAGE_SCHEMA].forEach(schema => {
@@ -203,13 +203,13 @@ export default function CeoSharifulIslamPage() {
   return (
     <SiteLayout>
       <Helmet>
-        <title>Shariful Islam — Founder, CEO &amp; MD | The Muslim Company</title>
-        <meta name="description" content="Shariful Islam is the Founder, Chief Executive Officer & Managing Director of The Muslim Company — a faith-driven global Islamic conglomerate built on prophetic values, ethical innovation, and civilization-focused leadership." />
+        <title>Shariful Islam | CEO of The Muslim Company</title>
+        <meta name="description" content="Shariful Islam is the Chief Executive Officer (CEO) of The Muslim Company, a faith-driven global enterprise headquartered in Dhaka, Bangladesh." />
         <link rel="canonical" href="https://www.themuslim.company/ceo/Sharifulislam" />
         {/* Open Graph */}
         <meta property="og:type" content="profile" />
-        <meta property="og:title" content="Shariful Islam — Founder, CEO & MD | The Muslim Company" />
-        <meta property="og:description" content="Shariful Islam is the Founder, CEO & MD of The Muslim Company — a faith-driven global Islamic conglomerate built on prophetic values and civilization-focused leadership." />
+        <meta property="og:title" content="Shariful Islam | CEO of The Muslim Company" />
+        <meta property="og:description" content="Shariful Islam is the Chief Executive Officer (CEO) of The Muslim Company." />
         <meta property="og:url" content="https://www.themuslim.company/ceo/Sharifulislam" />
         <meta property="og:image" content="https://www.themuslim.company/og-image.png" />
         <meta property="og:image:width" content="1200" />
@@ -220,14 +220,14 @@ export default function CeoSharifulIslamPage() {
         <meta property="profile:last_name" content="Islam" />
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Shariful Islam — Founder, CEO & MD | The Muslim Company" />
-        <meta name="twitter:description" content="Founder, CEO & MD of The Muslim Company — faith-driven global Islamic conglomerate built on prophetic values and ethical innovation." />
+        <meta name="twitter:title" content="Shariful Islam | CEO of The Muslim Company" />
+        <meta name="twitter:description" content="Chief Executive Officer (CEO) of The Muslim Company." />
         <meta name="twitter:image" content="https://www.themuslim.company/og-image.png" />
         <meta name="twitter:site" content="@PersonalSIslam" />
         <meta name="twitter:creator" content="@PersonalSIslam" />
         {/* SEO */}
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-        <meta name="keywords" content="Shariful Islam, Shariful Islam CEO, Shariful Islam The Muslim Company, Shariful Islam Founder, CEO The Muslim Company, The Muslim Company CEO, The Muslim Company founder, Islamic CEO Bangladesh, Muslim entrepreneur Bangladesh, faith driven company CEO, Islamic conglomerate founder, Shariful Islam engineer, Shariful Islam entrepreneur, Shariful Islam visionary" />
+        <meta name="keywords" content="Shariful Islam, Shariful Islam CEO, CEO Shariful Islam, CEO of The Muslim Company, Chief Executive Officer The Muslim Company, The Muslim Company CEO, Bangladeshi CEO, Muslim Entrepreneur, Islamic Business Leader, Ethical Leadership, The Muslim Company, TMC CEO, Shariful Islam Engineer" />
         <meta name="author" content="Shariful Islam" />
         {/* rel=me for Knowledge Panel entity disambiguation */}
         <link rel="me" href="https://www.linkedin.com/in/personalsharifulislam" />
@@ -255,10 +255,10 @@ export default function CeoSharifulIslamPage() {
                 Shariful Islam
               </motion.h1>
               <motion.p variants={fadeIn} className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-6">
-                Founder &nbsp;·&nbsp; Chief Executive Officer &nbsp;·&nbsp; Managing Director
+                Chief Executive Officer
               </motion.p>
               <motion.p variants={fadeIn} className="font-sans text-base text-primary-foreground/55 max-w-xl mx-auto leading-relaxed">
-                Bangladeshi Engineer, Ethical Visionary &amp; Entrepreneur — building a faith-driven global civilization on Prophetic values.
+                Bangladeshi Engineer, CEO, Ethical Visionary &amp; Entrepreneur — building a faith-driven global civilization on Prophetic values.
               </motion.p>
 
               {/* CTA Buttons */}
@@ -339,7 +339,7 @@ export default function CeoSharifulIslamPage() {
                 <p className="font-serif text-xl md:text-2xl italic text-primary/85 leading-relaxed mb-6">
                   &ldquo;I do not know whether this company will fully succeed, how far it will go, or whether I will be able to implement every part of this vision. But my intention is to seek the pleasure of Allah and, by following the teachings and ethics of Prophet Muhammad ﷺ as much as possible, try to build something beneficial for humanity.&rdquo;
                 </p>
-                <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-secondary/60">&mdash; Shariful Islam, Founder &amp; CEO</p>
+                <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-secondary/60">&mdash; Shariful Islam, CEO</p>
               </div>
               <div className="lg:col-span-2 p-7 bg-card border border-primary/10">
                 <SectionLabel>Executive Profile</SectionLabel>
@@ -349,7 +349,7 @@ export default function CeoSharifulIslamPage() {
                   { label: "Nationality", value: "Bangladeshi" },
                   { label: "Degree", value: "B.E. in Electrical Engineering" },
                   { label: "University", value: "University of Burdwan, India" },
-                  { label: "Role", value: "Founder, CEO & Managing Director" },
+                  { label: "Role", value: "Chief Executive Officer (CEO)" },
                   { label: "Company", value: "The Muslim Company" },
                   { label: "Founded", value: "January 2025, Dhaka" },
                   { label: "Other Role", value: "Peace Ambassador, Global Peace Chain (BD)" },
@@ -361,16 +361,16 @@ export default function CeoSharifulIslamPage() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-card border border-primary/10">
               <SectionLabel>Biography</SectionLabel>
-              <h2 className="font-serif text-2xl text-primary mb-5">About Shariful Islam</h2>
+              <h2 className="font-serif text-2xl text-primary mb-5">About Shariful Islam, CEO of The Muslim Company</h2>
               <div className="space-y-4 font-sans text-sm text-primary/65 leading-relaxed">
                 <p>
                   Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur dedicated to ethical innovation, humanitarian development, knowledge-driven progress, and civilization-focused institution building. Born in 2001 in Jamalpur, Bangladesh, he graduated with a Bachelor of Engineering in Electrical Engineering from The University of Burdwan, India.
                 </p>
                 <p>
-                  From an early age, Shariful developed strong interests spanning technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies. His intellectual journey led him to found <strong className="text-primary/80">The Muslim Company</strong> in January 2025 — a faith-driven global enterprise built on the principles of Islam and the prophetic model of ethical leadership.
+                  From an early age, Shariful developed strong interests spanning technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies. His intellectual journey led him to found <strong className="text-primary/80">The Muslim Company</strong> in January 2025. He currently serves as the Chief Executive Officer (CEO) of The Muslim Company, guiding the organization's long-term vision, leadership, and strategic growth.
                 </p>
                 <p>
-                  As Founder, CEO and Managing Director, he leads the company across seven key sectors: Technology &amp; AI, Media &amp; Journalism, Education &amp; Research, Humanitarian Development, Governance &amp; Policy, Renewable Energy, and Ethical Commerce. He also serves as a Peace Ambassador for the Global Peace Chain (Bangladesh), reflecting his commitment to dialogue, unity, and global humanitarian responsibility.
+                  As Chief Executive Officer (CEO), he leads the company across seven key sectors: Technology &amp; AI, Media &amp; Journalism, Education &amp; Research, Humanitarian Development, Governance &amp; Policy, Renewable Energy, and Ethical Commerce. He also serves as a Peace Ambassador for the Global Peace Chain (Bangladesh), reflecting his commitment to dialogue, unity, and global humanitarian responsibility.
                 </p>
                 <p>
                   Shariful's leadership philosophy is grounded in the Quran and the Sunnah of Prophet Muhammad ﷺ — combining ancient prophetic wisdom with modern global corporate strategy to create a model of enterprise that is simultaneously world-class and deeply principled.
@@ -501,7 +501,7 @@ export default function CeoSharifulIslamPage() {
                 &ldquo;Allah is the owner of everything. Rizq, honor, power, and success come only from Allah.&rdquo;
               </p>
               <p className="mt-4 font-sans text-[10px] tracking-[0.35em] uppercase text-primary/35">
-                &mdash; Shariful Islam, Founder &amp; CEO — The Muslim Company
+                &mdash; Shariful Islam, CEO — The Muslim Company
               </p>
             </motion.div>
 
@@ -545,7 +545,7 @@ export default function CeoSharifulIslamPage() {
               <div>
                 <p className="font-sans text-xs tracking-widest uppercase text-secondary mb-2">Connect</p>
                 <p className="font-serif text-xl text-primary">Follow Shariful Islam</p>
-                <p className="font-sans text-sm text-primary/50 mt-1">For updates on The Muslim Company &amp; thought leadership.</p>
+                <p className="font-sans text-sm text-primary/50 mt-1">Official insights and leadership updates from the CEO of The Muslim Company.</p>
               </div>
               <div className="flex gap-3 flex-wrap">
                 {[

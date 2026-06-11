@@ -35,6 +35,8 @@ function InlineQuote({ children, author }: { children: React.ReactNode; author?:
 export default function FounderPage() {
   useEffect(() => {
     document.title = "Founder & CEO — Shariful Islam — The Muslim Company";
+    const _rob = document.querySelector('meta[name="robots"]');
+    if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur — Founder & CEO of The Muslim Company, a faith-driven global enterprise built on Islamic principles.");
     const _ogt = document.querySelector('meta[property="og:title"]');

@@ -331,6 +331,27 @@ export default function CeoSharifulIslamPage() {
         <section className="py-24 px-6">
           <div className="container mx-auto max-w-5xl space-y-16">
 
+            {/* —— BIOGRAPHY —— */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="p-8 bg-card border border-primary/10">
+              <SectionLabel>Biography</SectionLabel>
+              <h2 className="font-serif text-2xl text-primary mb-5">About Shariful Islam, CEO of The Muslim Company</h2>
+              <div className="space-y-4 font-sans text-sm text-primary/65 leading-relaxed">
+                <p>
+                  Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur dedicated to ethical innovation, humanitarian development, knowledge-driven progress, and civilization-focused institution building. Born in 2001 in Jamalpur, Bangladesh, he graduated with a Bachelor of Engineering in Electrical Engineering from The University of Burdwan, India.
+                </p>
+                <p>
+                  From an early age, Shariful developed strong interests spanning technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies. His intellectual journey led him to found <strong className="text-primary/80">The Muslim Company</strong> in January 2025. He currently serves as the Chief Executive Officer (CEO) of The Muslim Company, guiding the organization's long-term vision, leadership, and strategic growth.
+                </p>
+                <p>
+                  As Chief Executive Officer (CEO), he leads the company across seven key sectors: Technology &amp; AI, Media &amp; Journalism, Education &amp; Research, Humanitarian Development, Governance &amp; Policy, Renewable Energy, and Ethical Commerce. He also serves as a Peace Ambassador for the Global Peace Chain (Bangladesh), reflecting his commitment to dialogue, unity, and global humanitarian responsibility.
+                </p>
+                <p>
+                  Shariful's leadership philosophy is grounded in the Quran and the Sunnah of Prophet Muhammad ﷺ — combining ancient prophetic wisdom with modern global corporate strategy to create a model of enterprise that is simultaneously world-class and deeply principled.
+                </p>
+              </div>
+            </motion.div>
+
             {/* —— STATEMENT + PROFILE CARD —— */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
               className="grid grid-cols-1 lg:grid-cols-5 gap-6">
@@ -354,27 +375,6 @@ export default function CeoSharifulIslamPage() {
                   { label: "Founded", value: "January 2025, Dhaka" },
                   { label: "Other Role", value: "Peace Ambassador, Global Peace Chain (BD)" },
                 ].map((r) => <InfoRow key={r.label} label={r.label} value={r.value} />)}
-              </div>
-            </motion.div>
-
-            {/* —— BIOGRAPHY —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="p-8 bg-card border border-primary/10">
-              <SectionLabel>Biography</SectionLabel>
-              <h2 className="font-serif text-2xl text-primary mb-5">About Shariful Islam, CEO of The Muslim Company</h2>
-              <div className="space-y-4 font-sans text-sm text-primary/65 leading-relaxed">
-                <p>
-                  Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur dedicated to ethical innovation, humanitarian development, knowledge-driven progress, and civilization-focused institution building. Born in 2001 in Jamalpur, Bangladesh, he graduated with a Bachelor of Engineering in Electrical Engineering from The University of Burdwan, India.
-                </p>
-                <p>
-                  From an early age, Shariful developed strong interests spanning technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies. His intellectual journey led him to found <strong className="text-primary/80">The Muslim Company</strong> in January 2025. He currently serves as the Chief Executive Officer (CEO) of The Muslim Company, guiding the organization's long-term vision, leadership, and strategic growth.
-                </p>
-                <p>
-                  As Chief Executive Officer (CEO), he leads the company across seven key sectors: Technology &amp; AI, Media &amp; Journalism, Education &amp; Research, Humanitarian Development, Governance &amp; Policy, Renewable Energy, and Ethical Commerce. He also serves as a Peace Ambassador for the Global Peace Chain (Bangladesh), reflecting his commitment to dialogue, unity, and global humanitarian responsibility.
-                </p>
-                <p>
-                  Shariful's leadership philosophy is grounded in the Quran and the Sunnah of Prophet Muhammad ﷺ — combining ancient prophetic wisdom with modern global corporate strategy to create a model of enterprise that is simultaneously world-class and deeply principled.
-                </p>
               </div>
             </motion.div>
 

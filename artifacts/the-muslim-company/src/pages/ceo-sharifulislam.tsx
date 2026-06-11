@@ -326,14 +326,7 @@ export default function CeoSharifulIslamPage() {
 
             {/* —— STATEMENT + PROFILE CARD —— */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-              <div className="lg:col-span-3 p-8 bg-card border border-primary/10">
-                <Quote className="w-7 h-7 text-secondary/40 mb-5" />
-                <p className="font-serif text-xl md:text-2xl italic text-primary/85 leading-relaxed mb-6">
-                  &ldquo;I do not know whether this company will fully succeed, how far it will go, or whether I will be able to implement every part of this vision. But my intention is to seek the pleasure of Allah and, by following the teachings and ethics of Prophet Muhammad ﷺ as much as possible, try to build something beneficial for humanity.&rdquo;
-                </p>
-                <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-secondary/60">&mdash; Shariful Islam, CEO</p>
-              </div>
+              className="grid grid-cols-1 gap-6">
               <div className="lg:col-span-2 p-7 bg-card border border-primary/10">
                 <SectionLabel>Executive Profile</SectionLabel>
                 {[
@@ -348,6 +341,7 @@ export default function CeoSharifulIslamPage() {
                   { label: "Other Role", value: "Peace Ambassador, Global Peace Chain (BD)" },
                 ].map((r) => <InfoRow key={r.label} label={r.label} value={r.value} />)}
               </div>
+            
             </motion.div>
 
             {/* —— LEADERSHIP PILLARS —— */}
@@ -453,6 +447,16 @@ export default function CeoSharifulIslamPage() {
                     <p className="font-sans text-sm text-primary-foreground/65 leading-relaxed">{item.text}</p>
                   </div>
                 ))}
+              </div>
+            </motion.div>
+
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+              <div className="border-l-4 border-secondary pl-6 py-2">
+                <Quote className="w-7 h-7 text-secondary/40 mb-5" />
+                <p className="font-serif text-xl md:text-2xl italic text-primary/85 leading-relaxed mb-6">
+                  &ldquo;I do not know whether this company will fully succeed, how far it will go, or whether I will be able to implement every part of this vision. But my intention is to seek the pleasure of Allah and, by following the teachings and ethics of Prophet Muhammad ﷺ as much as possible, try to build something beneficial for humanity.&rdquo;
+                </p>
+                <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-secondary/60">&mdash; Shariful Islam, CEO</p>
               </div>
             </motion.div>
 

@@ -42,6 +42,12 @@ function BlogCard({ post }: { post: BlogPost }) {
 export default function Blog() {
   useEffect(() => {
     document.title = "Blog — The Muslim Company";
+    const _can = document.querySelector('link[rel="canonical"]');
+    if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/blog'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/blog'; document.head.appendChild(_cl); }
+    const _ogu_c = document.querySelector('meta[property="og:url"]');
+    if (_ogu_c) _ogu_c.setAttribute('content', 'https://www.themuslim.company/blog');
+    const _rob = document.querySelector('meta[name="robots"]');
+    if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "Insights, reflections, and knowledge from The Muslim Company — on Islamic ethics, civilization, technology, entrepreneurship, and faith-driven development.");
     const _ogt = document.querySelector('meta[property="og:title"]');

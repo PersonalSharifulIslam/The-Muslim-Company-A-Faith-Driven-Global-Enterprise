@@ -22,15 +22,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function StatCard({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="text-center p-6 border border-primary/10 bg-card">
-      <p className="font-serif text-3xl md:text-4xl text-secondary mb-1">{value}</p>
-      <p className="font-sans text-xs tracking-widest uppercase text-primary/50">{label}</p>
-    </div>
-  );
-}
-
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="py-3 border-b border-primary/8 last:border-0">
@@ -248,9 +239,7 @@ export default function CeoSharifulIslamPage() {
           />
           <div className="relative container mx-auto max-w-5xl px-6 py-28 md:py-36">
             <motion.div initial="hidden" animate="visible" variants={stagger} className="flex flex-col items-center text-center">
-              <motion.div variants={fadeIn}>
-                <SectionLabel>The Muslim Company · Global Headquarters · Dhaka, Bangladesh</SectionLabel>
-              </motion.div>
+
               <motion.h1 variants={fadeIn} className="font-serif text-5xl md:text-7xl lg:text-8xl text-primary-foreground mt-2 mb-4 tracking-tight">
                 Shariful Islam
               </motion.h1>
@@ -305,27 +294,6 @@ export default function CeoSharifulIslamPage() {
             </motion.div>
           </div>
         </section>
-
-        {/* ══════════════════════════════ STATS BAR ══════════════════════════════ */}
-        <motion.section
-          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
-          className="border-y border-primary/10 bg-card"
-        >
-          <div className="container mx-auto max-w-5xl px-6 py-2">
-            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-primary/10">
-              {[
-                { value: "2025", label: "Founded The Muslim Company" },
-                { value: "B.E.", label: "Electrical Engineering" },
-                { value: "7+", label: "Business Sectors" },
-                { value: "Global", label: "Civilizational Vision" },
-              ].map((s) => (
-                <motion.div key={s.label} variants={fadeIn}>
-                  <StatCard value={s.value} label={s.label} />
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.section>
 
         {/* ══════════════════════════════ BODY ══════════════════════════════ */}
         <section className="py-24 px-6">

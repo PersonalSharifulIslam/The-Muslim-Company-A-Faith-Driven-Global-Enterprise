@@ -299,6 +299,16 @@ export default function CeoSharifulIslamPage() {
         <section className="py-24 px-6">
           <div className="container mx-auto max-w-5xl space-y-16">
 
+            {/* —— VISION QUOTE —— */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="border-l-4 border-secondary pl-8 py-3">
+              <SectionLabel>Founding Vision</SectionLabel>
+              <p className="font-serif text-xl md:text-2xl italic text-primary/80 leading-relaxed">
+                &ldquo;True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.&rdquo;
+              </p>
+              <p className="mt-4 font-sans text-xs tracking-widest uppercase text-primary/35">&mdash; Shariful Islam</p>
+            </motion.div>
+
             {/* —— BIOGRAPHY —— */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-card border border-primary/10">
@@ -348,16 +358,6 @@ export default function CeoSharifulIslamPage() {
                   { label: "Other Role", value: "Peace Ambassador, Global Peace Chain (BD)" },
                 ].map((r) => <InfoRow key={r.label} label={r.label} value={r.value} />)}
               </div>
-            </motion.div>
-
-            {/* —— VISION QUOTE —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="border-l-4 border-secondary pl-8 py-3">
-              <SectionLabel>Founding Vision</SectionLabel>
-              <p className="font-serif text-xl md:text-2xl italic text-primary/80 leading-relaxed">
-                &ldquo;True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.&rdquo;
-              </p>
-              <p className="mt-4 font-sans text-xs tracking-widest uppercase text-primary/35">&mdash; Shariful Islam</p>
             </motion.div>
 
             {/* —— LEADERSHIP PILLARS —— */}

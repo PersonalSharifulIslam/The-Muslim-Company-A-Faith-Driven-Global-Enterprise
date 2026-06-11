@@ -17,11 +17,10 @@ export async function onRequestGet(context: any) {
     }
   }
 
-  const [jobs, blogs, news, notices] = await Promise.all([
+  const [jobs, blogs, news] = await Promise.all([
     fetchTable('jobs',           'select=slug,created_at&status=eq.active'),
     fetchTable('blog_posts',     'select=slug,created_at&published=eq.true'),
     fetchTable('newsroom_posts', 'select=slug,created_at&published=eq.true'),
-    fetchTable('notices',        'select=id,created_at'),
   ])
 
   function url(loc: string, changefreq: string, priority: string, lastmod?: string) {
@@ -45,20 +44,21 @@ export async function onRequestGet(context: any) {
   ]
 
   const staticUrls = [
-    url(`${BASE}/`,                   'daily',   '1.0', now),
-    url(`${BASE}/careers`,            'weekly',  '0.9', now),
-    url(`${BASE}/newsroom`,           'weekly',  '0.8', now),
-    url(`${BASE}/blog`,               'weekly',  '0.8', now),
-    url(`${BASE}/notices`,            'weekly',  '0.7', now),
-    url(`${BASE}/recruitment-status`, 'monthly', '0.6'),
-    url(`${BASE}/contact`,             'monthly', '0.7', now),
-    url(`${BASE}/founder`,             'monthly', '0.8', now),
-    url(`${BASE}/vision`,              'monthly', '0.7', now),
-    url(`${BASE}/mission`,             'monthly', '0.7', now),
-    url(`${BASE}/transparency`,        'monthly', '0.8', now),
-    url(`${BASE}/get-involved`,        'monthly', '0.8', now),
-    url(`${BASE}/privacy-policy`,     'yearly',  '0.3'),
-    url(`${BASE}/terms-of-service`,   'yearly',  '0.3'),
+    url(`${BASE}/`,                     'daily',   '1.0', now),
+    url(`${BASE}/careers`,              'weekly',  '0.9', now),
+    url(`${BASE}/newsroom`,             'weekly',  '0.8', now),
+    url(`${BASE}/blog`,                 'weekly',  '0.8', now),
+    url(`${BASE}/notices`,              'weekly',  '0.7', now),
+    url(`${BASE}/founder`,              'monthly', '0.8', now),
+    url(`${BASE}/ceo/Sharifulislam`,    'monthly', '0.9', now),
+    url(`${BASE}/mission`,              'monthly', '0.7', now),
+    url(`${BASE}/vision`,               'monthly', '0.7', now),
+    url(`${BASE}/contact`,              'monthly', '0.7', now),
+    url(`${BASE}/transparency`,         'monthly', '0.7', now),
+    url(`${BASE}/get-involved`,         'monthly', '0.7', now),
+    url(`${BASE}/recruitment-status`,   'monthly', '0.6'),
+    url(`${BASE}/privacy-policy`,       'yearly',  '0.3'),
+    url(`${BASE}/terms-of-service`,     'yearly',  '0.3'),
   ].join('\n')
 
   const sectorUrls = SECTORS.map(slug =>
@@ -77,13 +77,13 @@ export async function onRequestGet(context: any) {
     url(`${BASE}/newsroom/${n.slug}`, 'weekly', '0.7', n.created_at)
   ).join('\n')
 
+  const parts = [staticUrls, sectorUrls, jobUrls, blogUrls, newsUrls]
+    .filter(p => p.trim())
+    .join('\n')
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticUrls}
-${sectorUrls}
-${jobUrls}
-${blogUrls}
-${newsUrls}
+${parts}
 </urlset>`
 
   return new Response(xml, {

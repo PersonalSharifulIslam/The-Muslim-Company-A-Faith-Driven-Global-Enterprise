@@ -207,8 +207,8 @@ const ORG_SCHEMA = {
 const PROFILE_PAGE_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
-  "name": "Shariful Islam | CEO of The Muslim Company",
-  "description": "Official CEO profile of Shariful Islam, Chief Executive Officer of The Muslim Company.",
+  "name": "Shariful Islam – CEO of The Muslim Company",
+  "description": "Official CEO profile of Shariful Islam, Chief Executive Officer (CEO) of The Muslim Company.",
   "url": "https://www.themuslim.company/ceo/Sharifulislam",
   "dateModified": "2025-06-01",
   "breadcrumb": {
@@ -223,9 +223,9 @@ const PROFILE_PAGE_SCHEMA = {
 
 export default function CeoSharifulIslamPage() {
   useEffect(() => {
-    document.title = "Shariful Islam | CEO of The Muslim Company";
+    document.title = "Shariful Islam – CEO of The Muslim Company";
     const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute("content", "Shariful Islam is the Chief Executive Officer (CEO) of The Muslim Company, a faith-driven global enterprise headquartered in Dhaka, Bangladesh.");
+    if (metaDesc) metaDesc.setAttribute("content", "Shariful Islam serves as the Chief Executive Officer (CEO) of The Muslim Company, a diversified global conglomerate committed to innovation, long-term value creation, and ethical leadership.");
 
     document.querySelectorAll("script[data-page-schema]").forEach(el => el.remove());
     [PERSON_SCHEMA, ORG_SCHEMA, PROFILE_PAGE_SCHEMA, FAQ_SCHEMA].forEach(schema => {
@@ -241,12 +241,12 @@ export default function CeoSharifulIslamPage() {
   return (
     <SiteLayout>
       <Helmet>
-        <title>Shariful Islam | CEO of The Muslim Company</title>
-        <meta name="description" content="Shariful Islam is the Chief Executive Officer (CEO) of The Muslim Company, a faith-driven global enterprise headquartered in Dhaka, Bangladesh." />
+        <title>Shariful Islam – CEO of The Muslim Company</title>
+        <meta name="description" content="Shariful Islam serves as the Chief Executive Officer (CEO) of The Muslim Company, a diversified global conglomerate committed to innovation, long-term value creation, and ethical leadership." />
         <link rel="canonical" href="https://www.themuslim.company/ceo/Sharifulislam" />
         {/* Open Graph */}
         <meta property="og:type" content="profile" />
-        <meta property="og:title" content="Shariful Islam | CEO of The Muslim Company" />
+        <meta property="og:title" content="Shariful Islam – CEO of The Muslim Company" />
         <meta property="og:description" content="Shariful Islam is the Chief Executive Officer (CEO) of The Muslim Company." />
         <meta property="og:url" content="https://www.themuslim.company/ceo/Sharifulislam" />
         <meta property="og:image" content="https://www.themuslim.company/og-image.png" />
@@ -258,7 +258,7 @@ export default function CeoSharifulIslamPage() {
         <meta property="profile:last_name" content="Islam" />
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Shariful Islam | CEO of The Muslim Company" />
+        <meta name="twitter:title" content="Shariful Islam – CEO of The Muslim Company" />
         <meta name="twitter:description" content="Chief Executive Officer (CEO) of The Muslim Company." />
         <meta name="twitter:image" content="https://www.themuslim.company/og-image.png" />
         <meta name="twitter:site" content="@PersonalSIslam" />

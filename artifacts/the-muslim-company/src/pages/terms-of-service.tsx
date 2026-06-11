@@ -28,9 +28,9 @@ export default function TermsOfService() {
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "Terms of Service of The Muslim Company — the rules, obligations, and agreements governing use of our platforms and services.");
     const _ogi = document.querySelector('meta[property="og:image"]');
-    if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-image.png');
+    if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-terms.jpg');
     const _twi = document.querySelector('meta[name="twitter:image"]');
-    if (_twi) _twi.setAttribute('content', 'https://www.themuslim.company/og-image.png');
+    if (_twi) _twi.setAttribute('content', 'https://www.themuslim.company/og-terms.jpg');
         const _ogu = document.querySelector('meta[property="og:url"]');
         if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/terms-of-service");
 

@@ -303,7 +303,11 @@ export default function CeoSharifulIslamPage() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-card border border-primary/10">
               <SectionLabel>Biography</SectionLabel>
-              <h2 className="font-serif text-2xl text-primary mb-5">About Shariful Islam, CEO of The Muslim Company</h2>
+              <h2 className="font-serif text-2xl text-primary mb-5">
+                About Shariful Islam,{" "}
+                <br className="hidden md:block" />
+                CEO of The Muslim Company
+              </h2>
               <div className="space-y-4 font-sans text-sm text-primary/65 leading-relaxed">
                 <p>
                   Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur dedicated to ethical innovation, humanitarian development, knowledge-driven progress, and civilization-focused institution building. Born in 2001 in Jamalpur, Bangladesh, he graduated with a Bachelor of Engineering in Electrical Engineering from The University of Burdwan, India.

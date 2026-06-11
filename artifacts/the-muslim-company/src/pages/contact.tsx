@@ -102,6 +102,12 @@ export default function ContactPage() {
     ];
 
     document.title = "Contact — The Muslim Company";
+    const _can = document.querySelector('link[rel="canonical"]');
+    if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/contact'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/contact'; document.head.appendChild(_cl); }
+    const _ogu_c = document.querySelector('meta[property="og:url"]');
+    if (_ogu_c) _ogu_c.setAttribute('content', 'https://www.themuslim.company/contact');
+    const _rob = document.querySelector('meta[name="robots"]');
+    if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const _ogi = document.querySelector('meta[property="og:image"]');
     if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-contact.png');
     else {

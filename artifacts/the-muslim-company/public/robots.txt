@@ -1,42 +1,29 @@
 User-agent: *
 Allow: /
-Allow: /sectors/
-Allow: /blog/
-Allow: /newsroom/
-Allow: /careers/
-Allow: /contact
-Allow: /get-involved
-Allow: /transparency
-Allow: /founder
-Allow: /ceo/
-Allow: /vision
-Allow: /mission
-Allow: /notices
-Allow: /privacy-policy
-Allow: /terms-of-service
+
 Disallow: /admin
 Disallow: /admin/
 Disallow: /employee
 Disallow: /employee/
 Disallow: /login
 Disallow: /auth-redirect
-Disallow: /recruitment-status
 Disallow: /careers/*/apply
 
 User-agent: Googlebot
 Allow: /
-Allow: /sectors/
-Allow: /blog/
-Allow: /newsroom/
-Allow: /careers/
-Allow: /ceo/
-Allow: /notices
-Allow: /privacy-policy
-Allow: /terms-of-service
 Disallow: /admin
 Disallow: /employee
-Disallow: /recruitment-status
+Disallow: /login
+Disallow: /auth-redirect
 Disallow: /careers/*/apply
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+Disallow: /employee
+
+User-agent: Applebot
+Allow: /
 
 User-agent: GPTBot
 Allow: /
@@ -47,10 +34,28 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: Bingbot
+User-agent: Googlebot-Extended
 Allow: /
 
-User-agent: Applebot
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Diffbot
 Allow: /
 
 Sitemap: https://www.themuslim.company/sitemap.xml

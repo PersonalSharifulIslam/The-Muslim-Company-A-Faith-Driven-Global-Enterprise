@@ -350,16 +350,6 @@ export default function CeoSharifulIslamPage() {
               </div>
             </motion.div>
 
-            {/* —— VISION QUOTE —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="border-l-4 border-secondary pl-8 py-3">
-              <SectionLabel>Founding Vision</SectionLabel>
-              <p className="font-serif text-xl md:text-2xl italic text-primary/80 leading-relaxed">
-                &ldquo;True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.&rdquo;
-              </p>
-              <p className="mt-4 font-sans text-xs tracking-widest uppercase text-primary/35">&mdash; Shariful Islam</p>
-            </motion.div>
-
             {/* —— LEADERSHIP PILLARS —— */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
               <SectionLabel>Executive Leadership</SectionLabel>
@@ -464,6 +454,16 @@ export default function CeoSharifulIslamPage() {
                   </div>
                 ))}
               </div>
+            </motion.div>
+
+            {/* —— VISION QUOTE —— */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="border-l-4 border-secondary pl-8 py-3">
+              <SectionLabel>Founding Vision</SectionLabel>
+              <p className="font-serif text-xl md:text-2xl italic text-primary/80 leading-relaxed">
+                &ldquo;True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.&rdquo;
+              </p>
+              <p className="mt-4 font-sans text-xs tracking-widest uppercase text-primary/35">&mdash; Shariful Islam</p>
             </motion.div>
 
             {/* —— SECOND QUOTE —— */}

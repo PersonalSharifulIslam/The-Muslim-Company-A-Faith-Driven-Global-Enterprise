@@ -48,6 +48,53 @@ function PillarCard({ icon: Icon, title, items }: { icon: React.ElementType; tit
   );
 }
 
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Who is the CEO of The Muslim Company?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Shariful Islam is the Chief Executive Officer (CEO) of The Muslim Company, a faith-driven global enterprise headquartered in Dhaka, Bangladesh."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is The Muslim Company?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Muslim Company is a faith-driven global enterprise founded in January 2025, built on Islamic principles, ethical innovation, and civilization-focused leadership."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where is Shariful Islam from?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Shariful Islam is a Bangladeshi Engineer and Entrepreneur, born in Jamalpur, Bangladesh. He holds a Bachelor of Engineering in Electrical Engineering from the University of Burdwan, India."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What sectors does The Muslim Company operate in under CEO Shariful Islam?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Under CEO Shariful Islam, The Muslim Company operates across Technology & AI, Media & Journalism, Education & Research, Humanitarian Development, Renewable Energy, Ethical Commerce, Social Welfare, Retail Business, Fashion & Apparel, Agriculture & Food, Manufacturing & Industry, and Lifestyle & Personal Care."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I contact the CEO of The Muslim Company?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Contact the CEO of The Muslim Company via the official website at https://www.themuslim.company/contact or via email at ceo@themuslim.company."
+      }
+    }
+  ]
+};
+
 const PERSON_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -181,7 +228,7 @@ export default function CeoSharifulIslamPage() {
     if (metaDesc) metaDesc.setAttribute("content", "Shariful Islam is the Chief Executive Officer (CEO) of The Muslim Company, a faith-driven global enterprise headquartered in Dhaka, Bangladesh.");
 
     document.querySelectorAll("script[data-page-schema]").forEach(el => el.remove());
-    [PERSON_SCHEMA, ORG_SCHEMA, PROFILE_PAGE_SCHEMA].forEach(schema => {
+    [PERSON_SCHEMA, ORG_SCHEMA, PROFILE_PAGE_SCHEMA, FAQ_SCHEMA].forEach(schema => {
       const s = document.createElement("script");
       s.type = "application/ld+json";
       s.setAttribute("data-page-schema", "true");

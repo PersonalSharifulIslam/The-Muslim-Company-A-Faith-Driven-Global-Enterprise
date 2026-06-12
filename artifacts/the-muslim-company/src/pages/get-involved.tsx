@@ -82,6 +82,10 @@ export default function GetInvolvedPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     document.title = "Get Involved — The Muslim Company";
+    const _md = document.querySelector('meta[name="description"]');
+    if (_md) _md.setAttribute('content', "Partner with, support, or collaborate with The Muslim Company. Discover opportunities to contribute to a faith-driven global enterprise building long-term civilizational impact.");
+    const _ogt_d = document.querySelector('meta[property="og:description"]');
+    if (_ogt_d) _ogt_d.setAttribute('content', "Partner with, support, or collaborate with The Muslim Company. Discover opportunities to contribute to a faith-driven global enterprise building long-term civilizational impact.");
     const _can = document.querySelector('link[rel="canonical"]');
     if (_can) _can.setAttribute('href', 'https://www.themuslim.company/get-involved');
     else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/get-involved'; document.head.appendChild(_cl); }

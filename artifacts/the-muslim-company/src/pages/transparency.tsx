@@ -18,6 +18,10 @@ export default function TransparencyPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     document.title = "Transparency & Accountability — The Muslim Company";
+    const _md = document.querySelector('meta[name="description"]');
+    if (_md) _md.setAttribute('content', "The Muslim Company's commitment to transparency, ethical governance, and accountability. Explore our corporate policies, values, and operational standards.");
+    const _ogt_d = document.querySelector('meta[property="og:description"]');
+    if (_ogt_d) _ogt_d.setAttribute('content', "The Muslim Company's commitment to transparency, ethical governance, and accountability. Explore our corporate policies, values, and operational standards.");
     const _can = document.querySelector('link[rel="canonical"]');
     if (_can) _can.setAttribute('href', 'https://www.themuslim.company/transparency');
     else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/transparency'; document.head.appendChild(_cl); }

@@ -889,6 +889,14 @@ export default function SectorDetail() {
 
     document.title = `${sector.label} — The Muslim Company`;
 
+    // Dynamic meta description from sector data
+    const _md = document.querySelector('meta[name="description"]');
+    const _sectorDesc = `${sector.tagline} — Explore The Muslim Company's ${sector.label} sector: vision, activities, and long-term goals rooted in Islamic ethics and ethical innovation.`;
+    if (_md) _md.setAttribute('content', _sectorDesc);
+    else { const _ml = document.createElement('meta'); _ml.name = 'description'; _ml.content = _sectorDesc; document.head.appendChild(_ml); }
+    const _ogd = document.querySelector('meta[property="og:description"]');
+    if (_ogd) _ogd.setAttribute('content', _sectorDesc);
+
     // Canonical URL
     const _can = document.querySelector('link[rel="canonical"]');
     const _canonicalUrl = `https://www.themuslim.company/sectors/${sector.slug}`;

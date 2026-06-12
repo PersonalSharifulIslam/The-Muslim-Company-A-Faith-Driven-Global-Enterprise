@@ -24,13 +24,13 @@ function Bullets({ items }: { items: string[] }) {
 
 export default function VisionPage() {
   useEffect(() => {
-    document.title = "Vision — The Muslim Company";
+    document.title = "Our Vision — The Muslim Company";
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "The Muslim Company's long-term vision: universities, research centers, hospitals, ethical AI institutions, and civilization-scale development guided by faith, knowledge, and justice.");
     const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', "Vision — The Muslim Company");
+    if (_ogt) _ogt.setAttribute('content', "Our Vision — The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "The Muslim Company's long-term vision: universities, research centers, hospitals, ethical AI institutions, and civilization-scale development guided by faith, knowledge, and justice.");
     const _ogu = document.querySelector('meta[property="og:url"]');
@@ -49,7 +49,7 @@ export default function VisionPage() {
   return (
     <SiteLayout>
       <Helmet>
-        <title>Our Vision – The Future is Ethical | The Muslim Company</title>
+        <title>Our Vision — The Muslim Company</title>
         <meta name="description" content="The Muslim Company's long-term vision: universities, research centers, hospitals, innovation hubs, and ethical AI institutions guided by faith, knowledge, and justice." />
         <link rel="canonical" href="https://www.themuslim.company/vision" />
         <meta property="og:title" content="Our Vision | The Muslim Company" />

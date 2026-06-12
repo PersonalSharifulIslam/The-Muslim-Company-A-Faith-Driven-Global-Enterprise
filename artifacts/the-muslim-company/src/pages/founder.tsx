@@ -40,7 +40,7 @@ export default function FounderPage() {
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a diversified global conglomerate built on Islamic principles, ethical leadership, and civilizational impact. Based in Dhaka, Bangladesh.");
     const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', "Shariful Islam — Founder & CEO of The Muslim Company");
+    if (_ogt) _ogt.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a diversified global conglomerate built on Islamic principles, ethical leadership, and civilizational impact. Based in Dhaka, Bangladesh.");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a diversified global conglomerate built on Islamic principles, ethical leadership, and civilizational impact. Based in Dhaka, Bangladesh.");
     const _ogu = document.querySelector('meta[property="og:url"]');

@@ -28,9 +28,9 @@ export default function VisionPage() {
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "The Muslim Company's long-term vision: universities, research centers, hospitals, ethical AI institutions, and civilization-scale development guided by faith, knowledge, and justice.");
+    if (_md) _md.setAttribute('content', "The Muslim Company's long-term vision: building universities, research centers, hospitals, and ethical institutions guided by faith, knowledge, and justice.");
     const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', "The Muslim Company's long-term vision: universities, research centers, hospitals, ethical AI institutions, and civilization-scale development guided by faith, knowledge, and justice.");
+    if (_ogt) _ogt.setAttribute('content', "The Muslim Company's long-term vision: building universities, research centers, hospitals, and ethical institutions guided by faith, knowledge, and justice.");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "The Muslim Company's long-term vision: universities, research centers, hospitals, ethical AI institutions, and civilization-scale development guided by faith, knowledge, and justice.");
     const _ogu = document.querySelector('meta[property="og:url"]');
@@ -50,7 +50,7 @@ export default function VisionPage() {
     <SiteLayout>
       <Helmet>
         <title>Our Vision — The Muslim Company</title>
-        <meta name="description" content="The Muslim Company's long-term vision: universities, research centers, hospitals, innovation hubs, and ethical AI institutions guided by faith, knowledge, and justice." />
+        <meta name="description" content="The Muslim Company's long-term vision: building universities, research centers, hospitals, and ethical institutions guided by faith, knowledge, and justice." />
         <link rel="canonical" href="https://www.themuslim.company/vision" />
         <meta property="og:title" content="Our Vision | The Muslim Company" />
         <meta property="og:url" content="https://www.themuslim.company/vision" />

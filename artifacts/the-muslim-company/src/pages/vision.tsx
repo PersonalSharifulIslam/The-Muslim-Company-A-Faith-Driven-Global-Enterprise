@@ -30,7 +30,7 @@ export default function VisionPage() {
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "The Muslim Company's long-term vision: universities, research centers, hospitals, ethical AI institutions, and civilization-scale development guided by faith, knowledge, and justice.");
     const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', "Our Vision — The Muslim Company");
+    if (_ogt) _ogt.setAttribute('content', "The Muslim Company's long-term vision: universities, research centers, hospitals, ethical AI institutions, and civilization-scale development guided by faith, knowledge, and justice.");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "The Muslim Company's long-term vision: universities, research centers, hospitals, ethical AI institutions, and civilization-scale development guided by faith, knowledge, and justice.");
     const _ogu = document.querySelector('meta[property="og:url"]');

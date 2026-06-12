@@ -29,7 +29,7 @@ export default function MissionPage() {
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "The Muslim Company's mission: to build a civilization-driven global company inspired by the Quran, authentic Sunnah, and the Prophetic model — empowering humanity through ethical business, knowledge, innovation, and justice.");
     const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', "Our Mission — The Muslim Company");
+    if (_ogt) _ogt.setAttribute('content', "The Muslim Company's mission: to build a civilization-driven global company inspired by the Quran, authentic Sunnah, and the Prophetic model — empowering humanity through ethical business, knowledge, innovation, and justice.");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "The Muslim Company's mission: to build a civilization-driven global company inspired by the Quran, authentic Sunnah, and the Prophetic model — empowering humanity through ethical business, knowledge, innovation, and justice.");
     const _ogu = document.querySelector('meta[property="og:url"]');

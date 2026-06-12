@@ -45,7 +45,7 @@ export default function Blog() {
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "Read the latest insights, thought leadership, and in-depth articles from The Muslim Company — covering Islamic business, ethical innovation, and civilization-focused leadership.");
     const _ogt_d = document.querySelector('meta[property="og:description"]');
-    if (_ogt_d) _ogt_d.setAttribute('content', "Blog & Insights — The Muslim Company");
+    if (_ogt_d) _ogt_d.setAttribute('content', "Read the latest insights, thought leadership, and in-depth articles from The Muslim Company — covering Islamic business, ethical innovation, and civilization-focused leadership.");
     const _can = document.querySelector('link[rel="canonical"]');
     if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/blog'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/blog'; document.head.appendChild(_cl); }
     const _ogu_c = document.querySelector('meta[property="og:url"]');
@@ -53,9 +53,9 @@ export default function Blog() {
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Insights, reflections, and knowledge from The Muslim Company — on Islamic ethics, civilization, technology, entrepreneurship, and faith-driven development.");
+    if (_md) _md.setAttribute('content', "Read the latest insights, thought leadership, and in-depth articles from The Muslim Company — covering Islamic business, ethical innovation, and civilization-focused leadership.");
     const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', "Blog — The Muslim Company");
+    if (_ogt) _ogt.setAttribute('content', "Read the latest insights, thought leadership, and in-depth articles from The Muslim Company — covering Islamic business, ethical innovation, and civilization-focused leadership.");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "Insights, reflections, and knowledge from The Muslim Company — on Islamic ethics, civilization, technology, entrepreneurship, and faith-driven development.");
     const _ogu = document.querySelector('meta[property="og:url"]');

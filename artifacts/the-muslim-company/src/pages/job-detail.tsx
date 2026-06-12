@@ -26,6 +26,9 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
     const ogImage = "https://www.themuslim.company/og-image.png";
 
     document.title = `${job.title} — Careers at The Muslim Company`;
+    const _rob = document.querySelector('meta[name="robots"]');
+    if (_rob) _rob.setAttribute('content', 'index, follow');
+    else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
 
     const md = document.querySelector('meta[name="description"]');
     if (md) md.setAttribute('content', desc);

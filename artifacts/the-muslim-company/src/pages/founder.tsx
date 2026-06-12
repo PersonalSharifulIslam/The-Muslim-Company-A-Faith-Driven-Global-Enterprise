@@ -106,6 +106,14 @@ export default function FounderPage() {
           <div className="container mx-auto max-w-5xl space-y-12">
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="p-6 bg-card border border-primary/10">
+              <h3 className="font-serif text-lg text-primary mb-3">About Shariful Islam</h3>
+              <p className="font-sans text-sm text-primary/65 leading-relaxed">
+                Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur dedicated to ethical innovation, humanitarian development, knowledge-driven progress, and civilization-focused institution building. From an early age he developed strong interests in technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies.
+              </p>
+            </motion.div>
+
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
               className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 p-8 bg-card border border-primary/10">
                 <Quote className="w-8 h-8 text-secondary/40 mb-4" />
@@ -129,14 +137,6 @@ export default function FounderPage() {
                   </div>
                 ))}
               </div>
-            </motion.div>
-
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="p-6 bg-card border border-primary/10">
-              <h3 className="font-serif text-lg text-primary mb-3">About Shariful Islam</h3>
-              <p className="font-sans text-sm text-primary/65 leading-relaxed">
-                Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur dedicated to ethical innovation, humanitarian development, knowledge-driven progress, and civilization-focused institution building. From an early age he developed strong interests in technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies.
-              </p>
             </motion.div>
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}

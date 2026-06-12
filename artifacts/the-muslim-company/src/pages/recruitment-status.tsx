@@ -35,6 +35,10 @@ function CountdownTimer({ expiresAt, label }: { expiresAt: string; label?: strin
 export default function RecruitmentStatus() {
   useEffect(() => {
     document.title = "Recruitment Status — The Muslim Company";
+    const _md = document.querySelector('meta[name="description"]');
+    if (_md) _md.setAttribute('content', "Track the status of your job application at The Muslim Company. Enter your reference number to check where you are in our recruitment process.");
+    const _ogt_d = document.querySelector('meta[property="og:description"]');
+    if (_ogt_d) _ogt_d.setAttribute('content', "Track the status of your job application at The Muslim Company. Enter your reference number to check where you are in our recruitment process.");
     const robots = document.querySelector('meta[name="robots"]');
     if (robots) robots.setAttribute('content', 'noindex, nofollow');
     const md = document.querySelector('meta[name="description"]');

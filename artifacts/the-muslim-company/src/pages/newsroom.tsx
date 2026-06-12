@@ -40,6 +40,10 @@ function NewsCard({ post, featured }: { post: NewsPost; featured?: boolean }) {
 export default function Newsroom() {
   useEffect(() => {
     document.title = "Newsroom & Press — The Muslim Company";
+    const _md = document.querySelector('meta[name="description"]');
+    if (_md) _md.setAttribute('content', "Official press releases, media coverage, and corporate announcements from The Muslim Company — a diversified global conglomerate headquartered in Dhaka, Bangladesh.");
+    const _ogt_d = document.querySelector('meta[property="og:description"]');
+    if (_ogt_d) _ogt_d.setAttribute('content', "Official press releases, media coverage, and corporate announcements from The Muslim Company — a diversified global conglomerate headquartered in Dhaka, Bangladesh.");
     const _can = document.querySelector('link[rel="canonical"]');
     if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/newsroom'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/newsroom'; document.head.appendChild(_cl); }
     const _ogu_c = document.querySelector('meta[property="og:url"]');

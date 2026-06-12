@@ -10,7 +10,7 @@ const NAV_LEFT = [
   { label: "Sectors", href: "/#sectors" },
   { label: "Governance", href: "/#governance" },
   { label: "Constitution", href: "/#constitution" },
-  { label: "Our People", href: "/#people" },
+  { label: "Our Story", href: "/#our-story" },
 ];
 
 const NAV_RIGHT = [

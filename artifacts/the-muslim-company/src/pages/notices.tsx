@@ -14,6 +14,10 @@ const fadeIn = { hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, tra
 export default function Notices() {
   useEffect(() => {
     document.title = "Notices & Events — The Muslim Company";
+    const _md = document.querySelector('meta[name="description"]');
+    if (_md) _md.setAttribute('content', "Official notices, announcements, and upcoming events from The Muslim Company. Stay informed on corporate updates, policy changes, and organizational milestones.");
+    const _ogt_d = document.querySelector('meta[property="og:description"]');
+    if (_ogt_d) _ogt_d.setAttribute('content', "Official notices, announcements, and upcoming events from The Muslim Company. Stay informed on corporate updates, policy changes, and organizational milestones.");
     const _can = document.querySelector('link[rel="canonical"]');
     if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/notices'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/notices'; document.head.appendChild(_cl); }
     const _ogu_c = document.querySelector('meta[property="og:url"]');

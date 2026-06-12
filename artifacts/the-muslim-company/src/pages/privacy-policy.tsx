@@ -21,6 +21,10 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 export default function PrivacyPolicy() {
   useEffect(() => {
     document.title = "Privacy Policy — The Muslim Company";
+    const _md = document.querySelector('meta[name="description"]');
+    if (_md) _md.setAttribute('content', "Read The Muslim Company's Privacy Policy — outlining how we collect, use, and protect your personal information across all our platforms and services.");
+    const _ogt_d = document.querySelector('meta[property="og:description"]');
+    if (_ogt_d) _ogt_d.setAttribute('content', "Read The Muslim Company's Privacy Policy — outlining how we collect, use, and protect your personal information across all our platforms and services.");
     const _can = document.querySelector('link[rel="canonical"]');
     if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/privacy-policy'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/privacy-policy'; document.head.appendChild(_cl); }
     const _ogu_c = document.querySelector('meta[property="og:url"]');

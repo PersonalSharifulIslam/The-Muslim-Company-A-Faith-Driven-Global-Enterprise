@@ -23,13 +23,13 @@ function Bullets({ items }: { items: string[] }) {
 
 export default function MissionPage() {
   useEffect(() => {
-    document.title = "Mission — The Muslim Company";
+    document.title = "Our Mission — The Muslim Company";
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "The Muslim Company's mission: to build a civilization-driven global company inspired by the Quran, authentic Sunnah, and the Prophetic model — empowering humanity through ethical business, knowledge, innovation, and justice.");
     const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', "Mission — The Muslim Company");
+    if (_ogt) _ogt.setAttribute('content', "Our Mission — The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "The Muslim Company's mission: to build a civilization-driven global company inspired by the Quran, authentic Sunnah, and the Prophetic model — empowering humanity through ethical business, knowledge, innovation, and justice.");
     const _ogu = document.querySelector('meta[property="og:url"]');
@@ -48,7 +48,7 @@ export default function MissionPage() {
   return (
     <SiteLayout>
       <Helmet>
-        <title>Our Mission – Building Human Civilization | The Muslim Company</title>
+        <title>Our Mission — The Muslim Company</title>
         <meta name="description" content="The Muslim Company's mission: to build a civilization-driven global company inspired by the Quran, authentic Sunnah, and the Prophetic model." />
         <link rel="canonical" href="https://www.themuslim.company/mission" />
         <meta property="og:title" content="Our Mission | The Muslim Company" />

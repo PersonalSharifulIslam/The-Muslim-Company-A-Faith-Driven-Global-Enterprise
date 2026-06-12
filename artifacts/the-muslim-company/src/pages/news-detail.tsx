@@ -25,6 +25,9 @@ export default function NewsDetail({ params }: { params: { slug: string } }) {
     const desc = post.excerpt || post.title;
 
     document.title = `${post.title} — The Muslim Company Newsroom`;
+    const _rob = document.querySelector('meta[name="robots"]');
+    if (_rob) _rob.setAttribute('content', 'index, follow');
+    else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
 
     const md = document.querySelector('meta[name="description"]');
     if (md) md.setAttribute('content', desc);

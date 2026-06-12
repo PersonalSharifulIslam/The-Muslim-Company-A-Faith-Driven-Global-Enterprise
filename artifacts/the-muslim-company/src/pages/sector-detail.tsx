@@ -888,6 +888,16 @@ export default function SectorDetail() {
     const ogImage = "https://www.themuslim.company/og-image.png";
 
     document.title = `${sector.label} — The Muslim Company`;
+
+    // Canonical URL
+    const _can = document.querySelector('link[rel="canonical"]');
+    const _canonicalUrl = `https://www.themuslim.company/sectors/${sector.slug}`;
+    if (_can) { _can.setAttribute('href', _canonicalUrl); }
+    else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = _canonicalUrl; document.head.appendChild(_cl); }
+
+    // OG URL
+    const _ogu = document.querySelector('meta[property="og:url"]');
+    if (_ogu) _ogu.setAttribute('content', _canonicalUrl);
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) _rob.setAttribute('content', 'index, follow');
     else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }

@@ -126,6 +126,15 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
               <a href="/careers" className="hover:text-primary-foreground transition-colors">Careers</a>
               <a href="/newsroom" className="hover:text-primary-foreground transition-colors">Newsroom</a>
               <a href="/blog" className="hover:text-primary-foreground transition-colors">Blog</a>
+              <a href="/notices" className="hover:text-primary-foreground transition-colors">Notices</a>
+            </div>
+            <div className="flex gap-5">
+              <a href="/founder" className="hover:text-primary-foreground transition-colors">Founder</a>
+              <a href="/ceo/Sharifulislam" className="hover:text-primary-foreground transition-colors">CEO</a>
+              <a href="/vision" className="hover:text-primary-foreground transition-colors">Vision</a>
+              <a href="/mission" className="hover:text-primary-foreground transition-colors">Mission</a>
+              <a href="/transparency" className="hover:text-primary-foreground transition-colors">Transparency</a>
+              <a href="/get-involved" className="hover:text-primary-foreground transition-colors">Get Involved</a>
             </div>
           </div>
         </div>

@@ -25,6 +25,51 @@ export default function NewsDetail({ params }: { params: { slug: string } }) {
     const desc = post.excerpt || post.title;
 
     document.title = `${post.title} — The Muslim Company Newsroom`;
+    // NewsArticle Schema for Google News
+    document.querySelectorAll('script[data-news-schema]').forEach(el => el.remove());
+    const newsArticleSchema = {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": post.title,
+      "description": post.excerpt || post.summary || post.title,
+      "datePublished": post.created_at || post.published_at || new Date().toISOString(),
+      "dateModified": post.updated_at || post.created_at || new Date().toISOString(),
+      "author": {
+        "@type": "Organization",
+        "name": "The Muslim Company",
+        "url": "https://www.themuslim.company"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "The Muslim Company",
+        "url": "https://www.themuslim.company",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.themuslim.company/favicon.png",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": post.image || "https://www.themuslim.company/opengraph.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.themuslim.company/newsroom/" + post.slug
+      },
+      "url": "https://www.themuslim.company/newsroom/" + post.slug,
+      "articleSection": "Corporate News",
+      "keywords": "The Muslim Company, Islamic Business, Corporate News, Bangladesh"
+    };
+    const newsScript = document.createElement("script");
+    newsScript.type = "application/ld+json";
+    newsScript.setAttribute("data-news-schema", "true");
+    newsScript.textContent = JSON.stringify(newsArticleSchema);
+    document.head.appendChild(newsScript);
+
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) _rob.setAttribute('content', 'index, follow');
     else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }

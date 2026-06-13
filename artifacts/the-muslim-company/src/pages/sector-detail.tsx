@@ -860,17 +860,20 @@ export default function SectorDetail() {
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question",
-          "name": `What does The Muslim Company do in ${sector.label}?`,
+        {
+          "@type": "Question",
+          "name": "What does The Muslim Company do in " + sector.label + "?",
           "acceptedAnswer": { "@type": "Answer", "text": sector.overview }
         },
-        { "@type": "Question",
-          "name": `Why is ${sector.label} important from an Islamic perspective?`,
+        {
+          "@type": "Question",
+          "name": "Why is " + sector.label + " important from an Islamic perspective?",
           "acceptedAnswer": { "@type": "Answer", "text": sector.islamicContext }
         },
-        { "@type": "Question",
-          "name": `What are the goals of The Muslim Company in ${sector.label}?`,
-          "acceptedAnswer": { "@type": "Answer", "text": sector.goals.short.join('. ') }
+        {
+          "@type": "Question",
+          "name": "What are the goals of The Muslim Company in " + sector.label + "?",
+          "acceptedAnswer": { "@type": "Answer", "text": sector.goals.short.join(". ") }
         }
       ]
     };

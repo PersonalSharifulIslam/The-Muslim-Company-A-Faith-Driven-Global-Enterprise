@@ -126,7 +126,14 @@ const PERSON_SCHEMA = {
   "alumniOf": {
     "@type": "CollegeOrUniversity",
     "name": "The University of Burdwan",
-    "address": { "@type": "PostalAddress", "addressCountry": "IN" },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Burdwan Rajbati, Raiganj",
+      "addressLocality": "Bardhaman",
+      "addressRegion": "West Bengal",
+      "postalCode": "713102",
+      "addressCountry": "IN"
+    },
     "url": "https://www.buruniv.ac.in"
   },
   "hasCredential": {
@@ -193,7 +200,17 @@ const ORG_SCHEMA = {
       "name": "Shariful Islam"
     }
   }],
-  "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "BD" },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Niketon Bazaar",
+    "addressLocality": "Dhaka",
+    "postalCode": "1212",
+    "addressCountry": "BD"
+  },
+  "numberOfEmployees": {
+    "@type": "QuantitativeValue",
+    "value": 10
+  },
   "sameAs": [
     "https://www.facebook.com/TheMuslimCompany",
     "https://www.instagram.com/officialTheMuslimCompany",

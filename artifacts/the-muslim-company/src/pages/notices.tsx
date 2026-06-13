@@ -24,8 +24,6 @@ export default function Notices() {
     if (_ogu_c) _ogu_c.setAttribute('content', 'https://www.themuslim.company/notices');
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
-    const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Official notices, announcements, and upcoming events from The Muslim Company.");
     const _ogt = document.querySelector('meta[property="og:title"]');
     if (_ogt) _ogt.setAttribute('content', "Notices & Events — The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');

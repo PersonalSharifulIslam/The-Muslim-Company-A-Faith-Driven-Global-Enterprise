@@ -14,6 +14,49 @@ const fadeIn = { hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, tra
 export default function Notices() {
   useEffect(() => {
     document.title = "Notices & Events — The Muslim Company";
+    // Event Schema for Google Events
+    document.querySelectorAll('script[data-event-schema]').forEach(el => el.remove());
+    const eventListSchema = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Notices & Events — The Muslim Company",
+      "description": "Official notices, announcements, and upcoming events from The Muslim Company.",
+      "url": "https://www.themuslim.company/notices",
+      "itemListElement": [
+        {
+          "@type": "Event",
+          "name": "The Muslim Company — Corporate Notices & Announcements",
+          "description": "Stay updated with official notices, policy announcements, and upcoming events from The Muslim Company.",
+          "startDate": "2025-01-09",
+          "endDate": "2026-12-31",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+          "location": {
+            "@type": "Place",
+            "name": "The Muslim Company HQ",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Niketon Bazaar",
+              "addressLocality": "Dhaka",
+              "postalCode": "1212",
+              "addressCountry": "BD"
+            }
+          },
+          "organizer": {
+            "@type": "Organization",
+            "name": "The Muslim Company",
+            "url": "https://www.themuslim.company"
+          },
+          "url": "https://www.themuslim.company/notices"
+        }
+      ]
+    };
+    const eventScript = document.createElement("script");
+    eventScript.type = "application/ld+json";
+    eventScript.setAttribute("data-event-schema", "true");
+    eventScript.textContent = JSON.stringify(eventListSchema);
+    document.head.appendChild(eventScript);
+
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "Official notices, announcements, and upcoming events from The Muslim Company. Stay informed on corporate updates, policy changes, and organizational milestones.");
     const _ogt_d = document.querySelector('meta[property="og:description"]');

@@ -26,6 +26,54 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
     const ogImage = "https://www.themuslim.company/og-image.png";
 
     document.title = `${job.title} — Careers at The Muslim Company`;
+    // JobPosting Schema for Google Jobs
+    document.querySelectorAll('script[data-job-schema]').forEach(el => el.remove());
+    const jobSchema = {
+      "@context": "https://schema.org",
+      "@type": "JobPosting",
+      "title": job.title,
+      "description": job.description || job.summary || "Join The Muslim Company as " + job.title,
+      "datePosted": job.created_at ? job.created_at.split("T")[0] : new Date().toISOString().split("T")[0],
+      "validThrough": job.deadline || new Date(Date.now() + 90*24*60*60*1000).toISOString().split("T")[0],
+      "employmentType": job.type ? job.type.toUpperCase().replace(" ", "_") : "FULL_TIME",
+      "hiringOrganization": {
+        "@type": "Organization",
+        "name": "The Muslim Company",
+        "sameAs": "https://www.themuslim.company",
+        "logo": "https://www.themuslim.company/favicon.png"
+      },
+      "jobLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": job.location || "Dhaka",
+          "addressCountry": "BD"
+        }
+      },
+      "applicantLocationRequirements": {
+        "@type": "Country",
+        "name": "Bangladesh"
+      },
+      "jobLocationType": job.remote ? "TELECOMMUTE" : undefined,
+      "baseSalary": job.salary ? {
+        "@type": "MonetaryAmount",
+        "currency": "BDT",
+        "value": {
+          "@type": "QuantitativeValue",
+          "value": job.salary,
+          "unitText": "MONTH"
+        }
+      } : undefined,
+      "url": "https://www.themuslim.company/careers/" + job.slug
+    };
+    // Remove undefined fields
+    const cleanJobSchema = JSON.parse(JSON.stringify(jobSchema));
+    const jobScript = document.createElement("script");
+    jobScript.type = "application/ld+json";
+    jobScript.setAttribute("data-job-schema", "true");
+    jobScript.textContent = JSON.stringify(cleanJobSchema);
+    document.head.appendChild(jobScript);
+
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) _rob.setAttribute('content', 'index, follow');
     else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }

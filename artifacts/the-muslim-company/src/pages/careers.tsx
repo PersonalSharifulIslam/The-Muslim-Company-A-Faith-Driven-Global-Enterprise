@@ -54,8 +54,6 @@ export default function Careers() {
     if (_ogu_c) _ogu_c.setAttribute('content', 'https://www.themuslim.company/careers');
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
-    const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Explore career opportunities at The Muslim Company — a faith-driven global conglomerate committed to ethical innovation, humanitarian development, and civilizational leadership. Join our team in Dhaka, Bangladesh.");
     const _ogt = document.querySelector('meta[property="og:title"]');
     if (_ogt) _ogt.setAttribute('content', "Explore career opportunities at The Muslim Company — a faith-driven global conglomerate committed to ethical innovation, humanitarian development, and civilizational leadership. Join our team in Dhaka, Bangladesh.");
     const _ogd = document.querySelector('meta[property="og:description"]');

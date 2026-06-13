@@ -50,8 +50,6 @@ export default function Newsroom() {
     if (_ogu_c) _ogu_c.setAttribute('content', 'https://www.themuslim.company/newsroom');
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
-    const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Latest news, press releases, and media coverage of The Muslim Company — a faith-driven global enterprise building ethical civilization.");
     const _ogt = document.querySelector('meta[property="og:title"]');
     if (_ogt) _ogt.setAttribute('content', "Newsroom & Press — The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');

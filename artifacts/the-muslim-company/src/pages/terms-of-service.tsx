@@ -31,8 +31,6 @@ export default function TermsOfService() {
     if (_ogu_c) _ogu_c.setAttribute('content', 'https://www.themuslim.company/terms-of-service');
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
-    const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Terms of Service of The Muslim Company — the rules, obligations, and agreements governing use of our platforms and services.");
     const _ogt = document.querySelector('meta[property="og:title"]');
     if (_ogt) _ogt.setAttribute('content', "Terms of Service — The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');

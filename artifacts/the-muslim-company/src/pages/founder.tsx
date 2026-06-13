@@ -38,9 +38,9 @@ export default function FounderPage() {
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a diversified global conglomerate built on Islamic principles, ethical leadership, and civilizational impact.");
+    if (_md) _md.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a global conglomerate built on ethical leadership and long-term civilizational impact. Dhaka, Bangladesh.");
     const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a diversified global conglomerate built on Islamic principles, ethical leadership, and civilizational impact.");
+    if (_ogt) _ogt.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a global conglomerate built on ethical leadership and long-term civilizational impact. Dhaka, Bangladesh.");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a diversified global conglomerate built on Islamic principles, ethical leadership, and civilizational impact. Based in Dhaka, Bangladesh.");
     const _ogu = document.querySelector('meta[property="og:url"]');
@@ -61,7 +61,7 @@ export default function FounderPage() {
     <SiteLayout>
       <Helmet>
         <title>Shariful Islam – Founder & CEO | The Muslim Company</title>
-        <meta name="description" content="Shariful Islam is the Founder of The Muslim Company — a diversified global conglomerate built on Islamic principles, ethical leadership, and civilizational impact." />
+        <meta name="description" content="Shariful Islam is the Founder of The Muslim Company — a global conglomerate built on ethical leadership and long-term civilizational impact. Dhaka, Bangladesh." />
         <link rel="canonical" href="https://www.themuslim.company/founder" />
         <meta property="og:title" content="Shariful Islam – Founder & CEO | The Muslim Company" />
         <meta property="og:url" content="https://www.themuslim.company/founder" />

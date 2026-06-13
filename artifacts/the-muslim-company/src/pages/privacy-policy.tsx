@@ -31,8 +31,6 @@ export default function PrivacyPolicy() {
     if (_ogu_c) _ogu_c.setAttribute('content', 'https://www.themuslim.company/privacy-policy');
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
-    const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Privacy Policy of The Muslim Company — how we collect, use, and protect your personal information in accordance with Islamic ethics and international standards.");
     const _ogt = document.querySelector('meta[property="og:title"]');
     if (_ogt) _ogt.setAttribute('content', "Privacy Policy — The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');

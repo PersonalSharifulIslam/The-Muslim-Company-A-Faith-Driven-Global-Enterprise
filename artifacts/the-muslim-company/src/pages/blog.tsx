@@ -42,6 +42,26 @@ function BlogCard({ post }: { post: BlogPost }) {
 export default function Blog() {
   useEffect(() => {
     document.title = "Blog & Insights — The Muslim Company";
+
+    // Organization Schema — consistent across all pages
+    document.querySelectorAll('script[data-org-schema]').forEach(el => el.remove());
+    const orgSchema = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://www.themuslim.company/#organization",
+      "name": "The Muslim Company",
+      "legalName": "The Muslim Company LTD",
+      "url": "https://www.themuslim.company",
+      "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 },
+      "foundingDate": "2025-01-09",
+      "address": { "@type": "PostalAddress", "streetAddress": "Niketon Bazaar", "addressLocality": "Dhaka", "postalCode": "1212", "addressCountry": "BD" },
+      "sameAs": ["https://www.facebook.com/TheMuslimCompany", "https://www.instagram.com/officialTheMuslimCompany", "https://www.youtube.com/@TheMuslimCompany", "https://www.linkedin.com/company/themuslimcompany", "https://x.com/officialtmchq", "https://www.crunchbase.com/organization/the-muslim-company"]
+    };
+    const orgScript = document.createElement("script");
+    orgScript.type = "application/ld+json";
+    orgScript.setAttribute("data-org-schema", "true");
+    orgScript.textContent = JSON.stringify(orgSchema);
+    document.head.appendChild(orgScript);
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "Insights, thought leadership, and articles from The Muslim Company — covering Islamic business, ethical innovation, and civilization-focused leadership.");
     const _ogt_d = document.querySelector('meta[property="og:description"]');

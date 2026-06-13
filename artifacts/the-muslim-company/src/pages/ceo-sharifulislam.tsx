@@ -210,7 +210,8 @@ const PROFILE_PAGE_SCHEMA = {
   "name": "Shariful Islam – CEO of The Muslim Company",
   "description": "Official CEO profile of Shariful Islam, Chief Executive Officer (CEO) of The Muslim Company.",
   "url": "https://www.themuslim.company/ceo/Sharifulislam",
-  "dateModified": "2026-06-12T00:00:00+06:00",
+  "datePublished": "2025-01-09T00:00:00+06:00",
+  "dateModified": "2026-06-13T00:00:00+06:00",
   "breadcrumb": {
     "@type": "BreadcrumbList",
     "itemListElement": [

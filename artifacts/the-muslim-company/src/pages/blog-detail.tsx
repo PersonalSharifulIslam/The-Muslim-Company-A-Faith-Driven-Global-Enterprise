@@ -25,6 +25,43 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
     const desc = post.excerpt || post.title;
 
     document.title = `${post.title} — The Muslim Company Blog`;
+    // Article Schema for Google Rich Results
+    document.querySelectorAll('script[data-article-schema]').forEach(el => el.remove());
+    const articleSchema = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "description": post.excerpt || post.summary || "",
+      "datePublished": post.created_at || post.published_at || new Date().toISOString(),
+      "dateModified": post.updated_at || post.created_at || new Date().toISOString(),
+      "author": {
+        "@type": "Person",
+        "name": post.author || "The Muslim Company",
+        "url": "https://www.themuslim.company/founder"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "The Muslim Company",
+        "url": "https://www.themuslim.company",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.themuslim.company/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.themuslim.company/blog/" + post.slug
+      },
+      "url": "https://www.themuslim.company/blog/" + post.slug,
+      "image": post.image || "https://www.themuslim.company/opengraph.jpg",
+      "keywords": post.tags ? post.tags.join(", ") : "The Muslim Company, Islamic Business"
+    };
+    const articleScript = document.createElement("script");
+    articleScript.type = "application/ld+json";
+    articleScript.setAttribute("data-article-schema", "true");
+    articleScript.textContent = JSON.stringify(articleSchema);
+    document.head.appendChild(articleScript);
+
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) _rob.setAttribute('content', 'index, follow');
     else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }

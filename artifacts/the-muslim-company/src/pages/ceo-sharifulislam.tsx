@@ -267,7 +267,7 @@ export default function CeoSharifulIslamPage() {
         <meta property="og:title" content="Shariful Islam – CEO of The Muslim Company" />
         <meta property="og:description" content="Shariful Islam serves as CEO of The Muslim Company — a global conglomerate committed to innovation, long-term value creation, and ethical leadership." />
         <meta property="og:url" content="https://www.themuslim.company/ceo/Sharifulislam" />
-        <meta property="og:image" content="https://www.themuslim.company/og-image.png" />
+        <meta property="og:image" content="https://www.themuslim.company/opengraph.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="The Muslim Company" />

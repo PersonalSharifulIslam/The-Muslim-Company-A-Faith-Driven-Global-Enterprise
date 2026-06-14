@@ -44,13 +44,10 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
         "name": "The Muslim Company",
         "url": "https://www.themuslim.company",
         "logo": {
-          "@type": "ImageObject",
-          "url": "https://www.themuslim.company/favicon.png"
-        }
+          "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 }
       },
       "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://www.themuslim.company/blog/" + post.slug
+        "@type": "WebPage", "@id": "https://www.themuslim.company/blog/", "name": "The Muslim Company" + post.slug
       },
       "url": "https://www.themuslim.company/blog/" + post.slug,
       "image": post.image || "https://www.themuslim.company/opengraph.jpg",
@@ -109,8 +106,7 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
     // Schemas
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
     const schemas = [
-      { "@context": "https://schema.org", "@type": "BreadcrumbList",
-        "itemListElement": [
+      { "@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
           { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.themuslim.company/blog" },
           { "@type": "ListItem", "position": 3, "name": post.title, "item": pageUrl }
@@ -122,7 +118,7 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
         "url": pageUrl,
         "datePublished": post.created_at,
         "author": { "@type": "Person", "name": post.author || "The Muslim Company", "url": "https://sharifulislam.engineer" },
-        "publisher": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company", "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png" } },
+        "publisher": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company", "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 } },
         "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl }
       },
       ...(post.excerpt ? [{ "@context": "https://schema.org", "@type": "FAQPage",

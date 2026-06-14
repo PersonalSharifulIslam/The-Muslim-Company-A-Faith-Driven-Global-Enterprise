@@ -1,0 +1,310 @@
+import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
+import { Link } from "wouter";
+import { ArrowLeft, ArrowUpRight, ShieldCheck, Globe2, Scale, Landmark, Leaf, HeartHandshake } from "lucide-react";
+import SiteLayout from "@/components/SiteLayout";
+
+const fadeIn = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
+};
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+const PERSON_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "name": "Breadcrumb",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
+    { "@type": "ListItem", "position": 2, "name": "The Bayt Al-Mal Bank", "item": "https://www.themuslim.company/BaytAlMalBank" }
+  ]
+};
+
+const ORG_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.themuslim.company/#organization",
+  "name": "The Muslim Company",
+  "legalName": "The Muslim Company LTD",
+  "url": "https://www.themuslim.company",
+  "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 },
+  "foundingDate": "2025-01-09",
+  "numberOfEmployees": { "@type": "QuantitativeValue", "value": 10 },
+  "address": { "@type": "PostalAddress", "streetAddress": "Niketon Bazaar", "addressLocality": "Dhaka", "postalCode": "1212", "addressCountry": "BD" },
+  "sameAs": ["https://www.facebook.com/TheMuslimCompany", "https://www.instagram.com/officialTheMuslimCompany", "https://www.youtube.com/@TheMuslimCompany", "https://www.linkedin.com/company/themuslimcompany", "https://x.com/officialtmchq"]
+};
+
+const BANK_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BankOrCreditUnion",
+  "name": "The Bayt Al-Mal Bank",
+  "legalName": "The Bayt Al-Mal Bank",
+  "url": "https://www.themuslim.company/BaytAlMalBank",
+  "description": "The Bayt Al-Mal Bank is a Shariah-compliant ethical banking institution under The Muslim Company — committed to interest-free finance, wealth justice, and civilizational economic development.",
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "The Muslim Company",
+    "url": "https://www.themuslim.company"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Niketon Bazaar",
+    "addressLocality": "Dhaka",
+    "postalCode": "1212",
+    "addressCountry": "BD"
+  },
+  "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 },
+  "sameAs": ["https://www.themuslim.company/BaytAlMalBank", "https://tbmb.themuslimcompany.studio/"]
+};
+
+const PILLARS = [
+  { icon: <ShieldCheck className="w-6 h-6 text-secondary" />, title: "Shariah Compliance", desc: "Every product, service, and transaction strictly adheres to Islamic financial law — eliminating riba (interest), gharar (excessive uncertainty), and all prohibited instruments." },
+  { icon: <Scale className="w-6 h-6 text-secondary" />, title: "Wealth Justice", desc: "Inspired by the Prophetic model of Bayt al-Mal, wealth is treated as an amanah (trust) — distributed equitably, invested ethically, and directed toward societal benefit." },
+  { icon: <Globe2 className="w-6 h-6 text-secondary" />, title: "Global Reach", desc: "Operating across borders with a vision to serve Muslim communities, ethical entrepreneurs, and mission-driven institutions worldwide through Shariah-compliant financial solutions." },
+  { icon: <Landmark className="w-6 h-6 text-secondary" />, title: "Institutional Integrity", desc: "Built on a foundation of transparency, accountability, and strong corporate governance — aligned with both Islamic ethical standards and international regulatory frameworks." },
+  { icon: <Leaf className="w-6 h-6 text-secondary" />, title: "Sustainable Finance", desc: "Prioritizing investments in renewable energy, ethical manufacturing, humanitarian development, and socially responsible enterprises that generate long-term positive impact." },
+  { icon: <HeartHandshake className="w-6 h-6 text-secondary" />, title: "Community Development", desc: "Supporting zakat distribution, waqf management, microfinance for underserved communities, and charitable endowments that strengthen Muslim societies worldwide." },
+];
+
+const SERVICES = [
+  { title: "Personal Banking", items: ["Shariah-Compliant Current & Savings Accounts", "Murabahah Home & Asset Finance", "Ethical Debit & Prepaid Cards", "Zakat Calculation & Distribution Services"] },
+  { title: "Business Banking", items: ["Musharakah & Mudarabah Business Finance", "Trade Finance & Letters of Credit", "Corporate Accounts & Cash Management", "Halal Investment Advisory"] },
+  { title: "Investment Services", items: ["Sukuk (Islamic Bonds) Issuance & Investment", "Shariah-Compliant Equity Portfolios", "Real Estate & Infrastructure Funds", "Ethical ESG Investment Products"] },
+  { title: "Social Finance", items: ["Waqf (Endowment) Management", "Qard al-Hasan (Benevolent Loans)", "Zakat & Sadaqah Fund Management", "Microfinance for Entrepreneurs"] },
+];
+
+export default function BaytAlMalBankPage() {
+  useEffect(() => {
+    document.title = "The Bayt Al-Mal Bank — The Muslim Company";
+
+    const _can = document.querySelector('link[rel="canonical"]');
+    const _url = "https://www.themuslim.company/BaytAlMalBank";
+    if (_can) { _can.setAttribute('href', _url); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = _url; document.head.appendChild(_cl); }
+
+    const _md = document.querySelector('meta[name="description"]');
+    if (_md) _md.setAttribute('content', "The Bayt Al-Mal Bank is a Shariah-compliant ethical banking institution under The Muslim Company — committed to interest-free finance, wealth justice, and civilizational economic development.");
+
+    const _ogt = document.querySelector('meta[property="og:title"]');
+    if (_ogt) _ogt.setAttribute('content', "The Bayt Al-Mal Bank — The Muslim Company");
+
+    const _ogd = document.querySelector('meta[property="og:description"]');
+    if (_ogd) _ogd.setAttribute('content', "A Shariah-compliant ethical bank under The Muslim Company — built on Islamic principles of wealth justice, interest-free finance, and civilizational economic development.");
+
+    const _ogu = document.querySelector('meta[property="og:url"]');
+    if (_ogu) _ogu.setAttribute('content', _url);
+
+    const _rob = document.querySelector('meta[name="robots"]');
+    if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
+
+    document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
+    [PERSON_SCHEMA, ORG_SCHEMA, BANK_SCHEMA].forEach(schema => {
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.setAttribute('data-page-schema', 'true');
+      s.textContent = JSON.stringify(schema);
+      document.head.appendChild(s);
+    });
+
+    return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
+  }, []);
+
+  return (
+    <SiteLayout>
+      <Helmet>
+        <title>The Bayt Al-Mal Bank — The Muslim Company</title>
+        <meta name="description" content="The Bayt Al-Mal Bank is a Shariah-compliant ethical banking institution under The Muslim Company — committed to interest-free finance, wealth justice, and civilizational economic development." />
+        <link rel="canonical" href="https://www.themuslim.company/BaytAlMalBank" />
+        <meta property="og:title" content="The Bayt Al-Mal Bank — The Muslim Company" />
+        <meta property="og:description" content="A Shariah-compliant ethical bank under The Muslim Company — built on Islamic principles of wealth justice, interest-free finance, and civilizational economic development." />
+        <meta property="og:url" content="https://www.themuslim.company/BaytAlMalBank" />
+        <meta property="og:image" content="https://www.themuslim.company/opengraph.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Bayt Al-Mal Bank — The Muslim Company" />
+        <meta name="twitter:description" content="A Shariah-compliant ethical bank under The Muslim Company." />
+        <meta name="twitter:image" content="https://www.themuslim.company/opengraph.jpg" />
+        <meta name="robots" content="index, follow" />
+        <meta name="keywords" content="The Bayt Al-Mal Bank, TBMB, Islamic Bank, Shariah Bank, Halal Banking, Islamic Finance, The Muslim Company, Shariah Compliant Bank, Bangladesh Islamic Bank, Ethical Banking" />
+      </Helmet>
+
+      <div className="bg-background min-h-screen">
+
+        {/* Hero */}
+        <section className="bg-primary py-28 px-6 relative overflow-hidden">
+          <div className="container mx-auto max-w-5xl relative z-10">
+            <motion.div initial="hidden" animate="visible" variants={stagger} className="text-center">
+              <motion.p variants={fadeIn} className="font-sans text-xs tracking-[0.4em] uppercase text-secondary mb-3">
+                A Division of The Muslim Company
+              </motion.p>
+              <motion.h1 variants={fadeIn} className="font-serif text-5xl md:text-7xl text-primary-foreground mb-4">
+                The Bayt Al-Mal Bank
+              </motion.h1>
+              <motion.p variants={fadeIn} className="font-sans text-sm tracking-widest uppercase text-primary-foreground/50 mb-6">
+                بيت المال — House of Wealth
+              </motion.p>
+              <motion.p variants={fadeIn} className="font-sans text-base text-primary-foreground/65 max-w-2xl mx-auto leading-relaxed mb-10">
+                A Shariah-compliant ethical banking institution built on the Prophetic model of wealth stewardship — committed to interest-free finance, wealth justice, and long-term civilizational economic development.
+              </motion.p>
+              <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a
+                  href="https://tbmb.themuslimcompany.studio/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-secondary text-primary hover:bg-secondary/90 font-sans text-xs font-bold uppercase tracking-widest h-12 px-8 transition-colors"
+                >
+                  Visit TBMB <ArrowUpRight className="w-4 h-4" />
+                </a>
+                <Link href="/contact" className="inline-flex items-center gap-2 border border-primary-foreground/30 text-primary-foreground hover:border-secondary hover:text-secondary font-sans text-xs font-bold uppercase tracking-widest h-12 px-8 transition-colors">
+                  Contact Us
+                </Link>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* What is Bayt Al-Mal */}
+        <section className="py-20 px-6 bg-card border-b border-primary/10">
+          <div className="container mx-auto max-w-4xl text-center">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-4">Historical Foundation</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">What is Bayt Al-Mal?</h2>
+              <p className="font-sans text-sm text-primary/65 leading-relaxed max-w-3xl mx-auto mb-6">
+                <em>Bayt al-Mal</em> (بيت المال) — "House of Wealth" or "House of Money" — is an institution rooted in the earliest foundations of Islamic civilization. Established during the era of the Rightly-Guided Caliphs, it served as the public treasury of the Islamic state: collecting revenues, distributing zakat, funding public welfare, and managing the financial affairs of the Muslim community with justice and accountability.
+              </p>
+              <p className="font-sans text-sm text-primary/65 leading-relaxed max-w-3xl mx-auto">
+                Inspired by this noble legacy, <strong className="text-primary/85">The Bayt Al-Mal Bank</strong> seeks to revive the spirit of Prophetic economic justice — transforming banking from a tool of exploitation into an instrument of human dignity, societal welfare, and civilizational advancement.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Core Pillars */}
+        <section className="py-20 px-6">
+          <div className="container mx-auto max-w-6xl">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
+              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">Our Foundation</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary">Core Pillars</h2>
+            </motion.div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {PILLARS.map((p, i) => (
+                <motion.div key={i} variants={fadeIn} className="p-6 bg-card border border-primary/10">
+                  <div className="mb-4">{p.icon}</div>
+                  <h3 className="font-serif text-lg text-primary mb-3">{p.title}</h3>
+                  <p className="font-sans text-sm text-primary/60 leading-relaxed">{p.desc}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Services */}
+        <section className="py-20 px-6 bg-card">
+          <div className="container mx-auto max-w-6xl">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
+              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">What We Offer</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary">Banking Services</h2>
+              <p className="font-sans text-sm text-primary/55 mt-4 max-w-2xl mx-auto">
+                A comprehensive suite of Shariah-compliant financial products and services designed for individuals, businesses, and institutions.
+              </p>
+            </motion.div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {SERVICES.map((s, i) => (
+                <motion.div key={i} variants={fadeIn} className="p-7 bg-background border border-primary/10">
+                  <h3 className="font-serif text-xl text-primary mb-5">{s.title}</h3>
+                  <ul className="space-y-3">
+                    {s.items.map((item, j) => (
+                      <li key={j} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 flex-shrink-0" />
+                        <span className="font-sans text-sm text-primary/65">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Quote */}
+        <section className="py-20 px-6">
+          <div className="container mx-auto max-w-3xl">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="border-l-4 border-secondary pl-6 py-2">
+              <p className="font-serif text-xl italic text-primary/80 leading-relaxed">
+                "Wealth belongs to Allah. We are only trustees. The Bayt Al-Mal Bank is our commitment to fulfill that trust — building financial systems that serve humanity, uphold justice, and reflect the highest values of Islamic civilization."
+              </p>
+              <p className="mt-4 font-sans text-xs tracking-widest uppercase text-secondary/60">— Shariful Islam, CEO — The Muslim Company</p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Why Different */}
+        <section className="py-20 px-6 bg-primary">
+          <div className="container mx-auto max-w-5xl">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-12">
+              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">Our Difference</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary-foreground">Why The Bayt Al-Mal Bank?</h2>
+            </motion.div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { title: "Zero Riba", desc: "Absolutely no interest-based products. Every transaction is structured on Shariah-approved contracts." },
+                { title: "Purpose-Driven", desc: "Profit is a means, not the end. Every product serves a higher purpose — societal welfare and civilizational growth." },
+                { title: "Prophetic Model", desc: "Guided by the Quran, the Sunnah, and the wisdom of classical Islamic economic scholarship." },
+              ].map((item, i) => (
+                <motion.div key={i} variants={fadeIn} className="p-6 border border-primary-foreground/20 text-center">
+                  <h3 className="font-serif text-xl text-secondary mb-3">{item.title}</h3>
+                  <p className="font-sans text-sm text-primary-foreground/60 leading-relaxed">{item.desc}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-20 px-6">
+          <div className="container mx-auto max-w-3xl text-center">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-4">Get Involved</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">Be Part of the Movement</h2>
+              <p className="font-sans text-sm text-primary/60 leading-relaxed mb-8 max-w-xl mx-auto">
+                The Bayt Al-Mal Bank is more than a financial institution — it is a movement to restore justice, dignity, and purpose to the global financial system through the timeless principles of Islam.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a
+                  href="https://tbmb.themuslimcompany.studio/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-secondary text-primary hover:bg-secondary/90 font-sans text-xs font-bold uppercase tracking-widest h-12 px-8 transition-colors"
+                >
+                  Visit TBMB <ArrowUpRight className="w-4 h-4" />
+                </a>
+                <Link href="/get-involved" className="inline-flex items-center gap-2 border border-primary/30 text-primary hover:border-secondary hover:text-secondary font-sans text-xs font-bold uppercase tracking-widest h-12 px-8 transition-colors">
+                  Get Involved
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Back Link */}
+        <div className="py-8 px-6 border-t border-primary/10">
+          <div className="container mx-auto max-w-5xl">
+            <Link href="/" className="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-widest text-primary/40 hover:text-secondary transition-colors">
+              <ArrowLeft className="w-4 h-4" /> Back to The Muslim Company
+            </Link>
+          </div>
+        </div>
+
+      </div>
+    </SiteLayout>
+  );
+}

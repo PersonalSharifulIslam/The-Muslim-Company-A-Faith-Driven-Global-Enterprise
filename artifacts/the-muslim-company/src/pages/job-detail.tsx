@@ -26,59 +26,6 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
     const ogImage = "https://www.themuslim.company/og-image.png";
 
     document.title = `${job.title} — Careers at The Muslim Company`;
-    // JobPosting Schema for Google Jobs
-    document.querySelectorAll('script[data-job-schema]').forEach(el => el.remove());
-    const jobSchema = {
-      "@context": "https://schema.org",
-      "@type": "JobPosting",
-      "title": job.title,
-      "description": job.description || job.summary || "Join The Muslim Company as " + job.title,
-      "datePosted": job.created_at ? job.created_at.split("T")[0] : new Date().toISOString().split("T")[0],
-      "validThrough": job.deadline || new Date(Date.now() + 90*24*60*60*1000).toISOString().split("T")[0],
-      "employmentType": job.type ? job.type.toUpperCase().replace(" ", "_") : "FULL_TIME",
-      "hiringOrganization": {
-        "@type": "Organization",
-        "name": "The Muslim Company",
-        "sameAs": "https://www.themuslim.company",
-        "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 }
-      },
-      "jobLocation": {
-        "@type": "Place",
-        "name": "The Muslim Company",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Niketon Bazaar",
-          "addressLocality": job.location || "Dhaka",
-          "addressRegion": "Dhaka Division",
-          "postalCode": "1212",
-          "addressCountry": "BD"
-        }
-      },
-      "applicantLocationRequirements": {
-        "@type": "Country",
-        "name": "Bangladesh"
-      },
-      "jobLocationType": job.remote ? "TELECOMMUTE" : undefined,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "BDT",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": job.salary_min || 30000,
-          "maxValue": job.salary_max || (job.salary || 80000),
-          "unitText": "MONTH"
-        }
-      },
-      "url": "https://www.themuslim.company/careers/" + job.slug
-    };
-    // Remove undefined fields
-    const cleanJobSchema = JSON.parse(JSON.stringify(jobSchema));
-    const jobScript = document.createElement("script");
-    jobScript.type = "application/ld+json";
-    jobScript.setAttribute("data-job-schema", "true");
-    jobScript.textContent = JSON.stringify(cleanJobSchema);
-    document.head.appendChild(jobScript);
-
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) _rob.setAttribute('content', 'index, follow');
     else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
@@ -126,16 +73,44 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
           { "@type": "ListItem", "position": 3, "name": job.title, "item": pageUrl }
         ]
       },
-      { "@context": "https://schema.org", "@type": "JobPosting",
+      {
+        "@context": "https://schema.org",
+        "@type": "JobPosting",
         "title": job.title,
         "description": job.description || desc,
-        "datePosted": job.created_at,
-        "validThrough": job.deadline,
-        "employmentType": job.type || "FULL_TIME",
-        "image": ogImage,
+        "datePosted": job.created_at ? job.created_at.split("T")[0] : new Date().toISOString().split("T")[0],
+        "validThrough": job.deadline || new Date(Date.now() + 90*24*60*60*1000).toISOString().split("T")[0],
+        "employmentType": job.type ? job.type.toUpperCase().replace(" ", "_") : "FULL_TIME",
         "url": pageUrl,
-        "hiringOrganization": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company", "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png" } },
-        "jobLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressRegion": "Dhaka Division", "addressCountry": "BD" } },
+        "hiringOrganization": {
+          "@type": "Organization",
+          "name": "The Muslim Company",
+          "sameAs": "https://www.themuslim.company",
+          "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 }
+        },
+        "jobLocation": {
+          "@type": "Place",
+          "name": "The Muslim Company",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Niketon Bazaar",
+            "addressLocality": "Dhaka",
+            "addressRegion": "Dhaka Division",
+            "postalCode": "1212",
+            "addressCountry": "BD"
+          }
+        },
+        "baseSalary": {
+          "@type": "MonetaryAmount",
+          "currency": "BDT",
+          "value": {
+            "@type": "QuantitativeValue",
+            "minValue": typeof job.salary_min === "number" ? job.salary_min : 30000,
+            "maxValue": typeof job.salary_max === "number" ? job.salary_max : 80000,
+            "unitText": "MONTH"
+          }
+        },
+        "applicantLocationRequirements": { "@type": "Country", "name": "Bangladesh" },
         "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl }
       },
       { "@context": "https://schema.org", "@type": "FAQPage",

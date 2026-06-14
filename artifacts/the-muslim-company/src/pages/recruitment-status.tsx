@@ -47,6 +47,7 @@ export default function RecruitmentStatus() {
       "url": "https://www.themuslim.company",
       "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 },
       "foundingDate": "2025-01-09",
+      "numberOfEmployees": { "@type": "QuantitativeValue", "value": 10 },
       "address": { "@type": "PostalAddress", "streetAddress": "Niketon Bazaar", "addressLocality": "Dhaka", "postalCode": "1212", "addressCountry": "BD" },
       "sameAs": ["https://www.facebook.com/TheMuslimCompany", "https://www.instagram.com/officialTheMuslimCompany", "https://www.youtube.com/@TheMuslimCompany", "https://www.linkedin.com/company/themuslimcompany", "https://x.com/officialtmchq", "https://www.crunchbase.com/organization/the-muslim-company"]
     };
@@ -68,7 +69,7 @@ export default function RecruitmentStatus() {
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
     const s = document.createElement('script'); s.type = 'application/ld+json';
     s.setAttribute('data-page-schema', 'true');
-    s.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+    s.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
       { "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://www.themuslim.company/careers" },
       { "@type": "ListItem", "position": 3, "name": "Recruitment Status", "item": "https://www.themuslim.company/recruitment-status" }

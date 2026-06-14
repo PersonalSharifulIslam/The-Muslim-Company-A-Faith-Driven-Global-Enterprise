@@ -40,13 +40,17 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
         "@type": "Organization",
         "name": "The Muslim Company",
         "sameAs": "https://www.themuslim.company",
-        "logo": "https://www.themuslim.company/favicon.png"
+        "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 }
       },
       "jobLocation": {
         "@type": "Place",
+        "name": "The Muslim Company",
         "address": {
           "@type": "PostalAddress",
+          "streetAddress": "Niketon Bazaar",
           "addressLocality": job.location || "Dhaka",
+          "addressRegion": "Dhaka Division",
+          "postalCode": "1212",
           "addressCountry": "BD"
         }
       },
@@ -55,15 +59,16 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
         "name": "Bangladesh"
       },
       "jobLocationType": job.remote ? "TELECOMMUTE" : undefined,
-      "baseSalary": job.salary ? {
+      "baseSalary": {
         "@type": "MonetaryAmount",
         "currency": "BDT",
         "value": {
           "@type": "QuantitativeValue",
-          "value": job.salary,
+          "minValue": job.salary_min || 30000,
+          "maxValue": job.salary_max || (job.salary || 80000),
           "unitText": "MONTH"
         }
-      } : undefined,
+      },
       "url": "https://www.themuslim.company/careers/" + job.slug
     };
     // Remove undefined fields

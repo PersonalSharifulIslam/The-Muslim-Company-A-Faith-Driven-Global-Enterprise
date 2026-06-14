@@ -66,8 +66,7 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
 
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
     const schemas = [
-      { "@context": "https://schema.org", "@type": "BreadcrumbList",
-        "itemListElement": [
+      { "@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
           { "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://www.themuslim.company/careers" },
           { "@type": "ListItem", "position": 3, "name": job.title, "item": pageUrl }

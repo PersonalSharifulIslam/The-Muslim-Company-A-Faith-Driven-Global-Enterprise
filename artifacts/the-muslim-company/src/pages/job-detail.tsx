@@ -100,15 +100,24 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
             "addressCountry": "BD"
           }
         },
-        "baseSalary": {
+        "baseSalary": job.salary ? {
           "@type": "MonetaryAmount",
           "currency": "BDT",
           "value": {
             "@type": "QuantitativeValue",
-            "minValue": typeof job.salary_min === "number" ? job.salary_min : 30000,
-            "maxValue": typeof job.salary_max === "number" ? job.salary_max : 80000,
+            "value": parseFloat(job.salary.replace(/[^0-9.]/g, "")) || 50000,
             "unitText": "MONTH"
-          }
+          },
+          "description": job.salary
+        } : {
+          "@type": "MonetaryAmount",
+          "currency": "BDT",
+          "value": {
+            "@type": "QuantitativeValue",
+            "value": 50000,
+            "unitText": "MONTH"
+          },
+          "description": "Competitive"
         },
         "applicantLocationRequirements": { "@type": "Country", "name": "Bangladesh" },
         "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl }

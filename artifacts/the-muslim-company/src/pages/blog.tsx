@@ -77,6 +77,12 @@ export default function Blog() {
     if (_ogt) _ogt.setAttribute('content', "Read the latest insights, thought leadership, and in-depth articles from The Muslim Company — covering Islamic business, ethical innovation, and civilization-focused leadership.");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "Insights, reflections, and knowledge from The Muslim Company — on Islamic ethics, civilization, technology, entrepreneurship, and faith-driven development.");
+    const _ogi = document.querySelector('meta[property="og:image"]');
+    if (_ogi) { _ogi.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); }
+    else { const _il = document.createElement('meta'); _il.setAttribute('property', 'og:image'); _il.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); document.head.appendChild(_il); }
+    const _twi = document.querySelector('meta[name="twitter:image"]');
+    if (_twi) { _twi.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); }
+    else { const _tl = document.createElement('meta'); _tl.setAttribute('name', 'twitter:image'); _tl.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); document.head.appendChild(_tl); }
     const _ogu = document.querySelector('meta[property="og:url"]');
     if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/blog");
 

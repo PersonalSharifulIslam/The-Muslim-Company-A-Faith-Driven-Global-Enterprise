@@ -122,13 +122,41 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
         "applicantLocationRequirements": { "@type": "Country", "name": "Bangladesh" },
         "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl }
       },
-      { "@context": "https://schema.org", "@type": "FAQPage",
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
         "mainEntity": [
-          { "@type": "Question", "name": `What is the ${job.title} role at The Muslim Company?`,
-            "acceptedAnswer": { "@type": "Answer", "text": job.description || `The Muslim Company is hiring for ${job.title}. Join a faith-driven global enterprise building ethical civilization.` }
+          {
+            "@type": "Question",
+            "name": "What is the " + job.title + " role at The Muslim Company?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": job.description || ("The Muslim Company is hiring for " + job.title + ". Join a global conglomerate building long-term civilizational impact.")
+            }
           },
-          { "@type": "Question", "name": "How can I apply for this position?",
-            "acceptedAnswer": { "@type": "Answer", "text": `Apply directly at https://www.themuslim.company/careers/${params.slug}/apply or email careers@themuslim.company.` }
+          {
+            "@type": "Question",
+            "name": "How can I apply for this position?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Apply at https://www.themuslim.company/careers/" + params.slug + "/apply or email careers@themuslim.company."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where is this job located?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This position is based in " + (job.location || "Dhaka, Bangladesh") + " at The Muslim Company."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the employment type?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This is a " + (job.type || "Full Time") + " position at The Muslim Company."
+            }
           }
         ]
       }

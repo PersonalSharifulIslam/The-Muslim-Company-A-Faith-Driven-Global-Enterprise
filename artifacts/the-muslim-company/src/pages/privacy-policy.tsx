@@ -33,6 +33,7 @@ export default function PrivacyPolicy() {
       "url": "https://www.themuslim.company",
       "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 },
       "foundingDate": "2025-01-09",
+      "numberOfEmployees": { "@type": "QuantitativeValue", "value": 10 },
       "address": { "@type": "PostalAddress", "streetAddress": "Niketon Bazaar", "addressLocality": "Dhaka", "postalCode": "1212", "addressCountry": "BD" },
       "sameAs": ["https://www.facebook.com/TheMuslimCompany", "https://www.instagram.com/officialTheMuslimCompany", "https://www.youtube.com/@TheMuslimCompany", "https://www.linkedin.com/company/themuslimcompany", "https://x.com/officialtmchq", "https://www.crunchbase.com/organization/the-muslim-company"]
     };
@@ -63,7 +64,7 @@ export default function PrivacyPolicy() {
         if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/privacy-policy");
 
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
-    [{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://www.themuslim.company/privacy-policy"}]}, {"@context": "https://schema.org", "@type": "WebPage", "name": "Privacy Policy \u2014 The Muslim Company", "description": "Privacy Policy of The Muslim Company \u2014 how we collect, use, and protect your personal information in accordance with Islamic ethics and international standards.", "url": "https://www.themuslim.company/privacy-policy", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {
+    [{"@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://www.themuslim.company/privacy-policy"}]}, {"@context": "https://schema.org", "@type": "WebPage", "name": "Privacy Policy \u2014 The Muslim Company", "description": "Privacy Policy of The Muslim Company \u2014 how we collect, use, and protect your personal information in accordance with Islamic ethics and international standards.", "url": "https://www.themuslim.company/privacy-policy", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {
       const s = document.createElement('script');
       s.type = 'application/ld+json';
       s.setAttribute('data-page-schema', 'true');

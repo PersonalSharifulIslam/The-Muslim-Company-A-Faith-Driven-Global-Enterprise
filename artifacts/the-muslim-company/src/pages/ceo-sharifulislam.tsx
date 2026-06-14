@@ -102,7 +102,6 @@ const PERSON_SCHEMA = {
   "name": "Shariful Islam",
   "givenName": "Shariful",
   "familyName": "Islam",
-  "birthName": "Shariful Islam",
   "birthDate": "2001",
   "birthPlace": { "@type": "Place", "name": "Jamalpur, Bangladesh" },
   "nationality": { "@type": "Country", "name": "Bangladesh" },

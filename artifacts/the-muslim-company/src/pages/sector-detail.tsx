@@ -808,8 +808,7 @@ export default function SectorDetail() {
     const schemas = [
       {
         "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
+        "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
           { "@type": "ListItem", "position": 2, "name": "Sectors", "item": "https://www.themuslim.company/#sectors" },
           { "@type": "ListItem", "position": 3, "name": sector.label, "item": `https://www.themuslim.company/sectors/${sector.slug}` }
@@ -822,8 +821,7 @@ export default function SectorDetail() {
         "description": sector.tagline,
         "url": `https://www.themuslim.company/sectors/${sector.slug}`,
         "breadcrumb": {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
+          "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
             { "@type": "ListItem", "position": 2, "name": "Sectors", "item": "https://www.themuslim.company/#sectors" },
             { "@type": "ListItem", "position": 3, "name": sector.label, "item": `https://www.themuslim.company/sectors/${sector.slug}` }

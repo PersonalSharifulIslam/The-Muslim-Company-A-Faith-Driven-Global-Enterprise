@@ -289,7 +289,7 @@ export default function CeoSharifulIslamPage() {
         <meta property="og:title" content="Shariful Islam – CEO of The Muslim Company" />
         <meta property="og:description" content="Shariful Islam serves as CEO of The Muslim Company — a global conglomerate committed to innovation, long-term value creation, and ethical leadership." />
         <meta property="og:url" content="https://www.themuslim.company/ceo/Sharifulislam" />
-        <meta property="og:image" content="https://www.themuslim.company/shariful-islam-ceo.jpg" />
+        <meta property="og:image" content="https://www.themuslim.company/shariful-islam-ceo.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="The Muslim Company" />
@@ -330,9 +330,9 @@ export default function CeoSharifulIslamPage() {
               {/* CEO Photo */}
               <motion.div variants={fadeIn} className="mb-6">
                 <img
-                  src="/shariful-islam-ceo.jpg"
+                  src="/shariful-islam-ceo.png"
                   alt="Shariful Islam — CEO of The Muslim Company"
-                  className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover object-top border-2 border-secondary/40 mx-auto"
+                  className="w-32 h-32 md:w-40 md:h-40 object-cover object-top mx-auto border border-secondary/20"
                 />
               </motion.div>
 

@@ -151,7 +151,6 @@ const PERSON_SCHEMA = {
     "https://sharifulislam.engineer",
     "https://g.co/kgs/4n3CijW",
     "https://www.google.com/search?kgmid=/g/11n_vfnlwt",
-    "https://www.google.com/search?kgmid=/g/11n4vqbl3_",
     "http://viaf.org/viaf/503162664557855002426",
     "https://isni.org/isni/0000000502719745",
     "https://www.facebook.com/PersonalSharifulIslam/",

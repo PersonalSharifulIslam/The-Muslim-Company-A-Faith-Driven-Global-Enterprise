@@ -238,7 +238,8 @@ const ORG_SCHEMA = {
     "https://www.youtube.com/@TheMuslimCompany",
     "https://www.linkedin.com/company/themuslimcompany",
     "https://x.com/officialtmchq",
-    "https://www.crunchbase.com/organization/the-muslim-company"
+    "https://www.crunchbase.com/organization/the-muslim-company",
+    "https://www.openpr.com/news/4523843/the-muslim-company-building-a-faith-driven-global"
   ]
 };
 

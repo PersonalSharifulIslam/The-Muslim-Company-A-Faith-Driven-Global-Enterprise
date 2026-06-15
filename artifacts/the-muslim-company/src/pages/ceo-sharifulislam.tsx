@@ -167,7 +167,30 @@ const PERSON_SCHEMA = {
     "https://orcid.org/0000-0002-6634-5090",
     "https://www.imdb.com/name/nm12843320/",
     "https://www.crunchbase.com/person/shariful-islam-4eee",
-    "https://about.me/Personalsharifulislam/"
+    "https://about.me/Personalsharifulislam/",
+    "https://globalpeacechain.org/team_members/shariful-islam/",
+    "https://www.openpr.com/news/4523843/the-muslim-company-building-a-faith-driven-global"
+  ],
+  "award": "Global Peace Ambassador 2025-2026, Global Peace Chain",
+  "hasCredential": [
+    {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "degree",
+      "name": "Bachelor of Engineering in Electrical Engineering",
+      "educationalLevel": "Bachelor's Degree"
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      "name": "Global Peace Ambassador",
+      "credentialCategory": "appointment",
+      "recognizedBy": {
+        "@type": "Organization",
+        "name": "Global Peace Chain",
+        "url": "https://globalpeacechain.org"
+      },
+      "validFrom": "2025",
+      "validUntil": "2026"
+    }
   ]
 };
 

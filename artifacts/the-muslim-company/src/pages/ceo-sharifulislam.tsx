@@ -289,7 +289,7 @@ export default function CeoSharifulIslamPage() {
         <meta property="og:title" content="Shariful Islam – CEO of The Muslim Company" />
         <meta property="og:description" content="Shariful Islam serves as CEO of The Muslim Company — a global conglomerate committed to innovation, long-term value creation, and ethical leadership." />
         <meta property="og:url" content="https://www.themuslim.company/ceo/Sharifulislam" />
-        <meta property="og:image" content="https://www.themuslim.company/opengraph.jpg" />
+        <meta property="og:image" content="https://www.themuslim.company/shariful-islam-ceo.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="The Muslim Company" />
@@ -326,6 +326,15 @@ export default function CeoSharifulIslamPage() {
           />
           <div className="relative container mx-auto max-w-5xl px-6 py-28 md:py-36">
             <motion.div initial="hidden" animate="visible" variants={stagger} className="flex flex-col items-center text-center">
+
+              {/* CEO Photo */}
+              <motion.div variants={fadeIn} className="mb-6">
+                <img
+                  src="/shariful-islam-ceo.jpg"
+                  alt="Shariful Islam — CEO of The Muslim Company"
+                  className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover object-top border-2 border-secondary/40 mx-auto"
+                />
+              </motion.div>
 
               <motion.h1 variants={fadeIn} className="font-serif text-5xl md:text-7xl lg:text-8xl text-primary-foreground mt-2 mb-4 tracking-tight">
                 Shariful Islam

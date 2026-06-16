@@ -365,7 +365,7 @@ export default function Home() {
             transition={{ duration: 1, delay: 0.8 }}
             className="mt-8 text-lg md:text-xl text-primary-foreground/80 max-w-3xl font-sans font-light"
           >
-            A faith-driven, civilization-oriented global company built upon the Quran and authentic Sunnah.
+            A Faith-Driven, Civilization-oriented Global Conglomerate Built upon Islamic Ethics and the Prophetic Model — Advancing Human Prosperity, Justice, and Sustainable Development Across the World.
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}

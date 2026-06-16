@@ -51,6 +51,20 @@ const BANK_SCHEMA = {
     "name": "The Muslim Company",
     "url": "https://www.themuslim.company"
   },
+  "founder": {
+    "@type": "Person",
+    "name": "Shariful Islam",
+    "url": "https://www.themuslim.company/ceo/Sharifulislam"
+  },
+  "employee": {
+    "@type": "OrganizationRole",
+    "roleName": "Founder & Chief Executive Officer",
+    "member": {
+      "@type": "Person",
+      "name": "Shariful Islam",
+      "url": "https://www.themuslim.company/ceo/Sharifulislam"
+    }
+  },
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Niketon Bazaar",
@@ -152,14 +166,6 @@ export default function BaytAlMalBankPage() {
                 A Shariah-compliant ethical banking institution built on the Prophetic model of wealth stewardship — committed to interest-free finance, wealth justice, and long-term civilizational economic development.
               </motion.p>
               <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a
-                  href="https://tbmb.themuslimcompany.studio/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-secondary text-primary hover:bg-secondary/90 font-sans text-xs font-bold uppercase tracking-widest h-12 px-8 transition-colors"
-                >
-                  Visit TBMB <ArrowUpRight className="w-4 h-4" />
-                </a>
                 <Link href="/contact" className="inline-flex items-center gap-2 border border-primary-foreground/30 text-primary-foreground hover:border-secondary hover:text-secondary font-sans text-xs font-bold uppercase tracking-widest h-12 px-8 transition-colors">
                   Contact Us
                 </Link>
@@ -279,14 +285,6 @@ export default function BaytAlMalBankPage() {
                 The Bayt Al-Mal Bank is more than a financial institution — it is a movement to restore justice, dignity, and purpose to the global financial system through the timeless principles of Islam.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a
-                  href="https://tbmb.themuslimcompany.studio/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-secondary text-primary hover:bg-secondary/90 font-sans text-xs font-bold uppercase tracking-widest h-12 px-8 transition-colors"
-                >
-                  Visit TBMB <ArrowUpRight className="w-4 h-4" />
-                </a>
                 <Link href="/get-involved" className="inline-flex items-center gap-2 border border-primary/30 text-primary hover:border-secondary hover:text-secondary font-sans text-xs font-bold uppercase tracking-widest h-12 px-8 transition-colors">
                   Get Involved
                 </Link>

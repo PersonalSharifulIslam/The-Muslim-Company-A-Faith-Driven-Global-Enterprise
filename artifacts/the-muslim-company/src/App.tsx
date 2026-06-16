@@ -34,6 +34,7 @@ import AuthRedirect from "@/pages/AuthRedirect";
 import FounderPage from "@/pages/founder";
 import CeoSharifulIslamPage from "@/pages/ceo-sharifulislam";
 import BaytAlMalBankPage from "@/pages/bayt-al-mal-bank";
+import BaytAlMalBankPage from "@/pages/bayt-al-mal-bank";
 import VisionPage from "@/pages/vision";
 import MissionPage from "@/pages/mission";
 import SectorDetail from "@/pages/sector-detail";
@@ -78,6 +79,7 @@ function Router() {
       <Route path="/auth-redirect" component={AuthRedirect} />
       <Route path="/founder" component={FounderPage} />
       <Route path="/ceo/Sharifulislam" component={CeoSharifulIslamPage} />
+      <Route path="/BaytAlMalBank" component={BaytAlMalBankPage} />
       <Route path="/BaytAlMalBank" component={BaytAlMalBankPage} />
       <Route path="/vision" component={VisionPage} />
       <Route path="/mission" component={MissionPage} />

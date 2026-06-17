@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/images/logo.png";
@@ -24,6 +25,27 @@ const NAV_RIGHT = [
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   const [navOpen, setNavOpen] = useState(false);
+  const [, navigate] = useLocation();
+
+  const handleHashLink = (href: string, e: React.MouseEvent) => {
+    if (href.startsWith("/#")) {
+      e.preventDefault();
+      setNavOpen(false);
+      const id = href.slice(2);
+      if (window.location.pathname === "/") {
+        // Already on home — just scroll
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      } else {
+        // Navigate to home first, then scroll after render
+        navigate("/");
+        setTimeout(() => {
+          document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+        }, 150);
+      }
+    } else {
+      setNavOpen(false);
+    }
+  };
   const [loginOpen, setLoginOpen] = useState(false);
 
   return (
@@ -58,7 +80,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                     <a
                       key={link.href}
                       href={link.href}
-                      onClick={() => setNavOpen(false)}
+                      onClick={(e) => handleHashLink(link.href, e)}
                       className="font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary transition-colors"
                     >
                       {link.label}
@@ -71,13 +93,14 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                     <a
                       key={link.href}
                       href={link.href}
-                      onClick={() => setNavOpen(false)}
+                      onClick={(e) => handleHashLink(link.href, e)}
                       className="font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary transition-colors"
                     >
                       {link.label}
                     </a>
                   ))}
                   <a
+                    onClick={(e) => handleHashLink("/#contact", e)}
                     href="/#contact"
                     onClick={() => setNavOpen(false)}
                     className="font-sans text-xs tracking-widest uppercase text-secondary hover:text-secondary/80 transition-colors font-bold"

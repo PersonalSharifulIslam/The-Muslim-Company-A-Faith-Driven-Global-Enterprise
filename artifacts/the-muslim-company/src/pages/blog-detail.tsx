@@ -144,7 +144,7 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
         <div className="container mx-auto max-w-3xl">
           <Link href="/blog" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary/50 hover:text-secondary transition-colors mb-8">
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Blog
-          </a>
+          </Link>
 
           {loading ? (
             <div className="space-y-4">

@@ -135,6 +135,38 @@ export default function FounderPage() {
                   CEO Profile
                 </a>
               </div>
+
+              {/* Global Peace Ambassador badge */}
+              <div className="mt-6 inline-flex items-center gap-2 border border-primary-foreground/15 px-4 py-2">
+                <Award className="w-4 h-4 text-secondary" />
+                <span className="font-sans text-xs text-primary-foreground/70">
+                  Global Peace Ambassador 2025–2026, Global Peace Chain
+                </span>
+              </div>
+
+              {/* Social / professional links */}
+              <div className="mt-6 flex items-center justify-center gap-5">
+                <a href="https://sharifulislam.engineer" target="_blank" rel="noopener noreferrer"
+                  aria-label="Personal website"
+                  className="text-primary-foreground/40 hover:text-secondary transition-colors">
+                  <Globe2 className="w-5 h-5" />
+                </a>
+                <a href="https://www.linkedin.com/in/personalsharifulislam" target="_blank" rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="text-primary-foreground/40 hover:text-secondary transition-colors">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a href="https://x.com/PersonalSIslam" target="_blank" rel="noopener noreferrer"
+                  aria-label="X (Twitter)"
+                  className="text-primary-foreground/40 hover:text-secondary transition-colors">
+                  <Twitter className="w-5 h-5" />
+                </a>
+                <a href="https://orcid.org/0000-0002-6634-5090" target="_blank" rel="noopener noreferrer"
+                  aria-label="ORCID"
+                  className="text-primary-foreground/40 hover:text-secondary transition-colors font-sans text-xs font-bold tracking-wide">
+                  ORCID
+                </a>
+              </div>
             </motion.div>
           </div>
         </section>

@@ -124,7 +124,7 @@ export default function Careers() {
             <p className="font-sans text-sm text-primary-foreground/55 max-w-2xl leading-relaxed mb-8">
               We are building a faith-driven global enterprise. Every role here is an opportunity to contribute to something greater — a civilization-scale mission guided by ethics, knowledge, and justice.
             </p>
-            <a href="/recruitment-status">
+            <Link href="/recruitment-status">
               <Button className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans h-10 px-6 text-xs font-bold">
                 Track Application Status <ArrowRight className="ml-2 w-3.5 h-3.5" />
               </Button>

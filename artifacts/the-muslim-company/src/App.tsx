@@ -144,6 +144,8 @@ function Router() {
 function ScrollToTop() {
   const [location] = useLocation();
   useEffect(() => {
+    // Skip auto-scroll-to-top if navigating to a hash anchor (handled by the hash link itself)
+    if (window.location.hash) return;
     window.scrollTo(0, 0);
   }, [location]);
   return null;

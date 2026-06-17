@@ -128,7 +128,7 @@ export default function Careers() {
               <Button className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans h-10 px-6 text-xs font-bold">
                 Track Application Status <ArrowRight className="ml-2 w-3.5 h-3.5" />
               </Button>
-            </a>
+            </Link>
           </motion.div>
         </div>
       </section>

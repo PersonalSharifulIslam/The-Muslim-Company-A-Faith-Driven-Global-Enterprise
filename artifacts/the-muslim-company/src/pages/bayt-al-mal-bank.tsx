@@ -202,7 +202,7 @@ export default function BaytAlMalBankPage() {
               <p className="font-sans text-sm text-primary/60 leading-relaxed max-w-2xl mx-auto mb-8">
                 The Bayt Al-Mal Bank is being carefully built from the ground up — establishing regulatory compliance, Shariah governance frameworks, and core banking infrastructure before launch. We are committed to building a trustworthy, fully compliant institution rather than rushing to market.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
                 <div className="p-4 border border-primary/10">
                   <p className="font-serif text-lg text-secondary mb-1">Phase 1</p>
                   <p className="font-sans text-xs text-primary/55">Shariah Framework & Governance Structure</p>
@@ -215,6 +215,10 @@ export default function BaytAlMalBankPage() {
                   <p className="font-serif text-lg text-secondary mb-1">Phase 3</p>
                   <p className="font-sans text-xs text-primary/55">Public Launch & Onboarding</p>
                 </div>
+              </div>
+              <div className="inline-block border border-secondary/40 px-6 py-3">
+                <p className="font-sans text-xs tracking-widest uppercase text-secondary/70 mb-1">Expected First Launch</p>
+                <p className="font-serif text-2xl text-primary">2031</p>
               </div>
             </motion.div>
           </div>
@@ -312,6 +316,70 @@ export default function BaytAlMalBankPage() {
           </div>
         </section>
 
+        {/* Comparison */}
+        <section className="py-20 px-6">
+          <div className="container mx-auto max-w-4xl">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-12">
+              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">The Difference</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary">Conventional Banking vs. The Bayt Al-Mal Bank</h2>
+            </motion.div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="overflow-x-auto">
+              <table className="w-full border border-primary/10 text-left">
+                <thead>
+                  <tr className="border-b border-primary/10 bg-card">
+                    <th className="p-4 font-sans text-xs uppercase tracking-widest text-primary/50">Aspect</th>
+                    <th className="p-4 font-sans text-xs uppercase tracking-widest text-primary/50">Conventional Bank</th>
+                    <th className="p-4 font-sans text-xs uppercase tracking-widest text-secondary">The Bayt Al-Mal Bank</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Interest (Riba)", "Charges and pays interest", "Strictly interest-free (Shariah-compliant contracts)"],
+                    ["Profit Motive", "Profit-maximization focused", "Purpose-driven — profit as a means, not the end"],
+                    ["Risk Sharing", "Risk transferred to borrower", "Risk shared between bank and customer (Musharakah/Mudarabah)"],
+                    ["Wealth Distribution", "No structured social obligation", "Built-in zakat, waqf, and qard al-hasan mechanisms"],
+                    ["Governance", "Regulatory compliance only", "Shariah Advisory Board + regulatory compliance"],
+                    ["Access", "Often urban / branch-limited", "Online and offline, designed for global access"],
+                  ].map((row, i) => (
+                    <tr key={i} className="border-b border-primary/10">
+                      <td className="p-4 font-sans text-sm text-primary/70 font-medium">{row[0]}</td>
+                      <td className="p-4 font-sans text-sm text-primary/50">{row[1]}</td>
+                      <td className="p-4 font-sans text-sm text-primary/80">{row[2]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Who We Serve */}
+        <section className="py-20 px-6 bg-card">
+          <div className="container mx-auto max-w-5xl">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
+              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">Built For Everyone</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary">Who We Serve</h2>
+              <p className="font-sans text-sm text-primary/55 mt-4 max-w-2xl mx-auto">
+                The Bayt Al-Mal Bank is designed to serve every segment of society — locally and globally, online and offline.
+              </p>
+            </motion.div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { title: "Individuals", desc: "Personal banking, savings, and home/asset financing for everyday life." },
+                { title: "Small & Medium Enterprises", desc: "Working capital, trade finance, and growth financing for entrepreneurs." },
+                { title: "Corporations", desc: "Corporate accounts, cash management, and large-scale ethical financing." },
+                { title: "Institutions & Nonprofits", desc: "Waqf management, zakat distribution, and institutional treasury services." },
+              ].map((item, i) => (
+                <motion.div key={i} variants={fadeIn} className="p-6 bg-background border border-primary/10 text-center">
+                  <h3 className="font-serif text-lg text-primary mb-3">{item.title}</h3>
+                  <p className="font-sans text-sm text-primary/55 leading-relaxed">{item.desc}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
         {/* Why Different */}
         <section className="py-20 px-6 bg-primary">
           <div className="container mx-auto max-w-5xl">
@@ -331,6 +399,22 @@ export default function BaytAlMalBankPage() {
                   <p className="font-sans text-sm text-primary-foreground/60 leading-relaxed">{item.desc}</p>
                 </motion.div>
               ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Backed By */}
+        <section className="py-20 px-6 bg-card">
+          <div className="container mx-auto max-w-3xl text-center">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-4">Trust & Credibility</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">Backed by The Muslim Company</h2>
+              <p className="font-sans text-sm text-primary/60 leading-relaxed max-w-2xl mx-auto mb-8">
+                The Bayt Al-Mal Bank is not a standalone venture — it is built on the foundation of The Muslim Company, a diversified global conglomerate already active across technology, education, healthcare, humanitarian development, and ethical commerce. This institutional backing provides the financial discipline, governance structure, and long-term commitment necessary to build a bank rooted in trust.
+              </p>
+              <Link href="/" className="inline-flex items-center gap-2 border border-primary/30 text-primary hover:border-secondary hover:text-secondary font-sans text-xs font-bold uppercase tracking-widest h-12 px-8 transition-colors">
+                Explore The Muslim Company
+              </Link>
             </motion.div>
           </div>
         </section>
@@ -358,6 +442,7 @@ export default function BaytAlMalBankPage() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="space-y-6">
               {[
                 { q: "Is The Bayt Al-Mal Bank open for customers yet?", a: "Not yet. The Bayt Al-Mal Bank is currently in development, building its Shariah governance framework and pursuing regulatory licensing before public launch." },
+                { q: "When will The Bayt Al-Mal Bank launch?", a: "The Bayt Al-Mal Bank is targeting its first public launch in 2031, following the completion of its Shariah governance framework and regulatory licensing process." },
                 { q: "Who is behind The Bayt Al-Mal Bank?", a: "The Bayt Al-Mal Bank is founded and led by Shariful Islam, Founder & CEO, as a division of The Muslim Company." },
                 { q: "How is this different from a conventional bank?", a: "Unlike conventional banks, The Bayt Al-Mal Bank operates entirely free of riba (interest), using Shariah-compliant contracts such as Murabahah, Musharakah, and Mudarabah for all financial products." },
                 { q: "How can I stay updated on the launch?", a: "You can reach out via our Contact page to express interest and receive updates as The Bayt Al-Mal Bank progresses toward launch." },

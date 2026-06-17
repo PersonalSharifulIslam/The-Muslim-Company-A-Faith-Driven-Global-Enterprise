@@ -301,7 +301,7 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
                   <Button variant="outline" className="border-primary/20 text-primary hover:border-secondary rounded-none font-sans text-xs tracking-widest uppercase h-11 px-6">
                     View All Positions
                   </Button>
-                </a>
+                </Link>
               </div>
             </motion.div>
           )}

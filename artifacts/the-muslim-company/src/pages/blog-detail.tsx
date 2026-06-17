@@ -142,7 +142,7 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
     <SiteLayout>
       <div className="py-12 px-6 lg:px-12">
         <div className="container mx-auto max-w-3xl">
-          <a href="/blog" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary/50 hover:text-secondary transition-colors mb-8">
+          <Link href="/blog" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary/50 hover:text-secondary transition-colors mb-8">
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Blog
           </a>
 

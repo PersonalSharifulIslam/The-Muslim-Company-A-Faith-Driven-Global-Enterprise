@@ -392,8 +392,8 @@ export default function CeoSharifulIslamPage() {
               <motion.div variants={fadeIn} className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-14 max-w-2xl mx-auto border-t border-primary-foreground/10 pt-10">
                 {[
                   { label: "Founded", value: "2025" },
-                  { label: "Sectors", value: "12+" },
-                  { label: "Headquarters", value: "Dhaka" },
+                  { label: "Sectors", value: "20+" },
+                  { label: "Headquarters", value: "Dhaka, Bangladesh" },
                   { label: "Reach", value: "Global" },
                 ].map((s) => (
                   <div key={s.label} className="text-center">
@@ -499,7 +499,7 @@ export default function CeoSharifulIslamPage() {
               <h2 className="font-serif text-3xl md:text-4xl text-primary mb-10">Career Timeline</h2>
               <div className="space-y-8">
                 {[
-                  { year: "2018", title: "B.E. Electrical Engineering", desc: "Graduated from the University of Burdwan, India, laying the technical foundation for a career in engineering and systems thinking." },
+                  { year: "2025", title: "B.E. Electrical Engineering", desc: "Graduated from the University of Burdwan, India, laying the technical foundation for a career in engineering and systems thinking." },
                   { year: "2025", title: "Founded The Muslim Company", desc: "Established The Muslim Company in Dhaka, Bangladesh — a diversified global conglomerate guided by Islamic principles and civilizational vision." },
                   { year: "2025–2026", title: "Appointed Global Peace Ambassador", desc: "Recognized by Global Peace Chain for contributions toward ethical leadership and global peace initiatives." },
                   { year: "2025–Present", title: "Expansion Across Sectors", desc: "Led the growth of The Muslim Company across technology, finance, education, retail, manufacturing, and humanitarian development." },
@@ -541,7 +541,7 @@ export default function CeoSharifulIslamPage() {
                 <Newspaper className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-serif text-lg text-primary mb-1 group-hover:text-secondary transition-colors">
-                    The Muslim Company: Building a Faith-Driven Global Enterprise
+                    The Muslim Company: Building a Faith-Driven Global Civilization Through Innovation, Ethics, and Excellence
                   </h3>
                   <p className="font-sans text-xs text-primary/50">OpenPR — Press Release</p>
                 </div>

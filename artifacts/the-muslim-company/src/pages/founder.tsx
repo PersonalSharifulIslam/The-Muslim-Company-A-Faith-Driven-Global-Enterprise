@@ -179,7 +179,7 @@ export default function FounderPage() {
               className="p-6 bg-card border border-primary/10">
               <h3 className="font-serif text-lg text-primary mb-3">About Shariful Islam</h3>
               <p className="font-sans text-sm text-primary/65 leading-relaxed">
-                Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur dedicated to ethical innovation, humanitarian development, knowledge-driven progress, and civilization-focused institution building. From an early age he developed strong interests in technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies.
+                Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur dedicated to ethical innovation, humanitarian development, knowledge-driven progress, and civilization-focused institution building. From an early age he developed strong interests in technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies. He is also the founder of The Bayt Al-Mal Bank, an Islamic banking initiative operating under The Muslim Company, established to advance Shariah-compliant financial services as part of the company's broader civilizational mission.
               </p>
             </motion.div>
 
@@ -199,6 +199,7 @@ export default function FounderPage() {
                   { l: "Degree", v: "B.E. Electrical Engineering" },
                   { l: "University", v: "The University of Burdwan, India" },
                   { l: "Founded", v: "The Muslim Company, January 2025" },
+                  { l: "Also Founded", v: "The Bayt Al-Mal Bank" },
                   { l: "Role", v: "Founder & CEO" },
                 ].map((r, i) => (
                   <div key={i}>

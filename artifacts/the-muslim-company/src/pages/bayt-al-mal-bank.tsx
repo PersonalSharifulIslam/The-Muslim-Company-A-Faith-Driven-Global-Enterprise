@@ -45,7 +45,7 @@ const BANK_SCHEMA = {
   "name": "The Bayt Al-Mal Bank",
   "legalName": "The Bayt Al-Mal Bank",
   "url": "https://www.themuslim.company/BaytAlMalBank",
-  "description": "The Bayt Al-Mal Bank is an international Shariah-compliant financial institution under The Muslim Company — built on ethical, interest-free banking for individuals, businesses, and institutions worldwide.",
+  "description": "The Bayt Al-Mal Bank — an international Shariah-compliant financial institution under The Muslim Company, offering ethical, interest-free banking worldwide.",
   "parentOrganization": {
     "@type": "Organization",
     "name": "The Muslim Company",
@@ -101,7 +101,7 @@ export default function BaytAlMalBankPage() {
     if (_can) { _can.setAttribute('href', _url); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = _url; document.head.appendChild(_cl); }
 
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "The Bayt Al-Mal Bank is an international Shariah-compliant financial institution under The Muslim Company — built on ethical, interest-free banking for individuals, businesses, and institutions worldwide.");
+    if (_md) _md.setAttribute('content', "The Bayt Al-Mal Bank — an international Shariah-compliant financial institution under The Muslim Company, offering ethical, interest-free banking worldwide.");
 
     const _ogt = document.querySelector('meta[property="og:title"]');
     if (_ogt) _ogt.setAttribute('content', "The Bayt Al-Mal Bank — The Muslim Company");
@@ -131,7 +131,7 @@ export default function BaytAlMalBankPage() {
     <SiteLayout>
       <Helmet>
         <title>The Bayt Al-Mal Bank — The Muslim Company</title>
-        <meta name="description" content="The Bayt Al-Mal Bank is an international Shariah-compliant financial institution under The Muslim Company — built on ethical, interest-free banking for individuals, businesses, and institutions worldwide." />
+        <meta name="description" content="The Bayt Al-Mal Bank — an international Shariah-compliant financial institution under The Muslim Company, offering ethical, interest-free banking worldwide." />
         <link rel="canonical" href="https://www.themuslim.company/BaytAlMalBank" />
         <meta property="og:title" content="The Bayt Al-Mal Bank — The Muslim Company" />
         <meta property="og:description" content="A Shariah-compliant ethical bank under The Muslim Company — built on Islamic principles of wealth justice, interest-free finance, and civilizational economic development." />

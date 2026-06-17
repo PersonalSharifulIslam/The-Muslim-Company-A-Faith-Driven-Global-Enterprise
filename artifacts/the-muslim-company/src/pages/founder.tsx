@@ -102,6 +102,13 @@ export default function FounderPage() {
         <section className="bg-primary py-24 px-6">
           <div className="container mx-auto max-w-4xl text-center">
             <motion.div initial="hidden" animate="visible" variants={fadeIn}>
+              <div className="mb-8">
+                <img
+                  src="/images/shariful-islam.jpg"
+                  alt="Shariful Islam — Founder & CEO, The Muslim Company"
+                  className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover object-top border-4 border-secondary/30"
+                />
+              </div>
               <p className="font-sans text-xs tracking-[0.4em] uppercase text-secondary mb-4">Founder & CEO</p>
               <h1 className="font-serif text-5xl md:text-7xl text-primary-foreground mb-6">Shariful Islam</h1>
               <p className="font-sans text-base text-primary-foreground/60 max-w-2xl mx-auto">

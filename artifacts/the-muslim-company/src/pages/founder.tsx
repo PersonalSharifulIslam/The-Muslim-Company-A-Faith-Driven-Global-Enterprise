@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { Helmet } from "react-helmet-async";
-import { Quote } from "lucide-react";
+import { Quote, Linkedin, Twitter, Globe2, Award } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 
 const fadeIn = {

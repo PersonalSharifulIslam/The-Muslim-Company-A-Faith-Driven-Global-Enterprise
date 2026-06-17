@@ -1092,6 +1092,35 @@ export default function SectorDetail() {
           </div>
         </section>
 
+        {/* ── FEATURED INITIATIVE ── */}
+        {sector.slug === "islamic-finance-fintech" && (
+          <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
+            <div className="container mx-auto max-w-5xl">
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+                <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-6">Featured Initiative</p>
+                <Link href="/BaytAlMalBank" className="block p-8 lg:p-10 bg-card border border-primary/10 hover:border-secondary/40 transition-colors group">
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                    <div>
+                      <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/70 mb-2">In Development — Launching 2031</p>
+                      <h3 className="font-serif text-2xl md:text-3xl text-primary mb-3 group-hover:text-secondary transition-colors">
+                        The Bayt Al-Mal Bank
+                      </h3>
+                      <p className="font-sans text-sm text-primary/60 leading-relaxed max-w-xl">
+                        The flagship realization of this sector's vision — an international, Shariah-compliant bank built on the Prophetic model of wealth stewardship, serving individuals and institutions worldwide, online and offline.
+                      </p>
+                    </div>
+                    <div className="flex-shrink-0">
+                      <span className="inline-flex items-center gap-2 font-sans text-xs font-bold uppercase tracking-widest text-secondary">
+                        Learn More <ArrowUpRight className="w-4 h-4" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            </div>
+          </section>
+        )}
+
         {/* ── RELATED SECTORS ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10 bg-card">
           <div className="container mx-auto max-w-5xl">

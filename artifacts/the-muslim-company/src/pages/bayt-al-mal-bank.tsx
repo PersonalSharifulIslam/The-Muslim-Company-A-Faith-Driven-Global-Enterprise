@@ -92,6 +92,38 @@ const SERVICES = [
   { title: "Social Finance", items: ["Waqf (Endowment) Management", "Qard al-Hasan (Benevolent Loans)", "Zakat & Sadaqah Fund Management", "Microfinance for Entrepreneurs"] },
 ];
 
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is The Bayt Al-Mal Bank open for customers yet?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not yet. The Bayt Al-Mal Bank is currently in development, building its Shariah governance framework and pursuing regulatory licensing before public launch." }
+    },
+    {
+      "@type": "Question",
+      "name": "When will The Bayt Al-Mal Bank launch?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The Bayt Al-Mal Bank is targeting its first public launch in 2031, following the completion of its Shariah governance framework and regulatory licensing process." }
+    },
+    {
+      "@type": "Question",
+      "name": "Who is behind The Bayt Al-Mal Bank?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The Bayt Al-Mal Bank is founded and led by Shariful Islam, Founder & CEO, as a division of The Muslim Company." }
+    },
+    {
+      "@type": "Question",
+      "name": "How is this different from a conventional bank?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Unlike conventional banks, The Bayt Al-Mal Bank operates entirely free of riba (interest), using Shariah-compliant contracts such as Murabahah, Musharakah, and Mudarabah for all financial products." }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I stay updated on the launch?",
+      "acceptedAnswer": { "@type": "Answer", "text": "You can reach out via the Contact page to express interest and receive updates as The Bayt Al-Mal Bank progresses toward launch." }
+    }
+  ]
+};
+
 export default function BaytAlMalBankPage() {
   useEffect(() => {
     document.title = "The Bayt Al-Mal Bank — The Muslim Company";

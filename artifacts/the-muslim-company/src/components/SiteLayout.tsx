@@ -33,11 +33,12 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       setNavOpen(false);
       const id = href.slice(2);
       if (window.location.pathname === "/") {
-        // Already on home — just scroll
+        // Already on home — just scroll, and record hash in history
+        window.history.pushState(null, "", href);
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       } else {
-        // Navigate to home first, then scroll after render
-        navigate("/");
+        // Navigate to home WITH hash in a single history entry
+        navigate(href);
         setTimeout(() => {
           document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
         }, 150);

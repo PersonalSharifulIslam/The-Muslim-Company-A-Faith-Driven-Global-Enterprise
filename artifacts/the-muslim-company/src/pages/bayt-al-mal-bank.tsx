@@ -166,7 +166,7 @@ export default function BaytAlMalBankPage() {
                 بيت المال — House of Wealth
               </motion.p>
               <motion.p variants={fadeIn} className="font-sans text-base text-primary-foreground/65 max-w-2xl mx-auto leading-relaxed mb-10">
-                A Shariah-compliant ethical banking institution currently in development — built on the Prophetic model of wealth stewardship, committed to interest-free finance, wealth justice, and long-term civilizational economic development.
+                A Shariah-compliant ethical banking institution currently in development — designed to serve individuals, businesses, and institutions worldwide through both online and offline channels. Built on the Prophetic model of wealth stewardship, committed to interest-free finance, wealth justice, and long-term civilizational economic development for all.
               </motion.p>
               <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link href="/contact" className="inline-flex items-center gap-2 border border-primary-foreground/30 text-primary-foreground hover:border-secondary hover:text-secondary font-sans text-xs font-bold uppercase tracking-widest h-12 px-8 transition-colors">
@@ -269,6 +269,36 @@ export default function BaytAlMalBankPage() {
           </div>
         </section>
 
+        {/* Ecosystem */}
+        <section className="py-20 px-6 bg-card">
+          <div className="container mx-auto max-w-5xl">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
+              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">Powered By</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary">A Connected Financial Ecosystem</h2>
+              <p className="font-sans text-sm text-primary/55 mt-4 max-w-2xl mx-auto">
+                The Bayt Al-Mal Bank operates as part of an integrated financial ecosystem within The Muslim Company, built to serve customers globally — online and offline.
+              </p>
+            </motion.div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <motion.div variants={fadeIn} className="p-7 bg-background border border-primary/10">
+                <h3 className="font-serif text-xl text-primary mb-3">DinarX</h3>
+                <p className="font-sans text-xs tracking-widest uppercase text-secondary/70 mb-3">Fintech App</p>
+                <p className="font-sans text-sm text-primary/60 leading-relaxed">
+                  The official fintech application of The Bayt Al-Mal Bank — providing mobile-first access to Shariah-compliant banking, savings, financing, and investment products for customers worldwide.
+                </p>
+              </motion.div>
+              <motion.div variants={fadeIn} className="p-7 bg-background border border-primary/10">
+                <h3 className="font-serif text-xl text-primary mb-3">Dirham Payment Gateway</h3>
+                <p className="font-sans text-xs tracking-widest uppercase text-secondary/70 mb-3">Payment Infrastructure</p>
+                <p className="font-sans text-sm text-primary/60 leading-relaxed">
+                  A Shariah-compliant payment gateway enabling seamless, interest-free transactions for businesses and individuals — supporting both online and offline commerce globally.
+                </p>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Quote */}
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-3xl">
@@ -301,6 +331,19 @@ export default function BaytAlMalBankPage() {
                   <p className="font-sans text-sm text-primary-foreground/60 leading-relaxed">{item.desc}</p>
                 </motion.div>
               ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Shariah Advisory Board */}
+        <section className="py-20 px-6">
+          <div className="container mx-auto max-w-3xl text-center">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-4">Governance</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">Shariah Advisory Board</h2>
+              <p className="font-sans text-sm text-primary/60 leading-relaxed max-w-2xl mx-auto">
+                Shariah Advisory Board — to be announced. The Bayt Al-Mal Bank is committed to assembling a board of respected scholars rooted in mainstream Sunni Islamic jurisprudence, ensuring full Shariah compliance across all products and services before public launch.
+              </p>
             </motion.div>
           </div>
         </section>

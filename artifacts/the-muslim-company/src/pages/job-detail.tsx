@@ -178,7 +178,7 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
     <SiteLayout>
       <div className="py-12 px-6 lg:px-12">
         <div className="container mx-auto max-w-4xl">
-          <a href="/careers" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary/50 hover:text-secondary transition-colors mb-8">
+          <Link href="/careers" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary/50 hover:text-secondary transition-colors mb-8">
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Careers
           </a>
 
@@ -297,7 +297,7 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
                 ) : (
                   <p className="font-sans text-sm text-red-400/70">This position is no longer accepting applications.</p>
                 )}
-                <a href="/careers">
+                <Link href="/careers">
                   <Button variant="outline" className="border-primary/20 text-primary hover:border-secondary rounded-none font-sans text-xs tracking-widest uppercase h-11 px-6">
                     View All Positions
                   </Button>

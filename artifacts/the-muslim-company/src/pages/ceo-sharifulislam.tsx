@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { Quote, Globe, Award, BookOpen, Briefcase, GraduationCap, Building2, Star, ExternalLink, Linkedin } from "lucide-react";
+import { Quote, Globe, Award, BookOpen, Briefcase, GraduationCap, Building2, Star, ExternalLink, Linkedin, Newspaper, Calendar, TrendingUp } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 
 const fadeIn = {
@@ -387,6 +387,21 @@ export default function CeoSharifulIslamPage() {
                   </a>
                 ))}
               </motion.div>
+
+              {/* Stats Bar */}
+              <motion.div variants={fadeIn} className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-14 max-w-2xl mx-auto border-t border-primary-foreground/10 pt-10">
+                {[
+                  { label: "Founded", value: "2025" },
+                  { label: "Sectors", value: "12+" },
+                  { label: "Headquarters", value: "Dhaka" },
+                  { label: "Reach", value: "Global" },
+                ].map((s) => (
+                  <div key={s.label} className="text-center">
+                    <p className="font-serif text-2xl md:text-3xl text-secondary mb-1">{s.value}</p>
+                    <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/45">{s.label}</p>
+                  </div>
+                ))}
+              </motion.div>
             </motion.div>
           </div>
         </section>
@@ -476,6 +491,62 @@ export default function CeoSharifulIslamPage() {
                   </motion.div>
                 ))}
               </div>
+            </motion.div>
+
+            {/* —— CAREER TIMELINE —— */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-20">
+              <SectionLabel>Leadership Journey</SectionLabel>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary mb-10">Career Timeline</h2>
+              <div className="space-y-8">
+                {[
+                  { year: "2018", title: "B.E. Electrical Engineering", desc: "Graduated from the University of Burdwan, India, laying the technical foundation for a career in engineering and systems thinking." },
+                  { year: "2025", title: "Founded The Muslim Company", desc: "Established The Muslim Company in Dhaka, Bangladesh — a diversified global conglomerate guided by Islamic principles and civilizational vision." },
+                  { year: "2025–2026", title: "Appointed Global Peace Ambassador", desc: "Recognized by Global Peace Chain for contributions toward ethical leadership and global peace initiatives." },
+                  { year: "2025–Present", title: "Expansion Across Sectors", desc: "Led the growth of The Muslim Company across technology, finance, education, retail, manufacturing, and humanitarian development." },
+                ].map((item, i) => (
+                  <motion.div key={i} variants={fadeIn} className="flex gap-6 border-l-2 border-secondary/30 pl-6 relative">
+                    <div className="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-secondary" />
+                    <div>
+                      <p className="font-sans text-xs tracking-widest uppercase text-secondary mb-1">{item.year}</p>
+                      <h3 className="font-serif text-lg text-primary mb-1">{item.title}</h3>
+                      <p className="font-sans text-sm text-primary/60 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* —— GUIDING PHILOSOPHY —— */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="mb-20 p-8 bg-card border border-primary/10">
+              <SectionLabel>Guiding Philosophy</SectionLabel>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">Leadership Rooted in Faith</h2>
+              <p className="font-sans text-sm text-primary/65 leading-relaxed mb-4">
+                Shariful Islam's approach to leadership draws directly from Quranic principles and the Prophetic model of stewardship — viewing wealth, authority, and enterprise not as ends in themselves, but as trusts (amanah) to be exercised with justice, accountability, and long-term benefit to society.
+              </p>
+              <p className="font-sans text-sm text-primary/65 leading-relaxed">
+                This philosophy shapes every major decision at The Muslim Company: from the choice to build interest-free financial institutions, to the commitment to humanitarian development, to a workforce policy grounded in dignity and fairness. Business, in this view, is inseparable from ethics — and profit is a means toward civilizational good, not the ultimate goal.
+              </p>
+            </motion.div>
+
+            {/* —— IN THE NEWS —— */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="mb-20">
+              <SectionLabel>Media Coverage</SectionLabel>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary mb-8">In the News</h2>
+              <a
+                href="https://www.openpr.com/news/4523843/the-muslim-company-building-a-faith-driven-global"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-4 p-6 bg-card border border-primary/10 hover:border-secondary/40 transition-colors group"
+              >
+                <Newspaper className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-serif text-lg text-primary mb-1 group-hover:text-secondary transition-colors">
+                    The Muslim Company: Building a Faith-Driven Global Enterprise
+                  </h3>
+                  <p className="font-sans text-xs text-primary/50">OpenPR — Press Release</p>
+                </div>
+                <ExternalLink className="w-4 h-4 text-primary/30 ml-auto flex-shrink-0 mt-1" />
+              </a>
             </motion.div>
 
             {/* —— ACADEMIC + INSPIRATIONS —— */}

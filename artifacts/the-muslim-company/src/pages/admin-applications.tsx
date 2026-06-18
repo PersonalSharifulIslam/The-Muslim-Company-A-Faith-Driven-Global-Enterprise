@@ -65,6 +65,17 @@ export default function AdminApplications() {
     setUpdating(false);
   };
 
+  const bulkUpdateStatus = async (status: string) => {
+    if (selectedIds.length === 0) return;
+    setUpdating(true);
+    try {
+      await supabase.from('applications').update({ status }).in('id', selectedIds);
+      await load();
+      setSelectedIds([]);
+    } catch {}
+    setUpdating(false);
+  };
+
   const toggleSelect = (id: number) => {
     setSelectedIds(prev => prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]);
   };
@@ -145,7 +156,16 @@ export default function AdminApplications() {
           <p className="font-sans text-sm text-primary/50">{apps.length} total applications</p>
         </div>
         {selectedIds.length > 0 && (
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2 flex-wrap items-center">
+            <select
+              onChange={(e) => { if (e.target.value) { bulkUpdateStatus(e.target.value); e.target.value = ""; } }}
+              disabled={updating}
+              defaultValue=""
+              className="h-9 px-3 bg-background border border-primary/15 font-sans text-xs uppercase tracking-widest text-primary focus:outline-none focus:border-secondary disabled:opacity-50"
+            >
+              <option value="" disabled>Set Status for {selectedIds.length} Selected...</option>
+              {ALL_STATUSES.map((s) => <option key={s} value={s}>{STATUS_LABELS[s]}</option>)}
+            </select>
             <Button onClick={() => openInterviewModal()}
               className="bg-blue-600 text-white hover:bg-blue-700 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-4 gap-2">
               <Calendar className="w-3.5 h-3.5" /> Schedule Interview ({selectedIds.length})

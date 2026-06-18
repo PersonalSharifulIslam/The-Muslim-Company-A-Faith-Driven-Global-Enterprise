@@ -7,7 +7,28 @@ import { api } from "@/lib/api";
 import { supabase } from "@/lib/supabase";
 import type { BlogPost } from "@/lib/supabase";
 
-const CATS = ["Technology", "Ethics", "Islamic Civilization", "Business", "Education", "Global Affairs"];
+const CATS = [
+  "Technology & Innovation",
+  "Artificial Intelligence",
+  "Islamic Ethics & Civilization",
+  "Quran & Sunnah Reflections",
+  "Business & Entrepreneurship",
+  "Islamic Finance & Economics",
+  "Leadership & Management",
+  "Education & Knowledge",
+  "Global Affairs & Geopolitics",
+  "Humanitarian & Social Welfare",
+  "Healthcare & Wellbeing",
+  "Environment & Sustainability",
+  "Media & Journalism",
+  "Research & Development",
+  "Culture & Society",
+  "History & Heritage",
+  "Youth & Family",
+  "Company News & Updates",
+  "Career & Professional Growth",
+  "Opinion & Commentary",
+];
 type Form = { title: string; slug: string; category: string; excerpt: string; content: string; image_url: string; author: string; reading_time: number; seo_title: string; meta_description: string; published: boolean };
 const BLANK: Form = { title: "", slug: "", category: CATS[0], excerpt: "", content: "", image_url: "", author: "The Muslim Company", reading_time: 5, seo_title: "", meta_description: "", published: false };
 

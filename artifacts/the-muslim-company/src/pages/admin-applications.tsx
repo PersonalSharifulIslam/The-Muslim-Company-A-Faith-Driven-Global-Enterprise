@@ -225,6 +225,10 @@ export default function AdminApplications() {
               className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-4 gap-2">
               <Send className="w-3.5 h-3.5" /> Send Offer ({selectedIds.length})
             </Button>
+            <Button onClick={() => openMessageModal()}
+              className="bg-gray-700 text-white hover:bg-gray-800 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-4 gap-2">
+              <MessageSquare className="w-3.5 h-3.5" /> Send Message ({selectedIds.length})
+            </Button>
           </div>
         )}
       </div>

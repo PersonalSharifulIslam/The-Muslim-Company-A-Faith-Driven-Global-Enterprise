@@ -6,7 +6,43 @@ import { useAuth } from "@/lib/auth-context";
 import { api } from "@/lib/api";
 import type { Job } from "@/lib/supabase";
 
-const DEPTS = ["Technology", "Engineering", "Operations", "Finance", "Marketing", "HR", "Research", "Media", "Legal"];
+const DEPTS = [
+  "Executive & Strategy",
+  "Technology & Engineering",
+  "Software Development",
+  "Data & AI",
+  "Cybersecurity & IT Infrastructure",
+  "Product Management",
+  "Operations",
+  "Supply Chain & Logistics",
+  "Manufacturing & Production",
+  "Quality Assurance",
+  "Finance & Accounting",
+  "Investment & Treasury",
+  "Islamic Finance & Shariah Compliance",
+  "Marketing & Brand",
+  "Sales & Business Development",
+  "Customer Experience & Support",
+  "Human Resources",
+  "Talent Acquisition & Recruitment",
+  "Learning & Development",
+  "Research & Development",
+  "Innovation Lab",
+  "Media & Communications",
+  "Public Relations",
+  "Legal & Compliance",
+  "Governance & Risk Management",
+  "Procurement",
+  "Real Estate & Facilities",
+  "Healthcare Division",
+  "Retail & E-commerce",
+  "Education & Training",
+  "Humanitarian & Social Welfare",
+  "Sustainability & Environment",
+  "International Affairs & Partnerships",
+  "Administration",
+  "Other",
+];
 const TYPES = ["Full-time", "Part-time", "Remote", "Contract", "Internship"];
 
 type JobForm = { title: string; department: string; employment_type: string; location: string; description: string; responsibilities: string; requirements: string; preferred: string; benefits: string; salary: string; deadline: string; status: string };

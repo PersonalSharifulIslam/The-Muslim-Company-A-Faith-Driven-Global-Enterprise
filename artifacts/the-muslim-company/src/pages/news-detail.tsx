@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";

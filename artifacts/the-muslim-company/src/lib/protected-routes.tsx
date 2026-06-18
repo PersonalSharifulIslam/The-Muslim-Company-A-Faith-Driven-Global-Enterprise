@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'wouter'
 import { useAuth } from './auth-context'
 
@@ -23,15 +23,26 @@ function Spinner() {
 export function AdminRoute({ children }: { children: React.ReactNode }) {
   const { loading, role, session } = useAuth()
   const [, setLocation] = useLocation()
+  const [hasLoadedOnce, setHasLoadedOnce] = useState(false)
 
   useEffect(() => {
-    if (loading) return
-    if (!session) setLocation('/login')
-    else if (role && role !== 'admin') setLocation('/employee/dashboard')
-  }, [loading, session, role])
+    if (!loading) setHasLoadedOnce(true)
+  }, [loading])
 
-  if (loading) return <Spinner />
-  if (!session || role !== 'admin') return <Spinner />
+  useEffect(() => {
+    // Only redirect on a CONFIRMED bad state, never on a transient loading blip
+    if (!hasLoadedOnce) return
+    if (!session) { setLocation('/login'); return; }
+    if (role && role !== 'admin') { setLocation('/employee/dashboard'); return; }
+  }, [hasLoadedOnce, session, role])
+
+  // Before the very first successful auth check, show spinner.
+  // After that, NEVER unmount children for a transient loading/session blip
+  // (e.g. tab visibility change triggering Supabase token refresh) —
+  // this was wiping in-progress admin form data.
+  if (!hasLoadedOnce) return <Spinner />
+  if (!session) return <Spinner />
+  if (role && role !== 'admin') return <Spinner />
   return <>{children}</>
 }
 

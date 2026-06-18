@@ -418,6 +418,10 @@ export default function AdminApplications() {
                   <Button className="w-full bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-10">Download CV</Button>
                 </a>
               )}
+              <Button onClick={() => openMessageModal(selected)}
+                className="w-full bg-gray-700 text-white hover:bg-gray-800 rounded-none uppercase tracking-widest font-sans text-xs h-10 gap-2">
+                <MessageSquare className="w-3.5 h-3.5" /> Send Custom Message
+              </Button>
               {selected.status === 'interview' && selected.interview_datetime && (
                 <div className="border border-blue-400/30 bg-blue-50/50 p-4">
                   <p className="font-sans text-[10px] tracking-widest uppercase text-blue-600 mb-3 flex items-center gap-2">

@@ -8,7 +8,43 @@ import { Button } from "@/components/ui/button";
 
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
 const ROLES = ["employee", "hr", "accountant", "manager", "moderator", "support"];
-const DEPTS = ["Human Resources", "Finance", "Operations", "Marketing", "Technology", "Sales", "Admin", "Management"];
+const DEPTS = [
+  "Executive & Strategy",
+  "Technology & Engineering",
+  "Software Development",
+  "Data & AI",
+  "Cybersecurity & IT Infrastructure",
+  "Product Management",
+  "Operations",
+  "Supply Chain & Logistics",
+  "Manufacturing & Production",
+  "Quality Assurance",
+  "Finance & Accounting",
+  "Investment & Treasury",
+  "Islamic Finance & Shariah Compliance",
+  "Marketing & Brand",
+  "Sales & Business Development",
+  "Customer Experience & Support",
+  "Human Resources",
+  "Talent Acquisition & Recruitment",
+  "Learning & Development",
+  "Research & Development",
+  "Innovation Lab",
+  "Media & Communications",
+  "Public Relations",
+  "Legal & Compliance",
+  "Governance & Risk Management",
+  "Procurement",
+  "Real Estate & Facilities",
+  "Healthcare Division",
+  "Retail & E-commerce",
+  "Education & Training",
+  "Humanitarian & Social Welfare",
+  "Sustainability & Environment",
+  "International Affairs & Partnerships",
+  "Administration",
+  "Other",
+];
 
 type Employee = { id: number; employee_id: string; name: string; email: string; department: string; role: string; position: string; phone: string; joining_date: string; status: string };
 type FormState = { name: string; email: string; password: string; employee_id: string; department: string; role: string; position: string; phone: string; address: string; joining_date: string };

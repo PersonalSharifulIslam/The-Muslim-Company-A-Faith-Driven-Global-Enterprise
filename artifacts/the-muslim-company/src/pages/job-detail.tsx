@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { MapPin, Clock, Calendar, Briefcase, ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";

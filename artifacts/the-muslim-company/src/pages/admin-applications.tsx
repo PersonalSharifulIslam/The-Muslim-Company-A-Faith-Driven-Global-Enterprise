@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Search, X, ExternalLink, Send, Clock, Calendar, CheckSquare, Square } from "lucide-react";
+import { Search, X, ExternalLink, Send, Clock, Calendar, CheckSquare, Square, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminLayout from "@/components/AdminLayout";
 import { supabase } from "@/lib/supabase";
-import { sendInterviewEmail, sendOfferEmail } from "@/lib/email";
+import { sendInterviewEmail, sendOfferEmail, sendCustomMessage } from "@/lib/email";
 import { STATUS_LABELS, STATUS_COLORS } from "@/lib/supabase";
 
 const ALL_STATUSES = ["submitted", "reviewing", "shortlisted", "interview", "offered", "hired", "rejected"];
@@ -34,6 +34,11 @@ export default function AdminApplications() {
   const [interviewType, setInterviewType] = useState("In-Person (Office Address)");
   const [interviewLocation, setInterviewLocation] = useState("");
   const [schedulingInterview, setSchedulingInterview] = useState(false);
+  const [showMessageModal, setShowMessageModal] = useState(false);
+  const [msgSubject, setMsgSubject] = useState("");
+  const [msgBody, setMsgBody] = useState("");
+  const [sendingMessage, setSendingMessage] = useState(false);
+  const [messageSentCount, setMessageSentCount] = useState<number | null>(null);
 
   const load = async () => {
     try {
@@ -146,6 +151,40 @@ export default function AdminApplications() {
       alert('Failed: ' + err.message);
     }
     setSendingOffer(false);
+  };
+
+  const openMessageModal = (app?: App) => {
+    if (app) setSelectedIds([app.id]);
+    setMsgSubject("");
+    setMsgBody("");
+    setMessageSentCount(null);
+    setShowMessageModal(true);
+  };
+
+  const sendBulkCustomMessage = async () => {
+    if (!msgSubject.trim() || !msgBody.trim() || selectedIds.length === 0) return;
+    setSendingMessage(true);
+    let sentCount = 0;
+    try {
+      const targets = apps.filter(a => selectedIds.includes(a.id));
+      for (const app of targets) {
+        try {
+          await sendCustomMessage({
+            to: app.email,
+            name: app.name,
+            position: app.job_title,
+            reference: app.reference_number,
+            subject: msgSubject,
+            message: msgBody,
+          });
+          sentCount++;
+        } catch {}
+      }
+      setMessageSentCount(sentCount);
+    } catch (err: any) {
+      alert("Failed: " + err.message);
+    }
+    setSendingMessage(false);
   };
 
   return (

@@ -73,3 +73,13 @@ export async function sendApplicationConfirmation(data: {
 }) {
   return callEdgeFunction('send-application-confirmation', data)
 }
+export async function sendCustomMessage(data: {
+  to: string
+  name: string
+  position?: string
+  reference?: string
+  subject: string
+  message: string
+}) {
+  return callEdgeFunction('send-custom-message', data)
+}

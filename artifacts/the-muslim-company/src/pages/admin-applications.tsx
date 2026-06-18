@@ -365,6 +365,76 @@ export default function AdminApplications() {
         </div>
       )}
 
+      {/* Custom Message Modal */}
+      {showMessageModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4"
+          onClick={() => setShowMessageModal(false)}>
+          <div className="bg-white border border-gray-200 w-full max-w-lg shadow-2xl rounded-lg max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 sticky top-0 bg-white">
+              <h2 className="font-serif text-lg text-gray-900">Send Custom Message</h2>
+              <button onClick={() => setShowMessageModal(false)} className="text-gray-400 hover:text-gray-600">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="p-6 space-y-4">
+              <p className="font-sans text-xs text-gray-500">
+                Sending to {selectedIds.length} candidate{selectedIds.length !== 1 ? "s" : ""}
+                {selectedIds.length <= 3 && (
+                  <span className="text-gray-700"> — {apps.filter(a => selectedIds.includes(a.id)).map(a => a.name).join(", ")}</span>
+                )}
+              </p>
+
+              {messageSentCount !== null ? (
+                <div className="bg-green-50 border border-green-200 p-4 rounded">
+                  <p className="font-sans text-sm text-green-700 font-semibold">✓ Message sent successfully!</p>
+                  <p className="font-sans text-xs text-green-600 mt-1">Delivered to {messageSentCount} of {selectedIds.length} recipient(s).</p>
+                  <button onClick={() => { setShowMessageModal(false); setSelectedIds([]); }}
+                    className="mt-3 px-4 h-9 bg-green-600 text-white rounded font-sans text-xs font-semibold hover:bg-green-700">
+                    Done
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div>
+                    <label className="font-sans text-xs font-semibold text-gray-700 block mb-2">Subject *</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Additional documents required, Application update..."
+                      value={msgSubject}
+                      onChange={(e) => setMsgSubject(e.target.value)}
+                      className="w-full h-10 px-3 border border-gray-300 rounded font-sans text-sm text-gray-900 focus:outline-none focus:border-gray-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-sans text-xs font-semibold text-gray-700 block mb-2">Message *</label>
+                    <textarea
+                      placeholder="Write your message here. Each blank line starts a new paragraph in the email."
+                      value={msgBody}
+                      onChange={(e) => setMsgBody(e.target.value)}
+                      rows={8}
+                      className="w-full px-3 py-2 border border-gray-300 rounded font-sans text-sm text-gray-900 focus:outline-none focus:border-gray-500 resize-none"
+                    />
+                    <p className="font-sans text-[11px] text-gray-400 mt-1">Sent using The Muslim Company's official branded email template.</p>
+                  </div>
+                  <div className="flex gap-3 pt-2">
+                    <button onClick={sendBulkCustomMessage}
+                      disabled={sendingMessage || !msgSubject.trim() || !msgBody.trim()}
+                      className="flex-1 bg-gray-800 text-white rounded font-sans text-sm font-semibold h-10 disabled:opacity-50 hover:bg-gray-900">
+                      {sendingMessage ? "Sending..." : `Send to ${selectedIds.length} Candidate${selectedIds.length !== 1 ? "s" : ""}`}
+                    </button>
+                    <button onClick={() => setShowMessageModal(false)}
+                      className="px-5 border border-gray-300 rounded font-sans text-sm text-gray-600 h-10 hover:bg-gray-50">
+                      Cancel
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Detail Panel */}
       {selected && (
         <div className="fixed inset-0 z-50 flex items-start justify-end bg-black/50">

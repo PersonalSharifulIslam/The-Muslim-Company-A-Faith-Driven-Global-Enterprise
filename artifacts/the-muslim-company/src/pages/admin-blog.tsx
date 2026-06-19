@@ -32,7 +32,7 @@ const CATS = [
 type Form = { title: string; slug: string; category: string; excerpt: string; content: string; image_url: string; author: string; reading_time: number; seo_title: string; meta_description: string; published: boolean };
 const BLANK: Form = { title: "", slug: "", category: CATS[0], excerpt: "", content: "", image_url: "", author: "The Muslim Company", reading_time: 5, seo_title: "", meta_description: "", published: false };
 
-function slugify(s: string) { return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") + "-" + Date.now(); }
+function slugify(s: string) { return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""); }
 
 export default function AdminBlog() {
   const { user, loading } = useAuth();

@@ -1,6 +1,19 @@
+// Map of old/legacy slugs to their corrected canonical slugs.
+// Add an entry here whenever a published blog slug is changed,
+// so old shared links / indexed URLs 301-redirect instead of 404ing.
+const SLUG_REDIRECTS: Record<string, string> = {
+  'digital-twin-earth-the-ai-civilization-model-that-could-predict-the-future-by-2040-1779284040790':
+    'digital-twin-earth-the-ai-civilization-model-that-could-predict-the-future-by-2040',
+}
+
 export async function onRequestGet(context: any) {
   const { request, env, params } = context
   const slug = params.slug as string
+
+  // 301 redirect legacy slugs to their new canonical URL
+  if (SLUG_REDIRECTS[slug]) {
+    return Response.redirect(`https://www.themuslim.company/blog/${SLUG_REDIRECTS[slug]}`, 301)
+  }
   const SUPABASE_URL = env.VITE_SUPABASE_URL || env.SUPABASE_URL
   const SUPABASE_KEY = env.VITE_SUPABASE_ANON_KEY || env.SUPABASE_ANON_KEY
 

@@ -11,7 +11,7 @@ const CATS = ["Press Release", "Company Update", "Partnership", "Media Coverage"
 type Form = { title: string; slug: string; category: string; excerpt: string; content: string; image_url: string; featured: boolean; published: boolean };
 const BLANK: Form = { title: "", slug: "", category: CATS[0], excerpt: "", content: "", image_url: "", featured: false, published: false };
 
-function slugify(s: string) { return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") + "-" + Date.now(); }
+function slugify(s: string) { return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""); }
 
 export default function AdminNewsroom() {
   const { user, loading } = useAuth();

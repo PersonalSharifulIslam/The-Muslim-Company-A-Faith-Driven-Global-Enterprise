@@ -7,14 +7,14 @@ import { api } from "@/lib/api"
 interface Doc { id: number; name: string; category: string; file_url: string; description: string; created_at: string }
 
 export default function EmployeeDocuments() {
-  const { profile } = useAuth()
+  const { profile, session, loading } = useAuth()
   const [docs, setDocs] = useState<Doc[]>([])
 
   useEffect(() => {
-    if (profile?.employee_id) {
+    if (session && profile?.employee_id) {
       api.get("/employee/documents").then(d => setDocs(d || [])).catch(() => {})
     }
-  }, [profile])
+  }, [session, profile])
 
   if (loading || !session || !profile) return (
     <div className="min-h-screen bg-[#0a1a0e] flex items-center justify-center">

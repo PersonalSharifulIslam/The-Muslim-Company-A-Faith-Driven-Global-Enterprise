@@ -653,8 +653,18 @@ async function routePut(path: string, body: any): Promise<any> {
   }
   const empMatch = path.match(/^\/admin\/employees\/(\d+)$/)
   if (empMatch) {
-    const { data, error } = await supabase.from('employees').update(body).eq('id', parseInt(empMatch[1])).select().single()
-    if (error) throw error; return data
+    // access_level/access_department drive user_roles, not the employees table itself
+    const { access_level, access_department, ...empBody } = body
+    const { data, error } = await supabase.from('employees').update(empBody).eq('id', parseInt(empMatch[1])).select().single()
+    if (error) throw error
+    // If an access level was supplied, sync it into user_roles for this employee
+    const VALID_ACCESS_LEVELS = ['admin','executive','vp','director','hr_manager','finance_manager','department_manager','team_lead','recruiter','content_editor','employee']
+    if (access_level && VALID_ACCESS_LEVELS.includes(access_level) && data?.employee_id) {
+      await supabase.from('user_roles')
+        .update({ role: access_level, department: access_department ?? data.department ?? null })
+        .eq('employee_id', data.employee_id)
+    }
+    return data
   }
   if (path === '/employee/profile') {
     const { data: { user } } = await supabase.auth.getUser()

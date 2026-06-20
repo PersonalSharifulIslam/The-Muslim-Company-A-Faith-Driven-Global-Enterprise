@@ -13,7 +13,7 @@ export async function onRequestGet(context: any) {
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Privacy Policy — The Muslim Company" />
   <meta property="og:description" content="Privacy Policy of The Muslim Company — how we protect your personal information." />
-  <meta property="og:image" content="https://www.themuslim.company/images/privacy-policy.png" />
+  <meta property="og:image" content="https://www.themuslim.company/images/privacy-policy.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Privacy Policy — The Muslim Company" />
@@ -22,7 +22,7 @@ export async function onRequestGet(context: any) {
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Privacy Policy — The Muslim Company" />
   <meta name="twitter:description" content="Privacy Policy of The Muslim Company — how we protect your personal information." />
-  <meta name="twitter:image" content="https://www.themuslim.company/images/privacy-policy.png" />
+  <meta name="twitter:image" content="https://www.themuslim.company/images/privacy-policy.jpg" />
   <meta name="twitter:site" content="@officialtmchq" />
   <link rel="canonical" href="https://www.themuslim.company/privacy-policy" />
 </head>

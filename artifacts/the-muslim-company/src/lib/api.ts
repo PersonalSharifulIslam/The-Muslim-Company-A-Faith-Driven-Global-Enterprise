@@ -1,5 +1,24 @@
 import { supabase } from './supabase'
 
+// Fire-and-forget audit trail write. Never blocks or throws into the caller —
+// a failed audit write should never break the actual admin action.
+export async function logAudit(action: string, target_table?: string, target_id?: string, details?: any) {
+  try {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return
+    const { data: roleRow } = await supabase.from('user_roles').select('role').eq('id', user.id).single()
+    await supabase.from('audit_log').insert({
+      actor_id: user.id,
+      actor_email: user.email,
+      actor_role: roleRow?.role || null,
+      action,
+      target_table: target_table || null,
+      target_id: target_id || null,
+      details: details || null,
+    })
+  } catch { /* audit logging must never break the calling action */ }
+}
+
 async function routeGet(path: string): Promise<any> {
   if (path === '/admin/stats') {
     const [j,a,n,no,b,e] = await Promise.all([
@@ -319,6 +338,17 @@ async function routeGet(path: string): Promise<any> {
       .from('departments')
       .select('*')
       .order('name', { ascending: true })
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Leadership-only audit trail
+  if (path === '/admin/audit-log') {
+    const { data, error } = await supabase
+      .from('audit_log')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(500)
     if (error) throw new Error(error.message)
     return data
   }

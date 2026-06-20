@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
 import { supabase } from './supabase'
 import type { UserProfile, UserRole } from './supabase'
+import { isAdminAreaRole } from './supabase'
 
 interface AuthState {
   session:  Session | null
@@ -42,7 +43,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       const role = roleData.role as UserRole
 
-      if (role === 'admin') {
+      // The owner/admin account has no linked employee_id (it's the
+      // single super-admin login, not a regular staff record).
+      if (role === 'admin' && !roleData.employee_id) {
         setState({
           session, user, role,
           profile: { id: user.id, role: 'admin', email: user.email ?? '' },
@@ -51,14 +54,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return
       }
 
-      const { data: emp } = await supabase
-        .from('employees').select('*')
-        .eq('employee_id', roleData.employee_id).single()
+      // Every other role (executive, vp, director, hr_manager,
+      // finance_manager, department_manager, team_lead, recruiter,
+      // content_editor, employee) is a real person on the employees
+      // table — load their name/department/position for both the
+      // Employee Portal and the admin sidebar.
+      const { data: emp } = roleData.employee_id
+        ? await supabase.from('employees').select('*').eq('employee_id', roleData.employee_id).single()
+        : { data: null }
 
       setState({
         session, user, role,
         profile: {
-          id: user.id, role: 'employee', email: user.email ?? '',
+          id: user.id, role, email: user.email ?? '',
           employee_id: roleData.employee_id,
           name: emp?.name, department: emp?.department,
           position: emp?.position, profile_image: emp?.profile_image,
@@ -147,5 +155,6 @@ export function useAuth() {
   return ctx
 }
 
-export const useIsAdmin    = () => useAuth().role === 'admin'
-export const useIsEmployee = () => useAuth().role === 'employee'
+export const useIsAdmin      = () => useAuth().role === 'admin'
+export const useIsEmployee   = () => useAuth().role === 'employee'
+export const useIsAdminArea  = () => isAdminAreaRole(useAuth().role)

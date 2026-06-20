@@ -964,12 +964,26 @@ async function routePut(path: string, body: any): Promise<any> {
     return data
   }
 
+  // Admin/HR: approve or reject a submitted document
+  const docMatch = path.match(/^\/admin\/documents\/(\d+)$/)
+  if (docMatch) {
+    const { status, review_note } = body
+    if (!['approved', 'rejected'].includes(status)) throw new Error('Invalid status')
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data, error } = await supabase.from('employee_documents').update({
+      status, review_note: review_note || '', reviewed_by: user?.id || null, reviewed_at: new Date().toISOString(),
+    }).eq('id', docMatch[1]).select().single()
+    if (error) throw new Error(error.message)
+    logAudit(`document_${status}`, 'employee_documents', docMatch[1], { status })
+    return data
+  }
+
   // Admin: Update Task
   const taskMatch_4 = path.match(/^\/admin\/tasks\/(\d+)$/)
   if (taskMatch_4) {
     const { data, error } = await supabase
       .from('tasks').update({ ...body, updated_at: new Date().toISOString() })
-      .eq('id', taskMatch[1]).select().single()
+      .eq('id', taskMatch_4[1]).select().single()
     if (error) throw new Error(error.message)
     return data
   }

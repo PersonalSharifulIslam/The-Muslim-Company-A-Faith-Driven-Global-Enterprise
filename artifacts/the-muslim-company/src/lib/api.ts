@@ -34,7 +34,19 @@ async function routeGet(path: string): Promise<any> {
   }
   if (path === '/admin/employees' || path === '/employees') {
     const { data, error } = await supabase.from('employees').select('*').order('created_at', { ascending: false })
-    if (error) throw error; return data
+    if (error) throw error
+    // Attach each employee's current access_level (user_roles.role) for display in the admin UI.
+    const ids = (data || []).map((e: any) => e.employee_id).filter(Boolean)
+    if (ids.length) {
+      const { data: roleRows } = await supabase.from('user_roles').select('employee_id, role, department').in('employee_id', ids)
+      const roleMap = new Map((roleRows || []).map((r: any) => [r.employee_id, r]))
+      return (data || []).map((e: any) => ({
+        ...e,
+        access_level: roleMap.get(e.employee_id)?.role || 'employee',
+        access_department: roleMap.get(e.employee_id)?.department || null,
+      }))
+    }
+    return data
   }
   if (path.startsWith('/jobs/')) {
     const slug = path.replace('/jobs/', '')

@@ -227,10 +227,17 @@ export default function AdminEmployees() {
                   </select>
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/40 block mb-1.5">Role *</label>
+                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/40 block mb-1.5">Role / Title *</label>
                   <select value={form.role} onChange={(e) => setForm((f) => ({ ...f, role: e.target.value }))} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     {ROLES.map((r) => <option key={r} className="capitalize">{r}</option>)}
                   </select>
+                </div>
+                <div>
+                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/40 block mb-1.5">Admin Access Level *</label>
+                  <select value={form.access_level} onChange={(e) => setForm((f) => ({ ...f, access_level: e.target.value }))} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
+                    {ACCESS_LEVELS.map((a) => <option key={a} value={a}>{ACCESS_LEVEL_LABELS[a]}</option>)}
+                  </select>
+                  <p className="font-sans text-[9px] text-primary/30 mt-1">Controls what this person can see/do in the admin panel. Most staff should stay "Employee".</p>
                 </div>
                 <div>
                   <label className="font-sans text-[10px] tracking-widest uppercase text-primary/40 block mb-1.5">Joining Date</label>
@@ -267,16 +274,16 @@ export default function AdminEmployees() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-primary/10 bg-primary/3">
-                  {["Employee ID", "Name", "Department", "Role", "Phone", "Joined", "Status", "Actions"].map((h) => (
+                  {["Employee ID", "Name", "Department", "Role", "Access Level", "Phone", "Joined", "Status", "Actions"].map((h) => (
                     <th key={h} className="px-4 py-3 text-left font-sans text-[9px] tracking-widest uppercase text-primary/30">{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {fetching ? (
-                  <tr><td colSpan={8} className="px-4 py-10 text-center"><div className="h-4 bg-primary/5 animate-pulse mx-auto w-32" /></td></tr>
+                  <tr><td colSpan={9} className="px-4 py-10 text-center"><div className="h-4 bg-primary/5 animate-pulse mx-auto w-32" /></td></tr>
                 ) : filtered.length === 0 ? (
-                  <tr><td colSpan={8} className="px-4 py-12 text-center font-sans text-sm text-primary/30">No employees found</td></tr>
+                  <tr><td colSpan={9} className="px-4 py-12 text-center font-sans text-sm text-primary/30">No employees found</td></tr>
                 ) : filtered.map((e) => (
                   <tr key={e.id} className="border-b border-primary/5 hover:bg-secondary/3 transition-colors">
                     <td className="px-4 py-3 font-mono text-xs text-secondary font-bold">{e.employee_id}</td>
@@ -287,6 +294,9 @@ export default function AdminEmployees() {
                     <td className="px-4 py-3 font-sans text-xs text-primary/60">{e.department}</td>
                     <td className="px-4 py-3">
                       <span className={`font-sans text-[9px] px-2 py-0.5 font-bold uppercase tracking-wide ${ROLE_COLORS[e.role] || "bg-white/5 text-white/40"}`}>{e.role}</span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className={`font-sans text-[9px] px-2 py-0.5 font-bold uppercase tracking-wide ${ACCESS_LEVEL_COLORS[e.access_level || "employee"]}`}>{ACCESS_LEVEL_LABELS[e.access_level || "employee"]}</span>
                     </td>
                     <td className="px-4 py-3 font-sans text-xs text-primary/50">{e.phone || "—"}</td>
                     <td className="px-4 py-3 font-sans text-xs text-primary/50">{e.joining_date ? new Date(e.joining_date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "—"}</td>

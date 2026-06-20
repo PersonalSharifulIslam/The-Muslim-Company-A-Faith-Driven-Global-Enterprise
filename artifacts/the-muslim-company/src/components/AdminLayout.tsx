@@ -3,23 +3,52 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth-context";
 import {
   LayoutDashboard, Briefcase, Users, Newspaper, Bell, BookOpen, LogOut, Menu, X, UserSquare2,
+  CalendarDays, Clock, CheckSquare, Wallet, Building2,
 } from "lucide-react";
 import logo from "@/assets/images/logo.png";
 
+// Each nav item declares which roles may see it.
+// "admin" and "executive" implicitly see everything (full company-wide visibility).
 const ADMIN_NAV = [
-  { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
-  { label: "Careers", href: "/admin/careers", icon: Briefcase },
-  { label: "Applications", href: "/admin/applications", icon: Users },
-  { label: "Newsroom & PR", href: "/admin/newsroom", icon: Newspaper },
-  { label: "Notice & Event", href: "/admin/notices", icon: Bell },
-  { label: "Blog", href: "/admin/blog", icon: BookOpen },
-  { label: "Employees", href: "/admin/employees", icon: UserSquare2 },
+  { label: "Dashboard",       href: "/admin/dashboard",    icon: LayoutDashboard, roles: ["all"] },
+  { label: "Careers",         href: "/admin/careers",      icon: Briefcase,       roles: ["admin", "executive", "hr_manager", "recruiter"] },
+  { label: "Applications",    href: "/admin/applications", icon: Users,           roles: ["admin", "executive", "hr_manager", "recruiter"] },
+  { label: "Employees",       href: "/admin/employees",    icon: UserSquare2,     roles: ["admin", "executive", "vp", "director", "hr_manager", "department_manager", "team_lead"] },
+  { label: "Attendance",      href: "/admin/attendance",   icon: Clock,           roles: ["admin", "executive", "vp", "director", "hr_manager", "department_manager", "team_lead"] },
+  { label: "Leave Requests",  href: "/admin/leaves",       icon: CalendarDays,    roles: ["admin", "executive", "vp", "director", "hr_manager", "department_manager"] },
+  { label: "Tasks",           href: "/admin/tasks",        icon: CheckSquare,     roles: ["admin", "executive", "vp", "director", "hr_manager", "department_manager", "team_lead"] },
+  { label: "Payroll",         href: "/admin/payroll",      icon: Wallet,          roles: ["admin", "executive", "hr_manager", "finance_manager"] },
+  { label: "Departments",     href: "/admin/departments",  icon: Building2,       roles: ["admin", "executive", "vp", "director", "hr_manager"] },
+  { label: "Newsroom & PR",   href: "/admin/newsroom",     icon: Newspaper,       roles: ["admin", "executive", "content_editor"] },
+  { label: "Notice & Event",  href: "/admin/notices",      icon: Bell,            roles: ["admin", "executive", "content_editor"] },
+  { label: "Blog",            href: "/admin/blog",         icon: BookOpen,        roles: ["admin", "executive", "content_editor"] },
 ];
 
+const ROLE_LABELS: Record<string, string> = {
+  admin: "Administrator",
+  executive: "Executive (C-Suite)",
+  vp: "Vice President",
+  director: "Director",
+  hr_manager: "HR Manager",
+  finance_manager: "Finance Manager",
+  department_manager: "Department Manager",
+  team_lead: "Team Lead",
+  recruiter: "Recruiter",
+  content_editor: "Content Editor",
+  employee: "Employee",
+};
+
+function visibleNav(role: string | null) {
+  if (!role) return [];
+  return ADMIN_NAV.filter(item => item.roles.includes("all") || item.roles.includes(role));
+}
+
 export default function AdminLayout({ children, current }: { children: React.ReactNode; current: string }) {
-  const { signOut, user } = useAuth();
+  const { signOut, user, role } = useAuth();
   const [, setLocation] = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const nav = visibleNav(role ?? null);
 
   const handleSignOut = async () => {
     await signOut();
@@ -38,8 +67,8 @@ export default function AdminLayout({ children, current }: { children: React.Rea
             <p className="font-sans text-[9px] tracking-widest uppercase text-secondary mt-0.5">Admin Panel</p>
           </div>
         </div>
-        <nav className="flex-1 px-4 py-6 space-y-1">
-          {ADMIN_NAV.map((item) => {
+        <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+          {nav.map((item) => {
             const Icon = item.icon;
             const active = current === item.href;
             return (
@@ -59,7 +88,12 @@ export default function AdminLayout({ children, current }: { children: React.Rea
           })}
         </nav>
         <div className="px-4 py-4 border-t border-primary-foreground/10">
-          <p className="font-sans text-[10px] text-primary-foreground/30 mb-3 px-4">{user?.email}</p>
+          <p className="font-sans text-[10px] text-primary-foreground/30 mb-1 px-4">{user?.email}</p>
+          {role && (
+            <p className="font-sans text-[9px] tracking-widest uppercase text-secondary/60 mb-3 px-4">
+              {ROLE_LABELS[role] || role}
+            </p>
+          )}
           <button
             onClick={handleSignOut}
             className="flex items-center gap-3 px-4 py-3 w-full font-sans text-xs tracking-wide text-primary-foreground/50 hover:text-secondary transition-colors"

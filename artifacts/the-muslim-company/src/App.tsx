@@ -53,8 +53,18 @@ import { AdminRoute, EmployeeRoute } from "@/lib/protected-routes";
 
 const queryClient = new QueryClient();
 
+function PageLoader() {
+  return (
+    <div style={{ minHeight: "60vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ width: 32, height: 32, border: "3px solid #d4af37", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
+      <style>{"@keyframes spin { to { transform: rotate(360deg); } }"}</style>
+    </div>
+  );
+}
+
 function Router() {
   return (
+    <Suspense fallback={<PageLoader />}>
     <Switch>
       {/* Public routes */}
       <Route path="/" component={Home} />

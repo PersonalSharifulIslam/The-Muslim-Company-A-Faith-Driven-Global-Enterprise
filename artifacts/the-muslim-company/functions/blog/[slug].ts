@@ -51,7 +51,7 @@ export async function onRequestGet(context: any) {
 
   const title = `${post.title} — The Muslim Company Blog`
   const description = post.excerpt?.slice(0, 160) || 'Read this article on The Muslim Company Blog.'
-  const image = post.image_url || 'https://www.themuslim.company/og-image.png'
+  const image = post.image_url || 'https://www.themuslim.company/opengraph.jpg'
   const url = `https://www.themuslim.company/blog/${slug}`
 
   if (isCrawler) {

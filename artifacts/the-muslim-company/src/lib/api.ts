@@ -411,6 +411,7 @@ async function routePost(path: string, body: any): Promise<any> {
     if (!res.ok || result.error) {
       throw new Error(result.error || 'Failed to create employee')
     }
+    logAudit('employee_created', 'employees', result.employee?.employee_id, { name: body.name, department: body.department, access_level: body.access_level })
     return result.employee
   }
   // Admin: create task
@@ -616,6 +617,7 @@ async function routePost(path: string, body: any): Promise<any> {
       assigned_by: assigned_by || 'Admin',
     }).select().single()
     if (error) throw new Error(error.message)
+    logAudit('task_assigned', 'tasks', String(data.id), { employee_id, title, priority })
     return data
   }
 
@@ -635,6 +637,7 @@ async function routePost(path: string, body: any): Promise<any> {
       notes: notes || '',
     }).select().single()
     if (error) throw new Error(error.message)
+    logAudit('payroll_created', 'payroll', String(data.id), { employee_id, month, net_salary: net })
     return data
   }
 
@@ -802,6 +805,7 @@ async function routePut(path: string, body: any): Promise<any> {
       .from('leave_requests').update(updates)
       .eq('id', leaveMatch[1]).select().single()
     if (error) throw new Error(error.message)
+    if (status) logAudit(`leave_${status}`, 'leave_requests', leaveMatch[1], { status, admin_note })
     return data
   }
 

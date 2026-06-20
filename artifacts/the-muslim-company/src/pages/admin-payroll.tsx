@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Plus, Check, X, Edit2, Trash2, AlertCircle } from "lucide-react";
+import { Plus, Check, X, Edit2, Trash2, AlertCircle, Download } from "lucide-react";
+import { exportToCSV } from "@/lib/csv-export";
 import AdminLayout from "@/components/AdminLayout";
 import { api } from "@/lib/api";
 
@@ -91,10 +92,26 @@ export default function AdminPayroll() {
             <h1 className="font-serif text-2xl text-primary">Payroll Management</h1>
             <p className="font-sans text-xs text-primary/50 mt-1">Manage employee salaries and payments</p>
           </div>
-          <button onClick={() => { setShowForm(true); setEditing(null); setForm(EMPTY); }}
-            className="flex items-center gap-2 bg-secondary text-primary font-sans text-xs uppercase tracking-widest h-9 px-4">
-            <Plus className="w-4 h-4" /> Add Payroll Entry
-          </button>
+          <div className="flex gap-2">
+            <button onClick={() => exportToCSV(`payroll-${filterMonth}`, filtered.map(r => ({
+              Employee: r.employees?.name || r.employee_id,
+              Department: r.employees?.department || "",
+              Month: r.month,
+              "Basic Salary": r.basic_salary,
+              Allowances: r.allowances || 0,
+              Deductions: r.deductions || 0,
+              "Net Salary": r.net_salary,
+              "Payment Method": r.payment_method,
+              Status: r.status,
+            })))}
+              className="flex items-center gap-2 border border-primary/20 text-primary font-sans text-xs uppercase tracking-widest h-9 px-4 hover:border-secondary transition-colors">
+              <Download className="w-4 h-4" /> Export CSV
+            </button>
+            <button onClick={() => { setShowForm(true); setEditing(null); setForm(EMPTY); }}
+              className="flex items-center gap-2 bg-secondary text-primary font-sans text-xs uppercase tracking-widest h-9 px-4">
+              <Plus className="w-4 h-4" /> Add Payroll Entry
+            </button>
+          </div>
         </div>
 
         {msg && (

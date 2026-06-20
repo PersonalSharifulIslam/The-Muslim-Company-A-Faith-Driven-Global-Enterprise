@@ -342,6 +342,16 @@ async function routeGet(path: string): Promise<any> {
     return data
   }
 
+  // List onboarding invites (never selects submitted_password_temp)
+  if (path === '/admin/invites') {
+    const { data, error } = await supabase
+      .from('onboarding_invites')
+      .select('id, token, department, position, access_level, status, submitted_name, submitted_email, submitted_phone, submitted_address, submitted_joining_date, submitted_at, review_note, resulting_employee_id, expires_at, created_at')
+      .order('created_at', { ascending: false })
+    if (error) throw new Error(error.message)
+    return data
+  }
+
   // Leadership-only audit trail
   if (path === '/admin/audit-log') {
     const { data, error } = await supabase
@@ -691,6 +701,40 @@ async function routePost(path: string, body: any): Promise<any> {
     return { sent: targetEmployeeIds.length }
   }
 
+  // Generate a new onboarding invite link
+  if (path === '/admin/invites') {
+    const { department, position, access_level } = body
+    if (!department) throw new Error('Department is required')
+    const VALID_ACCESS_LEVELS = ['admin','executive','vp','director','hr_manager','finance_manager','department_manager','team_lead','recruiter','content_editor','employee']
+    const level = VALID_ACCESS_LEVELS.includes(access_level) ? access_level : 'employee'
+    const { data: { user } } = await supabase.auth.getUser()
+    // Random URL-safe token
+    const token = Array.from(crypto.getRandomValues(new Uint8Array(24)))
+      .map(b => b.toString(36)).join('').slice(0, 28)
+    const { data, error } = await supabase.from('onboarding_invites').insert({
+      token, department, position: position || '', access_level: level, created_by: user?.id || null,
+    }).select().single()
+    if (error) throw new Error(error.message)
+    logAudit('invite_created', 'onboarding_invites', String(data.id), { department, access_level: level })
+    return data
+  }
+
+  // Approve/reject a submitted invite — delegates to the service-role function
+  // because it needs to create an actual Supabase Auth user.
+  if (path === '/admin/invites/review') {
+    const { data: { session } } = await supabase.auth.getSession()
+    const authToken = session?.access_token ?? ''
+    const res = await fetch('/api/admin/onboard-review', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
+      body: JSON.stringify(body),
+    })
+    const result = await res.json() as any
+    if (!res.ok || result.error) throw new Error(result.error || 'Failed to review invite')
+    logAudit(`invite_${body.action}d`, 'onboarding_invites', String(body.invite_id), { resulting_employee_id: result.employee_id })
+    return result
+  }
+
   throw new Error(`POST ${path} not implemented`)
 }
 
@@ -1016,6 +1060,14 @@ async function routeDel(path: string): Promise<any> {
   const delDeptMatch_2 = path.match(/^\/admin\/departments\/(\d+)$/)
   if (delDeptMatch_2) {
     const { error } = await supabase.from('departments').delete().eq('id', delDeptMatch[1])
+    if (error) throw new Error(error.message)
+    return { success: true }
+  }
+
+  // Revoke an invite link
+  const delInviteMatch = path.match(/^\/admin\/invites\/(\d+)$/)
+  if (delInviteMatch) {
+    const { error } = await supabase.from('onboarding_invites').delete().eq('id', delInviteMatch[1])
     if (error) throw new Error(error.message)
     return { success: true }
   }

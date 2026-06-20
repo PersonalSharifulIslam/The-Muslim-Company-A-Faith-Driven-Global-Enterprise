@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'wouter'
 import { useAuth } from './auth-context'
+import { isAdminAreaRole as _isAdminAreaRole } from './supabase'
 
 function Spinner() {
   return (
@@ -20,27 +21,10 @@ function Spinner() {
   )
 }
 
-// Full corporate role hierarchy. Any role in this list can reach the
-// /admin/* area (AdminRoute) — what they can actually SEE inside is
-// further filtered by AdminLayout nav + enforced by Supabase RLS.
-export const ADMIN_AREA_ROLES = [
-  'admin',
-  'executive',
-  'vp',
-  'director',
-  'hr_manager',
-  'finance_manager',
-  'department_manager',
-  'team_lead',
-  'recruiter',
-  'content_editor',
-] as const
-
-export type AdminAreaRole = typeof ADMIN_AREA_ROLES[number]
-
-export function isAdminAreaRole(role: string | null): role is AdminAreaRole {
-  return !!role && (ADMIN_AREA_ROLES as readonly string[]).includes(role)
-}
+// Single source of truth for which roles can reach /admin/* lives in
+// src/lib/supabase.ts (ADMIN_AREA_ROLES / isAdminAreaRole), re-exported
+// here for convenience so existing imports from protected-routes keep working.
+export { ADMIN_AREA_ROLES, isAdminAreaRole } from './supabase'
 
 export function AdminRoute({ children }: { children: React.ReactNode }) {
   const { loading, role, session } = useAuth()
@@ -55,7 +39,7 @@ export function AdminRoute({ children }: { children: React.ReactNode }) {
     // Only redirect on a CONFIRMED bad state, never on a transient loading blip
     if (!hasLoadedOnce) return
     if (!session) { setLocation('/login'); return; }
-    if (role && !isAdminAreaRole(role)) { setLocation('/employee/dashboard'); return; }
+    if (role && !_isAdminAreaRole(role)) { setLocation('/employee/dashboard'); return; }
   }, [hasLoadedOnce, session, role])
 
   // Before the very first successful auth check, show spinner.
@@ -64,7 +48,7 @@ export function AdminRoute({ children }: { children: React.ReactNode }) {
   // this was wiping in-progress admin form data.
   if (!hasLoadedOnce) return <Spinner />
   if (!session) return <Spinner />
-  if (role && !isAdminAreaRole(role)) return <Spinner />
+  if (role && !_isAdminAreaRole(role)) return <Spinner />
   return <>{children}</>
 }
 

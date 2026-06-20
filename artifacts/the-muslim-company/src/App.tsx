@@ -22,6 +22,11 @@ import AdminNewsroom from "@/pages/admin-newsroom";
 import AdminNotices from "@/pages/admin-notices";
 import AdminBlog from "@/pages/admin-blog";
 import AdminEmployees from "@/pages/admin-employees";
+import AdminLeaves from "@/pages/admin-leaves";
+import AdminAttendance from "@/pages/admin-attendance";
+import AdminTasks from "@/pages/admin-tasks";
+import AdminPayroll from "@/pages/admin-payroll";
+import AdminDepartments from "@/pages/admin-departments";
 import EmployeeDashboard from "@/pages/employee-dashboard";
 import EmployeeAttendance from "@/pages/employee-attendance";
 import EmployeeLeave from "@/pages/employee-leave";
@@ -41,10 +46,6 @@ import SectorDetail from "@/pages/sector-detail";
 import ContactPage from "@/pages/contact";
 import TransparencyPage from "@/pages/transparency";
 import GetInvolvedPage from "@/pages/get-involved";
-import GetInvolvedPage from "@/pages/get-involved";
-import TransparencyPage from "@/pages/transparency";
-import PrivacyPolicy from "@/pages/privacy-policy";
-import TermsOfService from "@/pages/terms-of-service";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import TermsOfService from "@/pages/terms-of-service";
 import { AdminRoute, EmployeeRoute } from "@/lib/protected-routes";
@@ -69,8 +70,6 @@ function Router() {
       <Route path="/contact" component={ContactPage} />
       <Route path="/transparency" component={TransparencyPage} />
       <Route path="/get-involved" component={GetInvolvedPage} />
-      <Route path="/get-involved" component={GetInvolvedPage} />
-      <Route path="/transparency" component={TransparencyPage} />
 
       {/* Unified login */}
       <Route path="/login" component={LoginPage} />
@@ -82,8 +81,6 @@ function Router() {
       <Route path="/BaytAlMalBank" component={BaytAlMalBankPage} />
       <Route path="/vision" component={VisionPage} />
       <Route path="/mission" component={MissionPage} />
-      <Route path="/privacy-policy" component={PrivacyPolicy} />
-      <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-service" component={TermsOfService} />
 
@@ -108,6 +105,21 @@ function Router() {
       </Route>
       <Route path="/admin/employees">
         <AdminRoute><AdminEmployees /></AdminRoute>
+      </Route>
+      <Route path="/admin/leaves">
+        <AdminRoute><AdminLeaves /></AdminRoute>
+      </Route>
+      <Route path="/admin/attendance">
+        <AdminRoute><AdminAttendance /></AdminRoute>
+      </Route>
+      <Route path="/admin/tasks">
+        <AdminRoute><AdminTasks /></AdminRoute>
+      </Route>
+      <Route path="/admin/payroll">
+        <AdminRoute><AdminPayroll /></AdminRoute>
+      </Route>
+      <Route path="/admin/departments">
+        <AdminRoute><AdminDepartments /></AdminRoute>
       </Route>
 
       {/* Employee protected routes */}
@@ -168,4 +180,3 @@ function App() {
 }
 
 export default App;
-

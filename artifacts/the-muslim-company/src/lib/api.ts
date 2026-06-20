@@ -667,6 +667,30 @@ async function routePost(path: string, body: any): Promise<any> {
     return data
   }
 
+  // Admin/HR: Broadcast a notification to all employees, or to one department
+  if (path === '/admin/broadcast') {
+    const { title, message, department } = body
+    if (!title || !message) throw new Error('Title and message are required')
+
+    let targetEmployeeIds: string[] = []
+    if (department && department !== 'all') {
+      const { data: emps } = await supabase.from('employees').select('employee_id').eq('department', department)
+      targetEmployeeIds = (emps || []).map((e: any) => e.employee_id)
+    } else {
+      const { data: emps } = await supabase.from('employees').select('employee_id')
+      targetEmployeeIds = (emps || []).map((e: any) => e.employee_id)
+    }
+    if (!targetEmployeeIds.length) return { sent: 0 }
+
+    const rows = targetEmployeeIds.map(employee_id => ({
+      employee_id, title, message, type: 'announcement', read: false,
+    }))
+    const { error } = await supabase.from('employee_notifications').insert(rows)
+    if (error) throw new Error(error.message)
+    logAudit('broadcast_sent', 'employee_notifications', undefined, { title, department: department || 'all', recipients: targetEmployeeIds.length })
+    return { sent: targetEmployeeIds.length }
+  }
+
   throw new Error(`POST ${path} not implemented`)
 }
 

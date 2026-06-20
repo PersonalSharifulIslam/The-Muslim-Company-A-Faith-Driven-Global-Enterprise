@@ -13,7 +13,7 @@ export async function onRequestGet(context: any) {
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Transparency & Accountability — The Muslim Company" />
   <meta property="og:description" content="Our commitment to full transparency in charity, governance, and ethical operations." />
-  <meta property="og:image" content="https://www.themuslim.company/images/transparency.png" />
+  <meta property="og:image" content="https://www.themuslim.company/images/transparency.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Transparency & Accountability — The Muslim Company" />
@@ -22,7 +22,7 @@ export async function onRequestGet(context: any) {
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Transparency & Accountability — The Muslim Company" />
   <meta name="twitter:description" content="Our commitment to full transparency in charity, governance, and ethical operations." />
-  <meta name="twitter:image" content="https://www.themuslim.company/images/transparency.png" />
+  <meta name="twitter:image" content="https://www.themuslim.company/images/transparency.jpg" />
   <meta name="twitter:site" content="@officialtmchq" />
   <link rel="canonical" href="https://www.themuslim.company/transparency" />
 </head>

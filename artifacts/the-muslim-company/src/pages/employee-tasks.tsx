@@ -31,7 +31,7 @@ export default function EmployeeTasks() {
     setUpdating(null);
   };
 
-  const filtered = filter === "all" ? tasks : tasks?.filter((t) => t.status === filter);
+  const filtered = (filter === "all" ? tasks : tasks?.filter((t) => t.status === filter)) || [];
   if (loading || !session || !profile) return null;
 
   return (

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Plus, Check, X, Edit2, AlertCircle } from "lucide-react";
+import { Plus, Check, X, Edit2, AlertCircle, Download } from "lucide-react";
+import { exportToCSV } from "@/lib/csv-export";
 import AdminLayout from "@/components/AdminLayout";
 import { api } from "@/lib/api";
 
@@ -103,10 +104,25 @@ export default function AdminAttendance() {
             <h1 className="font-serif text-2xl text-primary">Attendance Management</h1>
             <p className="font-sans text-xs text-primary/50 mt-1">Track and manage employee attendance</p>
           </div>
-          <button onClick={() => { setShowForm(true); setEditing(null); }}
-            className="flex items-center gap-2 bg-secondary text-primary font-sans text-xs uppercase tracking-widest h-9 px-4">
-            <Plus className="w-4 h-4" /> Add Entry
-          </button>
+          <div className="flex gap-2">
+            <button onClick={() => exportToCSV(`attendance-${filterMonth}`, filtered.map(r => ({
+              Employee: r.employees?.name || r.employee_id,
+              Department: r.employees?.department || "",
+              Date: r.date,
+              "Check In": fmt(r.check_in),
+              "Check Out": fmt(r.check_out),
+              "Hours Worked": r.working_hours || "",
+              Status: r.status,
+              Note: r.note || "",
+            })))}
+              className="flex items-center gap-2 border border-primary/20 text-primary font-sans text-xs uppercase tracking-widest h-9 px-4 hover:border-secondary transition-colors">
+              <Download className="w-4 h-4" /> Export CSV
+            </button>
+            <button onClick={() => { setShowForm(true); setEditing(null); }}
+              className="flex items-center gap-2 bg-secondary text-primary font-sans text-xs uppercase tracking-widest h-9 px-4">
+              <Plus className="w-4 h-4" /> Add Entry
+            </button>
+          </div>
         </div>
 
         {msg && (

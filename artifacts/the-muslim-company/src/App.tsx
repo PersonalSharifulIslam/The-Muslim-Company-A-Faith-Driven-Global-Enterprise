@@ -30,6 +30,8 @@ const AdminPayroll = lazy(() => import("@/pages/admin-payroll"));
 const AdminDepartments = lazy(() => import("@/pages/admin-departments"));
 const AdminAuditLog = lazy(() => import("@/pages/admin-audit-log"));
 const AdminOrgChart = lazy(() => import("@/pages/admin-org-chart"));
+const AdminInvites = lazy(() => import("@/pages/admin-invites"));
+const EmployeeOnboard = lazy(() => import("@/pages/employee-onboard"));
 const EmployeeDashboard = lazy(() => import("@/pages/employee-dashboard"));
 const EmployeeAttendance = lazy(() => import("@/pages/employee-attendance"));
 const EmployeeLeave = lazy(() => import("@/pages/employee-leave"));
@@ -83,6 +85,7 @@ function Router() {
       <Route path="/contact" component={ContactPage} />
       <Route path="/transparency" component={TransparencyPage} />
       <Route path="/get-involved" component={GetInvolvedPage} />
+      <Route path="/employee/onboard/:token" component={({ params }) => <EmployeeOnboard params={params} />} />
 
       {/* Unified login */}
       <Route path="/login" component={LoginPage} />
@@ -139,6 +142,9 @@ function Router() {
       </Route>
       <Route path="/admin/org-chart">
         <AdminRoute><AdminOrgChart /></AdminRoute>
+      </Route>
+      <Route path="/admin/invites">
+        <AdminRoute><AdminInvites /></AdminRoute>
       </Route>
 
       {/* Employee protected routes */}

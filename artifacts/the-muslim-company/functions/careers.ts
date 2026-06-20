@@ -13,7 +13,7 @@ export async function onRequestGet(context: any) {
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Careers — The Muslim Company" />
   <meta property="og:description" content="Join The Muslim Company — explore career opportunities in a faith-driven global enterprise." />
-  <meta property="og:image" content="https://www.themuslim.company/images/careers.png" />
+  <meta property="og:image" content="https://www.themuslim.company/images/careers.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Careers — The Muslim Company" />
@@ -22,7 +22,7 @@ export async function onRequestGet(context: any) {
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Careers — The Muslim Company" />
   <meta name="twitter:description" content="Join The Muslim Company — explore career opportunities in a faith-driven global enterprise." />
-  <meta name="twitter:image" content="https://www.themuslim.company/images/careers.png" />
+  <meta name="twitter:image" content="https://www.themuslim.company/images/careers.jpg" />
   <meta name="twitter:site" content="@officialtmchq" />
   <link rel="canonical" href="https://www.themuslim.company/careers" />
 </head>

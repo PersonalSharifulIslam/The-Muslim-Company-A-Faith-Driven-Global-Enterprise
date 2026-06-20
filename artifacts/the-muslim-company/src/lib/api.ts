@@ -175,6 +175,14 @@ async function routeGet(path: string): Promise<any> {
     const { data, error } = await supabase.from('employee_notifications').select('*').or(`employee_id.eq.${role.employee_id},broadcast.eq.true`).order('created_at', { ascending: false })
     if (error) throw error; return data
   }
+  // Employee: view own payslip history
+  if (path === '/employee/payroll') {
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
+    if (!role?.employee_id) return []
+    const { data, error } = await supabase.from('payroll').select('*').eq('employee_id', role.employee_id).order('month', { ascending: false })
+    if (error) throw error; return data
+  }
   if (path === '/employee/documents') {
     const { data: { user } } = await supabase.auth.getUser()
     const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
@@ -241,6 +249,16 @@ async function routeGet(path: string): Promise<any> {
   if (path === '/admin/departments') {
     const { data, error } = await supabase.from('departments')
       .select('*').order('name')
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Admin/HR: view all submitted employee documents for review
+  if (path === '/admin/documents') {
+    const { data, error } = await supabase
+      .from('employee_documents')
+      .select('*, employees(name, department, position)')
+      .order('created_at', { ascending: false })
     if (error) throw new Error(error.message)
     return data
   }
@@ -523,6 +541,22 @@ async function routePost(path: string, body: any): Promise<any> {
       .eq('employee_id', role.employee_id).eq('date', today).select().single()
     if (error) throw error
     return att
+  }
+
+  // Employee: submit a document for HR review (file already uploaded to storage by caller)
+  if (path === '/employee/documents') {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) throw new Error('Unauthorized')
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user.id).single()
+    if (!role?.employee_id) throw new Error('Employee not found')
+    const { name, category, file_url, description } = body
+    if (!name || !file_url) throw new Error('Document name and file are required')
+    const { data, error } = await supabase.from('employee_documents').insert({
+      employee_id: role.employee_id, name, category: category || 'other', file_url,
+      description: description || '', status: 'pending',
+    }).select().single()
+    if (error) throw new Error(error.message)
+    return data
   }
 
   // Employee leave request

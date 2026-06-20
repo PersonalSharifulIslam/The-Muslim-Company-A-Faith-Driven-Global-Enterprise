@@ -5,18 +5,18 @@ import { useAuth } from "@/lib/auth-context"
 import { api } from "@/lib/api"
 
 export default function EmployeeProfile() {
-  const { profile, refreshProfile } = useAuth()
+  const { profile, session, loading, refreshProfile } = useAuth()
   const [form, setForm] = useState({ name: '', phone: '', address: '', emergency_contact: '' })
   const [saving, setSaving] = useState(false)
   const [msg, setMsg] = useState('')
 
   useEffect(() => {
-    if (profile?.employee_id) {
+    if (session && profile?.employee_id) {
       api.get("/employee/profile").then(e => {
         if (e) setForm({ name: e.name || '', phone: e.phone || '', address: e.address || '', emergency_contact: e.emergency_contact || '' })
       }).catch(() => {})
     }
-  }, [profile])
+  }, [session, profile])
 
   async function handleSave(ev: React.FormEvent) {
     ev.preventDefault()

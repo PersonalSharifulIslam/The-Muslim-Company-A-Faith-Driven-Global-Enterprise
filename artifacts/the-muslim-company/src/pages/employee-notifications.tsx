@@ -7,15 +7,14 @@ import { api } from "@/lib/api"
 interface Notif { id: number; title: string; message: string; type: string; is_read: boolean; created_at: string }
 
 export default function EmployeeNotifications() {
-  const { profile } = useAuth()
-  const employee = profile?.employee_id ? profile : null
+  const { profile, session, loading } = useAuth()
   const [notifs, setNotifs] = useState<Notif[]>([])
 
   useEffect(() => {
-    if (profile?.employee_id) {
+    if (session && profile?.employee_id) {
       api.get("/employee/notifications").then(d => setNotifs(d || [])).catch(() => {})
     }
-  }, [profile])
+  }, [session, profile])
 
   async function markRead(id: number) {
     await api.markNotificationRead(id)

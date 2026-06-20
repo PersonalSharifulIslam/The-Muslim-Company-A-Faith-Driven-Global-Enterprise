@@ -28,6 +28,8 @@ const AdminAttendance = lazy(() => import("@/pages/admin-attendance"));
 const AdminTasks = lazy(() => import("@/pages/admin-tasks"));
 const AdminPayroll = lazy(() => import("@/pages/admin-payroll"));
 const AdminDepartments = lazy(() => import("@/pages/admin-departments"));
+const AdminAuditLog = lazy(() => import("@/pages/admin-audit-log"));
+const AdminOrgChart = lazy(() => import("@/pages/admin-org-chart"));
 const EmployeeDashboard = lazy(() => import("@/pages/employee-dashboard"));
 const EmployeeAttendance = lazy(() => import("@/pages/employee-attendance"));
 const EmployeeLeave = lazy(() => import("@/pages/employee-leave"));

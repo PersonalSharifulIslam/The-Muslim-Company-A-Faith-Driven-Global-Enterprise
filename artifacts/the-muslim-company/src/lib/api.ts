@@ -253,6 +253,30 @@ async function routeGet(path: string): Promise<any> {
     return data
   }
 
+  // Holidays & company events (visible to everyone authenticated, including employee portal)
+  if (path === '/holidays' || path === '/employee/holidays') {
+    const { data, error } = await supabase.from('holidays').select('*').order('date', { ascending: true })
+    if (error) throw new Error(error.message)
+    return data
+  }
+  if (path === '/admin/holidays') {
+    const { data, error } = await supabase.from('holidays').select('*').order('date', { ascending: true })
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Company directory — basic contact info for all active employees (name/department/position/phone/email).
+  // Visible to any authenticated employee, not just admin-area roles, so staff can look each other up.
+  if (path === '/employee/directory') {
+    const { data, error } = await supabase
+      .from('employees')
+      .select('employee_id, name, department, position, phone, email, profile_image')
+      .eq('status', 'active')
+      .order('name', { ascending: true })
+    if (error) throw new Error(error.message)
+    return data
+  }
+
   // Admin/HR: view all submitted employee documents for review
   if (path === '/admin/documents') {
     const { data, error } = await supabase
@@ -735,6 +759,17 @@ async function routePost(path: string, body: any): Promise<any> {
     return { sent: targetEmployeeIds.length }
   }
 
+  // Admin/HR: add a holiday or company event
+  if (path === '/admin/holidays') {
+    const { title, date, description, is_company_event } = body
+    if (!title || !date) throw new Error('Title and date are required')
+    const { data, error } = await supabase.from('holidays').insert({
+      title, date, description: description || '', is_company_event: !!is_company_event,
+    }).select().single()
+    if (error) throw new Error(error.message)
+    return data
+  }
+
   // Generate a new onboarding invite link
   if (path === '/admin/invites') {
     const { department, position, access_level } = body
@@ -1108,6 +1143,14 @@ async function routeDel(path: string): Promise<any> {
   const delDeptMatch_2 = path.match(/^\/admin\/departments\/(\d+)$/)
   if (delDeptMatch_2) {
     const { error } = await supabase.from('departments').delete().eq('id', delDeptMatch[1])
+    if (error) throw new Error(error.message)
+    return { success: true }
+  }
+
+  // Admin/HR: remove a holiday
+  const delHolidayMatch = path.match(/^\/admin\/holidays\/(\d+)$/)
+  if (delHolidayMatch) {
+    const { error } = await supabase.from('holidays').delete().eq('id', delHolidayMatch[1])
     if (error) throw new Error(error.message)
     return { success: true }
   }

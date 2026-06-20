@@ -24,9 +24,9 @@ export async function onRequestGet(context: any) {
     return env.ASSETS.fetch(request)
   }
 
-  const title = `${post.title} — The Muslim Company Blog`
+  const title = `${post.title} — The Muslim Company Newsroom`
   const description = post.excerpt?.slice(0, 160) || 'Read this article on The Muslim Company Newsroom.'
-  const image = post.image_url || 'https://www.themuslim.company/og-image.png'
+  const image = post.image_url || 'https://www.themuslim.company/opengraph.jpg'
   const url = `https://www.themuslim.company/newsroom/${slug}`
 
   if (isCrawler) {

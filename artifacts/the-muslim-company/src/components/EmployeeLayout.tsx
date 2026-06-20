@@ -2,6 +2,21 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LayoutDashboard, Clock, Calendar, CheckSquare, FileText, Bell, User, Settings, LogOut, Menu, X, ChevronRight } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
+import { isAdminAreaRole } from "@/lib/supabase";
+
+const ROLE_LABELS: Record<string, string> = {
+  admin: "Administrator",
+  executive: "Executive (C-Suite)",
+  vp: "Vice President",
+  director: "Director",
+  hr_manager: "HR Manager",
+  finance_manager: "Finance Manager",
+  department_manager: "Department Manager",
+  team_lead: "Team Lead",
+  recruiter: "Recruiter",
+  content_editor: "Content Editor",
+  employee: "Staff",
+};
 import logo from "@/assets/images/logo.png";
 
 const NAV = [
@@ -16,7 +31,7 @@ const NAV = [
 ];
 
 export default function EmployeeLayout({ children, current }: { children: React.ReactNode; current: string }) {
-  const { profile, signOut } = useAuth();
+  const { profile, role, signOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [unread, setUnread] = useState(0);
 
@@ -50,7 +65,19 @@ export default function EmployeeLayout({ children, current }: { children: React.
             <p className="font-sans text-[10px] text-white/40 truncate">{profile?.employee_id}</p>
           </div>
         </div>
+        {role && (
+          <p className="font-sans text-[9px] tracking-widest uppercase text-[#b08d57] mt-2 px-1">
+            {ROLE_LABELS[role] || role}
+          </p>
+        )}
       </div>
+
+      {isAdminAreaRole(role) && (
+        <a href="/admin/dashboard"
+          className="mx-3 mt-3 flex items-center justify-center gap-2 px-3 py-2 text-[10px] font-sans uppercase tracking-widest text-[#b08d57] border border-[#b08d57]/30 hover:bg-[#b08d57]/10 transition-colors">
+          Go to Admin Panel →
+        </a>
+      )}
 
       <nav className="flex-1 overflow-y-auto p-3 space-y-0.5">
         {NAV.map(({ label, href, icon: Icon }) => {

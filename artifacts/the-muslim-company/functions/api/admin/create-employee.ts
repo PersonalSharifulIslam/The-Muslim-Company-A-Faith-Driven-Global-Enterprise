@@ -17,19 +17,36 @@ export async function onRequestPost(context: any) {
     headers: { 'apikey': SERVICE_KEY, 'Authorization': `Bearer ${SERVICE_KEY}` },
   })
   const roles = await roleRes.json() as any[]
-  if (!roles[0] || roles[0].role !== 'admin') return Response.json({ error: 'Forbidden' }, { status: 403 })
+  // Only these roles can create new staff accounts and assign access levels.
+  const CAN_CREATE_EMPLOYEES = ['admin', 'executive', 'hr_manager']
+  if (!roles[0] || !CAN_CREATE_EMPLOYEES.includes(roles[0].role))
+    return Response.json({ error: 'Forbidden' }, { status: 403 })
 
   const body = await request.json() as any
   const { email, password, name, department, position, phone, address, joining_date } = body
   // Auto-generate employee_id if not provided
   const employee_id = body.employee_id?.trim() || `TMC-${Date.now().toString(36).toUpperCase()}`
+
+  // Access level (user_roles.role) — defaults to plain "employee" if not specified.
+  // Validate against the full corporate hierarchy so a typo/bad value can't
+  // silently slip an unrecognized role into the system.
+  const VALID_ACCESS_LEVELS = [
+    'admin', 'executive', 'vp', 'director', 'hr_manager',
+    'finance_manager', 'department_manager', 'team_lead',
+    'recruiter', 'content_editor', 'employee',
+  ]
+  const access_level = VALID_ACCESS_LEVELS.includes(body.access_level) ? body.access_level : 'employee'
+  // Scoped roles (department_manager / team_lead) need a department to be scoped to.
+  // Company-wide roles don't need this, but we store it anyway for reference.
+  const access_department = body.department || department || null
+
   if (!email || !password || !name || !department || !position)
     return Response.json({ error: 'Missing required fields: email, password, name, department, position' }, { status: 400 })
 
   const createRes = await fetch(`${SUPABASE_URL}/auth/v1/admin/users`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'apikey': SERVICE_KEY, 'Authorization': `Bearer ${SERVICE_KEY}` },
-    body: JSON.stringify({ email, password, email_confirm: true, user_metadata: { role: 'employee', employee_id, name } }),
+    body: JSON.stringify({ email, password, email_confirm: true, user_metadata: { role: access_level, employee_id, name } }),
   })
   if (!createRes.ok) {
     const err = await createRes.json() as any
@@ -55,7 +72,7 @@ export async function onRequestPost(context: any) {
   await fetch(`${SUPABASE_URL}/rest/v1/user_roles`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'apikey': SERVICE_KEY, 'Authorization': `Bearer ${SERVICE_KEY}`, 'Prefer': 'resolution=merge-duplicates' },
-    body: JSON.stringify({ id: authId, role: 'employee', employee_id }),
+    body: JSON.stringify({ id: authId, role: access_level, employee_id, department: access_department }),
   })
 
   const employee = await empRes.json()

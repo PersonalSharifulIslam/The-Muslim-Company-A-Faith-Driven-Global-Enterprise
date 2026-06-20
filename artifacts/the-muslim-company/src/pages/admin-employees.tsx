@@ -8,6 +8,39 @@ import { Button } from "@/components/ui/button";
 
 const fade = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } };
 const ROLES = ["employee", "hr", "accountant", "manager", "moderator", "support"];
+
+// user_roles.role — the actual permission/access level for the /admin/* area.
+// This is separate from the "Role / Title" badge above, which is just a display label.
+const ACCESS_LEVELS = [
+  "employee", "team_lead", "department_manager", "recruiter", "content_editor",
+  "finance_manager", "hr_manager", "director", "vp", "executive", "admin",
+];
+const ACCESS_LEVEL_LABELS: Record<string, string> = {
+  admin: "Administrator",
+  executive: "Executive (C-Suite)",
+  vp: "Vice President",
+  director: "Director",
+  hr_manager: "HR Manager",
+  finance_manager: "Finance Manager",
+  department_manager: "Department Manager",
+  team_lead: "Team Lead",
+  recruiter: "Recruiter",
+  content_editor: "Content Editor",
+  employee: "Employee (Staff)",
+};
+const ACCESS_LEVEL_COLORS: Record<string, string> = {
+  admin: "bg-red-400/10 text-red-400",
+  executive: "bg-rose-400/10 text-rose-400",
+  vp: "bg-purple-400/10 text-purple-400",
+  director: "bg-indigo-400/10 text-indigo-400",
+  hr_manager: "bg-blue-400/10 text-blue-400",
+  finance_manager: "bg-emerald-400/10 text-emerald-400",
+  department_manager: "bg-amber-400/10 text-amber-400",
+  team_lead: "bg-cyan-400/10 text-cyan-400",
+  recruiter: "bg-pink-400/10 text-pink-400",
+  content_editor: "bg-orange-400/10 text-orange-400",
+  employee: "bg-white/5 text-white/40",
+};
 const DEPTS = [
   "Executive & Strategy",
   "Technology & Engineering",
@@ -46,10 +79,10 @@ const DEPTS = [
   "Other",
 ];
 
-type Employee = { id: number; employee_id: string; name: string; email: string; department: string; role: string; position: string; phone: string; joining_date: string; status: string };
-type FormState = { name: string; email: string; password: string; employee_id: string; department: string; role: string; position: string; phone: string; address: string; joining_date: string };
+type Employee = { id: number; employee_id: string; name: string; email: string; department: string; role: string; position: string; phone: string; joining_date: string; status: string; access_level?: string };
+type FormState = { name: string; email: string; password: string; employee_id: string; department: string; role: string; position: string; phone: string; address: string; joining_date: string; access_level: string };
 
-const EMPTY: FormState = { name: "", email: "", password: "", employee_id: "", department: DEPTS[0], role: "employee", position: "", phone: "", address: "", joining_date: new Date().toISOString().split("T")[0] };
+const EMPTY: FormState = { name: "", email: "", password: "", employee_id: "", department: DEPTS[0], role: "employee", position: "", phone: "", address: "", joining_date: new Date().toISOString().split("T")[0], access_level: "employee" };
 
 const ROLE_COLORS: Record<string, string> = {
   manager: "bg-purple-400/10 text-purple-400",
@@ -83,7 +116,7 @@ export default function AdminEmployees() {
   useEffect(() => { load(); }, []);
 
   const openCreate = () => { setEditing(null); setForm(EMPTY); setShowForm(true); setMsg(null); };
-  const openEdit = (e: Employee) => { setEditing(e); setForm({ name: e.name, email: e.email, password: "", department: e.department, role: e.role, position: e.position || "", phone: e.phone || "", address: "", joining_date: e.joining_date?.split("T")[0] || "" }); setShowForm(true); setMsg(null); };
+  const openEdit = (e: Employee) => { setEditing(e); setForm({ name: e.name, email: e.email, password: "", employee_id: e.employee_id, department: e.department, role: e.role, position: e.position || "", phone: e.phone || "", address: "", joining_date: e.joining_date?.split("T")[0] || "", access_level: e.access_level || "employee" }); setShowForm(true); setMsg(null); };
 
   const handleSave = async (ev: React.FormEvent) => {
     ev.preventDefault(); setSaving(true); setMsg(null);

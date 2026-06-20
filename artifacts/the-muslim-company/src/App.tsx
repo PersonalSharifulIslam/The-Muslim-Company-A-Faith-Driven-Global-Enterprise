@@ -1,53 +1,54 @@
 import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/lib/auth-context";
-import NotFound from "@/pages/not-found";
-import Home from "@/pages/home";
-import Careers from "@/pages/careers";
-import JobDetail from "@/pages/job-detail";
-import JobApply from "@/pages/job-apply";
-import RecruitmentStatus from "@/pages/recruitment-status";
-import Newsroom from "@/pages/newsroom";
-import NewsDetail from "@/pages/news-detail";
-import Notices from "@/pages/notices";
-import Blog from "@/pages/blog";
-import BlogDetail from "@/pages/blog-detail";
-import AdminDashboard from "@/pages/admin-dashboard";
-import AdminCareers from "@/pages/admin-careers";
-import AdminApplications from "@/pages/admin-applications";
-import AdminNewsroom from "@/pages/admin-newsroom";
-import AdminNotices from "@/pages/admin-notices";
-import AdminBlog from "@/pages/admin-blog";
-import AdminEmployees from "@/pages/admin-employees";
-import AdminLeaves from "@/pages/admin-leaves";
-import AdminAttendance from "@/pages/admin-attendance";
-import AdminTasks from "@/pages/admin-tasks";
-import AdminPayroll from "@/pages/admin-payroll";
-import AdminDepartments from "@/pages/admin-departments";
-import EmployeeDashboard from "@/pages/employee-dashboard";
-import EmployeeAttendance from "@/pages/employee-attendance";
-import EmployeeLeave from "@/pages/employee-leave";
-import EmployeeTasks from "@/pages/employee-tasks";
-import EmployeeNotifications from "@/pages/employee-notifications";
-import EmployeeDocuments from "@/pages/employee-documents";
-import EmployeeProfile from "@/pages/employee-profile";
-import EmployeeSettings from "@/pages/employee-settings";
-import LoginPage from "@/pages/LoginPage";
-import AuthRedirect from "@/pages/AuthRedirect";
-import FounderPage from "@/pages/founder";
-import CeoSharifulIslamPage from "@/pages/ceo-sharifulislam";
-import BaytAlMalBankPage from "@/pages/bayt-al-mal-bank";
-import VisionPage from "@/pages/vision";
-import MissionPage from "@/pages/mission";
-import SectorDetail from "@/pages/sector-detail";
-import ContactPage from "@/pages/contact";
-import TransparencyPage from "@/pages/transparency";
-import GetInvolvedPage from "@/pages/get-involved";
-import PrivacyPolicy from "@/pages/privacy-policy";
-import TermsOfService from "@/pages/terms-of-service";
+
+const NotFound = lazy(() => import("@/pages/not-found"));
+const Home = lazy(() => import("@/pages/home"));
+const Careers = lazy(() => import("@/pages/careers"));
+const JobDetail = lazy(() => import("@/pages/job-detail"));
+const JobApply = lazy(() => import("@/pages/job-apply"));
+const RecruitmentStatus = lazy(() => import("@/pages/recruitment-status"));
+const Newsroom = lazy(() => import("@/pages/newsroom"));
+const NewsDetail = lazy(() => import("@/pages/news-detail"));
+const Notices = lazy(() => import("@/pages/notices"));
+const Blog = lazy(() => import("@/pages/blog"));
+const BlogDetail = lazy(() => import("@/pages/blog-detail"));
+const AdminDashboard = lazy(() => import("@/pages/admin-dashboard"));
+const AdminCareers = lazy(() => import("@/pages/admin-careers"));
+const AdminApplications = lazy(() => import("@/pages/admin-applications"));
+const AdminNewsroom = lazy(() => import("@/pages/admin-newsroom"));
+const AdminNotices = lazy(() => import("@/pages/admin-notices"));
+const AdminBlog = lazy(() => import("@/pages/admin-blog"));
+const AdminEmployees = lazy(() => import("@/pages/admin-employees"));
+const AdminLeaves = lazy(() => import("@/pages/admin-leaves"));
+const AdminAttendance = lazy(() => import("@/pages/admin-attendance"));
+const AdminTasks = lazy(() => import("@/pages/admin-tasks"));
+const AdminPayroll = lazy(() => import("@/pages/admin-payroll"));
+const AdminDepartments = lazy(() => import("@/pages/admin-departments"));
+const EmployeeDashboard = lazy(() => import("@/pages/employee-dashboard"));
+const EmployeeAttendance = lazy(() => import("@/pages/employee-attendance"));
+const EmployeeLeave = lazy(() => import("@/pages/employee-leave"));
+const EmployeeTasks = lazy(() => import("@/pages/employee-tasks"));
+const EmployeeNotifications = lazy(() => import("@/pages/employee-notifications"));
+const EmployeeDocuments = lazy(() => import("@/pages/employee-documents"));
+const EmployeeProfile = lazy(() => import("@/pages/employee-profile"));
+const EmployeeSettings = lazy(() => import("@/pages/employee-settings"));
+const LoginPage = lazy(() => import("@/pages/LoginPage"));
+const AuthRedirect = lazy(() => import("@/pages/AuthRedirect"));
+const FounderPage = lazy(() => import("@/pages/founder"));
+const CeoSharifulIslamPage = lazy(() => import("@/pages/ceo-sharifulislam"));
+const BaytAlMalBankPage = lazy(() => import("@/pages/bayt-al-mal-bank"));
+const VisionPage = lazy(() => import("@/pages/vision"));
+const MissionPage = lazy(() => import("@/pages/mission"));
+const SectorDetail = lazy(() => import("@/pages/sector-detail"));
+const ContactPage = lazy(() => import("@/pages/contact"));
+const TransparencyPage = lazy(() => import("@/pages/transparency"));
+const GetInvolvedPage = lazy(() => import("@/pages/get-involved"));
+const PrivacyPolicy = lazy(() => import("@/pages/privacy-policy"));
+const TermsOfService = lazy(() => import("@/pages/terms-of-service"));
 import { AdminRoute, EmployeeRoute } from "@/lib/protected-routes";
 
 const queryClient = new QueryClient();
@@ -150,6 +151,7 @@ function Router() {
 
       <Route component={NotFound} />
     </Switch>
+    </Suspense>
   );
 }
 

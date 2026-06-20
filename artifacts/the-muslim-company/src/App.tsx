@@ -135,6 +135,9 @@ function Router() {
       <Route path="/admin/audit-log">
         <AdminRoute><AdminAuditLog /></AdminRoute>
       </Route>
+      <Route path="/admin/org-chart">
+        <AdminRoute><AdminOrgChart /></AdminRoute>
+      </Route>
 
       {/* Employee protected routes */}
       <Route path="/employee/dashboard">

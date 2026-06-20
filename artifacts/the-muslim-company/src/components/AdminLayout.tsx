@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth-context";
 import {
   LayoutDashboard, Briefcase, Users, Newspaper, Bell, BookOpen, LogOut, Menu, X, UserSquare2,
-  CalendarDays, Clock, CheckSquare, Wallet, Building2, ShieldAlert, Network,
+  CalendarDays, Clock, CheckSquare, Wallet, Building2, ShieldAlert, Network, Link2,
 } from "lucide-react";
 import logo from "@/assets/images/logo.png";
 
@@ -24,6 +24,7 @@ const ADMIN_NAV = [
   { label: "Blog",            href: "/admin/blog",         icon: BookOpen,        roles: ["admin", "executive", "content_editor"] },
   { label: "Audit Trail",     href: "/admin/audit-log",    icon: ShieldAlert,     roles: ["admin", "executive", "vp", "director"] },
   { label: "Org Chart",       href: "/admin/org-chart",    icon: Network,         roles: ["admin", "executive", "vp", "director", "hr_manager"] },
+  { label: "Invite Links",     href: "/admin/invites",      icon: Link2,           roles: ["admin", "executive", "hr_manager"] },
 ];
 
 const ROLE_LABELS: Record<string, string> = {

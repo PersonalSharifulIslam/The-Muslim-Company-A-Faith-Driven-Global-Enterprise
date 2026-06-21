@@ -3,9 +3,10 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth-context";
 import {
   LayoutDashboard, Briefcase, Users, Newspaper, Bell, BookOpen, LogOut, Menu, X, UserSquare2,
-  CalendarDays, Clock, CheckSquare, Wallet, Building2, ShieldAlert, Network, Link2,
+  CalendarDays, Clock, CheckSquare, Wallet, Building2, ShieldAlert, Network, Link2, FileText, Sparkles,
 } from "lucide-react";
 import logo from "@/assets/images/logo.png";
+import GlobalSearch from "@/components/GlobalSearch";
 
 // Each nav item declares which roles may see it.
 // "admin" and "executive" implicitly see everything (full company-wide visibility).
@@ -25,6 +26,8 @@ const ADMIN_NAV = [
   { label: "Audit Trail",     href: "/admin/audit-log",    icon: ShieldAlert,     roles: ["admin", "executive", "vp", "director"] },
   { label: "Org Chart",       href: "/admin/org-chart",    icon: Network,         roles: ["admin", "executive", "vp", "director", "hr_manager"] },
   { label: "Invite Links",     href: "/admin/invites",      icon: Link2,           roles: ["admin", "executive", "hr_manager"] },
+  { label: "Documents",       href: "/admin/documents",    icon: FileText,        roles: ["admin", "executive", "hr_manager"] },
+  { label: "Holidays",        href: "/admin/holidays",     icon: Sparkles,        roles: ["admin", "executive", "hr_manager"] },
 ];
 
 const ROLE_LABELS: Record<string, string> = {
@@ -117,9 +120,10 @@ export default function AdminLayout({ children, current }: { children: React.Rea
           >
             {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
-          <p className="font-sans text-xs tracking-widest uppercase text-primary/40">
+          <p className="font-sans text-xs tracking-widest uppercase text-primary/40 hidden sm:block flex-shrink-0">
             {ADMIN_NAV.find(n => n.href === current)?.label || "Admin"}
           </p>
+          <GlobalSearch />
         </header>
         <main className="flex-1 p-6">{children}</main>
       </div>

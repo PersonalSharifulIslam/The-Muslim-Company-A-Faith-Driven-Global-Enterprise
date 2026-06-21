@@ -759,12 +759,14 @@ async function routePost(path: string, body: any): Promise<any> {
     return { sent: targetEmployeeIds.length }
   }
 
-  // Admin/HR: add a holiday or company event
+  // Admin/HR: add a holiday or company event (supports a date range — single
+  // day if end_date is omitted/equal to date, multi-day for things like Eid holidays)
   if (path === '/admin/holidays') {
-    const { title, date, description, is_company_event } = body
+    const { title, date, end_date, description, is_company_event } = body
     if (!title || !date) throw new Error('Title and date are required')
+    const finalEnd = end_date && end_date >= date ? end_date : date
     const { data, error } = await supabase.from('holidays').insert({
-      title, date, description: description || '', is_company_event: !!is_company_event,
+      title, date, end_date: finalEnd, description: description || '', is_company_event: !!is_company_event,
     }).select().single()
     if (error) throw new Error(error.message)
     return data

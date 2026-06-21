@@ -31,6 +31,8 @@ const AdminDepartments = lazy(() => import("@/pages/admin-departments"));
 const AdminAuditLog = lazy(() => import("@/pages/admin-audit-log"));
 const AdminOrgChart = lazy(() => import("@/pages/admin-org-chart"));
 const AdminInvites = lazy(() => import("@/pages/admin-invites"));
+const AdminDocuments = lazy(() => import("@/pages/admin-documents"));
+const AdminHolidays = lazy(() => import("@/pages/admin-holidays"));
 const EmployeeOnboard = lazy(() => import("@/pages/employee-onboard"));
 const EmployeeDashboard = lazy(() => import("@/pages/employee-dashboard"));
 const EmployeeAttendance = lazy(() => import("@/pages/employee-attendance"));
@@ -40,6 +42,9 @@ const EmployeeNotifications = lazy(() => import("@/pages/employee-notifications"
 const EmployeeDocuments = lazy(() => import("@/pages/employee-documents"));
 const EmployeeProfile = lazy(() => import("@/pages/employee-profile"));
 const EmployeeSettings = lazy(() => import("@/pages/employee-settings"));
+const EmployeePayslip = lazy(() => import("@/pages/employee-payslip"));
+const EmployeeHolidays = lazy(() => import("@/pages/employee-holidays"));
+const EmployeeDirectory = lazy(() => import("@/pages/employee-directory"));
 const LoginPage = lazy(() => import("@/pages/LoginPage"));
 const AuthRedirect = lazy(() => import("@/pages/AuthRedirect"));
 const FounderPage = lazy(() => import("@/pages/founder"));
@@ -146,6 +151,12 @@ function Router() {
       <Route path="/admin/invites">
         <AdminRoute><AdminInvites /></AdminRoute>
       </Route>
+      <Route path="/admin/documents">
+        <AdminRoute><AdminDocuments /></AdminRoute>
+      </Route>
+      <Route path="/admin/holidays">
+        <AdminRoute><AdminHolidays /></AdminRoute>
+      </Route>
 
       {/* Employee protected routes */}
       <Route path="/employee/dashboard">
@@ -171,6 +182,15 @@ function Router() {
       </Route>
       <Route path="/employee/settings">
         <EmployeeRoute><EmployeeSettings /></EmployeeRoute>
+      </Route>
+      <Route path="/employee/payslip">
+        <EmployeeRoute><EmployeePayslip /></EmployeeRoute>
+      </Route>
+      <Route path="/employee/holidays">
+        <EmployeeRoute><EmployeeHolidays /></EmployeeRoute>
+      </Route>
+      <Route path="/employee/directory">
+        <EmployeeRoute><EmployeeDirectory /></EmployeeRoute>
       </Route>
 
       <Route component={NotFound} />

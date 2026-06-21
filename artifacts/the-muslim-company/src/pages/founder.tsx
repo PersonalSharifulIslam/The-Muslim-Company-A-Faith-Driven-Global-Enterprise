@@ -55,6 +55,37 @@ export default function FounderPage() {
     if (_can) { _can.setAttribute('href', "https://www.themuslim.company/founder"); }
     else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = "https://www.themuslim.company/founder"; document.head.appendChild(_cl); }
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
+    [{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.themuslim.company/#organization",
+  "name": "The Muslim Company",
+  "legalName": "The Muslim Company LTD",
+  "alternateName": ["TMC", "TMC Bangladesh", "TheMuslimCompany"],
+  "url": "https://www.themuslim.company",
+  "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/logo.png", "width": 512, "height": 512 },
+  "image": ["https://www.themuslim.company/logo.png", "https://www.themuslim.company/logo-letterhead-1.png", "https://www.themuslim.company/logo-letterhead-2.png"],
+  "description": "The Muslim Company is a faith-driven global conglomerate built on Islamic principles, ethical innovation, and civilization-focused leadership. Founded by Shariful Islam in Dhaka, Bangladesh.",
+  "foundingDate": "2025-01-09",
+  "foundingLocation": { "@type": "Place", "name": "Dhaka, Bangladesh" },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Niketon Bazaar",
+    "addressLocality": "Dhaka",
+    "postalCode": "1212",
+    "addressCountry": "BD"
+  },
+  "numberOfEmployees": { "@type": "QuantitativeValue", "value": 10 },
+  "sameAs": [
+    "https://www.facebook.com/TheMuslimCompany",
+    "https://www.instagram.com/officialTheMuslimCompany",
+    "https://www.youtube.com/@TheMuslimCompany",
+    "https://www.linkedin.com/company/themuslimcompany",
+    "https://x.com/officialtmchq",
+    "https://www.crunchbase.com/organization/the-muslim-company",
+    "https://www.openpr.com/news/4523843/the-muslim-company-building-a-faith-driven-global"
+  ]
+},
     [{"@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Founder \u2014 Shariful Islam", "item": "https://www.themuslim.company/founder"}]}, {"@context": "https://schema.org", "@type": "ProfilePage",
         "dateModified": "2026-06-12T00:00:00+06:00", "name": "Shariful Islam \u2014 Founder & CEO", "description": "Shariful Islam is the Founder of The Muslim Company — a diversified global conglomerate built on Islamic principles, ethical leadership, and long-term civilizational impact.", "url": "https://www.themuslim.company/founder", "mainEntity": {"@type": "Person", "name": "Shariful Islam", "jobTitle": "Founder & CEO", "worksFor": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}, "founder": [{"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}, {"@type": "Organization", "name": "The Bayt Al-Mal Bank", "parentOrganization": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}], "nationality": "Bangladeshi", "url": "https://sharifulislam.engineer", "sameAs": ["https://sharifulislam.engineer", "https://g.co/kgs/4n3CijW", "https://www.google.com/search?kgmid=/g/11n_vfnlwt", "http://viaf.org/viaf/503162664557855002426", "https://isni.org/isni/0000000502719745", "https://www.linkedin.com/in/personalsharifulislam", "https://x.com/PersonalSIslam", "https://orcid.org/0000-0002-6634-5090", "https://www.crunchbase.com/person/shariful-islam-4eee", "https://www.imdb.com/name/nm12843320/",
       "https://globalpeacechain.org/team_members/shariful-islam/",

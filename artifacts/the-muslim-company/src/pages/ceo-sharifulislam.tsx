@@ -135,13 +135,6 @@ const PERSON_SCHEMA = {
     },
     "url": "https://www.buruniv.ac.in"
   },
-  "hasCredential": {
-    "@type": "EducationalOccupationalCredential",
-    "credentialCategory": "degree",
-    "name": "Bachelor of Engineering in Electrical Engineering",
-    "educationalLevel": "Bachelor's Degree"
-  },
-  "award": ["Peace Ambassador — Global Peace Chain (Bangladesh)"],
   "knowsAbout": [
     "Islamic Business Ethics", "Ethical Innovation", "Electrical Engineering",
     "Renewable Energy", "Artificial Intelligence", "Global Entrepreneurship",

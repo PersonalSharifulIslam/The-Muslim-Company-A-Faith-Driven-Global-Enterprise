@@ -32,6 +32,8 @@ export default function AdminAttendance() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState<AttRecord | null>(null);
+  const [viewMode, setViewMode] = useState<"day" | "month">("day");
+  const [filterDate, setFilterDate] = useState(new Date().toISOString().split("T")[0]);
   const [filterMonth, setFilterMonth] = useState(new Date().toISOString().slice(0, 7));
   const [filterEmp, setFilterEmp] = useState("all");
   const [msg, setMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
@@ -85,9 +87,9 @@ export default function AdminAttendance() {
   }
 
   const filtered = records.filter(r => {
-    const monthMatch = r.date.startsWith(filterMonth);
+    const dateMatch = viewMode === "day" ? r.date === filterDate : r.date.startsWith(filterMonth);
     const empMatch = filterEmp === "all" || r.employee_id === filterEmp;
-    return monthMatch && empMatch;
+    return dateMatch && empMatch;
   });
 
   const stats = {
@@ -105,7 +107,7 @@ export default function AdminAttendance() {
             <p className="font-sans text-xs text-primary/50 mt-1">Track and manage employee attendance</p>
           </div>
           <div className="flex gap-2">
-            <button onClick={() => exportToCSV(`attendance-${filterMonth}`, filtered.map(r => ({
+            <button onClick={() => exportToCSV(`attendance-${viewMode === "day" ? filterDate : filterMonth}`, filtered.map(r => ({
               Employee: r.employees?.name || r.employee_id,
               Department: r.employees?.department || "",
               Date: r.date,
@@ -140,9 +142,24 @@ export default function AdminAttendance() {
           ))}
         </div>
 
-        <div className="flex gap-3 mb-4">
-          <input type="month" value={filterMonth} onChange={e => setFilterMonth(e.target.value)}
-            className="h-9 px-3 bg-card border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+        <div className="flex gap-3 mb-4 flex-wrap items-center">
+          <div className="flex border border-primary/15 rounded overflow-hidden">
+            <button onClick={() => setViewMode("day")}
+              className={`h-9 px-4 font-sans text-xs uppercase tracking-widest transition-colors ${viewMode === "day" ? "bg-secondary text-primary" : "bg-card text-primary/50 hover:text-primary"}`}>
+              By Day
+            </button>
+            <button onClick={() => setViewMode("month")}
+              className={`h-9 px-4 font-sans text-xs uppercase tracking-widest transition-colors ${viewMode === "month" ? "bg-secondary text-primary" : "bg-card text-primary/50 hover:text-primary"}`}>
+              By Month
+            </button>
+          </div>
+          {viewMode === "day" ? (
+            <input type="date" value={filterDate} onChange={e => setFilterDate(e.target.value)}
+              className="h-9 px-3 bg-card border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+          ) : (
+            <input type="month" value={filterMonth} onChange={e => setFilterMonth(e.target.value)}
+              className="h-9 px-3 bg-card border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+          )}
           <select value={filterEmp} onChange={e => setFilterEmp(e.target.value)}
             className="h-9 px-3 bg-card border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
             <option value="all">All Employees</option>

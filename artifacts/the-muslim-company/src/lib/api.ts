@@ -751,7 +751,7 @@ async function routePost(path: string, body: any): Promise<any> {
     if (!targetEmployeeIds.length) return { sent: 0 }
 
     const rows = targetEmployeeIds.map(employee_id => ({
-      employee_id, title, message, type: 'announcement', read: false,
+      employee_id, title, message, type: 'announcement', is_read: false, broadcast: true,
     }))
     const { error } = await supabase.from('employee_notifications').insert(rows)
     if (error) throw new Error(error.message)

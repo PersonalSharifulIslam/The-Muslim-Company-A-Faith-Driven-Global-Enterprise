@@ -53,7 +53,7 @@ export default function NewsDetail({ params }: { params: { slug: string } }) {
       },
       "image": {
         "@type": "ImageObject",
-        "url": post.image || "https://www.themuslim.company/opengraph.jpg", "width": 1200, "height": 630,
+        "url": post.image || "https://www.themuslim.company/opengraph.jpg",
         "width": 1200,
         "height": 630
       },

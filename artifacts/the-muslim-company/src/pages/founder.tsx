@@ -107,8 +107,8 @@ export default function FounderPage() {
           "name": "Global Peace Chain",
           "url": "https://globalpeacechain.org"
         },
-        "validFrom": "2025",
-        "validUntil": "2026"
+        "dateCreated": "2025",
+        "expires": "2026"
       }
     ]
   }}].forEach(schema => {

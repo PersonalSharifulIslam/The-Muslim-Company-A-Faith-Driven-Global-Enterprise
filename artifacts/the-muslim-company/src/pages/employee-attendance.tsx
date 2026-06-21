@@ -36,8 +36,6 @@ export default function EmployeeAttendance() {
     setToday(d.find((r) => r.date.startsWith(todayStr)) || null);
   };
 
-  useEffect(() => { if (employee) loadRecords(); }, [session, profile]);
-
   useEffect(() => {
     timerRef.current = setInterval(() => setNow(new Date()), 1000);
     return () => { if (timerRef.current) clearInterval(timerRef.current); };

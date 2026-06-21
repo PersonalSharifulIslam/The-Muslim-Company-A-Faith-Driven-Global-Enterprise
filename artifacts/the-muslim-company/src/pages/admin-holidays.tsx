@@ -3,7 +3,7 @@ import { Plus, Trash2, Sparkles, Building2, AlertCircle, Check } from "lucide-re
 import AdminLayout from "@/components/AdminLayout";
 import { api } from "@/lib/api";
 
-type Holiday = { id: number; title: string; date: string; description: string; is_company_event: boolean };
+type Holiday = { id: number; title: string; date: string; end_date: string; description: string; is_company_event: boolean };
 
 export default function AdminHolidays() {
   const [holidays, setHolidays] = useState<Holiday[]>([]);
@@ -11,7 +11,7 @@ export default function AdminHolidays() {
   const [showForm, setShowForm] = useState(false);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
-  const [form, setForm] = useState({ title: "", date: "", description: "", is_company_event: false });
+  const [form, setForm] = useState({ title: "", date: "", end_date: "", description: "", is_company_event: false });
 
   useEffect(() => { load(); }, []);
 
@@ -26,7 +26,7 @@ export default function AdminHolidays() {
     try {
       await api.post("/admin/holidays", form, true);
       setMsg({ type: "ok", text: "Added successfully" });
-      setShowForm(false); setForm({ title: "", date: "", description: "", is_company_event: false });
+      setShowForm(false); setForm({ title: "", date: "", end_date: "", description: "", is_company_event: false });
       await load();
     } catch (err: any) { setMsg({ type: "err", text: err.message || "Error" }); }
     setSaving(false);
@@ -62,8 +62,13 @@ export default function AdminHolidays() {
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
             </div>
             <div>
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Date *</label>
-              <input required type="date" value={form.date} onChange={e => setForm(f => ({ ...f, date: e.target.value }))}
+              <label className="font-sans text-xs text-primary/50 mb-1 block">From Date *</label>
+              <input required type="date" value={form.date} onChange={e => setForm(f => ({ ...f, date: e.target.value, end_date: f.end_date && f.end_date < e.target.value ? e.target.value : f.end_date }))}
+                className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+            </div>
+            <div>
+              <label className="font-sans text-xs text-primary/50 mb-1 block">To Date (optional — for multi-day holidays like Eid)</label>
+              <input type="date" min={form.date} value={form.end_date} onChange={e => setForm(f => ({ ...f, end_date: e.target.value }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
             </div>
             <div className="sm:col-span-2">
@@ -97,7 +102,11 @@ export default function AdminHolidays() {
                   {h.is_company_event ? <Building2 className="w-4 h-4 text-primary/40" /> : <Sparkles className="w-4 h-4 text-secondary/60" />}
                   <div>
                     <p className="font-sans text-sm text-primary">{h.title}</p>
-                    <p className="font-sans text-xs text-primary/40">{new Date(h.date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</p>
+                    <p className="font-sans text-xs text-primary/40">
+                      {h.end_date && h.end_date !== h.date
+                        ? `${new Date(h.date).toLocaleDateString("en-US", { month: "long", day: "numeric" })} – ${new Date(h.end_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })} (${Math.round((new Date(h.end_date).getTime() - new Date(h.date).getTime()) / 86400000) + 1} days)`
+                        : new Date(h.date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
+                    </p>
                   </div>
                 </div>
                 <button onClick={() => handleDelete(h.id)} className="text-primary/40 hover:text-red-400"><Trash2 className="w-4 h-4" /></button>

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'wouter'
 import { useAuth } from '../lib/auth-context'
+import { isAdminAreaRole } from '../lib/supabase'
 
 export default function AuthRedirect() {
   useEffect(() => {
@@ -18,7 +19,11 @@ export default function AuthRedirect() {
 
   useEffect(() => {
     if (loading) return
-    if (role === 'admin') setLocation('/admin/dashboard')
+    // Any corporate access-level role (admin, executive, vp, director,
+    // hr_manager, finance_manager, department_manager, team_lead, recruiter,
+    // content_editor) goes to the admin panel. Plain "employee" goes to the
+    // Employee Portal. No role at all (shouldn't normally happen) → login.
+    if (isAdminAreaRole(role)) setLocation('/admin/dashboard')
     else if (role === 'employee') setLocation('/employee/dashboard')
     else setLocation('/login')
   }, [role, loading])

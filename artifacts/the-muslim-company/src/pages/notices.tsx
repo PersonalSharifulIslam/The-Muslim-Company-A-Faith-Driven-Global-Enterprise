@@ -91,7 +91,7 @@ export default function Notices() {
 
   const [notices, setNotices] = useState<Notice[]>([]);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(() => new URLSearchParams(window.location.search).get("q") || "");
   const [cat, setCat] = useState("All");
   const [year, setYear] = useState("All");
   const [page, setPage] = useState(1);

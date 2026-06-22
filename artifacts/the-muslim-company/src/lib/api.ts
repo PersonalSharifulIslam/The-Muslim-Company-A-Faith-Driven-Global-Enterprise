@@ -535,6 +535,31 @@ async function routePost(path: string, body: any): Promise<any> {
     return data
   }
 
+  // Bulk-create employees from a parsed CSV (array of row objects)
+  if (path === '/admin/employees/bulk') {
+    const rows = body.rows as any[]
+    if (!Array.isArray(rows) || !rows.length) throw new Error('No rows to import')
+    const { data: { session } } = await supabase.auth.getSession()
+    const token = session?.access_token ?? ''
+    const results: any[] = []
+    for (const row of rows) {
+      try {
+        const res = await fetch('/api/admin/create-employee', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+          body: JSON.stringify(row),
+        })
+        const result = await res.json() as any
+        if (!res.ok || result.error) results.push({ row: row.email, success: false, error: result.error })
+        else results.push({ row: row.email, success: true, employee_id: result.employee?.employee_id })
+      } catch (e: any) {
+        results.push({ row: row.email, success: false, error: e.message })
+      }
+    }
+    logAudit('bulk_employee_import', 'employees', undefined, { total: rows.length, succeeded: results.filter(r => r.success).length })
+    return results
+  }
+
   if (path === '/admin/employees') {
     const { data: { session } } = await supabase.auth.getSession()
     const token = session?.access_token ?? ''

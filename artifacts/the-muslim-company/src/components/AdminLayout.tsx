@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/lib/auth-context";
 import {
   LayoutDashboard, Briefcase, Users, Newspaper, Bell, BookOpen, LogOut, Menu, X, UserSquare2,
-  CalendarDays, Clock, CheckSquare, Wallet, Building2, ShieldAlert, Network, Link2, FileText, Sparkles,
+  CalendarDays, Clock, CheckSquare, Wallet, Building2, ShieldAlert, Network, Link2, FileText, Sparkles, ShieldCheck,
 } from "lucide-react";
 import logo from "@/assets/images/logo.png";
 import GlobalSearch from "@/components/GlobalSearch";
@@ -23,6 +23,7 @@ const ADMIN_NAV = [
   { label: "Newsroom & PR",   href: "/admin/newsroom",     icon: Newspaper,       roles: ["admin", "executive", "content_editor"] },
   { label: "Notice & Event",  href: "/admin/notices",      icon: Bell,            roles: ["admin", "executive", "content_editor"] },
   { label: "Blog",            href: "/admin/blog",         icon: BookOpen,        roles: ["admin", "executive", "content_editor"] },
+  { label: "Transparency Reports", href: "/admin/transparency-reports", icon: ShieldCheck, roles: ["admin", "executive", "content_editor"] },
   { label: "Audit Trail",     href: "/admin/audit-log",    icon: ShieldAlert,     roles: ["admin", "executive", "vp", "director"] },
   { label: "Org Chart",       href: "/admin/org-chart",    icon: Network,         roles: ["admin", "executive", "vp", "director", "hr_manager"] },
   { label: "Invite Links",     href: "/admin/invites",      icon: Link2,           roles: ["admin", "executive", "hr_manager"] },

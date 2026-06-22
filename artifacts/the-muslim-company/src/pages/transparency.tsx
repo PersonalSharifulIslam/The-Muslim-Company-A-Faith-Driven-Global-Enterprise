@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Check, Shield, Scale, Heart, TreePine, Users, BookOpen, Globe2, Landmark, HandHeart, Leaf } from "lucide-react";
+import { ArrowUpRight, Check, Shield, Scale, Heart, TreePine, Users, BookOpen, Globe2, Landmark, HandHeart, Leaf, FileText, Download, Calendar } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
+import { api } from "@/lib/api";
+import type { TransparencyReport } from "@/lib/supabase";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
@@ -14,6 +16,12 @@ const stagger = {
 };
 
 export default function TransparencyPage() {
+  const [reports, setReports] = useState<TransparencyReport[]>([]);
+
+  useEffect(() => {
+    api.get("/transparency-reports").then((data) => setReports(data as TransparencyReport[])).catch(() => {});
+  }, []);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -351,40 +359,70 @@ export default function TransparencyPage() {
           </div>
         </section>
 
-        {/* ── ANNUAL REPORT ── */}
+        {/* ── TRANSPARENCY REPORTS ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10 bg-card">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Annual Transparency Report</p>
-              <p className="font-serif text-2xl text-primary mb-6 max-w-2xl">
-                When operational, TMC will publish annual reports covering all aspects of our ethical operations.
+              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Transparency Reports</p>
+              <p className="font-serif text-2xl text-primary mb-8 max-w-2xl">
+                Monthly, quarterly, semi-annual, and annual reports covering all aspects of our ethical operations.
               </p>
-              <div className="p-6 border border-primary/10 bg-background mb-6">
-                <p className="font-sans text-xs tracking-widest uppercase text-primary/40 mb-4">Annual reports will include:</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {[
-                    "Revenue and expenditure summary",
-                    "Zakat calculation and distribution details",
-                    "Monthly charity disbursement breakdown",
-                    "Humanitarian activities and beneficiary numbers",
-                    "Shariah board audit findings",
-                    "Worker welfare metrics and improvements",
-                    "Environmental impact assessment",
-                    "Tax and VAT compliance confirmation",
-                    "Governance violations (if any) and corrective actions",
-                    "Waqf and endowment fund status",
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 flex-shrink-0" />
-                      <p className="font-sans text-sm text-primary/65">{item}</p>
-                    </div>
+
+              {reports.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                  {reports.map((r) => (
+                    <a
+                      key={r.id}
+                      href={r.pdf_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-start gap-4 p-5 border border-primary/10 bg-background hover:border-secondary/40 transition-colors group"
+                    >
+                      <FileText className="w-5 h-5 text-secondary flex-shrink-0 mt-1" />
+                      <div className="flex-1">
+                        <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/70 mb-1">
+                          {r.report_type.replace("_", "-")} · {r.period_label}
+                        </p>
+                        <h3 className="font-serif text-base text-primary mb-1 group-hover:text-secondary transition-colors">{r.title}</h3>
+                        {r.description && <p className="font-sans text-xs text-primary/50 leading-relaxed mb-2">{r.description}</p>}
+                        <div className="flex items-center gap-1.5 font-sans text-[10px] text-primary/40">
+                          <Calendar className="w-3 h-3" />
+                          {new Date(r.published_date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
+                        </div>
+                      </div>
+                      <Download className="w-4 h-4 text-primary/20 group-hover:text-secondary transition-colors flex-shrink-0 mt-1" />
+                    </a>
                   ))}
                 </div>
-              </div>
+              ) : (
+                <div className="p-6 border border-primary/10 bg-background mb-6">
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/40 mb-4">Reports will include:</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {[
+                      "Revenue and expenditure summary",
+                      "Zakat calculation and distribution details",
+                      "Monthly charity disbursement breakdown",
+                      "Humanitarian activities and beneficiary numbers",
+                      "Shariah board audit findings",
+                      "Worker welfare metrics and improvements",
+                      "Environmental impact assessment",
+                      "Tax and VAT compliance confirmation",
+                      "Governance violations (if any) and corrective actions",
+                      "Waqf and endowment fund status",
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 flex-shrink-0" />
+                        <p className="font-sans text-sm text-primary/65">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <div className="p-5 border border-secondary/30 bg-secondary/5">
                 <p className="font-sans text-xs text-primary/60 leading-relaxed">
                   <span className="text-secondary font-bold uppercase tracking-widest text-[10px]">Note — </span>
-                  The Muslim Company was founded in January 2025 and is currently in its development and establishment phase. Full operational transparency reports will be published once commercial operations commence. This page reflects our constitutional commitments and ethical framework that govern all future reporting.
+                  The Muslim Company was founded in January 2025 and is currently in its development and establishment phase. This page reflects our constitutional commitments and ethical framework that govern all reporting, published as reports become available.
                 </p>
               </div>
             </motion.div>

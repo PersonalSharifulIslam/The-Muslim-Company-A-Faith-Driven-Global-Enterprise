@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Plus, Edit2, Trash2, Key, UserCheck, UserX, X, AlertCircle, CheckCircle, Users } from "lucide-react";
+import { Upload, Plus, Edit2, Trash2, Key, UserCheck, UserX, X, AlertCircle, CheckCircle, Users } from "lucide-react";
 import AdminLayout from "@/components/AdminLayout";
 import { useAuth } from "@/lib/auth-context";
 import { api } from "@/lib/api";
@@ -108,6 +108,45 @@ export default function AdminEmployees() {
   const [search, setSearch] = useState("");
 
 
+  const [showBulk, setShowBulk] = useState(false);
+  const [bulkRows, setBulkRows] = useState<any[]>([]);
+  const [bulkResults, setBulkResults] = useState<any[] | null>(null);
+  const [bulkUploading, setBulkUploading] = useState(false);
+
+  function parseCSV(text: string): any[] {
+    const lines = text.trim().split(/\r?\n/);
+    if (lines.length < 2) return [];
+    const headers = lines[0].split(",").map(h => h.trim());
+    return lines.slice(1).filter(l => l.trim()).map(line => {
+      const cells = line.split(",").map(c => c.trim());
+      const row: any = {};
+      headers.forEach((h, i) => { row[h] = cells[i] || ""; });
+      return row;
+    });
+  }
+
+  function handleCsvFile(file: File) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target?.result as string;
+      setBulkRows(parseCSV(text));
+      setBulkResults(null);
+    };
+    reader.readAsText(file);
+  }
+
+  async function submitBulk() {
+    setBulkUploading(true);
+    try {
+      const res = await api.post("/admin/employees/bulk", { rows: bulkRows }, true) as any[];
+      setBulkResults(res);
+      await load();
+    } catch (e: any) {
+      setMsg({ type: "err", text: e.message || "Bulk import failed" });
+    }
+    setBulkUploading(false);
+  }
+
   const load = async () => {
     setFetching(true);
     api.get("/admin/employees", true).then((d) => setEmployees(d as Employee[])).catch(() => {}).finally(() => setFetching(false));
@@ -179,6 +218,9 @@ export default function AdminEmployees() {
           </div>
           <Button onClick={openCreate} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none font-sans text-xs font-bold tracking-widest uppercase h-9 px-5 gap-2">
             <Plus className="w-3.5 h-3.5" /> Add Employee
+          </Button>
+          <Button onClick={() => { setShowBulk(true); setBulkRows([]); setBulkResults(null); }} variant="outline" className="border-primary/20 text-primary rounded-none font-sans text-xs font-bold tracking-widest uppercase h-9 px-5 gap-2">
+            <Upload className="w-3.5 h-3.5" /> Import CSV
           </Button>
         </motion.div>
 

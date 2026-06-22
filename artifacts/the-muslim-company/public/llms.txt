@@ -7,7 +7,7 @@
 ### Core Identity
 - [Home](https://www.themuslim.company/): Main landing page covering the company overview, founder introduction, sectors, governance model, constitution, and story
 - [Mission](https://www.themuslim.company/mission): The company's core mission — building a faith-driven global enterprise rooted in Islamic principles
-- [Vision](https://www.themuslim.company/#vision): Long-term vision for transforming global commerce and society through ethical Islamic enterprise
+- [Vision](https://www.themuslim.company/vision): Long-term vision for transforming global commerce and society through ethical Islamic enterprise
 - [Founder](https://www.themuslim.company/founder): Profile of Shariful Islam, founder of The Muslim Company — his background, beliefs, and founding story
 - [CEO Profile – Shariful Islam](https://www.themuslim.company/ceo/Sharifulislam): Detailed biography, credentials, verified external profiles, and public identity of Shariful Islam as Founder, CEO & Managing Director
 

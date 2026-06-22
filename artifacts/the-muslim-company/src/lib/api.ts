@@ -253,6 +253,82 @@ async function routeGet(path: string): Promise<any> {
     return data
   }
 
+  // Employee: own leave balance for current year
+  if (path === '/employee/leave-balance') {
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
+    if (!role?.employee_id) return null
+    const year = new Date().getFullYear()
+    const { data: balance } = await supabase.from('leave_balances').select('*').eq('employee_id', role.employee_id).eq('year', year).maybeSingle()
+    const { data: used } = await supabase.from('leave_requests').select('days').eq('employee_id', role.employee_id).eq('status', 'approved').gte('start_date', `${year}-01-01`).lte('start_date', `${year}-12-31`)
+    const usedDays = (used || []).reduce((s: number, r: any) => s + Number(r.days || 0), 0)
+    return { quota: balance?.annual_quota ?? 20, used: usedDays, remaining: (balance?.annual_quota ?? 20) - usedDays, year }
+  }
+
+  // Admin/HR: all employees' leave balances
+  if (path === '/admin/leave-balances') {
+    const year = new Date().getFullYear()
+    const { data: emps, error } = await supabase.from('employees').select('employee_id, name, department').eq('status', 'active')
+    if (error) throw new Error(error.message)
+    const { data: balances } = await supabase.from('leave_balances').select('*').eq('year', year)
+    const { data: leaves } = await supabase.from('leave_requests').select('employee_id, days').eq('status', 'approved').gte('start_date', `${year}-01-01`).lte('start_date', `${year}-12-31`)
+    const balMap = new Map((balances || []).map((b: any) => [b.employee_id, b.annual_quota]))
+    const usedMap: Record<string, number> = {}
+    for (const l of (leaves || [])) usedMap[l.employee_id] = (usedMap[l.employee_id] || 0) + Number(l.days || 0)
+    return (emps || []).map((e: any) => {
+      const quota = balMap.get(e.employee_id) ?? 20
+      const used = usedMap[e.employee_id] || 0
+      return { ...e, quota, used, remaining: quota - used }
+    })
+  }
+
+  // Employee: own performance reviews
+  if (path === '/employee/performance') {
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
+    if (!role?.employee_id) return []
+    const { data, error } = await supabase.from('performance_reviews').select('*').eq('employee_id', role.employee_id).order('created_at', { ascending: false })
+    if (error) throw error; return data
+  }
+
+  // Admin/Manager: all performance reviews
+  if (path === '/admin/performance') {
+    const { data, error } = await supabase.from('performance_reviews').select('*, employees(name, department, position)').order('created_at', { ascending: false })
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Admin/HR: employee exits
+  if (path === '/admin/exits') {
+    const { data, error } = await supabase.from('employee_exits').select('*, employees(name, department, position)').order('created_at', { ascending: false })
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Admin/HR/Manager: company assets
+  if (path === '/admin/assets') {
+    const { data, error } = await supabase.from('company_assets').select('*, employees(name, department)').order('created_at', { ascending: false })
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Employee: own assigned assets
+  if (path === '/employee/assets') {
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
+    if (!role?.employee_id) return []
+    const { data, error } = await supabase.from('company_assets').select('*').eq('assigned_to', role.employee_id)
+    if (error) throw error; return data
+  }
+
+  // Task comments (employee's own tasks, or any manager-capable role)
+  const taskCommentsMatch = path.match(/^\/tasks\/(\d+)\/comments$/)
+  if (taskCommentsMatch) {
+    const { data, error } = await supabase.from('task_comments').select('*').eq('task_id', taskCommentsMatch[1]).order('created_at', { ascending: true })
+    if (error) throw new Error(error.message)
+    return data
+  }
+
   // Holidays & company events (visible to everyone authenticated, including employee portal)
   if (path === '/holidays' || path === '/employee/holidays') {
     const { data, error } = await supabase.from('holidays').select('*').order('date', { ascending: true })

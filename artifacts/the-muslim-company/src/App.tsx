@@ -34,6 +34,10 @@ const AdminOrgChart = lazy(() => import("@/pages/admin-org-chart"));
 const AdminInvites = lazy(() => import("@/pages/admin-invites"));
 const AdminDocuments = lazy(() => import("@/pages/admin-documents"));
 const AdminHolidays = lazy(() => import("@/pages/admin-holidays"));
+const AdminPerformance = lazy(() => import("@/pages/admin-performance"));
+const AdminExits = lazy(() => import("@/pages/admin-exits"));
+const AdminAssets = lazy(() => import("@/pages/admin-assets"));
+const AdminLeaveBalances = lazy(() => import("@/pages/admin-leave-balances"));
 const EmployeeOnboard = lazy(() => import("@/pages/employee-onboard"));
 const EmployeeDashboard = lazy(() => import("@/pages/employee-dashboard"));
 const EmployeeAttendance = lazy(() => import("@/pages/employee-attendance"));
@@ -46,6 +50,7 @@ const EmployeeSettings = lazy(() => import("@/pages/employee-settings"));
 const EmployeePayslip = lazy(() => import("@/pages/employee-payslip"));
 const EmployeeHolidays = lazy(() => import("@/pages/employee-holidays"));
 const EmployeeDirectory = lazy(() => import("@/pages/employee-directory"));
+const EmployeePerformance = lazy(() => import("@/pages/employee-performance"));
 const LoginPage = lazy(() => import("@/pages/LoginPage"));
 const AuthRedirect = lazy(() => import("@/pages/AuthRedirect"));
 const FounderPage = lazy(() => import("@/pages/founder"));
@@ -161,6 +166,18 @@ function Router() {
       <Route path="/admin/holidays">
         <AdminRoute><AdminHolidays /></AdminRoute>
       </Route>
+      <Route path="/admin/performance">
+        <AdminRoute><AdminPerformance /></AdminRoute>
+      </Route>
+      <Route path="/admin/exits">
+        <AdminRoute><AdminExits /></AdminRoute>
+      </Route>
+      <Route path="/admin/assets">
+        <AdminRoute><AdminAssets /></AdminRoute>
+      </Route>
+      <Route path="/admin/leave-balances">
+        <AdminRoute><AdminLeaveBalances /></AdminRoute>
+      </Route>
 
       {/* Employee protected routes */}
       <Route path="/employee/dashboard">
@@ -195,6 +212,9 @@ function Router() {
       </Route>
       <Route path="/employee/directory">
         <EmployeeRoute><EmployeeDirectory /></EmployeeRoute>
+      </Route>
+      <Route path="/employee/performance">
+        <EmployeeRoute><EmployeePerformance /></EmployeeRoute>
       </Route>
 
       <Route component={NotFound} />

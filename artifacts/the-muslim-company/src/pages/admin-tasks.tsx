@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus, Check, X, Edit2, Trash2, AlertCircle } from "lucide-react";
+import { Plus, Check, X, Edit2, Trash2, AlertCircle, MessageSquare, Send } from "lucide-react";
 import AdminLayout from "@/components/AdminLayout";
 import { api } from "@/lib/api";
 
@@ -35,6 +35,9 @@ export default function AdminTasks() {
   const [saving, setSaving] = useState(false);
   const EMPTY = { employee_id: "", title: "", description: "", priority: "medium", deadline: "", assigned_by: "Admin" };
   const [form, setForm] = useState(EMPTY);
+  const [expanded, setExpanded] = useState<number | null>(null);
+  const [comments, setComments] = useState<Record<number, any[]>>({});
+  const [commentDraft, setCommentDraft] = useState("");
 
   useEffect(() => { load(); }, []);
 
@@ -73,6 +76,25 @@ export default function AdminTasks() {
   async function handleDelete(id: number) {
     if (!confirm("Delete this task?")) return;
     try { await api.delete(`/admin/tasks/${id}`, true); await load(); } catch {}
+  }
+
+  async function toggleExpand(id: number) {
+    if (expanded === id) { setExpanded(null); return; }
+    setExpanded(id);
+    if (!comments[id]) {
+      try { setComments(prev => ({ ...prev, [id]: (await api.get(`/tasks/${id}/comments`)) as any[] || [] })); } catch {}
+    }
+  }
+
+  async function postComment(taskId: number) {
+    if (!commentDraft.trim()) return;
+    try {
+      await api.post("/admin/task-comment", { task_id: taskId, comment: commentDraft }, true);
+      setComments(prev => ({ ...prev, [taskId]: [] }));
+      const c = await api.get(`/tasks/${taskId}/comments`);
+      setComments(prev => ({ ...prev, [taskId]: (c as any[]) || [] }));
+      setCommentDraft("");
+    } catch {}
   }
 
   function startEdit(t: Task) {
@@ -208,7 +230,28 @@ export default function AdminTasks() {
                     className={`text-[11px] uppercase tracking-widest px-3 py-1.5 border rounded font-sans ${STATUS_COLORS[t.status]}`}>
                     {["pending", "in_progress", "done", "cancelled"].map(s => <option key={s} value={s}>{s.replace("_", " ")}</option>)}
                   </select>
+                  <button onClick={() => toggleExpand(t.id)} className="flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-widest text-primary/40 hover:text-secondary">
+                    <MessageSquare className="w-3.5 h-3.5" /> {comments[t.id]?.length ? comments[t.id].length : ""}
+                  </button>
                 </div>
+
+                {expanded === t.id && (
+                  <div className="mt-3 pt-3 border-t border-primary/10 space-y-2">
+                    {(comments[t.id] || []).map((c: any) => (
+                      <div key={c.id} className="bg-background border border-primary/5 rounded p-2.5">
+                        <p className="font-sans text-[10px] text-secondary/80 font-semibold">{c.author_name}</p>
+                        <p className="font-sans text-xs text-primary/70">{c.comment}</p>
+                        <p className="font-sans text-[9px] text-primary/30 mt-0.5">{new Date(c.created_at).toLocaleString()}</p>
+                      </div>
+                    ))}
+                    <div className="flex gap-2">
+                      <input value={commentDraft} onChange={e => setCommentDraft(e.target.value)} placeholder="Add a note..."
+                        onKeyDown={e => e.key === "Enter" && postComment(t.id)}
+                        className="flex-1 h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+                      <button onClick={() => postComment(t.id)} className="bg-secondary text-primary px-3 rounded"><Send className="w-4 h-4" /></button>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>

@@ -23,11 +23,12 @@ export default function EmployeeLeave() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  
+  const [balance, setBalance] = useState<{ quota: number; used: number; remaining: number } | null>(null);
 
   useEffect(() => {
     if (!session || !profile) return;
     api.get("/employee/leave").then((d) => setLeaves(d as LeaveReq[])).catch(() => {});
+    api.get("/employee/leave-balance").then((d) => setBalance(d as any)).catch(() => {});
   }, [session, profile]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -64,13 +65,18 @@ export default function EmployeeLeave() {
           </Button>
         </motion.div>
 
-        <motion.div variants={fade} className="grid grid-cols-3 gap-3">
+        <motion.div variants={fade} className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[["Total Requests", stats.total, "text-white"], ["Pending", stats.pending, "text-yellow-400"], ["Approved", stats.approved, "text-green-400"]].map(([label, val, color]) => (
             <div key={label as string} className="bg-[#0f2314]/60 border border-[#b08d57]/15 p-4 text-center">
               <p className={`font-serif text-3xl font-bold ${color}`}>{val}</p>
               <p className="font-sans text-[10px] tracking-widest uppercase text-white/30 mt-1">{label}</p>
             </div>
           ))}
+          <div className="bg-[#0f2314]/60 border border-[#b08d57]/30 p-4 text-center">
+            <p className={`font-serif text-3xl font-bold ${balance && balance.remaining <= 3 ? "text-red-400" : "text-[#b08d57]"}`}>{balance ? balance.remaining : "—"}</p>
+            <p className="font-sans text-[10px] tracking-widest uppercase text-white/30 mt-1">Days Remaining</p>
+            {balance && <p className="font-sans text-[9px] text-white/20 mt-0.5">of {balance.quota} annual</p>}
+          </div>
         </motion.div>
 
         {success && (

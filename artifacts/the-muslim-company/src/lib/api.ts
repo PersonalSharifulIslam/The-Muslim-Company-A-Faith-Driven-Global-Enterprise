@@ -1151,6 +1151,54 @@ async function routePut(path: string, body: any): Promise<any> {
     return data
   }
 
+  // Admin/HR: update an employee exit record's status
+  const exitMatch = path.match(/^\/admin\/exits\/(\d+)$/)
+  if (exitMatch) {
+    const { status, last_working_date, exit_interview_notes } = body
+    const updates: any = {}
+    if (status) updates.status = status
+    if (last_working_date) updates.last_working_date = last_working_date
+    if (exit_interview_notes !== undefined) updates.exit_interview_notes = exit_interview_notes
+    const { data, error } = await supabase.from('employee_exits').update(updates).eq('id', exitMatch[1]).select().single()
+    if (error) throw new Error(error.message)
+    // If marked completed, also flip the employee's status to inactive
+    if (status === 'completed' && data?.employee_id) {
+      await supabase.from('employees').update({ status: 'inactive' }).eq('employee_id', data.employee_id)
+    }
+    logAudit(`exit_${status || 'updated'}`, 'employee_exits', exitMatch[1], { status })
+    return data
+  }
+
+  // Admin/HR/Manager: update an asset (e.g. reassign or mark returned)
+  const assetMatch = path.match(/^\/admin\/assets\/(\d+)$/)
+  if (assetMatch) {
+    const { assigned_to, status, returned_date, notes } = body
+    const updates: any = {}
+    if (assigned_to !== undefined) {
+      updates.assigned_to = assigned_to || null
+      updates.status = assigned_to ? 'assigned' : 'available'
+      updates.assigned_date = assigned_to ? new Date().toISOString().split('T')[0] : null
+      updates.returned_date = assigned_to ? null : new Date().toISOString().split('T')[0]
+    }
+    if (status) updates.status = status
+    if (returned_date) updates.returned_date = returned_date
+    if (notes !== undefined) updates.notes = notes
+    const { data, error } = await supabase.from('company_assets').update(updates).eq('id', assetMatch[1]).select().single()
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+  // Employee: acknowledge a submitted performance review
+  const ackMatch = path.match(/^\/employee\/performance\/(\d+)\/acknowledge$/)
+  if (ackMatch) {
+    const { employee_comments } = body
+    const { data, error } = await supabase.from('performance_reviews').update({
+      status: 'acknowledged', employee_comments: employee_comments || '', updated_at: new Date().toISOString(),
+    }).eq('id', ackMatch[1]).select().single()
+    if (error) throw new Error(error.message)
+    return data
+  }
+
   // Admin/HR: approve or reject a submitted document
   const docMatch = path.match(/^\/admin\/documents\/(\d+)$/)
   if (docMatch) {

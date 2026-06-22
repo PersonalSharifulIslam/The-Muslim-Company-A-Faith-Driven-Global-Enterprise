@@ -835,6 +835,80 @@ async function routePost(path: string, body: any): Promise<any> {
     return { sent: targetEmployeeIds.length }
   }
 
+  // Admin/HR: set or update an employee's annual leave quota
+  if (path === '/admin/leave-balances') {
+    const { employee_id, year, annual_quota } = body
+    if (!employee_id || !annual_quota) throw new Error('Employee and quota are required')
+    const { data, error } = await supabase.from('leave_balances').upsert({
+      employee_id, year: year || new Date().getFullYear(), annual_quota: Number(annual_quota),
+    }, { onConflict: 'employee_id,year' }).select().single()
+    if (error) throw new Error(error.message)
+    logAudit('leave_balance_updated', 'leave_balances', employee_id, { annual_quota })
+    return data
+  }
+
+  // Admin/Manager: create a performance review
+  if (path === '/admin/performance') {
+    const { employee_id, review_period, overall_rating, strengths, areas_for_improvement, goals_next_period } = body
+    if (!employee_id || !review_period) throw new Error('Employee and review period are required')
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data, error } = await supabase.from('performance_reviews').insert({
+      employee_id, review_period, reviewer_id: user?.id || null,
+      overall_rating: overall_rating || null, strengths: strengths || '',
+      areas_for_improvement: areas_for_improvement || '', goals_next_period: goals_next_period || '',
+      status: 'submitted',
+    }).select().single()
+    if (error) throw new Error(error.message)
+    logAudit('performance_review_created', 'performance_reviews', String(data.id), { employee_id, review_period, overall_rating })
+    return data
+  }
+
+  // Admin/HR: record an employee exit (resignation/termination)
+  if (path === '/admin/exits') {
+    const { employee_id, exit_type, notice_date, last_working_date, reason } = body
+    if (!employee_id || !exit_type) throw new Error('Employee and exit type are required')
+    const { data: { user } } = await supabase.auth.getUser()
+    const { data, error } = await supabase.from('employee_exits').insert({
+      employee_id, exit_type, notice_date: notice_date || new Date().toISOString().split('T')[0],
+      last_working_date: last_working_date || null, reason: reason || '', status: 'pending', processed_by: user?.id || null,
+    }).select().single()
+    if (error) throw new Error(error.message)
+    logAudit('employee_exit_recorded', 'employee_exits', String(data.id), { employee_id, exit_type })
+    return data
+  }
+
+  // Admin/HR/Manager: register a company asset
+  if (path === '/admin/assets') {
+    const { asset_name, asset_type, serial_number, assigned_to, assigned_date, notes } = body
+    if (!asset_name || !asset_type) throw new Error('Asset name and type are required')
+    const { data, error } = await supabase.from('company_assets').insert({
+      asset_name, asset_type, serial_number: serial_number || '', assigned_to: assigned_to || null,
+      assigned_date: assigned_to ? (assigned_date || new Date().toISOString().split('T')[0]) : null,
+      status: assigned_to ? 'assigned' : 'available', notes: notes || '',
+    }).select().single()
+    if (error) throw new Error(error.message)
+    logAudit('asset_created', 'company_assets', String(data.id), { asset_name, asset_type })
+    return data
+  }
+
+  // Add a comment to a task (employee or manager)
+  if (path === '/employee/task-comment' || path === '/admin/task-comment') {
+    const { task_id, comment } = body
+    if (!task_id || !comment) throw new Error('task_id and comment are required')
+    const { data: { user } } = await supabase.auth.getUser()
+    let authorName = user?.email || 'Unknown'
+    const { data: role } = await supabase.from('user_roles').select('employee_id').eq('id', user?.id ?? '').single()
+    if (role?.employee_id) {
+      const { data: emp } = await supabase.from('employees').select('name').eq('employee_id', role.employee_id).single()
+      if (emp?.name) authorName = emp.name
+    }
+    const { data, error } = await supabase.from('task_comments').insert({
+      task_id, author_id: user?.id || null, author_name: authorName, comment,
+    }).select().single()
+    if (error) throw new Error(error.message)
+    return data
+  }
+
   // Admin/HR: add a holiday or company event (supports a date range — single
   // day if end_date is omitted/equal to date, multi-day for things like Eid holidays)
   if (path === '/admin/holidays') {

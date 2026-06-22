@@ -362,6 +362,68 @@ export default function AdminEmployees() {
           </div>
         </motion.div>
       </motion.div>
+
+      {showBulk && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4" onClick={() => setShowBulk(false)}>
+          <div className="bg-card border border-primary/15 w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between px-6 py-4 border-b border-primary/10">
+              <h2 className="font-serif text-lg text-primary">Bulk Import Employees (CSV)</h2>
+              <button onClick={() => setShowBulk(false)} className="text-primary/40 hover:text-primary"><X className="w-5 h-5" /></button>
+            </div>
+            <div className="p-6 space-y-4">
+              <div className="bg-background border border-primary/10 p-4 rounded">
+                <p className="font-sans text-xs text-primary/50 mb-2">CSV must have these column headers (in any order):</p>
+                <code className="font-mono text-[11px] text-secondary block bg-primary/5 p-2 rounded overflow-x-auto">
+                  name,email,password,department,position,phone,address,joining_date,access_level
+                </code>
+                <p className="font-sans text-[10px] text-primary/30 mt-2">access_level is optional (defaults to "employee"). employee_id is auto-generated.</p>
+              </div>
+
+              <input type="file" accept=".csv" onChange={e => e.target.files?.[0] && handleCsvFile(e.target.files[0])}
+                className="font-sans text-sm text-primary" />
+
+              {bulkRows.length > 0 && !bulkResults && (
+                <>
+                  <p className="font-sans text-xs text-primary/60">{bulkRows.length} row(s) ready to import</p>
+                  <div className="overflow-x-auto border border-primary/10 rounded max-h-48">
+                    <table className="w-full font-sans text-xs">
+                      <thead><tr className="border-b border-primary/10">{Object.keys(bulkRows[0]).map(h => <th key={h} className="text-left px-3 py-2 text-primary/40">{h}</th>)}</tr></thead>
+                      <tbody>
+                        {bulkRows.slice(0, 10).map((r, i) => (
+                          <tr key={i} className="border-b border-primary/5">
+                            {Object.keys(bulkRows[0]).map(h => <td key={h} className="px-3 py-1.5 text-primary/70">{h === "password" ? "••••••" : r[h]}</td>)}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <button onClick={submitBulk} disabled={bulkUploading}
+                    className="bg-secondary text-primary font-sans text-xs uppercase tracking-widest h-10 px-6 rounded disabled:opacity-50">
+                    {bulkUploading ? "Importing..." : `Import ${bulkRows.length} Employees`}
+                  </button>
+                </>
+              )}
+
+              {bulkResults && (
+                <div className="space-y-2">
+                  <p className="font-sans text-sm text-primary">
+                    {bulkResults.filter(r => r.success).length} succeeded, {bulkResults.filter(r => !r.success).length} failed
+                  </p>
+                  <div className="space-y-1 max-h-48 overflow-y-auto">
+                    {bulkResults.map((r, i) => (
+                      <div key={i} className={`flex items-center gap-2 font-sans text-xs px-3 py-1.5 rounded ${r.success ? "bg-green-400/10 text-green-400" : "bg-red-400/10 text-red-400"}`}>
+                        {r.success ? <Check className="w-3.5 h-3.5" /> : <AlertCircle className="w-3.5 h-3.5" />}
+                        {r.row} {r.success ? `→ ${r.employee_id}` : `— ${r.error}`}
+                      </div>
+                    ))}
+                  </div>
+                  <button onClick={() => setShowBulk(false)} className="bg-secondary text-primary font-sans text-xs uppercase tracking-widest h-9 px-5 rounded">Done</button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </AdminLayout>
   );
 }

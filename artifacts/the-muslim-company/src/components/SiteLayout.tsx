@@ -60,15 +60,20 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
             </span>
           </a>
           <button
-            className="text-primary-foreground/70 hover:text-secondary transition-colors"
-            onClick={() => setNavOpen(!navOpen)}
-          >
+  data-testid="nav-mobile-toggle"
+  aria-label={navOpen ? "Close navigation menu" : "Open navigation menu"}
+  aria-expanded={navOpen}
+  aria-controls="mobile-nav-menu"
+  className="text-primary-foreground/70 hover:text-secondary transition-colors"
+  onClick={() => setNavOpen(!navOpen)}
+>
             {navOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
         <AnimatePresence>
           {navOpen && (
             <motion.div
+              id="mobile-nav-menu"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}

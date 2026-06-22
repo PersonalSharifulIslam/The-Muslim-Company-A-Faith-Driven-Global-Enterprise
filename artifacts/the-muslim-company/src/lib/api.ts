@@ -47,6 +47,10 @@ async function routeGet(path: string): Promise<any> {
     const { data, error } = await supabase.from('notices').select('*').order('created_at', { ascending: false })
     if (error) throw error; return data
   }
+  if (path === '/admin/transparency-reports' || path === '/transparency-reports') {
+    const { data, error } = await supabase.from('transparency_reports').select('*').order('published_date', { ascending: false })
+    if (error) throw error; return data
+  }
   if (path === '/admin/blog' || path === '/blog') {
     const { data, error } = await supabase.from('blog_posts').select('*').order('created_at', { ascending: false })
     if (error) throw error; return data
@@ -495,6 +499,10 @@ async function routePost(path: string, body: any): Promise<any> {
   }
   if (path === '/admin/notices') {
     const { data, error } = await supabase.from('notices').insert(body).select().single()
+    if (error) throw error; return data
+  }
+  if (path === '/admin/transparency-reports') {
+    const { data, error } = await supabase.from('transparency_reports').insert(body).select().single()
     if (error) throw error; return data
   }
   if (path === '/admin/blog') {
@@ -980,6 +988,11 @@ async function routePut(path: string, body: any): Promise<any> {
     const { data, error } = await supabase.from('notices').update(body).eq('id', parseInt(noticeMatch[1])).select().single()
     if (error) throw error; return data
   }
+  const transparencyMatch = path.match(/^\/admin\/transparency-reports\/(\d+)$/)
+  if (transparencyMatch) {
+    const { data, error } = await supabase.from('transparency_reports').update(body).eq('id', parseInt(transparencyMatch[1])).select().single()
+    if (error) throw error; return data
+  }
   const blogMatch = path.match(/^\/admin\/blog\/(\d+)$/)
   if (blogMatch) {
     const { data, error } = await supabase.from('blog_posts').update(body).eq('id', parseInt(blogMatch[1])).select().single()
@@ -1274,6 +1287,11 @@ async function routeDel(path: string): Promise<any> {
   const noticeMatch_2 = path.match(/^\/admin\/notices\/(\d+)$/)
   if (noticeMatch_2) {
     const { error } = await supabase.from('notices').delete().eq('id', parseInt(noticeMatch[1]))
+    if (error) throw error; return { success: true }
+  }
+  const transparencyMatch_2 = path.match(/^\/admin\/transparency-reports\/(\d+)$/)
+  if (transparencyMatch_2) {
+    const { error } = await supabase.from('transparency_reports').delete().eq('id', parseInt(transparencyMatch_2[1]))
     if (error) throw error; return { success: true }
   }
   const blogMatch_2 = path.match(/^\/admin\/blog\/(\d+)$/)

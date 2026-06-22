@@ -412,7 +412,7 @@ export default function AdminEmployees() {
                   <div className="space-y-1 max-h-48 overflow-y-auto">
                     {bulkResults.map((r, i) => (
                       <div key={i} className={`flex items-center gap-2 font-sans text-xs px-3 py-1.5 rounded ${r.success ? "bg-green-400/10 text-green-400" : "bg-red-400/10 text-red-400"}`}>
-                        {r.success ? <Check className="w-3.5 h-3.5" /> : <AlertCircle className="w-3.5 h-3.5" />}
+                        {r.success ? <CheckCircle className="w-3.5 h-3.5" /> : <AlertCircle className="w-3.5 h-3.5" />}
                         {r.row} {r.success ? `→ ${r.employee_id}` : `— ${r.error}`}
                       </div>
                     ))}

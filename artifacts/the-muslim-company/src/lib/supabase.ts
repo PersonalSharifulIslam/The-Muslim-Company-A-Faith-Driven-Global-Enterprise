@@ -89,3 +89,16 @@ export type Application = {
   created_at: string
   updated_at: string
 }
+
+
+export type TransparencyReport = {
+  id: number
+  title: string
+  report_type: 'monthly' | 'quarterly' | 'semi_annual' | 'annual'
+  period_label: string
+  description: string
+  pdf_url: string
+  published_date: string
+  featured: boolean
+  created_at: string
+}

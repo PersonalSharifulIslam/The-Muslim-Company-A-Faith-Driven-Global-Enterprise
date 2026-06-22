@@ -29,6 +29,10 @@ const ADMIN_NAV = [
   { label: "Invite Links",     href: "/admin/invites",      icon: Link2,           roles: ["admin", "executive", "hr_manager"] },
   { label: "Documents",       href: "/admin/documents",    icon: FileText,        roles: ["admin", "executive", "hr_manager"] },
   { label: "Holidays",        href: "/admin/holidays",     icon: Sparkles,        roles: ["admin", "executive", "hr_manager"] },
+  { label: "Performance",     href: "/admin/performance",  icon: Star,            roles: ["admin", "executive", "vp", "director", "hr_manager", "department_manager"] },
+  { label: "Leave Balances",  href: "/admin/leave-balances", icon: PieChart,       roles: ["admin", "executive", "hr_manager"] },
+  { label: "Exits",           href: "/admin/exits",        icon: UserMinus,       roles: ["admin", "executive", "hr_manager"] },
+  { label: "Assets",          href: "/admin/assets",       icon: Package,         roles: ["admin", "executive", "hr_manager", "department_manager"] },
 ];
 
 const ROLE_LABELS: Record<string, string> = {

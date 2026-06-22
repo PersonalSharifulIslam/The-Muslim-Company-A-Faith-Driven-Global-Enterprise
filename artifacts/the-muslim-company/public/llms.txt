@@ -1,47 +1,47 @@
 # The Muslim Company
 
-> The Muslim Company (themuslim.company) is a faith-driven global Islamic conglomerate headquartered in Dhaka, Bangladesh, founded in January 2025 by Shariful Islam. It operates across Technology & AI, Media, Education, Humanitarian Development, Governance, Renewable Energy, and Ethical Commerce under a Shariah-compliant governance structure. The company is guided by Islamic values of accountability, transparency, and purposeful enterprise.
+> The Muslim Company (www.themuslim.company) is a global conglomerate based in Dhaka, Bangladesh — spanning industry, technology, society, education, healthcare, and humanitarian development worldwide. Founded in January 2025 by Shariful Islam. It operates across Technology & AI, Media, Education, Humanitarian Development, Governance, Renewable Energy, and Ethical Commerce under a Shariah-compliant governance structure. The company is guided by Islamic values of accountability, transparency, and purposeful enterprise.
 
 ## Public Pages
 
 ### Core Identity
-- [Home](https://themuslim.company/): Main landing page covering the company overview, founder introduction, sectors, governance model, constitution, and story
-- [Mission](https://themuslim.company/mission): The company's core mission — building a faith-driven global enterprise rooted in Islamic principles
-- [Vision](https://themuslim.company/vision): Long-term vision for transforming global commerce and society through ethical Islamic enterprise
-- [Founder](https://themuslim.company/founder): Profile of Shariful Islam, founder of The Muslim Company — his background, beliefs, and founding story
-- [CEO Profile – Shariful Islam](https://themuslim.company/ceo/Sharifulislam): Detailed biography, credentials, verified external profiles, and public identity of Shariful Islam as Founder, CEO & Managing Director
+- [Home](https://www.themuslim.company/): Main landing page covering the company overview, founder introduction, sectors, governance model, constitution, and story
+- [Mission](https://www.themuslim.company/mission): The company's core mission — building a faith-driven global enterprise rooted in Islamic principles
+- [Vision](https://www.themuslim.company/#vision): Long-term vision for transforming global commerce and society through ethical Islamic enterprise
+- [Founder](https://www.themuslim.company/founder): Profile of Shariful Islam, founder of The Muslim Company — his background, beliefs, and founding story
+- [CEO Profile – Shariful Islam](https://www.themuslim.company/ceo/Sharifulislam): Detailed biography, credentials, verified external profiles, and public identity of Shariful Islam as Founder, CEO & Managing Director
 
 ### Sectors
-- [Sector Detail](https://themuslim.company/sectors/:slug): Individual pages for each of the company's operating sectors (e.g. Technology & AI, Media, Education, Renewable Energy, Ethical Commerce, Humanitarian Development, Governance)
+- [Sector Detail](https://www.themuslim.company/sectors/:slug): Individual pages for each of the company's operating sectors (e.g. Technology & AI, Media, Education, Renewable Energy, Ethical Commerce, Humanitarian Development, Governance)
 
 ### Careers & Recruitment
-- [Careers](https://themuslim.company/careers): Open job listings, hiring philosophy, and Shariah-compliant workplace values
-- [Job Detail](https://themuslim.company/careers/:slug): Full details for a specific open position
-- [Job Application](https://themuslim.company/careers/:slug/apply): Application form for a specific job opening
-- [Recruitment Status](https://themuslim.company/recruitment-status): Applicants can track the status of their submitted application
+- [Careers](https://www.themuslim.company/careers): Open job listings, hiring philosophy, and Shariah-compliant workplace values
+- [Job Detail](https://www.themuslim.company/careers/:slug): Full details for a specific open position
+- [Job Application](https://www.themuslim.company/careers/:slug/apply): Application form for a specific job opening
+- [Recruitment Status](https://www.themuslim.company/recruitment-status): Applicants can track the status of their submitted application
 
 ### News & Communications
-- [Newsroom & PR](https://themuslim.company/newsroom): Press releases, media features, and official company announcements
-- [News Article](https://themuslim.company/newsroom/:slug): Full text of an individual news or press release article
-- [Notices & Events](https://themuslim.company/notices): Official company notices, regulatory communications, and public events
-- [Blog](https://themuslim.company/blog): Thought leadership articles on Islamic enterprise, ethics, technology, and reform
-- [Blog Post](https://themuslim.company/blog/:slug): Full content of an individual blog article
+- [Newsroom & PR](https://www.themuslim.company/newsroom): Press releases, media features, and official company announcements
+- [News Article](https://www.themuslim.company/newsroom/:slug): Full text of an individual news or press release article
+- [Notices & Events](https://www.themuslim.company/notices): Official company notices, regulatory communications, and public events
+- [Blog](https://www.themuslim.company/blog): Thought leadership articles on Islamic enterprise, ethics, technology, and reform
+- [Blog Post](https://www.themuslim.company/blog/:slug): Full content of an individual blog article
 
 ### Governance & Legal
-- [Transparency](https://themuslim.company/transparency): Corporate governance disclosures, Shariah compliance reports, and financial accountability documents
-- [Privacy Policy](https://themuslim.company/privacy-policy): How The Muslim Company collects, uses, and protects user data
-- [Terms of Service](https://themuslim.company/terms-of-service): Legal terms governing use of the website and its services
+- [Transparency](https://www.themuslim.company/transparency): Corporate governance disclosures, Shariah compliance reports, and financial accountability documents
+- [Privacy Policy](https://www.themuslim.company/privacy-policy): How The Muslim Company collects, uses, and protects user data
+- [Terms of Service](https://www.themuslim.company/terms-of-service): Legal terms governing use of the website and its services
 
 ### Engagement
-- [Get Involved](https://themuslim.company/get-involved): Ways to partner, volunteer, invest, or collaborate with The Muslim Company
-- [Contact](https://themuslim.company/contact): Contact details, office address (Dhaka, Bangladesh), and inquiry form
+- [Get Involved](https://www.themuslim.company/get-involved): Ways to partner, volunteer, invest, or collaborate with The Muslim Company
+- [Contact](https://www.themuslim.company/contact): Contact details, office address (Dhaka, Bangladesh), and inquiry form
 
 ### Special Pages
-- [Bayt Al-Mal Bank](https://themuslim.company/BaytAlMalBank): Overview of the company's Islamic finance and ethical banking initiative
+- [Bayt Al-Mal Bank](https://www.themuslim.company/BaytAlMalBank): Overview of the company's Islamic finance and ethical banking initiative
 
 ## About the Founder & CEO
 
-**Shariful Islam** is the Founder, CEO & Managing Director of The Muslim Company. He holds a B.Sc. in Electrical Engineering and serves as a Peace Ambassador for the Global Peace Chain (Bangladesh). He founded The Muslim Company in January 2025 with a mission to create a Shariah-compliant global enterprise spanning technology, media, education, renewable energy, and humanitarian development.
+**Shariful Islam** is the Founder, CEO & Managing Director of The Muslim Company. He holds a B.E. in Electrical Engineering and serves as a Peace Ambassador for the Global Peace Chain (Bangladesh). He founded The Muslim Company in January 2025 with a mission to create a Shariah-compliant global enterprise spanning technology, media, education, renewable energy, and humanitarian development.
 
 Verified external profiles: LinkedIn, Crunchbase, Wikidata, ORCID, ISNI, VIAF, IMDb, and others listed on the CEO page.
 
@@ -49,10 +49,10 @@ Verified external profiles: LinkedIn, Crunchbase, Wikidata, ORCID, ISNI, VIAF, I
 
 - **Founded:** January 2025
 - **Headquarters:** Dhaka, Bangladesh
-- **Type:** Faith-driven Islamic conglomerate
+- **Type:** A Faith-Driven Global Enterprise
 - **Governance:** Shariah-compliant Board structure
 - **Operating Sectors:** Technology & AI · Media · Education · Humanitarian Development · Governance · Renewable Energy · Ethical Commerce
-- **Website:** https://themuslim.company
+- **Website:** https://www.themuslim.company
 - **Social Media:** [Facebook](https://www.facebook.com/TheMuslimCompany) · [Instagram](https://www.instagram.com/officialTheMuslimCompany) · [YouTube](https://www.youtube.com/@TheMuslimCompany) · [LinkedIn](https://www.linkedin.com/company/themuslimcompany) · [X/Twitter](https://x.com/officialtmchq)
 
 ## Internal Portals (Authentication Required — Not for AI Crawling)
@@ -65,8 +65,8 @@ The following routes require login and contain private employee or administrativ
 
 ## Technical Reference
 
-- [XML Sitemap](https://themuslim.company/sitemap.xml)
-- [robots.txt](https://themuslim.company/robots.txt)
+- [XML Sitemap](https://www.themuslim.company/sitemap.xml)
+- [robots.txt](https://www.themuslim.company/robots.txt)
 
 ## Crawling & Usage Policy
 

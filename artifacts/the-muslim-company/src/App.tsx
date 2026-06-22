@@ -21,6 +21,7 @@ const AdminCareers = lazy(() => import("@/pages/admin-careers"));
 const AdminApplications = lazy(() => import("@/pages/admin-applications"));
 const AdminNewsroom = lazy(() => import("@/pages/admin-newsroom"));
 const AdminNotices = lazy(() => import("@/pages/admin-notices"));
+const AdminTransparencyReports = lazy(() => import("@/pages/admin-transparency-reports"));
 const AdminBlog = lazy(() => import("@/pages/admin-blog"));
 const AdminEmployees = lazy(() => import("@/pages/admin-employees"));
 const AdminLeaves = lazy(() => import("@/pages/admin-leaves"));
@@ -120,6 +121,9 @@ function Router() {
       </Route>
       <Route path="/admin/notices">
         <AdminRoute><AdminNotices /></AdminRoute>
+      </Route>
+      <Route path="/admin/transparency-reports">
+        <AdminRoute><AdminTransparencyReports /></AdminRoute>
       </Route>
       <Route path="/admin/blog">
         <AdminRoute><AdminBlog /></AdminRoute>

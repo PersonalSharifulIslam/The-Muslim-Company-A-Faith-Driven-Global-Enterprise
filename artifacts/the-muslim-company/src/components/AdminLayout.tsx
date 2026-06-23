@@ -4,6 +4,7 @@ import { useAuth } from "@/lib/auth-context";
 import {
   LayoutDashboard, Briefcase, Users, Newspaper, Bell, BookOpen, LogOut, Menu, X, UserSquare2,
   CalendarDays, Clock, CheckSquare, Wallet, Building2, ShieldAlert, Network, Link2, FileText, Sparkles, ShieldCheck,
+  Star, PieChart, UserMinus, Package,
 } from "lucide-react";
 import logo from "@/assets/images/logo.png";
 import GlobalSearch from "@/components/GlobalSearch";

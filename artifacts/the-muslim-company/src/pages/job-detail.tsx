@@ -83,6 +83,12 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
         "employmentType": job.type ? job.type.toUpperCase().replace(" ", "_") : "FULL_TIME",
         "url": pageUrl,
         "directApply": true,
+        "applicationContact": {
+          "@type": "ContactPoint",
+          "url": pageUrl + "/apply",
+          "contactType": "Job Application",
+          "email": "careers@themuslim.company"
+        },
         "hiringOrganization": {
           "@type": "Organization",
           "name": "The Muslim Company",

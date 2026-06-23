@@ -1239,7 +1239,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="border-t border-primary-foreground/10 pt-10 flex flex-col md:flex-row justify-between items-center text-xs font-sans text-primary-foreground/35">
+          <div className="border-t border-primary-foreground/10 pt-10 flex flex-col md:flex-row justify-between items-center text-xs font-sans text-primary-foreground/60">
             <div>
               <p className="font-serif text-base text-primary-foreground/50 mb-1">The Muslim Company</p>
               <p>&copy; {new Date().getFullYear()} All rights reserved.</p>

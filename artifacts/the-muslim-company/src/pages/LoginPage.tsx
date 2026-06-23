@@ -67,12 +67,12 @@ export default function LoginPage() {
         <div className="bg-[#0f1f15]/90 backdrop-blur-sm border border-[#b08d57]/20 rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] px-8 sm:px-10 py-10">
           {/* Brand mark */}
           <div className="flex flex-col items-center text-center mb-8">
-            <img src={loginLogo} alt="The Muslim Company" className="w-20 h-20 object-contain mb-4" />
-            <p className="font-serif text-lg text-[#e8d5a3] tracking-wide">The Muslim Company</p>
-            <div className="flex items-center gap-2 mt-1.5">
-              <span className="h-px w-6 bg-[#b08d57]/40" />
-              <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-[#8aad8e]">Staff Portal</p>
-              <span className="h-px w-6 bg-[#b08d57]/40" />
+            <img src={loginLogo} alt="The Muslim Company" className="w-40 h-40 object-contain mb-2 -mt-2" />
+            <p className="font-serif text-xl text-[#f1e6c8] tracking-wide">The Muslim Company</p>
+            <div className="flex items-center gap-2 mt-2">
+              <span className="h-px w-6 bg-[#b08d57]/50" />
+              <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-[#b08d57]">Staff Portal</p>
+              <span className="h-px w-6 bg-[#b08d57]/50" />
             </div>
           </div>
 

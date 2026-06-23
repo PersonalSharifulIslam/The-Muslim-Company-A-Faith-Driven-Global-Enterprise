@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutDashboard, Clock, Calendar, CheckSquare, FileText, Bell, User, Settings, LogOut, Menu, X, ChevronRight, Wallet, Sparkles, Users } from "lucide-react";
+import { LayoutDashboard, Clock, Calendar, CheckSquare, FileText, Bell, User, Settings, LogOut, Menu, X, ChevronRight, Wallet, Sparkles, Users, Star } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { isAdminAreaRole } from "@/lib/supabase";
 
@@ -28,6 +28,7 @@ const NAV = [
   { label: "Documents", href: "/employee/documents", icon: FileText },
   { label: "Directory", href: "/employee/directory", icon: Users },
   { label: "Holidays", href: "/employee/holidays", icon: Sparkles },
+  { label: "Performance", href: "/employee/performance", icon: Star },
   { label: "Notifications", href: "/employee/notifications", icon: Bell },
   { label: "Profile", href: "/employee/profile", icon: User },
   { label: "Settings", href: "/employee/settings", icon: Settings },

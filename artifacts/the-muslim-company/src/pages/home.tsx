@@ -14,9 +14,11 @@ import {
 import heroBg from "@/assets/images/hero-bg.webp";
 import heroBgMobile from "@/assets/images/hero-bg-mobile.webp";
 import heroBgDesktop from "@/assets/images/hero-bg-desktop.webp";
+import heroBgRetina from "@/assets/images/hero-bg-retina.webp";
 import visionBg from "@/assets/images/vision.webp";
 import visionBgMobile from "@/assets/images/vision-mobile.webp";
 import visionBgDesktop from "@/assets/images/vision-desktop.webp";
+import visionBgRetina from "@/assets/images/vision-retina.webp";
 import logo from "@/assets/images/logo.png";
 
 /* ─── animation variants ─── */
@@ -346,7 +348,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-primary/75 mix-blend-multiply z-10" />
           <img
             src={heroBgDesktop}
-            srcSet={`${heroBgMobile} 640w, ${heroBgDesktop} 1280w`}
+            srcSet={`${heroBgMobile} 640w, ${heroBgDesktop} 1280w, ${heroBgRetina} 1200w`}
             sizes="100vw"
             alt="Islamic architecture"
             className="w-full h-full object-cover"
@@ -967,7 +969,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-primary/70 z-10" />
           <img
             src={visionBgDesktop}
-            srcSet={`${visionBgMobile} 640w, ${visionBgDesktop} 1280w`}
+            srcSet={`${visionBgMobile} 640w, ${visionBgDesktop} 1280w, ${visionBgRetina} 1200w`}
             sizes="100vw"
             alt="Vision"
             className="w-full h-full object-cover"

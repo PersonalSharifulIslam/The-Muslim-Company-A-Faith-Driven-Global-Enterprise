@@ -216,6 +216,42 @@ export default function FounderPage() {
               </p>
             </motion.div>
 
+            {/* Our Story */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="p-8 bg-primary text-primary-foreground">
+              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-4">Our Story</p>
+              <h3 className="font-serif text-2xl mb-6">How The Muslim Company Began</h3>
+
+              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed mb-5">
+                Shariful Islam spent his early career studying global business, technology, and economic systems closely — observing how many of the world's most powerful institutions optimized for profit and market dominance while overlooking ethics, equity, and long-term human welfare. At the same time, he recognized a distinct gap in the global market: practicing professionals, ethical entrepreneurs, and faith-conscious consumers had limited access to institutions built around transparency, accountability, and Shariah-compliant principles at scale.
+              </p>
+
+              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed mb-5">
+                This observation led to a defining question that would shape the next chapter of his career: <em className="text-primary-foreground/85">could a global institution be built on ethics, transparency, knowledge, technology, and humanitarian responsibility — without compromising on commercial excellence or operational scale?</em>
+              </p>
+
+              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed mb-6">
+                Drawing on the historical precedent of the Islamic Golden Age — an era defined by leadership in science, medicine, finance, and governance — Shariful Islam founded The Muslim Company in January 2025 in Dhaka, Bangladesh. The company was conceived not as a single-sector business, but as a diversified, multi-industry institution: a platform where ethical governance, financial integrity, and civilizational ambition could coexist with global commercial standards.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                {[
+                  { t: "The Problem", d: "Limited access to ethical, transparent, Shariah-compliant institutions operating at global scale." },
+                  { t: "The Insight", d: "Faith-driven principles and world-class commercial execution are not mutually exclusive." },
+                  { t: "The Response", d: "A diversified global conglomerate built on accountability, knowledge, and long-term value." },
+                ].map((item, i) => (
+                  <div key={i} className="p-4 border border-primary-foreground/15">
+                    <p className="font-sans text-[10px] tracking-widest uppercase text-secondary mb-2">{item.t}</p>
+                    <p className="font-sans text-xs text-primary-foreground/65 leading-relaxed">{item.d}</p>
+                  </div>
+                ))}
+              </div>
+
+              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed">
+                Today, that founding vision continues to guide the organization's expansion across technology, finance, education, healthcare, manufacturing, and humanitarian development — each sector evaluated not only for commercial viability, but for its contribution to a broader, ethically grounded enterprise.
+              </p>
+            </motion.div>
+
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
               className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 p-8 bg-card border border-primary/10">

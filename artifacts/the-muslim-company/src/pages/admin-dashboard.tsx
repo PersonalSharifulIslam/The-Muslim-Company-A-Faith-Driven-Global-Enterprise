@@ -254,6 +254,12 @@ export default function AdminDashboard() {
               { label: "Post Notice",        href: "/admin/notices" },
               { label: "Write Blog Post",    href: "/admin/blog" },
               { label: "View Audit Trail",   href: "/admin/audit-log" },
+              { label: "Performance Reviews", href: "/admin/performance" },
+              { label: "Leave Balances",     href: "/admin/leave-balances" },
+              { label: "Manage Assets",      href: "/admin/assets" },
+              { label: "Resignations/Exits", href: "/admin/exits" },
+              { label: "Invite an Employee", href: "/admin/invites" },
+              { label: "Review Documents",   href: "/admin/documents" },
             ].map(({ label, href }) => (
               <Link key={label} href={href} className="bg-card border border-border rounded-lg px-4 py-3 text-sm text-center hover:border-primary/40 hover:text-primary transition-colors">
                 {label}

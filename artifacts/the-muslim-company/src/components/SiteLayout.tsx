@@ -123,7 +123,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <main className="flex-1 pt-14">{children}</main>
 
       <footer className="bg-primary text-primary-foreground border-t border-primary-foreground/10 py-10 px-6 lg:px-12">
-        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-xs font-sans text-primary-foreground/35">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-xs font-sans text-primary-foreground/60">
           <div>
             <p className="font-serif text-base text-primary-foreground/50 mb-1">The Muslim Company</p>
             <p>&copy; {new Date().getFullYear()} All rights reserved.</p>

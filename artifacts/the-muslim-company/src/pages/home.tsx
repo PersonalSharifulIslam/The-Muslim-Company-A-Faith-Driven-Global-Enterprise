@@ -285,6 +285,8 @@ export default function Home() {
           <div className="flex justify-end">
             <button
               data-testid="nav-mobile-toggle"
+              aria-label={navOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={navOpen}
               className="text-primary-foreground/70 hover:text-secondary transition-colors"
               onClick={() => setNavOpen(!navOpen)}
             >

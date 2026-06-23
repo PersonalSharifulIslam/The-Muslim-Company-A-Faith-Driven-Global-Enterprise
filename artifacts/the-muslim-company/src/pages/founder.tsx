@@ -247,9 +247,18 @@ export default function FounderPage() {
                 ))}
               </div>
 
-              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed">
+              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed mb-8">
                 Today, that founding vision continues to guide the organization's expansion across technology, finance, education, healthcare, manufacturing, and humanitarian development — each sector evaluated not only for commercial viability, but for its contribution to a broader, ethically grounded enterprise.
               </p>
+
+              <p className="font-sans text-[10px] tracking-widest uppercase text-secondary mb-4">The Vision Beyond Business</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {["Ethical Business Ecosystem", "Halal Economic Model", "Humanitarian Development Platform", "Knowledge & Research Revival", "Ethical Technology Ecosystem", "Transparent Institution", "Civilization-Focused Enterprise", "Environmental Stewardship"].map((v, i) => (
+                  <div key={i} className="p-3 border border-secondary/20 text-center">
+                    <p className="font-sans text-[10px] tracking-wide uppercase text-primary-foreground/60">{v}</p>
+                  </div>
+                ))}
+              </div>
             </motion.div>
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
@@ -269,7 +278,7 @@ export default function FounderPage() {
                   { l: "University", v: "The University of Burdwan, India" },
                   { l: "Founded", v: "The Muslim Company, January 2025" },
                   { l: "Also Founded", v: "The Bayt Al-Mal Bank" },
-                  { l: "Role", v: "Founder & CEO" },
+                  { l: "Role", v: "Founder, Chairman & MD, CEO" },
                 ].map((r, i) => (
                   <div key={i}>
                     <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40">{r.l}</p>
@@ -305,6 +314,23 @@ export default function FounderPage() {
                   "Dr. Zakir Naik — Islamic knowledge and comparative religion",
                   "Imran Khan — principled leadership against corruption",
                 ]} />
+              </div>
+            </motion.div>
+
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="p-6 bg-card border border-primary/10">
+              <h4 className="font-serif text-lg text-primary mb-4">Board & Leadership Roles</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {[
+                  { role: "Founder", org: "The Muslim Company" },
+                  { role: "Chairman & Managing Director", org: "The Muslim Company" },
+                  { role: "Chief Executive Officer", org: "The Muslim Company" },
+                ].map((r, i) => (
+                  <div key={i} className="p-4 border border-primary/10">
+                    <p className="font-serif text-sm text-primary mb-1">{r.role}</p>
+                    <p className="font-sans text-xs text-primary/50">{r.org}</p>
+                  </div>
+                ))}
               </div>
             </motion.div>
 

@@ -82,7 +82,10 @@ export default function AdminTasks() {
     if (expanded === id) { setExpanded(null); return; }
     setExpanded(id);
     if (!comments[id]) {
-      try { setComments(prev => ({ ...prev, [id]: (await api.get(`/tasks/${id}/comments`)) as any[] || [] })); } catch {}
+      try {
+        const c = await api.get(`/tasks/${id}/comments`);
+        setComments(prev => ({ ...prev, [id]: (c as any[]) || [] }));
+      } catch {}
     }
   }
 

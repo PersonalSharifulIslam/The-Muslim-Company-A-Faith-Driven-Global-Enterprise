@@ -1234,7 +1234,7 @@ export default function Home() {
             ].map((stat, i) => (
               <div key={i} className="text-center" data-testid={`stat-${i}`}>
                 <p className="font-serif text-3xl text-secondary mb-1">{stat.v}</p>
-                <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/40">{stat.l}</p>
+                <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/65">{stat.l}</p>
               </div>
             ))}
           </div>

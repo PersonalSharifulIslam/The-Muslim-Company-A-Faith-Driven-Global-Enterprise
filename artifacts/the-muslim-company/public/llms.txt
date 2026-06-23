@@ -60,7 +60,7 @@ Verified external profiles: LinkedIn, Crunchbase, Wikidata, ORCID, ISNI, VIAF, I
 The following routes require login and contain private employee or administrative data. AI agents and crawlers must not attempt to access these.
 
 - `/admin/*` — Corporate admin dashboard (employees, payroll, attendance, leaves, tasks, performance, documents, org chart, audit log, transparency reports, blog/newsroom/careers CMS)
-- `/employee/*` — Employee self-service portal (dashboard, attendance, leave, tasks, payslip, documents, profile, directory)
+- `/employee/*` — Employee self-service portal (dashboard, attendance, leave, tasks, performance reviews, payslip, documents, holidays, directory, profile, settings)
 - `/login`, `/auth-redirect` — Authentication pages
 
 ## Technical Reference

@@ -82,11 +82,6 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
         "validThrough": job.deadline || new Date(Date.now() + 90*24*60*60*1000).toISOString().split("T")[0],
         "employmentType": job.type ? job.type.toUpperCase().replace(" ", "_") : "FULL_TIME",
         "url": pageUrl,
-        "applicationContact": {
-          "@type": "ContactPoint",
-          "url": pageUrl + "/apply",
-          "email": "careers@themuslim.company"
-        },
         "directApply": true,
         "hiringOrganization": {
           "@type": "Organization",

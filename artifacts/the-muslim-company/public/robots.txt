@@ -7,7 +7,6 @@ Disallow: /employee
 Disallow: /employee/
 Disallow: /login
 Disallow: /auth-redirect
-Disallow: /careers/*/apply
 
 User-agent: Googlebot
 Allow: /
@@ -15,7 +14,6 @@ Disallow: /admin
 Disallow: /employee
 Disallow: /login
 Disallow: /auth-redirect
-Disallow: /careers/*/apply
 
 User-agent: Bingbot
 Allow: /

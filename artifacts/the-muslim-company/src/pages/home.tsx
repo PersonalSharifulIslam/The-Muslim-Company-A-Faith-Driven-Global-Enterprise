@@ -12,7 +12,11 @@ import {
   ShoppingCart, Shirt, Sparkles
 } from "lucide-react";
 import heroBg from "@/assets/images/hero-bg.webp";
+import heroBgMobile from "@/assets/images/hero-bg-mobile.webp";
+import heroBgDesktop from "@/assets/images/hero-bg-desktop.webp";
 import visionBg from "@/assets/images/vision.webp";
+import visionBgMobile from "@/assets/images/vision-mobile.webp";
+import visionBgDesktop from "@/assets/images/vision-desktop.webp";
 import logo from "@/assets/images/logo.png";
 
 /* ─── animation variants ─── */
@@ -340,7 +344,13 @@ export default function Home() {
       <section id="hero" className="relative h-[100svh] w-full flex items-center justify-center overflow-hidden">
         <motion.div className="absolute inset-0 z-0" style={{ y: yHero }}>
           <div className="absolute inset-0 bg-primary/75 mix-blend-multiply z-10" />
-          <img src={heroBg} alt="Islamic architecture" className="w-full h-full object-cover" />
+          <img
+            src={heroBgDesktop}
+            srcSet={`${heroBgMobile} 640w, ${heroBgDesktop} 1280w`}
+            sizes="100vw"
+            alt="Islamic architecture"
+            className="w-full h-full object-cover"
+          />
         </motion.div>
         <div className="relative z-10 container px-6 mx-auto flex flex-col items-center text-center">
           <motion.p
@@ -955,7 +965,13 @@ export default function Home() {
           transition={{ duration: 1.5 }} viewport={{ once: true }}
         >
           <div className="absolute inset-0 bg-primary/70 z-10" />
-          <img src={visionBg} alt="Vision" className="w-full h-full object-cover" />
+          <img
+            src={visionBgDesktop}
+            srcSet={`${visionBgMobile} 640w, ${visionBgDesktop} 1280w`}
+            sizes="100vw"
+            alt="Vision"
+            className="w-full h-full object-cover"
+          />
         </motion.div>
         <div className="relative z-10 container px-6 mx-auto text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1 }}>

@@ -294,7 +294,7 @@ export default function AdminApplications() {
             <tbody>
               {filtered.map((a) => (
                 <tr key={a.id} className="border-t border-primary/8 hover:bg-secondary/5 transition-colors cursor-pointer"
-                  onClick={() => { setSelected(a); setOfferSent(false); }}>
+                  onClick={() => { setSelected(a); setOfferSent(false); setJoinedConfirmed(false); setJoinDate(new Date().toISOString().split("T")[0]); }}>
                   <td className="px-4 py-4" onClick={(e) => { e.stopPropagation(); toggleSelect(a.id); }}>
                     {selectedIds.includes(a.id) ? <CheckSquare className="w-4 h-4 text-secondary" /> : <Square className="w-4 h-4 text-primary/30" />}
                   </td>
@@ -553,6 +553,43 @@ export default function AdminApplications() {
                         className="w-full bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-10 gap-2 disabled:opacity-50">
                         <Send className="w-3.5 h-3.5" />
                         {sendingOffer ? "Sending..." : "Send Job Offer Email"}
+                      </Button>
+                    </>
+                  )}
+                </div>
+              )}
+              {selected.status === 'joined' && selected.joining_date && (
+                <div className="border border-amber-400/30 bg-amber-50/40 p-5">
+                  <p className="font-sans text-[10px] tracking-widest uppercase text-amber-700 mb-2 flex items-center gap-2">
+                    <CheckSquare className="w-3.5 h-3.5" /> Joined The Muslim Company
+                  </p>
+                  <p className="font-sans text-sm text-primary/70">
+                    <strong>Joining Date:</strong> {new Date(selected.joining_date).toLocaleDateString("en-GB", { dateStyle: "long" })}
+                  </p>
+                </div>
+              )}
+              {['offered', 'offer_accepted', 'hired'].includes(selected.status) && (
+                <div className="border border-amber-400/30 bg-amber-50/40 p-5">
+                  <p className="font-sans text-[10px] tracking-widest uppercase text-amber-700 mb-3 flex items-center gap-2">
+                    <CheckSquare className="w-3.5 h-3.5" /> Mark as Joined
+                  </p>
+                  {joinedConfirmed ? (
+                    <div className="bg-green-50 border border-green-200 p-3">
+                      <p className="font-sans text-sm text-green-700 font-semibold">✓ Marked as Joined!</p>
+                      <p className="font-sans text-xs text-green-600 mt-1">This is now the employee's joining date.</p>
+                    </div>
+                  ) : (
+                    <>
+                      <p className="font-sans text-xs text-primary/60 mb-3">
+                        Once all documents are verified in person and the candidate has physically joined, confirm the joining date below.
+                      </p>
+                      <label className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1.5 block">Joining Date</label>
+                      <input type="date" value={joinDate} onChange={(e) => setJoinDate(e.target.value)}
+                        className="w-full h-10 px-3 mb-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-amber-500" />
+                      <Button onClick={() => markAsJoined(selected)} disabled={markingJoined || !joinDate}
+                        className="w-full bg-amber-600 text-white hover:bg-amber-700 rounded-none uppercase tracking-widest font-sans text-xs h-10 gap-2 disabled:opacity-50">
+                        <CheckSquare className="w-3.5 h-3.5" />
+                        {markingJoined ? "Saving..." : "Confirm Joined & Set Date"}
                       </Button>
                     </>
                   )}

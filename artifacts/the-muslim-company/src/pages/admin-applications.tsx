@@ -7,7 +7,7 @@ import { supabase } from "@/lib/supabase";
 import { sendInterviewEmail, sendOfferEmail, sendCustomMessage } from "@/lib/email";
 import { STATUS_LABELS, STATUS_COLORS } from "@/lib/supabase";
 
-const ALL_STATUSES = ["submitted", "reviewing", "shortlisted", "interview", "offered", "hired", "rejected"];
+const ALL_STATUSES = ["submitted", "reviewing", "shortlisted", "interview", "offered", "offer_accepted", "hired", "joined", "rejected"];
 
 type App = {
   id: number; name: string; email: string; phone: string; address: string;
@@ -16,6 +16,7 @@ type App = {
   portfolio: string; cv_url: string; created_at: string; updated_at: string;
   offer_sent_at?: string; offer_expires_at?: string; offer_status?: string;
   interview_datetime?: string; interview_type?: string; interview_location?: string;
+  joining_date?: string;
 }
 
 export default function AdminApplications() {
@@ -39,6 +40,9 @@ export default function AdminApplications() {
   const [msgBody, setMsgBody] = useState("");
   const [sendingMessage, setSendingMessage] = useState(false);
   const [messageSentCount, setMessageSentCount] = useState<number | null>(null);
+  const [joinDate, setJoinDate] = useState(new Date().toISOString().split("T")[0]);
+  const [markingJoined, setMarkingJoined] = useState(false);
+  const [joinedConfirmed, setJoinedConfirmed] = useState(false);
 
   const load = async () => {
     try {
@@ -151,6 +155,20 @@ export default function AdminApplications() {
       alert('Failed: ' + err.message);
     }
     setSendingOffer(false);
+  };
+
+  const markAsJoined = async (app: App) => {
+    if (!joinDate) return;
+    setMarkingJoined(true);
+    try {
+      await supabase.from('applications').update({ status: 'joined', joining_date: joinDate }).eq('id', app.id);
+      await load();
+      setJoinedConfirmed(true);
+      setSelected(prev => prev ? { ...prev, status: 'joined', joining_date: joinDate } : null);
+    } catch (err: any) {
+      alert('Failed: ' + err.message);
+    }
+    setMarkingJoined(false);
   };
 
   const openMessageModal = (app?: App) => {

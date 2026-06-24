@@ -8,7 +8,7 @@ type Exit = {
   reason: string; exit_interview_notes: string | null; status: string;
   employees?: { name: string; department: string; position: string };
 };
-type Employee = { employee_id: string; name: string; department: string };
+type Employee = { employee_id: string; name: string; department: string; joining_date?: string };
 
 const STATUS_COLORS: Record<string, string> = {
   pending: "bg-yellow-400/10 text-yellow-400",
@@ -85,6 +85,14 @@ export default function AdminExits() {
                 <option value="">Select employee</option>
                 {employees.map(e => <option key={e.employee_id} value={e.employee_id}>{e.name}</option>)}
               </select>
+              {form.employee_id && (() => {
+                const emp = employees.find(e => e.employee_id === form.employee_id);
+                return emp?.joining_date ? (
+                  <p className="font-sans text-[11px] text-primary/40 mt-1.5">
+                    Joined on {new Date(emp.joining_date).toLocaleDateString("en-GB", { dateStyle: "long" })}
+                  </p>
+                ) : null;
+              })()}
             </div>
             <div>
               <label className="font-sans text-xs text-primary/50 mb-1 block">Exit Type *</label>

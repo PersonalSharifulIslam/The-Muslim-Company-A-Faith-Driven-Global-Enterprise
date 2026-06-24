@@ -51,23 +51,27 @@ export function isAdminAreaRole(role: UserRole | null | undefined): boolean {
 }
 
 export const STATUS_LABELS: Record<string, string> = {
-  submitted:   'Submitted',
-  reviewing:   'Under Review',
-  shortlisted: 'Shortlisted',
-  interview:   'Interview',
-  offered:     'Offered',
-  hired:       'Hired',
-  rejected:    'Rejected',
+  submitted:      'Submitted',
+  reviewing:      'Under Review',
+  shortlisted:    'Shortlisted',
+  interview:      'Interview',
+  offered:        'Offered',
+  offer_accepted: 'Offer Accepted',
+  hired:          'Hired',
+  joined:         'Joined',
+  rejected:       'Rejected',
 }
 
 export const STATUS_COLORS: Record<string, string> = {
-  submitted:   'bg-blue-100 text-blue-800',
-  reviewing:   'bg-yellow-100 text-yellow-800',
-  shortlisted: 'bg-purple-100 text-purple-800',
-  interview:   'bg-orange-100 text-orange-800',
-  offered:     'bg-green-100 text-green-800',
-  hired:       'bg-emerald-100 text-emerald-800',
-  rejected:    'bg-red-100 text-red-800',
+  submitted:      'bg-blue-100 text-blue-800',
+  reviewing:      'bg-yellow-100 text-yellow-800',
+  shortlisted:    'bg-purple-100 text-purple-800',
+  interview:      'bg-orange-100 text-orange-800',
+  offered:        'bg-green-100 text-green-800',
+  offer_accepted: 'bg-teal-100 text-teal-800',
+  hired:          'bg-emerald-100 text-emerald-800',
+  joined:         'bg-amber-200 text-amber-900',
+  rejected:       'bg-red-100 text-red-800',
 }
 
 export type Application = {

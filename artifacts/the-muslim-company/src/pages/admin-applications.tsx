@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Search, X, ExternalLink, Send, Clock, Calendar, CheckSquare, Square, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ type App = {
 }
 
 export default function AdminApplications() {
+  const [, setLocation] = useLocation();
   const [apps, setApps] = useState<App[]>([]);
   const [jobs, setJobs] = useState<{id: number, job_id: number, title: string}[]>([]);
   const [jobFilter, setJobFilter] = useState("all");
@@ -563,9 +565,24 @@ export default function AdminApplications() {
                   <p className="font-sans text-[10px] tracking-widest uppercase text-amber-700 mb-2 flex items-center gap-2">
                     <CheckSquare className="w-3.5 h-3.5" /> Joined The Muslim Company
                   </p>
-                  <p className="font-sans text-sm text-primary/70">
+                  <p className="font-sans text-sm text-primary/70 mb-4">
                     <strong>Joining Date:</strong> {new Date(selected.joining_date).toLocaleDateString("en-GB", { dateStyle: "long" })}
                   </p>
+                  <Button onClick={() => {
+                      const params = new URLSearchParams({
+                        from_application: "1",
+                        name: selected.name,
+                        email: selected.email,
+                        phone: selected.phone || "",
+                        address: selected.address || "",
+                        position: selected.job_title,
+                        joining_date: selected.joining_date || "",
+                      });
+                      setLocation(`/admin/employees?${params.toString()}`);
+                    }}
+                    className="w-full bg-amber-600 text-white hover:bg-amber-700 rounded-none uppercase tracking-widest font-sans text-xs h-10 gap-2">
+                    Create Employee Account →
+                  </Button>
                 </div>
               )}
               {['offered', 'offer_accepted', 'hired'].includes(selected.status) && (

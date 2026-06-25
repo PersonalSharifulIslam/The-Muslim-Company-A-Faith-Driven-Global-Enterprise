@@ -2,6 +2,49 @@ import { supabase } from './supabase'
 
 // Fire-and-forget audit trail write. Never blocks or throws into the caller —
 // a failed audit write should never break the actual admin action.
+// Find the right people to notify for a given department-scoped event.
+// Returns a list of employee_ids: the department's manager/team_lead (if any),
+// plus all company-wide HR/leadership roles (hr_manager, admin, executive)
+// who should always be informed of leave/task/document/performance events.
+async function getNotificationRecipients(department: string | null): Promise<string[]> {
+  const recipients = new Set<string>()
+
+  // Department-level manager/team_lead, scoped to this employee's department
+  if (department) {
+    const { data: deptLeads } = await supabase
+      .from('user_roles')
+      .select('employee_id')
+      .in('role', ['department_manager', 'team_lead'])
+      .eq('department', department)
+    for (const r of (deptLeads || [])) if (r.employee_id) recipients.add(r.employee_id)
+  }
+
+  // Company-wide HR/leadership roles always get informed
+  const { data: hrRoles } = await supabase
+    .from('user_roles')
+    .select('employee_id')
+    .in('role', ['hr_manager'])
+  for (const r of (hrRoles || [])) if (r.employee_id) recipients.add(r.employee_id)
+
+  return Array.from(recipients)
+}
+
+// Send an in-app notification to a specific employee_id.
+async function notifyEmployee(employee_id: string, title: string, message: string, type: string = 'system') {
+  try {
+    await supabase.from('employee_notifications').insert({ employee_id, title, message, type, is_read: false })
+  } catch { /* notifications must never break the calling action */ }
+}
+
+// Notify the right manager(s)/HR for an event tied to a given employee_id.
+async function notifyManagersFor(employeeId: string, title: string, message: string, type: string = 'system') {
+  try {
+    const { data: emp } = await supabase.from('employees').select('department').eq('employee_id', employeeId).single()
+    const recipients = await getNotificationRecipients(emp?.department || null)
+    for (const r of recipients) await notifyEmployee(r, title, message, type)
+  } catch { /* never break the calling action */ }
+}
+
 export async function logAudit(action: string, target_table?: string, target_id?: string, details?: any) {
   try {
     const { data: { user } } = await supabase.auth.getUser()

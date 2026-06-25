@@ -841,6 +841,7 @@ async function routePost(path: string, body: any): Promise<any> {
     }).select().single()
     if (error) throw new Error(error.message)
     logAudit('task_assigned', 'tasks', String(data.id), { employee_id, title, priority })
+    notifyEmployee(employee_id, 'New Task Assigned', `${assigned_by || 'Admin'} assigned you a new task: "${title}"${deadline ? ` (due ${deadline})` : ''}.`, 'task')
     return data
   }
 

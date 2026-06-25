@@ -154,6 +154,25 @@ export default function AdminEmployees() {
 
   useEffect(() => { load(); }, []);
 
+  // Pre-fill form when arriving from "Create Employee Account" link on a Joined application
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("from_application") === "1") {
+      setForm((f) => ({
+        ...f,
+        name: params.get("name") || "",
+        email: params.get("email") || "",
+        phone: params.get("phone") || "",
+        address: params.get("address") || "",
+        position: params.get("position") || "",
+        joining_date: params.get("joining_date") || f.joining_date,
+      }));
+      setShowForm(true);
+      // Clean the URL so a refresh doesn't re-trigger this
+      window.history.replaceState({}, "", "/admin/employees");
+    }
+  }, []);
+
   const openCreate = () => { setEditing(null); setForm(EMPTY); setShowForm(true); setMsg(null); };
   const openEdit = (e: Employee) => { setEditing(e); setForm({ name: e.name, email: e.email, password: "", employee_id: e.employee_id, department: e.department, role: e.role, position: e.position || "", phone: e.phone || "", address: "", joining_date: e.joining_date?.split("T")[0] || "", access_level: e.access_level || "employee" }); setShowForm(true); setMsg(null); };
 

@@ -30,7 +30,6 @@ const NAV = [
   { label: "Holidays", href: "/employee/holidays", icon: Sparkles },
   { label: "Performance", href: "/employee/performance", icon: Star },
   { label: "Notifications", href: "/employee/notifications", icon: Bell },
-  { label: "Profile", href: "/employee/profile", icon: User },
   { label: "Settings", href: "/employee/settings", icon: Settings },
 ];
 
@@ -57,23 +56,6 @@ export default function EmployeeLayout({ children, current }: { children: React.
           </div>
         </div>
         <p className="font-sans text-[9px] tracking-[0.2em] uppercase text-white/30 mt-2">Employee Portal</p>
-      </div>
-
-      <div className="p-4 border-b border-[#b08d57]/10">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-[#b08d57]/20 border border-[#b08d57]/40 flex items-center justify-center">
-            <span className="font-sans text-xs font-bold text-[#b08d57]">{initials}</span>
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="font-sans text-sm font-semibold text-white truncate">{profile?.name}</p>
-            <p className="font-sans text-[10px] text-white/40 truncate">{profile?.employee_id}</p>
-          </div>
-        </div>
-        {role && (
-          <p className="font-sans text-[9px] tracking-widest uppercase text-[#b08d57] mt-2 px-1">
-            {ROLE_LABELS[role] || role}
-          </p>
-        )}
       </div>
 
       {isAdminAreaRole(role) && (

@@ -1178,7 +1178,13 @@ async function routePut(path: string, body: any): Promise<any> {
       .from('leave_requests').update(updates)
       .eq('id', leaveMatch[1]).select().single()
     if (error) throw new Error(error.message)
-    if (status) logAudit(`leave_${status}`, 'leave_requests', leaveMatch[1], { status, admin_note })
+    if (status) {
+      logAudit(`leave_${status}`, 'leave_requests', leaveMatch[1], { status, admin_note })
+      if (data?.employee_id) {
+        notifyEmployee(data.employee_id, `Leave Request ${status === 'approved' ? 'Approved' : 'Rejected'}`,
+          `Your ${data.leave_type} leave request (${data.start_date} to ${data.end_date}) was ${status}.${admin_note ? ` Note: ${admin_note}` : ''}`, 'leave')
+      }
+    }
     return data
   }
 

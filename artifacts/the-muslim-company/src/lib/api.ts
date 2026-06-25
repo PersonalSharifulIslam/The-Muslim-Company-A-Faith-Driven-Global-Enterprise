@@ -575,6 +575,9 @@ async function routePost(path: string, body: any): Promise<any> {
       status: 'pending',
     }).select().single()
     if (error) throw new Error(error.message)
+    const { data: empName } = await supabase.from('employees').select('name').eq('employee_id', roleData.employee_id).single()
+    notifyManagersFor(roleData.employee_id, 'New Leave Request',
+      `${empName?.name || roleData.employee_id} requested ${days} day(s) of ${leave_type} leave (${start_date} to ${end_date}).`, 'leave')
     return data
   }
 

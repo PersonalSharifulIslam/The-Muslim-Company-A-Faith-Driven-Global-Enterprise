@@ -75,7 +75,7 @@ export default function EmployeeLeave() {
           <div className="bg-[#0f2314]/60 border border-[#b08d57]/30 p-4 text-center">
             <p className={`font-serif text-3xl font-bold ${balance && balance.remaining <= 3 ? "text-red-400" : "text-[#b08d57]"}`}>{balance ? balance.remaining : "—"}</p>
             <p className="font-sans text-[10px] tracking-widest uppercase text-white/30 mt-1">Days Remaining</p>
-            {balance && <p className="font-sans text-[9px] text-white/20 mt-0.5">of {balance.quota} annual</p>}
+            {balance && <p className="font-sans text-[9px] text-white/40 mt-0.5">of {balance.quota} annual</p>}
           </div>
         </motion.div>
 
@@ -133,7 +133,7 @@ export default function EmployeeLeave() {
             <p className="font-sans text-[10px] tracking-widest uppercase text-white/40">Leave History</p>
           </div>
           {leaves?.length === 0 ? (
-            <p className="font-sans text-sm text-white/20 text-center py-12">No leave requests submitted yet</p>
+            <p className="font-sans text-sm text-white/45 text-center py-12">No leave requests submitted yet</p>
           ) : (
             <div className="divide-y divide-[#b08d57]/8">
               {leaves?.map((l) => {

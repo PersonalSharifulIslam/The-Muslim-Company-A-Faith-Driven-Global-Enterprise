@@ -735,6 +735,8 @@ async function routePost(path: string, body: any): Promise<any> {
       description: description || '', status: 'pending',
     }).select().single()
     if (error) throw new Error(error.message)
+    const { data: empName1 } = await supabase.from('employees').select('name').eq('employee_id', role.employee_id).single()
+    notifyManagersFor(role.employee_id, 'Document Submitted', `${empName1?.name || role.employee_id} submitted a document for review: "${name}".`, 'document')
     return data
   }
 
@@ -940,6 +942,7 @@ async function routePost(path: string, body: any): Promise<any> {
     }).select().single()
     if (error) throw new Error(error.message)
     logAudit('performance_review_created', 'performance_reviews', String(data.id), { employee_id, review_period, overall_rating })
+    notifyEmployee(employee_id, 'New Performance Review', `A performance review for ${review_period} has been submitted. Please review and acknowledge it.`, 'performance')
     return data
   }
 
@@ -1301,6 +1304,10 @@ async function routePut(path: string, body: any): Promise<any> {
     }).eq('id', docMatch[1]).select().single()
     if (error) throw new Error(error.message)
     logAudit(`document_${status}`, 'employee_documents', docMatch[1], { status })
+    if (data?.employee_id) {
+      notifyEmployee(data.employee_id, `Document ${status === 'approved' ? 'Approved' : 'Rejected'}`,
+        `Your document "${data.name}" was ${status}.${review_note ? ` Note: ${review_note}` : ''}`, 'document')
+    }
     return data
   }
 

@@ -95,8 +95,8 @@ export default function EmployeeTasks() {
         <motion.div variants={fade} className="space-y-3">
           {filtered.length === 0 ? (
             <div className="bg-[#0f2314]/60 border border-[#b08d57]/15 py-16 text-center">
-              <CheckSquare className="w-8 h-8 text-white/10 mx-auto mb-3" />
-              <p className="font-sans text-sm text-white/20">No tasks found</p>
+              <CheckSquare className="w-8 h-8 text-white/25 mx-auto mb-3" />
+              <p className="font-sans text-sm text-white/45">No tasks found</p>
             </div>
           ) : filtered.map((t) => (
             <div key={t.id} className="bg-[#0f2314]/60 border border-[#b08d57]/15 p-5 hover:border-[#b08d57]/30 transition-all">
@@ -157,7 +157,7 @@ export default function EmployeeTasks() {
                     <div key={c.id} className="bg-white/[0.03] rounded p-2.5">
                       <p className="font-sans text-[10px] text-[#b08d57]/80 font-semibold">{c.author_name}</p>
                       <p className="font-sans text-xs text-white/70">{c.comment}</p>
-                      <p className="font-sans text-[9px] text-white/20 mt-0.5">{new Date(c.created_at).toLocaleString()}</p>
+                      <p className="font-sans text-[9px] text-white/40 mt-0.5">{new Date(c.created_at).toLocaleString()}</p>
                     </div>
                   ))}
                   <div className="flex gap-2">

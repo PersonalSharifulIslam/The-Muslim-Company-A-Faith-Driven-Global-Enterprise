@@ -103,7 +103,7 @@ export default function EmployeeAttendance() {
           <div className="grid grid-cols-3 gap-4 mt-6 pt-5 border-t border-[#b08d57]/10">
             {[["Check In", today?.check_in ? fmt(today.check_in) : "—:——"], ["Check Out", today?.check_out ? fmt(today.check_out) : "—:——"], ["Hours", today?.working_hours ? `${today.working_hours}h` : "—"]].map(([label, val]) => (
               <div key={label}>
-                <p className="font-sans text-[9px] tracking-widest uppercase text-white/25 mb-1">{label}</p>
+                <p className="font-sans text-[9px] tracking-widest uppercase text-white/45 mb-1">{label}</p>
                 <p className="font-mono text-xl text-white">{val}</p>
               </div>
             ))}

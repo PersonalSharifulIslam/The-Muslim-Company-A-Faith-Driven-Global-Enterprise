@@ -148,7 +148,7 @@ export default function EmployeeLeave() {
                           <span className="font-sans text-[9px] text-white/30">· {l.days} day{l.days !== 1 ? "s" : ""}</span>
                         </div>
                         <p className="font-sans text-sm text-white/50">{l.reason}</p>
-                        <p className="font-sans text-[10px] text-white/25 mt-1">
+                        <p className="font-sans text-[10px] text-white/45 mt-1">
                           {new Date(l.start_date).toLocaleDateString("en-GB", { day: "numeric", month: "short" })} → {new Date(l.end_date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
                         </p>
                         {l.admin_note && <p className="font-sans text-xs text-[#b08d57]/60 mt-1 italic">Note: {l.admin_note}</p>}

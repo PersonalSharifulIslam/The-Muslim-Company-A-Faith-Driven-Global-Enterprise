@@ -41,7 +41,7 @@ export default function EmployeeDirectory() {
         <div className="relative mb-6">
           <Search className="w-4 h-4 text-white/30 absolute left-3 top-1/2 -translate-y-1/2" />
           <input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search by name, department, or position..."
-            className="w-full h-11 pl-10 pr-4 bg-white/5 border border-white/10 font-sans text-sm text-white focus:outline-none focus:border-[#b08d57] rounded" />
+            className="w-full h-11 pl-10 pr-4 bg-white/5 border border-white/10 font-sans text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-[#b08d57] rounded" />
         </div>
 
         {dataLoading ? (

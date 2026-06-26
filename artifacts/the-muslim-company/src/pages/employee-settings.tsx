@@ -31,7 +31,7 @@ export default function EmployeeSettings() {
               {items?.map((item) => (
                 <div key={item} className="flex items-center justify-between py-2 border-b border-[#b08d57]/8">
                   <p className="font-sans text-xs text-white/50">{item}</p>
-                  <span className="font-sans text-[9px] tracking-widest uppercase text-white/20">Default</span>
+                  <span className="font-sans text-[9px] tracking-widest uppercase text-white/40">Default</span>
                 </div>
               ))}
             </div>

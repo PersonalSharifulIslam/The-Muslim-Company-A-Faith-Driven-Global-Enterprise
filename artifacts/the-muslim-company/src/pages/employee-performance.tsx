@@ -65,7 +65,7 @@ export default function EmployeePerformance() {
                   <div className="mt-3 pt-3 border-t border-white/10 space-y-2">
                     <textarea placeholder="Add your comments (optional)" rows={2}
                       onChange={e => setCommentDrafts(d => ({ ...d, [r.id]: e.target.value }))}
-                      className="w-full px-3 py-2 bg-white/5 border border-white/10 font-sans text-sm text-white focus:outline-none focus:border-[#b08d57] rounded resize-none" />
+                      className="w-full px-3 py-2 bg-white/5 border border-white/10 font-sans text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-[#b08d57] rounded resize-none" />
                     <button onClick={() => acknowledge(r.id)} disabled={submitting === r.id}
                       className="flex items-center gap-2 bg-[#b08d57] text-[#0a1a0e] font-sans text-xs uppercase tracking-widest h-9 px-4 rounded disabled:opacity-50">
                       <MessageSquare className="w-3.5 h-3.5" /> {submitting === r.id ? "Submitting..." : "Acknowledge & Comment"}

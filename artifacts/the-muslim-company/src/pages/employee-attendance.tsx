@@ -125,7 +125,7 @@ export default function EmployeeAttendance() {
               </thead>
               <tbody>
                 {records?.length === 0 ? (
-                  <tr><td colSpan={5} className="px-4 py-10 text-center font-sans text-sm text-white/20">No attendance records yet</td></tr>
+                  <tr><td colSpan={5} className="px-4 py-10 text-center font-sans text-sm text-white/45">No attendance records yet</td></tr>
                 ) : records?.map((r) => (
                   <tr key={r.id} className="border-b border-[#b08d57]/5 hover:bg-[#b08d57]/3 transition-colors">
                     <td className="px-4 py-3 font-sans text-sm text-white/70">{fmtDate(r.date)}</td>

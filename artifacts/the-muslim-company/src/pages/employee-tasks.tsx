@@ -163,7 +163,7 @@ export default function EmployeeTasks() {
                   <div className="flex gap-2">
                     <input value={commentDraft} onChange={(e) => setCommentDraft(e.target.value)} placeholder="Add an update or comment..."
                       onKeyDown={(e) => e.key === "Enter" && postComment(t.id)}
-                      className="flex-1 h-9 px-3 bg-white/5 border border-white/10 font-sans text-sm text-white focus:outline-none focus:border-[#b08d57] rounded" />
+                      className="flex-1 h-9 px-3 bg-white/5 border border-white/10 font-sans text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-[#b08d57] rounded" />
                     <button onClick={() => postComment(t.id)} disabled={postingComment}
                       className="bg-[#b08d57] text-[#0a1a0e] px-3 rounded disabled:opacity-50"><Send className="w-4 h-4" /></button>
                   </div>

@@ -119,7 +119,7 @@ export default function EmployeeAttendance() {
               <thead>
                 <tr className="border-b border-[#b08d57]/10">
                   {["Date", "Check In", "Check Out", "Hours", "Status"].map((h) => (
-                    <th key={h} className="px-4 py-3 text-left font-sans text-[9px] tracking-widest uppercase text-white/25">{h}</th>
+                    <th key={h} className="px-4 py-3 text-left font-sans text-[9px] tracking-widest uppercase text-white/45">{h}</th>
                   ))}
                 </tr>
               </thead>

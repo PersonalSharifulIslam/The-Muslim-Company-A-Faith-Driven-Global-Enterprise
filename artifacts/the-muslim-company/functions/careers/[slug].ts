@@ -11,7 +11,7 @@ export async function onRequestGet(context: any) {
   let job: any = null
   try {
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/jobs?slug=eq.${slug}&select=title,description,location,type,department,deadline,created_at`,
+      `${SUPABASE_URL}/rest/v1/jobs?slug=eq.${slug}&select=title,description,location,employment_type,department,deadline,created_at,status`,
       { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } }
     )
     const data = await res.json() as any[]

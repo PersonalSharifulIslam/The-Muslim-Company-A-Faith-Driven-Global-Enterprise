@@ -107,7 +107,7 @@ export default function EmployeeTasks() {
                     <span className={`font-sans text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 border ${PRIORITY[t.priority] || "text-white/30 border-white/10"}`}>{t.priority}</span>
                   </div>
                   {t.description && <p className="font-sans text-xs text-white/40">{t.description}</p>}
-                  <div className="flex items-center gap-4 mt-2 text-[10px] font-sans text-white/25">
+                  <div className="flex items-center gap-4 mt-2 text-[10px] font-sans text-white/45">
                     {t.deadline && <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />Due: {new Date(t.deadline).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</span>}
                     <span>Assigned by: {t.assigned_by}</span>
                   </div>
@@ -126,7 +126,7 @@ export default function EmployeeTasks() {
 
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <p className="font-sans text-[9px] tracking-widest uppercase text-white/25">Progress</p>
+                  <p className="font-sans text-[9px] tracking-widest uppercase text-white/45">Progress</p>
                   <p className="font-mono text-[10px] text-[#b08d57]">{t.progress}%</p>
                 </div>
                 <div className="h-1.5 bg-white/10 w-full">

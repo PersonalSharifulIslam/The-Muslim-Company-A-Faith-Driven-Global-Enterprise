@@ -5,7 +5,6 @@ import SiteLayout from "@/components/SiteLayout";
 import { api } from "@/lib/api";
 import type { BlogPost } from "@/lib/supabase";
 
-const CATEGORIES = ["All", "Technology", "Ethics", "Islamic Civilization", "Business", "Education", "Global Affairs"];
 const fadeIn = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 
 function BlogCard({ post }: { post: BlogPost }) {
@@ -112,6 +111,9 @@ export default function Blog() {
     return matchSearch && matchCat;
   });
 
+  // Only show categories that actually have at least one published post
+  const availableCategories = ["All", ...Array.from(new Set(posts.map((p) => p.category).filter(Boolean)))];
+
   return (
     <SiteLayout>
       <section className="bg-primary text-primary-foreground py-20 lg:py-28 px-6 lg:px-12">
@@ -138,16 +140,16 @@ export default function Blog() {
               className="w-full pl-11 pr-4 h-11 bg-background border border-primary/15 font-sans text-sm text-primary placeholder:text-primary/30 focus:outline-none focus:border-secondary"
             />
           </div>
-          <div className="flex gap-2 flex-wrap">
-            {CATEGORIES.map((c) => (
-              <button
-                key={c}
-                onClick={() => setCat(c)}
-                className={`px-4 py-2 font-sans text-[10px] tracking-widest uppercase border transition-colors ${cat === c ? "bg-secondary text-primary border-secondary" : "border-primary/15 text-primary/50 hover:border-secondary/50"}`}
-              >
-                {c}
-              </button>
-            ))}
+          <div className="relative sm:w-56">
+            <select
+              value={cat}
+              onChange={(e) => setCat(e.target.value)}
+              className="w-full h-11 px-4 bg-background border border-primary/15 font-sans text-[11px] tracking-widest uppercase text-primary/70 focus:outline-none focus:border-secondary appearance-none cursor-pointer"
+            >
+              {availableCategories.map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
           </div>
         </div>
       </section>

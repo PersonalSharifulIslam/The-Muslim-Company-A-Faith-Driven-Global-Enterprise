@@ -985,7 +985,7 @@ export default function Home() {
             src={visionBgDesktop}
             srcSet={`${visionBgMobile} 640w, ${visionBgDesktop} 1280w, ${visionBgRetina} 1200w`}
             sizes="100vw"
-            alt="Vision"
+            alt="The Muslim Company vision — building ethical institutions for the future"
             className="w-full h-full object-cover"
           />
         </motion.div>

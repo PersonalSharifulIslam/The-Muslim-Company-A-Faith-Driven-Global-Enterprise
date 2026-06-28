@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -232,6 +232,18 @@ export default function Home() {
   const { scrollYProgress } = useScroll();
   const yHero = useTransform(scrollYProgress, [0, 0.3], ["0%", "30%"]);
   const [navOpen, setNavOpen] = useState(false);
+  const navRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!navOpen) return;
+    function handleOutsideClick(e: MouseEvent) {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setNavOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, [navOpen]);
   const [contactModal, setContactModal] = useState<null | "contact" | "partner">(null);
 
   const CONTACT_OPTIONS = [

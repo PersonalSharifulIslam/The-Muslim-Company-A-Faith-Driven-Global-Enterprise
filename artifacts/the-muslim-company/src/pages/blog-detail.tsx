@@ -48,7 +48,9 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
           "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 }
       },
       "mainEntityOfPage": {
-        "@type": "WebPage", "@id": "https://www.themuslim.company/blog/", "name": "The Muslim Company" + post.slug
+        "@type": "WebPage",
+        "@id": "https://www.themuslim.company/blog/" + post.slug,
+        "name": post.title
       },
       "url": "https://www.themuslim.company/blog/" + post.slug,
       "image": post.image || "https://www.themuslim.company/opengraph.jpg",

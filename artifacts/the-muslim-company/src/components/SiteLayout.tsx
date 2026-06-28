@@ -54,7 +54,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary-foreground/10">
         <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-14">
           <a href="/" className="flex items-center gap-3">
-            <img src={logo} alt="TMC" className="w-7 h-7 opacity-90 flex-shrink-0" />
+            <img src={logo} alt="The Muslim Company" className="w-7 h-7 opacity-90 flex-shrink-0" />
             <span className="font-serif text-sm font-bold tracking-widest uppercase text-primary-foreground whitespace-nowrap">
               The Muslim Company
             </span>
@@ -189,7 +189,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
               <div className="bg-primary border border-primary-foreground/15 shadow-2xl overflow-hidden">
                 <div className="flex items-center justify-between px-6 py-4 border-b border-primary-foreground/10">
                   <div className="flex items-center gap-3">
-                    <img src={logo} alt="TMC" className="w-6 h-6 opacity-80" />
+                    <img src={logo} alt="The Muslim Company" className="w-6 h-6 opacity-80" />
                     <div>
                       <p className="font-serif text-sm text-primary-foreground">The Muslim Company</p>
                       <p className="font-sans text-[9px] tracking-widest uppercase text-secondary/60">Select Portal</p>

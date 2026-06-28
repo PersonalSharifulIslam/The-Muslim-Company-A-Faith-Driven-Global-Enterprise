@@ -283,7 +283,7 @@ export default function Home() {
     <div className="w-full bg-background text-foreground overflow-hidden">
 
       {/* ── NAV ── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary-foreground/10">
+      <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary-foreground/10">
         {/* Single row — logo+title · tagline · hamburger */}
         <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-14">
           {/* Left */}

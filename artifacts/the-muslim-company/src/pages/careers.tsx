@@ -7,7 +7,6 @@ import SiteLayout from "@/components/SiteLayout";
 import { api } from "@/lib/api";
 import type { Job } from "@/lib/supabase";
 
-const DEPARTMENTS = ["All", "Technology", "Engineering", "Operations", "Finance", "Marketing", "HR", "Research", "Media"];
 const TYPES = ["All", "Full-time", "Part-time", "Remote", "Contract", "Internship"];
 
 const fadeIn = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
@@ -108,6 +107,8 @@ export default function Careers() {
     api.get("/jobs").then((data) => setJobs(data as Job[])).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
+  const departments = ["All", ...Array.from(new Set(jobs.map((j) => j.department))).sort()];
+
   const filtered = jobs.filter((j) => {
     const matchSearch = j.title.toLowerCase().includes(search.toLowerCase()) || j.department.toLowerCase().includes(search.toLowerCase());
     const matchDept = dept === "All" || j.department === dept;
@@ -142,7 +143,7 @@ export default function Careers() {
               <input type="text" placeholder="Search positions..." value={search} onChange={(e) => setSearch(e.target.value)} className="w-full pl-11 pr-4 h-11 bg-background border border-primary/15 font-sans text-sm text-primary placeholder:text-primary/30 focus:outline-none focus:border-secondary" />
             </div>
             <select value={dept} onChange={(e) => setDept(e.target.value)} className="h-11 px-4 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
-              {DEPARTMENTS.map((d) => <option key={d}>{d}</option>)}
+              {departments.map((d) => <option key={d}>{d}</option>)}
             </select>
             <select value={type} onChange={(e) => setType(e.target.value)} className="h-11 px-4 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
               {TYPES.map((t) => <option key={t}>{t}</option>)}

@@ -106,9 +106,8 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                     </a>
                   ))}
                   <a
-                    onClick={(e) => handleHashLink("/#contact", e)}
+                    onClick={(e) => { handleHashLink("/#contact", e); setNavOpen(false); }}
                     href="/#contact"
-                    onClick={() => setNavOpen(false)}
                     className="font-sans text-xs tracking-widest uppercase text-secondary hover:text-secondary/80 transition-colors font-bold"
                   >
                     Join Us →

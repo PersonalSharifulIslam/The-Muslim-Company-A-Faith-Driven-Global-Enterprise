@@ -260,7 +260,7 @@ export default function ContactPage() {
                 <div className="p-6 bg-card border border-primary/10">
                   <Globe className="w-5 h-5 text-secondary mb-3" />
                   <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1">Website</p>
-                  <p className="font-sans text-sm text-primary/80">themuslim.company</p>
+                  <a href="https://www.themuslim.company" className="font-sans text-sm text-primary/80 hover:text-secondary transition-colors underline-offset-2 hover:underline">themuslim.company</a>
                 </div>
                 <div className="p-6 bg-card border border-primary/10">
                   <Mail className="w-5 h-5 text-secondary mb-3" />

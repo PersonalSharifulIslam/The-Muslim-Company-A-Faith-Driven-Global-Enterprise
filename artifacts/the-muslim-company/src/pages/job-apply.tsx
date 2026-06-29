@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, CheckCircle, AlertCircle, Upload, Download, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -141,6 +141,39 @@ export default function JobApply({ params }: { params: { slug: string } }) {
   const [submitted, setSubmitted] = useState<SubmittedState | null>(null);
   const [error, setError] = useState("");
   const [pdfLoading, setPdfLoading] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileReady, setTurnstileReady] = useState(false);
+  const turnstileWidgetId = useRef<string | null>(null);
+
+  // Load the Turnstile script once, only on this page (not site-wide)
+  useEffect(() => {
+    if (document.getElementById("cf-turnstile-script")) { setTurnstileReady(true); return; }
+    const script = document.createElement("script");
+    script.id = "cf-turnstile-script";
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => setTurnstileReady(true);
+    document.head.appendChild(script);
+  }, []);
+
+  // Render the widget once the script is ready and the form (not the success screen) is showing
+  useEffect(() => {
+    if (!turnstileReady || submitted) return;
+    const container = document.getElementById("turnstile-container");
+    if (!container || turnstileWidgetId.current) return;
+    // @ts-ignore — global from the Turnstile script
+    if (window.turnstile) {
+      // @ts-ignore
+      turnstileWidgetId.current = window.turnstile.render(container, {
+        sitekey: "0x4AAAAAADsybnAg1p4qZ5qL",
+        callback: (token: string) => setTurnstileToken(token),
+        "expired-callback": () => setTurnstileToken(""),
+        "error-callback": () => setTurnstileToken(""),
+      });
+    }
+  }, [turnstileReady, submitted]);
+
   useEffect(() => {
     document.title = "Apply — Careers at The Muslim Company";
     const robots = document.querySelector('meta[name="robots"]');

@@ -205,9 +205,23 @@ export default function JobApply({ params }: { params: { slug: string } }) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!job) return;
+    if (!turnstileToken) {
+      setError("Please complete the verification challenge before submitting.");
+      return;
+    }
     setSubmitting(true);
     setError("");
     try {
+      // Verify the human-check token server-side before writing to the database.
+      const verifyRes = await fetch("/api/verify-turnstile", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: turnstileToken }),
+      });
+      const verifyData = await verifyRes.json();
+      if (!verifyRes.ok || !verifyData.success) {
+        throw new Error("Verification failed. Please try again.");
+      }
       const nameParts = form.name.trim().split(' ');
       const initials = (nameParts[0]?.[0] ?? 'X').toUpperCase() + (nameParts[1]?.[0] ?? 'X').toUpperCase();
       const randomStr = Math.random().toString(36).substring(2, 8).toUpperCase();
@@ -262,6 +276,9 @@ export default function JobApply({ params }: { params: { slug: string } }) {
       });
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Submission failed. Please try again.");
+      // @ts-ignore — reset the widget so the user isn't stuck with a used/expired token
+      if (window.turnstile && turnstileWidgetId.current) window.turnstile.reset(turnstileWidgetId.current);
+      setTurnstileToken("");
     }
     setSubmitting(false);
   };

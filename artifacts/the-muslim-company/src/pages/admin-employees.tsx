@@ -79,10 +79,10 @@ const DEPTS = [
   "Other",
 ];
 
-type Employee = { id: number; employee_id: string; name: string; email: string; department: string; role: string; position: string; phone: string; joining_date: string; status: string; access_level?: string };
-type FormState = { name: string; email: string; password: string; employee_id: string; department: string; role: string; position: string; phone: string; address: string; joining_date: string; access_level: string };
+type Employee = { id: number; employee_id: string; name: string; email: string; department: string; role: string; position: string; phone: string; joining_date: string; status: string; access_level?: string; bank_name?: string; bank_account_name?: string; bank_account_number?: string; bank_branch?: string; bank_routing_number?: string };
+type FormState = { name: string; email: string; password: string; employee_id: string; department: string; role: string; position: string; phone: string; address: string; joining_date: string; access_level: string; bank_name: string; bank_account_name: string; bank_account_number: string; bank_branch: string; bank_routing_number: string };
 
-const EMPTY: FormState = { name: "", email: "", password: "", employee_id: "", department: DEPTS[0], role: "employee", position: "", phone: "", address: "", joining_date: new Date().toISOString().split("T")[0], access_level: "employee" };
+const EMPTY: FormState = { name: "", email: "", password: "", employee_id: "", department: DEPTS[0], role: "employee", position: "", phone: "", address: "", joining_date: new Date().toISOString().split("T")[0], access_level: "employee", bank_name: "", bank_account_name: "", bank_account_number: "", bank_branch: "", bank_routing_number: "" };
 
 const ROLE_COLORS: Record<string, string> = {
   manager: "bg-purple-400/10 text-purple-400",
@@ -174,7 +174,7 @@ export default function AdminEmployees() {
   }, []);
 
   const openCreate = () => { setEditing(null); setForm(EMPTY); setShowForm(true); setMsg(null); };
-  const openEdit = (e: Employee) => { setEditing(e); setForm({ name: e.name, email: e.email, password: "", employee_id: e.employee_id, department: e.department, role: e.role, position: e.position || "", phone: e.phone || "", address: "", joining_date: e.joining_date?.split("T")[0] || "", access_level: e.access_level || "employee" }); setShowForm(true); setMsg(null); };
+  const openEdit = (e: Employee) => { setEditing(e); setForm({ name: e.name, email: e.email, password: "", employee_id: e.employee_id, department: e.department, role: e.role, position: e.position || "", phone: e.phone || "", address: "", joining_date: e.joining_date?.split("T")[0] || "", access_level: e.access_level || "employee", bank_name: e.bank_name || "", bank_account_name: e.bank_account_name || "", bank_account_number: e.bank_account_number || "", bank_branch: e.bank_branch || "", bank_routing_number: e.bank_routing_number || "" }); setShowForm(true); setMsg(null); };
 
   const handleSave = async (ev: React.FormEvent) => {
     ev.preventDefault(); setSaving(true); setMsg(null);
@@ -306,6 +306,18 @@ export default function AdminEmployees() {
                     className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
               </div>
+
+              <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 pt-3 border-t border-primary/10">Bank Details (for Payroll)</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {([["Bank Name", "bank_name"], ["Account Holder Name", "bank_account_name"], ["Account Number", "bank_account_number"], ["Branch", "bank_branch"], ["Routing / Swift Number", "bank_routing_number"]] as const).map(([label, field]) => (
+                  <div key={field}>
+                    <label className="font-sans text-[10px] tracking-widest uppercase text-primary/40 block mb-1.5">{label}</label>
+                    <input type="text" value={form[field]} onChange={(e) => setForm((f) => ({ ...f, [field]: e.target.value }))}
+                      className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+                  </div>
+                ))}
+              </div>
+
               <div className="flex gap-3 pt-2">
                 <Button type="submit" disabled={saving} className="h-9 bg-secondary text-primary hover:bg-secondary/90 rounded-none font-sans text-xs font-bold tracking-widest uppercase disabled:opacity-50">
                   {saving ? "Saving..." : editing ? "Save Changes" : "Create Employee"}

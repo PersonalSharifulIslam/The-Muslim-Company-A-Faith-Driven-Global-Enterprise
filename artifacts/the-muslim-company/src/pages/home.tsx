@@ -198,12 +198,12 @@ const SECTORS = [
 ];
 
 const NAV_LINKS_LEFT = [
-  { label: "Mission", href: "#mission" },
-  { label: "Vision", href: "#vision" },
-  { label: "Founder", href: "/#founder" },
-  { label: "Sectors", href: "#sectors" },
-  { label: "Governance", href: "#governance" },
-  { label: "Constitution", href: "#constitution" },
+  { label: "Mission", href: "/mission" },
+  { label: "Vision", href: "/vision" },
+  { label: "Founder", href: "/founder" },
+  { label: "Sectors", href: "/sectors" },
+  { label: "Governance", href: "/governance" },
+  { label: "Constitution", href: "/constitution" },
   { label: "Our Story", href: "/our-story" },
 ];
 
@@ -219,12 +219,12 @@ const NAV_LINKS_RIGHT = [
 const NAV_LINKS = [...NAV_LINKS_LEFT, ...NAV_LINKS_RIGHT];
 
 const NAV_LINKS_DESKTOP = [
-  { label: "Mission", href: "#mission" },
-  { label: "Sectors", href: "#sectors" },
-  { label: "Governance", href: "#governance" },
-  { label: "Vision", href: "#vision" },
-  { label: "Constitution", href: "#constitution" },
-  { label: "Founder", href: "#founder" },
+  { label: "Mission", href: "/mission" },
+  { label: "Sectors", href: "/sectors" },
+  { label: "Governance", href: "/governance" },
+  { label: "Vision", href: "/vision" },
+  { label: "Constitution", href: "/constitution" },
+  { label: "Founder", href: "/founder" },
 ];
 
 /* ─── component ─── */
@@ -279,11 +279,20 @@ export default function Home() {
     return () => window.removeEventListener("popstate", onPop);
   }, []);
 
-  // /our-story is the same Home page — just scroll straight to that section
+  // Section-specific URLs (/our-story, /foundation, /sectors, /governance, /constitution)
+  // render this same Home page — just scroll straight to that section
   useEffect(() => {
-    if (window.location.pathname === "/our-story") {
+    const sectionByPath: Record<string, string> = {
+      "/our-story": "our-story",
+      "/foundation": "foundation",
+      "/sectors": "sectors",
+      "/governance": "governance",
+      "/constitution": "constitution",
+    };
+    const targetId = sectionByPath[window.location.pathname];
+    if (targetId) {
       const t = setTimeout(() => {
-        document.getElementById("our-story")?.scrollIntoView({ behavior: "smooth" });
+        document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
       }, 100);
       return () => clearTimeout(t);
     }
@@ -297,7 +306,7 @@ export default function Home() {
         {/* Single row — logo+title · tagline · hamburger */}
         <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-14">
           {/* Left */}
-          <a href="#" className="flex items-center gap-3">
+          <a href="/" className="flex items-center gap-3">
             <img src={logo} alt="The Muslim Company Logo" className="w-7 h-7 opacity-90 flex-shrink-0" />
             <span className="font-serif text-sm font-bold tracking-widest uppercase text-primary-foreground whitespace-nowrap">
               The Muslim Company
@@ -355,7 +364,7 @@ export default function Home() {
                       {link.label}{link.label === "Join Us" ? " →" : ""}
                     </a>
                   ))}
-                  <a href="#contact" onClick={() => setNavOpen(false)}
+                  <a href="/contact" onClick={() => setNavOpen(false)}
                     className="font-sans text-xs tracking-widest uppercase text-secondary hover:text-secondary/80 transition-colors font-bold">
                     Join Us →
                   </a>
@@ -409,12 +418,12 @@ export default function Home() {
             transition={{ duration: 1, delay: 1.2 }}
             className="mt-12 flex gap-4 flex-wrap justify-center"
           >
-            <a href="#mission">
+            <a href="/mission">
               <Button data-testid="hero-explore" size="lg" className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans h-12 px-8 text-xs font-bold">
                 Explore Our Mission <MoveRight className="ml-2 w-4 h-4" />
               </Button>
             </a>
-            <a href="#foundation">
+            <a href="/foundation">
               <Button data-testid="hero-foundation" variant="outline" size="lg" className="border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10 rounded-none uppercase tracking-widest font-sans h-12 px-8 text-xs">
                 Our Foundation
               </Button>

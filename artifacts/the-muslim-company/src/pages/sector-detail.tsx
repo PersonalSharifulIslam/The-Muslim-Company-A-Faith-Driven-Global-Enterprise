@@ -810,7 +810,7 @@ export default function SectorDetail() {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
-          { "@type": "ListItem", "position": 2, "name": "Sectors", "item": "https://www.themuslim.company/#sectors" },
+          { "@type": "ListItem", "position": 2, "name": "Sectors", "item": "https://www.themuslim.company/sectors" },
           { "@type": "ListItem", "position": 3, "name": sector.label, "item": `https://www.themuslim.company/sectors/${sector.slug}` }
         ]
       },
@@ -823,7 +823,7 @@ export default function SectorDetail() {
         "breadcrumb": {
           "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
-            { "@type": "ListItem", "position": 2, "name": "Sectors", "item": "https://www.themuslim.company/#sectors" },
+            { "@type": "ListItem", "position": 2, "name": "Sectors", "item": "https://www.themuslim.company/sectors" },
             { "@type": "ListItem", "position": 3, "name": sector.label, "item": `https://www.themuslim.company/sectors/${sector.slug}` }
           ]
         },
@@ -961,7 +961,7 @@ export default function SectorDetail() {
             <p className="font-sans text-xs tracking-[0.3em] uppercase text-secondary mb-4">404</p>
             <h1 className="font-serif text-4xl text-primary mb-4">Sector Not Found</h1>
             <p className="font-sans text-sm text-primary/60 mb-8">This sector does not exist or has not been added yet.</p>
-            <Link href="/#sectors">
+            <Link href="/sectors">
               <Button className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans h-12 px-8 text-xs font-bold">
                 <ArrowLeft className="mr-2 w-4 h-4" /> Back to Sectors
               </Button>
@@ -982,7 +982,7 @@ export default function SectorDetail() {
         <section className="bg-primary pt-32 pb-20 px-6 lg:px-12">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-              <Link href="/#sectors" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary-foreground/40 hover:text-secondary transition-colors mb-8">
+              <Link href="/sectors" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary-foreground/40 hover:text-secondary transition-colors mb-8">
                 <ArrowLeft className="w-3 h-3" /> All Sectors
               </Link>
               <div className="text-5xl mb-6">{sector.icon}</div>
@@ -1158,7 +1158,7 @@ export default function SectorDetail() {
                     Partner With Us <MoveRight className="ml-2 w-4 h-4" />
                   </Button>
                 </a>
-                <Link href="/#sectors">
+                <Link href="/sectors">
                   <Button variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 rounded-none uppercase tracking-widest font-sans h-12 px-8 text-xs">
                     All Sectors
                   </Button>

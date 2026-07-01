@@ -7,10 +7,10 @@ import logo from "@/assets/images/logo.png";
 const NAV_LEFT = [
   { label: "Mission", href: "/mission" },
   { label: "Vision", href: "/vision" },
-  { label: "Founder", href: "/#founder" },
-  { label: "Sectors", href: "/#sectors" },
-  { label: "Governance", href: "/#governance" },
-  { label: "Constitution", href: "/#constitution" },
+  { label: "Founder", href: "/founder" },
+  { label: "Sectors", href: "/sectors" },
+  { label: "Governance", href: "/governance" },
+  { label: "Constitution", href: "/constitution" },
   { label: "Our Story", href: "/our-story" },
 ];
 
@@ -106,8 +106,8 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                     </a>
                   ))}
                   <a
-                    onClick={(e) => { handleHashLink("/#contact", e); setNavOpen(false); }}
-                    href="/#contact"
+                    onClick={() => setNavOpen(false)}
+                    href="/contact"
                     className="font-sans text-xs tracking-widest uppercase text-secondary hover:text-secondary/80 transition-colors font-bold"
                   >
                     Join Us →

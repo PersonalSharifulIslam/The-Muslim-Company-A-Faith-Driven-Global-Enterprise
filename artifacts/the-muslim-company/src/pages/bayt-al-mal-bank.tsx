@@ -21,7 +21,7 @@ const PERSON_SCHEMA = {
   "name": "Breadcrumb",
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
-    { "@type": "ListItem", "position": 2, "name": "The Bayt Al-Mal Bank", "item": "https://www.themuslim.company/BaytAlMalBank" }
+    { "@type": "ListItem", "position": 2, "name": "The Bayt Al-Mal Bank", "item": "https://www.themuslim.company/baytalmalbank" }
   ]
 };
 
@@ -44,7 +44,7 @@ const BANK_SCHEMA = {
   "@type": "BankOrCreditUnion",
   "name": "The Bayt Al-Mal Bank",
   "legalName": "The Bayt Al-Mal Bank",
-  "url": "https://www.themuslim.company/BaytAlMalBank",
+  "url": "https://www.themuslim.company/baytalmalbank",
   "description": "The Bayt Al-Mal Bank — an international Shariah-compliant financial institution under The Muslim Company, offering ethical, interest-free banking worldwide.",
   "parentOrganization": {
     "@type": "Organization",
@@ -73,7 +73,7 @@ const BANK_SCHEMA = {
     "addressCountry": "BD"
   },
   "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 },
-  "sameAs": ["https://www.themuslim.company/BaytAlMalBank", "https://tbmb.themuslimcompany.studio/"]
+  "sameAs": ["https://www.themuslim.company/baytalmalbank", "https://tbmb.themuslimcompany.studio/"]
 };
 
 const PILLARS = [
@@ -129,7 +129,7 @@ export default function BaytAlMalBankPage() {
     document.title = "The Bayt Al-Mal Bank — The Muslim Company";
 
     const _can = document.querySelector('link[rel="canonical"]');
-    const _url = "https://www.themuslim.company/BaytAlMalBank";
+    const _url = "https://www.themuslim.company/baytalmalbank";
     if (_can) { _can.setAttribute('href', _url); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = _url; document.head.appendChild(_cl); }
 
     const _md = document.querySelector('meta[name="description"]');
@@ -164,10 +164,10 @@ export default function BaytAlMalBankPage() {
       <Helmet>
         <title>The Bayt Al-Mal Bank — The Muslim Company</title>
         <meta name="description" content="The Bayt Al-Mal Bank — an international Shariah-compliant financial institution under The Muslim Company, offering ethical, interest-free banking worldwide." />
-        <link rel="canonical" href="https://www.themuslim.company/BaytAlMalBank" />
+        <link rel="canonical" href="https://www.themuslim.company/baytalmalbank" />
         <meta property="og:title" content="The Bayt Al-Mal Bank — The Muslim Company" />
         <meta property="og:description" content="A Shariah-compliant ethical bank under The Muslim Company — built on Islamic principles of wealth justice, interest-free finance, and civilizational economic development." />
-        <meta property="og:url" content="https://www.themuslim.company/BaytAlMalBank" />
+        <meta property="og:url" content="https://www.themuslim.company/baytalmalbank" />
         <meta property="og:image" content="https://www.themuslim.company/opengraph.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />

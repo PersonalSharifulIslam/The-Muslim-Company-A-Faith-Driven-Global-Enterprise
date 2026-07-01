@@ -1098,7 +1098,7 @@ export default function SectorDetail() {
             <div className="container mx-auto max-w-5xl">
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
                 <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-6">Featured Initiative</p>
-                <Link href="/BaytAlMalBank" className="block p-8 lg:p-10 bg-card border border-primary/10 hover:border-secondary/40 transition-colors group">
+                <Link href="/baytalmalbank" className="block p-8 lg:p-10 bg-card border border-primary/10 hover:border-secondary/40 transition-colors group">
                   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                     <div>
                       <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/70 mb-2">In Development — Launching 2031</p>

@@ -161,7 +161,8 @@ const PERSON_SCHEMA = {
     "https://www.crunchbase.com/person/shariful-islam-4eee",
     "https://about.me/Personalsharifulislam/",
     "https://globalpeacechain.org/team_members/shariful-islam/",
-    "https://www.openpr.com/news/4523843/the-muslim-company-building-a-faith-driven-global"
+    "https://www.openpr.com/news/4523843/the-muslim-company-building-a-faith-driven-global",
+    "https://www.openpr.com/news/4563968/shariful-islam-unveils-global-vision-for-the-muslim-company"
   ],
   "award": "Global Peace Ambassador 2025-2026, Global Peace Chain",
   "hasCredential": [
@@ -233,7 +234,8 @@ const ORG_SCHEMA = {
     "https://www.linkedin.com/company/themuslimcompany",
     "https://x.com/officialtmchq",
     "https://www.crunchbase.com/organization/the-muslim-company",
-    "https://www.openpr.com/news/4523843/the-muslim-company-building-a-faith-driven-global"
+    "https://www.openpr.com/news/4523843/the-muslim-company-building-a-faith-driven-global",
+    "https://www.openpr.com/news/4563968/shariful-islam-unveils-global-vision-for-the-muslim-company"
   ]
 };
 
@@ -526,21 +528,38 @@ export default function CeoSharifulIslamPage() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="mb-20">
               <SectionLabel>Media Coverage</SectionLabel>
               <h2 className="font-serif text-3xl md:text-4xl text-primary mb-8">In the News</h2>
-              <a
-                href="https://www.openpr.com/news/4523843/the-muslim-company-building-a-faith-driven-global"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-start gap-4 p-6 bg-card border border-primary/10 hover:border-secondary/40 transition-colors group"
-              >
-                <Newspaper className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-serif text-lg text-primary mb-1 group-hover:text-secondary transition-colors">
-                    The Muslim Company: Building a Faith-Driven Global Civilization Through Innovation, Ethics, and Excellence
-                  </h3>
-                  <p className="font-sans text-xs text-primary/50">OpenPR — Press Release</p>
-                </div>
-                <ExternalLink className="w-4 h-4 text-primary/30 ml-auto flex-shrink-0 mt-1" />
-              </a>
+              <div className="space-y-4">
+                <a
+                  href="https://www.openpr.com/news/4563968/shariful-islam-unveils-global-vision-for-the-muslim-company"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-4 p-6 bg-card border border-primary/10 hover:border-secondary/40 transition-colors group"
+                >
+                  <Newspaper className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="font-serif text-lg text-primary mb-1 group-hover:text-secondary transition-colors">
+                      Shariful Islam Unveils Global Vision for The Muslim Company, a Faith-Driven Conglomerate Spanning Twenty Sectors Across Asia, the Middle East, and Africa
+                    </h3>
+                    <p className="font-sans text-xs text-primary/50">OpenPR — Press Release</p>
+                  </div>
+                  <ExternalLink className="w-4 h-4 text-primary/30 ml-auto flex-shrink-0 mt-1" />
+                </a>
+                <a
+                  href="https://www.openpr.com/news/4523843/the-muslim-company-building-a-faith-driven-global"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-4 p-6 bg-card border border-primary/10 hover:border-secondary/40 transition-colors group"
+                >
+                  <Newspaper className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="font-serif text-lg text-primary mb-1 group-hover:text-secondary transition-colors">
+                      The Muslim Company: Building a Faith-Driven Global Civilization Through Innovation, Ethics, and Excellence
+                    </h3>
+                    <p className="font-sans text-xs text-primary/50">OpenPR — Press Release</p>
+                  </div>
+                  <ExternalLink className="w-4 h-4 text-primary/30 ml-auto flex-shrink-0 mt-1" />
+                </a>
+              </div>
             </motion.div>
 
             {/* —— ACADEMIC + INSPIRATIONS —— */}

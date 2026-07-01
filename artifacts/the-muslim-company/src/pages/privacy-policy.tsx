@@ -103,7 +103,7 @@ export default function PrivacyPolicy() {
             </Section>
             <Section title="2. Information We Collect">
               <p>We collect the following categories of personal information:</p>
-              <div className="space-y-3">{[{title:"Identity Information",desc:"Full name, as provided during job applications or contact forms."},{title:"Contact Information",desc:"Email address, phone number, and physical address."},{title:"Professional Information",desc:"Educational background, work experience, skills, portfolio links, cover letters, and CV documents submitted during the recruitment process."},{title:"Technical Information",desc:"IP address, browser type, device information, and usage data collected automatically when you visit our website."},{title:"Communications",desc:"Any messages, inquiries, or feedback you send to us directly."}].map(({title,desc})=><div key={title} className="border border-primary/10 p-4"><p className="font-sans text-xs font-bold text-secondary uppercase tracking-wider mb-1">{title}</p><p className="font-sans text-sm text-primary/70">{desc}</p></div>)}</div>
+              <div className="space-y-3">{[{title:"Identity Information",desc:"Full name, as provided during job applications or contact forms."},{title:"Contact Information",desc:"Email address, phone number, and physical address."},{title:"Professional Information",desc:"Educational background, work experience, skills, portfolio links, cover letters, and CV documents submitted during the recruitment process."},{title:"Employment & HR Information",desc:"For staff, additional data including national ID/passport number, bank account details for payroll, attendance records, leave history, performance reviews, and employment documents."},{title:"Financial Services Information",desc:"For users of The Bayt Al-Mal Bank, DinarX, or Dirham Payment Gateway, this includes KYC (Know Your Customer) documentation, transaction records, and account information, handled under a separate financial services privacy addendum."},{title:"Technical Information",desc:"IP address, browser type, device information, and usage data collected automatically when you visit our website."},{title:"Communications",desc:"Any messages, inquiries, or feedback you send to us directly."}].map(({title,desc})=><div key={title} className="border border-primary/10 p-4"><p className="font-sans text-xs font-bold text-secondary uppercase tracking-wider mb-1">{title}</p><p className="font-sans text-sm text-primary/70">{desc}</p></div>)}</div>
             </Section>
             <Section title="3. How We Use Your Information">
               <p>We use your information strictly for the following purposes:</p>
@@ -133,7 +133,18 @@ export default function PrivacyPolicy() {
             <Section title="10. Policy Updates">
               <p>We may update this Privacy Policy from time to time. Material changes will be communicated through a prominent notice on our website.</p>
             </Section>
-            <Section title="11. Contact & Complaints">
+            <Section title="11. Third-Party Service Providers">
+              <p>We use a limited number of trusted third-party providers to operate our platform. These providers process data only as necessary to deliver their service, under confidentiality obligations:</p>
+              <div className="space-y-3">{[{title:"Supabase",desc:"Our database and backend infrastructure provider, used to securely store application, employee, and account data."},{title:"Cloudflare",desc:"Our website hosting, security, and bot-verification (CAPTCHA) provider. Cloudflare may process your IP address and browser information to protect our platform from abuse."}].map(({title,desc})=><div key={title} className="border border-primary/10 p-4"><p className="font-sans text-xs font-bold text-secondary uppercase tracking-wider mb-1">{title}</p><p className="font-sans text-sm text-primary/70">{desc}</p></div>)}</div>
+            </Section>
+            <Section title="12. Data Retention">
+              <p>We retain personal information only as long as necessary for the purpose it was collected:</p>
+              <ul className="list-none space-y-1">{["Job application data is retained for up to 12 months after a hiring decision, unless you request earlier deletion","Employee data is retained for the duration of employment and as required afterward under Bangladesh labour and tax law","Financial services data (Bayt Al-Mal Bank, DinarX, Dirham) is retained in accordance with applicable financial regulations","Contact form and general inquiry data is retained for up to 24 months"].map((item,i)=><li key={i} className="flex items-start gap-2"><span className="text-secondary mt-0.5">◆</span><span>{item}</span></li>)}</ul>
+            </Section>
+            <Section title="13. Financial Services — Bayt Al-Mal Bank">
+              <p>The Bayt Al-Mal Bank, DinarX, and Dirham Payment Gateway are financial services operated under The Muslim Company. Given the sensitive nature of financial data, these services are governed by an additional Financial Services Privacy Addendum covering KYC verification, transaction monitoring, and regulatory reporting obligations, available on request at <strong>help@themuslim.company</strong>.</p>
+            </Section>
+            <Section title="14. Contact & Complaints">
               <div className="bg-primary text-primary-foreground p-5">
                 <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/60 mb-3">Contact Information</p>
                 <p className="font-sans text-sm mb-1"><strong className="text-secondary">The Muslim Company LTD</strong></p>

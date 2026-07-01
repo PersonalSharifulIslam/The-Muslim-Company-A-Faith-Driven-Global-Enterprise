@@ -116,26 +116,32 @@ export default function TermsOfService() {
             <Section title="6. Shariah Compliance Commitment">
               <ul className="list-none space-y-2">{["All our business activities are conducted on a Halal and Riba-free basis","We do not engage in or facilitate any transaction prohibited by Islamic law","Our platform is not to be used to promote any Haram activity","We reserve the right to refuse service to entities conflicting with our Islamic ethical standards"].map((item,i)=><li key={i} className="flex items-start gap-2"><span className="text-secondary mt-0.5">◆</span><span>{item}</span></li>)}</ul>
             </Section>
-            <Section title="7. Disclaimer of Warranties">
+            <Section title="7. Financial Services — Bayt Al-Mal Bank">
+              <p>The Bayt Al-Mal Bank, DinarX, and Dirham Payment Gateway are Shariah-compliant financial services operated under The Muslim Company. Use of these services is subject to additional Financial Services Terms, including KYC verification and applicable financial regulatory requirements, provided separately at the point of account opening.</p>
+            </Section>
+            <Section title="8. Security & Bot Verification">
+              <p>Certain forms on our Platform, including job applications, use Cloudflare Turnstile to verify that submissions are made by a human and to prevent automated abuse. Use of the Platform constitutes consent to this verification process.</p>
+            </Section>
+            <Section title="9. Disclaimer of Warranties">
               <p>The Platform is provided on an "as is" basis without warranties of any kind. Information provided does not constitute professional legal, financial, or religious advisory services.</p>
             </Section>
-            <Section title="8. Limitation of Liability">
+            <Section title="10. Limitation of Liability">
               <p>To the fullest extent permitted by law, The Muslim Company LTD shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Platform.</p>
             </Section>
-            <Section title="9. Third-Party Links & Services">
+            <Section title="11. Third-Party Links & Services">
               <p>Our Platform may contain links to third-party websites. These do not constitute an endorsement. The Muslim Company is not responsible for third-party content or practices.</p>
             </Section>
-            <Section title="10. Termination of Access">
+            <Section title="12. Termination of Access">
               <p>We reserve the right to suspend or terminate your access at our sole discretion for conduct violating these Terms, our ethical standards, or applicable law.</p>
             </Section>
-            <Section title="11. Governing Law & Dispute Resolution">
+            <Section title="13. Governing Law & Dispute Resolution">
               <p>These Terms are governed by the laws of Bangladesh. Disputes shall be subject to the courts of Dhaka, Bangladesh.</p>
               <p className="border-l-2 border-secondary pl-3 italic text-primary/60">"And if you disagree over anything, refer it to Allah and the Messenger." — Quran 4:59</p>
             </Section>
-            <Section title="12. Amendments">
+            <Section title="14. Amendments">
               <p>We reserve the right to modify these Terms at any time. Material changes will be notified through our website.</p>
             </Section>
-            <Section title="13. Contact Us">
+            <Section title="15. Contact Us">
               <div className="bg-primary text-primary-foreground p-5">
                 <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/60 mb-3">Contact Information</p>
                 <p className="font-sans text-sm mb-1"><strong className="text-secondary">The Muslim Company LTD</strong></p>

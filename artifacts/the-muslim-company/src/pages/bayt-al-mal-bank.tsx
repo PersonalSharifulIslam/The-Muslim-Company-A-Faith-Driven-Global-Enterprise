@@ -128,9 +128,7 @@ export default function BaytAlMalBankPage() {
   useEffect(() => {
     document.title = "The Bayt Al-Mal Bank — The Muslim Company";
 
-    const _can = document.querySelector('link[rel="canonical"]');
     const _url = "https://www.themuslim.company/BaytAlMalBank";
-    if (_can) { _can.setAttribute('href', _url); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = _url; document.head.appendChild(_cl); }
 
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "The Bayt Al-Mal Bank — an international Shariah-compliant financial institution under The Muslim Company, offering ethical, interest-free banking worldwide.");

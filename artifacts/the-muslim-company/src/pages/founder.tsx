@@ -51,9 +51,6 @@ export default function FounderPage() {
     else { const _tl = document.createElement('meta'); _tl.setAttribute('name', 'twitter:image'); _tl.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); document.head.appendChild(_tl); }
     const _ogu = document.querySelector('meta[property="og:url"]');
     if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/founder");
-    const _can = document.querySelector('link[rel="canonical"]');
-    if (_can) { _can.setAttribute('href', "https://www.themuslim.company/founder"); }
-    else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = "https://www.themuslim.company/founder"; document.head.appendChild(_cl); }
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
     [{
   "@context": "https://schema.org",

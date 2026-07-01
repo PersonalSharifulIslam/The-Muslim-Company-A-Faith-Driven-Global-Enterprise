@@ -10,7 +10,11 @@ type Payroll = {
   status: string; payment_method: string; notes: string;
   employees?: { name: string; department: string; position: string };
 };
-type Employee = { employee_id: string; name: string; department: string };
+type Employee = {
+  employee_id: string; name: string; department: string;
+  bank_name?: string; bank_account_name?: string; bank_account_number?: string;
+  bank_branch?: string; bank_routing_number?: string;
+};
 
 const STATUS_COLORS: Record<string, string> = {
   pending: "bg-yellow-400/10 text-yellow-400 border-yellow-400/20",
@@ -146,6 +150,27 @@ export default function AdminPayroll() {
                   {employees.map(e => <option key={e.employee_id} value={e.employee_id}>{e.name}</option>)}
                 </select>
               </div>
+              {form.employee_id && (() => {
+                const emp = employees.find(e => e.employee_id === form.employee_id);
+                if (!emp) return null;
+                const hasBank = emp.bank_name || emp.bank_account_number || emp.bank_account_name;
+                return (
+                  <div className="sm:col-span-3 p-3 bg-background border border-primary/10 rounded">
+                    <p className="font-sans text-[10px] uppercase tracking-widest text-primary/40 mb-2">Bank Account (for Payroll)</p>
+                    {hasBank ? (
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 font-sans text-xs text-primary/70">
+                        <div><span className="text-primary/40">Bank: </span>{emp.bank_name || "—"}</div>
+                        <div><span className="text-primary/40">Account Name: </span>{emp.bank_account_name || "—"}</div>
+                        <div><span className="text-primary/40">Account No: </span>{emp.bank_account_number || "—"}</div>
+                        <div><span className="text-primary/40">Branch: </span>{emp.bank_branch || "—"}</div>
+                        {emp.bank_routing_number && <div><span className="text-primary/40">Routing/Swift: </span>{emp.bank_routing_number}</div>}
+                      </div>
+                    ) : (
+                      <p className="font-sans text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3.5 h-3.5" /> No bank details on file for this employee — add them in Employee Management first.</p>
+                    )}
+                  </div>
+                );
+              })()}
               <div>
                 <label className="font-sans text-xs text-primary/50 mb-1 block">Month *</label>
                 <input type="month" value={form.month} onChange={e => setForm(f => ({ ...f, month: e.target.value }))} required
@@ -204,19 +229,29 @@ export default function AdminPayroll() {
             <table className="w-full font-sans text-sm">
               <thead>
                 <tr className="border-b border-primary/10">
-                  {["Employee", "Basic", "Allowances", "Deductions", "Net Salary", "Method", "Status", ""].map(h => (
+                  {["Employee", "Bank Account", "Basic", "Allowances", "Deductions", "Net Salary", "Method", "Status", ""].map(h => (
                     <th key={h} className="text-left py-3 px-3 font-sans text-[10px] uppercase tracking-widest text-primary/40">{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {filtered.length === 0 ? (
-                  <tr><td colSpan={8} className="text-center py-8 text-primary/40">No payroll records for this month</td></tr>
-                ) : filtered.map(p => (
+                  <tr><td colSpan={9} className="text-center py-8 text-primary/40">No payroll records for this month</td></tr>
+                ) : filtered.map(p => {
+                  const emp = employees.find(e => e.employee_id === p.employee_id);
+                  return (
                   <tr key={p.id} className="border-b border-primary/5 hover:bg-card transition-colors">
                     <td className="py-3 px-3">
                       <p className="text-primary font-medium">{p.employees?.name || p.employee_id}</p>
                       <p className="text-primary/40 text-xs">{p.employees?.department}</p>
+                    </td>
+                    <td className="py-3 px-3 text-primary/60 text-xs">
+                      {emp?.bank_account_number ? (
+                        <>
+                          <p>{emp.bank_name || "—"}</p>
+                          <p className="text-primary/40">{emp.bank_account_number}</p>
+                        </>
+                      ) : <span className="text-red-400">Not on file</span>}
                     </td>
                     <td className="py-3 px-3 text-primary/70">৳{Number(p.basic_salary).toLocaleString()}</td>
                     <td className="py-3 px-3 text-primary/70">৳{Number(p.allowances || 0).toLocaleString()}</td>
@@ -234,7 +269,8 @@ export default function AdminPayroll() {
                       <button onClick={() => handleDelete(p.id)} className="text-primary/40 hover:text-red-400"><Trash2 className="w-4 h-4" /></button>
                     </td>
                   </tr>
-                ))}
+                  );
+                })}
               </tbody>
             </table>
           </div>

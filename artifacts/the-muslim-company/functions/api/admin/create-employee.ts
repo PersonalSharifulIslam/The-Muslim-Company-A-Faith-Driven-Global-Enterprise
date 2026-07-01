@@ -23,7 +23,7 @@ export async function onRequestPost(context: any) {
     return Response.json({ error: 'Forbidden' }, { status: 403 })
 
   const body = await request.json() as any
-  const { email, password, name, department, position, phone, address, joining_date } = body
+  const { email, password, name, department, position, phone, address, joining_date, bank_name, bank_account_name, bank_account_number, bank_branch, bank_routing_number } = body
   // Auto-generate employee_id if not provided
   const employee_id = body.employee_id?.trim() || `TMC-${Date.now().toString(36).toUpperCase()}`
 
@@ -58,7 +58,12 @@ export async function onRequestPost(context: any) {
   const empRes = await fetch(`${SUPABASE_URL}/rest/v1/employees`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'apikey': SERVICE_KEY, 'Authorization': `Bearer ${SERVICE_KEY}`, 'Prefer': 'return=representation' },
-    body: JSON.stringify({ auth_user_id: authId, employee_id, name, email, department, position, phone: phone||'', address: address||'', joining_date: joining_date||new Date().toISOString().split('T')[0], status: 'active' }),
+    body: JSON.stringify({
+      auth_user_id: authId, employee_id, name, email, department, position,
+      phone: phone||'', address: address||'', joining_date: joining_date||new Date().toISOString().split('T')[0], status: 'active',
+      bank_name: bank_name||'', bank_account_name: bank_account_name||'', bank_account_number: bank_account_number||'',
+      bank_branch: bank_branch||'', bank_routing_number: bank_routing_number||'',
+    }),
   })
   if (!empRes.ok) {
     await fetch(`${SUPABASE_URL}/auth/v1/admin/users/${authId}`, {

@@ -911,14 +911,6 @@ export default function SectorDetail() {
     if (_rob) _rob.setAttribute('content', 'index, follow');
     else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
 
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', sector.tagline);
-
-    // Canonical
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) { canonical = document.createElement('link'); canonical.setAttribute('rel', 'canonical'); document.head.appendChild(canonical); }
-    canonical.setAttribute('href', pageUrl);
-
     // OG tags
     const ogTags: Record<string, string> = {
       'og:title': `${sector.label} — The Muslim Company`,

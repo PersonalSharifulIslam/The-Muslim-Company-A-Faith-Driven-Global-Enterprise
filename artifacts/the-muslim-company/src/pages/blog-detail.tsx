@@ -173,7 +173,7 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
               <p className="font-sans text-xs text-primary/40 mb-8 pb-8 border-b border-primary/10">By {post.author}</p>
               {post.image_url && (
                 <div className="mb-8 overflow-hidden">
-                  <img src={post.image_url} alt={post.title} className="w-full h-72 object-cover" />
+                  <img src={post.image_url} alt={post.title} loading="lazy" className="w-full h-72 object-cover" />
                 </div>
               )}
               {post.excerpt && (

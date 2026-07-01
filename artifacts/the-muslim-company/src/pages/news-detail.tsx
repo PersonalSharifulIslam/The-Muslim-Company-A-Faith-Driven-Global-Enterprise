@@ -169,7 +169,7 @@ export default function NewsDetail({ params }: { params: { slug: string } }) {
               <h1 className="font-serif text-3xl md:text-4xl text-primary leading-tight mb-6">{post.title}</h1>
               {post.image_url && (
                 <div className="mb-8 overflow-hidden">
-                  <img src={post.image_url} alt={post.title} className="w-full h-72 object-cover" />
+                  <img src={post.image_url} alt={post.title} loading="lazy" className="w-full h-72 object-cover" />
                 </div>
               )}
               {post.excerpt && (

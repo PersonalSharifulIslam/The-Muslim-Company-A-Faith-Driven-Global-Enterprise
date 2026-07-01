@@ -37,6 +37,7 @@
     <meta name="theme-color" content="#1a1a2e" />
     <meta name="msapplication-TileColor" content="#1a1a2e" />
     <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -347,17 +348,17 @@
       "name": "The Muslim Company Navigation",
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company"},
-        {"@type": "ListItem", "position": 2, "name": "Mission", "item": "https://www.themuslim.company/#mission"},
-        {"@type": "ListItem", "position": 3, "name": "Vision", "item": "https://www.themuslim.company/#vision"},
-        {"@type": "ListItem", "position": 4, "name": "Foundation", "item": "https://www.themuslim.company/#foundation"},
-        {"@type": "ListItem", "position": 5, "name": "Sectors", "item": "https://www.themuslim.company/#sectors"},
-        {"@type": "ListItem", "position": 6, "name": "Governance", "item": "https://www.themuslim.company/#governance"},
-        {"@type": "ListItem", "position": 7, "name": "Our People", "item": "https://www.themuslim.company/#people"},
-        {"@type": "ListItem", "position": 8, "name": "Environment", "item": "https://www.themuslim.company/#environment"},
-        {"@type": "ListItem", "position": 9, "name": "Humanitarian", "item": "https://www.themuslim.company/#humanitarian"},
-        {"@type": "ListItem", "position": 10, "name": "Technology", "item": "https://www.themuslim.company/#technology"},
-        {"@type": "ListItem", "position": 11, "name": "Constitution", "item": "https://www.themuslim.company/#constitution"},
-        {"@type": "ListItem", "position": 12, "name": "Founder – Shariful Islam", "item": "https://www.themuslim.company/#founder"},
+        {"@type": "ListItem", "position": 2, "name": "Mission", "item": "https://www.themuslim.company/mission"},
+        {"@type": "ListItem", "position": 3, "name": "Vision", "item": "https://www.themuslim.company/vision"},
+        {"@type": "ListItem", "position": 4, "name": "Foundation", "item": "https://www.themuslim.company/foundation"},
+        {"@type": "ListItem", "position": 5, "name": "Sectors", "item": "https://www.themuslim.company/sectors"},
+        {"@type": "ListItem", "position": 6, "name": "Governance", "item": "https://www.themuslim.company/governance"},
+        {"@type": "ListItem", "position": 7, "name": "Our People", "item": "https://www.themuslim.company/our-people"},
+        {"@type": "ListItem", "position": 8, "name": "Environment", "item": "https://www.themuslim.company/environment"},
+        {"@type": "ListItem", "position": 9, "name": "Humanitarian", "item": "https://www.themuslim.company/humanitarian"},
+        {"@type": "ListItem", "position": 10, "name": "Technology", "item": "https://www.themuslim.company/technology"},
+        {"@type": "ListItem", "position": 11, "name": "Constitution", "item": "https://www.themuslim.company/constitution"},
+        {"@type": "ListItem", "position": 12, "name": "Founder – Shariful Islam", "item": "https://www.themuslim.company/founder"},
         {"@type": "ListItem", "position": 13, "name": "Careers", "item": "https://www.themuslim.company/careers"},
         {"@type": "ListItem", "position": 14, "name": "Newsroom & PR", "item": "https://www.themuslim.company/newsroom"},
         {"@type": "ListItem", "position": 15, "name": "Notice & Event", "item": "https://www.themuslim.company/notices"},
@@ -475,17 +476,18 @@
       "name": "The Muslim Company — Main Navigation",
       "itemListElement": [
         {"@type": "SiteNavigationElement", "position": 1,  "name": "Home",              "url": "https://www.themuslim.company/"},
-        {"@type": "SiteNavigationElement", "position": 2,  "name": "Founder",           "url": "https://www.themuslim.company/founder"},
-        {"@type": "SiteNavigationElement", "position": 3,  "name": "CEO",               "url": "https://www.themuslim.company/ceo/Sharifulislam"},
-        {"@type": "SiteNavigationElement", "position": 4,  "name": "Vision",            "url": "https://www.themuslim.company/vision"},
-        {"@type": "SiteNavigationElement", "position": 5,  "name": "Mission",           "url": "https://www.themuslim.company/mission"},
-        {"@type": "SiteNavigationElement", "position": 6,  "name": "Careers",           "url": "https://www.themuslim.company/careers"},
-        {"@type": "SiteNavigationElement", "position": 7,  "name": "Newsroom & PR",     "url": "https://www.themuslim.company/newsroom"},
-        {"@type": "SiteNavigationElement", "position": 8,  "name": "Blog",              "url": "https://www.themuslim.company/blog"},
-        {"@type": "SiteNavigationElement", "position": 9,  "name": "Notices",           "url": "https://www.themuslim.company/notices"},
-        {"@type": "SiteNavigationElement", "position": 10, "name": "Transparency",      "url": "https://www.themuslim.company/transparency"},
-        {"@type": "SiteNavigationElement", "position": 11, "name": "Get Involved",      "url": "https://www.themuslim.company/get-involved"},
-        {"@type": "SiteNavigationElement", "position": 12, "name": "Contact",           "url": "https://www.themuslim.company/contact"}
+        {"@type": "SiteNavigationElement", "position": 2,  "name": "About",             "url": "https://www.themuslim.company/about"},
+        {"@type": "SiteNavigationElement", "position": 3,  "name": "Founder",           "url": "https://www.themuslim.company/founder"},
+        {"@type": "SiteNavigationElement", "position": 4,  "name": "CEO",               "url": "https://www.themuslim.company/ceo/Sharifulislam"},
+        {"@type": "SiteNavigationElement", "position": 5,  "name": "Vision",            "url": "https://www.themuslim.company/vision"},
+        {"@type": "SiteNavigationElement", "position": 6,  "name": "Mission",           "url": "https://www.themuslim.company/mission"},
+        {"@type": "SiteNavigationElement", "position": 7,  "name": "Careers",           "url": "https://www.themuslim.company/careers"},
+        {"@type": "SiteNavigationElement", "position": 8,  "name": "Newsroom & PR",     "url": "https://www.themuslim.company/newsroom"},
+        {"@type": "SiteNavigationElement", "position": 9,  "name": "Blog",              "url": "https://www.themuslim.company/blog"},
+        {"@type": "SiteNavigationElement", "position": 10, "name": "Notices",           "url": "https://www.themuslim.company/notices"},
+        {"@type": "SiteNavigationElement", "position": 11, "name": "Transparency",      "url": "https://www.themuslim.company/transparency"},
+        {"@type": "SiteNavigationElement", "position": 12, "name": "Get Involved",      "url": "https://www.themuslim.company/get-involved"},
+        {"@type": "SiteNavigationElement", "position": 13, "name": "Contact",           "url": "https://www.themuslim.company/contact"}
       ]
     }
     </script></body>

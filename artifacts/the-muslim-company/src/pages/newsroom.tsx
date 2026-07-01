@@ -17,7 +17,7 @@ function NewsCard({ post, featured }: { post: NewsPost; featured?: boolean }) {
     >
       {post.image_url && (
         <div className={`overflow-hidden ${featured ? "h-56 md:h-72" : "h-44"}`}>
-          <img src={post.image_url} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          <img src={post.image_url} alt={post.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
         </div>
       )}
       <div className="p-6">

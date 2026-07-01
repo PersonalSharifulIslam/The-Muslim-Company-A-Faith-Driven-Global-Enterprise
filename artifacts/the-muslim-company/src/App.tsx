@@ -113,6 +113,7 @@ function Router() {
       <Route path="/founder" component={FounderPage} />
       <Route path="/ceo/Sharifulislam" component={CeoSharifulIslamPage} />
       <Route path="/BaytAlMalBank" component={BaytAlMalBankPage} />
+      <Route path="/baytalmalbank" component={BaytAlMalBankPage} />
       <Route path="/vision" component={VisionPage} />
       <Route path="/mission" component={MissionPage} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />

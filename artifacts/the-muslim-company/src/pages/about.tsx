@@ -41,20 +41,20 @@ const VALUES = [
 const MILESTONES = [
   { year: "Jan 2025", title: "Founded in Dhaka, Bangladesh", desc: "The Muslim Company was established by Shariful Islam as a faith-driven global conglomerate, headquartered in Dhaka." },
   { year: "2025", title: "Financial ecosystem launched", desc: "The Bayt Al-Mal Bank established, along with DinarX (its fintech app) and Dirham Payment Gateway — a Shariah-compliant, interest-free financial ecosystem." },
-  { year: "2025–Present", title: "Expansion across 16+ sectors", desc: "Operations grew across Technology, AI, Manufacturing, Renewable Energy, Healthcare, Education, Media, and Humanitarian Development." },
+  { year: "2025–Present", title: "Expansion across 20+ sectors", desc: "Operations grew across Technology, AI, Manufacturing, Renewable Energy, Healthcare, Education, Media, and Humanitarian Development." },
 ];
 
 const SUBBRANDS = [
-  { name: "The Bayt Al-Mal Bank", tag: "Shariah-Compliant Banking", desc: "The Muslim Company's Islamic banking arm — offering interest-free (riba-free) banking, savings, and financing products.", href: "/BaytAlMalBank" },
-  { name: "DinarX", tag: "Fintech App", desc: "The official fintech application of The Bayt Al-Mal Bank — mobile-first access to Shariah-compliant banking, savings, financing, and investment.", href: "/BaytAlMalBank" },
-  { name: "Dirham Payment Gateway", tag: "Payment Infrastructure", desc: "A Shariah-compliant payment gateway enabling interest-free transactions for businesses and individuals, online and offline.", href: "/BaytAlMalBank" },
+  { name: "The Bayt Al-Mal Bank", tag: "Shariah-Compliant Banking", desc: "The Muslim Company's Islamic banking arm — offering interest-free (riba-free) banking, savings, and financing products.", href: "/baytalmalbank" },
+  { name: "DinarX", tag: "Fintech App", desc: "The official fintech application of The Bayt Al-Mal Bank — mobile-first access to Shariah-compliant banking, savings, financing, and investment.", href: "/baytalmalbank" },
+  { name: "Dirham Payment Gateway", tag: "Payment Infrastructure", desc: "A Shariah-compliant payment gateway enabling interest-free transactions for businesses and individuals, online and offline.", href: "/baytalmalbank" },
 ];
 
 const FAQS = [
-  { q: "What is The Muslim Company?", a: "The Muslim Company is a faith-driven global conglomerate headquartered in Dhaka, Bangladesh, founded in January 2025 by Shariful Islam. It operates across 16+ sectors — including Technology, AI, Manufacturing, Renewable Energy, Healthcare, Education, Media, and Humanitarian Development — under a fully Shariah-compliant, halal, and riba-free framework." },
+  { q: "What is The Muslim Company?", a: "The Muslim Company is a faith-driven global conglomerate headquartered in Dhaka, Bangladesh, founded in January 2025 by Shariful Islam. It operates across 20+ sectors — including Technology, AI, Manufacturing, Renewable Energy, Healthcare, Education, Media, and Humanitarian Development — under a fully Shariah-compliant, halal, and riba-free framework." },
   { q: "Who founded The Muslim Company, and who leads it today?", a: "The Muslim Company was founded by Shariful Islam, who serves as its Founder, Chairman, Managing Director, and CEO." },
   { q: "Is The Muslim Company Shariah-compliant?", a: "Yes. Every entity under the group is overseen by a Supreme Shariah Board and reviewed against the Maqasid al-Shariah (higher objectives of Islamic law). Operations are completely free from riba (interest), bribery, and exploitation." },
-  { q: "What sectors does The Muslim Company operate in?", a: "The company works across 16+ beneficial and halal sectors, including Technology & AI, Healthcare, Renewable Energy, Manufacturing, Education, Islamic Finance & FinTech, Media, and Humanitarian & Social Welfare." },
+  { q: "What sectors does The Muslim Company operate in?", a: "The company works across 20+ beneficial and halal sectors, including Technology & AI, Healthcare, Renewable Energy, Manufacturing, Education, Islamic Finance & FinTech, Media, and Humanitarian & Social Welfare." },
   { q: "Does The Muslim Company give back to the community?", a: "Yes. The company commits 10% of monthly net profit to Fi Sabilillah — for Allah's path — in addition to fully distributing annual zakat, supporting mosques, madrasas, education scholarships, healthcare, and orphan care." },
   { q: "Where is The Muslim Company headquartered?", a: "The Muslim Company is headquartered in Niketon Bazaar, Dhaka-1212, Bangladesh." },
 ];
@@ -87,7 +87,7 @@ export default function AboutPage() {
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
 
-    const desc = "About The Muslim Company — a faith-driven global conglomerate founded by Shariful Islam in Dhaka, Bangladesh, operating across 16+ sectors including Technology, AI, Renewable Energy, Healthcare, and Humanitarian Development, governed by Amanah, Ilm, and Rahmah.";
+    const desc = "About The Muslim Company — a faith-driven global conglomerate founded by Shariful Islam in Dhaka, Bangladesh, operating across 20+ sectors including Technology, AI, Renewable Energy, Healthcare, and Humanitarian Development, governed by Amanah, Ilm, and Rahmah.";
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', desc);
     const _ogt = document.querySelector('meta[property="og:title"]');
@@ -135,7 +135,7 @@ export default function AboutPage() {
     <SiteLayout>
       <Helmet>
         <title>About Us — The Muslim Company | Faith-Driven Global Conglomerate</title>
-        <meta name="description" content="About The Muslim Company — a faith-driven global conglomerate founded by Shariful Islam in Dhaka, Bangladesh, operating across 16+ sectors, governed by Amanah, Ilm, and Rahmah." />
+        <meta name="description" content="About The Muslim Company — a faith-driven global conglomerate founded by Shariful Islam in Dhaka, Bangladesh, operating across 20+ sectors, governed by Amanah, Ilm, and Rahmah." />
         <link rel="canonical" href="https://www.themuslim.company/about" />
         <meta property="og:title" content="About Us | The Muslim Company" />
         <meta property="og:url" content="https://www.themuslim.company/about" />
@@ -149,7 +149,7 @@ export default function AboutPage() {
               <p className="font-sans text-xs tracking-[0.4em] uppercase text-secondary mb-4">About Us</p>
               <h1 className="font-serif text-5xl md:text-6xl text-primary-foreground mb-6">The Muslim Company</h1>
               <p className="font-serif text-xl md:text-2xl text-primary-foreground/80 max-w-3xl mx-auto leading-relaxed">
-                A faith-driven global conglomerate building an ethical, Shariah-compliant business ecosystem across 16+ sectors — founded on Amanah, Ilm, and Rahmah.
+                A faith-driven global conglomerate building an ethical, Shariah-compliant business ecosystem across 20+ sectors — founded on Amanah, Ilm, and Rahmah.
               </p>
             </motion.div>
           </div>
@@ -160,7 +160,7 @@ export default function AboutPage() {
           <div className="container mx-auto max-w-5xl grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               ["Jan 2025", "Founded"],
-              ["16+", "Global Sectors"],
+              ["20+", "Global Sectors"],
               ["Dhaka, BD", "Headquarters"],
               ["10%", "Monthly Profit — Fi Sabilillah"],
             ].map(([val, label], i) => (
@@ -181,10 +181,10 @@ export default function AboutPage() {
               <div className="lg:col-span-2">
                 <h2 className="font-serif text-3xl text-primary mb-5">Who We Are</h2>
                 <p className="font-sans text-sm text-primary/70 leading-relaxed mb-4">
-                  The Muslim Company is a faith-driven global conglomerate headquartered in Dhaka, Bangladesh, founded in January 2025 by <a href="/founder" className="text-secondary hover:underline font-medium">Shariful Islam</a>. The company operates across 16+ sectors — including Technology, Artificial Intelligence, Manufacturing, Renewable Energy, Healthcare, Education, Media, and Humanitarian Development — united under a single ethical framework rooted in the Quran, authentic Sunnah, and the Prophetic model.
+                  The Muslim Company is a faith-driven global conglomerate headquartered in Dhaka, Bangladesh, founded in January 2025 by <a href="/founder" className="text-secondary hover:underline font-medium">Shariful Islam</a>. The company operates across 20+ sectors — including Technology, Artificial Intelligence, Manufacturing, Renewable Energy, Healthcare, Education, Media, and Humanitarian Development — united under a single ethical framework rooted in the Quran, authentic Sunnah, and the Prophetic model.
                 </p>
                 <p className="font-sans text-sm text-primary/70 leading-relaxed mb-4">
-                  Rather than a conventional business group, The Muslim Company was envisioned as a civilization-scale institution: one built on transparency, halal economics, knowledge, research, technology, and humanitarian responsibility. Every entity under the group — from <a href="/BaytAlMalBank" className="text-secondary hover:underline">The Bayt Al Mal Bank</a> to The Muslim Souq and The Muslim Company Foundation — is governed by the same Shariah-compliant standards and overseen by a Supreme Shariah Board.
+                  Rather than a conventional business group, The Muslim Company was envisioned as a civilization-scale institution: one built on transparency, halal economics, knowledge, research, technology, and humanitarian responsibility. Every entity under the group — from <a href="/baytalmalbank" className="text-secondary hover:underline">The Bayt Al Mal Bank</a> to The Muslim Souq and The Muslim Company Foundation — is governed by the same Shariah-compliant standards and overseen by a Supreme Shariah Board.
                 </p>
                 <p className="font-sans text-sm text-primary/70 leading-relaxed">
                   Led by Founder, Chairman, Managing Director, and CEO <a href="/ceo/Sharifulislam" className="text-secondary hover:underline font-medium">Shariful Islam</a>, the company commits 10% of monthly net profit to Fi Sabilillah — for Allah's path — in addition to annual zakat, reflecting its belief that ethical wealth carries barakah only when it serves people beyond shareholders.
@@ -205,7 +205,7 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1">Sectors</p>
-                  <p className="font-serif text-lg text-primary">16+ industries</p>
+                  <p className="font-serif text-lg text-primary">20+ industries</p>
                 </div>
                 <div>
                   <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1">Governance</p>
@@ -260,7 +260,7 @@ export default function AboutPage() {
                 <h2 className="font-serif text-3xl text-primary text-center">Sectors We Operate In</h2>
               </div>
               <p className="font-sans text-sm text-primary/60 text-center max-w-2xl mx-auto mb-8">
-                The Muslim Company works across 16+ beneficial and halal sectors, building an integrated ethical economy from agriculture to advanced technology.
+                The Muslim Company works across 20+ beneficial and halal sectors, building an integrated ethical economy from agriculture to advanced technology.
               </p>
               <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
                 {SECTORS.map((s, i) => (
@@ -420,7 +420,7 @@ export default function AboutPage() {
               <div className="p-8 bg-primary text-primary-foreground text-center">
                 <Briefcase className="w-6 h-6 text-secondary mx-auto mb-4" />
                 <h3 className="font-serif text-xl mb-2">Join Our Team</h3>
-                <p className="font-sans text-sm text-primary-foreground/65 mb-5">Build a career with purpose across 16+ ethical, halal industries.</p>
+                <p className="font-sans text-sm text-primary-foreground/65 mb-5">Build a career with purpose across 20+ ethical, halal industries.</p>
                 <a href="/careers" className="inline-flex items-center bg-secondary text-primary font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 hover:bg-secondary/90 transition-colors">
                   View Careers
                 </a>

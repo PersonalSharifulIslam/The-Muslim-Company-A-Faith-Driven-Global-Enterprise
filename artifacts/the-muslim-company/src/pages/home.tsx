@@ -204,7 +204,7 @@ const NAV_LINKS_LEFT = [
   { label: "Sectors", href: "#sectors" },
   { label: "Governance", href: "#governance" },
   { label: "Constitution", href: "#constitution" },
-  { label: "Our Story", href: "/#our-story" },
+  { label: "Our Story", href: "/our-story" },
 ];
 
 const NAV_LINKS_RIGHT = [
@@ -277,6 +277,16 @@ export default function Home() {
     };
     window.addEventListener("popstate", onPop);
     return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+  // /our-story is the same Home page — just scroll straight to that section
+  useEffect(() => {
+    if (window.location.pathname === "/our-story") {
+      const t = setTimeout(() => {
+        document.getElementById("our-story")?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+      return () => clearTimeout(t);
+    }
   }, []);
 
   return (

@@ -83,6 +83,7 @@ function Router() {
     <Switch>
       {/* Public routes */}
       <Route path="/" component={Home} />
+      <Route path="/our-story" component={Home} />
       <Route path="/careers" component={Careers} />
       <Route path="/careers/:slug" component={JobDetail} />
       <Route path="/careers/:slug/apply" component={JobApply} />

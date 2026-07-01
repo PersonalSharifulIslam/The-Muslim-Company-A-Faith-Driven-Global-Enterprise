@@ -7,6 +7,7 @@ import { AuthProvider } from "@/lib/auth-context";
 
 const NotFound = lazy(() => import("@/pages/not-found"));
 const Home = lazy(() => import("@/pages/home"));
+const AboutPage = lazy(() => import("@/pages/about"));
 const Careers = lazy(() => import("@/pages/careers"));
 const JobDetail = lazy(() => import("@/pages/job-detail"));
 const JobApply = lazy(() => import("@/pages/job-apply"));
@@ -83,6 +84,7 @@ function Router() {
     <Switch>
       {/* Public routes */}
       <Route path="/" component={Home} />
+      <Route path="/about" component={AboutPage} />
       <Route path="/our-story" component={Home} />
       <Route path="/foundation" component={Home} />
       <Route path="/sectors" component={Home} />

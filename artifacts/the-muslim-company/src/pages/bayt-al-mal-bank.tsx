@@ -59,7 +59,7 @@ const BANK_SCHEMA = {
   "employee": {
     "@type": "OrganizationRole",
     "roleName": "Founder & Chief Executive Officer",
-    "member": {
+    "employee": {
       "@type": "Person",
       "name": "Shariful Islam",
       "url": "https://www.themuslim.company/ceo/Sharifulislam"

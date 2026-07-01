@@ -174,15 +174,13 @@ const PERSON_SCHEMA = {
     },
     {
       "@type": "EducationalOccupationalCredential",
-      "name": "Global Peace Ambassador",
+      "name": "Global Peace Ambassador (2025–2026)",
       "credentialCategory": "appointment",
       "recognizedBy": {
         "@type": "Organization",
         "name": "Global Peace Chain",
         "url": "https://globalpeacechain.org"
-      },
-      "validFrom": "2025",
-      "validUntil": "2026"
+      }
     }
   ]
 };
@@ -210,7 +208,7 @@ const ORG_SCHEMA = {
     "@type": "OrganizationRole",
     "roleName": "Chief Executive Officer",
     "startDate": "2025",
-    "member": {
+    "employee": {
       "@type": "Person",
       "@id": "https://www.themuslim.company/ceo/Sharifulislam#person",
       "name": "Shariful Islam"

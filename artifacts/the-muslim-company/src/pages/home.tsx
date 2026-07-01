@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -227,6 +228,35 @@ const NAV_LINKS_DESKTOP = [
   { label: "Founder", href: "/founder" },
 ];
 
+/* ─── per-section SEO for the clean-URL routes that share this Home page ─── */
+const SECTION_SEO: Record<string, { title: string; description: string; path: string }> = {
+  "/our-story": {
+    title: "Our Story — The Muslim Company",
+    description: "From observing a world drifting from ethics to envisioning a civilization-scale ethical enterprise — this is how The Muslim Company was born.",
+    path: "/our-story",
+  },
+  "/foundation": {
+    title: "Islamic Foundation — The Muslim Company",
+    description: "Every operation follows the Quran, authentic Hadith, and the Prophetic Model — completely free from riba, bribery, corruption, and exploitation.",
+    path: "/foundation",
+  },
+  "/sectors": {
+    title: "Areas of Work & Sectors — The Muslim Company",
+    description: "The company works across 20 beneficial and halal sectors — from agriculture and healthcare to AI, renewable energy, and Islamic finance.",
+    path: "/sectors",
+  },
+  "/governance": {
+    title: "Governance Structure — The Muslim Company",
+    description: "Governed by a Supreme Shariah Board, Amanah-based leadership, Shura consultation, and the higher objectives of Shariah (Maqasid al-Shariah).",
+    path: "/governance",
+  },
+  "/constitution": {
+    title: "Constitutional Framework — The Muslim Company",
+    description: "A permanent constitutional framework protects the company's mission from corruption, hostile takeover, and ethical drift — for generations to come.",
+    path: "/constitution",
+  },
+};
+
 /* ─── component ─── */
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -298,8 +328,23 @@ export default function Home() {
     }
   }, []);
 
+  const sectionMeta = SECTION_SEO[window.location.pathname];
+
   return (
     <div className="w-full bg-background text-foreground overflow-hidden">
+      {sectionMeta && (
+        <Helmet>
+          <title>{sectionMeta.title}</title>
+          <meta name="description" content={sectionMeta.description} />
+          <link rel="canonical" href={`https://www.themuslim.company${sectionMeta.path}`} />
+          <meta property="og:title" content={sectionMeta.title} />
+          <meta property="og:description" content={sectionMeta.description} />
+          <meta property="og:url" content={`https://www.themuslim.company${sectionMeta.path}`} />
+          <meta name="twitter:title" content={sectionMeta.title} />
+          <meta name="twitter:description" content={sectionMeta.description} />
+        </Helmet>
+      )}
+
 
       {/* ── NAV ── */}
       <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary-foreground/10">

@@ -402,6 +402,7 @@ export default function JobApply({ params }: { params: { slug: string } }) {
                     <p className="font-sans text-sm text-red-600">{error}</p>
                   </div>
                 )}
+                <div id="turnstile-container" className="pt-2" />
                 <div className="pt-4 border-t border-primary/10 flex flex-wrap gap-4">
                   <Button type="submit" disabled={submitting} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans h-11 px-8 text-xs font-bold disabled:opacity-50">
                     {submitting ? "Submitting..." : "Submit Application"}

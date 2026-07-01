@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { BookOpen, ShieldCheck, Scale, Users, Building2, Target, Compass, Award, HeartHandshake } from "lucide-react";
+import { BookOpen, ShieldCheck, Scale, Users, Building2, Target, Compass, Award, HeartHandshake, Trophy, Mail, Briefcase, HelpCircle, Landmark } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 
 const fadeIn = {
@@ -40,8 +40,23 @@ const VALUES = [
 
 const MILESTONES = [
   { year: "Jan 2025", title: "Founded in Dhaka, Bangladesh", desc: "The Muslim Company was established by Shariful Islam as a faith-driven global conglomerate, headquartered in Dhaka." },
-  { year: "2025", title: "Sub-brand architecture launched", desc: "The Mr. Clothing, The Ms. Clothing, Liyana, The Bayt Al Mal Bank, DinarX, Dirham Payment Gateway, The Muslim Souq, and The Muslim Company Foundation established." },
+  { year: "2025", title: "Financial ecosystem launched", desc: "The Bayt Al-Mal Bank established, along with DinarX (its fintech app) and Dirham Payment Gateway — a Shariah-compliant, interest-free financial ecosystem." },
   { year: "2025–Present", title: "Expansion across 16+ sectors", desc: "Operations grew across Technology, AI, Manufacturing, Renewable Energy, Healthcare, Education, Media, and Humanitarian Development." },
+];
+
+const SUBBRANDS = [
+  { name: "The Bayt Al-Mal Bank", tag: "Shariah-Compliant Banking", desc: "The Muslim Company's Islamic banking arm — offering interest-free (riba-free) banking, savings, and financing products.", href: "/BaytAlMalBank" },
+  { name: "DinarX", tag: "Fintech App", desc: "The official fintech application of The Bayt Al-Mal Bank — mobile-first access to Shariah-compliant banking, savings, financing, and investment.", href: "/BaytAlMalBank" },
+  { name: "Dirham Payment Gateway", tag: "Payment Infrastructure", desc: "A Shariah-compliant payment gateway enabling interest-free transactions for businesses and individuals, online and offline.", href: "/BaytAlMalBank" },
+];
+
+const FAQS = [
+  { q: "What is The Muslim Company?", a: "The Muslim Company is a faith-driven global conglomerate headquartered in Dhaka, Bangladesh, founded in January 2025 by Shariful Islam. It operates across 16+ sectors — including Technology, AI, Manufacturing, Renewable Energy, Healthcare, Education, Media, and Humanitarian Development — under a fully Shariah-compliant, halal, and riba-free framework." },
+  { q: "Who founded The Muslim Company, and who leads it today?", a: "The Muslim Company was founded by Shariful Islam, who serves as its Founder, Chairman, Managing Director, and CEO." },
+  { q: "Is The Muslim Company Shariah-compliant?", a: "Yes. Every entity under the group is overseen by a Supreme Shariah Board and reviewed against the Maqasid al-Shariah (higher objectives of Islamic law). Operations are completely free from riba (interest), bribery, and exploitation." },
+  { q: "What sectors does The Muslim Company operate in?", a: "The company works across 16+ beneficial and halal sectors, including Technology & AI, Healthcare, Renewable Energy, Manufacturing, Education, Islamic Finance & FinTech, Media, and Humanitarian & Social Welfare." },
+  { q: "Does The Muslim Company give back to the community?", a: "Yes. The company commits 10% of monthly net profit to charity and humanitarian causes, in addition to fully distributing annual zakat, supporting mosques, madrasas, education scholarships, healthcare, and orphan care." },
+  { q: "Where is The Muslim Company headquartered?", a: "The Muslim Company is headquartered in Niketon Bazaar, Dhaka-1212, Bangladesh." },
 ];
 
 export default function AboutPage() {
@@ -92,6 +107,20 @@ export default function AboutPage() {
     [
       { "@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" }, { "@type": "ListItem", "position": 2, "name": "About Us", "item": "https://www.themuslim.company/about" }] },
       { "@context": "https://schema.org", "@type": "AboutPage", "name": "About Us — The Muslim Company", "description": desc, "url": "https://www.themuslim.company/about", "publisher": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company" }, "mainEntity": { "@id": "https://www.themuslim.company/#organization" } },
+      {
+        "@context": "https://schema.org", "@type": "Person",
+        "@id": "https://www.themuslim.company/ceo/Sharifulislam#person",
+        "name": "Shariful Islam", "givenName": "Shariful", "familyName": "Islam",
+        "jobTitle": "Founder, Chairman, Managing Director & CEO",
+        "description": "Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur. He is the Founder, Chairman, Managing Director, and CEO of The Muslim Company — a faith-driven global enterprise built on Islamic principles and prophetic values. He is also a Peace Ambassador for the Global Peace Chain (Bangladesh).",
+        "url": "https://www.themuslim.company/founder",
+        "worksFor": { "@type": "Organization", "@id": "https://www.themuslim.company/#organization", "name": "The Muslim Company" },
+        "award": "Global Peace Ambassador 2025-2026, Global Peace Chain",
+      },
+      {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": FAQS.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } })),
+      },
     ].forEach(schema => {
       const s = document.createElement('script');
       s.type = 'application/ld+json';
@@ -123,6 +152,23 @@ export default function AboutPage() {
                 A faith-driven global conglomerate building an ethical, Shariah-compliant business ecosystem across 16+ sectors — founded on Amanah, Ilm, and Rahmah.
               </p>
             </motion.div>
+          </div>
+        </section>
+
+        {/* Key Stats */}
+        <section className="bg-card border-b border-primary/10 py-10 px-6">
+          <div className="container mx-auto max-w-5xl grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              ["Jan 2025", "Founded"],
+              ["16+", "Global Sectors"],
+              ["Dhaka, BD", "Headquarters"],
+              ["10%", "Monthly Profit to Charity"],
+            ].map(([val, label], i) => (
+              <div key={i} className="text-center">
+                <p className="font-serif text-2xl md:text-3xl text-primary font-bold">{val}</p>
+                <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mt-1">{label}</p>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -254,6 +300,65 @@ export default function AboutPage() {
                 <a href="/transparency" className="font-sans text-xs uppercase tracking-widest text-secondary hover:underline">Transparency reports →</a>
                 <a href="/constitution" className="font-sans text-xs uppercase tracking-widest text-secondary hover:underline">Read the constitution →</a>
               </div>
+              <div className="mt-8 pt-6 border-t border-primary-foreground/10 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="font-serif text-lg mb-2">Council of Ethical Scholars, Scientists & Experts</h3>
+                  <p className="font-sans text-xs text-primary-foreground/55 leading-relaxed">A permanent interdisciplinary council of Islamic scholars, scientists, engineers, economists, AI researchers, doctors, and humanitarian experts — guided by Quran, Hadith, and verified science.</p>
+                </div>
+                <div>
+                  <h3 className="font-serif text-lg mb-2">Shura — Consultation Framework</h3>
+                  <p className="font-sans text-xs text-primary-foreground/55 leading-relaxed">Inspired by the Islamic principle of Shura, major decisions involve expert consultation councils, strategic advisory committees, and ethical review sessions before implementation.</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Financial Ecosystem / Sub-brands */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+              <div className="flex items-center gap-2 mb-3 justify-center">
+                <Landmark className="w-5 h-5 text-secondary" />
+                <h2 className="font-serif text-3xl text-primary text-center">Our Financial Ecosystem</h2>
+              </div>
+              <p className="font-sans text-sm text-primary/60 text-center max-w-2xl mx-auto mb-8">
+                A connected, Shariah-compliant financial ecosystem built to serve customers globally — online and offline.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                {SUBBRANDS.map((b, i) => (
+                  <a key={i} href={b.href} className="p-6 bg-card border border-primary/10 hover:border-secondary/40 transition-colors block">
+                    <h3 className="font-serif text-lg text-primary mb-1">{b.name}</h3>
+                    <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/70 mb-3">{b.tag}</p>
+                    <p className="font-sans text-xs text-primary/55 leading-relaxed">{b.desc}</p>
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Recognition */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="p-8 bg-card border border-primary/10 text-center">
+              <Trophy className="w-6 h-6 text-secondary mx-auto mb-4" />
+              <h2 className="font-serif text-2xl text-primary mb-3">Recognition</h2>
+              <p className="font-sans text-sm text-primary/60 max-w-2xl mx-auto">
+                Founder & CEO Shariful Islam has been recognized as a <span className="text-secondary font-medium">Global Peace Ambassador (2025–2026)</span> by the Global Peace Chain, in recognition of his ethical leadership and civilization-focused vision.
+              </p>
+            </motion.div>
+
+            {/* Social Responsibility */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="p-8 bg-primary text-primary-foreground">
+              <div className="flex items-center gap-2 mb-4">
+                <HeartHandshake className="w-5 h-5 text-secondary" />
+                <h2 className="font-serif text-2xl">Social Responsibility</h2>
+              </div>
+              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed mb-6 max-w-3xl">
+                Businesses that maintain honesty, justice, and charity receive barakah and long-term stability. The Muslim Company directs 10% of monthly net profit to charity, alongside full annual zakat distribution, toward:
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {["Mosques & Madrasas", "Education Scholarships", "Healthcare Support", "Orphan Care"].map((item, i) => (
+                  <div key={i} className="px-4 py-3 border border-secondary/30 text-center">
+                    <p className="font-sans text-xs tracking-wide text-secondary/80">{item}</p>
+                  </div>
+                ))}
+              </div>
             </motion.div>
 
             {/* Milestones */}
@@ -289,6 +394,43 @@ export default function AboutPage() {
                 </a>
                 <a href="/ceo/Sharifulislam" className="border border-primary/20 text-primary font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 flex items-center hover:border-secondary transition-colors">
                   CEO Profile
+                </a>
+              </div>
+            </motion.div>
+
+            {/* FAQ */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+              <div className="flex items-center gap-2 mb-8 justify-center">
+                <HelpCircle className="w-5 h-5 text-secondary" />
+                <h2 className="font-serif text-3xl text-primary text-center">Frequently Asked Questions</h2>
+              </div>
+              <div className="space-y-4 max-w-3xl mx-auto">
+                {FAQS.map((f, i) => (
+                  <div key={i} className="p-5 bg-card border border-primary/10">
+                    <h3 className="font-serif text-base text-primary mb-2">{f.q}</h3>
+                    <p className="font-sans text-sm text-primary/60 leading-relaxed">{f.a}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Careers & Contact CTA */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="p-8 bg-primary text-primary-foreground text-center">
+                <Briefcase className="w-6 h-6 text-secondary mx-auto mb-4" />
+                <h3 className="font-serif text-xl mb-2">Join Our Team</h3>
+                <p className="font-sans text-sm text-primary-foreground/65 mb-5">Build a career with purpose across 16+ ethical, halal industries.</p>
+                <a href="/careers" className="inline-flex items-center bg-secondary text-primary font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 hover:bg-secondary/90 transition-colors">
+                  View Careers
+                </a>
+              </div>
+              <div className="p-8 bg-card border border-primary/10 text-center">
+                <Mail className="w-6 h-6 text-secondary mx-auto mb-4" />
+                <h3 className="font-serif text-xl text-primary mb-2">Get in Touch</h3>
+                <p className="font-sans text-sm text-primary/60 mb-5">Niketon Bazaar, Dhaka-1212, Bangladesh · help@themuslim.company</p>
+                <a href="/contact" className="inline-flex items-center border border-primary/20 text-primary font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 hover:border-secondary transition-colors">
+                  Contact Us
                 </a>
               </div>
             </motion.div>

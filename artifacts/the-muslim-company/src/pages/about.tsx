@@ -55,7 +55,7 @@ const FAQS = [
   { q: "Who founded The Muslim Company, and who leads it today?", a: "The Muslim Company was founded by Shariful Islam, who serves as its Founder, Chairman, Managing Director, and CEO." },
   { q: "Is The Muslim Company Shariah-compliant?", a: "Yes. Every entity under the group is overseen by a Supreme Shariah Board and reviewed against the Maqasid al-Shariah (higher objectives of Islamic law). Operations are completely free from riba (interest), bribery, and exploitation." },
   { q: "What sectors does The Muslim Company operate in?", a: "The company works across 16+ beneficial and halal sectors, including Technology & AI, Healthcare, Renewable Energy, Manufacturing, Education, Islamic Finance & FinTech, Media, and Humanitarian & Social Welfare." },
-  { q: "Does The Muslim Company give back to the community?", a: "Yes. The company commits 10% of monthly net profit to charity and humanitarian causes, in addition to fully distributing annual zakat, supporting mosques, madrasas, education scholarships, healthcare, and orphan care." },
+  { q: "Does The Muslim Company give back to the community?", a: "Yes. The company commits 10% of monthly net profit to Fi Sabilillah — for Allah's path — in addition to fully distributing annual zakat, supporting mosques, madrasas, education scholarships, healthcare, and orphan care." },
   { q: "Where is The Muslim Company headquartered?", a: "The Muslim Company is headquartered in Niketon Bazaar, Dhaka-1212, Bangladesh." },
 ];
 
@@ -162,7 +162,7 @@ export default function AboutPage() {
               ["Jan 2025", "Founded"],
               ["16+", "Global Sectors"],
               ["Dhaka, BD", "Headquarters"],
-              ["10%", "Monthly Profit to Charity"],
+              ["10%", "Monthly Profit — Fi Sabilillah"],
             ].map(([val, label], i) => (
               <div key={i} className="text-center">
                 <p className="font-serif text-2xl md:text-3xl text-primary font-bold">{val}</p>
@@ -187,7 +187,7 @@ export default function AboutPage() {
                   Rather than a conventional business group, The Muslim Company was envisioned as a civilization-scale institution: one built on transparency, halal economics, knowledge, research, technology, and humanitarian responsibility. Every entity under the group — from <a href="/BaytAlMalBank" className="text-secondary hover:underline">The Bayt Al Mal Bank</a> to The Muslim Souq and The Muslim Company Foundation — is governed by the same Shariah-compliant standards and overseen by a Supreme Shariah Board.
                 </p>
                 <p className="font-sans text-sm text-primary/70 leading-relaxed">
-                  Led by Founder, Chairman, Managing Director, and CEO <a href="/ceo/Sharifulislam" className="text-secondary hover:underline font-medium">Shariful Islam</a>, the company commits 10% of monthly net profit to charity and humanitarian causes, in addition to annual zakat, reflecting its belief that ethical wealth carries barakah only when it serves people beyond shareholders.
+                  Led by Founder, Chairman, Managing Director, and CEO <a href="/ceo/Sharifulislam" className="text-secondary hover:underline font-medium">Shariful Islam</a>, the company commits 10% of monthly net profit to Fi Sabilillah — for Allah's path — in addition to annual zakat, reflecting its belief that ethical wealth carries barakah only when it serves people beyond shareholders.
                 </p>
               </div>
               <div className="bg-card border border-primary/10 p-6 space-y-5 h-fit">
@@ -289,7 +289,7 @@ export default function AboutPage() {
                   "Guided by Maqasid al-Shariah — the higher objectives of Islamic law",
                 ]} />
                 <Bullets items={[
-                  "10% of monthly net profit directed to charity and humanitarian causes",
+                  "10% of monthly net profit directed to Fi Sabilillah — for Allah's path",
                   "Annual zakat calculated and fully distributed",
                   "Constitutional framework binding all future leadership to the founding mission",
                   "Full transparency reporting published for public accountability",
@@ -350,7 +350,7 @@ export default function AboutPage() {
                 <h2 className="font-serif text-2xl">Social Responsibility</h2>
               </div>
               <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed mb-6 max-w-3xl">
-                Businesses that maintain honesty, justice, and charity receive barakah and long-term stability. The Muslim Company directs 10% of monthly net profit to charity, alongside full annual zakat distribution, toward:
+                Businesses that maintain honesty, justice, and charity receive barakah and long-term stability. The Muslim Company directs 10% of monthly net profit to Fi Sabilillah — for Allah's path — alongside full annual zakat distribution, toward:
               </p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {["Mosques & Madrasas", "Education Scholarships", "Healthcare Support", "Orphan Care"].map((item, i) => (

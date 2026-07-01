@@ -255,6 +255,26 @@ const SECTION_SEO: Record<string, { title: string; description: string; path: st
     description: "A permanent constitutional framework protects the company's mission from corruption, hostile takeover, and ethical drift — for generations to come.",
     path: "/constitution",
   },
+  "/our-people": {
+    title: "Our People — The Muslim Company",
+    description: "Fair wages, dignified workplaces, separate facilities for women, extended maternity leave, and long-term pension and family welfare programs.",
+    path: "/our-people",
+  },
+  "/environment": {
+    title: "Environmental Stewardship — The Muslim Company",
+    description: "Nature is a trust from Allah. The company supports renewable energy, wildlife protection, reforestation, and ecological restoration in every operation.",
+    path: "/environment",
+  },
+  "/humanitarian": {
+    title: "Humanitarian Development — The Muslim Company",
+    description: "10% of monthly net profit goes to charity — funding disaster relief, orphan and widow support, education access, healthcare, and housing worldwide.",
+    path: "/humanitarian",
+  },
+  "/technology": {
+    title: "Technology & AI Ethics — The Muslim Company",
+    description: "Technology stays under ethical supervision. The company opposes harmful AI, addiction-based systems, privacy abuse, and mass misinformation.",
+    path: "/technology",
+  },
 };
 
 /* ─── component ─── */
@@ -318,6 +338,10 @@ export default function Home() {
       "/sectors": "sectors",
       "/governance": "governance",
       "/constitution": "constitution",
+      "/our-people": "people",
+      "/environment": "environment",
+      "/humanitarian": "humanitarian",
+      "/technology": "technology",
     };
     const targetId = sectionByPath[window.location.pathname];
     if (targetId) {

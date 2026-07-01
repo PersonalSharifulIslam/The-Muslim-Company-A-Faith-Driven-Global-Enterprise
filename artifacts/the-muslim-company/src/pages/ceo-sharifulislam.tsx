@@ -99,7 +99,10 @@ const PERSON_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": "https://www.themuslim.company/ceo/Sharifulislam#person",
-  "name": "Shariful Islam",
+  "name": [
+    { "@language": "en", "@value": "Shariful Islam" },
+    { "@language": "bn", "@value": "শরিফুল ইসলাম" }
+  ],
   "givenName": "Shariful",
   "familyName": "Islam",
   "birthDate": "2001",
@@ -108,7 +111,10 @@ const PERSON_SCHEMA = {
   "gender": "Male",
   "knowsLanguage": ["Bengali", "English"],
   "jobTitle": "Chief Executive Officer",
-  "description": "Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur. He is the Chief Executive Officer (CEO) of The Muslim Company — a faith-driven global enterprise built on Islamic principles and prophetic values. He is also a Peace Ambassador for the Global Peace Chain (Bangladesh).",
+  "description": [
+    { "@language": "en", "@value": "Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur. He is the Chief Executive Officer (CEO) of The Muslim Company — a faith-driven global enterprise built on Islamic principles and prophetic values. He is also a Peace Ambassador for the Global Peace Chain (Bangladesh)." },
+    { "@language": "bn", "@value": "শরিফুল ইসলাম একজন বাংলাদেশি ইঞ্জিনিয়ার, নৈতিক দূরদর্শী এবং উদ্যোক্তা। তিনি দ্য মুসলিম কোম্পানি-র প্রধান নির্বাহী কর্মকর্তা (সিইও) — একটি বিশ্বাস-চালিত বৈশ্বিক প্রতিষ্ঠান, যা ইসলামী নীতি ও নববী আদর্শের ওপর প্রতিষ্ঠিত। তিনি গ্লোবাল পিস চেইন (বাংলাদেশ)-এরও একজন শান্তি দূত।" }
+  ],
   "url": "https://www.themuslim.company/ceo/Sharifulislam",
   "image": {
     "@type": "ImageObject",
@@ -189,7 +195,10 @@ const ORG_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": "https://www.themuslim.company/#organization",
-  "name": "The Muslim Company",
+  "name": [
+    { "@language": "en", "@value": "The Muslim Company" },
+    { "@language": "bn", "@value": "দ্য মুসলিম কোম্পানি" }
+  ],
   "legalName": "The Muslim Company LTD",
   "alternateName": ["TMC", "TMC Bangladesh", "TheMuslimCompany"],
   "url": "https://www.themuslim.company",

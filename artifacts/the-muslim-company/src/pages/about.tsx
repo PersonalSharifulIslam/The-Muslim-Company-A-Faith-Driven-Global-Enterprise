@@ -9,11 +9,11 @@ const fadeIn = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
-function Bullets({ items }: { items: string[] }) {
+function Bullets({ items, light }: { items: string[]; light?: boolean }) {
   return (
     <ul className="space-y-2.5">
       {items.map((item, i) => (
-        <li key={i} className="flex items-start gap-3 font-sans text-sm text-primary/70">
+        <li key={i} className={`flex items-start gap-3 font-sans text-sm ${light ? "text-primary-foreground/70" : "text-primary/70"}`}>
           <div className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 flex-shrink-0" />
           <span>{item}</span>
         </li>
@@ -181,7 +181,7 @@ export default function AboutPage() {
               <div className="lg:col-span-2">
                 <h2 className="font-serif text-3xl text-primary mb-5">Who We Are</h2>
                 <p className="font-sans text-sm text-primary/70 leading-relaxed mb-4">
-                  The Muslim Company is a faith-driven global conglomerate headquartered in Dhaka, Bangladesh, founded in January 2025 by <a href="/founder" className="text-secondary hover:underline font-medium">Shariful Islam</a>. The company operates across 20+ sectors — including Technology, Artificial Intelligence, Manufacturing, Renewable Energy, Healthcare, Education, Media, and Humanitarian Development — united under a single ethical framework rooted in the Quran, authentic Sunnah, and the Prophetic model.
+                  The Muslim Company is a faith-driven global conglomerate headquartered in Dhaka, Bangladesh, founded in January 2025 by <a href="/founder" className="text-secondary hover:underline font-medium">Shariful Islam</a>. The company operates across 20+ sectors — including Technology, Artificial Intelligence, Manufacturing, Renewable Energy, Healthcare, Education, Media, and Humanitarian Development — with a growing presence across Bangladesh, India, Pakistan, the United Arab Emirates, Nigeria, Ghana, and the wider African continent, united under a single ethical framework rooted in the Quran, authentic Sunnah, and the Prophetic model.
                 </p>
                 <p className="font-sans text-sm text-primary/70 leading-relaxed mb-4">
                   Rather than a conventional business group, The Muslim Company was envisioned as a civilization-scale institution: one built on transparency, halal economics, knowledge, research, technology, and humanitarian responsibility. Every entity under the group — from <a href="/baytalmalbank" className="text-secondary hover:underline">The Bayt Al Mal Bank</a> to The Muslim Souq and The Muslim Company Foundation — is governed by the same Shariah-compliant standards and overseen by a Supreme Shariah Board.
@@ -282,13 +282,13 @@ export default function AboutPage() {
                 <h2 className="font-serif text-2xl">Governance & Compliance</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <Bullets items={[
+                <Bullets light items={[
                   "Supreme Shariah Board oversight on all major decisions",
                   "Amanah-based leadership and Shura (consultative) framework",
                   "Completely free from riba (interest), bribery, and exploitation",
                   "Guided by Maqasid al-Shariah — the higher objectives of Islamic law",
                 ]} />
-                <Bullets items={[
+                <Bullets light items={[
                   "10% of monthly net profit directed to Fi Sabilillah — for Allah's path",
                   "Annual zakat calculated and fully distributed",
                   "Constitutional framework binding all future leadership to the founding mission",

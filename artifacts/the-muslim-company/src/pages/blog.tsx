@@ -12,7 +12,7 @@ function BlogCard({ post }: { post: BlogPost }) {
     <motion.a variants={fadeIn} href={`/blog/${post.slug}`} className="block bg-card border border-primary/10 hover:border-secondary/40 transition-colors group overflow-hidden">
       {post.image_url && (
         <div className="h-48 overflow-hidden">
-          <img src={post.image_url} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          <img src={post.image_url} alt={post.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
         </div>
       )}
       <div className="p-6">

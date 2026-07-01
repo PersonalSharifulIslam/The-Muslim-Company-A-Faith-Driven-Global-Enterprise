@@ -1,0 +1,26 @@
+{
+  "name": "The Muslim Company",
+  "short_name": "TMC",
+  "description": "The Muslim Company is a faith-driven global conglomerate based in Dhaka, Bangladesh — spanning industry, technology, society, education, healthcare, and humanitarian development worldwide.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

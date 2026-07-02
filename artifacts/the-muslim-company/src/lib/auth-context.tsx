@@ -1,8 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
-import { supabase } from './supabase'
-import type { UserProfile, UserRole } from './supabase'
-import { isAdminAreaRole } from './supabase'
+import type { UserProfile, UserRole } from './roles'
+import { isAdminAreaRole } from './roles'
 
 interface AuthState {
   session:  Session | null
@@ -21,12 +20,30 @@ interface AuthContextValue extends AuthState {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined)
 
+// The @supabase/supabase-js bundle (~50-100KB) is only needed on the
+// /admin, /employee, and /login areas. Every public marketing page
+// (home, about, blog, careers listing, etc.) renders inside AuthProvider
+// too, so importing supabase statically at the top of this file used to
+// force-load it on every single page load. This lazy singleton defers
+// the import until it's actually needed.
+let supabasePromise: Promise<typeof import('./supabase')> | null = null
+function getSupabase() {
+  if (!supabasePromise) supabasePromise = import('./supabase')
+  return supabasePromise
+}
+
+function isAuthRoute(pathname: string) {
+  return /^\/(admin|employee|login|auth-redirect)(\/|$)/.test(pathname)
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<AuthState>({
-    session: null, user: null, profile: null, role: null, loading: true,
+    session: null, user: null, profile: null, role: null,
+    loading: typeof window !== 'undefined' ? isAuthRoute(window.location.pathname) : false,
   })
 
   async function loadProfile(user: User, session: Session) {
+    const { supabase } = await getSupabase()
     // Keep existing role/session while loading to prevent flicker
     setState(prev => ({ ...prev, loading: true }))
     try {
@@ -79,45 +96,56 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
+    // Public marketing pages never need a session — skip loading Supabase
+    // entirely so they don't pay for the bundle at all.
+    if (!isAuthRoute(window.location.pathname)) {
+      setState(s => (s.loading ? { ...s, loading: false } : s))
+      return
+    }
+
     let mounted = true
 
-    // Restore session from localStorage
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    getSupabase().then(({ supabase }) => {
       if (!mounted) return
-      if (session?.user) {
-        loadProfile(session.user, session)
-      } else {
-        setState(s => ({ ...s, loading: false }))
-      }
+
+      // Restore session from localStorage
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (!mounted) return
+        if (session?.user) {
+          loadProfile(session.user, session)
+        } else {
+          setState(s => ({ ...s, loading: false }))
+        }
+      })
+
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+        if (!mounted) return
+        if (event === 'SIGNED_OUT' || !session) {
+          setState({ session: null, user: null, profile: null, role: null, loading: false })
+          return
+        }
+        if (event === 'SIGNED_IN') {
+          if (session?.user) loadProfile(session.user, session)
+        }
+        // TOKEN_REFRESHED: just update session/user, keep existing role/profile
+        if (event === 'TOKEN_REFRESHED' && session?.user) {
+          setState(prev => ({
+            ...prev,
+            session,
+            user: session.user,
+          }))
+        }
+      })
+
+      return () => subscription.unsubscribe()
     })
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (!mounted) return
-      if (event === 'SIGNED_OUT' || !session) {
-        setState({ session: null, user: null, profile: null, role: null, loading: false })
-        return
-      }
-      if (event === 'SIGNED_IN') {
-        if (session?.user) loadProfile(session.user, session)
-      }
-      // TOKEN_REFRESHED: just update session/user, keep existing role/profile
-      if (event === 'TOKEN_REFRESHED' && session?.user) {
-        setState(prev => ({
-          ...prev,
-          session,
-          user: session.user,
-        }))
-      }
-    })
-
-    return () => {
-      mounted = false
-      subscription.unsubscribe()
-    }
+    return () => { mounted = false }
   }, [])
 
   async function signIn(email: string, password: string) {
     try {
+      const { supabase } = await getSupabase()
       const { error } = await supabase.auth.signInWithPassword({ email, password })
       return { error: error?.message ?? null }
     } catch(e: any) {
@@ -126,11 +154,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   async function signOut() {
+    const { supabase } = await getSupabase()
     await supabase.auth.signOut()
     setState({ session: null, user: null, profile: null, role: null, loading: false })
   }
 
   async function resetPassword(email: string) {
+    const { supabase } = await getSupabase()
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password`,
     })
@@ -138,6 +168,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   async function refreshProfile() {
+    const { supabase } = await getSupabase()
     const { data: { session } } = await supabase.auth.getSession()
     if (session?.user) await loadProfile(session.user, session)
   }

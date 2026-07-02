@@ -198,6 +198,55 @@ const SECTORS = [
   { label: "Lifestyle & Personal Care", icon: <Sparkles className="w-5 h-5" /> },
 ];
 
+const NAV_COL1 = [
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "/about" },
+      { label: "Mission", href: "/mission" },
+      { label: "Vision", href: "/vision" },
+      { label: "Founder", href: "/founder" },
+      { label: "CEO", href: "/ceo/Sharifulislam" },
+    ],
+  },
+  {
+    title: "Newsroom & Public",
+    links: [
+      { label: "Newsroom & PR", href: "/newsroom" },
+      { label: "Notice & Event", href: "/notices" },
+      { label: "Blog", href: "/blog" },
+      { label: "Transparency", href: "/transparency" },
+    ],
+  },
+];
+
+const NAV_COL2 = [
+  {
+    title: "Governance",
+    links: [
+      { label: "Governance", href: "/governance" },
+      { label: "Constitution", href: "/constitution" },
+      { label: "Our Story", href: "/our-story" },
+    ],
+  },
+  {
+    title: "Business",
+    links: [
+      { label: "Sectors", href: "/sectors" },
+      { label: "The Bayt Al-Mal Bank", href: "/baytalmalbank" },
+      { label: "Foundation", href: "/the-muslim-company-foundation" },
+    ],
+  },
+  {
+    title: "Connect",
+    links: [
+      { label: "Careers", href: "/careers" },
+      { label: "Get Involved", href: "/get-involved" },
+      { label: "Contact", href: "/contact" },
+    ],
+  },
+];
+
 const NAV_LINKS_LEFT = [
   { label: "Mission", href: "/mission" },
   { label: "Vision", href: "/vision" },
@@ -404,35 +453,49 @@ export default function Home() {
               exit={{ height: 0, opacity: 0 }}
               className="bg-primary border-t border-primary-foreground/10 overflow-hidden"
             >
-              <div className="container mx-auto px-6 py-5 grid grid-cols-2 gap-x-12">
+              <div className="container mx-auto px-6 py-5 max-h-[75vh] overflow-y-auto grid grid-cols-2 gap-x-10">
                 {/* Left column */}
-                <div className="flex flex-col gap-3">
-                  {NAV_LINKS_LEFT.map(link => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setNavOpen(false)}
-                      className="font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary transition-colors"
-                    >
-                      {link.label}
-                    </a>
+                <div className="flex flex-col gap-6">
+                  {NAV_COL1.map(group => (
+                    <div key={group.title}>
+                      <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-secondary/60 font-bold mb-2.5">
+                        {group.title}
+                      </p>
+                      <div className="flex flex-col gap-2.5">
+                        {group.links.map(link => (
+                          <a
+                            key={link.href}
+                            href={link.href}
+                            onClick={() => setNavOpen(false)}
+                            className="font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary transition-colors"
+                          >
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
                 {/* Right column */}
-                <div className="flex flex-col gap-3">
-                  {NAV_LINKS_RIGHT.map(link => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setNavOpen(false)}
-                      className={`font-sans text-xs tracking-widest uppercase transition-colors ${
-                        link.label === "Join Us"
-                          ? "text-secondary hover:text-secondary/80 font-bold"
-                          : "text-primary-foreground/60 hover:text-secondary"
-                      }`}
-                    >
-                      {link.label}{link.label === "Join Us" ? " →" : ""}
-                    </a>
+                <div className="flex flex-col gap-6">
+                  {NAV_COL2.map(group => (
+                    <div key={group.title}>
+                      <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-secondary/60 font-bold mb-2.5">
+                        {group.title}
+                      </p>
+                      <div className="flex flex-col gap-2.5">
+                        {group.links.map(link => (
+                          <a
+                            key={link.href}
+                            href={link.href}
+                            onClick={() => setNavOpen(false)}
+                            className="font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary transition-colors"
+                          >
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                   <a href="/contact" onClick={() => setNavOpen(false)}
                     className="font-sans text-xs tracking-widest uppercase text-secondary hover:text-secondary/80 transition-colors font-bold">

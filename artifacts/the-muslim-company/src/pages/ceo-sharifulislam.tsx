@@ -171,6 +171,11 @@ const PERSON_SCHEMA = {
     "https://www.openpr.com/news/4563968/shariful-islam-unveils-global-vision-for-the-muslim-company"
   ],
   "award": "Global Peace Ambassador 2025-2026, Global Peace Chain",
+  "memberOf": [
+    { "@type": "Organization", "name": "Society of Satellite Professionals International", "alternateName": "SSPI" },
+    { "@type": "Organization", "name": "International Association of Engineers", "alternateName": "IAENG" },
+    { "@type": "Organization", "name": "International Human Rights Commission", "alternateName": "IHRC" }
+  ],
   "hasCredential": [
     {
       "@type": "EducationalOccupationalCredential",
@@ -187,6 +192,24 @@ const PERSON_SCHEMA = {
         "name": "Global Peace Chain",
         "url": "https://globalpeacechain.org"
       }
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      "name": "Member, Society of Satellite Professionals International (SSPI)",
+      "credentialCategory": "membership",
+      "recognizedBy": { "@type": "Organization", "name": "Society of Satellite Professionals International" }
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      "name": "Member, International Association of Engineers (IAENG)",
+      "credentialCategory": "membership",
+      "recognizedBy": { "@type": "Organization", "name": "International Association of Engineers" }
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      "name": "Member, International Human Rights Commission (IHRC)",
+      "credentialCategory": "membership",
+      "recognizedBy": { "@type": "Organization", "name": "International Human Rights Commission" }
     }
   ]
 };
@@ -430,7 +453,10 @@ export default function CeoSharifulIslamPage() {
                   From an early age, Shariful developed strong interests spanning technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies. His intellectual journey led him to found <strong className="text-primary/80">The Muslim Company</strong> in January 2025. He currently serves as the Chief Executive Officer (CEO) of The Muslim Company, guiding the organization's long-term vision, leadership, and strategic growth.
                 </p>
                 <p>
-                  As Chief Executive Officer (CEO), he leads the company across multiple key sectors: Technology &amp; AI, Media &amp; Journalism, Education &amp; Research, Humanitarian Development, Governance &amp; Policy, Renewable Energy, Ethical Commerce, Social Welfare &amp; Humanitarian Work, Retail Business, Fashion &amp; Apparel, Agriculture &amp; Food, Manufacturing &amp; Industry, and Lifestyle &amp; Personal Care. He also serves as a Peace Ambassador for the Global Peace Chain (Bangladesh), reflecting his commitment to dialogue, unity, and global humanitarian responsibility.
+                  As Chief Executive Officer (CEO), he leads the company across multiple key sectors: Technology &amp; AI, Media &amp; Journalism, Education &amp; Research, Humanitarian Development, Governance &amp; Policy, Renewable Energy, Ethical Commerce, Social Welfare &amp; Humanitarian Work, Retail Business, Fashion &amp; Apparel, Agriculture &amp; Food, Manufacturing &amp; Industry, and Lifestyle &amp; Personal Care — with a growing operational presence across Bangladesh, India, Pakistan, the United Arab Emirates, Nigeria, Ghana, and the wider African continent. He also serves as a Peace Ambassador for the Global Peace Chain (Bangladesh), reflecting his commitment to dialogue, unity, and global humanitarian responsibility.
+                </p>
+                <p>
+                  Shariful is a member of the Society of Satellite Professionals International (SSPI) and the International Association of Engineers (IAENG), reflecting his cross-disciplinary expertise spanning engineering, technology, and international institutional development. He also contributes to human rights advocacy as a recognized member of the International Human Rights Commission (IHRC), working on humanitarian issues at the international level.
                 </p>
                 <p>
                   Shariful's leadership philosophy is grounded in the Quran and the Sunnah of Prophet Muhammad ﷺ — combining ancient prophetic wisdom with modern global corporate strategy to create a model of enterprise that is simultaneously world-class and deeply principled.
@@ -453,6 +479,7 @@ export default function CeoSharifulIslamPage() {
                   { label: "Company", value: "The Muslim Company" },
                   { label: "Founded", value: "January 2025, Dhaka" },
                   { label: "Other Role", value: "Peace Ambassador, Global Peace Chain (BD)" },
+                  { label: "Memberships", value: "SSPI · IAENG · IHRC" },
                 ].map((r) => <InfoRow key={r.label} label={r.label} value={r.value} />)}
               </div>
             

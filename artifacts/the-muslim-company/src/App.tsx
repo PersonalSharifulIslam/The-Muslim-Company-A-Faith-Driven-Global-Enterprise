@@ -62,6 +62,7 @@ const MissionPage = lazy(() => import("@/pages/mission"));
 const SectorDetail = lazy(() => import("@/pages/sector-detail"));
 const ContactPage = lazy(() => import("@/pages/contact"));
 const TransparencyPage = lazy(() => import("@/pages/transparency"));
+const TMCFoundationPage = lazy(() => import("@/pages/tmc-foundation"));
 const GetInvolvedPage = lazy(() => import("@/pages/get-involved"));
 const PrivacyPolicy = lazy(() => import("@/pages/privacy-policy"));
 const TermsOfService = lazy(() => import("@/pages/terms-of-service"));
@@ -106,6 +107,7 @@ function Router() {
       <Route path="/sectors/:slug" component={SectorDetail} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/transparency" component={TransparencyPage} />
+      <Route path="/the-muslim-company-foundation" component={TMCFoundationPage} />
       <Route path="/get-involved" component={GetInvolvedPage} />
       <Route path="/employee/onboard/:token" component={({ params }) => <EmployeeOnboard params={params} />} />
 

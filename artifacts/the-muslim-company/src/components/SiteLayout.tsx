@@ -18,6 +18,7 @@ const NAV_RIGHT = [
   { label: "Careers", href: "/careers" },
   { label: "Newsroom & PR", href: "/newsroom" },
   { label: "Notice & Event", href: "/notices" },
+  { label: "Foundation", href: "/the-muslim-company-foundation" },
   { label: "Get Involved", href: "/get-involved" },
   { label: "Transparency", href: "/transparency" },
   { label: "Blog", href: "/blog" },
@@ -163,6 +164,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
               <a href="/vision" className="hover:text-primary-foreground transition-colors">Vision</a>
               <a href="/mission" className="hover:text-primary-foreground transition-colors">Mission</a>
               <a href="/transparency" className="hover:text-primary-foreground transition-colors">Transparency</a>
+              <a href="/the-muslim-company-foundation" className="hover:text-primary-foreground transition-colors">Foundation</a>
               <a href="/get-involved" className="hover:text-primary-foreground transition-colors">Get Involved</a>
             </div>
           </div>

@@ -212,6 +212,7 @@ const NAV_LINKS_RIGHT = [
   { label: "Careers", href: "/careers" },
   { label: "Newsroom & PR", href: "/newsroom" },
   { label: "Notice & Event", href: "/notices" },
+  { label: "Foundation", href: "/the-muslim-company-foundation" },
   { label: "Get Involved", href: "/get-involved" },
   { label: "Transparency", href: "/transparency" },
   { label: "Blog", href: "/blog" },

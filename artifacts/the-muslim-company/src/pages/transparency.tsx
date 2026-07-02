@@ -23,6 +23,35 @@ export default function TransparencyPage() {
   }, []);
 
   useEffect(() => {
+    document.querySelectorAll('script[data-report-schema]').forEach(el => el.remove());
+    if (reports.length === 0) return;
+    const reportSchema = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "The Muslim Company — Transparency Reports",
+      "itemListElement": reports.map((r, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "DigitalDocument",
+          "name": r.title,
+          "description": r.description || `${r.report_type.replace("_", "-")} transparency report — ${r.period_label}`,
+          "url": r.pdf_url,
+          "encodingFormat": "application/pdf",
+          "datePublished": r.published_date,
+          "publisher": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company" }
+        }
+      }))
+    };
+    const s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.setAttribute("data-report-schema", "true");
+    s.textContent = JSON.stringify(reportSchema);
+    document.head.appendChild(s);
+    return () => { document.querySelectorAll('script[data-report-schema]').forEach(el => el.remove()); };
+  }, [reports]);
+
+  useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     document.title = "Transparency & Accountability — The Muslim Company";
@@ -128,6 +157,81 @@ export default function TransparencyPage() {
                   "Indeed, Allah commands you to render trusts to whom they are due and when you judge between people to judge with justice."
                 </p>
                 <p className="font-sans text-xs tracking-widest uppercase text-secondary/60 mt-3">— Quran 4:58</p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── TRANSPARENCY REPORTS (prominent, right after hero) ── */}
+        <section className="py-16 px-6 lg:px-12 bg-card border-b-2 border-secondary/40">
+          <div className="container mx-auto max-w-5xl">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+              <div className="flex items-center gap-3 mb-3">
+                <FileText className="w-5 h-5 text-secondary" />
+                <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold">Official Reports</p>
+              </div>
+              <p className="font-serif text-2xl md:text-3xl text-primary mb-8 max-w-2xl">
+                Monthly, quarterly, semi-annual, and annual reports covering all aspects of our ethical operations.
+              </p>
+
+              {reports.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                  {reports.map((r) => (
+                    <a
+                      key={r.id}
+                      href={r.pdf_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-start gap-4 p-6 border-2 border-secondary/30 bg-background hover:border-secondary hover:shadow-lg transition-all group"
+                    >
+                      <div className="w-11 h-11 flex items-center justify-center bg-secondary/10 flex-shrink-0">
+                        <FileText className="w-5 h-5 text-secondary" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/70 mb-1">
+                          {r.report_type.replace("_", "-")} · {r.period_label}
+                        </p>
+                        <h3 className="font-serif text-lg text-primary mb-1 group-hover:text-secondary transition-colors">{r.title}</h3>
+                        {r.description && <p className="font-sans text-xs text-primary/50 leading-relaxed mb-2">{r.description}</p>}
+                        <div className="flex items-center gap-1.5 font-sans text-[10px] text-primary/40">
+                          <Calendar className="w-3 h-3" />
+                          {new Date(r.published_date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
+                        </div>
+                      </div>
+                      <Download className="w-4 h-4 text-primary/20 group-hover:text-secondary transition-colors flex-shrink-0 mt-1" />
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <div className="p-6 border border-primary/10 bg-background mb-6">
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/40 mb-4">Reports will include:</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {[
+                      "Revenue and expenditure summary",
+                      "Zakat calculation and distribution details",
+                      "Monthly charity disbursement breakdown",
+                      "Humanitarian activities and beneficiary numbers",
+                      "Shariah board audit findings",
+                      "Worker welfare metrics and improvements",
+                      "Environmental impact assessment",
+                      "Tax and VAT compliance confirmation",
+                      "Governance violations (if any) and corrective actions",
+                      "Waqf and endowment fund status",
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 flex-shrink-0" />
+                        <p className="font-sans text-sm text-primary/65">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="p-5 border border-secondary/30 bg-secondary/5">
+                <p className="font-sans text-xs text-primary/60 leading-relaxed">
+                  <span className="text-secondary font-bold uppercase tracking-widest text-[10px]">Note — </span>
+                  The Muslim Company was founded in January 2025 and is currently in its development and establishment phase. This page reflects our constitutional commitments and ethical framework that govern all reporting, published as reports become available.
+                </p>
               </div>
             </motion.div>
           </div>
@@ -354,76 +458,6 @@ export default function TransparencyPage() {
                     <p className="font-sans text-xs text-primary-foreground/50 leading-relaxed">{item.desc}</p>
                   </div>
                 ))}
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ── TRANSPARENCY REPORTS ── */}
-        <section className="py-20 px-6 lg:px-12 border-b border-primary/10 bg-card">
-          <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Transparency Reports</p>
-              <p className="font-serif text-2xl text-primary mb-8 max-w-2xl">
-                Monthly, quarterly, semi-annual, and annual reports covering all aspects of our ethical operations.
-              </p>
-
-              {reports.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                  {reports.map((r) => (
-                    <a
-                      key={r.id}
-                      href={r.pdf_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-start gap-4 p-5 border border-primary/10 bg-background hover:border-secondary/40 transition-colors group"
-                    >
-                      <FileText className="w-5 h-5 text-secondary flex-shrink-0 mt-1" />
-                      <div className="flex-1">
-                        <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/70 mb-1">
-                          {r.report_type.replace("_", "-")} · {r.period_label}
-                        </p>
-                        <h3 className="font-serif text-base text-primary mb-1 group-hover:text-secondary transition-colors">{r.title}</h3>
-                        {r.description && <p className="font-sans text-xs text-primary/50 leading-relaxed mb-2">{r.description}</p>}
-                        <div className="flex items-center gap-1.5 font-sans text-[10px] text-primary/40">
-                          <Calendar className="w-3 h-3" />
-                          {new Date(r.published_date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
-                        </div>
-                      </div>
-                      <Download className="w-4 h-4 text-primary/20 group-hover:text-secondary transition-colors flex-shrink-0 mt-1" />
-                    </a>
-                  ))}
-                </div>
-              ) : (
-                <div className="p-6 border border-primary/10 bg-background mb-6">
-                  <p className="font-sans text-xs tracking-widest uppercase text-primary/40 mb-4">Reports will include:</p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {[
-                      "Revenue and expenditure summary",
-                      "Zakat calculation and distribution details",
-                      "Monthly charity disbursement breakdown",
-                      "Humanitarian activities and beneficiary numbers",
-                      "Shariah board audit findings",
-                      "Worker welfare metrics and improvements",
-                      "Environmental impact assessment",
-                      "Tax and VAT compliance confirmation",
-                      "Governance violations (if any) and corrective actions",
-                      "Waqf and endowment fund status",
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 bg-secondary rounded-full mt-2 flex-shrink-0" />
-                        <p className="font-sans text-sm text-primary/65">{item}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <div className="p-5 border border-secondary/30 bg-secondary/5">
-                <p className="font-sans text-xs text-primary/60 leading-relaxed">
-                  <span className="text-secondary font-bold uppercase tracking-widest text-[10px]">Note — </span>
-                  The Muslim Company was founded in January 2025 and is currently in its development and establishment phase. This page reflects our constitutional commitments and ethical framework that govern all reporting, published as reports become available.
-                </p>
               </div>
             </motion.div>
           </div>

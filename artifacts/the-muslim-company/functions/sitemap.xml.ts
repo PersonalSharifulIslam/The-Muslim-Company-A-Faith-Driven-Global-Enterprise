@@ -66,6 +66,7 @@ export async function onRequestGet(context: any) {
     url(`${BASE}/technology`,           'monthly', '0.7', now),
     url(`${BASE}/contact`,              'monthly', '0.7', now),
     url(`${BASE}/transparency`,         'monthly', '0.7', now),
+    url(`${BASE}/the-muslim-company-foundation`, 'monthly', '0.8', now),
     url(`${BASE}/get-involved`,         'monthly', '0.7', now),
     url(`${BASE}/recruitment-status`,   'monthly', '0.6'),
     url(`${BASE}/baytalmalbank`,        'monthly', '0.8', now),

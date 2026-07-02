@@ -23,6 +23,35 @@ export default function TransparencyPage() {
   }, []);
 
   useEffect(() => {
+    document.querySelectorAll('script[data-report-schema]').forEach(el => el.remove());
+    if (reports.length === 0) return;
+    const reportSchema = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "The Muslim Company — Transparency Reports",
+      "itemListElement": reports.map((r, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "DigitalDocument",
+          "name": r.title,
+          "description": r.description || `${r.report_type.replace("_", "-")} transparency report — ${r.period_label}`,
+          "url": r.pdf_url,
+          "encodingFormat": "application/pdf",
+          "datePublished": r.published_date,
+          "publisher": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company" }
+        }
+      }))
+    };
+    const s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.setAttribute("data-report-schema", "true");
+    s.textContent = JSON.stringify(reportSchema);
+    document.head.appendChild(s);
+    return () => { document.querySelectorAll('script[data-report-schema]').forEach(el => el.remove()); };
+  }, [reports]);
+
+  useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     document.title = "Transparency & Accountability — The Muslim Company";

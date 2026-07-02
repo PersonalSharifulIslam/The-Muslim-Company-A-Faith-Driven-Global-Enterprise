@@ -17,10 +17,11 @@ export async function onRequestGet(context: any) {
     }
   }
 
-  const [jobs, blogs, news] = await Promise.all([
-    fetchTable('jobs',           'select=slug,created_at&status=eq.active'),
-    fetchTable('blog_posts',     'select=slug,created_at&published=eq.true'),
-    fetchTable('newsroom_posts', 'select=slug,created_at&published=eq.true'),
+  const [jobs, blogs, news, reports] = await Promise.all([
+    fetchTable('jobs',                 'select=slug,created_at&status=eq.active'),
+    fetchTable('blog_posts',           'select=slug,created_at&published=eq.true'),
+    fetchTable('newsroom_posts',       'select=slug,created_at&published=eq.true'),
+    fetchTable('transparency_reports', 'select=pdf_url,published_date'),
   ])
 
   function url(loc: string, changefreq: string, priority: string, lastmod?: string) {
@@ -88,7 +89,11 @@ export async function onRequestGet(context: any) {
     url(`${BASE}/newsroom/${n.slug}`, 'weekly', '0.7', n.created_at)
   ).join('\n')
 
-  const parts = [staticUrls, sectorUrls, jobUrls, blogUrls, newsUrls]
+  const reportUrls = reports.map((r: any) =>
+    url(r.pdf_url, 'yearly', '0.6', r.published_date)
+  ).join('\n')
+
+  const parts = [staticUrls, sectorUrls, jobUrls, blogUrls, newsUrls, reportUrls]
     .filter(p => p.trim())
     .join('\n')
 

@@ -118,7 +118,7 @@ export default function AdminLayout({ children, current }: { children: React.Rea
       {sidebarOpen && (
         <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={() => setSidebarOpen(false)} />
       )}
-      <div className="flex-1 lg:ml-64 flex flex-col min-h-screen">
+      <div className="flex-1 lg:ml-64 flex flex-col min-h-screen min-w-0">
         <header className="bg-background border-b border-primary/10 px-6 py-4 flex items-center gap-4 sticky top-0 z-30">
           <button
             className="lg:hidden text-primary/60 hover:text-primary"
@@ -131,7 +131,7 @@ export default function AdminLayout({ children, current }: { children: React.Rea
           </p>
           <GlobalSearch />
         </header>
-        <main className="flex-1 p-6">{children}</main>
+        <main className="flex-1 p-6 min-w-0">{children}</main>
       </div>
     </div>
   );

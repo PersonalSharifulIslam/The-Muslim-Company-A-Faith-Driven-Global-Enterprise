@@ -10,10 +10,10 @@ const fadeIn = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, tra
 
 function NewsCard({ post, featured }: { post: NewsPost; featured?: boolean }) {
   return (
-    <motion.a
+    <motion.div
       variants={fadeIn}
-      href={`/newsroom/${post.slug}`}
-      className={`block bg-card border border-primary/10 hover:border-secondary/40 transition-colors group overflow-hidden ${featured ? "md:col-span-2" : ""}`}
+      onClick={() => { window.location.href = `/newsroom/${post.slug}`; }}
+      className={`block bg-card border border-primary/10 hover:border-secondary/40 transition-colors group overflow-hidden cursor-pointer ${featured ? "md:col-span-2" : ""}`}
     >
       {post.image_url && (
         <div className={`overflow-hidden ${featured ? "h-56 md:h-72" : "h-44"}`}>
@@ -22,7 +22,13 @@ function NewsCard({ post, featured }: { post: NewsPost; featured?: boolean }) {
       )}
       <div className="p-6">
         <div className="flex items-center gap-3 mb-3">
-          <span className="font-sans text-[10px] tracking-widest uppercase text-secondary border border-secondary/30 px-2 py-0.5">{post.category}</span>
+          <a
+            href={`/newsroom/category/${encodeURIComponent(post.category)}`}
+            onClick={(e) => e.stopPropagation()}
+            className="font-sans text-[10px] tracking-widest uppercase text-secondary border border-secondary/30 px-2 py-0.5 hover:bg-secondary/10 transition-colors"
+          >
+            {post.category}
+          </a>
           <span className="font-sans text-[10px] text-primary/40 flex items-center gap-1">
             <Calendar className="w-3 h-3" />{new Date(post.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
           </span>
@@ -33,13 +39,16 @@ function NewsCard({ post, featured }: { post: NewsPost; featured?: boolean }) {
           Read More <ArrowRight className="w-3.5 h-3.5" />
         </div>
       </div>
-    </motion.a>
+    </motion.div>
   );
 }
 
-export default function Newsroom() {
+export default function Newsroom({ params }: { params?: { category?: string } }) {
+  const urlCategory = params?.category ? decodeURIComponent(params.category) : null;
+
   useEffect(() => {
-    document.title = "Newsroom & Press — The Muslim Company";
+    const catLabel = urlCategory ? ` — ${urlCategory}` : "";
+    document.title = `Newsroom & Press${catLabel} — The Muslim Company`;
 
     // Organization Schema — consistent across all pages
     document.querySelectorAll('script[data-org-schema]').forEach(el => el.remove());
@@ -61,29 +70,38 @@ export default function Newsroom() {
     orgScript.setAttribute("data-org-schema", "true");
     orgScript.textContent = JSON.stringify(orgSchema);
     document.head.appendChild(orgScript);
+    const canonicalUrl = urlCategory ? `https://www.themuslim.company/newsroom/category/${encodeURIComponent(urlCategory)}` : 'https://www.themuslim.company/newsroom';
+    const description = urlCategory
+      ? `${urlCategory} news and press releases from The Muslim Company.`
+      : "Official press releases, media coverage, and corporate announcements from The Muslim Company — a global conglomerate based in Dhaka, Bangladesh.";
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Official press releases, media coverage, and corporate announcements from The Muslim Company — a global conglomerate based in Dhaka, Bangladesh.");
+    if (_md) _md.setAttribute('content', description);
     const _ogt_d = document.querySelector('meta[property="og:description"]');
-    if (_ogt_d) _ogt_d.setAttribute('content', "Official press releases, media coverage, and corporate announcements from The Muslim Company — a global conglomerate based in Dhaka, Bangladesh.");
+    if (_ogt_d) _ogt_d.setAttribute('content', description);
     const _can = document.querySelector('link[rel="canonical"]');
-    if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/newsroom'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/newsroom'; document.head.appendChild(_cl); }
+    if (_can) { _can.setAttribute('href', canonicalUrl); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = canonicalUrl; document.head.appendChild(_cl); }
     const _ogu_c = document.querySelector('meta[property="og:url"]');
-    if (_ogu_c) _ogu_c.setAttribute('content', 'https://www.themuslim.company/newsroom');
+    if (_ogu_c) _ogu_c.setAttribute('content', canonicalUrl);
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', "Newsroom & Press — The Muslim Company");
+    if (_ogt) _ogt.setAttribute('content', urlCategory ? `${urlCategory} — Newsroom — The Muslim Company` : "Newsroom & Press — The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');
-    if (_ogd) _ogd.setAttribute('content', "Latest news, press releases, and media coverage of The Muslim Company — a faith-driven global enterprise building ethical civilization.");
+    if (_ogd) _ogd.setAttribute('content', description);
     const _ogi = document.querySelector('meta[property="og:image"]');
     if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-newsroom.png');
     const _twi = document.querySelector('meta[name="twitter:image"]');
     if (_twi) _twi.setAttribute('content', 'https://www.themuslim.company/og-newsroom.png');
         const _ogu = document.querySelector('meta[property="og:url"]');
-    if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/newsroom");
+    if (_ogu) _ogu.setAttribute('content', canonicalUrl);
 
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
-    [{"@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Newsroom", "item": "https://www.themuslim.company/newsroom"}]}, {"@context": "https://schema.org", "@type": "NewsMediaOrganization", "name": "The Muslim Company Newsroom", "description": "Latest news, press releases, and media coverage of The Muslim Company \u2014 a faith-driven global enterprise building ethical civilization.", "url": "https://www.themuslim.company/newsroom", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {
+    const breadcrumbItems = [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"},
+      {"@type": "ListItem", "position": 2, "name": "Newsroom", "item": "https://www.themuslim.company/newsroom"},
+    ];
+    if (urlCategory) breadcrumbItems.push({"@type": "ListItem", "position": 3, "name": urlCategory, "item": canonicalUrl});
+    [{"@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": breadcrumbItems}, {"@context": "https://schema.org", "@type": "NewsMediaOrganization", "name": urlCategory ? `The Muslim Company Newsroom — ${urlCategory}` : "The Muslim Company Newsroom", "description": description, "url": canonicalUrl, "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {
       const s = document.createElement('script');
       s.type = 'application/ld+json';
       s.setAttribute('data-page-schema', 'true');
@@ -91,16 +109,23 @@ export default function Newsroom() {
       document.head.appendChild(s);
     });
     return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
-  }, []);
+  }, [urlCategory]);
 
   const [posts, setPosts] = useState<NewsPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [cat, setCat] = useState("All");
+  const [cat, setCat] = useState(urlCategory || "All");
+
+  useEffect(() => { setCat(urlCategory || "All"); }, [urlCategory]);
 
   useEffect(() => {
     api.get("/newsroom").then((data) => setPosts(data as NewsPost[])).catch(() => {}).finally(() => setLoading(false));
   }, []);
+
+  function handleCategoryChange(value: string) {
+    setCat(value);
+    window.location.href = value === "All" ? "/newsroom" : `/newsroom/category/${encodeURIComponent(value)}`;
+  }
 
   const filtered = posts.filter((p) => {
     const matchSearch = p.title.toLowerCase().includes(search.toLowerCase());
@@ -117,9 +142,13 @@ export default function Newsroom() {
         <div className="container mx-auto max-w-5xl">
           <motion.div initial="hidden" animate="visible" variants={fadeIn}>
             <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Press & Media</p>
-            <h1 className="font-serif text-4xl md:text-6xl text-primary-foreground mb-4">Newsroom & PR</h1>
+            <h1 className="font-serif text-4xl md:text-6xl text-primary-foreground mb-4">
+              {urlCategory ? urlCategory : "Newsroom & PR"}
+            </h1>
             <p className="font-sans text-sm text-primary-foreground/55 max-w-2xl">
-              Latest news, press releases, company updates, and media coverage from The Muslim Company.
+              {urlCategory
+                ? `All ${urlCategory.toLowerCase()} items from The Muslim Company.`
+                : "Latest news, press releases, company updates, and media coverage from The Muslim Company."}
             </p>
           </motion.div>
         </div>
@@ -141,7 +170,7 @@ export default function Newsroom() {
             {CATEGORIES.map((c) => (
               <button
                 key={c}
-                onClick={() => setCat(c)}
+                onClick={() => handleCategoryChange(c)}
                 className={`px-4 py-2 font-sans text-[10px] tracking-widest uppercase border transition-colors ${cat === c ? "bg-secondary text-primary border-secondary" : "border-primary/15 text-primary/50 hover:border-secondary/50"}`}
               >
                 {c}

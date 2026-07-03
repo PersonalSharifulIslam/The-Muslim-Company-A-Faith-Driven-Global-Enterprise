@@ -9,7 +9,11 @@ const fadeIn = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, tra
 
 function BlogCard({ post }: { post: BlogPost }) {
   return (
-    <motion.a variants={fadeIn} href={`/blog/${post.slug}`} className="block bg-card border border-primary/10 hover:border-secondary/40 transition-colors group overflow-hidden">
+    <motion.div
+      variants={fadeIn}
+      onClick={() => { window.location.href = `/blog/${post.slug}`; }}
+      className="block bg-card border border-primary/10 hover:border-secondary/40 transition-colors group overflow-hidden cursor-pointer"
+    >
       {post.image_url && (
         <div className="h-48 overflow-hidden">
           <img src={post.image_url} alt={post.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -17,7 +21,13 @@ function BlogCard({ post }: { post: BlogPost }) {
       )}
       <div className="p-6">
         <div className="flex items-center gap-3 mb-3 flex-wrap">
-          <span className="font-sans text-[10px] tracking-widest uppercase text-secondary border border-secondary/30 px-2 py-0.5">{post.category}</span>
+          <a
+            href={`/blog/category/${encodeURIComponent(post.category)}`}
+            onClick={(e) => e.stopPropagation()}
+            className="font-sans text-[10px] tracking-widest uppercase text-secondary border border-secondary/30 px-2 py-0.5 hover:bg-secondary/10 transition-colors"
+          >
+            {post.category}
+          </a>
           <span className="font-sans text-[10px] text-primary/40 flex items-center gap-1">
             <Calendar className="w-3 h-3" />{new Date(post.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
           </span>
@@ -34,13 +44,16 @@ function BlogCard({ post }: { post: BlogPost }) {
           </span>
         </div>
       </div>
-    </motion.a>
+    </motion.div>
   );
 }
 
-export default function Blog() {
+export default function Blog({ params }: { params?: { category?: string } }) {
+  const urlCategory = params?.category ? decodeURIComponent(params.category) : null;
+
   useEffect(() => {
-    document.title = "Blog & Insights — The Muslim Company";
+    const catLabel = urlCategory ? ` — ${urlCategory}` : "";
+    document.title = `Blog & Insights${catLabel} — The Muslim Company`;
 
     // Organization Schema — consistent across all pages
     document.querySelectorAll('script[data-org-schema]').forEach(el => el.remove());
@@ -62,20 +75,24 @@ export default function Blog() {
     orgScript.setAttribute("data-org-schema", "true");
     orgScript.textContent = JSON.stringify(orgSchema);
     document.head.appendChild(orgScript);
+    const canonicalUrl = urlCategory ? `https://www.themuslim.company/blog/category/${encodeURIComponent(urlCategory)}` : 'https://www.themuslim.company/blog';
+    const description = urlCategory
+      ? `Articles in "${urlCategory}" — insights and thought leadership from The Muslim Company.`
+      : "Insights, thought leadership, and articles from The Muslim Company — covering Islamic business, ethical innovation, and civilization-focused leadership.";
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Insights, thought leadership, and articles from The Muslim Company — covering Islamic business, ethical innovation, and civilization-focused leadership.");
+    if (_md) _md.setAttribute('content', description);
     const _ogt_d = document.querySelector('meta[property="og:description"]');
-    if (_ogt_d) _ogt_d.setAttribute('content', "Insights, thought leadership, and articles from The Muslim Company — covering Islamic business, ethical innovation, and civilization-focused leadership.");
+    if (_ogt_d) _ogt_d.setAttribute('content', description);
     const _can = document.querySelector('link[rel="canonical"]');
-    if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/blog'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/blog'; document.head.appendChild(_cl); }
+    if (_can) { _can.setAttribute('href', canonicalUrl); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = canonicalUrl; document.head.appendChild(_cl); }
     const _ogu_c = document.querySelector('meta[property="og:url"]');
-    if (_ogu_c) _ogu_c.setAttribute('content', 'https://www.themuslim.company/blog');
+    if (_ogu_c) _ogu_c.setAttribute('content', canonicalUrl);
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', "Read the latest insights, thought leadership, and in-depth articles from The Muslim Company — covering Islamic business, ethical innovation, and civilization-focused leadership.");
+    if (_ogt) _ogt.setAttribute('content', urlCategory ? `${urlCategory} Articles — The Muslim Company Blog` : "Read the latest insights, thought leadership, and in-depth articles from The Muslim Company — covering Islamic business, ethical innovation, and civilization-focused leadership.");
     const _ogd = document.querySelector('meta[property="og:description"]');
-    if (_ogd) _ogd.setAttribute('content', "Insights, reflections, and knowledge from The Muslim Company — on Islamic ethics, civilization, technology, entrepreneurship, and faith-driven development.");
+    if (_ogd) _ogd.setAttribute('content', description);
     const _ogi = document.querySelector('meta[property="og:image"]');
     if (_ogi) { _ogi.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); }
     else { const _il = document.createElement('meta'); _il.setAttribute('property', 'og:image'); _il.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); document.head.appendChild(_il); }
@@ -83,10 +100,15 @@ export default function Blog() {
     if (_twi) { _twi.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); }
     else { const _tl = document.createElement('meta'); _tl.setAttribute('name', 'twitter:image'); _tl.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); document.head.appendChild(_tl); }
     const _ogu = document.querySelector('meta[property="og:url"]');
-    if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/blog");
+    if (_ogu) _ogu.setAttribute('content', canonicalUrl);
 
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
-    [{"@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.themuslim.company/blog"}]}, {"@context": "https://schema.org", "@type": "Blog", "name": "The Muslim Company Blog", "description": "Insights, reflections, and knowledge from The Muslim Company \u2014 on Islamic ethics, civilization, technology, entrepreneurship, and faith-driven development.", "url": "https://www.themuslim.company/blog", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {
+    const breadcrumbItems = [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"},
+      {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.themuslim.company/blog"},
+    ];
+    if (urlCategory) breadcrumbItems.push({"@type": "ListItem", "position": 3, "name": urlCategory, "item": canonicalUrl});
+    [{"@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": breadcrumbItems}, {"@context": "https://schema.org", "@type": "Blog", "name": urlCategory ? `The Muslim Company Blog — ${urlCategory}` : "The Muslim Company Blog", "description": description, "url": canonicalUrl, "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {
       const s = document.createElement('script');
       s.type = 'application/ld+json';
       s.setAttribute('data-page-schema', 'true');
@@ -94,16 +116,23 @@ export default function Blog() {
       document.head.appendChild(s);
     });
     return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
-  }, []);
+  }, [urlCategory]);
 
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [cat, setCat] = useState("All");
+  const [cat, setCat] = useState(urlCategory || "All");
+
+  useEffect(() => { setCat(urlCategory || "All"); }, [urlCategory]);
 
   useEffect(() => {
     api.get("/blog").then((data) => setPosts(data as BlogPost[])).catch(() => {}).finally(() => setLoading(false));
   }, []);
+
+  function handleCategoryChange(value: string) {
+    setCat(value);
+    window.location.href = value === "All" ? "/blog" : `/blog/category/${encodeURIComponent(value)}`;
+  }
 
   const filtered = posts.filter((p) => {
     const matchSearch = p.title.toLowerCase().includes(search.toLowerCase()) || (p.excerpt || "").toLowerCase().includes(search.toLowerCase());
@@ -120,10 +149,19 @@ export default function Blog() {
         <div className="container mx-auto max-w-5xl">
           <motion.div initial="hidden" animate="visible" variants={fadeIn}>
             <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Insights & Ideas</p>
-            <h1 className="font-serif text-4xl md:text-6xl text-primary-foreground mb-4">The TMC Blog</h1>
+            <h1 className="font-serif text-4xl md:text-6xl text-primary-foreground mb-4">
+              {urlCategory ? urlCategory : "The TMC Blog"}
+            </h1>
             <p className="font-sans text-sm text-primary-foreground/55 max-w-2xl">
-              Thoughts on ethics, technology, Islamic civilization, business, and the future of humanity — written with purpose.
+              {urlCategory
+                ? `All articles in "${urlCategory}".`
+                : "Thoughts on ethics, technology, Islamic civilization, business, and the future of humanity — written with purpose."}
             </p>
+            {urlCategory && (
+              <a href="/blog" className="inline-block mt-4 font-sans text-xs tracking-widest uppercase text-secondary hover:underline">
+                ← All Articles
+              </a>
+            )}
           </motion.div>
         </div>
       </section>
@@ -143,7 +181,7 @@ export default function Blog() {
           <div className="relative sm:w-56">
             <select
               value={cat}
-              onChange={(e) => setCat(e.target.value)}
+              onChange={(e) => handleCategoryChange(e.target.value)}
               className="w-full h-11 px-4 bg-background border border-primary/15 font-sans text-[11px] tracking-widest uppercase text-primary/70 focus:outline-none focus:border-secondary appearance-none cursor-pointer"
             >
               {availableCategories.map((c) => (

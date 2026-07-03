@@ -101,9 +101,11 @@ function Router() {
       <Route path="/careers/:slug/apply" component={JobApply} />
       <Route path="/recruitment-status" component={RecruitmentStatus} />
       <Route path="/newsroom" component={Newsroom} />
+      <Route path="/newsroom/category/:category" component={Newsroom} />
       <Route path="/newsroom/:slug" component={NewsDetail} />
       <Route path="/notices" component={Notices} />
       <Route path="/blog" component={Blog} />
+      <Route path="/blog/category/:category" component={Blog} />
       <Route path="/blog/:slug" component={({ params }) => <BlogDetail params={params} />} />
       <Route path="/sectors/:slug" component={SectorDetail} />
       <Route path="/contact" component={ContactPage} />

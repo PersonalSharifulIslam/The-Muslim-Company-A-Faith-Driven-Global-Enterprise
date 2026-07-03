@@ -862,7 +862,33 @@ export default function Home() {
         <div className="p-6 bg-primary-foreground/10 border border-secondary/20">
           <Microscope className="w-6 h-6 text-secondary mb-3" />
           <h3 className="font-serif text-xl mb-3">Council of Ethical Scholars, Scientists & Experts</h3>
-          <p className="font-sans text-sm text-primary-foreground/60 mb-4">A permanent interdisciplinary council: Islamic scholars, scientists, engineers, economists, AI researchers, doctors, psychologists, environmental specialists, strategic thinkers, and humanitarian experts — guided by Quran, Hadith, and verified science.</p>
+          <p className="font-sans text-sm text-primary-foreground/60 mb-6">A permanent interdisciplinary council — Islamic scholars, scientists, engineers, economists, AI researchers, doctors, psychologists, environmental specialists, and humanitarian experts — the analytical bridge between what Research & Development creates and what the Supreme Shariah Board approves.</p>
+
+          <p className="font-sans text-xs tracking-widest uppercase text-secondary/70 font-bold mb-4">How It Works</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            {[
+              { n: "1", title: "R&D Develops", desc: "Research & Development builds a new product, service, technology, or infrastructure and submits complete technical documentation and findings to the Council." },
+              { n: "2", title: "Council Analyzes", desc: "Each submission is independently reviewed for scientific validity, safety, efficacy, and social & environmental impact — by the specific experts qualified to judge it." },
+              { n: "3", title: "Shariah Board Decides", desc: "The Council's full analysis and recommendation go to the Supreme Shariah Board, which weighs them against Quran, Sunnah, and Maqasid al-Shariah for final approval." },
+            ].map((step) => (
+              <div key={step.n} className="p-4 bg-primary-foreground/5 border border-primary-foreground/10">
+                <div className="w-7 h-7 flex items-center justify-center border border-secondary/40 text-secondary font-serif text-sm mb-3">
+                  {step.n}
+                </div>
+                <h4 className="font-sans text-xs font-bold uppercase tracking-wide text-primary-foreground mb-2">{step.title}</h4>
+                <p className="font-sans text-xs text-primary-foreground/55 leading-relaxed">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+          <p className="font-sans text-xs text-primary-foreground/45 italic mb-6">Nothing reaches the public without completing all three stages — no product, service, platform, infrastructure, technology, or partnership bypasses this pipeline.</p>
+
+          <p className="font-sans text-xs tracking-widest uppercase text-secondary/70 font-bold mb-3">Beyond Pre-Launch Review</p>
+          <Bullets light items={[
+            "Post-launch monitoring — the Council continues watching every live product and service; new evidence of harm is escalated immediately, with authority to recommend suspension or recall",
+            "Applied research & publication — guidelines bridging Islamic principle and modern science (e.g. Islamic AI ethics, halal biotechnology standards)",
+            "Crisis consultation — rapid, credible expert response when the company's position is publicly challenged",
+            "Internal training — ethics and safety training for staff across every business unit",
+          ]} />
         </div>
 
         <div className="p-6 bg-primary-foreground/5 border border-primary-foreground/10">

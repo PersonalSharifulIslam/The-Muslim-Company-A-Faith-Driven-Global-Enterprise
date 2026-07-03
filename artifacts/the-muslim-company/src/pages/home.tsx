@@ -486,6 +486,8 @@ export default function Home() {
             srcSet={`${heroBgMobile} 640w, ${heroBgDesktop} 1280w, ${heroBgRetina} 1200w`}
             sizes="100vw"
             alt="Islamic architecture"
+            fetchPriority="high"
+            decoding="async"
             className="w-full h-full object-cover"
           />
         </motion.div>

@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
+import ShareButtons from "@/components/ShareButtons";
 import { api } from "@/lib/api";
 import type { NewsPost } from "@/lib/supabase";
 
@@ -167,6 +168,9 @@ export default function NewsDetail({ params }: { params: { slug: string } }) {
                 </span>
               </div>
               <h1 className="font-serif text-3xl md:text-4xl text-primary leading-tight mb-6">{post.title}</h1>
+              <div className="mb-6">
+                <ShareButtons url={`https://www.themuslim.company/newsroom/${params.slug}`} title={post.title} />
+              </div>
               {post.image_url && (
                 <div className="mb-8 overflow-hidden">
                   <img src={post.image_url} alt={post.title} loading="lazy" className="w-full h-72 object-cover" />
@@ -177,6 +181,9 @@ export default function NewsDetail({ params }: { params: { slug: string } }) {
               )}
               <div className="prose prose-sm max-w-none font-sans text-primary/70 leading-relaxed whitespace-pre-line">
                 {post.content}
+              </div>
+              <div className="mt-10 pt-8 border-t border-primary/10">
+                <ShareButtons url={`https://www.themuslim.company/newsroom/${params.slug}`} title={post.title} />
               </div>
             </motion.article>
           )}

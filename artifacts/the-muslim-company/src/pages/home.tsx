@@ -247,37 +247,6 @@ const NAV_COL2 = [
   },
 ];
 
-const NAV_LINKS_LEFT = [
-  { label: "Mission", href: "/mission" },
-  { label: "Vision", href: "/vision" },
-  { label: "Founder", href: "/founder" },
-  { label: "Sectors", href: "/sectors" },
-  { label: "Governance", href: "/governance" },
-  { label: "Constitution", href: "/constitution" },
-  { label: "Our Story", href: "/our-story" },
-];
-
-const NAV_LINKS_RIGHT = [
-  { label: "Careers", href: "/careers" },
-  { label: "Newsroom & PR", href: "/newsroom" },
-  { label: "Notice & Event", href: "/notices" },
-  { label: "Foundation", href: "/the-muslim-company-foundation" },
-  { label: "Get Involved", href: "/get-involved" },
-  { label: "Transparency", href: "/transparency" },
-  { label: "Blog", href: "/blog" },
-];
-
-const NAV_LINKS = [...NAV_LINKS_LEFT, ...NAV_LINKS_RIGHT];
-
-const NAV_LINKS_DESKTOP = [
-  { label: "Mission", href: "/mission" },
-  { label: "Sectors", href: "/sectors" },
-  { label: "Governance", href: "/governance" },
-  { label: "Vision", href: "/vision" },
-  { label: "Constitution", href: "/constitution" },
-  { label: "Founder", href: "/founder" },
-];
-
 /* ─── per-section SEO for the clean-URL routes that share this Home page ─── */
 const SECTION_SEO: Record<string, { title: string; description: string; path: string }> = {
   "/our-story": {

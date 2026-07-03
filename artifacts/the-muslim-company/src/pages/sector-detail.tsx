@@ -1062,7 +1062,7 @@ export default function SectorDetail() {
                   <div className="space-y-3">
                     {sector.goals.short.map((g, i) => (
                       <div key={i} className="flex items-start gap-3">
-                        <span className="font-sans text-xs text-secondary/50 w-5 flex-shrink-0 mt-1">{String(i+1).padStart(2,"0")}</span>
+                        <span className="font-sans text-xs text-secondary/70 w-5 flex-shrink-0 mt-1">{String(i+1).padStart(2,"0")}</span>
                         <p className="font-sans text-sm text-primary/70">{g}</p>
                       </div>
                     ))}
@@ -1073,7 +1073,7 @@ export default function SectorDetail() {
                   <div className="space-y-3">
                     {sector.goals.long.map((g, i) => (
                       <div key={i} className="flex items-start gap-3">
-                        <span className="font-sans text-xs text-secondary/50 w-5 flex-shrink-0 mt-1">{String(i+1).padStart(2,"0")}</span>
+                        <span className="font-sans text-xs text-secondary/70 w-5 flex-shrink-0 mt-1">{String(i+1).padStart(2,"0")}</span>
                         <p className="font-sans text-sm text-primary/70">{g}</p>
                       </div>
                     ))}

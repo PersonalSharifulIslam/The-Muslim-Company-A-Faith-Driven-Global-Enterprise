@@ -1354,7 +1354,7 @@ export default function Home() {
           >
             {["Faith and technology work together", "Business and morality remain connected", "Human development remains ethical", "Nature and civilization remain balanced", "Knowledge, justice, and compassion guide leadership", "Economic systems serve humanity rather than exploit it"].map((item, i) => (
               <motion.div key={i} variants={fadeIn} className="flex items-center gap-4">
-                <span className="font-sans text-xs text-secondary/50 w-6 flex-shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-sans text-xs text-secondary/70 w-6 flex-shrink-0">{String(i + 1).padStart(2, "0")}</span>
                 <p className="font-sans text-sm text-primary/70">{item}</p>
               </motion.div>
             ))}

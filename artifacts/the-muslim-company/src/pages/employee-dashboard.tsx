@@ -153,7 +153,7 @@ export default function EmployeeDashboard() {
                 ))}
               </div>
             )}
-            <a href="/employee/tasks" className="font-sans text-xs tracking-widest uppercase text-secondary/50 hover:text-secondary mt-3 block transition-colors">View all tasks →</a>
+            <a href="/employee/tasks" className="font-sans text-xs tracking-widest uppercase text-secondary/70 hover:text-secondary mt-3 block transition-colors">View all tasks →</a>
           </motion.div>
         </div>
 
@@ -176,7 +176,7 @@ export default function EmployeeDashboard() {
               ))}
             </div>
           )}
-          <a href="/employee/notifications" className="font-sans text-xs tracking-widest uppercase text-secondary/50 hover:text-secondary mt-3 block transition-colors">View all →</a>
+          <a href="/employee/notifications" className="font-sans text-xs tracking-widest uppercase text-secondary/70 hover:text-secondary mt-3 block transition-colors">View all →</a>
         </motion.div>
       </motion.div>
     </EmployeeLayout>

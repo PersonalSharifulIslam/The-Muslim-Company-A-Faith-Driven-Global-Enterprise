@@ -1,6 +1,4 @@
 import { useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
 
 export default function NotFound() {
   useEffect(() => {
@@ -29,19 +27,40 @@ export default function NotFound() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
-
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
+    <div className="min-h-screen w-full flex items-center justify-center bg-primary px-6">
+      <div className="w-full max-w-lg text-center">
+        <p className="font-serif text-7xl md:text-8xl text-secondary/90 mb-4">404</p>
+        <h1 className="font-serif text-2xl md:text-3xl text-primary-foreground mb-4">
+          This page could not be found
+        </h1>
+        <p className="font-sans text-sm text-primary-foreground/60 leading-relaxed mb-10">
+          The page you're looking for may have been moved, renamed, or no longer exists.
+          Here are some places to continue from:
+        </p>
+        <div className="flex flex-wrap justify-center gap-3 mb-10">
+          <a href="/" className="bg-secondary text-primary font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 flex items-center hover:bg-secondary/90 transition-colors">
+            Home
+          </a>
+          <a href="/about" className="border border-primary-foreground/20 text-primary-foreground font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 flex items-center hover:border-secondary transition-colors">
+            About Us
+          </a>
+          <a href="/contact" className="border border-primary-foreground/20 text-primary-foreground font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 flex items-center hover:border-secondary transition-colors">
+            Contact
+          </a>
+        </div>
+        <div className="pt-8 border-t border-primary-foreground/10 flex flex-wrap justify-center gap-x-6 gap-y-2">
+          {[
+            { label: "Sectors", href: "/sectors" },
+            { label: "Careers", href: "/careers" },
+            { label: "Blog", href: "/blog" },
+            { label: "Newsroom", href: "/newsroom" },
+          ].map(link => (
+            <a key={link.href} href={link.href} className="font-sans text-xs tracking-widest uppercase text-primary-foreground/50 hover:text-secondary transition-colors">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
+import ShareButtons from "@/components/ShareButtons";
 import { api } from "@/lib/api";
 import type { BlogPost } from "@/lib/supabase";
 
@@ -170,7 +171,10 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
                 </span>
               </div>
               <h1 className="font-serif text-3xl md:text-4xl text-primary leading-tight mb-4">{post.title}</h1>
-              <p className="font-sans text-xs text-primary/40 mb-8 pb-8 border-b border-primary/10">By {post.author}</p>
+              <div className="flex items-center justify-between flex-wrap gap-4 mb-8 pb-8 border-b border-primary/10">
+                <p className="font-sans text-xs text-primary/40">By {post.author}</p>
+                <ShareButtons url={`https://www.themuslim.company/blog/${params.slug}`} title={post.title} />
+              </div>
               {post.image_url && (
                 <div className="mb-8 overflow-hidden">
                   <img src={post.image_url} alt={post.title} loading="lazy" className="w-full h-72 object-cover" />
@@ -181,6 +185,9 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
               )}
               <div className="font-sans text-sm text-primary/70 leading-relaxed whitespace-pre-line space-y-4">
                 {post.content}
+              </div>
+              <div className="mt-10 pt-8 border-t border-primary/10">
+                <ShareButtons url={`https://www.themuslim.company/blog/${params.slug}`} title={post.title} />
               </div>
             </motion.article>
           )}

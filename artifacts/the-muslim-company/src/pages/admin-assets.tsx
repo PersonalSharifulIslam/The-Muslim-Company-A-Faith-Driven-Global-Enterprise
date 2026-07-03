@@ -16,7 +16,7 @@ const STATUS_COLORS: Record<string, string> = {
   available: "bg-blue-400/10 text-blue-400",
   assigned: "bg-green-400/10 text-green-400",
   maintenance: "bg-yellow-400/10 text-yellow-400",
-  retired: "bg-gray-400/10 text-gray-400",
+  retired: "bg-gray-400/10 text-gray-600",
 };
 const ASSET_TYPES = ["Laptop", "Desktop", "Phone", "ID Card", "Vehicle", "Office Equipment", "Software License", "Other"];
 const BLANK_ITEM: AssetItem = { asset_name: "", asset_type: ASSET_TYPES[0], serial_number: "", notes: "" };

@@ -18,7 +18,7 @@ const PRIORITY_COLORS: Record<string, string> = {
   urgent: "bg-red-400/10 text-red-400 border-red-400/20",
 };
 const STATUS_COLORS: Record<string, string> = {
-  pending: "bg-gray-400/10 text-gray-400 border-gray-400/20",
+  pending: "bg-gray-400/10 text-gray-600 border-gray-400/20",
   in_progress: "bg-blue-400/10 text-blue-400 border-blue-400/20",
   done: "bg-green-400/10 text-green-400 border-green-400/20",
   cancelled: "bg-red-400/10 text-red-400 border-red-400/20",

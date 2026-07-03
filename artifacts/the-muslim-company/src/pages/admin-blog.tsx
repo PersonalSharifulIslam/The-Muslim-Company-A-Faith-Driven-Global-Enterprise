@@ -164,7 +164,7 @@ export default function AdminBlog() {
                   <td className="px-5 py-4 font-sans text-xs text-primary/65">{p.author}</td>
                   <td className="px-5 py-4 font-sans text-xs text-primary/65">{new Date(p.created_at).toLocaleDateString("en-GB")}</td>
                   <td className="px-5 py-4">
-                    <span className={`font-sans text-xs tracking-widest uppercase px-2 py-0.5 border ${p.published ? "text-green-400 border-green-400/20" : "text-gray-400 border-gray-400/20"}`}>
+                    <span className={`font-sans text-xs tracking-widest uppercase px-2 py-0.5 border ${p.published ? "text-green-400 border-green-400/20" : "text-gray-600 border-gray-400/20"}`}>
                       {p.published ? "Published" : "Draft"}
                     </span>
                   </td>

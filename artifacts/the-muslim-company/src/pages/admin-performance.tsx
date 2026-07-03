@@ -12,7 +12,7 @@ type Review = {
 type Employee = { employee_id: string; name: string; department: string };
 
 const STATUS_COLORS: Record<string, string> = {
-  draft: "bg-gray-400/10 text-gray-400",
+  draft: "bg-gray-400/10 text-gray-600",
   submitted: "bg-yellow-400/10 text-yellow-400",
   acknowledged: "bg-green-400/10 text-green-400",
 };

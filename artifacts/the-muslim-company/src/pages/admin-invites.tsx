@@ -39,7 +39,7 @@ const STATUS_COLORS: Record<string, string> = {
   submitted: "bg-yellow-400/10 text-yellow-400 border-yellow-400/20",
   approved: "bg-green-400/10 text-green-400 border-green-400/20",
   rejected: "bg-red-400/10 text-red-400 border-red-400/20",
-  expired: "bg-gray-400/10 text-gray-400 border-gray-400/20",
+  expired: "bg-gray-400/10 text-gray-600 border-gray-400/20",
 };
 
 export default function AdminInvites() {

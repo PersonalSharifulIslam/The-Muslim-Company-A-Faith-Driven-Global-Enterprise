@@ -139,7 +139,7 @@ export default function AdminCareers() {
                   <td className="px-5 py-4 font-sans text-xs text-primary/60">{j.employment_type}</td>
                   <td className="px-5 py-4 font-sans text-xs text-primary/60">{new Date(j.deadline).toLocaleDateString("en-GB")}</td>
                   <td className="px-5 py-4">
-                    <span className={`font-sans text-xs tracking-widest uppercase px-2 py-0.5 border ${j.status === "active" ? "text-green-400 border-green-400/20 bg-green-400/5" : "text-gray-400 border-gray-400/20"}`}>
+                    <span className={`font-sans text-xs tracking-widest uppercase px-2 py-0.5 border ${j.status === "active" ? "text-green-400 border-green-400/20 bg-green-400/5" : "text-gray-600 border-gray-400/20"}`}>
                       {j.status}
                     </span>
                   </td>

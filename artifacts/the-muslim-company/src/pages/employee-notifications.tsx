@@ -48,7 +48,7 @@ export default function EmployeeNotifications() {
                 <div>
                   <p className="font-medium">{n.title}</p>
                   <p className="text-sm text-gray-600 mt-1">{n.message}</p>
-                  <p className="text-xs text-gray-400 mt-2">{new Date(n.created_at).toLocaleDateString()}</p>
+                  <p className="text-xs text-gray-600 mt-2">{new Date(n.created_at).toLocaleDateString()}</p>
                 </div>
                 {!n.is_read && <button onClick={() => markRead(n.id)} className="text-emerald-600 hover:text-emerald-800"><Check size={18} /></button>}
               </div>

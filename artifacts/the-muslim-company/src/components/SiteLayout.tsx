@@ -212,7 +212,9 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
               <a href="/mission" className="hover:text-primary-foreground transition-colors">Mission</a>
               <a href="/transparency" className="hover:text-primary-foreground transition-colors">Transparency</a>
               <a href="/the-muslim-company-foundation" className="hover:text-primary-foreground transition-colors">Foundation</a>
+              <a href="/rss.xml" className="hover:text-primary-foreground transition-colors">RSS Feed</a>
               <a href="/get-involved" className="hover:text-primary-foreground transition-colors">Get Involved</a>
+              <a href="/rss.xml" className="hover:text-primary-foreground transition-colors">RSS</a>
             </div>
           </div>
         </div>

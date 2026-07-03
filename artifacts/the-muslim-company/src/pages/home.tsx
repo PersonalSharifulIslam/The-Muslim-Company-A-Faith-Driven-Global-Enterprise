@@ -427,7 +427,7 @@ export default function Home() {
                 <div className="flex flex-col gap-6">
                   {NAV_COL1.map(group => (
                     <div key={group.title}>
-                      <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-secondary/60 font-bold mb-2.5">
+                      <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-secondary font-bold mb-2.5">
                         {group.title}
                       </p>
                       <div className="flex flex-col gap-2.5">
@@ -449,7 +449,7 @@ export default function Home() {
                 <div className="flex flex-col gap-6">
                   {NAV_COL2.map(group => (
                     <div key={group.title}>
-                      <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-secondary/60 font-bold mb-2.5">
+                      <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-secondary font-bold mb-2.5">
                         {group.title}
                       </p>
                       <div className="flex flex-col gap-2.5">

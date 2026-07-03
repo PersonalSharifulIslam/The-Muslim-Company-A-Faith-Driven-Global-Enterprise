@@ -50,7 +50,7 @@ export default function AdminAuditLog() {
           <ShieldAlert className="w-6 h-6 text-secondary" />
           <h1 className="font-serif text-2xl text-primary">Audit Trail</h1>
         </div>
-        <p className="font-sans text-xs text-primary/50 mb-6">
+        <p className="font-sans text-xs text-primary/65 mb-6">
           A read-only, append-only record of significant admin actions across the organization. Visible only to Admin, Executive, VP and Director roles.
         </p>
 
@@ -72,30 +72,30 @@ export default function AdminAuditLog() {
             <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-12 text-primary/40 font-sans text-sm">No audit entries found</div>
+          <div className="text-center py-12 text-primary/65 font-sans text-sm">No audit entries found</div>
         ) : (
           <div className="space-y-2">
             {filtered.map(e => (
               <div key={e.id} className="border border-primary/10 bg-card p-4 flex items-start justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className={`font-sans text-[10px] uppercase tracking-widest px-2 py-0.5 rounded ${ACTION_COLORS[e.action] || "bg-primary/5 text-primary/60"}`}>
+                    <span className={`font-sans text-xs uppercase tracking-widest px-2 py-0.5 rounded ${ACTION_COLORS[e.action] || "bg-primary/5 text-primary/60"}`}>
                       {actionLabel(e.action)}
                     </span>
                     {e.target_table && (
-                      <span className="font-sans text-[10px] text-primary/30">{e.target_table}{e.target_id ? ` · #${e.target_id}` : ""}</span>
+                      <span className="font-sans text-xs text-primary/30">{e.target_table}{e.target_id ? ` · #${e.target_id}` : ""}</span>
                     )}
                   </div>
                   <p className="font-sans text-xs text-primary/60 flex items-center gap-1.5">
                     <User className="w-3 h-3" /> {e.actor_email} <span className="text-primary/30">({e.actor_role})</span>
                   </p>
                   {e.details && (
-                    <p className="font-sans text-[11px] text-primary/40 mt-1.5 font-mono">
+                    <p className="font-sans text-xs text-primary/65 mt-1.5 font-mono">
                       {Object.entries(e.details).map(([k, v]) => `${k}: ${v}`).join(" · ")}
                     </p>
                   )}
                 </div>
-                <p className="font-sans text-[11px] text-primary/40 flex items-center gap-1.5 whitespace-nowrap">
+                <p className="font-sans text-xs text-primary/65 flex items-center gap-1.5 whitespace-nowrap">
                   <Calendar className="w-3 h-3" /> {new Date(e.created_at).toLocaleString()}
                 </p>
               </div>

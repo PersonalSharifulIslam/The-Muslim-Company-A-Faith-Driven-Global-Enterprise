@@ -189,7 +189,7 @@ export default function BaytAlMalBankPage() {
                 A Division of The Muslim Company
               </motion.p>
               <motion.div variants={fadeIn} className="inline-block border border-secondary/40 px-4 py-1.5 mb-6">
-                <span className="font-sans text-[10px] tracking-widest uppercase text-secondary">In Development — Launching Soon</span>
+                <span className="font-sans text-xs tracking-widest uppercase text-secondary">In Development — Launching Soon</span>
               </motion.div>
               <motion.h1 variants={fadeIn} className="font-serif text-5xl md:text-7xl text-primary-foreground mb-4">
                 The Bayt Al-Mal Bank
@@ -237,15 +237,15 @@ export default function BaytAlMalBankPage() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
                 <div className="p-4 border border-primary/10">
                   <p className="font-serif text-lg text-secondary mb-1">Phase 1</p>
-                  <p className="font-sans text-xs text-primary/55">Shariah Framework & Governance Structure</p>
+                  <p className="font-sans text-xs text-primary/65">Shariah Framework & Governance Structure</p>
                 </div>
                 <div className="p-4 border border-primary/10">
                   <p className="font-serif text-lg text-secondary mb-1">Phase 2</p>
-                  <p className="font-sans text-xs text-primary/55">Regulatory Licensing & Compliance</p>
+                  <p className="font-sans text-xs text-primary/65">Regulatory Licensing & Compliance</p>
                 </div>
                 <div className="p-4 border border-primary/10">
                   <p className="font-serif text-lg text-secondary mb-1">Phase 3</p>
-                  <p className="font-sans text-xs text-primary/55">Public Launch & Onboarding</p>
+                  <p className="font-sans text-xs text-primary/65">Public Launch & Onboarding</p>
                 </div>
               </div>
               <div className="inline-block border border-secondary/40 px-6 py-3">
@@ -282,7 +282,7 @@ export default function BaytAlMalBankPage() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">What We Offer</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary">Banking Services</h2>
-              <p className="font-sans text-sm text-primary/55 mt-4 max-w-2xl mx-auto">
+              <p className="font-sans text-sm text-primary/65 mt-4 max-w-2xl mx-auto">
                 A comprehensive suite of Shariah-compliant financial products and services designed for individuals, businesses, and institutions.
               </p>
             </motion.div>
@@ -311,7 +311,7 @@ export default function BaytAlMalBankPage() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">Powered By</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary">A Connected Financial Ecosystem</h2>
-              <p className="font-sans text-sm text-primary/55 mt-4 max-w-2xl mx-auto">
+              <p className="font-sans text-sm text-primary/65 mt-4 max-w-2xl mx-auto">
                 The Bayt Al-Mal Bank operates as part of an integrated financial ecosystem within The Muslim Company, built to serve customers globally — online and offline.
               </p>
             </motion.div>
@@ -359,8 +359,8 @@ export default function BaytAlMalBankPage() {
               <table className="w-full border border-primary/10 text-left">
                 <thead>
                   <tr className="border-b border-primary/10 bg-card">
-                    <th className="p-4 font-sans text-xs uppercase tracking-widest text-primary/50">Aspect</th>
-                    <th className="p-4 font-sans text-xs uppercase tracking-widest text-primary/50">Conventional Bank</th>
+                    <th className="p-4 font-sans text-xs uppercase tracking-widest text-primary/65">Aspect</th>
+                    <th className="p-4 font-sans text-xs uppercase tracking-widest text-primary/65">Conventional Bank</th>
                     <th className="p-4 font-sans text-xs uppercase tracking-widest text-secondary">The Bayt Al-Mal Bank</th>
                   </tr>
                 </thead>
@@ -375,7 +375,7 @@ export default function BaytAlMalBankPage() {
                   ].map((row, i) => (
                     <tr key={i} className="border-b border-primary/10">
                       <td className="p-4 font-sans text-sm text-primary/70 font-medium">{row[0]}</td>
-                      <td className="p-4 font-sans text-sm text-primary/50">{row[1]}</td>
+                      <td className="p-4 font-sans text-sm text-primary/65">{row[1]}</td>
                       <td className="p-4 font-sans text-sm text-primary/80">{row[2]}</td>
                     </tr>
                   ))}
@@ -391,7 +391,7 @@ export default function BaytAlMalBankPage() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">Built For Everyone</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary">Who We Serve</h2>
-              <p className="font-sans text-sm text-primary/55 mt-4 max-w-2xl mx-auto">
+              <p className="font-sans text-sm text-primary/65 mt-4 max-w-2xl mx-auto">
                 The Bayt Al-Mal Bank is designed to serve every segment of society — locally and globally, online and offline.
               </p>
             </motion.div>
@@ -405,7 +405,7 @@ export default function BaytAlMalBankPage() {
               ].map((item, i) => (
                 <motion.div key={i} variants={fadeIn} className="p-6 bg-background border border-primary/10 text-center">
                   <h3 className="font-serif text-lg text-primary mb-3">{item.title}</h3>
-                  <p className="font-sans text-sm text-primary/55 leading-relaxed">{item.desc}</p>
+                  <p className="font-sans text-sm text-primary/65 leading-relaxed">{item.desc}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -509,7 +509,7 @@ export default function BaytAlMalBankPage() {
         {/* Back Link */}
         <div className="py-8 px-6 border-t border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <Link href="/" className="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-widest text-primary/40 hover:text-secondary transition-colors">
+            <Link href="/" className="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-widest text-primary/65 hover:text-secondary transition-colors">
               <ArrowLeft className="w-4 h-4" /> Back to The Muslim Company
             </Link>
           </div>

@@ -248,7 +248,7 @@ export default function GetInvolvedPage() {
                         {type.qualities.map((q, qi) => (
                           <div key={qi} className="flex items-start gap-3">
                             <Check className="w-3.5 h-3.5 text-secondary mt-0.5 flex-shrink-0" />
-                            <p className="font-sans text-xs text-primary/55">{q}</p>
+                            <p className="font-sans text-xs text-primary/65">{q}</p>
                           </div>
                         ))}
                       </div>
@@ -260,7 +260,7 @@ export default function GetInvolvedPage() {
                           <ArrowUpRight className="w-4 h-4" />
                         </button>
                       </a>
-                      <p className="font-sans text-[10px] text-primary/30 mt-3 text-center">{type.email}</p>
+                      <p className="font-sans text-xs text-primary/30 mt-3 text-center">{type.email}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -279,7 +279,7 @@ export default function GetInvolvedPage() {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/40 mb-4">What we value most:</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-4">What we value most:</p>
                   <div className="space-y-3">
                     {[
                       "Taqwa — genuine God-consciousness in daily life",
@@ -298,7 +298,7 @@ export default function GetInvolvedPage() {
                   </div>
                 </div>
                 <div>
-                  <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/40 mb-4">We welcome people from:</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-4">We welcome people from:</p>
                   <div className="space-y-3">
                     {[
                       "Technology and engineering backgrounds",

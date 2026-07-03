@@ -146,7 +146,7 @@ export default function NewsDetail({ params }: { params: { slug: string } }) {
     <SiteLayout>
       <div className="py-12 px-6 lg:px-12">
         <div className="container mx-auto max-w-3xl">
-          <Link href="/newsroom" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary/50 hover:text-secondary transition-colors mb-8">
+          <Link href="/newsroom" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary/65 hover:text-secondary transition-colors mb-8">
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Newsroom
           </Link>
 
@@ -162,8 +162,8 @@ export default function NewsDetail({ params }: { params: { slug: string } }) {
           ) : (
             <motion.article initial="hidden" animate="visible" variants={fadeIn}>
               <div className="flex items-center gap-3 mb-4 flex-wrap">
-                <span className="font-sans text-[10px] tracking-widest uppercase text-secondary border border-secondary/30 px-2 py-0.5">{post.category}</span>
-                <span className="font-sans text-[10px] text-primary/40 flex items-center gap-1">
+                <span className="font-sans text-xs tracking-widest uppercase text-secondary border border-secondary/30 px-2 py-0.5">{post.category}</span>
+                <span className="font-sans text-xs text-primary/65 flex items-center gap-1">
                   <Calendar className="w-3 h-3" />{new Date(post.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
                 </span>
               </div>

@@ -82,9 +82,9 @@ export default function PrivacyPolicy() {
             <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Legal</p>
             <h1 className="font-serif text-4xl md:text-5xl text-primary-foreground mb-4">Privacy Policy</h1>
             <div className="flex flex-wrap gap-6 mt-6">
-              <div><p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/40 mb-1">Effective Date</p><p className="font-sans text-sm text-secondary">1 January 2026</p></div>
-              <div><p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/40 mb-1">Governed By</p><p className="font-sans text-sm text-secondary">Islamic Law · Bangladesh Law · International Law</p></div>
-              <div><p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/40 mb-1">Contact</p><p className="font-sans text-sm text-secondary">help@themuslim.company</p></div>
+              <div><p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-1">Effective Date</p><p className="font-sans text-sm text-secondary">1 January 2026</p></div>
+              <div><p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-1">Governed By</p><p className="font-sans text-sm text-secondary">Islamic Law · Bangladesh Law · International Law</p></div>
+              <div><p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-1">Contact</p><p className="font-sans text-sm text-secondary">help@themuslim.company</p></div>
             </div>
           </motion.div>
         </div>
@@ -94,7 +94,7 @@ export default function PrivacyPolicy() {
           <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.08 } } }}>
             <motion.div variants={fadeIn} className="border-l-4 border-secondary pl-5 py-3 mb-10 bg-secondary/5">
               <p className="font-serif text-base text-primary italic">"In the name of Allah, the Most Gracious, the Most Merciful."</p>
-              <p className="font-sans text-xs text-primary/50 mt-2">The Muslim Company is built upon the principles of Amanah (trust), transparency, and ethical responsibility. This Privacy Policy reflects our commitment to honoring the trust you place in us when you share your personal information.</p>
+              <p className="font-sans text-xs text-primary/65 mt-2">The Muslim Company is built upon the principles of Amanah (trust), transparency, and ethical responsibility. This Privacy Policy reflects our commitment to honoring the trust you place in us when you share your personal information.</p>
             </motion.div>
             <Section title="1. Introduction & Our Commitment">
               <p>The Muslim Company LTD ("Company", "we", "our", or "us"), headquartered in Dhaka, Bangladesh, operates the website <strong>www.themuslim.company</strong> and all associated portals. This Privacy Policy governs how we collect, process, store, and protect your personal information in accordance with:</p>
@@ -146,12 +146,12 @@ export default function PrivacyPolicy() {
             </Section>
             <Section title="14. Contact & Complaints">
               <div className="bg-primary text-primary-foreground p-5">
-                <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/60 mb-3">Contact Information</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-secondary/60 mb-3">Contact Information</p>
                 <p className="font-sans text-sm mb-1"><strong className="text-secondary">The Muslim Company LTD</strong></p>
                 <p className="font-sans text-sm text-primary-foreground/70 mb-1">Dhaka, Bangladesh</p>
                 <p className="font-sans text-sm text-secondary">help@themuslim.company</p>
               </div>
-              <p className="italic text-primary/50">Jazakallah Khair for trusting The Muslim Company.</p>
+              <p className="italic text-primary/65">Jazakallah Khair for trusting The Muslim Company.</p>
             </Section>
           </motion.div>
         </div>

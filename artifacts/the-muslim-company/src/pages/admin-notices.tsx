@@ -117,7 +117,7 @@ export default function AdminNotices() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="font-serif text-3xl text-primary mb-1">Notice & Event</h1>
-          <p className="font-sans text-sm text-primary/50">Manage official notices and announcements</p>
+          <p className="font-sans text-sm text-primary/65">Manage official notices and announcements</p>
         </div>
         <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
           <Plus className="w-3.5 h-3.5 mr-2" />New Notice
@@ -137,7 +137,7 @@ export default function AdminNotices() {
             <thead>
               <tr className="bg-primary text-primary-foreground">
                 {["Title", "Category", "Date", "Flags", "PDF", "Actions"].map((h) => (
-                  <th key={h} className="text-left font-sans text-[10px] tracking-widest uppercase px-5 py-4">{h}</th>
+                  <th key={h} className="text-left font-sans text-xs tracking-widest uppercase px-5 py-4">{h}</th>
                 ))}
               </tr>
             </thead>
@@ -146,18 +146,18 @@ export default function AdminNotices() {
                 <tr key={n.id} className={`border-t border-primary/8 hover:bg-secondary/5 transition-colors ${n.pinned ? "bg-secondary/5" : ""}`}>
                   <td className="px-5 py-4 font-sans text-sm text-primary max-w-xs truncate">{n.title}</td>
                   <td className="px-5 py-4 font-sans text-xs text-primary/60">{n.category}</td>
-                  <td className="px-5 py-4 font-sans text-xs text-primary/50">{new Date(n.created_at).toLocaleDateString("en-GB")}</td>
+                  <td className="px-5 py-4 font-sans text-xs text-primary/65">{new Date(n.created_at).toLocaleDateString("en-GB")}</td>
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-2">
                       {n.pinned && <Pin className="w-3.5 h-3.5 text-secondary" />}
-                      {n.important && <span className="font-sans text-[9px] tracking-widest uppercase text-red-400 border border-red-400/20 px-1.5 py-0.5">Important</span>}
+                      {n.important && <span className="font-sans text-xs tracking-widest uppercase text-red-400 border border-red-400/20 px-1.5 py-0.5">Important</span>}
                     </div>
                   </td>
-                  <td className="px-5 py-4 font-sans text-xs text-primary/50">{n.pdf_url ? "✓" : "—"}</td>
+                  <td className="px-5 py-4 font-sans text-xs text-primary/65">{n.pdf_url ? "✓" : "—"}</td>
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
-                      <button onClick={() => openEdit(n)} className="text-primary/40 hover:text-secondary transition-colors"><Edit2 className="w-4 h-4" /></button>
-                      <button onClick={() => del(n.id)} disabled={deleting === n.id} className="text-primary/40 hover:text-red-400 transition-colors disabled:opacity-30"><Trash2 className="w-4 h-4" /></button>
+                      <button onClick={() => openEdit(n)} className="text-primary/65 hover:text-secondary transition-colors"><Edit2 className="w-4 h-4" /></button>
+                      <button onClick={() => del(n.id)} disabled={deleting === n.id} className="text-primary/65 hover:text-red-400 transition-colors disabled:opacity-30"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   </td>
                 </tr>
@@ -172,28 +172,28 @@ export default function AdminNotices() {
           <div className="bg-background border border-primary/15 w-full max-w-xl my-8">
             <div className="flex items-center justify-between px-6 py-4 border-b border-primary/10">
               <h2 className="font-serif text-xl text-primary">{editing ? "Edit Notice" : "New Notice"}</h2>
-              <button onClick={() => setModal(false)}><X className="w-5 h-5 text-primary/40" /></button>
+              <button onClick={() => setModal(false)}><X className="w-5 h-5 text-primary/65" /></button>
             </div>
             <div className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
               <div>
-                <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Title *</label>
+                <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Title *</label>
                 <input value={form.title} onChange={setField("title")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Category</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Category</label>
                   <select value={form.category} onChange={setField("category")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     {CATS.map((c) => <option key={c}>{c}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">PDF File (Optional)</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">PDF File (Optional)</label>
                   {form.pdf_url ? (
                     // PDF uploaded — show filename with remove option
                     <div className="flex items-center gap-2 h-10 px-3 bg-secondary/10 border border-secondary/30">
                       <FileText className="w-4 h-4 text-secondary shrink-0" />
                       <span className="font-sans text-xs text-primary truncate flex-1">{uploadedFileName}</span>
-                      <button onClick={removePdf} className="text-primary/40 hover:text-red-400 transition-colors shrink-0">
+                      <button onClick={removePdf} className="text-primary/65 hover:text-red-400 transition-colors shrink-0">
                         <X className="w-3.5 h-3.5" />
                       </button>
                     </div>
@@ -202,7 +202,7 @@ export default function AdminNotices() {
                     <button
                       onClick={() => fileInputRef.current?.click()}
                       disabled={uploading}
-                      className="w-full h-10 px-3 bg-background border border-primary/15 border-dashed font-sans text-xs text-primary/50 hover:border-secondary/50 hover:text-secondary transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                      className="w-full h-10 px-3 bg-background border border-primary/15 border-dashed font-sans text-xs text-primary/65 hover:border-secondary/50 hover:text-secondary transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
                     >
                       {uploading ? (
                         <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading...</>
@@ -221,7 +221,7 @@ export default function AdminNotices() {
                 </div>
               </div>
               <div>
-                <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Content (Optional)</label>
+                <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Content (Optional)</label>
                 <textarea rows={5} value={form.content} onChange={setField("content")} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
               </div>
               <div className="flex gap-6">

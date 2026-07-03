@@ -154,7 +154,7 @@ export default function TMCFoundationPage() {
                 <motion.div key={i} variants={fadeIn} className="p-6 border border-primary/10 bg-background">
                   <div className="text-secondary mb-4">{item.icon}</div>
                   <h3 className="font-serif text-lg text-primary mb-2">{item.title}</h3>
-                  <p className="font-sans text-xs text-primary/55 leading-relaxed">{item.desc}</p>
+                  <p className="font-sans text-xs text-primary/65 leading-relaxed">{item.desc}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -195,7 +195,7 @@ export default function TMCFoundationPage() {
                 Where support is directed — and where impact stories will be published as projects launch.
               </p>
               <div className="p-6 border border-primary/10 bg-card mb-6">
-                <p className="font-sans text-xs tracking-widest uppercase text-primary/40 mb-4">Our impact areas include:</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-4">Our impact areas include:</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {IMPACT_AREAS.map((item, i) => (
                     <div key={i} className="flex items-start gap-3">
@@ -207,7 +207,7 @@ export default function TMCFoundationPage() {
               </div>
               <div className="p-5 border border-secondary/30 bg-secondary/5">
                 <p className="font-sans text-xs text-primary/60 leading-relaxed">
-                  <span className="text-secondary font-bold uppercase tracking-widest text-[10px]">Note — </span>
+                  <span className="text-secondary font-bold uppercase tracking-widest text-xs">Note — </span>
                   The Muslim Company was founded in January 2025 and the Foundation is in its establishment phase. As individual relief, education, and environmental projects launch, verified case studies and beneficiary impact numbers will be published here and in our <a href="/transparency" className="text-secondary hover:underline">Transparency Reports</a>.
                 </p>
               </div>

@@ -106,7 +106,7 @@ export default function AdminCareers() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="font-serif text-3xl text-primary mb-1">Careers</h1>
-          <p className="font-sans text-sm text-primary/50">Manage job postings</p>
+          <p className="font-sans text-sm text-primary/65">Manage job postings</p>
         </div>
         <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
           <Plus className="w-3.5 h-3.5 mr-2" />New Job
@@ -126,32 +126,32 @@ export default function AdminCareers() {
             <thead>
               <tr className="bg-primary text-primary-foreground">
                 {["Job ID", "Title", "Department", "Type", "Deadline", "Status", "Actions"].map((h) => (
-                  <th key={h} className="text-left font-sans text-[10px] tracking-widest uppercase px-5 py-4">{h}</th>
+                  <th key={h} className="text-left font-sans text-xs tracking-widest uppercase px-5 py-4">{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {jobs.map((j) => (
                 <tr key={j.id} className="border-t border-primary/8 hover:bg-secondary/5 transition-colors">
-                  <td className="px-5 py-4 font-sans text-xs text-primary/50">#{j.job_id}</td>
+                  <td className="px-5 py-4 font-sans text-xs text-primary/65">#{j.job_id}</td>
                   <td className="px-5 py-4 font-sans text-sm text-primary font-medium">{j.title}</td>
                   <td className="px-5 py-4 font-sans text-xs text-primary/60">{j.department}</td>
                   <td className="px-5 py-4 font-sans text-xs text-primary/60">{j.employment_type}</td>
                   <td className="px-5 py-4 font-sans text-xs text-primary/60">{new Date(j.deadline).toLocaleDateString("en-GB")}</td>
                   <td className="px-5 py-4">
-                    <span className={`font-sans text-[10px] tracking-widest uppercase px-2 py-0.5 border ${j.status === "active" ? "text-green-400 border-green-400/20 bg-green-400/5" : "text-gray-400 border-gray-400/20"}`}>
+                    <span className={`font-sans text-xs tracking-widest uppercase px-2 py-0.5 border ${j.status === "active" ? "text-green-400 border-green-400/20 bg-green-400/5" : "text-gray-400 border-gray-400/20"}`}>
                       {j.status}
                     </span>
                   </td>
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
-                      <a href={`/careers/${j.slug}`} target="_blank" className="text-primary/40 hover:text-secondary transition-colors" title="Preview">
+                      <a href={`/careers/${j.slug}`} target="_blank" className="text-primary/65 hover:text-secondary transition-colors" title="Preview">
                         <Eye className="w-4 h-4" />
                       </a>
-                      <button onClick={() => openEdit(j)} className="text-primary/40 hover:text-secondary transition-colors" title="Edit">
+                      <button onClick={() => openEdit(j)} className="text-primary/65 hover:text-secondary transition-colors" title="Edit">
                         <Edit2 className="w-4 h-4" />
                       </button>
-                      <button onClick={() => del(j.id)} disabled={deleting === j.id} className="text-primary/40 hover:text-red-400 transition-colors disabled:opacity-30" title="Delete">
+                      <button onClick={() => del(j.id)} disabled={deleting === j.id} className="text-primary/65 hover:text-red-400 transition-colors disabled:opacity-30" title="Delete">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
@@ -168,38 +168,38 @@ export default function AdminCareers() {
           <div className="bg-background border border-primary/15 w-full max-w-2xl my-8">
             <div className="flex items-center justify-between px-6 py-4 border-b border-primary/10">
               <h2 className="font-serif text-xl text-primary">{editing ? "Edit Job" : "New Job Posting"}</h2>
-              <button onClick={() => setModal(false)} className="text-primary/40 hover:text-primary"><X className="w-5 h-5" /></button>
+              <button onClick={() => setModal(false)} className="text-primary/65 hover:text-primary"><X className="w-5 h-5" /></button>
             </div>
             <div className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {([["title", "Job Title"], ["location", "Location"]] as const).map(([k, l]) => (
                   <div key={k}>
-                    <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">{l} *</label>
+                    <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">{l} *</label>
                     <input required value={form[k]} onChange={setField(k)} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                   </div>
                 ))}
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Department</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Department</label>
                   <select value={form.department} onChange={setField("department")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     {DEPTS.map((d) => <option key={d}>{d}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Employment Type</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Employment Type</label>
                   <select value={form.employment_type} onChange={setField("employment_type")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     {TYPES.map((t) => <option key={t}>{t}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Deadline *</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Deadline *</label>
                   <input type="date" value={form.deadline} onChange={setField("deadline")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Salary (Optional)</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Salary (Optional)</label>
                   <input value={form.salary} onChange={setField("salary")} placeholder="e.g. Competitive / $X per month" className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Status</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Status</label>
                   <select value={form.status} onChange={setField("status")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
@@ -210,7 +210,7 @@ export default function AdminCareers() {
                 const labels: Record<string, string> = { description: "Job Description", responsibilities: "Responsibilities (one per line)", requirements: "Requirements (one per line)", preferred: "Preferred Qualifications", benefits: "Benefits" };
                 return (
                   <div key={k}>
-                    <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">{labels[k]}</label>
+                    <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">{labels[k]}</label>
                     <textarea rows={4} value={form[k]} onChange={setField(k)} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
                   </div>
                 );

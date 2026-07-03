@@ -117,7 +117,7 @@ export default function EmployeeDocuments() {
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <p className="font-sans text-sm text-white font-medium">{d.name}</p>
-                    <span className={`font-sans text-[9px] uppercase tracking-widest px-2 py-0.5 border rounded ${STATUS_COLORS[d.status] || STATUS_COLORS.pending}`}>{d.status}</span>
+                    <span className={`font-sans text-xs uppercase tracking-widest px-2 py-0.5 border rounded ${STATUS_COLORS[d.status] || STATUS_COLORS.pending}`}>{d.status}</span>
                   </div>
                   <p className="font-sans text-xs text-white/40">{d.category} · {new Date(d.created_at).toLocaleDateString()}</p>
                   {d.description && <p className="font-sans text-xs text-white/50 mt-1">{d.description}</p>}

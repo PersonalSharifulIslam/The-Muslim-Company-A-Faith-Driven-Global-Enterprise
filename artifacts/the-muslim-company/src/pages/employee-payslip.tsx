@@ -60,7 +60,7 @@ export default function EmployeePayslip() {
         <p className="font-sans text-xs text-white/40 mb-6">Your salary history and payslip records.</p>
 
         <div className="bg-white/[0.03] border border-white/10 rounded-lg p-5 mb-6">
-          <p className="font-sans text-[10px] uppercase tracking-widest text-white/30">Total Paid (All Time)</p>
+          <p className="font-sans text-xs uppercase tracking-widest text-white/30">Total Paid (All Time)</p>
           <p className="font-serif text-3xl text-[#b08d57] mt-1">৳{totalEarnedYTD.toLocaleString()}</p>
         </div>
 
@@ -81,17 +81,17 @@ export default function EmployeePayslip() {
                     <p className="font-sans text-xs text-white/40">Net: ৳{Number(s.net_salary).toLocaleString()}</p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className={`font-sans text-[10px] uppercase tracking-widest px-2 py-1 border rounded ${STATUS_COLORS[s.status]}`}>{s.status}</span>
+                    <span className={`font-sans text-xs uppercase tracking-widest px-2 py-1 border rounded ${STATUS_COLORS[s.status]}`}>{s.status}</span>
                     {expanded === s.id ? <ChevronUp className="w-4 h-4 text-white/30" /> : <ChevronDown className="w-4 h-4 text-white/30" />}
                   </div>
                 </button>
                 {expanded === s.id && (
                   <div className="px-4 pb-4 pt-1 border-t border-white/5">
                     <div className="grid grid-cols-2 gap-3 mb-3">
-                      <div><p className="font-sans text-[10px] uppercase text-white/30">Basic Salary</p><p className="font-sans text-sm text-white">৳{Number(s.basic_salary).toLocaleString()}</p></div>
-                      <div><p className="font-sans text-[10px] uppercase text-white/30">Allowances</p><p className="font-sans text-sm text-green-400">+৳{Number(s.allowances || 0).toLocaleString()}</p></div>
-                      <div><p className="font-sans text-[10px] uppercase text-white/30">Deductions</p><p className="font-sans text-sm text-red-400">-৳{Number(s.deductions || 0).toLocaleString()}</p></div>
-                      <div><p className="font-sans text-[10px] uppercase text-white/30">Payment Method</p><p className="font-sans text-sm text-white capitalize">{(s.payment_method || "").replace(/_/g, " ")}</p></div>
+                      <div><p className="font-sans text-xs uppercase text-white/30">Basic Salary</p><p className="font-sans text-sm text-white">৳{Number(s.basic_salary).toLocaleString()}</p></div>
+                      <div><p className="font-sans text-xs uppercase text-white/30">Allowances</p><p className="font-sans text-sm text-green-400">+৳{Number(s.allowances || 0).toLocaleString()}</p></div>
+                      <div><p className="font-sans text-xs uppercase text-white/30">Deductions</p><p className="font-sans text-sm text-red-400">-৳{Number(s.deductions || 0).toLocaleString()}</p></div>
+                      <div><p className="font-sans text-xs uppercase text-white/30">Payment Method</p><p className="font-sans text-sm text-white capitalize">{(s.payment_method || "").replace(/_/g, " ")}</p></div>
                     </div>
                     {s.notes && <p className="font-sans text-xs text-white/40 mb-3">{s.notes}</p>}
                     <button onClick={() => downloadPayslip(s)}

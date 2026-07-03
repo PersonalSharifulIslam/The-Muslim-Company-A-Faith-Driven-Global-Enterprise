@@ -57,22 +57,22 @@ export default function AdminHolidays() {
         {showForm && (
           <form onSubmit={handleSave} className="mb-6 p-6 border border-secondary/30 bg-card grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Title *</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Title *</label>
               <input required value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
             </div>
             <div>
-              <label className="font-sans text-xs text-primary/50 mb-1 block">From Date *</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">From Date *</label>
               <input required type="date" value={form.date} onChange={e => setForm(f => ({ ...f, date: e.target.value, end_date: f.end_date && f.end_date < e.target.value ? e.target.value : f.end_date }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
             </div>
             <div>
-              <label className="font-sans text-xs text-primary/50 mb-1 block">To Date (optional — for multi-day holidays like Eid)</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">To Date (optional — for multi-day holidays like Eid)</label>
               <input type="date" min={form.date} value={form.end_date} onChange={e => setForm(f => ({ ...f, end_date: e.target.value }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
             </div>
             <div className="sm:col-span-2">
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Description</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Description</label>
               <input value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
             </div>
@@ -99,17 +99,17 @@ export default function AdminHolidays() {
             {holidays.map(h => (
               <div key={h.id} className="flex items-center justify-between p-4 border border-primary/10 bg-card">
                 <div className="flex items-center gap-3">
-                  {h.is_company_event ? <Building2 className="w-4 h-4 text-primary/40" /> : <Sparkles className="w-4 h-4 text-secondary/60" />}
+                  {h.is_company_event ? <Building2 className="w-4 h-4 text-primary/65" /> : <Sparkles className="w-4 h-4 text-secondary/60" />}
                   <div>
                     <p className="font-sans text-sm text-primary">{h.title}</p>
-                    <p className="font-sans text-xs text-primary/40">
+                    <p className="font-sans text-xs text-primary/65">
                       {h.end_date && h.end_date !== h.date
                         ? `${new Date(h.date).toLocaleDateString("en-US", { month: "long", day: "numeric" })} – ${new Date(h.end_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })} (${Math.round((new Date(h.end_date).getTime() - new Date(h.date).getTime()) / 86400000) + 1} days)`
                         : new Date(h.date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
                     </p>
                   </div>
                 </div>
-                <button onClick={() => handleDelete(h.id)} className="text-primary/40 hover:text-red-400"><Trash2 className="w-4 h-4" /></button>
+                <button onClick={() => handleDelete(h.id)} className="text-primary/65 hover:text-red-400"><Trash2 className="w-4 h-4" /></button>
               </div>
             ))}
           </div>

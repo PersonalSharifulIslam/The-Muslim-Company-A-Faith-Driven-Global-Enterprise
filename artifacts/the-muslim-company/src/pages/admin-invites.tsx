@@ -118,7 +118,7 @@ export default function AdminInvites() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="font-serif text-2xl text-primary flex items-center gap-2"><Link2 className="w-6 h-6 text-secondary" /> Employee Invite Links</h1>
-            <p className="font-sans text-xs text-primary/50 mt-1">Generate a unique link, send it to a new hire — they fill their own details, you just approve.</p>
+            <p className="font-sans text-xs text-primary/65 mt-1">Generate a unique link, send it to a new hire — they fill their own details, you just approve.</p>
           </div>
           <button onClick={() => setShowForm(true)}
             className="flex items-center gap-2 bg-secondary text-primary font-sans text-xs uppercase tracking-widest h-9 px-4">
@@ -137,7 +137,7 @@ export default function AdminInvites() {
             <button key={s} onClick={() => setFilter(s)}
               className={`p-3 border rounded text-center transition-colors ${filter === s ? "border-secondary bg-secondary/5" : "border-primary/10 hover:border-primary/30"}`}>
               <p className="font-serif text-xl text-primary">{counts[s]}</p>
-              <p className="font-sans text-[9px] uppercase tracking-widest text-primary/40 capitalize">{s}</p>
+              <p className="font-sans text-xs uppercase tracking-widest text-primary/65 capitalize">{s}</p>
             </button>
           ))}
         </div>
@@ -147,19 +147,19 @@ export default function AdminInvites() {
             <h3 className="font-serif text-lg text-primary mb-4">Generate New Invite Link</h3>
             <form onSubmit={handleCreate} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Department *</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Department *</label>
                 <select value={form.department} onChange={e => setForm(f => ({ ...f, department: e.target.value }))} required
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                   {DEPTS.map(d => <option key={d} value={d}>{d}</option>)}
                 </select>
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Suggested Position</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Suggested Position</label>
                 <input type="text" value={form.position} onChange={e => setForm(f => ({ ...f, position: e.target.value }))} placeholder="e.g. Software Engineer"
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Access Level *</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Access Level *</label>
                 <select value={form.access_level} onChange={e => setForm(f => ({ ...f, access_level: e.target.value }))}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                   {ACCESS_LEVELS.map(a => <option key={a} value={a}>{ACCESS_LEVEL_LABELS[a]}</option>)}
@@ -185,7 +185,7 @@ export default function AdminInvites() {
             <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-12 text-primary/40 font-sans text-sm">No invites found</div>
+          <div className="text-center py-12 text-primary/65 font-sans text-sm">No invites found</div>
         ) : (
           <div className="space-y-3">
             {filtered.map(inv => {
@@ -196,12 +196,12 @@ export default function AdminInvites() {
                   <div className="flex items-start justify-between gap-4 mb-3">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1 flex-wrap">
-                        <span className={`font-sans text-[10px] uppercase tracking-widest px-2 py-0.5 border rounded ${STATUS_COLORS[displayStatus]}`}>{displayStatus}</span>
+                        <span className={`font-sans text-xs uppercase tracking-widest px-2 py-0.5 border rounded ${STATUS_COLORS[displayStatus]}`}>{displayStatus}</span>
                         <span className="font-sans text-sm text-primary">{inv.department}</span>
-                        <span className="font-sans text-[10px] text-primary/40">· {ACCESS_LEVEL_LABELS[inv.access_level]}</span>
+                        <span className="font-sans text-xs text-primary/65">· {ACCESS_LEVEL_LABELS[inv.access_level]}</span>
                       </div>
-                      {inv.position && <p className="font-sans text-xs text-primary/50">{inv.position}</p>}
-                      <p className="font-sans text-[10px] text-primary/30 mt-1 flex items-center gap-1">
+                      {inv.position && <p className="font-sans text-xs text-primary/65">{inv.position}</p>}
+                      <p className="font-sans text-xs text-primary/30 mt-1 flex items-center gap-1">
                         <Clock className="w-3 h-3" /> Expires {new Date(inv.expires_at).toLocaleDateString()}
                       </p>
                     </div>
@@ -213,7 +213,7 @@ export default function AdminInvites() {
                         </button>
                       )}
                       {(inv.status === "open" || inv.status === "rejected" || expired) && (
-                        <button onClick={() => handleDelete(inv.id)} className="text-primary/40 hover:text-red-400"><Trash2 className="w-4 h-4" /></button>
+                        <button onClick={() => handleDelete(inv.id)} className="text-primary/65 hover:text-red-400"><Trash2 className="w-4 h-4" /></button>
                       )}
                     </div>
                   </div>
@@ -221,13 +221,13 @@ export default function AdminInvites() {
                   {inv.status === "submitted" && (
                     <div className="mt-3 pt-3 border-t border-primary/10 space-y-3">
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                        <div><p className="font-sans text-[10px] uppercase text-primary/40">Name</p><p className="font-sans text-sm text-primary">{inv.submitted_name}</p></div>
-                        <div><p className="font-sans text-[10px] uppercase text-primary/40">Email</p><p className="font-sans text-sm text-primary">{inv.submitted_email}</p></div>
-                        <div><p className="font-sans text-[10px] uppercase text-primary/40">Phone</p><p className="font-sans text-sm text-primary">{inv.submitted_phone || "—"}</p></div>
-                        <div><p className="font-sans text-[10px] uppercase text-primary/40">Joining</p><p className="font-sans text-sm text-primary">{inv.submitted_joining_date}</p></div>
+                        <div><p className="font-sans text-xs uppercase text-primary/65">Name</p><p className="font-sans text-sm text-primary">{inv.submitted_name}</p></div>
+                        <div><p className="font-sans text-xs uppercase text-primary/65">Email</p><p className="font-sans text-sm text-primary">{inv.submitted_email}</p></div>
+                        <div><p className="font-sans text-xs uppercase text-primary/65">Phone</p><p className="font-sans text-sm text-primary">{inv.submitted_phone || "—"}</p></div>
+                        <div><p className="font-sans text-xs uppercase text-primary/65">Joining</p><p className="font-sans text-sm text-primary">{inv.submitted_joining_date}</p></div>
                       </div>
                       {inv.submitted_address && (
-                        <div><p className="font-sans text-[10px] uppercase text-primary/40">Address</p><p className="font-sans text-sm text-primary/70">{inv.submitted_address}</p></div>
+                        <div><p className="font-sans text-xs uppercase text-primary/65">Address</p><p className="font-sans text-sm text-primary/70">{inv.submitted_address}</p></div>
                       )}
                       <textarea value={reviewNote} onChange={e => setReviewNote(e.target.value)} placeholder="Optional note (visible in audit log)"
                         rows={2} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />

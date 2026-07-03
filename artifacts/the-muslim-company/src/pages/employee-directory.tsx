@@ -63,7 +63,7 @@ export default function EmployeeDirectory() {
                     <p className="font-sans text-xs text-white/40 truncate">{p.position}</p>
                   </div>
                 </div>
-                <p className="font-sans text-[10px] uppercase tracking-widest text-white/30 mb-2">{p.department}</p>
+                <p className="font-sans text-xs uppercase tracking-widest text-white/30 mb-2">{p.department}</p>
                 <div className="space-y-1">
                   {p.phone && (
                     <a href={`tel:${p.phone}`} className="flex items-center gap-1.5 font-sans text-xs text-white/60 hover:text-[#b08d57]">

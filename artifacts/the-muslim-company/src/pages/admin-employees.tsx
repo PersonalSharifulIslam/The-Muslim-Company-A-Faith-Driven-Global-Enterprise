@@ -233,7 +233,7 @@ export default function AdminEmployees() {
         <motion.div variants={fade} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
             <h1 className="font-serif text-3xl text-primary mb-1">Employee Management</h1>
-            <p className="font-sans text-sm text-primary/50">{employees.length} employee{employees.length !== 1 ? "s" : ""} registered</p>
+            <p className="font-sans text-sm text-primary/65">{employees.length} employee{employees.length !== 1 ? "s" : ""} registered</p>
           </div>
           <Button onClick={openCreate} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none font-sans text-xs font-bold tracking-widest uppercase h-9 px-5 gap-2">
             <Plus className="w-3.5 h-3.5" /> Add Employee
@@ -255,7 +255,7 @@ export default function AdminEmployees() {
           {[["Total", employees.length, "text-primary"], ["Active", employees.filter((e) => e.status === "active").length, "text-green-600"], ["Inactive", employees.filter((e) => e.status !== "active").length, "text-red-500"]].map(([label, val, color]) => (
             <div key={label as string} className="bg-card border border-primary/10 p-5 text-center">
               <p className={`font-serif text-3xl font-bold ${color}`}>{val}</p>
-              <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mt-1">{label}</p>
+              <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mt-1">{label}</p>
             </div>
           ))}
         </motion.div>
@@ -268,50 +268,50 @@ export default function AdminEmployees() {
         {showForm && (
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="bg-card border border-primary/15 p-6 mb-6">
             <div className="flex items-center justify-between mb-5">
-              <p className="font-sans text-xs tracking-widest uppercase text-primary/50 flex items-center gap-2"><Users className="w-3.5 h-3.5" />{editing ? "Edit Employee" : "New Employee"}</p>
+              <p className="font-sans text-xs tracking-widest uppercase text-primary/65 flex items-center gap-2"><Users className="w-3.5 h-3.5" />{editing ? "Edit Employee" : "New Employee"}</p>
               <button onClick={() => setShowForm(false)} className="text-primary/30 hover:text-primary"><X className="w-4 h-4" /></button>
             </div>
             <form onSubmit={handleSave} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {([["Full Name", "name", "text", true], ["Employee ID", "employee_id", "text", true], ["Email Address", "email", "email", true], ["Password", "password", "password", !editing], ["Phone Number", "phone", "tel", false], ["Position / Title", "position", "text", false]] as const).map(([label, field, type, req]) => (
                   <div key={field}>
-                    <label className="font-sans text-[10px] tracking-widest uppercase text-primary/40 block mb-1.5">{label}{req ? " *" : ""}</label>
+                    <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-1.5">{label}{req ? " *" : ""}</label>
                     <input type={type} required={req} value={form[field]} onChange={(e) => setForm((f) => ({ ...f, [field]: e.target.value }))}
                       placeholder={field === "password" && editing ? "Leave blank to keep current" : ""}
                       className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary placeholder:text-primary/25" />
                   </div>
                 ))}
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/40 block mb-1.5">Department *</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-1.5">Department *</label>
                   <select value={form.department} onChange={(e) => setForm((f) => ({ ...f, department: e.target.value }))} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     {DEPTS.map((d) => <option key={d}>{d}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/40 block mb-1.5">Role / Title *</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-1.5">Role / Title *</label>
                   <select value={form.role} onChange={(e) => setForm((f) => ({ ...f, role: e.target.value }))} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     {ROLES.map((r) => <option key={r} className="capitalize">{r}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/40 block mb-1.5">Admin Access Level *</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-1.5">Admin Access Level *</label>
                   <select value={form.access_level} onChange={(e) => setForm((f) => ({ ...f, access_level: e.target.value }))} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     {ACCESS_LEVELS.map((a) => <option key={a} value={a}>{ACCESS_LEVEL_LABELS[a]}</option>)}
                   </select>
-                  <p className="font-sans text-[9px] text-primary/30 mt-1">Controls what this person can see/do in the admin panel. Most staff should stay "Employee".</p>
+                  <p className="font-sans text-xs text-primary/30 mt-1">Controls what this person can see/do in the admin panel. Most staff should stay "Employee".</p>
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/40 block mb-1.5">Joining Date</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-1.5">Joining Date</label>
                   <input type="date" value={form.joining_date} onChange={(e) => setForm((f) => ({ ...f, joining_date: e.target.value }))}
                     className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
               </div>
 
-              <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 pt-3 border-t border-primary/10">Bank Details (for Payroll)</p>
+              <p className="font-sans text-xs tracking-widest uppercase text-primary/65 pt-3 border-t border-primary/10">Bank Details (for Payroll)</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {([["Bank Name", "bank_name"], ["Account Holder Name", "bank_account_name"], ["Account Number", "bank_account_number"], ["Branch", "bank_branch"], ["Routing / Swift Number", "bank_routing_number"]] as const).map(([label, field]) => (
                   <div key={field}>
-                    <label className="font-sans text-[10px] tracking-widest uppercase text-primary/40 block mb-1.5">{label}</label>
+                    <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-1.5">{label}</label>
                     <input type="text" value={form[field]} onChange={(e) => setForm((f) => ({ ...f, [field]: e.target.value }))}
                       className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                   </div>
@@ -322,7 +322,7 @@ export default function AdminEmployees() {
                 <Button type="submit" disabled={saving} className="h-9 bg-secondary text-primary hover:bg-secondary/90 rounded-none font-sans text-xs font-bold tracking-widest uppercase disabled:opacity-50">
                   {saving ? "Saving..." : editing ? "Save Changes" : "Create Employee"}
                 </Button>
-                <Button type="button" onClick={() => setShowForm(false)} variant="outline" className="h-9 border-primary/20 text-primary/50 rounded-none font-sans text-xs tracking-widest uppercase">Cancel</Button>
+                <Button type="button" onClick={() => setShowForm(false)} variant="outline" className="h-9 border-primary/20 text-primary/65 rounded-none font-sans text-xs tracking-widest uppercase">Cancel</Button>
               </div>
             </form>
           </motion.div>
@@ -330,14 +330,14 @@ export default function AdminEmployees() {
 
         {resetId !== null && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-card border border-secondary/30 p-5 mb-6">
-            <p className="font-sans text-xs tracking-widest uppercase text-primary/50 mb-3 flex items-center gap-2"><Key className="w-3.5 h-3.5" /> Reset Password</p>
+            <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-3 flex items-center gap-2"><Key className="w-3.5 h-3.5" /> Reset Password</p>
             <div className="flex gap-3">
               <input type="password" placeholder="New password (min 8 chars)" value={resetPw} onChange={(e) => setResetPw(e.target.value)}
                 className="flex-1 h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               <Button onClick={() => handleResetPw(resetId)} disabled={saving} className="h-10 bg-secondary text-primary rounded-none font-sans text-xs font-bold tracking-widest uppercase px-5 disabled:opacity-50">
                 {saving ? "..." : "Reset"}
               </Button>
-              <Button onClick={() => { setResetId(null); setResetPw(""); }} variant="outline" className="h-10 border-primary/20 text-primary/50 rounded-none font-sans text-xs tracking-widest uppercase">Cancel</Button>
+              <Button onClick={() => { setResetId(null); setResetPw(""); }} variant="outline" className="h-10 border-primary/20 text-primary/65 rounded-none font-sans text-xs tracking-widest uppercase">Cancel</Button>
             </div>
           </motion.div>
         )}
@@ -348,7 +348,7 @@ export default function AdminEmployees() {
               <thead>
                 <tr className="border-b border-primary/10 bg-primary/3">
                   {["Employee ID", "Name", "Department", "Role", "Access Level", "Phone", "Joined", "Status", "Actions"].map((h) => (
-                    <th key={h} className="px-4 py-3 text-left font-sans text-[9px] tracking-widest uppercase text-primary/30">{h}</th>
+                    <th key={h} className="px-4 py-3 text-left font-sans text-xs tracking-widest uppercase text-primary/30">{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -362,19 +362,19 @@ export default function AdminEmployees() {
                     <td className="px-4 py-3 font-mono text-xs text-secondary font-bold">{e.employee_id}</td>
                     <td className="px-4 py-3">
                       <p className="font-sans text-sm text-primary font-medium">{e.name}</p>
-                      <p className="font-sans text-[10px] text-primary/40">{e.email}</p>
+                      <p className="font-sans text-xs text-primary/65">{e.email}</p>
                     </td>
                     <td className="px-4 py-3 font-sans text-xs text-primary/60">{e.department}</td>
                     <td className="px-4 py-3">
-                      <span className={`font-sans text-[9px] px-2 py-0.5 font-bold uppercase tracking-wide ${ROLE_COLORS[e.role] || "bg-white/5 text-white/40"}`}>{e.role}</span>
+                      <span className={`font-sans text-xs px-2 py-0.5 font-bold uppercase tracking-wide ${ROLE_COLORS[e.role] || "bg-white/5 text-white/40"}`}>{e.role}</span>
                     </td>
                     <td className="px-4 py-3">
-                      <span className={`font-sans text-[9px] px-2 py-0.5 font-bold uppercase tracking-wide ${ACCESS_LEVEL_COLORS[e.access_level || "employee"]}`}>{ACCESS_LEVEL_LABELS[e.access_level || "employee"]}</span>
+                      <span className={`font-sans text-xs px-2 py-0.5 font-bold uppercase tracking-wide ${ACCESS_LEVEL_COLORS[e.access_level || "employee"]}`}>{ACCESS_LEVEL_LABELS[e.access_level || "employee"]}</span>
                     </td>
-                    <td className="px-4 py-3 font-sans text-xs text-primary/50">{e.phone || "—"}</td>
-                    <td className="px-4 py-3 font-sans text-xs text-primary/50">{e.joining_date ? new Date(e.joining_date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "—"}</td>
+                    <td className="px-4 py-3 font-sans text-xs text-primary/65">{e.phone || "—"}</td>
+                    <td className="px-4 py-3 font-sans text-xs text-primary/65">{e.joining_date ? new Date(e.joining_date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "—"}</td>
                     <td className="px-4 py-3">
-                      <span className={`font-sans text-[9px] px-2 py-0.5 font-bold uppercase tracking-widest ${e.status === "active" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-600"}`}>{e.status}</span>
+                      <span className={`font-sans text-xs px-2 py-0.5 font-bold uppercase tracking-widest ${e.status === "active" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-600"}`}>{e.status}</span>
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
@@ -399,15 +399,15 @@ export default function AdminEmployees() {
           <div className="bg-card border border-primary/15 w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded" onClick={e => e.stopPropagation()}>
             <div className="flex items-center justify-between px-6 py-4 border-b border-primary/10">
               <h2 className="font-serif text-lg text-primary">Bulk Import Employees (CSV)</h2>
-              <button onClick={() => setShowBulk(false)} className="text-primary/40 hover:text-primary"><X className="w-5 h-5" /></button>
+              <button onClick={() => setShowBulk(false)} className="text-primary/65 hover:text-primary"><X className="w-5 h-5" /></button>
             </div>
             <div className="p-6 space-y-4">
               <div className="bg-background border border-primary/10 p-4 rounded">
-                <p className="font-sans text-xs text-primary/50 mb-2">CSV must have these column headers (in any order):</p>
-                <code className="font-mono text-[11px] text-secondary block bg-primary/5 p-2 rounded overflow-x-auto">
+                <p className="font-sans text-xs text-primary/65 mb-2">CSV must have these column headers (in any order):</p>
+                <code className="font-mono text-xs text-secondary block bg-primary/5 p-2 rounded overflow-x-auto">
                   name,email,password,department,position,phone,address,joining_date,access_level
                 </code>
-                <p className="font-sans text-[10px] text-primary/30 mt-2">access_level is optional (defaults to "employee"). employee_id is auto-generated.</p>
+                <p className="font-sans text-xs text-primary/30 mt-2">access_level is optional (defaults to "employee"). employee_id is auto-generated.</p>
               </div>
 
               <input type="file" accept=".csv" onChange={e => e.target.files?.[0] && handleCsvFile(e.target.files[0])}
@@ -418,7 +418,7 @@ export default function AdminEmployees() {
                   <p className="font-sans text-xs text-primary/60">{bulkRows.length} row(s) ready to import</p>
                   <div className="overflow-x-auto border border-primary/10 rounded max-h-48">
                     <table className="w-full font-sans text-xs">
-                      <thead><tr className="border-b border-primary/10">{Object.keys(bulkRows[0]).map(h => <th key={h} className="text-left px-3 py-2 text-primary/40">{h}</th>)}</tr></thead>
+                      <thead><tr className="border-b border-primary/10">{Object.keys(bulkRows[0]).map(h => <th key={h} className="text-left px-3 py-2 text-primary/65">{h}</th>)}</tr></thead>
                       <tbody>
                         {bulkRows.slice(0, 10).map((r, i) => (
                           <tr key={i} className="border-b border-primary/5">

@@ -211,7 +211,7 @@ export default function ContactPage() {
                     <h3 className="font-serif text-lg text-primary group-hover:text-secondary transition-colors">{type.label}</h3>
                     <ArrowUpRight className="w-4 h-4 text-primary/20 group-hover:text-secondary transition-colors flex-shrink-0 mt-1" />
                   </div>
-                  <p className="font-sans text-xs text-primary/55 leading-relaxed mb-3">{type.desc}</p>
+                  <p className="font-sans text-xs text-primary/65 leading-relaxed mb-3">{type.desc}</p>
                   <p className="font-sans text-xs text-secondary/70 tracking-wide">{type.email}</p>
                 </motion.button>
               ))}
@@ -249,22 +249,22 @@ export default function ContactPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="p-6 bg-card border border-primary/10">
                   <Building2 className="w-5 h-5 text-secondary mb-3" />
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1">Legal Name</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-1">Legal Name</p>
                   <p className="font-sans text-sm text-primary/80">The Muslim Company LTD</p>
                 </div>
                 <div className="p-6 bg-card border border-primary/10">
                   <MapPin className="w-5 h-5 text-secondary mb-3" />
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1">Headquarters</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-1">Headquarters</p>
                   <p className="font-sans text-sm text-primary/80">Dhaka, Bangladesh</p>
                 </div>
                 <div className="p-6 bg-card border border-primary/10">
                   <Globe className="w-5 h-5 text-secondary mb-3" />
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1">Website</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-1">Website</p>
                   <a href="https://www.themuslim.company" className="font-sans text-sm text-primary/80 hover:text-secondary transition-colors underline-offset-2 hover:underline">themuslim.company</a>
                 </div>
                 <div className="p-6 bg-card border border-primary/10">
                   <Mail className="w-5 h-5 text-secondary mb-3" />
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1">General Email</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-1">General Email</p>
                   <p className="font-sans text-sm text-primary/80">help@themuslim.company</p>
                 </div>
               </div>
@@ -292,7 +292,7 @@ export default function ContactPage() {
                     className="py-4 px-5 border-b border-primary/10 flex justify-between items-center group hover:bg-background transition-colors"
                   >
                     <div>
-                      <p className="font-sans text-xs tracking-wide uppercase text-primary/40 mb-0.5">{item.dept}</p>
+                      <p className="font-sans text-xs tracking-wide uppercase text-primary/65 mb-0.5">{item.dept}</p>
                       <p className="font-serif text-base text-primary group-hover:text-secondary transition-colors">{item.email}</p>
                     </div>
                     <ArrowUpRight className="w-4 h-4 text-primary/20 group-hover:text-secondary transition-colors" />

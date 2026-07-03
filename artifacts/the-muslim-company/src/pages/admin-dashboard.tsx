@@ -229,7 +229,7 @@ export default function AdminDashboard() {
                     <div key={d.name} className="flex items-center gap-2 text-xs">
                       <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: PIE_COLORS[i % PIE_COLORS.length] }} />
                       <span className="text-primary/70 truncate">{d.name}</span>
-                      <span className="text-primary/40 ml-auto">{d.value}</span>
+                      <span className="text-primary/65 ml-auto">{d.value}</span>
                     </div>
                   ))}
                 </div>
@@ -276,14 +276,14 @@ export default function AdminDashboard() {
           <div className="bg-card border border-border w-full max-w-md rounded-xl shadow-2xl" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between px-6 py-4 border-b border-border">
               <h3 className="font-serif text-lg text-primary flex items-center gap-2"><Megaphone className="w-5 h-5 text-secondary" /> Broadcast Announcement</h3>
-              <button onClick={() => setBroadcastOpen(false)} className="text-primary/40 hover:text-primary"><X className="w-5 h-5" /></button>
+              <button onClick={() => setBroadcastOpen(false)} className="text-primary/65 hover:text-primary"><X className="w-5 h-5" /></button>
             </div>
             <div className="p-6 space-y-4">
               {bcResult ? (
                 <div className="p-3 bg-green-400/10 text-green-400 rounded font-sans text-sm">{bcResult}</div>
               ) : null}
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Send To</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Send To</label>
                 <select value={bcDept} onChange={(e) => setBcDept(e.target.value)}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                   <option value="all">All Employees</option>
@@ -291,12 +291,12 @@ export default function AdminDashboard() {
                 </select>
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Title *</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Title *</label>
                 <input value={bcTitle} onChange={(e) => setBcTitle(e.target.value)} placeholder="e.g. Office closed for Eid"
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Message *</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Message *</label>
                 <textarea value={bcMessage} onChange={(e) => setBcMessage(e.target.value)} rows={4}
                   className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
               </div>

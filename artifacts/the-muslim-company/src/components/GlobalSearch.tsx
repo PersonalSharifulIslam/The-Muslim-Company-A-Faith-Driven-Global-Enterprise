@@ -69,7 +69,7 @@ export default function GlobalSearch() {
           {searching ? (
             <div className="p-4 flex justify-center"><Loader2 className="w-4 h-4 text-secondary animate-spin" /></div>
           ) : results.length === 0 ? (
-            <p className="p-4 font-sans text-xs text-primary/40 text-center">No results found</p>
+            <p className="p-4 font-sans text-xs text-primary/65 text-center">No results found</p>
           ) : (
             results.map((r, i) => {
               const Icon = ICONS[r.type];
@@ -79,7 +79,7 @@ export default function GlobalSearch() {
                   <Icon className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
                   <div className="min-w-0">
                     <p className="font-sans text-xs text-primary truncate">{r.title}</p>
-                    <p className="font-sans text-[10px] text-primary/40 truncate">{r.subtitle}</p>
+                    <p className="font-sans text-xs text-primary/65 truncate">{r.subtitle}</p>
                   </div>
                 </Link>
               );

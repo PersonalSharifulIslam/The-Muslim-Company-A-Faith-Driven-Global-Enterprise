@@ -61,7 +61,7 @@ export default function AdminDocuments() {
           <FileText className="w-6 h-6 text-secondary" />
           <h1 className="font-serif text-2xl text-primary">Document Review</h1>
         </div>
-        <p className="font-sans text-xs text-primary/50 mb-6">Review and approve documents submitted by employees (NID, contracts, certificates, etc.)</p>
+        <p className="font-sans text-xs text-primary/65 mb-6">Review and approve documents submitted by employees (NID, contracts, certificates, etc.)</p>
 
         {msg && (
           <div className={`mb-4 p-3 flex items-center gap-2 font-sans text-sm rounded ${msg.type === "ok" ? "bg-green-400/10 text-green-400" : "bg-red-400/10 text-red-400"}`}>
@@ -74,7 +74,7 @@ export default function AdminDocuments() {
             <button key={s} onClick={() => setFilter(s)}
               className={`p-3 border rounded text-center transition-colors ${filter === s ? "border-secondary bg-secondary/5" : "border-primary/10 hover:border-primary/30"}`}>
               <p className="font-serif text-xl text-primary">{counts[s]}</p>
-              <p className="font-sans text-[9px] uppercase tracking-widest text-primary/40 capitalize">{s}</p>
+              <p className="font-sans text-xs uppercase tracking-widest text-primary/65 capitalize">{s}</p>
             </button>
           ))}
         </div>
@@ -85,7 +85,7 @@ export default function AdminDocuments() {
             <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-12 text-primary/40 font-sans text-sm">No documents found</div>
+          <div className="text-center py-12 text-primary/65 font-sans text-sm">No documents found</div>
         ) : (
           <div className="space-y-3">
             {filtered.map(d => (
@@ -94,12 +94,12 @@ export default function AdminDocuments() {
                   <div>
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-sans text-sm text-primary font-medium">{d.name}</span>
-                      <span className={`font-sans text-[10px] uppercase tracking-widest px-2 py-0.5 border rounded ${STATUS_COLORS[d.status]}`}>{d.status}</span>
+                      <span className={`font-sans text-xs uppercase tracking-widest px-2 py-0.5 border rounded ${STATUS_COLORS[d.status]}`}>{d.status}</span>
                     </div>
-                    <p className="font-sans text-xs text-primary/50">
+                    <p className="font-sans text-xs text-primary/65">
                       {d.employees?.name || d.employee_id} · {d.employees?.department} · {d.category}
                     </p>
-                    {d.description && <p className="font-sans text-xs text-primary/40 mt-1">{d.description}</p>}
+                    {d.description && <p className="font-sans text-xs text-primary/65 mt-1">{d.description}</p>}
                   </div>
                   <a href={d.file_url} target="_blank" rel="noopener noreferrer"
                     className="flex items-center gap-1.5 border border-primary/20 text-primary text-xs font-sans px-3 py-1.5 hover:border-secondary transition-colors flex-shrink-0">
@@ -122,7 +122,7 @@ export default function AdminDocuments() {
                             className="flex items-center gap-1.5 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 font-sans text-xs uppercase tracking-widest h-8 px-4 disabled:opacity-50">
                             <X className="w-3.5 h-3.5" /> Reject
                           </button>
-                          <button onClick={() => { setActiveId(null); setNote(""); }} className="text-primary/40 font-sans text-xs px-3">Cancel</button>
+                          <button onClick={() => { setActiveId(null); setNote(""); }} className="text-primary/65 font-sans text-xs px-3">Cancel</button>
                         </div>
                       </div>
                     ) : (
@@ -131,7 +131,7 @@ export default function AdminDocuments() {
                   </div>
                 )}
                 {d.status !== "pending" && d.review_note && (
-                  <p className="mt-2 font-sans text-xs text-primary/40">Note: {d.review_note}</p>
+                  <p className="mt-2 font-sans text-xs text-primary/65">Note: {d.review_note}</p>
                 )}
               </div>
             ))}

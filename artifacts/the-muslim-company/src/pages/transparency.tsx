@@ -188,12 +188,12 @@ export default function TransparencyPage() {
                         <FileText className="w-5 h-5 text-secondary" />
                       </div>
                       <div className="flex-1">
-                        <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/70 mb-1">
+                        <p className="font-sans text-xs tracking-widest uppercase text-secondary/70 mb-1">
                           {r.report_type.replace("_", "-")} · {r.period_label}
                         </p>
                         <h3 className="font-serif text-lg text-primary mb-1 group-hover:text-secondary transition-colors">{r.title}</h3>
-                        {r.description && <p className="font-sans text-xs text-primary/50 leading-relaxed mb-2">{r.description}</p>}
-                        <div className="flex items-center gap-1.5 font-sans text-[10px] text-primary/40">
+                        {r.description && <p className="font-sans text-xs text-primary/65 leading-relaxed mb-2">{r.description}</p>}
+                        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/65">
                           <Calendar className="w-3 h-3" />
                           {new Date(r.published_date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
                         </div>
@@ -204,7 +204,7 @@ export default function TransparencyPage() {
                 </div>
               ) : (
                 <div className="p-6 border border-primary/10 bg-background mb-6">
-                  <p className="font-sans text-xs tracking-widest uppercase text-primary/40 mb-4">Reports will include:</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-4">Reports will include:</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {[
                       "Revenue and expenditure summary",
@@ -229,7 +229,7 @@ export default function TransparencyPage() {
 
               <div className="p-5 border border-secondary/30 bg-secondary/5">
                 <p className="font-sans text-xs text-primary/60 leading-relaxed">
-                  <span className="text-secondary font-bold uppercase tracking-widest text-[10px]">Note — </span>
+                  <span className="text-secondary font-bold uppercase tracking-widest text-xs">Note — </span>
                   The Muslim Company was founded in January 2025 and is currently in its development and establishment phase. This page reflects our constitutional commitments and ethical framework that govern all reporting, published as reports become available.
                 </p>
               </div>
@@ -259,7 +259,7 @@ export default function TransparencyPage() {
                 <motion.div key={i} variants={fadeIn} className="p-6 border border-primary/10 bg-card">
                   <div className="text-secondary mb-4">{item.icon}</div>
                   <h3 className="font-serif text-lg text-primary mb-2">{item.title}</h3>
-                  <p className="font-sans text-xs text-primary/55 leading-relaxed">{item.desc}</p>
+                  <p className="font-sans text-xs text-primary/65 leading-relaxed">{item.desc}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -287,7 +287,7 @@ export default function TransparencyPage() {
                   </div>
                 ))}
               </div>
-              <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/40 mb-4">Charitable causes include:</p>
+              <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-4">Charitable causes include:</p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {[
                   "Mosques & Madrasas", "Education Scholarships", "Healthcare Support", "Orphan Care",
@@ -313,7 +313,7 @@ export default function TransparencyPage() {
               </p>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
-                  <p className="font-sans text-xs tracking-widest uppercase text-primary/40 mb-4">What We Practice</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-4">What We Practice</p>
                   <div className="space-y-3">
                     {[
                       "Profit-and-loss sharing as the foundation of all investment",
@@ -333,7 +333,7 @@ export default function TransparencyPage() {
                   </div>
                 </div>
                 <div>
-                  <p className="font-sans text-xs tracking-widest uppercase text-primary/40 mb-4">What We Prohibit</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-4">What We Prohibit</p>
                   <div className="space-y-3">
                     {[
                       "Riba (interest) in any form — buying, selling, or investing",
@@ -349,7 +349,7 @@ export default function TransparencyPage() {
                         <div className="w-4 h-4 flex items-center justify-center flex-shrink-0 mt-0.5">
                           <div className="w-2 h-0.5 bg-primary/30 rounded" />
                         </div>
-                        <p className="font-sans text-sm text-primary/50">{item}</p>
+                        <p className="font-sans text-sm text-primary/65">{item}</p>
                       </div>
                     ))}
                   </div>
@@ -413,7 +413,7 @@ export default function TransparencyPage() {
                 ].map((stat, i) => (
                   <div key={i} className="text-center p-5 border border-primary/10">
                     <p className="font-serif text-3xl text-secondary mb-1">{stat.value}</p>
-                    <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40">{stat.label}</p>
+                    <p className="font-sans text-xs tracking-widest uppercase text-primary/65">{stat.label}</p>
                   </div>
                 ))}
               </div>

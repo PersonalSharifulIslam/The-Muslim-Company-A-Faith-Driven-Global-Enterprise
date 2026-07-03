@@ -212,7 +212,7 @@ export default function AdminApplications() {
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <div>
           <h1 className="font-serif text-3xl text-primary mb-1">Applications</h1>
-          <p className="font-sans text-sm text-primary/50">{apps.length} total applications</p>
+          <p className="font-sans text-sm text-primary/65">{apps.length} total applications</p>
         </div>
         {selectedIds.length > 0 && (
           <div className="flex gap-2 flex-wrap items-center">
@@ -285,11 +285,11 @@ export default function AdminApplications() {
                   <button onClick={toggleSelectAll}>
                     {selectedIds.length === filtered.length && filtered.length > 0
                       ? <CheckSquare className="w-4 h-4 text-secondary" />
-                      : <Square className="w-4 h-4 text-primary-foreground/40" />}
+                      : <Square className="w-4 h-4 text-primary-foreground/55" />}
                   </button>
                 </th>
                 {["Name", "Position", "Job ID", "Reference", "Date", "Status", "Actions"].map((h) => (
-                  <th key={h} className="text-left font-sans text-[10px] tracking-widest uppercase px-4 py-4">{h}</th>
+                  <th key={h} className="text-left font-sans text-xs tracking-widest uppercase px-4 py-4">{h}</th>
                 ))}
               </tr>
             </thead>
@@ -302,11 +302,11 @@ export default function AdminApplications() {
                   </td>
                   <td className="px-4 py-4 font-sans text-sm text-primary">{a.name}</td>
                   <td className="px-4 py-4 font-sans text-xs text-primary/60">{a.job_title}</td>
-                  <td className="px-4 py-4 font-sans text-xs text-primary/50">#{a.job_id}</td>
-                  <td className="px-4 py-4 font-mono text-xs text-primary/50">{a.reference_number}</td>
-                  <td className="px-4 py-4 font-sans text-xs text-primary/50">{new Date(a.created_at).toLocaleDateString("en-GB")}</td>
+                  <td className="px-4 py-4 font-sans text-xs text-primary/65">#{a.job_id}</td>
+                  <td className="px-4 py-4 font-mono text-xs text-primary/65">{a.reference_number}</td>
+                  <td className="px-4 py-4 font-sans text-xs text-primary/65">{new Date(a.created_at).toLocaleDateString("en-GB")}</td>
                   <td className="px-4 py-4">
-                    <span className={`font-sans text-[10px] tracking-widest uppercase px-2 py-0.5 border ${STATUS_COLORS[a.status] || ''}`}>
+                    <span className={`font-sans text-xs tracking-widest uppercase px-2 py-0.5 border ${STATUS_COLORS[a.status] || ''}`}>
                       {STATUS_LABELS[a.status] || a.status}
                     </span>
                   </td>
@@ -435,7 +435,7 @@ export default function AdminApplications() {
                       rows={8}
                       className="w-full px-3 py-2 border border-gray-300 rounded font-sans text-sm text-gray-900 focus:outline-none focus:border-gray-500 resize-none"
                     />
-                    <p className="font-sans text-[11px] text-gray-400 mt-1">Sent using The Muslim Company's official branded email template.</p>
+                    <p className="font-sans text-xs text-gray-400 mt-1">Sent using The Muslim Company's official branded email template.</p>
                   </div>
                   <div className="flex gap-3 pt-2">
                     <button onClick={sendBulkCustomMessage}
@@ -462,12 +462,12 @@ export default function AdminApplications() {
             className="w-full max-w-lg bg-background h-full overflow-y-auto shadow-2xl">
             <div className="flex items-center justify-between px-6 py-4 border-b border-primary/10 sticky top-0 bg-background">
               <h2 className="font-serif text-lg text-primary">Application Details</h2>
-              <button onClick={() => setSelected(null)} className="text-primary/40 hover:text-primary"><X className="w-5 h-5" /></button>
+              <button onClick={() => setSelected(null)} className="text-primary/65 hover:text-primary"><X className="w-5 h-5" /></button>
             </div>
             <div className="p-6 space-y-5">
               <div className="bg-primary text-primary-foreground p-5">
                 <p className="font-mono text-sm text-secondary mb-1">{selected.reference_number}</p>
-                <p className="font-sans text-[10px] text-primary-foreground/40 tracking-widest uppercase">Reference Number</p>
+                <p className="font-sans text-xs text-primary-foreground/55 tracking-widest uppercase">Reference Number</p>
               </div>
               {[
                 { l: "Full Name", v: selected.name },
@@ -479,7 +479,7 @@ export default function AdminApplications() {
                 { l: "Applied On", v: new Date(selected.created_at).toLocaleDateString("en-GB", { dateStyle: "long" }) },
               ].map(({ l, v }) => (
                 <div key={l} className="border-b border-primary/8 pb-4">
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1">{l}</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-1">{l}</p>
                   <p className="font-sans text-sm text-primary">{v}</p>
                 </div>
               ))}
@@ -490,13 +490,13 @@ export default function AdminApplications() {
                 { l: "Cover Letter", v: selected.cover_letter },
               ].map(({ l, v }) => (
                 <div key={l}>
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-2">{l}</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-2">{l}</p>
                   <p className="font-sans text-sm text-primary/70 leading-relaxed whitespace-pre-line">{v}</p>
                 </div>
               ))}
               {selected.portfolio && (
                 <div>
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-2">Portfolio</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-2">Portfolio</p>
                   <a href={selected.portfolio} target="_blank" rel="noopener noreferrer"
                     className="flex items-center gap-2 font-sans text-sm text-secondary hover:underline">
                     {selected.portfolio} <ExternalLink className="w-3.5 h-3.5" />
@@ -514,7 +514,7 @@ export default function AdminApplications() {
               </Button>
               {selected.status === 'interview' && selected.interview_datetime && (
                 <div className="border border-blue-400/30 bg-blue-50/50 p-4">
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-blue-600 mb-3 flex items-center gap-2">
+                  <p className="font-sans text-xs tracking-widest uppercase text-blue-600 mb-3 flex items-center gap-2">
                     <Calendar className="w-3.5 h-3.5" /> Interview Scheduled
                   </p>
                   <p className="font-sans text-xs text-primary/70 mb-1"><strong>Date & Time:</strong> {new Date(selected.interview_datetime).toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}</p>
@@ -536,7 +536,7 @@ export default function AdminApplications() {
               )}
               {['interview', 'shortlisted'].includes(selected.status) && (
                 <div className="border border-secondary/30 bg-secondary/5 p-5">
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-3 flex items-center gap-2">
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-3 flex items-center gap-2">
                     <Send className="w-3.5 h-3.5" /> Send Job Offer
                   </p>
                   {offerSent ? (
@@ -547,7 +547,7 @@ export default function AdminApplications() {
                   ) : (
                     <>
                       <p className="font-sans text-xs text-primary/60 mb-3">Sends formal offer to <strong>{selected.email}</strong> with 72-hour window.</p>
-                      <div className="flex items-center gap-2 mb-4 text-primary/50">
+                      <div className="flex items-center gap-2 mb-4 text-primary/65">
                         <Clock className="w-3.5 h-3.5" />
                         <span className="font-sans text-xs">Auto-expires after 72 hours</span>
                       </div>
@@ -562,7 +562,7 @@ export default function AdminApplications() {
               )}
               {selected.status === 'joined' && selected.joining_date && (
                 <div className="border border-amber-400/30 bg-amber-50/40 p-5">
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-amber-700 mb-2 flex items-center gap-2">
+                  <p className="font-sans text-xs tracking-widest uppercase text-amber-700 mb-2 flex items-center gap-2">
                     <CheckSquare className="w-3.5 h-3.5" /> Joined The Muslim Company
                   </p>
                   <p className="font-sans text-sm text-primary/70 mb-4">
@@ -587,7 +587,7 @@ export default function AdminApplications() {
               )}
               {['offered', 'offer_accepted', 'hired'].includes(selected.status) && (
                 <div className="border border-amber-400/30 bg-amber-50/40 p-5">
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-amber-700 mb-3 flex items-center gap-2">
+                  <p className="font-sans text-xs tracking-widest uppercase text-amber-700 mb-3 flex items-center gap-2">
                     <CheckSquare className="w-3.5 h-3.5" /> Mark as Joined
                   </p>
                   {joinedConfirmed ? (
@@ -600,7 +600,7 @@ export default function AdminApplications() {
                       <p className="font-sans text-xs text-primary/60 mb-3">
                         Once all documents are verified in person and the candidate has physically joined, confirm the joining date below.
                       </p>
-                      <label className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1.5 block">Joining Date</label>
+                      <label className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-1.5 block">Joining Date</label>
                       <input type="date" value={joinDate} onChange={(e) => setJoinDate(e.target.value)}
                         className="w-full h-10 px-3 mb-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-amber-500" />
                       <Button onClick={() => markAsJoined(selected)} disabled={markingJoined || !joinDate}
@@ -613,12 +613,12 @@ export default function AdminApplications() {
                 </div>
               )}
               <div className="border-t border-primary/10 pt-5">
-                <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-3">Update Status</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-3">Update Status</p>
                 <div className="grid grid-cols-2 gap-2">
                   {ALL_STATUSES.map((s) => (
                     <button key={s} onClick={() => updateStatus(selected.id, s)}
                       disabled={updating || selected.status === s}
-                      className={`px-3 py-2 font-sans text-[10px] tracking-widest uppercase border transition-colors disabled:opacity-40 ${selected.status === s ? "bg-secondary text-primary border-secondary" : "border-primary/15 text-primary/50 hover:border-secondary/50"}`}>
+                      className={`px-3 py-2 font-sans text-xs tracking-widest uppercase border transition-colors disabled:opacity-40 ${selected.status === s ? "bg-secondary text-primary border-secondary" : "border-primary/15 text-primary/65 hover:border-secondary/50"}`}>
                       {STATUS_LABELS[s]}
                     </button>
                   ))}

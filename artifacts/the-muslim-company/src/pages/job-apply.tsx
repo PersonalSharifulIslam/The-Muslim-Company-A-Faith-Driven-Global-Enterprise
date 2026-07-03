@@ -300,23 +300,23 @@ export default function JobApply({ params }: { params: { slug: string } }) {
                 </div>
                 <p className="font-sans text-xs tracking-[0.3em] uppercase text-secondary mb-2">Alhamdulillah</p>
                 <h2 className="font-serif text-4xl text-primary mb-3">Application Submitted</h2>
-                <p className="font-sans text-sm text-primary/55 max-w-md mx-auto">Jazakallah Khair for applying. Our team will review your application carefully, In Sha Allah.</p>
+                <p className="font-sans text-sm text-primary/65 max-w-md mx-auto">Jazakallah Khair for applying. Our team will review your application carefully, In Sha Allah.</p>
               </div>
               <div className="bg-primary text-primary-foreground overflow-hidden mb-6">
                 <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
                   <div>
-                    <p className="font-sans text-[9px] tracking-[0.25em] uppercase text-secondary/60 mb-1">Reference Number</p>
+                    <p className="font-sans text-xs tracking-[0.25em] uppercase text-secondary/60 mb-1">Reference Number</p>
                     <p className="font-mono text-xl text-secondary font-bold tracking-wider">{submitted.ref}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-sans text-[9px] tracking-[0.25em] uppercase text-primary-foreground/40 mb-1">Submitted On</p>
+                    <p className="font-sans text-xs tracking-[0.25em] uppercase text-primary-foreground/55 mb-1">Submitted On</p>
                     <p className="font-sans text-sm text-primary-foreground/80">{submitted.date}</p>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-px bg-white/10">
                   {[["Position", submitted.job.title],["Job ID", `#${submitted.job.job_id}`],["Department", submitted.job.department],["Location", submitted.job.location],["Applicant", submitted.form.name],["Email", submitted.form.email]].map(([label, val]) => (
                     <div key={label} className="bg-primary px-6 py-3">
-                      <p className="font-sans text-[9px] tracking-widest uppercase text-primary-foreground/40 mb-0.5">{label}</p>
+                      <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-0.5">{label}</p>
                       <p className="font-sans text-sm text-primary-foreground truncate">{val}</p>
                     </div>
                   ))}
@@ -327,7 +327,7 @@ export default function JobApply({ params }: { params: { slug: string } }) {
                   <FileText className="w-5 h-5 text-secondary mt-0.5 shrink-0" />
                   <div>
                     <p className="font-sans text-sm font-semibold text-primary mb-1">Download Your Application Confirmation</p>
-                    <p className="font-sans text-xs text-primary/55 mb-4">A complete PDF summary of your application for your records.</p>
+                    <p className="font-sans text-xs text-primary/65 mb-4">A complete PDF summary of your application for your records.</p>
                     <Button onClick={handleDownloadPDF} disabled={pdfLoading} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans h-10 px-6 text-xs font-bold gap-2 disabled:opacity-60">
                       <Download className="w-3.5 h-3.5" />
                       {pdfLoading ? "Generating PDF..." : "Download PDF Confirmation"}
@@ -349,7 +349,7 @@ export default function JobApply({ params }: { params: { slug: string } }) {
     <SiteLayout>
       <div className="py-12 px-6 lg:px-12">
         <div className="container mx-auto max-w-3xl">
-          <a href={`/careers/${params.slug}`} className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary/50 hover:text-secondary transition-colors mb-8">
+          <a href={`/careers/${params.slug}`} className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary/65 hover:text-secondary transition-colors mb-8">
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Job Details
           </a>
           {loading ? (
@@ -364,13 +364,13 @@ export default function JobApply({ params }: { params: { slug: string } }) {
               <div className="mb-8 pb-6 border-b border-primary/10">
                 <p className="font-sans text-xs tracking-widest uppercase text-secondary mb-2">Apply Now</p>
                 <h1 className="font-serif text-3xl text-primary">{job.title}</h1>
-                <p className="font-sans text-sm text-primary/50 mt-1">Job ID: #{job.job_id} · {job.department} · {job.location}</p>
+                <p className="font-sans text-sm text-primary/65 mt-1">Job ID: #{job.job_id} · {job.department} · {job.location}</p>
               </div>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {([["name","Full Name",true],["email","Email Address",true],["phone","Phone Number",true],["address","Current Address",true]] as const).map(([field, label, req]) => (
                     <div key={field}>
-                      <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">{label}{req && " *"}</label>
+                      <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">{label}{req && " *"}</label>
                       <input type={field === "email" ? "email" : "text"} required={req} value={form[field]} onChange={set(field)} className="w-full h-11 px-4 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                     </div>
                   ))}
@@ -379,20 +379,20 @@ export default function JobApply({ params }: { params: { slug: string } }) {
                   const labels: Record<string, string> = { education: "Educational Background *", experience: "Work Experience *", skills: "Key Skills *", cover_letter: "Cover Letter *" };
                   return (
                     <div key={field}>
-                      <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">{labels[field]}</label>
+                      <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">{labels[field]}</label>
                       <textarea required rows={field === "cover_letter" ? 6 : 3} value={form[field]} onChange={set(field)} className="w-full px-4 py-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
                     </div>
                   );
                 })}
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Portfolio / LinkedIn (Optional)</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Portfolio / LinkedIn (Optional)</label>
                   <input type="text" value={form.portfolio} onChange={set("portfolio")} className="w-full h-11 px-4 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" placeholder="https://" />
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Upload CV (PDF or DOC)</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Upload CV (PDF or DOC)</label>
                   <label className="flex items-center gap-3 h-11 px-4 border border-dashed border-primary/20 cursor-pointer hover:border-secondary transition-colors">
-                    <Upload className="w-4 h-4 text-primary/40" />
-                    <span className="font-sans text-sm text-primary/40">{cvFile ? cvFile.name : "Click to upload..."}</span>
+                    <Upload className="w-4 h-4 text-primary/65" />
+                    <span className="font-sans text-sm text-primary/65">{cvFile ? cvFile.name : "Click to upload..."}</span>
                     <input type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={(e) => setCvFile(e.target.files?.[0] || null)} />
                   </label>
                 </div>
@@ -407,7 +407,7 @@ export default function JobApply({ params }: { params: { slug: string } }) {
                   <Button type="submit" disabled={submitting} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans h-11 px-8 text-xs font-bold disabled:opacity-50">
                     {submitting ? "Submitting..." : "Submit Application"}
                   </Button>
-                  <p className="font-sans text-xs text-primary/40 self-center">Your information is kept confidential.</p>
+                  <p className="font-sans text-xs text-primary/65 self-center">Your information is kept confidential.</p>
                 </div>
               </form>
             </motion.div>

@@ -60,7 +60,7 @@ function InlineQuote({ children, author, light = false }: { children: React.Reac
       <p className={`font-serif text-lg italic leading-relaxed ${light ? "text-primary-foreground/90" : "text-primary/80"}`}>
         "{children}"
       </p>
-      {author && <p className={`mt-3 font-sans text-xs tracking-widest uppercase ${light ? "text-secondary/70" : "text-primary/40"}`}>— {author}</p>}
+      {author && <p className={`mt-3 font-sans text-xs tracking-widest uppercase ${light ? "text-secondary/70" : "text-primary/65"}`}>— {author}</p>}
 
     </div>
   );
@@ -427,7 +427,7 @@ export default function Home() {
                 <div className="flex flex-col gap-6">
                   {NAV_COL1.map(group => (
                     <div key={group.title}>
-                      <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-secondary font-bold mb-2.5">
+                      <p className="font-sans text-xs tracking-[0.3em] uppercase text-secondary font-bold mb-2.5">
                         {group.title}
                       </p>
                       <div className="flex flex-col gap-2.5">
@@ -449,7 +449,7 @@ export default function Home() {
                 <div className="flex flex-col gap-6">
                   {NAV_COL2.map(group => (
                     <div key={group.title}>
-                      <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-secondary font-bold mb-2.5">
+                      <p className="font-sans text-xs tracking-[0.3em] uppercase text-secondary font-bold mb-2.5">
                         {group.title}
                       </p>
                       <div className="flex flex-col gap-2.5">
@@ -534,7 +534,7 @@ export default function Home() {
         </div>
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
           <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
-            <ChevronDown className="w-6 h-6 text-primary-foreground/40" />
+            <ChevronDown className="w-6 h-6 text-primary-foreground/55" />
           </motion.div>
         </div>
       </section>
@@ -639,7 +639,7 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {["Ethical Business Ecosystem", "Halal Economic Model", "Humanitarian Development Platform", "Knowledge & Research Revival", "Ethical Technology Ecosystem", "Transparent Institution", "Civilization-Focused Enterprise", "Environmental Stewardship"].map((v, i) => (
                 <div key={i} className="p-3 border border-secondary/20 text-center">
-                  <p className="font-sans text-[10px] tracking-wide uppercase text-primary-foreground/60">{v}</p>
+                  <p className="font-sans text-xs tracking-wide uppercase text-primary-foreground/60">{v}</p>
                 </div>
               ))}
             </div>
@@ -777,7 +777,7 @@ export default function Home() {
             </a>
           ))}
         </div>
-        <p className="font-sans text-sm text-primary/55 leading-relaxed max-w-2xl">
+        <p className="font-sans text-sm text-primary/65 leading-relaxed max-w-2xl">
           The company believes no beneficial and halal sector should remain outside ethical development. The goal is to build an integrated civilization-scale ecosystem where every domain of human life is guided by faith, justice, and responsibility.
         </p>
       </ExpandableSection>
@@ -804,8 +804,8 @@ export default function Home() {
             <Gavel className="w-6 h-6 text-secondary mb-3" />
             <h3 className="font-serif text-xl mb-3">Supreme Shariah Board</h3>
             <p className="font-sans text-sm text-primary-foreground/60 mb-4">The highest ethical authority. No major project, product, technology, investment, service, research, media activity, marketing campaign, financial structure, or partnership can begin without Board approval.</p>
-            <p className="font-sans text-xs text-primary-foreground/45 mb-3">Evaluates based on: Quran, Sahih Hadith, Ijma, Qiyas, scientific evidence, ethical reasoning, social impact, human welfare, environmental effect, and long-term civilization consequences.</p>
-            <p className="font-sans text-xs text-primary-foreground/45 italic">Even after approval, if future evidence proves harm, the Board may cancel approval, stop production, recall products, or shut down services.</p>
+            <p className="font-sans text-xs text-primary-foreground/55 mb-3">Evaluates based on: Quran, Sahih Hadith, Ijma, Qiyas, scientific evidence, ethical reasoning, social impact, human welfare, environmental effect, and long-term civilization consequences.</p>
+            <p className="font-sans text-xs text-primary-foreground/55 italic">Even after approval, if future evidence proves harm, the Board may cancel approval, stop production, recall products, or shut down services.</p>
           </div>
           <div className="p-6 bg-primary-foreground/5 border border-primary-foreground/10">
             <UserCheck className="w-6 h-6 text-secondary mb-3" />
@@ -849,7 +849,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p className="font-sans text-xs text-primary-foreground/45 italic mb-6">Nothing reaches the public without completing all three stages — no product, service, platform, infrastructure, technology, or partnership bypasses this pipeline.</p>
+          <p className="font-sans text-xs text-primary-foreground/55 italic mb-6">Nothing reaches the public without completing all three stages — no product, service, platform, infrastructure, technology, or partnership bypasses this pipeline.</p>
 
           <p className="font-sans text-xs tracking-widest uppercase text-secondary/70 font-bold mb-3">Beyond Pre-Launch Review</p>
           <Bullets light items={[
@@ -881,7 +881,7 @@ export default function Home() {
             ].map((s, i) => (
               <div key={i} className="text-center">
                 <p className="font-serif text-xl text-secondary">{s.v}</p>
-                <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mt-1">{s.l}</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mt-1">{s.l}</p>
               </div>
             ))}
           </div>
@@ -960,7 +960,7 @@ export default function Home() {
             <div key={i} className="p-5 bg-card border border-primary/10">
               <div className="text-secondary mb-3 w-5 h-5">{item.icon}</div>
               <h4 className="font-serif text-base text-primary mb-2">{item.title}</h4>
-              <p className="font-sans text-xs text-primary/55 leading-relaxed">{item.desc}</p>
+              <p className="font-sans text-xs text-primary/65 leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -999,7 +999,7 @@ export default function Home() {
             <h3 className="font-serif text-xl mb-3">Disaster Response & Relief</h3>
             <p className="font-sans text-sm text-primary-foreground/60 mb-4">An emergency response division may be established for:</p>
             <Bullets light items={["Floods & earthquakes", "Famines & drought response", "War-related humanitarian crises", "Refugee support", "Emergency food & medical aid", "Crisis price stability & fair distribution"]} />
-            <p className="font-sans text-xs italic text-primary-foreground/40 mt-4">Humanitarian assistance should remain organized, transparent, and dignity-focused.</p>
+            <p className="font-sans text-xs italic text-primary-foreground/55 mt-4">Humanitarian assistance should remain organized, transparent, and dignity-focused.</p>
           </div>
         </div>
 
@@ -1178,7 +1178,7 @@ export default function Home() {
           <h3 className="font-serif text-lg text-primary mb-4">Future of Humanity Research</h3>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
             {["AI civilization risks", "Global moral decline", "Mental health crises", "Family instability", "Water & food insecurity", "Economic injustice", "Digital addiction", "Spiritual emptiness", "Social fragmentation", "Human survival challenges"].map((item, i) => (
-              <div key={i} className="flex items-start gap-1.5 font-sans text-xs text-primary/55">
+              <div key={i} className="flex items-start gap-1.5 font-sans text-xs text-primary/65">
                 <div className="w-1 h-1 bg-secondary rounded-full mt-1.5 flex-shrink-0" />{item}
               </div>
             ))}
@@ -1267,7 +1267,7 @@ export default function Home() {
                 { l: "Role", v: "Founder & CEO" },
               ].map((r, i) => (
                 <div key={i}>
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40">{r.l}</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65">{r.l}</p>
                   <p className="font-sans text-sm text-primary/80">{r.v}</p>
                 </div>
               ))}
@@ -1336,7 +1336,7 @@ export default function Home() {
           <InlineQuote author="Shariful Islam">Allah is the owner of everything. Rizq, honor, power, and success come only from Allah.</InlineQuote>
           <InlineQuote author="Shariful Islam">True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.</InlineQuote>
 
-          <p className="font-sans text-sm text-primary/55 leading-relaxed">
+          <p className="font-sans text-sm text-primary/65 leading-relaxed">
             The Muslim Company does not claim perfection. The company will correct mistakes when discovered, accept truth when it becomes clear, protect ethics and justice, benefit humanity, and keep accountability and humility. The journey continues through tawakkul upon Allah, sincerity, halal effort, Prophetic ethics, and continuous striving for goodness. <span className="font-serif italic text-secondary">InshaAllah, as far as Allah allows.</span>
           </p>
         </div>
@@ -1354,7 +1354,7 @@ export default function Home() {
           >
             {["Faith and technology work together", "Business and morality remain connected", "Human development remains ethical", "Nature and civilization remain balanced", "Knowledge, justice, and compassion guide leadership", "Economic systems serve humanity rather than exploit it"].map((item, i) => (
               <motion.div key={i} variants={fadeIn} className="flex items-center gap-4">
-                <span className="font-sans text-[10px] text-secondary/50 w-6 flex-shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-sans text-xs text-secondary/50 w-6 flex-shrink-0">{String(i + 1).padStart(2, "0")}</span>
                 <p className="font-sans text-sm text-primary/70">{item}</p>
               </motion.div>
             ))}
@@ -1396,7 +1396,7 @@ export default function Home() {
             ].map((stat, i) => (
               <div key={i} className="text-center" data-testid={`stat-${i}`}>
                 <p className="font-serif text-3xl text-secondary mb-1">{stat.v}</p>
-                <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/65">{stat.l}</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/65">{stat.l}</p>
               </div>
             ))}
           </div>
@@ -1406,19 +1406,19 @@ export default function Home() {
               <p className="font-serif text-base text-primary-foreground/50 mb-1">The Muslim Company</p>
               <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
               <div className="flex items-center gap-4 mt-3">
-                <a href="https://www.facebook.com/TheMuslimCompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/30 hover:text-secondary transition-colors" aria-label="Facebook">
+                <a href="https://www.facebook.com/TheMuslimCompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/55 hover:text-secondary transition-colors" aria-label="Facebook">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                 </a>
-                <a href="https://www.instagram.com/officialTheMuslimCompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/30 hover:text-secondary transition-colors" aria-label="Instagram">
+                <a href="https://www.instagram.com/officialTheMuslimCompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/55 hover:text-secondary transition-colors" aria-label="Instagram">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path fill="none" stroke="currentColor" strokeWidth="2" d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line fill="none" stroke="currentColor" strokeWidth="2" x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                 </a>
-                <a href="https://www.youtube.com/@TheMuslimCompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/30 hover:text-secondary transition-colors" aria-label="YouTube">
+                <a href="https://www.youtube.com/@TheMuslimCompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/55 hover:text-secondary transition-colors" aria-label="YouTube">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon fill="none" stroke="currentColor" strokeWidth="2" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
                 </a>
-                <a href="https://www.linkedin.com/company/themuslimcompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/30 hover:text-secondary transition-colors" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/company/themuslimcompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/55 hover:text-secondary transition-colors" aria-label="LinkedIn">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                 </a>
-                <a href="https://x.com/officialtmchq" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/30 hover:text-secondary transition-colors" aria-label="X">
+                <a href="https://x.com/officialtmchq" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/55 hover:text-secondary transition-colors" aria-label="X">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </a>
               </div>
@@ -1460,7 +1460,7 @@ export default function Home() {
             >
               <button
                 onClick={() => setContactModal(null)}
-                className="absolute top-4 right-4 text-primary/40 hover:text-primary transition-colors"
+                className="absolute top-4 right-4 text-primary/65 hover:text-primary transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -1470,7 +1470,7 @@ export default function Home() {
               <h3 className="font-serif text-2xl text-primary mb-2">
                 {contactModal === "contact" ? "How can we help?" : "Let's work together"}
               </h3>
-              <p className="font-sans text-xs text-primary/40 mb-6">
+              <p className="font-sans text-xs text-primary/65 mb-6">
                 {contactModal === "contact" ? "help@themuslim.company" : "ceo@themuslim.company"}
               </p>
               <div className="space-y-2">

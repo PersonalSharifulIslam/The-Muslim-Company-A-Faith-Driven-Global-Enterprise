@@ -69,7 +69,7 @@ export default function AdminPerformance() {
         {showForm && (
           <form onSubmit={handleSave} className="mb-6 p-6 border border-secondary/30 bg-card grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Employee *</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Employee *</label>
               <select required value={form.employee_id} onChange={e => setForm(f => ({ ...f, employee_id: e.target.value }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                 <option value="">Select employee</option>
@@ -77,12 +77,12 @@ export default function AdminPerformance() {
               </select>
             </div>
             <div>
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Review Period *</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Review Period *</label>
               <input required placeholder="e.g. 2026-Q2" value={form.review_period} onChange={e => setForm(f => ({ ...f, review_period: e.target.value }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
             </div>
             <div className="sm:col-span-2">
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Overall Rating (1–5)</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Overall Rating (1–5)</label>
               <div className="flex gap-1">
                 {[1, 2, 3, 4, 5].map(n => (
                   <button key={n} type="button" onClick={() => setForm(f => ({ ...f, overall_rating: n }))}>
@@ -92,17 +92,17 @@ export default function AdminPerformance() {
               </div>
             </div>
             <div className="sm:col-span-2">
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Strengths</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Strengths</label>
               <textarea rows={2} value={form.strengths} onChange={e => setForm(f => ({ ...f, strengths: e.target.value }))}
                 className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
             </div>
             <div className="sm:col-span-2">
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Areas for Improvement</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Areas for Improvement</label>
               <textarea rows={2} value={form.areas_for_improvement} onChange={e => setForm(f => ({ ...f, areas_for_improvement: e.target.value }))}
                 className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
             </div>
             <div className="sm:col-span-2">
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Goals for Next Period</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Goals for Next Period</label>
               <textarea rows={2} value={form.goals_next_period} onChange={e => setForm(f => ({ ...f, goals_next_period: e.target.value }))}
                 className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
             </div>
@@ -118,7 +118,7 @@ export default function AdminPerformance() {
         {loading ? (
           <div className="flex justify-center py-12"><div style={{ width: 32, height: 32, border: "2px solid #b08d57", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} /><style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style></div>
         ) : reviews.length === 0 ? (
-          <p className="text-center py-12 text-primary/40 font-sans text-sm">No performance reviews yet</p>
+          <p className="text-center py-12 text-primary/65 font-sans text-sm">No performance reviews yet</p>
         ) : (
           <div className="space-y-3">
             {reviews.map(r => (
@@ -126,15 +126,15 @@ export default function AdminPerformance() {
                 <div className="flex items-start justify-between mb-2">
                   <div>
                     <p className="font-sans text-sm text-primary font-medium">{r.employees?.name || r.employee_id} — {r.review_period}</p>
-                    <p className="font-sans text-xs text-primary/40">{r.employees?.department}</p>
+                    <p className="font-sans text-xs text-primary/65">{r.employees?.department}</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="flex">{[1,2,3,4,5].map(n => <Star key={n} className={`w-3.5 h-3.5 ${n <= r.overall_rating ? "fill-secondary text-secondary" : "text-primary/15"}`} />)}</div>
-                    <span className={`font-sans text-[10px] uppercase tracking-widest px-2 py-0.5 rounded ${STATUS_COLORS[r.status]}`}>{r.status}</span>
+                    <span className={`font-sans text-xs uppercase tracking-widest px-2 py-0.5 rounded ${STATUS_COLORS[r.status]}`}>{r.status}</span>
                   </div>
                 </div>
-                {r.strengths && <p className="font-sans text-xs text-primary/60 mt-2"><span className="text-primary/40">Strengths: </span>{r.strengths}</p>}
-                {r.areas_for_improvement && <p className="font-sans text-xs text-primary/60 mt-1"><span className="text-primary/40">Improve: </span>{r.areas_for_improvement}</p>}
+                {r.strengths && <p className="font-sans text-xs text-primary/60 mt-2"><span className="text-primary/65">Strengths: </span>{r.strengths}</p>}
+                {r.areas_for_improvement && <p className="font-sans text-xs text-primary/60 mt-1"><span className="text-primary/65">Improve: </span>{r.areas_for_improvement}</p>}
                 {r.employee_comments && <p className="font-sans text-xs text-secondary/80 mt-2 italic">"{r.employee_comments}"</p>}
               </div>
             ))}

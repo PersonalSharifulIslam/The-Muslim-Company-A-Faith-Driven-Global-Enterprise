@@ -79,14 +79,14 @@ export default function EmployeeTasks() {
           {[["Total", tasks?.length, "text-white"], ["Pending", tasks?.filter((t) => t.status === "pending").length, "text-yellow-400"], ["In Progress", tasks?.filter((t) => t.status === "in_progress").length, "text-blue-400"], ["Completed", tasks?.filter((t) => t.status === "done").length, "text-green-400"]].map(([label, val, color]) => (
             <div key={label as string} className="bg-[#0f2314]/60 border border-[#b08d57]/15 p-4 text-center">
               <p className={`font-serif text-3xl font-bold ${color}`}>{val}</p>
-              <p className="font-sans text-[10px] tracking-widest uppercase text-white/30 mt-1">{label}</p>
+              <p className="font-sans text-xs tracking-widest uppercase text-white/30 mt-1">{label}</p>
             </div>
           ))}
         </motion.div>
 
         <motion.div variants={fade} className="flex gap-1">
           {STATUS_TABS.map((tab) => (
-            <button key={tab} onClick={() => setFilter(tab)} className={`font-sans text-[10px] tracking-widest uppercase px-4 py-2 transition-all ${filter === tab ? "bg-[#b08d57] text-black font-bold" : "text-white/40 hover:text-white hover:bg-white/5"}`}>
+            <button key={tab} onClick={() => setFilter(tab)} className={`font-sans text-xs tracking-widest uppercase px-4 py-2 transition-all ${filter === tab ? "bg-[#b08d57] text-black font-bold" : "text-white/40 hover:text-white hover:bg-white/5"}`}>
               {STATUS_LABELS[tab]}
             </button>
           ))}
@@ -104,10 +104,10 @@ export default function EmployeeTasks() {
                 <div className="flex-1">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
                     <h3 className="font-sans text-sm font-semibold text-white">{t.title}</h3>
-                    <span className={`font-sans text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 border ${PRIORITY[t.priority] || "text-white/30 border-white/10"}`}>{t.priority}</span>
+                    <span className={`font-sans text-xs font-bold uppercase tracking-widest px-2 py-0.5 border ${PRIORITY[t.priority] || "text-white/30 border-white/10"}`}>{t.priority}</span>
                   </div>
                   {t.description && <p className="font-sans text-xs text-white/40">{t.description}</p>}
-                  <div className="flex items-center gap-4 mt-2 text-[10px] font-sans text-white/45">
+                  <div className="flex items-center gap-4 mt-2 text-xs font-sans text-white/45">
                     {t.deadline && <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />Due: {new Date(t.deadline).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</span>}
                     <span>Assigned by: {t.assigned_by}</span>
                   </div>
@@ -116,7 +116,7 @@ export default function EmployeeTasks() {
                   value={t.status}
                   disabled={updating === t.id}
                   onChange={(e) => update(t.id, e.target.value, e.target.value === "done" ? 100 : t.progress)}
-                  className={`font-sans text-[10px] uppercase tracking-widest px-2 py-1.5 border focus:outline-none disabled:opacity-50 cursor-pointer ${t.status === "done" ? "bg-green-400/10 border-green-400/30 text-green-400" : t.status === "in_progress" ? "bg-blue-400/10 border-blue-400/30 text-blue-400" : "bg-yellow-400/10 border-yellow-400/30 text-yellow-400"}`}
+                  className={`font-sans text-xs uppercase tracking-widest px-2 py-1.5 border focus:outline-none disabled:opacity-50 cursor-pointer ${t.status === "done" ? "bg-green-400/10 border-green-400/30 text-green-400" : t.status === "in_progress" ? "bg-blue-400/10 border-blue-400/30 text-blue-400" : "bg-yellow-400/10 border-yellow-400/30 text-yellow-400"}`}
                 >
                   <option value="pending" className="bg-[#0a1a0e] text-white">Pending</option>
                   <option value="in_progress" className="bg-[#0a1a0e] text-white">In Progress</option>
@@ -126,8 +126,8 @@ export default function EmployeeTasks() {
 
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <p className="font-sans text-[9px] tracking-widest uppercase text-white/45">Progress</p>
-                  <p className="font-mono text-[10px] text-[#b08d57]">{t.progress}%</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-white/45">Progress</p>
+                  <p className="font-mono text-xs text-[#b08d57]">{t.progress}%</p>
                 </div>
                 <div className="h-1.5 bg-white/10 w-full">
                   <div className="h-full bg-[#b08d57] transition-all" style={{ width: `${t.progress}%` }} />
@@ -143,11 +143,11 @@ export default function EmployeeTasks() {
               {t.status === "done" && (
                 <div className="flex items-center gap-1.5 mt-2">
                   <AlertCircle className="w-3 h-3 text-green-400" />
-                  <p className="font-sans text-[10px] text-green-400">Completed · Jazakallah Khair</p>
+                  <p className="font-sans text-xs text-green-400">Completed · Jazakallah Khair</p>
                 </div>
               )}
 
-              <button onClick={() => toggleExpand(t.id)} className="flex items-center gap-1.5 mt-3 font-sans text-[10px] uppercase tracking-widest text-[#b08d57]/70 hover:text-[#b08d57]">
+              <button onClick={() => toggleExpand(t.id)} className="flex items-center gap-1.5 mt-3 font-sans text-xs uppercase tracking-widest text-[#b08d57]/70 hover:text-[#b08d57]">
                 <MessageSquare className="w-3 h-3" /> {comments[t.id]?.length ? `${comments[t.id].length} comment${comments[t.id].length !== 1 ? "s" : ""}` : "Comments"}
               </button>
 
@@ -155,9 +155,9 @@ export default function EmployeeTasks() {
                 <div className="mt-3 pt-3 border-t border-[#b08d57]/10 space-y-2">
                   {(comments[t.id] || []).map((c) => (
                     <div key={c.id} className="bg-white/[0.03] rounded p-2.5">
-                      <p className="font-sans text-[10px] text-[#b08d57]/80 font-semibold">{c.author_name}</p>
+                      <p className="font-sans text-xs text-[#b08d57]/80 font-semibold">{c.author_name}</p>
                       <p className="font-sans text-xs text-white/70">{c.comment}</p>
-                      <p className="font-sans text-[9px] text-white/40 mt-0.5">{new Date(c.created_at).toLocaleString()}</p>
+                      <p className="font-sans text-xs text-white/40 mt-0.5">{new Date(c.created_at).toLocaleString()}</p>
                     </div>
                   ))}
                   <div className="flex gap-2">

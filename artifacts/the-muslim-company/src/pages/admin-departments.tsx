@@ -65,7 +65,7 @@ export default function AdminDepartments() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="font-serif text-2xl text-primary">Department Management</h1>
-            <p className="font-sans text-xs text-primary/50 mt-1">Manage organizational departments</p>
+            <p className="font-sans text-xs text-primary/65 mt-1">Manage organizational departments</p>
           </div>
           <button onClick={() => { setShowForm(true); setEditing(null); setForm(EMPTY); }}
             className="flex items-center gap-2 bg-secondary text-primary font-sans text-xs uppercase tracking-widest h-9 px-4">
@@ -84,12 +84,12 @@ export default function AdminDepartments() {
             <h3 className="font-serif text-lg text-primary mb-4">{editing ? "Edit Department" : "Add Department"}</h3>
             <form onSubmit={handleSave} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Name *</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Name *</label>
                 <input type="text" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} required
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Department Head</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Department Head</label>
                 <select value={form.head_employee_id} onChange={e => setForm(f => ({ ...f, head_employee_id: e.target.value }))}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                   <option value="">None</option>
@@ -97,7 +97,7 @@ export default function AdminDepartments() {
                 </select>
               </div>
               <div className="sm:col-span-2">
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Description</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Description</label>
                 <textarea value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} rows={2}
                   className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
               </div>
@@ -121,7 +121,7 @@ export default function AdminDepartments() {
             <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
           </div>
         ) : depts.length === 0 ? (
-          <div className="text-center py-12 text-primary/40 font-sans text-sm">No departments yet</div>
+          <div className="text-center py-12 text-primary/65 font-sans text-sm">No departments yet</div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {depts.map(d => {
@@ -131,12 +131,12 @@ export default function AdminDepartments() {
                   <div className="flex items-start justify-between mb-2">
                     <h3 className="font-serif text-lg text-primary">{d.name}</h3>
                     <div className="flex items-center gap-2">
-                      <button onClick={() => startEdit(d)} className="text-primary/40 hover:text-secondary"><Edit2 className="w-4 h-4" /></button>
-                      <button onClick={() => handleDelete(d.id)} className="text-primary/40 hover:text-red-400"><Trash2 className="w-4 h-4" /></button>
+                      <button onClick={() => startEdit(d)} className="text-primary/65 hover:text-secondary"><Edit2 className="w-4 h-4" /></button>
+                      <button onClick={() => handleDelete(d.id)} className="text-primary/65 hover:text-red-400"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   </div>
                   {d.description && <p className="font-sans text-sm text-primary/60 mb-3">{d.description}</p>}
-                  <div className="flex items-center justify-between text-xs font-sans text-primary/50">
+                  <div className="flex items-center justify-between text-xs font-sans text-primary/65">
                     <span>{employeeCount(d.name)} employee{employeeCount(d.name) !== 1 ? "s" : ""}</span>
                     {head && <span>Head: {head.name}</span>}
                   </div>

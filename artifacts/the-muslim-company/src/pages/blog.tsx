@@ -24,21 +24,21 @@ function BlogCard({ post }: { post: BlogPost }) {
           <a
             href={`/blog/category/${encodeURIComponent(post.category)}`}
             onClick={(e) => e.stopPropagation()}
-            className="font-sans text-[10px] tracking-widest uppercase text-secondary border border-secondary/30 px-2 py-0.5 hover:bg-secondary/10 transition-colors"
+            className="font-sans text-xs tracking-widest uppercase text-secondary border border-secondary/30 px-2 py-0.5 hover:bg-secondary/10 transition-colors"
           >
             {post.category}
           </a>
-          <span className="font-sans text-[10px] text-primary/40 flex items-center gap-1">
+          <span className="font-sans text-xs text-primary/65 flex items-center gap-1">
             <Calendar className="w-3 h-3" />{new Date(post.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
           </span>
-          <span className="font-sans text-[10px] text-primary/40 flex items-center gap-1">
+          <span className="font-sans text-xs text-primary/65 flex items-center gap-1">
             <Clock className="w-3 h-3" />{post.reading_time} min read
           </span>
         </div>
         <h3 className="font-serif text-xl text-primary group-hover:text-secondary transition-colors leading-snug mb-2">{post.title}</h3>
-        {post.excerpt && <p className="font-sans text-sm text-primary/55 leading-relaxed line-clamp-2 mb-4">{post.excerpt}</p>}
+        {post.excerpt && <p className="font-sans text-sm text-primary/65 leading-relaxed line-clamp-2 mb-4">{post.excerpt}</p>}
         <div className="flex items-center justify-between">
-          <span className="font-sans text-xs text-primary/40">{post.author}</span>
+          <span className="font-sans text-xs text-primary/65">{post.author}</span>
           <span className="flex items-center gap-1.5 font-sans text-xs tracking-widest uppercase text-secondary">
             Read More <ArrowRight className="w-3.5 h-3.5" />
           </span>
@@ -182,7 +182,7 @@ export default function Blog({ params }: { params?: { category?: string } }) {
             <select
               value={cat}
               onChange={(e) => handleCategoryChange(e.target.value)}
-              className="w-full h-11 px-4 bg-background border border-primary/15 font-sans text-[11px] tracking-widest uppercase text-primary/70 focus:outline-none focus:border-secondary appearance-none cursor-pointer"
+              className="w-full h-11 px-4 bg-background border border-primary/15 font-sans text-xs tracking-widest uppercase text-primary/70 focus:outline-none focus:border-secondary appearance-none cursor-pointer"
             >
               {availableCategories.map((c) => (
                 <option key={c} value={c}>{c}</option>
@@ -202,7 +202,7 @@ export default function Blog({ params }: { params?: { category?: string } }) {
             <div className="text-center py-20">
               <BookOpen className="w-10 h-10 text-secondary/40 mx-auto mb-4" />
               <h3 className="font-serif text-2xl text-primary mb-3">No Articles Yet</h3>
-              <p className="font-sans text-sm text-primary/50">{posts.length === 0 ? "No blog posts published yet." : "No results match your search."}</p>
+              <p className="font-sans text-sm text-primary/65">{posts.length === 0 ? "No blog posts published yet." : "No results match your search."}</p>
             </div>
           ) : (
             <motion.div

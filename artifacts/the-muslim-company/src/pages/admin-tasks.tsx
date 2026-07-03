@@ -123,7 +123,7 @@ export default function AdminTasks() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="font-serif text-2xl text-primary">Task Management</h1>
-            <p className="font-sans text-xs text-primary/50 mt-1">Assign and track employee tasks</p>
+            <p className="font-sans text-xs text-primary/65 mt-1">Assign and track employee tasks</p>
           </div>
           <button onClick={() => { setShowForm(true); setEditing(null); setForm(EMPTY); }}
             className="flex items-center gap-2 bg-secondary text-primary font-sans text-xs uppercase tracking-widest h-9 px-4">
@@ -142,7 +142,7 @@ export default function AdminTasks() {
             <button key={s} onClick={() => setFilterStatus(s)}
               className={`p-4 border rounded text-center transition-colors ${filterStatus === s ? "border-secondary bg-secondary/5" : "border-primary/10 hover:border-primary/30"}`}>
               <p className="font-serif text-2xl text-primary">{counts[s]}</p>
-              <p className="font-sans text-[10px] uppercase tracking-widest text-primary/40 capitalize">{s.replace("_", " ")}</p>
+              <p className="font-sans text-xs uppercase tracking-widest text-primary/65 capitalize">{s.replace("_", " ")}</p>
             </button>
           ))}
         </div>
@@ -152,7 +152,7 @@ export default function AdminTasks() {
             <h3 className="font-serif text-lg text-primary mb-4">{editing ? "Edit Task" : "Assign New Task"}</h3>
             <form onSubmit={handleSave} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Employee *</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Employee *</label>
                 <select value={form.employee_id} onChange={e => setForm(f => ({ ...f, employee_id: e.target.value }))} required
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                   <option value="">Select employee</option>
@@ -160,29 +160,29 @@ export default function AdminTasks() {
                 </select>
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Priority</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Priority</label>
                 <select value={form.priority} onChange={e => setForm(f => ({ ...f, priority: e.target.value }))}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                   {["low", "medium", "high", "urgent"].map(p => <option key={p} value={p}>{p}</option>)}
                 </select>
               </div>
               <div className="sm:col-span-2">
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Title *</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Title *</label>
                 <input type="text" value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} required
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div className="sm:col-span-2">
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Description</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Description</label>
                 <textarea value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} rows={3}
                   className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Deadline</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Deadline</label>
                 <input type="date" value={form.deadline} onChange={e => setForm(f => ({ ...f, deadline: e.target.value }))}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Assigned By</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Assigned By</label>
                 <input type="text" value={form.assigned_by} onChange={e => setForm(f => ({ ...f, assigned_by: e.target.value }))}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
@@ -206,7 +206,7 @@ export default function AdminTasks() {
             <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-12 text-primary/40 font-sans text-sm">No tasks found</div>
+          <div className="text-center py-12 text-primary/65 font-sans text-sm">No tasks found</div>
         ) : (
           <div className="space-y-3">
             {filtered.map(t => (
@@ -215,25 +215,25 @@ export default function AdminTasks() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <h3 className="font-serif text-base text-primary">{t.title}</h3>
-                      <span className={`text-[10px] uppercase tracking-widest px-2 py-0.5 border rounded ${PRIORITY_COLORS[t.priority]}`}>{t.priority}</span>
+                      <span className={`text-xs uppercase tracking-widest px-2 py-0.5 border rounded ${PRIORITY_COLORS[t.priority]}`}>{t.priority}</span>
                     </div>
-                    <p className="font-sans text-xs text-primary/50">
+                    <p className="font-sans text-xs text-primary/65">
                       {t.employees?.name || t.employee_id} · {t.employees?.department}
                       {t.deadline && ` · Due ${new Date(t.deadline).toLocaleDateString()}`}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <button onClick={() => startEdit(t)} className="text-primary/40 hover:text-secondary transition-colors"><Edit2 className="w-4 h-4" /></button>
-                    <button onClick={() => handleDelete(t.id)} className="text-primary/40 hover:text-red-400 transition-colors"><Trash2 className="w-4 h-4" /></button>
+                    <button onClick={() => startEdit(t)} className="text-primary/65 hover:text-secondary transition-colors"><Edit2 className="w-4 h-4" /></button>
+                    <button onClick={() => handleDelete(t.id)} className="text-primary/65 hover:text-red-400 transition-colors"><Trash2 className="w-4 h-4" /></button>
                   </div>
                 </div>
                 {t.description && <p className="font-sans text-sm text-primary/60 mb-3">{t.description}</p>}
                 <div className="flex items-center gap-3">
                   <select value={t.status} onChange={e => updateStatus(t, e.target.value)}
-                    className={`text-[11px] uppercase tracking-widest px-3 py-1.5 border rounded font-sans ${STATUS_COLORS[t.status]}`}>
+                    className={`text-xs uppercase tracking-widest px-3 py-1.5 border rounded font-sans ${STATUS_COLORS[t.status]}`}>
                     {["pending", "in_progress", "done", "cancelled"].map(s => <option key={s} value={s}>{s.replace("_", " ")}</option>)}
                   </select>
-                  <button onClick={() => toggleExpand(t.id)} className="flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-widest text-primary/40 hover:text-secondary">
+                  <button onClick={() => toggleExpand(t.id)} className="flex items-center gap-1.5 font-sans text-xs uppercase tracking-widest text-primary/65 hover:text-secondary">
                     <MessageSquare className="w-3.5 h-3.5" /> {comments[t.id]?.length ? comments[t.id].length : ""}
                   </button>
                 </div>
@@ -242,9 +242,9 @@ export default function AdminTasks() {
                   <div className="mt-3 pt-3 border-t border-primary/10 space-y-2">
                     {(comments[t.id] || []).map((c: any) => (
                       <div key={c.id} className="bg-background border border-primary/5 rounded p-2.5">
-                        <p className="font-sans text-[10px] text-secondary/80 font-semibold">{c.author_name}</p>
+                        <p className="font-sans text-xs text-secondary/80 font-semibold">{c.author_name}</p>
                         <p className="font-sans text-xs text-primary/70">{c.comment}</p>
-                        <p className="font-sans text-[9px] text-primary/30 mt-0.5">{new Date(c.created_at).toLocaleString()}</p>
+                        <p className="font-sans text-xs text-primary/30 mt-0.5">{new Date(c.created_at).toLocaleString()}</p>
                       </div>
                     ))}
                     <div className="flex gap-2">

@@ -33,7 +33,7 @@ export default function AdminLeaveBalances() {
     <AdminLayout current="/admin/leave-balances">
       <div className="p-6 max-w-3xl mx-auto">
         <h1 className="font-serif text-2xl text-primary mb-1">Leave Balances</h1>
-        <p className="font-sans text-xs text-primary/50 mb-6">Annual leave quotas and usage for {new Date().getFullYear()}.</p>
+        <p className="font-sans text-xs text-primary/65 mb-6">Annual leave quotas and usage for {new Date().getFullYear()}.</p>
 
         {msg && (
           <div className={`mb-4 p-3 flex items-center gap-2 font-sans text-sm rounded ${msg.type === "ok" ? "bg-green-400/10 text-green-400" : "bg-red-400/10 text-red-400"}`}>
@@ -48,14 +48,14 @@ export default function AdminLeaveBalances() {
             <table className="w-full font-sans text-sm">
               <thead>
                 <tr className="border-b border-primary/10">
-                  {["Employee", "Department", "Quota", "Used", "Remaining", ""].map(h => <th key={h} className="text-left py-3 px-3 font-sans text-[10px] uppercase tracking-widest text-primary/40">{h}</th>)}
+                  {["Employee", "Department", "Quota", "Used", "Remaining", ""].map(h => <th key={h} className="text-left py-3 px-3 font-sans text-xs uppercase tracking-widest text-primary/65">{h}</th>)}
                 </tr>
               </thead>
               <tbody>
                 {balances.map(b => (
                   <tr key={b.employee_id} className="border-b border-primary/5">
                     <td className="py-3 px-3 text-primary">{b.name}</td>
-                    <td className="py-3 px-3 text-primary/50">{b.department}</td>
+                    <td className="py-3 px-3 text-primary/65">{b.department}</td>
                     <td className="py-3 px-3 text-primary/70">
                       {editing === b.employee_id ? (
                         <input type="number" value={newQuota} onChange={e => setNewQuota(e.target.value)} className="w-16 h-7 px-2 bg-background border border-primary/15 text-primary text-sm" />
@@ -67,7 +67,7 @@ export default function AdminLeaveBalances() {
                       {editing === b.employee_id ? (
                         <button onClick={() => saveQuota(b.employee_id)} className="text-green-400 text-xs font-sans uppercase">Save</button>
                       ) : (
-                        <button onClick={() => { setEditing(b.employee_id); setNewQuota(String(b.quota)); }} className="text-primary/40 hover:text-secondary"><Edit2 className="w-3.5 h-3.5" /></button>
+                        <button onClick={() => { setEditing(b.employee_id); setNewQuota(String(b.quota)); }} className="text-primary/65 hover:text-secondary"><Edit2 className="w-3.5 h-3.5" /></button>
                       )}
                     </td>
                   </tr>

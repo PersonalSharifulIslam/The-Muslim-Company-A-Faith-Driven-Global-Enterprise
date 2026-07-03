@@ -104,7 +104,7 @@ export default function AdminAttendance() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="font-serif text-2xl text-primary">Attendance Management</h1>
-            <p className="font-sans text-xs text-primary/50 mt-1">Track and manage employee attendance</p>
+            <p className="font-sans text-xs text-primary/65 mt-1">Track and manage employee attendance</p>
           </div>
           <div className="flex gap-2">
             <button onClick={() => exportToCSV(`attendance-${viewMode === "day" ? filterDate : filterMonth}`, filtered.map(r => ({
@@ -137,7 +137,7 @@ export default function AdminAttendance() {
           {[["Present", stats.present, "text-green-400"], ["Absent", stats.absent, "text-red-400"], ["Late", stats.late, "text-yellow-400"]].map(([label, count, color]) => (
             <div key={label as string} className="p-4 border border-primary/10 bg-card text-center">
               <p className={`font-serif text-3xl ${color}`}>{count}</p>
-              <p className="font-sans text-[10px] uppercase tracking-widest text-primary/40">{label}</p>
+              <p className="font-sans text-xs uppercase tracking-widest text-primary/65">{label}</p>
             </div>
           ))}
         </div>
@@ -145,11 +145,11 @@ export default function AdminAttendance() {
         <div className="flex gap-3 mb-4 flex-wrap items-center">
           <div className="flex border border-primary/15 rounded overflow-hidden">
             <button onClick={() => setViewMode("day")}
-              className={`h-9 px-4 font-sans text-xs uppercase tracking-widest transition-colors ${viewMode === "day" ? "bg-secondary text-primary" : "bg-card text-primary/50 hover:text-primary"}`}>
+              className={`h-9 px-4 font-sans text-xs uppercase tracking-widest transition-colors ${viewMode === "day" ? "bg-secondary text-primary" : "bg-card text-primary/65 hover:text-primary"}`}>
               By Day
             </button>
             <button onClick={() => setViewMode("month")}
-              className={`h-9 px-4 font-sans text-xs uppercase tracking-widest transition-colors ${viewMode === "month" ? "bg-secondary text-primary" : "bg-card text-primary/50 hover:text-primary"}`}>
+              className={`h-9 px-4 font-sans text-xs uppercase tracking-widest transition-colors ${viewMode === "month" ? "bg-secondary text-primary" : "bg-card text-primary/65 hover:text-primary"}`}>
               By Month
             </button>
           </div>
@@ -172,7 +172,7 @@ export default function AdminAttendance() {
             <h3 className="font-serif text-lg text-primary mb-4">{editing ? "Edit Attendance" : "Add Attendance"}</h3>
             <form onSubmit={handleSave} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Employee *</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Employee *</label>
                 <select value={form.employee_id} onChange={e => setForm(f => ({ ...f, employee_id: e.target.value }))} required
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                   <option value="">Select employee</option>
@@ -180,29 +180,29 @@ export default function AdminAttendance() {
                 </select>
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Date *</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Date *</label>
                 <input type="date" value={form.date} onChange={e => setForm(f => ({ ...f, date: e.target.value }))} required
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Check In</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Check In</label>
                 <input type="time" value={form.check_in} onChange={e => setForm(f => ({ ...f, check_in: e.target.value }))}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Check Out</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Check Out</label>
                 <input type="time" value={form.check_out} onChange={e => setForm(f => ({ ...f, check_out: e.target.value }))}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Status *</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Status *</label>
                 <select value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                   {["present", "absent", "late", "half_day", "leave"].map(s => <option key={s} value={s}>{s.replace("_", " ")}</option>)}
                 </select>
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Note</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Note</label>
                 <input type="text" value={form.note} onChange={e => setForm(f => ({ ...f, note: e.target.value }))} placeholder="Optional note"
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
@@ -231,31 +231,31 @@ export default function AdminAttendance() {
               <thead>
                 <tr className="border-b border-primary/10">
                   {["Employee", "Date", "Check In", "Check Out", "Hours", "Status", "Note", ""].map(h => (
-                    <th key={h} className="text-left py-3 px-3 font-sans text-[10px] uppercase tracking-widest text-primary/40">{h}</th>
+                    <th key={h} className="text-left py-3 px-3 font-sans text-xs uppercase tracking-widest text-primary/65">{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {filtered.length === 0 ? (
-                  <tr><td colSpan={8} className="text-center py-8 text-primary/40">No records found</td></tr>
+                  <tr><td colSpan={8} className="text-center py-8 text-primary/65">No records found</td></tr>
                 ) : filtered.map(r => (
                   <tr key={r.id} className="border-b border-primary/5 hover:bg-card transition-colors">
                     <td className="py-3 px-3">
                       <p className="text-primary font-medium">{r.employees?.name || r.employee_id}</p>
-                      <p className="text-primary/40 text-xs">{r.employees?.department}</p>
+                      <p className="text-primary/65 text-xs">{r.employees?.department}</p>
                     </td>
                     <td className="py-3 px-3 text-primary/70">{r.date}</td>
                     <td className="py-3 px-3 text-primary/70">{fmt(r.check_in)}</td>
                     <td className="py-3 px-3 text-primary/70">{fmt(r.check_out)}</td>
                     <td className="py-3 px-3 text-primary/70">{r.working_hours ? `${r.working_hours}h` : "—"}</td>
                     <td className="py-3 px-3">
-                      <span className={`text-[10px] uppercase tracking-widest px-2 py-1 border rounded ${STATUS_COLORS[r.status] || "bg-primary/5 text-primary/60 border-primary/10"}`}>
+                      <span className={`text-xs uppercase tracking-widest px-2 py-1 border rounded ${STATUS_COLORS[r.status] || "bg-primary/5 text-primary/60 border-primary/10"}`}>
                         {r.status.replace("_", " ")}
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-primary/50 text-xs max-w-[120px] truncate">{r.note || "—"}</td>
+                    <td className="py-3 px-3 text-primary/65 text-xs max-w-[120px] truncate">{r.note || "—"}</td>
                     <td className="py-3 px-3">
-                      <button onClick={() => startEdit(r)} className="text-primary/40 hover:text-secondary transition-colors">
+                      <button onClick={() => startEdit(r)} className="text-primary/65 hover:text-secondary transition-colors">
                         <Edit2 className="w-4 h-4" />
                       </button>
                     </td>

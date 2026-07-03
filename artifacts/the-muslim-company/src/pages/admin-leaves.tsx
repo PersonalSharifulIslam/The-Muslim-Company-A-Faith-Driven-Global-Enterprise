@@ -84,7 +84,7 @@ export default function AdminLeaves() {
         {/* Header */}
         <div className="mb-6">
           <h1 className="font-serif text-2xl text-primary mb-1">Leave Requests</h1>
-          <p className="font-sans text-xs text-primary/50">Review, approve, or reject employee leave requests.</p>
+          <p className="font-sans text-xs text-primary/65">Review, approve, or reject employee leave requests.</p>
         </div>
 
         {msg && (
@@ -100,7 +100,7 @@ export default function AdminLeaves() {
             <button key={s} onClick={() => setFilter(s)}
               className={`p-4 border rounded text-center transition-colors ${filter === s ? "border-secondary bg-secondary/5" : "border-primary/10 hover:border-primary/30"}`}>
               <p className="font-serif text-2xl text-primary">{counts[s]}</p>
-              <p className="font-sans text-[10px] uppercase tracking-widest text-primary/40 capitalize">{s}</p>
+              <p className="font-sans text-xs uppercase tracking-widest text-primary/65 capitalize">{s}</p>
             </button>
           ))}
         </div>
@@ -112,7 +112,7 @@ export default function AdminLeaves() {
             <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-12 text-primary/40 font-sans text-sm">No {filter} leave requests</div>
+          <div className="text-center py-12 text-primary/65 font-sans text-sm">No {filter} leave requests</div>
         ) : (
           <div className="space-y-3">
             {filtered.map(leave => (
@@ -132,7 +132,7 @@ export default function AdminLeaves() {
                       <p className="font-sans text-sm font-medium text-primary truncate">
                         {leave.employees?.name || leave.employee_id}
                       </p>
-                      <p className="font-sans text-xs text-primary/40 truncate">
+                      <p className="font-sans text-xs text-primary/65 truncate">
                         {leave.employees?.department} · {leave.leave_type}
                       </p>
                     </div>
@@ -142,12 +142,12 @@ export default function AdminLeaves() {
                       <p className="font-sans text-xs text-primary/60">
                         {new Date(leave.start_date).toLocaleDateString()} – {new Date(leave.end_date).toLocaleDateString()}
                       </p>
-                      <p className="font-sans text-[10px] text-primary/40">{leave.days} day{leave.days !== 1 ? "s" : ""}</p>
+                      <p className="font-sans text-xs text-primary/65">{leave.days} day{leave.days !== 1 ? "s" : ""}</p>
                     </div>
-                    <span className={`font-sans text-[10px] uppercase tracking-widest px-2 py-1 border rounded ${STATUS_COLORS[leave.status]}`}>
+                    <span className={`font-sans text-xs uppercase tracking-widest px-2 py-1 border rounded ${STATUS_COLORS[leave.status]}`}>
                       {leave.status}
                     </span>
-                    {expanded === leave.id ? <ChevronUp className="w-4 h-4 text-primary/40" /> : <ChevronDown className="w-4 h-4 text-primary/40" />}
+                    {expanded === leave.id ? <ChevronUp className="w-4 h-4 text-primary/65" /> : <ChevronDown className="w-4 h-4 text-primary/65" />}
                   </div>
                 </button>
 
@@ -158,19 +158,19 @@ export default function AdminLeaves() {
                     {/* Details */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                       <div>
-                        <p className="font-sans text-[10px] uppercase tracking-widest text-primary/40 mb-1">Leave Type</p>
+                        <p className="font-sans text-xs uppercase tracking-widest text-primary/65 mb-1">Leave Type</p>
                         <p className="font-sans text-sm text-primary">{leave.leave_type}</p>
                       </div>
                       <div>
-                        <p className="font-sans text-[10px] uppercase tracking-widest text-primary/40 mb-1">Duration</p>
+                        <p className="font-sans text-xs uppercase tracking-widest text-primary/65 mb-1">Duration</p>
                         <p className="font-sans text-sm text-primary">{leave.days} day{leave.days !== 1 ? "s" : ""}</p>
                       </div>
                       <div>
-                        <p className="font-sans text-[10px] uppercase tracking-widest text-primary/40 mb-1">Applied</p>
+                        <p className="font-sans text-xs uppercase tracking-widest text-primary/65 mb-1">Applied</p>
                         <p className="font-sans text-sm text-primary">{new Date(leave.created_at).toLocaleDateString()}</p>
                       </div>
                       <div>
-                        <p className="font-sans text-[10px] uppercase tracking-widest text-primary/40 mb-1">Status</p>
+                        <p className="font-sans text-xs uppercase tracking-widest text-primary/65 mb-1">Status</p>
                         <p className={`font-sans text-sm capitalize ${leave.status === "approved" ? "text-green-400" : leave.status === "rejected" ? "text-red-400" : "text-yellow-400"}`}>
                           {leave.status}
                         </p>
@@ -179,22 +179,22 @@ export default function AdminLeaves() {
 
                     {/* Reason */}
                     <div>
-                      <p className="font-sans text-[10px] uppercase tracking-widest text-primary/40 mb-1">Reason</p>
+                      <p className="font-sans text-xs uppercase tracking-widest text-primary/65 mb-1">Reason</p>
                       <p className="font-sans text-sm text-primary/70 bg-background border border-primary/10 p-3">{leave.reason}</p>
                     </div>
 
                     {/* Edit Dates */}
                     <div>
-                      <p className="font-sans text-[10px] uppercase tracking-widest text-primary/40 mb-2">Adjust Dates (optional)</p>
+                      <p className="font-sans text-xs uppercase tracking-widest text-primary/65 mb-2">Adjust Dates (optional)</p>
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="font-sans text-xs text-primary/50 mb-1 block">Start Date</label>
+                          <label className="font-sans text-xs text-primary/65 mb-1 block">Start Date</label>
                           <input type="date" defaultValue={leave.start_date}
                             onChange={e => setEditDates(prev => ({ start: e.target.value, end: prev?.end || leave.end_date }))}
                             className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                         </div>
                         <div>
-                          <label className="font-sans text-xs text-primary/50 mb-1 block">End Date</label>
+                          <label className="font-sans text-xs text-primary/65 mb-1 block">End Date</label>
                           <input type="date" defaultValue={leave.end_date}
                             onChange={e => setEditDates(prev => ({ start: prev?.start || leave.start_date, end: e.target.value }))}
                             className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
@@ -204,7 +204,7 @@ export default function AdminLeaves() {
 
                     {/* Admin Note */}
                     <div>
-                      <label className="font-sans text-[10px] uppercase tracking-widest text-primary/40 mb-2 block">Admin Note (optional)</label>
+                      <label className="font-sans text-xs uppercase tracking-widest text-primary/65 mb-2 block">Admin Note (optional)</label>
                       <textarea value={note} onChange={e => setNote(e.target.value)} rows={2}
                         placeholder="Add a note for the employee..."
                         className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
@@ -212,7 +212,7 @@ export default function AdminLeaves() {
 
                     {leave.admin_note && (
                       <div className="p-3 bg-primary/5 border border-primary/10">
-                        <p className="font-sans text-[10px] uppercase tracking-widest text-primary/40 mb-1">Previous Admin Note</p>
+                        <p className="font-sans text-xs uppercase tracking-widest text-primary/65 mb-1">Previous Admin Note</p>
                         <p className="font-sans text-sm text-primary/70">{leave.admin_note}</p>
                       </div>
                     )}

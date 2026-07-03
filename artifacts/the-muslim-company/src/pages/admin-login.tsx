@@ -78,7 +78,7 @@ export default function AdminLogin() {
           <h1 className="font-serif text-2xl text-primary-foreground mb-1">
             {setupMode ? "Create Admin Account" : "Admin Access"}
           </h1>
-          <p className="font-sans text-xs text-primary-foreground/40 tracking-widest uppercase">The Muslim Company</p>
+          <p className="font-sans text-xs text-primary-foreground/55 tracking-widest uppercase">The Muslim Company</p>
         </div>
 
         {noAdmin && !setupMode && (
@@ -87,7 +87,7 @@ export default function AdminLogin() {
               <AlertCircle className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" />
               <div>
                 <p className="font-sans text-xs text-yellow-400 font-semibold mb-1">First Time Setup</p>
-                <p className="font-sans text-[11px] text-primary-foreground/40 leading-relaxed">
+                <p className="font-sans text-xs text-primary-foreground/55 leading-relaxed">
                   No admin account found.{" "}
                   <button onClick={() => setSetupMode(true)} className="text-secondary underline">Create one now.</button>
                 </p>
@@ -98,7 +98,7 @@ export default function AdminLogin() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/40 block mb-2">Email Address</label>
+            <label className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 block mb-2">Email Address</label>
             <input
               type="email"
               required
@@ -109,7 +109,7 @@ export default function AdminLogin() {
             />
           </div>
           <div>
-            <label className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/40 block mb-2">Password{setupMode && " (min 8 chars)"}</label>
+            <label className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 block mb-2">Password{setupMode && " (min 8 chars)"}</label>
             <div className="relative">
               <input
                 type={showPw ? "text" : "password"}
@@ -123,7 +123,7 @@ export default function AdminLogin() {
               <button
                 type="button"
                 onClick={() => setShowPw(!showPw)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-primary-foreground/30 hover:text-primary-foreground/60"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-primary-foreground/55 hover:text-primary-foreground/60"
               >
                 {showPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -148,18 +148,18 @@ export default function AdminLogin() {
         </form>
 
         {setupMode && (
-          <button onClick={() => setSetupMode(false)} className="w-full text-center font-sans text-[10px] text-primary-foreground/30 hover:text-secondary mt-4 transition-colors">
+          <button onClick={() => setSetupMode(false)} className="w-full text-center font-sans text-xs text-primary-foreground/55 hover:text-secondary mt-4 transition-colors">
             ← Back to Login
           </button>
         )}
 
         {!setupMode && (
-          <p className="text-center font-sans text-[10px] text-primary-foreground/20 mt-8">
+          <p className="text-center font-sans text-xs text-primary-foreground/20 mt-8">
             Restricted access. Authorised personnel only.
           </p>
         )}
         <div className="text-center mt-4">
-          <a href="/" className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/25 hover:text-secondary transition-colors">
+          <a href="/" className="font-sans text-xs tracking-widest uppercase text-primary-foreground/25 hover:text-secondary transition-colors">
             ← Back to Website
           </a>
         </div>

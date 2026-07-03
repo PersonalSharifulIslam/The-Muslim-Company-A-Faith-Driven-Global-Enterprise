@@ -36,13 +36,13 @@ export default function EmployeeHolidays() {
       <div className={`flex items-center gap-4 p-4 bg-white/[0.02] border rounded ${isOngoing ? "border-[#b08d57]/50" : "border-white/10"}`}>
         <div className="flex-shrink-0 w-14 h-14 bg-[#b08d57]/10 border border-[#b08d57]/30 rounded flex flex-col items-center justify-center">
           <p className="font-serif text-lg text-[#b08d57] leading-none">{date.getDate()}</p>
-          <p className="font-sans text-[9px] uppercase text-[#b08d57]/70">{date.toLocaleDateString("en-US", { month: "short" })}</p>
+          <p className="font-sans text-xs uppercase text-[#b08d57]/70">{date.toLocaleDateString("en-US", { month: "short" })}</p>
         </div>
         <div className="flex-1">
           <div className="flex items-center gap-2 flex-wrap">
             <p className="font-sans text-sm text-white font-medium">{h.title}</p>
             {h.is_company_event ? <Building2 className="w-3.5 h-3.5 text-white/30" /> : <Sparkles className="w-3.5 h-3.5 text-[#b08d57]/50" />}
-            {isOngoing && <span className="font-sans text-[9px] uppercase tracking-widest bg-[#b08d57]/20 text-[#b08d57] px-1.5 py-0.5 rounded">Ongoing</span>}
+            {isOngoing && <span className="font-sans text-xs uppercase tracking-widest bg-[#b08d57]/20 text-[#b08d57] px-1.5 py-0.5 rounded">Ongoing</span>}
           </div>
           <p className="font-sans text-xs text-white/40 mt-0.5">
             {isRange
@@ -70,13 +70,13 @@ export default function EmployeeHolidays() {
           </div>
         ) : (
           <>
-            <p className="font-sans text-[10px] uppercase tracking-widest text-white/30 mb-3">Upcoming</p>
+            <p className="font-sans text-xs uppercase tracking-widest text-white/30 mb-3">Upcoming</p>
             <div className="space-y-2 mb-8">
               {upcoming.length === 0 ? <p className="text-white/30 font-sans text-sm">No upcoming holidays</p> : upcoming.map(h => <HolidayCard key={h.id} h={h} />)}
             </div>
             {past.length > 0 && (
               <>
-                <p className="font-sans text-[10px] uppercase tracking-widest text-white/30 mb-3">Past</p>
+                <p className="font-sans text-xs uppercase tracking-widest text-white/30 mb-3">Past</p>
                 <div className="space-y-2 opacity-50">
                   {past.map(h => <HolidayCard key={h.id} h={h} />)}
                 </div>

@@ -15,7 +15,7 @@ const stagger = {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-secondary mb-3 flex items-center gap-2">
+    <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3 flex items-center gap-2">
       <span className="inline-block w-5 h-px bg-secondary" />
       {children}
     </p>
@@ -25,7 +25,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="py-3 border-b border-primary/8 last:border-0">
-      <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-primary/35 mb-0.5">{label}</p>
+      <p className="font-sans text-xs tracking-[0.3em] uppercase text-primary/35 mb-0.5">{label}</p>
       <p className="font-sans text-sm text-primary/80">{value}</p>
     </div>
   );
@@ -378,7 +378,7 @@ export default function CeoSharifulIslamPage() {
                   href="https://g.co/kgs/4n3CijW"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-secondary text-primary font-sans text-[11px] font-bold uppercase tracking-widest h-11 px-7 hover:bg-secondary/90 transition-colors"
+                  className="inline-flex items-center gap-2 bg-secondary text-primary font-sans text-xs font-bold uppercase tracking-widest h-11 px-7 hover:bg-secondary/90 transition-colors"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -392,7 +392,7 @@ export default function CeoSharifulIslamPage() {
                   href="https://www.linkedin.com/in/personalsharifulislam"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-primary-foreground/10 border border-primary-foreground/15 text-primary-foreground font-sans text-[11px] uppercase tracking-widest h-11 px-7 hover:bg-primary-foreground/15 transition-colors"
+                  className="inline-flex items-center gap-2 bg-primary-foreground/10 border border-primary-foreground/15 text-primary-foreground font-sans text-xs uppercase tracking-widest h-11 px-7 hover:bg-primary-foreground/15 transition-colors"
                 >
                   <Linkedin className="w-3.5 h-3.5" />
                   LinkedIn Profile
@@ -408,7 +408,7 @@ export default function CeoSharifulIslamPage() {
                   { href: "https://www.youtube.com/@PersonalSharifulIslam", label: "YouTube", d: "M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" },
                 ].map(({ href, label, d }) => (
                   <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
-                    className="text-primary-foreground/35 hover:text-secondary transition-colors">
+                    className="text-primary-foreground/55 hover:text-secondary transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d={d} /></svg>
                   </a>
                 ))}
@@ -424,7 +424,7 @@ export default function CeoSharifulIslamPage() {
                 ].map((s) => (
                   <div key={s.label} className="text-center">
                     <p className="font-serif text-2xl md:text-3xl text-secondary mb-1">{s.value}</p>
-                    <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/45">{s.label}</p>
+                    <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55">{s.label}</p>
                   </div>
                 ))}
               </motion.div>
@@ -574,7 +574,7 @@ export default function CeoSharifulIslamPage() {
                     <h3 className="font-serif text-lg text-primary mb-1 group-hover:text-secondary transition-colors">
                       Shariful Islam Unveils Global Vision for The Muslim Company, a Faith-Driven Conglomerate Spanning Twenty Sectors Across Asia, the Middle East, and Africa
                     </h3>
-                    <p className="font-sans text-xs text-primary/50">OpenPR — Press Release</p>
+                    <p className="font-sans text-xs text-primary/65">OpenPR — Press Release</p>
                   </div>
                   <ExternalLink className="w-4 h-4 text-primary/30 ml-auto flex-shrink-0 mt-1" />
                 </a>
@@ -589,7 +589,7 @@ export default function CeoSharifulIslamPage() {
                     <h3 className="font-serif text-lg text-primary mb-1 group-hover:text-secondary transition-colors">
                       The Muslim Company: Building a Faith-Driven Global Civilization Through Innovation, Ethics, and Excellence
                     </h3>
-                    <p className="font-sans text-xs text-primary/50">OpenPR — Press Release</p>
+                    <p className="font-sans text-xs text-primary/65">OpenPR — Press Release</p>
                   </div>
                   <ExternalLink className="w-4 h-4 text-primary/30 ml-auto flex-shrink-0 mt-1" />
                 </a>
@@ -670,7 +670,7 @@ export default function CeoSharifulIslamPage() {
                 <p className="font-serif text-xl md:text-2xl italic text-primary/85 leading-relaxed mb-6">
                   &ldquo;I do not know whether this company will fully succeed, how far it will go, or whether I will be able to implement every part of this vision. But my intention is to seek the pleasure of Allah and, by following the teachings and ethics of Prophet Muhammad ﷺ as much as possible, try to build something beneficial for humanity.&rdquo;
                 </p>
-                <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-secondary/60">&mdash; Shariful Islam, CEO</p>
+                <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary/60">&mdash; Shariful Islam, CEO</p>
               </div>
             </motion.div>
 
@@ -690,7 +690,7 @@ export default function CeoSharifulIslamPage() {
               <p className="font-serif text-xl italic text-primary/80 leading-relaxed">
                 &ldquo;Allah is the owner of everything. Rizq, honor, power, and success come only from Allah.&rdquo;
               </p>
-              <p className="mt-4 font-sans text-[10px] tracking-[0.35em] uppercase text-primary/35">
+              <p className="mt-4 font-sans text-xs tracking-[0.35em] uppercase text-primary/35">
                 &mdash; Shariful Islam, CEO — The Muslim Company
               </p>
             </motion.div>
@@ -721,7 +721,7 @@ export default function CeoSharifulIslamPage() {
                   >
                     <div>
                       <p className="font-sans text-sm font-medium text-primary group-hover:text-secondary transition-colors">{link.label}</p>
-                      <p className="font-sans text-xs text-primary/40 mt-0.5">{link.sub}</p>
+                      <p className="font-sans text-xs text-primary/65 mt-0.5">{link.sub}</p>
                     </div>
                     <ExternalLink className="w-3.5 h-3.5 text-primary/25 group-hover:text-secondary/60 transition-colors" />
                   </motion.a>
@@ -735,7 +735,7 @@ export default function CeoSharifulIslamPage() {
               <div>
                 <p className="font-sans text-xs tracking-widest uppercase text-secondary mb-2">Connect</p>
                 <p className="font-serif text-xl text-primary">Follow Shariful Islam</p>
-                <p className="font-sans text-sm text-primary/50 mt-1">Official insights and leadership updates from the CEO of The Muslim Company.</p>
+                <p className="font-sans text-sm text-primary/65 mt-1">Official insights and leadership updates from the CEO of The Muslim Company.</p>
               </div>
               <div className="flex gap-3 flex-wrap">
                 {[
@@ -749,7 +749,7 @@ export default function CeoSharifulIslamPage() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-sans text-[11px] uppercase tracking-widest h-10 px-6 border border-primary/20 text-primary/70 hover:border-secondary hover:text-secondary transition-colors inline-flex items-center"
+                    className="font-sans text-xs uppercase tracking-widest h-10 px-6 border border-primary/20 text-primary/70 hover:border-secondary hover:text-secondary transition-colors inline-flex items-center"
                   >
                     {s.label}
                   </a>

@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/lib/auth-context";
+import CookieConsent from "@/components/CookieConsent";
 
 const NotFound = lazy(() => import("@/pages/not-found"));
 const Home = lazy(() => import("@/pages/home"));
@@ -257,6 +258,7 @@ function App() {
             <Router />
           </WouterRouter>
           <Toaster />
+          <CookieConsent />
         </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>

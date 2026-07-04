@@ -10,7 +10,6 @@ const NotFound = lazy(() => import("@/pages/not-found"));
 const Home = lazy(() => import("@/pages/home"));
 const AboutPage = lazy(() => import("@/pages/about"));
 const FAQPage = lazy(() => import("@/pages/faq"));
-const FAQPage = lazy(() => import("@/pages/faq"));
 const Careers = lazy(() => import("@/pages/careers"));
 const JobDetail = lazy(() => import("@/pages/job-detail"));
 const JobApply = lazy(() => import("@/pages/job-apply"));

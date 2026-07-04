@@ -802,7 +802,12 @@ export default function SectorDetail() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    if (!sector) return;
+    if (!sector) {
+      const _rob = document.querySelector('meta[name="robots"]');
+      if (_rob) _rob.setAttribute('content', 'noindex, nofollow');
+      else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'noindex, nofollow'; document.head.appendChild(_rl); }
+      return;
+    }
 
     // Inject dynamic schema for this sector page
     const schemas = [

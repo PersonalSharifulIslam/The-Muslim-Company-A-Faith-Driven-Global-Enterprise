@@ -27,7 +27,7 @@ function CountdownTimer({ expiresAt, label }: { expiresAt: string; label?: strin
     <div className={`flex items-center gap-2 font-mono text-xl font-bold ${expired ? "text-red-500" : "text-secondary"}`}>
       <Clock className="w-5 h-5" />
       <span>{timeLeft}</span>
-      {label && <span className="font-sans text-xs font-normal text-primary/50 ml-2">{label}</span>}
+      {label && <span className="font-sans text-xs font-normal text-primary/65 ml-2">{label}</span>}
     </div>
   );
 }
@@ -165,7 +165,7 @@ export default function RecruitmentStatus() {
 
           {/* Search */}
           <form onSubmit={handleSearch} className="mb-10">
-            <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-3">Application Reference Number</label>
+            <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-3">Application Reference Number</label>
             <div className="flex gap-3 flex-col sm:flex-row">
               <input type="text" value={ref} onChange={e => setRef(e.target.value)}
                 placeholder="e.g. TMC/SI/10925/2026/ABC123"
@@ -185,7 +185,7 @@ export default function RecruitmentStatus() {
               <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
               <div>
                 <p className="font-serif text-base text-primary mb-1">Application reference number not found.</p>
-                <p className="font-sans text-xs text-primary/50">Please check the reference number and try again. Ensure it matches exactly as provided in your confirmation.</p>
+                <p className="font-sans text-xs text-primary/65">Please check the reference number and try again. Ensure it matches exactly as provided in your confirmation.</p>
               </div>
             </motion.div>
           )}
@@ -196,7 +196,7 @@ export default function RecruitmentStatus() {
 
               {/* Application Card */}
               <div className="bg-primary text-primary-foreground p-8">
-                <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/60 mb-6">Application Details</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-secondary/60 mb-6">Application Details</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
                   {[
                     { l: "Applicant Name", v: app.name },
@@ -207,13 +207,13 @@ export default function RecruitmentStatus() {
                     { l: "Last Updated", v: new Date(app.updated_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) },
                   ].map(({ l, v, mono }) => (
                     <div key={l}>
-                      <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/35 mb-1">{l}</p>
+                      <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-1">{l}</p>
                       <p className={`${mono ? "font-mono text-secondary text-xs" : "font-sans text-sm"} text-primary-foreground`}>{v}</p>
                     </div>
                   ))}
                 </div>
                 <div className="pt-5 border-t border-primary-foreground/10">
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/35 mb-2">Current Status</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-2">Current Status</p>
                   <span className={`inline-flex items-center px-4 py-2 font-sans text-sm font-semibold border ${statusColors[status] || "border-primary-foreground/20 text-primary-foreground"}`}>
                     {statusLabels[status] || status}
                   </span>
@@ -223,7 +223,7 @@ export default function RecruitmentStatus() {
               {/* ── STATE: Submitted / Under Review / Shortlisted ── */}
               {isSubmittedOrReview && (
                 <div className="border border-primary/10 bg-card p-6">
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-secondary font-bold mb-1">Current Status: {statusLabels[status]}</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-secondary font-bold mb-1">Current Status: {statusLabels[status]}</p>
                   <p className="font-serif text-lg text-primary mb-3">As-salamu alaykum.</p>
                   <p className="font-sans text-sm text-primary/70 leading-relaxed">
                     Please be informed that your application has been safely received and is currently being thoroughly evaluated by our Talent Acquisition team. We deeply value the time and effort you have invested in choosing The Muslim Company. Please bookmark this tracking portal or monitor your inbox for upcoming updates.
@@ -244,7 +244,7 @@ export default function RecruitmentStatus() {
                   </p>
                   <div className="bg-primary text-primary-foreground p-5 space-y-4 mb-5">
                     <div>
-                      <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/40 mb-1">Date & Time</p>
+                      <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-1">Date & Time</p>
                       <p className="font-sans text-sm text-primary-foreground">
                         {app.interview_datetime
                           ? new Date(app.interview_datetime).toLocaleString("en-GB", { dateStyle: "long", timeStyle: "short" })
@@ -252,7 +252,7 @@ export default function RecruitmentStatus() {
                       </p>
                     </div>
                     <div>
-                      <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/40 mb-1">Interview Type</p>
+                      <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-1">Interview Type</p>
                       <div className="flex items-center gap-2">
                         {app.interview_type === "online"
                           ? <><Video className="w-4 h-4 text-secondary" /><span className="font-sans text-sm text-primary-foreground">Online (Google Meet)</span></>
@@ -261,7 +261,7 @@ export default function RecruitmentStatus() {
                       </div>
                     </div>
                     <div>
-                      <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/40 mb-1">Venue / Access Link</p>
+                      <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-1">Venue / Access Link</p>
                       {app.interview_location?.startsWith("http")
                         ? <a href={app.interview_location} target="_blank" rel="noreferrer"
                             className="font-sans text-sm text-secondary underline break-all">{app.interview_location}</a>
@@ -302,9 +302,9 @@ export default function RecruitmentStatus() {
                   {/* Countdown */}
                   {!isOfferExpired ? (
                     <div className="bg-primary text-primary-foreground p-5 mb-5">
-                      <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/40 mb-3">Offer Expiration Remaining</p>
+                      <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-3">Offer Expiration Remaining</p>
                       <CountdownTimer expiresAt={app.offer_expires_at} />
-                      <p className="font-sans text-xs text-primary-foreground/40 mt-3">
+                      <p className="font-sans text-xs text-primary-foreground/55 mt-3">
                         This offer expires: {new Date(app.offer_expires_at).toLocaleString("en-GB", { dateStyle: "long", timeStyle: "short" })}
                       </p>
                     </div>
@@ -356,9 +356,9 @@ export default function RecruitmentStatus() {
                   {/* 7-day onboarding countdown */}
                   {app.joining_deadline && (
                     <div className="bg-primary text-primary-foreground p-5 mb-5">
-                      <p className="font-sans text-[10px] tracking-widest uppercase text-primary-foreground/40 mb-3">Maximum Time Remaining to Report Onsite</p>
+                      <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-3">Maximum Time Remaining to Report Onsite</p>
                       <CountdownTimer expiresAt={app.joining_deadline} />
-                      <p className="font-sans text-xs text-primary-foreground/40 mt-3">
+                      <p className="font-sans text-xs text-primary-foreground/55 mt-3">
                         Deadline: {new Date(app.joining_deadline).toLocaleString("en-GB", { dateStyle: "long", timeStyle: "short" })}
                       </p>
                     </div>
@@ -380,7 +380,7 @@ export default function RecruitmentStatus() {
                       ))}
                     </ol>
                   </div>
-                  <p className="font-sans text-xs text-primary/50 italic">
+                  <p className="font-sans text-xs text-primary/65 italic">
                     "Prophet Muhammad (PBUH) stated: 'Muslims must abide by their agreements and covenants.' We look forward to your timely arrival."
                   </p>
                 </div>
@@ -415,7 +415,7 @@ export default function RecruitmentStatus() {
               {/* Footer note */}
               {!isRejected && !isHired && (
                 <div className="p-5 border border-secondary/20 bg-secondary/5">
-                  <p className="font-sans text-xs text-primary/55 leading-relaxed">
+                  <p className="font-sans text-xs text-primary/65 leading-relaxed">
                     Our recruitment team reviews all applications carefully. If you have any questions, contact us at <strong>hr@themuslim.company</strong>. May Allah bless your efforts.
                   </p>
                 </div>

@@ -115,7 +115,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                 <div className="flex flex-col gap-6">
                   {NAV_COL1.map(group => (
                     <div key={group.title}>
-                      <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-secondary font-bold mb-2.5">
+                      <p className="font-sans text-xs tracking-[0.3em] uppercase text-secondary font-bold mb-2.5">
                         {group.title}
                       </p>
                       <div className="flex flex-col gap-2.5">
@@ -137,7 +137,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                 <div className="flex flex-col gap-6">
                   {NAV_COL2.map(group => (
                     <div key={group.title}>
-                      <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-secondary font-bold mb-2.5">
+                      <p className="font-sans text-xs tracking-[0.3em] uppercase text-secondary font-bold mb-2.5">
                         {group.title}
                       </p>
                       <div className="flex flex-col gap-2.5">
@@ -176,19 +176,19 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
             <p className="font-serif text-base text-primary-foreground/50 mb-1">The Muslim Company</p>
             <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
             <div className="flex items-center gap-4 mt-3">
-              <a href="https://www.facebook.com/TheMuslimCompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/30 hover:text-secondary transition-colors" aria-label="Facebook">
+              <a href="https://www.facebook.com/TheMuslimCompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/55 hover:text-secondary transition-colors" aria-label="Facebook">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
               </a>
-              <a href="https://www.instagram.com/officialTheMuslimCompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/30 hover:text-secondary transition-colors" aria-label="Instagram">
+              <a href="https://www.instagram.com/officialTheMuslimCompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/55 hover:text-secondary transition-colors" aria-label="Instagram">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path fill="none" stroke="currentColor" strokeWidth="2" d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line fill="none" stroke="currentColor" strokeWidth="2" x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
               </a>
-              <a href="https://www.youtube.com/@TheMuslimCompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/30 hover:text-secondary transition-colors" aria-label="YouTube">
+              <a href="https://www.youtube.com/@TheMuslimCompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/55 hover:text-secondary transition-colors" aria-label="YouTube">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon fill="none" stroke="currentColor" strokeWidth="2" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
               </a>
-              <a href="https://www.linkedin.com/company/themuslimcompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/30 hover:text-secondary transition-colors" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/company/themuslimcompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/55 hover:text-secondary transition-colors" aria-label="LinkedIn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
               </a>
-              <a href="https://x.com/officialtmchq" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/30 hover:text-secondary transition-colors" aria-label="X">
+              <a href="https://x.com/officialtmchq" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/55 hover:text-secondary transition-colors" aria-label="X">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
               </a>
             </div>
@@ -244,10 +244,10 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                     <img src={logo} alt="The Muslim Company" className="w-6 h-6 opacity-80" />
                     <div>
                       <p className="font-serif text-sm text-primary-foreground">The Muslim Company</p>
-                      <p className="font-sans text-[9px] tracking-widest uppercase text-secondary/60">Select Portal</p>
+                      <p className="font-sans text-xs tracking-widest uppercase text-secondary/60">Select Portal</p>
                     </div>
                   </div>
-                  <button onClick={() => setLoginOpen(false)} className="text-primary-foreground/40 hover:text-primary-foreground transition-colors">
+                  <button onClick={() => setLoginOpen(false)} className="text-primary-foreground/55 hover:text-primary-foreground transition-colors">
                     <X className="w-4 h-4" />
                   </button>
                 </div>
@@ -256,19 +256,19 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                     className="flex items-center justify-between w-full p-4 border border-secondary/25 hover:border-secondary/60 bg-secondary/5 hover:bg-secondary/10 transition-all group">
                     <div>
                       <p className="font-sans text-xs font-bold tracking-widest uppercase text-primary-foreground group-hover:text-secondary transition-colors">Corporate Admin</p>
-                      <p className="font-sans text-[10px] text-primary-foreground/35 mt-0.5">Management dashboard access</p>
+                      <p className="font-sans text-xs text-primary-foreground/55 mt-0.5">Management dashboard access</p>
                     </div>
                   </a>
                   <a href="/employee"
                     className="flex items-center justify-between w-full p-4 border border-primary-foreground/15 hover:border-secondary/40 bg-white/5 hover:bg-secondary/5 transition-all group">
                     <div>
                       <p className="font-sans text-xs font-bold tracking-widest uppercase text-primary-foreground group-hover:text-secondary transition-colors">Employee Portal</p>
-                      <p className="font-sans text-[10px] text-primary-foreground/35 mt-0.5">Staff attendance, tasks & leave</p>
+                      <p className="font-sans text-xs text-primary-foreground/55 mt-0.5">Staff attendance, tasks & leave</p>
                     </div>
                   </a>
                 </div>
                 <div className="px-5 pb-5">
-                  <p className="font-sans text-[9px] text-primary-foreground/20 text-center tracking-widest uppercase">
+                  <p className="font-sans text-xs text-primary-foreground/20 text-center tracking-widest uppercase">
                     بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
                   </p>
                 </div>

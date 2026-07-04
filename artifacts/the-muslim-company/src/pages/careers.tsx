@@ -18,17 +18,17 @@ function JobCard({ job }: { job: Job }) {
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-4">
         <div>
           <h3 className="font-serif text-xl text-primary group-hover:text-secondary transition-colors">{job.title}</h3>
-          <p className="font-sans text-xs text-primary/50 mt-1">Job ID: #{job.job_id}</p>
+          <p className="font-sans text-xs text-primary/65 mt-1">Job ID: #{job.job_id}</p>
         </div>
-        <span className={`self-start px-3 py-1 font-sans text-[10px] tracking-widest uppercase border ${isExpired ? "border-red-400/30 text-red-400/70" : "border-secondary/30 text-secondary"}`}>
+        <span className={`self-start px-3 py-1 font-sans text-xs tracking-widest uppercase border ${isExpired ? "border-red-400/30 text-red-400/70" : "border-secondary/30 text-secondary"}`}>
           {isExpired ? "Expired" : "Open"}
         </span>
       </div>
       <div className="flex flex-wrap gap-4 mb-5">
-        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/55"><Briefcase className="w-3.5 h-3.5" />{job.department}</div>
-        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/55"><MapPin className="w-3.5 h-3.5" />{job.location}</div>
-        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/55"><Clock className="w-3.5 h-3.5" />{job.employment_type}</div>
-        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/55">
+        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/65"><Briefcase className="w-3.5 h-3.5" />{job.department}</div>
+        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/65"><MapPin className="w-3.5 h-3.5" />{job.location}</div>
+        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/65"><Clock className="w-3.5 h-3.5" />{job.employment_type}</div>
+        <div className="flex items-center gap-1.5 font-sans text-xs text-primary/65">
           <Calendar className="w-3.5 h-3.5" />Deadline: {new Date(job.deadline).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
         </div>
       </div>
@@ -160,13 +160,13 @@ export default function Careers() {
             <div className="text-center py-20">
               <Briefcase className="w-10 h-10 text-secondary/40 mx-auto mb-4" />
               <h3 className="font-serif text-2xl text-primary mb-3">No Positions Found</h3>
-              <p className="font-sans text-sm text-primary/50">
+              <p className="font-sans text-sm text-primary/65">
                 {jobs.length === 0 ? "No openings at the moment. Check back soon, In Sha Allah." : "No results match your search. Try different filters."}
               </p>
             </div>
           ) : (
             <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.08 } } }} className="space-y-4">
-              <p className="font-sans text-xs text-primary/40 mb-6">{filtered.length} position{filtered.length !== 1 ? "s" : ""} found</p>
+              <p className="font-sans text-xs text-primary/65 mb-6">{filtered.length} position{filtered.length !== 1 ? "s" : ""} found</p>
               {filtered.map((job) => <JobCard key={job.id} job={job} />)}
             </motion.div>
           )}

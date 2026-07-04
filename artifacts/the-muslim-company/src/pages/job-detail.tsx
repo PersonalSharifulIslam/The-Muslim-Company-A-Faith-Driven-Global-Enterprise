@@ -186,7 +186,7 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
     <SiteLayout>
       <div className="py-12 px-6 lg:px-12">
         <div className="container mx-auto max-w-4xl">
-          <Link href="/careers" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary/50 hover:text-secondary transition-colors mb-8">
+          <Link href="/careers" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary/65 hover:text-secondary transition-colors mb-8">
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Careers
           </Link>
 
@@ -198,16 +198,16 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
           ) : !job ? (
             <div className="text-center py-20">
               <h3 className="font-serif text-2xl text-primary mb-3">Job Not Found</h3>
-              <p className="font-sans text-sm text-primary/50">This position may no longer be available.</p>
+              <p className="font-sans text-sm text-primary/65">This position may no longer be available.</p>
             </div>
           ) : (
             <motion.div initial="hidden" animate="visible" variants={fadeIn}>
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-8">
                 <div>
-                  <p className="font-sans text-xs text-primary/40 mb-1">Job ID: #{job.job_id}</p>
+                  <p className="font-sans text-xs text-primary/65 mb-1">Job ID: #{job.job_id}</p>
                   <h1 className="font-serif text-3xl md:text-4xl text-primary">{job.title}</h1>
                 </div>
-                <span className={`self-start px-3 py-1 font-sans text-[10px] tracking-widest uppercase border ${isExpired ? "border-red-400/30 text-red-400/70" : "border-secondary/30 text-secondary"}`}>
+                <span className={`self-start px-3 py-1 font-sans text-xs tracking-widest uppercase border ${isExpired ? "border-red-400/30 text-red-400/70" : "border-secondary/30 text-secondary"}`}>
                   {isExpired ? "Expired" : "Open"}
                 </span>
               </div>

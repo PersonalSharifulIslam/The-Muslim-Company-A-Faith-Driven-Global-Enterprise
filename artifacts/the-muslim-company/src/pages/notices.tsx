@@ -153,7 +153,7 @@ export default function Notices() {
             <div className="text-center py-20">
               <Bell className="w-10 h-10 text-secondary/40 mx-auto mb-4" />
               <h3 className="font-serif text-2xl text-primary mb-3">No Notices Found</h3>
-              <p className="font-sans text-sm text-primary/50">{notices.length === 0 ? "No notices published yet." : "No results match your search."}</p>
+              <p className="font-sans text-sm text-primary/65">{notices.length === 0 ? "No notices published yet." : "No results match your search."}</p>
             </div>
           ) : (
             <>
@@ -161,11 +161,11 @@ export default function Notices() {
                 <table className="w-full min-w-[600px]">
                   <thead>
                     <tr className="bg-primary text-primary-foreground">
-                      <th className="text-left font-sans text-[10px] tracking-widest uppercase px-5 py-4 w-12">No.</th>
-                      <th className="text-left font-sans text-[10px] tracking-widest uppercase px-5 py-4 w-32">Date</th>
-                      <th className="text-left font-sans text-[10px] tracking-widest uppercase px-5 py-4">Title</th>
-                      <th className="text-left font-sans text-[10px] tracking-widest uppercase px-5 py-4 w-28">Category</th>
-                      <th className="text-center font-sans text-[10px] tracking-widest uppercase px-5 py-4 w-32">PDF</th>
+                      <th className="text-left font-sans text-xs tracking-widest uppercase px-5 py-4 w-12">No.</th>
+                      <th className="text-left font-sans text-xs tracking-widest uppercase px-5 py-4 w-32">Date</th>
+                      <th className="text-left font-sans text-xs tracking-widest uppercase px-5 py-4">Title</th>
+                      <th className="text-left font-sans text-xs tracking-widest uppercase px-5 py-4 w-28">Category</th>
+                      <th className="text-center font-sans text-xs tracking-widest uppercase px-5 py-4 w-32">PDF</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -177,19 +177,19 @@ export default function Notices() {
                         transition={{ delay: idx * 0.03 }}
                         className={`border-t border-primary/8 hover:bg-secondary/5 transition-colors ${notice.pinned ? "bg-secondary/5" : ""}`}
                       >
-                        <td className="px-5 py-4 font-sans text-sm text-primary/40">{(page - 1) * PER_PAGE + idx + 1}</td>
-                        <td className="px-5 py-4 font-sans text-xs text-primary/55 whitespace-nowrap">
+                        <td className="px-5 py-4 font-sans text-sm text-primary/65">{(page - 1) * PER_PAGE + idx + 1}</td>
+                        <td className="px-5 py-4 font-sans text-xs text-primary/65 whitespace-nowrap">
                           {new Date(notice.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
                         </td>
                         <td className="px-5 py-4">
                           <div className="flex items-center gap-2 flex-wrap">
                             {notice.pinned && <Pin className="w-3 h-3 text-secondary flex-shrink-0" />}
-                            {notice.important && <span className="font-sans text-[9px] tracking-widest uppercase bg-red-400/10 text-red-400 border border-red-400/20 px-2 py-0.5">Important</span>}
+                            {notice.important && <span className="font-sans text-xs tracking-widest uppercase bg-red-400/10 text-red-400 border border-red-400/20 px-2 py-0.5">Important</span>}
                             <span className="font-sans text-sm text-primary">{notice.title}</span>
                           </div>
                         </td>
                         <td className="px-5 py-4">
-                          <span className="font-sans text-[10px] tracking-wide text-primary/50 border border-primary/10 px-2 py-0.5 whitespace-nowrap">{notice.category}</span>
+                          <span className="font-sans text-xs tracking-wide text-primary/65 border border-primary/10 px-2 py-0.5 whitespace-nowrap">{notice.category}</span>
                         </td>
                         <td className="px-5 py-4">
                           {notice.pdf_url ? (
@@ -197,7 +197,7 @@ export default function Notices() {
                               <a href={notice.pdf_url} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-secondary/70 transition-colors" title="View PDF">
                                 <ExternalLink className="w-4 h-4" />
                               </a>
-                              <a href={notice.pdf_url} download className="text-primary/50 hover:text-secondary transition-colors" title="Download PDF">
+                              <a href={notice.pdf_url} download className="text-primary/65 hover:text-secondary transition-colors" title="Download PDF">
                                 <Download className="w-4 h-4" />
                               </a>
                             </div>
@@ -217,7 +217,7 @@ export default function Notices() {
                     <button
                       key={i}
                       onClick={() => setPage(i + 1)}
-                      className={`w-9 h-9 font-sans text-xs border transition-colors ${page === i + 1 ? "bg-secondary text-primary border-secondary" : "border-primary/15 text-primary/50 hover:border-secondary/50"}`}
+                      className={`w-9 h-9 font-sans text-xs border transition-colors ${page === i + 1 ? "bg-secondary text-primary border-secondary" : "border-primary/15 text-primary/65 hover:border-secondary/50"}`}
                     >
                       {i + 1}
                     </button>

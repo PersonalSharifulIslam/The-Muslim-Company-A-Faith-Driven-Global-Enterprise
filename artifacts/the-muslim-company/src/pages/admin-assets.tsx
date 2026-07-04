@@ -16,7 +16,7 @@ const STATUS_COLORS: Record<string, string> = {
   available: "bg-blue-400/10 text-blue-400",
   assigned: "bg-green-400/10 text-green-400",
   maintenance: "bg-yellow-400/10 text-yellow-400",
-  retired: "bg-gray-400/10 text-gray-400",
+  retired: "bg-gray-400/10 text-gray-600",
 };
 const ASSET_TYPES = ["Laptop", "Desktop", "Phone", "ID Card", "Vehicle", "Office Equipment", "Software License", "Other"];
 const BLANK_ITEM: AssetItem = { asset_name: "", asset_type: ASSET_TYPES[0], serial_number: "", notes: "" };
@@ -137,7 +137,7 @@ export default function AdminAssets() {
           {(["all", "available", "assigned"] as const).map((s) => (
             <button key={s} onClick={() => setFilter(s)} className={`p-3 border rounded text-center transition-colors ${filter === s ? "border-secondary bg-secondary/5" : "border-primary/10"}`}>
               <p className="font-serif text-xl text-primary">{counts[s]}</p>
-              <p className="font-sans text-[9px] uppercase tracking-widest text-primary/40 capitalize">{s}</p>
+              <p className="font-sans text-xs uppercase tracking-widest text-primary/65 capitalize">{s}</p>
             </button>
           ))}
         </div>
@@ -146,16 +146,16 @@ export default function AdminAssets() {
         {showForm && (
           <form onSubmit={handleSaveMultiple} className="mb-6 p-6 border border-secondary/30 bg-card">
             <div className="mb-5">
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Assign To (Optional)</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Assign To (Optional)</label>
               <select value={assignedTo} onChange={(e) => setAssignedTo(e.target.value)}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                 <option value="">Unassigned</option>
                 {employees.map((e) => <option key={e.employee_id} value={e.employee_id}>{e.name} — {e.department}</option>)}
               </select>
-              <p className="font-sans text-[10px] text-primary/40 mt-1">All items below will be assigned to this person.</p>
+              <p className="font-sans text-xs text-primary/65 mt-1">All items below will be assigned to this person.</p>
             </div>
 
-            <p className="font-sans text-xs uppercase tracking-widest text-primary/50 mb-3">Assets ({items.length})</p>
+            <p className="font-sans text-xs uppercase tracking-widest text-primary/65 mb-3">Assets ({items.length})</p>
 
             <div className="space-y-4">
               {items.map((item, i) => (
@@ -166,26 +166,26 @@ export default function AdminAssets() {
                     </button>
                   )}
                   <div>
-                    <label className="font-sans text-[10px] text-primary/50 mb-1 block">Asset Name *</label>
+                    <label className="font-sans text-xs text-primary/65 mb-1 block">Asset Name *</label>
                     <input required value={item.asset_name} onChange={(e) => updateRow(i, "asset_name", e.target.value)}
                       placeholder="e.g. MacBook Pro 16&quot;"
                       className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                   </div>
                   <div>
-                    <label className="font-sans text-[10px] text-primary/50 mb-1 block">Type *</label>
+                    <label className="font-sans text-xs text-primary/65 mb-1 block">Type *</label>
                     <select value={item.asset_type} onChange={(e) => updateRow(i, "asset_type", e.target.value)}
                       className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                       {ASSET_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="font-sans text-[10px] text-primary/50 mb-1 block">Serial Number</label>
+                    <label className="font-sans text-xs text-primary/65 mb-1 block">Serial Number</label>
                     <input value={item.serial_number} onChange={(e) => updateRow(i, "serial_number", e.target.value)}
                       placeholder="Unique serial / plate / license no."
                       className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                   </div>
                   <div>
-                    <label className="font-sans text-[10px] text-primary/50 mb-1 block">Notes</label>
+                    <label className="font-sans text-xs text-primary/65 mb-1 block">Notes</label>
                     <input value={item.notes} onChange={(e) => updateRow(i, "notes", e.target.value)}
                       className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                   </div>
@@ -210,24 +210,24 @@ export default function AdminAssets() {
         {editing && (
           <form onSubmit={handleSaveEdit} className="mb-6 p-6 border border-secondary/30 bg-card grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Asset Name *</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Asset Name *</label>
               <input required value={editForm.asset_name} onChange={(e) => setEditForm((f) => ({ ...f, asset_name: e.target.value }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
             </div>
             <div>
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Type *</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Type *</label>
               <select value={editForm.asset_type} onChange={(e) => setEditForm((f) => ({ ...f, asset_type: e.target.value }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                 {ASSET_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
               </select>
             </div>
             <div>
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Serial Number</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Serial Number</label>
               <input value={editForm.serial_number} onChange={(e) => setEditForm((f) => ({ ...f, serial_number: e.target.value }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
             </div>
             <div>
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Assign To</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Assign To</label>
               <select value={editing.assigned_to || ""} onChange={(e) => setEditing((ed) => ed ? { ...ed, assigned_to: e.target.value } : ed)}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                 <option value="">Unassigned</option>
@@ -235,7 +235,7 @@ export default function AdminAssets() {
               </select>
             </div>
             <div className="sm:col-span-2">
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Notes</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Notes</label>
               <input value={editForm.notes} onChange={(e) => setEditForm((f) => ({ ...f, notes: e.target.value }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
             </div>
@@ -255,11 +255,11 @@ export default function AdminAssets() {
                 <div>
                   <div className="flex items-center gap-2">
                     <p className="font-sans text-sm text-primary">{a.asset_name}</p>
-                    <span className={`font-sans text-[9px] uppercase tracking-widest px-2 py-0.5 rounded ${STATUS_COLORS[a.status]}`}>{a.status}</span>
+                    <span className={`font-sans text-xs uppercase tracking-widest px-2 py-0.5 rounded ${STATUS_COLORS[a.status]}`}>{a.status}</span>
                   </div>
-                  <p className="font-sans text-xs text-primary/40">{a.asset_type} {a.serial_number && `· ${a.serial_number}`} {a.employees?.name && `· Assigned to ${a.employees.name}`}</p>
+                  <p className="font-sans text-xs text-primary/65">{a.asset_type} {a.serial_number && `· ${a.serial_number}`} {a.employees?.name && `· Assigned to ${a.employees.name}`}</p>
                 </div>
-                <button onClick={() => startEdit(a)} className="text-primary/40 hover:text-secondary"><Edit2 className="w-4 h-4" /></button>
+                <button onClick={() => startEdit(a)} className="text-primary/65 hover:text-secondary"><Edit2 className="w-4 h-4" /></button>
               </div>
             ))}
           </div>

@@ -27,7 +27,7 @@ function InlineQuote({ children, author }: { children: React.ReactNode; author?:
   return (
     <div className="border-l-4 border-secondary pl-5 py-1 my-6">
       <p className="font-serif text-lg italic leading-relaxed text-primary/80">"{children}"</p>
-      {author && <p className="mt-3 font-sans text-xs tracking-widest uppercase text-primary/40">— {author}</p>}
+      {author && <p className="mt-3 font-sans text-xs tracking-widest uppercase text-primary/65">— {author}</p>}
     </div>
   );
 }
@@ -178,22 +178,22 @@ export default function FounderPage() {
               <div className="mt-6 flex items-center justify-center gap-5">
                 <a href="https://sharifulislam.engineer" target="_blank" rel="noopener noreferrer"
                   aria-label="Personal website"
-                  className="text-primary-foreground/40 hover:text-secondary transition-colors">
+                  className="text-primary-foreground/55 hover:text-secondary transition-colors">
                   <Globe2 className="w-5 h-5" />
                 </a>
                 <a href="https://www.linkedin.com/in/personalsharifulislam" target="_blank" rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="text-primary-foreground/40 hover:text-secondary transition-colors">
+                  className="text-primary-foreground/55 hover:text-secondary transition-colors">
                   <Linkedin className="w-5 h-5" />
                 </a>
                 <a href="https://x.com/PersonalSIslam" target="_blank" rel="noopener noreferrer"
                   aria-label="X (Twitter)"
-                  className="text-primary-foreground/40 hover:text-secondary transition-colors">
+                  className="text-primary-foreground/55 hover:text-secondary transition-colors">
                   <Twitter className="w-5 h-5" />
                 </a>
                 <a href="https://orcid.org/0000-0002-6634-5090" target="_blank" rel="noopener noreferrer"
                   aria-label="ORCID"
-                  className="text-primary-foreground/40 hover:text-secondary transition-colors font-sans text-xs font-bold tracking-wide">
+                  className="text-primary-foreground/55 hover:text-secondary transition-colors font-sans text-xs font-bold tracking-wide">
                   ORCID
                 </a>
               </div>
@@ -238,7 +238,7 @@ export default function FounderPage() {
                   { t: "The Response", d: "A diversified global conglomerate built on accountability, knowledge, and long-term value." },
                 ].map((item, i) => (
                   <div key={i} className="p-4 border border-primary-foreground/15">
-                    <p className="font-sans text-[10px] tracking-widest uppercase text-secondary mb-2">{item.t}</p>
+                    <p className="font-sans text-xs tracking-widest uppercase text-secondary mb-2">{item.t}</p>
                     <p className="font-sans text-xs text-primary-foreground/65 leading-relaxed">{item.d}</p>
                   </div>
                 ))}
@@ -248,11 +248,11 @@ export default function FounderPage() {
                 Today, that founding vision continues to guide the organization's expansion across technology, finance, education, healthcare, manufacturing, and humanitarian development — each sector evaluated not only for commercial viability, but for its contribution to a broader, ethically grounded enterprise.
               </p>
 
-              <p className="font-sans text-[10px] tracking-widest uppercase text-secondary mb-4">The Vision Beyond Business</p>
+              <p className="font-sans text-xs tracking-widest uppercase text-secondary mb-4">The Vision Beyond Business</p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {["Ethical Business Ecosystem", "Halal Economic Model", "Humanitarian Development Platform", "Knowledge & Research Revival", "Ethical Technology Ecosystem", "Transparent Institution", "Civilization-Focused Enterprise", "Environmental Stewardship"].map((v, i) => (
                   <div key={i} className="p-3 border border-secondary/20 text-center">
-                    <p className="font-sans text-[10px] tracking-wide uppercase text-primary-foreground/60">{v}</p>
+                    <p className="font-sans text-xs tracking-wide uppercase text-primary-foreground/60">{v}</p>
                   </div>
                 ))}
               </div>
@@ -278,7 +278,7 @@ export default function FounderPage() {
                   { l: "Role", v: "Founder, Chairman & MD, CEO" },
                 ].map((r, i) => (
                   <div key={i}>
-                    <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40">{r.l}</p>
+                    <p className="font-sans text-xs tracking-widest uppercase text-primary/65">{r.l}</p>
                     <p className="font-sans text-sm text-primary/80">{r.v}</p>
                   </div>
                 ))}
@@ -325,7 +325,7 @@ export default function FounderPage() {
                 ].map((r, i) => (
                   <div key={i} className="p-4 border border-primary/10">
                     <p className="font-serif text-sm text-primary mb-1">{r.role}</p>
-                    <p className="font-sans text-xs text-primary/50">{r.org}</p>
+                    <p className="font-sans text-xs text-primary/65">{r.org}</p>
                   </div>
                 ))}
               </div>

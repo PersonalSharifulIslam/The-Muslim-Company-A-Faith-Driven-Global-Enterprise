@@ -974,7 +974,7 @@ export default function SectorDetail() {
         <section className="bg-primary pt-32 pb-20 px-6 lg:px-12">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-              <Link href="/sectors" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary-foreground/40 hover:text-secondary transition-colors mb-8">
+              <Link href="/sectors" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary-foreground/55 hover:text-secondary transition-colors mb-8">
                 <ArrowLeft className="w-3 h-3" /> All Sectors
               </Link>
               <div className="text-5xl mb-6">{sector.icon}</div>
@@ -1044,7 +1044,7 @@ export default function SectorDetail() {
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-4">Why It Matters</p>
               <p className="font-serif text-2xl text-primary leading-relaxed mb-6 max-w-3xl">{sector.whyItMatters}</p>
               <div className="p-6 border border-primary/10 bg-background">
-                <p className="font-sans text-xs tracking-widest uppercase text-primary/40 mb-2">The Global Challenge</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-2">The Global Challenge</p>
                 <p className="font-sans text-sm text-primary/65 leading-relaxed">{sector.globalProblem}</p>
               </div>
             </motion.div>
@@ -1062,7 +1062,7 @@ export default function SectorDetail() {
                   <div className="space-y-3">
                     {sector.goals.short.map((g, i) => (
                       <div key={i} className="flex items-start gap-3">
-                        <span className="font-sans text-[10px] text-secondary/50 w-5 flex-shrink-0 mt-1">{String(i+1).padStart(2,"0")}</span>
+                        <span className="font-sans text-xs text-secondary/70 w-5 flex-shrink-0 mt-1">{String(i+1).padStart(2,"0")}</span>
                         <p className="font-sans text-sm text-primary/70">{g}</p>
                       </div>
                     ))}
@@ -1073,7 +1073,7 @@ export default function SectorDetail() {
                   <div className="space-y-3">
                     {sector.goals.long.map((g, i) => (
                       <div key={i} className="flex items-start gap-3">
-                        <span className="font-sans text-[10px] text-secondary/50 w-5 flex-shrink-0 mt-1">{String(i+1).padStart(2,"0")}</span>
+                        <span className="font-sans text-xs text-secondary/70 w-5 flex-shrink-0 mt-1">{String(i+1).padStart(2,"0")}</span>
                         <p className="font-sans text-sm text-primary/70">{g}</p>
                       </div>
                     ))}
@@ -1093,7 +1093,7 @@ export default function SectorDetail() {
                 <Link href="/baytalmalbank" className="block p-8 lg:p-10 bg-card border border-primary/10 hover:border-secondary/40 transition-colors group">
                   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                     <div>
-                      <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/70 mb-2">In Development — Launching 2031</p>
+                      <p className="font-sans text-xs tracking-widest uppercase text-secondary/70 mb-2">In Development — Launching 2031</p>
                       <h3 className="font-serif text-2xl md:text-3xl text-primary mb-3 group-hover:text-secondary transition-colors">
                         The Bayt Al-Mal Bank
                       </h3>

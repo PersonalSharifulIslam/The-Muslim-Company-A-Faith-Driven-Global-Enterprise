@@ -60,7 +60,7 @@ export default function EmployeeLeave() {
             <p className="font-sans text-xs tracking-widest uppercase text-[#b08d57]/60 mb-1">Employee Portal</p>
             <h1 className="font-serif text-3xl text-white">Leave Management</h1>
           </div>
-          <Button onClick={() => setShowForm(true)} className="h-9 bg-[#b08d57] hover:bg-[#c9a96e] text-black rounded-none font-sans text-[10px] font-bold tracking-widest uppercase gap-2">
+          <Button onClick={() => setShowForm(true)} className="h-9 bg-[#b08d57] hover:bg-[#c9a96e] text-black rounded-none font-sans text-xs font-bold tracking-widest uppercase gap-2">
             <Plus className="w-3.5 h-3.5" /> Request Leave
           </Button>
         </motion.div>
@@ -69,13 +69,13 @@ export default function EmployeeLeave() {
           {[["Total Requests", stats.total, "text-white"], ["Pending", stats.pending, "text-yellow-400"], ["Approved", stats.approved, "text-green-400"]].map(([label, val, color]) => (
             <div key={label as string} className="bg-[#0f2314]/60 border border-[#b08d57]/15 p-4 text-center">
               <p className={`font-serif text-3xl font-bold ${color}`}>{val}</p>
-              <p className="font-sans text-[10px] tracking-widest uppercase text-white/30 mt-1">{label}</p>
+              <p className="font-sans text-xs tracking-widest uppercase text-white/30 mt-1">{label}</p>
             </div>
           ))}
           <div className="bg-[#0f2314]/60 border border-[#b08d57]/30 p-4 text-center">
             <p className={`font-serif text-3xl font-bold ${balance && balance.remaining <= 3 ? "text-red-400" : "text-[#b08d57]"}`}>{balance ? balance.remaining : "—"}</p>
-            <p className="font-sans text-[10px] tracking-widest uppercase text-white/30 mt-1">Days Remaining</p>
-            {balance && <p className="font-sans text-[9px] text-white/40 mt-0.5">of {balance.quota} annual</p>}
+            <p className="font-sans text-xs tracking-widest uppercase text-white/30 mt-1">Days Remaining</p>
+            {balance && <p className="font-sans text-xs text-white/40 mt-0.5">of {balance.quota} annual</p>}
           </div>
         </motion.div>
 
@@ -89,38 +89,38 @@ export default function EmployeeLeave() {
         {showForm && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-[#0f2314]/80 border border-[#b08d57]/30 p-6">
             <div className="flex items-center justify-between mb-5">
-              <p className="font-sans text-[10px] tracking-widest uppercase text-white/50 flex items-center gap-2"><Calendar className="w-3.5 h-3.5" /> New Leave Request</p>
+              <p className="font-sans text-xs tracking-widest uppercase text-white/50 flex items-center gap-2"><Calendar className="w-3.5 h-3.5" /> New Leave Request</p>
               <button onClick={() => setShowForm(false)} className="text-white/30 hover:text-white"><X className="w-4 h-4" /></button>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-white/30 block mb-2">Leave Type *</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-white/30 block mb-2">Leave Type *</label>
                   <select value={form.leave_type} onChange={(e) => setForm((f) => ({ ...f, leave_type: e.target.value }))} className="w-full h-10 px-3 bg-white/5 border border-[#b08d57]/20 text-white font-sans text-sm focus:outline-none focus:border-[#b08d57]/50">
                     {LEAVE_TYPES.map((t) => <option key={t} value={t} className="bg-[#0a1a0e]">{t}</option>)}
                   </select>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <label className="font-sans text-[10px] tracking-widest uppercase text-white/30 block mb-2">Start Date *</label>
+                    <label className="font-sans text-xs tracking-widest uppercase text-white/30 block mb-2">Start Date *</label>
                     <input type="date" required value={form.start_date} onChange={(e) => setForm((f) => ({ ...f, start_date: e.target.value }))} className="w-full h-10 px-3 bg-white/5 border border-[#b08d57]/20 text-white font-sans text-sm focus:outline-none focus:border-[#b08d57]/50 [color-scheme:dark]" />
                   </div>
                   <div>
-                    <label className="font-sans text-[10px] tracking-widest uppercase text-white/30 block mb-2">End Date *</label>
+                    <label className="font-sans text-xs tracking-widest uppercase text-white/30 block mb-2">End Date *</label>
                     <input type="date" required value={form.end_date} onChange={(e) => setForm((f) => ({ ...f, end_date: e.target.value }))} className="w-full h-10 px-3 bg-white/5 border border-[#b08d57]/20 text-white font-sans text-sm focus:outline-none focus:border-[#b08d57]/50 [color-scheme:dark]" />
                   </div>
                 </div>
               </div>
               <div>
-                <label className="font-sans text-[10px] tracking-widest uppercase text-white/30 block mb-2">Reason *</label>
+                <label className="font-sans text-xs tracking-widest uppercase text-white/30 block mb-2">Reason *</label>
                 <textarea required rows={3} value={form.reason} onChange={(e) => setForm((f) => ({ ...f, reason: e.target.value }))} className="w-full px-3 py-2.5 bg-white/5 border border-[#b08d57]/20 text-white font-sans text-sm focus:outline-none focus:border-[#b08d57]/50 resize-none" />
               </div>
               {error && <p className="font-sans text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3.5 h-3.5" />{error}</p>}
               <div className="flex gap-3">
-                <Button type="submit" disabled={submitting} className="h-9 bg-[#b08d57] hover:bg-[#c9a96e] text-black rounded-none font-sans text-[10px] font-bold tracking-widest uppercase disabled:opacity-50">
+                <Button type="submit" disabled={submitting} className="h-9 bg-[#b08d57] hover:bg-[#c9a96e] text-black rounded-none font-sans text-xs font-bold tracking-widest uppercase disabled:opacity-50">
                   {submitting ? "Submitting..." : "Submit Request"}
                 </Button>
-                <Button type="button" onClick={() => setShowForm(false)} variant="outline" className="h-9 border-[#b08d57]/20 text-white/50 hover:text-white rounded-none font-sans text-[10px] tracking-widest uppercase">
+                <Button type="button" onClick={() => setShowForm(false)} variant="outline" className="h-9 border-[#b08d57]/20 text-white/50 hover:text-white rounded-none font-sans text-xs tracking-widest uppercase">
                   Cancel
                 </Button>
               </div>
@@ -130,7 +130,7 @@ export default function EmployeeLeave() {
 
         <motion.div variants={fade} className="bg-[#0f2314]/60 border border-[#b08d57]/15">
           <div className="px-5 py-4 border-b border-[#b08d57]/10">
-            <p className="font-sans text-[10px] tracking-widest uppercase text-white/40">Leave History</p>
+            <p className="font-sans text-xs tracking-widest uppercase text-white/40">Leave History</p>
           </div>
           {leaves?.length === 0 ? (
             <p className="font-sans text-sm text-white/45 text-center py-12">No leave requests submitted yet</p>
@@ -145,15 +145,15 @@ export default function EmployeeLeave() {
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <span className="font-sans text-xs font-bold text-white">{l.leave_type}</span>
-                          <span className="font-sans text-[9px] text-white/30">· {l.days} day{l.days !== 1 ? "s" : ""}</span>
+                          <span className="font-sans text-xs text-white/30">· {l.days} day{l.days !== 1 ? "s" : ""}</span>
                         </div>
                         <p className="font-sans text-sm text-white/50">{l.reason}</p>
-                        <p className="font-sans text-[10px] text-white/45 mt-1">
+                        <p className="font-sans text-xs text-white/45 mt-1">
                           {new Date(l.start_date).toLocaleDateString("en-GB", { day: "numeric", month: "short" })} → {new Date(l.end_date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
                         </p>
                         {l.admin_note && <p className="font-sans text-xs text-[#b08d57]/60 mt-1 italic">Note: {l.admin_note}</p>}
                       </div>
-                      <span className={`inline-flex items-center gap-1 font-sans text-[9px] font-bold uppercase tracking-widest px-2 py-1 ${s.bg} ${s.color}`}>
+                      <span className={`inline-flex items-center gap-1 font-sans text-xs font-bold uppercase tracking-widest px-2 py-1 ${s.bg} ${s.color}`}>
                         <Icon className="w-3 h-3" />{l.status}
                       </span>
                     </div>

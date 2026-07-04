@@ -135,7 +135,7 @@ export default function AdminTransparencyReports() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="font-serif text-3xl text-primary mb-1">Transparency Reports</h1>
-          <p className="font-sans text-sm text-primary/50">Upload monthly, quarterly, semi-annual, and annual reports</p>
+          <p className="font-sans text-sm text-primary/65">Upload monthly, quarterly, semi-annual, and annual reports</p>
         </div>
         <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
           <Plus className="w-3.5 h-3.5 mr-2" />New Report
@@ -155,7 +155,7 @@ export default function AdminTransparencyReports() {
             <thead>
               <tr className="bg-primary text-primary-foreground">
                 {["Title", "Type", "Period", "Published", "Featured", "PDF", "Actions"].map((h) => (
-                  <th key={h} className="text-left font-sans text-[10px] tracking-widest uppercase px-5 py-4">{h}</th>
+                  <th key={h} className="text-left font-sans text-xs tracking-widest uppercase px-5 py-4">{h}</th>
                 ))}
               </tr>
             </thead>
@@ -165,13 +165,13 @@ export default function AdminTransparencyReports() {
                   <td className="px-5 py-4 font-sans text-sm text-primary max-w-xs truncate">{r.title}</td>
                   <td className="px-5 py-4 font-sans text-xs text-primary/60">{typeLabel(r.report_type)}</td>
                   <td className="px-5 py-4 font-sans text-xs text-primary/60">{r.period_label}</td>
-                  <td className="px-5 py-4 font-sans text-xs text-primary/50">{new Date(r.published_date).toLocaleDateString("en-GB")}</td>
+                  <td className="px-5 py-4 font-sans text-xs text-primary/65">{new Date(r.published_date).toLocaleDateString("en-GB")}</td>
                   <td className="px-5 py-4">{r.featured && <Star className="w-3.5 h-3.5 text-secondary" />}</td>
-                  <td className="px-5 py-4 font-sans text-xs text-primary/50">{r.pdf_url ? "✓" : "—"}</td>
+                  <td className="px-5 py-4 font-sans text-xs text-primary/65">{r.pdf_url ? "✓" : "—"}</td>
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
-                      <button onClick={() => openEdit(r)} className="text-primary/40 hover:text-secondary transition-colors"><Edit2 className="w-4 h-4" /></button>
-                      <button onClick={() => del(r.id)} disabled={deleting === r.id} className="text-primary/40 hover:text-red-400 transition-colors disabled:opacity-30"><Trash2 className="w-4 h-4" /></button>
+                      <button onClick={() => openEdit(r)} className="text-primary/65 hover:text-secondary transition-colors"><Edit2 className="w-4 h-4" /></button>
+                      <button onClick={() => del(r.id)} disabled={deleting === r.id} className="text-primary/65 hover:text-red-400 transition-colors disabled:opacity-30"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   </td>
                 </tr>
@@ -186,37 +186,37 @@ export default function AdminTransparencyReports() {
           <div className="bg-background border border-primary/15 w-full max-w-xl my-8">
             <div className="flex items-center justify-between px-6 py-4 border-b border-primary/10">
               <h2 className="font-serif text-xl text-primary">{editing ? "Edit Report" : "New Report"}</h2>
-              <button onClick={() => setModal(false)}><X className="w-5 h-5 text-primary/40" /></button>
+              <button onClick={() => setModal(false)}><X className="w-5 h-5 text-primary/65" /></button>
             </div>
             <div className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
               <div>
-                <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Title *</label>
+                <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Title *</label>
                 <input value={form.title} onChange={setField("title")} placeholder="e.g. Q2 2026 Transparency Report" className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Report Type</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Report Type</label>
                   <select value={form.report_type} onChange={setField("report_type")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     {TYPES.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Period Label *</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Period Label *</label>
                   <input value={form.period_label} onChange={setField("period_label")} placeholder="e.g. April–June 2026" className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Published Date</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Published Date</label>
                   <input type="date" value={form.published_date} onChange={setField("published_date")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">PDF File *</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">PDF File *</label>
                   {form.pdf_url ? (
                     <div className="flex items-center gap-2 h-10 px-3 bg-secondary/10 border border-secondary/30">
                       <FileText className="w-4 h-4 text-secondary shrink-0" />
                       <span className="font-sans text-xs text-primary truncate flex-1">{uploadedFileName}</span>
-                      <button onClick={removePdf} className="text-primary/40 hover:text-red-400 transition-colors shrink-0">
+                      <button onClick={removePdf} className="text-primary/65 hover:text-red-400 transition-colors shrink-0">
                         <X className="w-3.5 h-3.5" />
                       </button>
                     </div>
@@ -224,7 +224,7 @@ export default function AdminTransparencyReports() {
                     <button
                       onClick={() => fileInputRef.current?.click()}
                       disabled={uploading}
-                      className="w-full h-10 px-3 bg-background border border-primary/15 border-dashed font-sans text-xs text-primary/50 hover:border-secondary/50 hover:text-secondary transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                      className="w-full h-10 px-3 bg-background border border-primary/15 border-dashed font-sans text-xs text-primary/65 hover:border-secondary/50 hover:text-secondary transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
                     >
                       {uploading ? (
                         <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading...</>
@@ -243,7 +243,7 @@ export default function AdminTransparencyReports() {
                 </div>
               </div>
               <div>
-                <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Description (Optional)</label>
+                <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Description (Optional)</label>
                 <textarea rows={4} value={form.description} onChange={setField("description")} placeholder="Brief summary of this report's contents" className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
               </div>
               <label className="flex items-center gap-2 cursor-pointer">

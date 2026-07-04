@@ -166,7 +166,7 @@ export default function AboutPage() {
             ].map(([val, label], i) => (
               <div key={i} className="text-center">
                 <p className="font-serif text-2xl md:text-3xl text-primary font-bold">{val}</p>
-                <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mt-1">{label}</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mt-1">{label}</p>
               </div>
             ))}
           </div>
@@ -192,23 +192,23 @@ export default function AboutPage() {
               </div>
               <div className="bg-card border border-primary/10 p-6 space-y-5 h-fit">
                 <div>
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1">Founded</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-1">Founded</p>
                   <p className="font-serif text-lg text-primary">January 2025</p>
                 </div>
                 <div>
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1">Headquarters</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-1">Headquarters</p>
                   <p className="font-serif text-lg text-primary">Dhaka, Bangladesh</p>
                 </div>
                 <div>
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1">Founder, Chairman & CEO</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-1">Founder, Chairman & CEO</p>
                   <p className="font-serif text-lg text-primary"><a href="/founder" className="hover:text-secondary transition-colors">Shariful Islam</a></p>
                 </div>
                 <div>
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1">Sectors</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-1">Sectors</p>
                   <p className="font-serif text-lg text-primary">20+ industries</p>
                 </div>
                 <div>
-                  <p className="font-sans text-[10px] tracking-widest uppercase text-primary/40 mb-1">Governance</p>
+                  <p className="font-sans text-xs tracking-widest uppercase text-primary/65 mb-1">Governance</p>
                   <p className="font-serif text-lg text-primary">Supreme Shariah Board</p>
                 </div>
               </div>
@@ -222,7 +222,7 @@ export default function AboutPage() {
                   <div key={i} className="p-6 bg-card border border-primary/10">
                     <div className="text-secondary mb-3">{v.icon}</div>
                     <h3 className="font-serif text-lg text-primary mb-2">{v.title}</h3>
-                    <p className="font-sans text-xs text-primary/55 leading-relaxed">{v.desc}</p>
+                    <p className="font-sans text-xs text-primary/65 leading-relaxed">{v.desc}</p>
                   </div>
                 ))}
               </div>
@@ -325,8 +325,8 @@ export default function AboutPage() {
                 {SUBBRANDS.map((b, i) => (
                   <a key={i} href={b.href} className="p-6 bg-card border border-primary/10 hover:border-secondary/40 transition-colors block">
                     <h3 className="font-serif text-lg text-primary mb-1">{b.name}</h3>
-                    <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/70 mb-3">{b.tag}</p>
-                    <p className="font-sans text-xs text-primary/55 leading-relaxed">{b.desc}</p>
+                    <p className="font-sans text-xs tracking-widest uppercase text-secondary/70 mb-3">{b.tag}</p>
+                    <p className="font-sans text-xs text-primary/65 leading-relaxed">{b.desc}</p>
                   </a>
                 ))}
               </div>
@@ -373,7 +373,7 @@ export default function AboutPage() {
                     <div className="font-serif text-sm text-secondary font-bold whitespace-nowrap w-28 flex-shrink-0">{m.year}</div>
                     <div>
                       <h4 className="font-serif text-base text-primary mb-1">{m.title}</h4>
-                      <p className="font-sans text-xs text-primary/55 leading-relaxed">{m.desc}</p>
+                      <p className="font-sans text-xs text-primary/65 leading-relaxed">{m.desc}</p>
                     </div>
                   </div>
                 ))}

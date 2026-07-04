@@ -132,7 +132,7 @@ export default function AdminBlog() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="font-serif text-3xl text-primary mb-1">Blog</h1>
-          <p className="font-sans text-sm text-primary/50">Manage blog posts and articles</p>
+          <p className="font-sans text-sm text-primary/65">Manage blog posts and articles</p>
         </div>
         <Button onClick={openNew} className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans text-xs h-9 px-5">
           <Plus className="w-3.5 h-3.5 mr-2" />New Post
@@ -152,7 +152,7 @@ export default function AdminBlog() {
             <thead>
               <tr className="bg-primary text-primary-foreground">
                 {["Title", "Category", "Author", "Date", "Published", "Actions"].map((h) => (
-                  <th key={h} className="text-left font-sans text-[10px] tracking-widest uppercase px-5 py-4">{h}</th>
+                  <th key={h} className="text-left font-sans text-xs tracking-widest uppercase px-5 py-4">{h}</th>
                 ))}
               </tr>
             </thead>
@@ -161,18 +161,18 @@ export default function AdminBlog() {
                 <tr key={p.id} className="border-t border-primary/8 hover:bg-secondary/5 transition-colors">
                   <td className="px-5 py-4 font-sans text-sm text-primary max-w-xs truncate">{p.title}</td>
                   <td className="px-5 py-4 font-sans text-xs text-primary/60">{p.category}</td>
-                  <td className="px-5 py-4 font-sans text-xs text-primary/50">{p.author}</td>
-                  <td className="px-5 py-4 font-sans text-xs text-primary/50">{new Date(p.created_at).toLocaleDateString("en-GB")}</td>
+                  <td className="px-5 py-4 font-sans text-xs text-primary/65">{p.author}</td>
+                  <td className="px-5 py-4 font-sans text-xs text-primary/65">{new Date(p.created_at).toLocaleDateString("en-GB")}</td>
                   <td className="px-5 py-4">
-                    <span className={`font-sans text-[10px] tracking-widest uppercase px-2 py-0.5 border ${p.published ? "text-green-400 border-green-400/20" : "text-gray-400 border-gray-400/20"}`}>
+                    <span className={`font-sans text-xs tracking-widest uppercase px-2 py-0.5 border ${p.published ? "text-green-400 border-green-400/20" : "text-gray-600 border-gray-400/20"}`}>
                       {p.published ? "Published" : "Draft"}
                     </span>
                   </td>
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
-                      <a href={`/blog/${p.slug}`} target="_blank" className="text-primary/40 hover:text-secondary transition-colors"><Eye className="w-4 h-4" /></a>
-                      <button onClick={() => openEdit(p)} className="text-primary/40 hover:text-secondary transition-colors"><Edit2 className="w-4 h-4" /></button>
-                      <button onClick={() => del(p.id)} disabled={deleting === p.id} className="text-primary/40 hover:text-red-400 transition-colors disabled:opacity-30"><Trash2 className="w-4 h-4" /></button>
+                      <a href={`/blog/${p.slug}`} target="_blank" className="text-primary/65 hover:text-secondary transition-colors"><Eye className="w-4 h-4" /></a>
+                      <button onClick={() => openEdit(p)} className="text-primary/65 hover:text-secondary transition-colors"><Edit2 className="w-4 h-4" /></button>
+                      <button onClick={() => del(p.id)} disabled={deleting === p.id} className="text-primary/65 hover:text-red-400 transition-colors disabled:opacity-30"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   </td>
                 </tr>
@@ -187,32 +187,32 @@ export default function AdminBlog() {
           <div className="bg-background border border-primary/15 w-full max-w-2xl my-8">
             <div className="flex items-center justify-between px-6 py-4 border-b border-primary/10">
               <h2 className="font-serif text-xl text-primary">{editing ? "Edit Post" : "New Blog Post"}</h2>
-              <button onClick={() => setModal(false)}><X className="w-5 h-5 text-primary/40" /></button>
+              <button onClick={() => setModal(false)}><X className="w-5 h-5 text-primary/65" /></button>
             </div>
             <div className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
               <div>
-                <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Title *</label>
+                <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Title *</label>
                 <input value={form.title} onChange={setField("title")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Category</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Category</label>
                   <select value={form.category} onChange={setField("category")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                     {CATS.map((c) => <option key={c}>{c}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Author</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Author</label>
                   <input value={form.author} onChange={setField("author")} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Reading Time (mins)</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Reading Time (mins)</label>
                   <input type="number" value={form.reading_time} onChange={setField("reading_time")} min={1} className="w-full h-10 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
                 <div>
-                  <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Image</label>
+                  <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Image</label>
                   {form.image_url ? (
                     <div className="relative h-10 border border-secondary/30 overflow-hidden group">
                       <img src={form.image_url} alt="preview" className="w-full h-full object-cover" />
@@ -229,7 +229,7 @@ export default function AdminBlog() {
                     <button
                       onClick={() => fileInputRef.current?.click()}
                       disabled={uploading}
-                      className="w-full h-10 px-3 bg-background border border-primary/15 border-dashed font-sans text-xs text-primary/50 hover:border-secondary/50 hover:text-secondary transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                      className="w-full h-10 px-3 bg-background border border-primary/15 border-dashed font-sans text-xs text-primary/65 hover:border-secondary/50 hover:text-secondary transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
                     >
                       {uploading ? (
                         <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading...</>
@@ -248,11 +248,11 @@ export default function AdminBlog() {
                 </div>
               </div>
               <div>
-                <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Excerpt / Summary</label>
+                <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Excerpt / Summary</label>
                 <textarea rows={2} value={form.excerpt} onChange={setField("excerpt")} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
               </div>
               <div>
-                <label className="font-sans text-[10px] tracking-widest uppercase text-primary/50 block mb-2">Content *</label>
+                <label className="font-sans text-xs tracking-widest uppercase text-primary/65 block mb-2">Content *</label>
                 <textarea rows={10} value={form.content} onChange={setField("content")} className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
               </div>
               <div className="flex gap-6">

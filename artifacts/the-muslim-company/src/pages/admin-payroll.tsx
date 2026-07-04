@@ -94,7 +94,7 @@ export default function AdminPayroll() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="font-serif text-2xl text-primary">Payroll Management</h1>
-            <p className="font-sans text-xs text-primary/50 mt-1">Manage employee salaries and payments</p>
+            <p className="font-sans text-xs text-primary/65 mt-1">Manage employee salaries and payments</p>
           </div>
           <div className="flex gap-2">
             <button onClick={() => exportToCSV(`payroll-${filterMonth}`, filtered.map(r => ({
@@ -133,7 +133,7 @@ export default function AdminPayroll() {
           {[["Gross Total", `৳${totals.gross.toLocaleString()}`], ["Net Total", `৳${totals.net.toLocaleString()}`], ["Paid", totals.paid], ["Pending", totals.pending]].map(([label, val]) => (
             <div key={label as string} className="p-4 border border-primary/10 bg-card text-center">
               <p className="font-serif text-xl text-primary">{val}</p>
-              <p className="font-sans text-[10px] uppercase tracking-widest text-primary/40">{label}</p>
+              <p className="font-sans text-xs uppercase tracking-widest text-primary/65">{label}</p>
             </div>
           ))}
         </div>
@@ -143,7 +143,7 @@ export default function AdminPayroll() {
             <h3 className="font-serif text-lg text-primary mb-4">{editing ? "Edit Payroll" : "Add Payroll Entry"}</h3>
             <form onSubmit={handleSave} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Employee *</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Employee *</label>
                 <select value={form.employee_id} onChange={e => setForm(f => ({ ...f, employee_id: e.target.value }))} required
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                   <option value="">Select employee</option>
@@ -156,14 +156,14 @@ export default function AdminPayroll() {
                 const hasBank = emp.bank_name || emp.bank_account_number || emp.bank_account_name;
                 return (
                   <div className="sm:col-span-3 p-3 bg-background border border-primary/10 rounded">
-                    <p className="font-sans text-[10px] uppercase tracking-widest text-primary/40 mb-2">Bank Account (for Payroll)</p>
+                    <p className="font-sans text-xs uppercase tracking-widest text-primary/65 mb-2">Bank Account (for Payroll)</p>
                     {hasBank ? (
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 font-sans text-xs text-primary/70">
-                        <div><span className="text-primary/40">Bank: </span>{emp.bank_name || "—"}</div>
-                        <div><span className="text-primary/40">Account Name: </span>{emp.bank_account_name || "—"}</div>
-                        <div><span className="text-primary/40">Account No: </span>{emp.bank_account_number || "—"}</div>
-                        <div><span className="text-primary/40">Branch: </span>{emp.bank_branch || "—"}</div>
-                        {emp.bank_routing_number && <div><span className="text-primary/40">Routing/Swift: </span>{emp.bank_routing_number}</div>}
+                        <div><span className="text-primary/65">Bank: </span>{emp.bank_name || "—"}</div>
+                        <div><span className="text-primary/65">Account Name: </span>{emp.bank_account_name || "—"}</div>
+                        <div><span className="text-primary/65">Account No: </span>{emp.bank_account_number || "—"}</div>
+                        <div><span className="text-primary/65">Branch: </span>{emp.bank_branch || "—"}</div>
+                        {emp.bank_routing_number && <div><span className="text-primary/65">Routing/Swift: </span>{emp.bank_routing_number}</div>}
                       </div>
                     ) : (
                       <p className="font-sans text-xs text-red-400 flex items-center gap-1"><AlertCircle className="w-3.5 h-3.5" /> No bank details on file for this employee — add them in Employee Management first.</p>
@@ -172,12 +172,12 @@ export default function AdminPayroll() {
                 );
               })()}
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Month *</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Month *</label>
                 <input type="month" value={form.month} onChange={e => setForm(f => ({ ...f, month: e.target.value }))} required
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Payment Method</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Payment Method</label>
                 <select value={form.payment_method} onChange={e => setForm(f => ({ ...f, payment_method: e.target.value }))}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                   <option value="bank_transfer">Bank Transfer</option>
@@ -186,22 +186,22 @@ export default function AdminPayroll() {
                 </select>
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Basic Salary *</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Basic Salary *</label>
                 <input type="number" value={form.basic_salary} onChange={e => setForm(f => ({ ...f, basic_salary: e.target.value }))} required
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Allowances</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Allowances</label>
                 <input type="number" value={form.allowances} onChange={e => setForm(f => ({ ...f, allowances: e.target.value }))}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div>
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Deductions</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Deductions</label>
                 <input type="number" value={form.deductions} onChange={e => setForm(f => ({ ...f, deductions: e.target.value }))}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div className="sm:col-span-3">
-                <label className="font-sans text-xs text-primary/50 mb-1 block">Notes</label>
+                <label className="font-sans text-xs text-primary/65 mb-1 block">Notes</label>
                 <input type="text" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
@@ -230,26 +230,26 @@ export default function AdminPayroll() {
               <thead>
                 <tr className="border-b border-primary/10">
                   {["Employee", "Bank Account", "Basic", "Allowances", "Deductions", "Net Salary", "Method", "Status", ""].map(h => (
-                    <th key={h} className="text-left py-3 px-3 font-sans text-[10px] uppercase tracking-widest text-primary/40">{h}</th>
+                    <th key={h} className="text-left py-3 px-3 font-sans text-xs uppercase tracking-widest text-primary/65">{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {filtered.length === 0 ? (
-                  <tr><td colSpan={9} className="text-center py-8 text-primary/40">No payroll records for this month</td></tr>
+                  <tr><td colSpan={9} className="text-center py-8 text-primary/65">No payroll records for this month</td></tr>
                 ) : filtered.map(p => {
                   const emp = employees.find(e => e.employee_id === p.employee_id);
                   return (
                   <tr key={p.id} className="border-b border-primary/5 hover:bg-card transition-colors">
                     <td className="py-3 px-3">
                       <p className="text-primary font-medium">{p.employees?.name || p.employee_id}</p>
-                      <p className="text-primary/40 text-xs">{p.employees?.department}</p>
+                      <p className="text-primary/65 text-xs">{p.employees?.department}</p>
                     </td>
                     <td className="py-3 px-3 text-primary/60 text-xs">
                       {emp?.bank_account_number ? (
                         <>
                           <p>{emp.bank_name || "—"}</p>
-                          <p className="text-primary/40">{emp.bank_account_number}</p>
+                          <p className="text-primary/65">{emp.bank_account_number}</p>
                         </>
                       ) : <span className="text-red-400">Not on file</span>}
                     </td>
@@ -257,16 +257,16 @@ export default function AdminPayroll() {
                     <td className="py-3 px-3 text-primary/70">৳{Number(p.allowances || 0).toLocaleString()}</td>
                     <td className="py-3 px-3 text-primary/70">৳{Number(p.deductions || 0).toLocaleString()}</td>
                     <td className="py-3 px-3 text-secondary font-medium">৳{Number(p.net_salary).toLocaleString()}</td>
-                    <td className="py-3 px-3 text-primary/50 text-xs">{(p.payment_method || "").replace("_", " ")}</td>
+                    <td className="py-3 px-3 text-primary/65 text-xs">{(p.payment_method || "").replace("_", " ")}</td>
                     <td className="py-3 px-3">
-                      <span className={`text-[10px] uppercase tracking-widest px-2 py-1 border rounded ${STATUS_COLORS[p.status]}`}>{p.status}</span>
+                      <span className={`text-xs uppercase tracking-widest px-2 py-1 border rounded ${STATUS_COLORS[p.status]}`}>{p.status}</span>
                     </td>
                     <td className="py-3 px-3 flex items-center gap-2">
                       {p.status === "pending" && (
                         <button onClick={() => markPaid(p)} className="text-green-400 hover:text-green-300" title="Mark Paid"><Check className="w-4 h-4" /></button>
                       )}
-                      <button onClick={() => startEdit(p)} className="text-primary/40 hover:text-secondary"><Edit2 className="w-4 h-4" /></button>
-                      <button onClick={() => handleDelete(p.id)} className="text-primary/40 hover:text-red-400"><Trash2 className="w-4 h-4" /></button>
+                      <button onClick={() => startEdit(p)} className="text-primary/65 hover:text-secondary"><Edit2 className="w-4 h-4" /></button>
+                      <button onClick={() => handleDelete(p.id)} className="text-primary/65 hover:text-red-400"><Trash2 className="w-4 h-4" /></button>
                     </td>
                   </tr>
                   );

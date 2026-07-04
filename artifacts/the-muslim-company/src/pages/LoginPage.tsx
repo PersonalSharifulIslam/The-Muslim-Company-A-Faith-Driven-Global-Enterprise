@@ -71,7 +71,7 @@ export default function LoginPage() {
             <p className="font-serif text-xl text-[#f1e6c8] tracking-wide">The Muslim Company</p>
             <div className="flex items-center gap-2 mt-2">
               <span className="h-px w-6 bg-[#b08d57]/50" />
-              <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-[#b08d57]">Staff Portal</p>
+              <p className="font-sans text-xs tracking-[0.25em] uppercase text-[#b08d57]">Staff Portal</p>
               <span className="h-px w-6 bg-[#b08d57]/50" />
             </div>
           </div>
@@ -101,7 +101,7 @@ export default function LoginPage() {
           {mode === "login" ? (
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
-                <label className="font-sans text-[11px] tracking-wider uppercase text-[#8aad8e]/90 mb-1.5 block">
+                <label className="font-sans text-xs tracking-wider uppercase text-[#8aad8e]/90 mb-1.5 block">
                   Email Address
                 </label>
                 <div className="relative">
@@ -115,7 +115,7 @@ export default function LoginPage() {
                 </div>
               </div>
               <div>
-                <label className="font-sans text-[11px] tracking-wider uppercase text-[#8aad8e]/90 mb-1.5 block">
+                <label className="font-sans text-xs tracking-wider uppercase text-[#8aad8e]/90 mb-1.5 block">
                   Password
                 </label>
                 <div className="relative">
@@ -149,7 +149,7 @@ export default function LoginPage() {
           ) : (
             <form onSubmit={handleForgot} className="space-y-4">
               <div>
-                <label className="font-sans text-[11px] tracking-wider uppercase text-[#8aad8e]/90 mb-1.5 block">
+                <label className="font-sans text-xs tracking-wider uppercase text-[#8aad8e]/90 mb-1.5 block">
                   Email Address
                 </label>
                 <div className="relative">
@@ -182,7 +182,7 @@ export default function LoginPage() {
         {/* Footer note */}
         <div className="flex items-center justify-center gap-2 mt-6">
           <ShieldCheck className="w-3.5 h-3.5 text-[#4a7a50]" />
-          <p className="font-sans text-[11px] text-[#4a7a50]">
+          <p className="font-sans text-xs text-[#4a7a50]">
             Secure access · Role detected automatically
           </p>
         </div>

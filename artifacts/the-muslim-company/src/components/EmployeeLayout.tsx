@@ -55,12 +55,12 @@ export default function EmployeeLayout({ children, current }: { children: React.
             <p className="font-serif text-sm font-bold text-secondary tracking-widest">COMPANY</p>
           </div>
         </div>
-        <p className="font-sans text-[9px] tracking-[0.2em] uppercase text-primary/45 mt-2">Employee Portal</p>
+        <p className="font-sans text-xs tracking-[0.2em] uppercase text-primary/65 mt-2">Employee Portal</p>
       </div>
 
       {isAdminAreaRole(role) && (
         <a href="/admin/dashboard"
-          className="mx-3 mt-3 flex items-center justify-center gap-2 px-3 py-2 text-[10px] font-sans uppercase tracking-widest text-secondary border border-secondary/30 hover:bg-secondary/10 transition-colors">
+          className="mx-3 mt-3 flex items-center justify-center gap-2 px-3 py-2 text-xs font-sans uppercase tracking-widest text-secondary border border-secondary/30 hover:bg-secondary/10 transition-colors">
           Go to Admin Panel →
         </a>
       )}
@@ -70,12 +70,12 @@ export default function EmployeeLayout({ children, current }: { children: React.
           const active = current === href;
           return (
             <a key={href} href={href}
-              className={`flex items-center gap-3 px-3 py-2.5 text-xs font-sans tracking-wide transition-all group ${active ? "bg-secondary/15 text-secondary border-l-2 border-secondary" : "text-primary/55 hover:text-primary hover:bg-primary/5 border-l-2 border-transparent"}`}
+              className={`flex items-center gap-3 px-3 py-2.5 text-xs font-sans tracking-wide transition-all group ${active ? "bg-secondary/15 text-secondary border-l-2 border-secondary" : "text-primary/65 hover:text-primary hover:bg-primary/5 border-l-2 border-transparent"}`}
             >
               <Icon className="w-4 h-4 shrink-0" />
               <span className="uppercase tracking-widest">{label}</span>
               {label === "Notifications" && unread > 0 && (
-                <span className="ml-auto bg-secondary text-black text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">{unread}</span>
+                <span className="ml-auto bg-secondary text-black text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">{unread}</span>
               )}
               {active && <ChevronRight className="w-3 h-3 ml-auto" />}
             </a>
@@ -115,18 +115,18 @@ export default function EmployeeLayout({ children, current }: { children: React.
             <Menu className="w-5 h-5" />
           </button>
           <div className="hidden lg:block">
-            <p className="font-sans text-xs tracking-widest uppercase text-primary/45">
+            <p className="font-sans text-xs tracking-widest uppercase text-primary/65">
               {NAV.find((n) => n.href === current)?.label || "Employee Portal"}
             </p>
           </div>
           <div className="flex items-center gap-4 ml-auto">
-            <a href="/employee/notifications" className="relative text-primary/50 hover:text-secondary transition-colors">
+            <a href="/employee/notifications" className="relative text-primary/65 hover:text-secondary transition-colors">
               <Bell className="w-4 h-4" />
-              {unread > 0 && <span className="absolute -top-1 -right-1 bg-secondary text-black text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">{unread}</span>}
+              {unread > 0 && <span className="absolute -top-1 -right-1 bg-secondary text-black text-xs font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">{unread}</span>}
             </a>
             <a href="/employee/profile" className="flex items-center gap-2">
               <div className="w-7 h-7 rounded-full bg-secondary/20 border border-secondary/40 flex items-center justify-center">
-                <span className="font-sans text-[10px] font-bold text-secondary">{initials}</span>
+                <span className="font-sans text-xs font-bold text-secondary">{initials}</span>
               </div>
             </a>
           </div>
@@ -137,7 +137,7 @@ export default function EmployeeLayout({ children, current }: { children: React.
         </main>
 
         <footer className="px-6 py-3 border-t border-primary/8 text-center">
-          <p className="font-sans text-[9px] tracking-widest uppercase text-primary/30">The Muslim Company — Employee Portal</p>
+          <p className="font-sans text-xs tracking-widest uppercase text-primary/30">The Muslim Company — Employee Portal</p>
         </footer>
       </div>
     </div>

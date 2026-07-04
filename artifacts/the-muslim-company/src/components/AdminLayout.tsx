@@ -76,7 +76,7 @@ export default function AdminLayout({ children, current }: { children: React.Rea
             <p className="font-serif text-xs font-bold tracking-widest uppercase text-primary-foreground leading-tight">
               The Muslim Company
             </p>
-            <p className="font-sans text-[9px] tracking-widest uppercase text-secondary mt-0.5">Admin Panel</p>
+            <p className="font-sans text-xs tracking-widest uppercase text-secondary mt-0.5">Admin Panel</p>
           </div>
         </div>
         <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
@@ -100,9 +100,9 @@ export default function AdminLayout({ children, current }: { children: React.Rea
           })}
         </nav>
         <div className="px-4 py-4 border-t border-primary-foreground/10">
-          <p className="font-sans text-[10px] text-primary-foreground/30 mb-1 px-4">{user?.email}</p>
+          <p className="font-sans text-xs text-primary-foreground/55 mb-1 px-4">{user?.email}</p>
           {role && (
-            <p className="font-sans text-[9px] tracking-widest uppercase text-secondary/60 mb-3 px-4">
+            <p className="font-sans text-xs tracking-widest uppercase text-secondary/60 mb-3 px-4">
               {ROLE_LABELS[role] || role}
             </p>
           )}
@@ -126,7 +126,7 @@ export default function AdminLayout({ children, current }: { children: React.Rea
           >
             {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
-          <p className="font-sans text-xs tracking-widest uppercase text-primary/40 hidden sm:block flex-shrink-0">
+          <p className="font-sans text-xs tracking-widest uppercase text-primary/65 hidden sm:block flex-shrink-0">
             {ADMIN_NAV.find(n => n.href === current)?.label || "Admin"}
           </p>
           <GlobalSearch />

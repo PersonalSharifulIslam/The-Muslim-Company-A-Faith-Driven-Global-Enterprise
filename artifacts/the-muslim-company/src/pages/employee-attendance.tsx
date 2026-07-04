@@ -77,7 +77,7 @@ export default function EmployeeAttendance() {
         <motion.div variants={fade} className="bg-[#0f2314]/60 border border-[#b08d57]/20 p-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div>
-              <p className="font-sans text-[10px] tracking-widest uppercase text-white/30 mb-2">Current Time</p>
+              <p className="font-sans text-xs tracking-widest uppercase text-white/30 mb-2">Current Time</p>
               <p className="font-mono text-5xl text-white font-bold tracking-wider">{now.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}</p>
               {elapsedStr && (
                 <div className="flex items-center gap-2 mt-2">
@@ -103,7 +103,7 @@ export default function EmployeeAttendance() {
           <div className="grid grid-cols-3 gap-4 mt-6 pt-5 border-t border-[#b08d57]/10">
             {[["Check In", today?.check_in ? fmt(today.check_in) : "—:——"], ["Check Out", today?.check_out ? fmt(today.check_out) : "—:——"], ["Hours", today?.working_hours ? `${today.working_hours}h` : "—"]].map(([label, val]) => (
               <div key={label}>
-                <p className="font-sans text-[9px] tracking-widest uppercase text-white/45 mb-1">{label}</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-white/45 mb-1">{label}</p>
                 <p className="font-mono text-xl text-white">{val}</p>
               </div>
             ))}
@@ -112,14 +112,14 @@ export default function EmployeeAttendance() {
 
         <motion.div variants={fade} className="bg-[#0f2314]/60 border border-[#b08d57]/15">
           <div className="px-5 py-4 border-b border-[#b08d57]/10">
-            <p className="font-sans text-[10px] tracking-widest uppercase text-white/40 flex items-center gap-2"><Clock className="w-3.5 h-3.5" /> Attendance History</p>
+            <p className="font-sans text-xs tracking-widest uppercase text-white/40 flex items-center gap-2"><Clock className="w-3.5 h-3.5" /> Attendance History</p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-[#b08d57]/10">
                   {["Date", "Check In", "Check Out", "Hours", "Status"].map((h) => (
-                    <th key={h} className="px-4 py-3 text-left font-sans text-[9px] tracking-widest uppercase text-white/45">{h}</th>
+                    <th key={h} className="px-4 py-3 text-left font-sans text-xs tracking-widest uppercase text-white/45">{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -133,7 +133,7 @@ export default function EmployeeAttendance() {
                     <td className="px-4 py-3 font-mono text-sm text-white">{r.check_out ? fmt(r.check_out) : "—"}</td>
                     <td className="px-4 py-3 font-mono text-sm text-[#b08d57]">{r.working_hours ? `${r.working_hours}h` : "—"}</td>
                     <td className="px-4 py-3">
-                      <span className={`font-sans text-[9px] px-2 py-0.5 uppercase tracking-widest font-bold ${r.status === "present" ? "bg-green-400/10 text-green-400" : "bg-red-400/10 text-red-400"}`}>{r.status}</span>
+                      <span className={`font-sans text-xs px-2 py-0.5 uppercase tracking-widest font-bold ${r.status === "present" ? "bg-green-400/10 text-green-400" : "bg-red-400/10 text-red-400"}`}>{r.status}</span>
                     </td>
                   </tr>
                 ))}

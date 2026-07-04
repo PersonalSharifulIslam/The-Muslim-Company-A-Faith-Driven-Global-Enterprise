@@ -40,7 +40,7 @@ export default function ShareButtons({ url, title }: ShareButtonsProps) {
 
   return (
     <div className="flex items-center gap-3 flex-wrap">
-      <span className="font-sans text-[10px] tracking-widest uppercase text-primary/40">Share</span>
+      <span className="font-sans text-xs tracking-widest uppercase text-primary/65">Share</span>
       {links.map(({ name, icon: Icon, href }) => (
         <a
           key={name}
@@ -48,7 +48,7 @@ export default function ShareButtons({ url, title }: ShareButtonsProps) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Share on ${name}`}
-          className="w-8 h-8 flex items-center justify-center border border-primary/15 text-primary/50 hover:text-secondary hover:border-secondary/40 transition-colors"
+          className="w-8 h-8 flex items-center justify-center border border-primary/15 text-primary/65 hover:text-secondary hover:border-secondary/40 transition-colors"
         >
           <Icon className="w-3.5 h-3.5" />
         </a>
@@ -56,7 +56,7 @@ export default function ShareButtons({ url, title }: ShareButtonsProps) {
       <button
         onClick={copyLink}
         aria-label="Copy link"
-        className="w-8 h-8 flex items-center justify-center border border-primary/15 text-primary/50 hover:text-secondary hover:border-secondary/40 transition-colors"
+        className="w-8 h-8 flex items-center justify-center border border-primary/15 text-primary/65 hover:text-secondary hover:border-secondary/40 transition-colors"
       >
         {copied ? <Check className="w-3.5 h-3.5" /> : <Link2 className="w-3.5 h-3.5" />}
       </button>

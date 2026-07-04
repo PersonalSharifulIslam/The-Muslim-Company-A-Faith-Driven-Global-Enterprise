@@ -61,7 +61,7 @@ export default function EmployeeLogin() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#b08d57]/10 border border-[#b08d57]/30 mb-4">
             <img src={logo} alt="TMC" className="w-8 h-8 opacity-80" />
           </div>
-          <p className="font-sans text-[11px] tracking-[0.3em] uppercase text-[#b08d57]/60 mb-1">Employee Portal</p>
+          <p className="font-sans text-xs tracking-[0.3em] uppercase text-[#b08d57]/60 mb-1">Employee Portal</p>
           <h1 className="font-serif text-3xl text-white mb-1">Welcome Back</h1>
           <p className="font-sans text-xs text-white/30">As-salamu alaykum — sign in to continue</p>
         </div>
@@ -69,12 +69,12 @@ export default function EmployeeLogin() {
         <div className="bg-[#0f2314]/80 border border-[#b08d57]/20 p-8 backdrop-blur-sm">
           <div className="flex items-center gap-2 mb-6 pb-4 border-b border-[#b08d57]/10">
             <div className="w-1.5 h-1.5 rounded-full bg-[#b08d57]" />
-            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-white/30">THE MUSLIM COMPANY</p>
+            <p className="font-sans text-xs tracking-[0.2em] uppercase text-white/30">THE MUSLIM COMPANY</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="font-sans text-[10px] tracking-widest uppercase text-white/40 block mb-2">Employee ID or Email</label>
+              <label className="font-sans text-xs tracking-widest uppercase text-white/40 block mb-2">Employee ID or Email</label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/25" />
                 <input
@@ -89,7 +89,7 @@ export default function EmployeeLogin() {
             </div>
 
             <div>
-              <label className="font-sans text-[10px] tracking-widest uppercase text-white/40 block mb-2">Password</label>
+              <label className="font-sans text-xs tracking-widest uppercase text-white/40 block mb-2">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/25" />
                 <input
@@ -119,12 +119,12 @@ export default function EmployeeLogin() {
           </form>
 
           <div className="mt-6 pt-5 border-t border-[#b08d57]/10 text-center">
-            <p className="font-sans text-[10px] text-white/20">Contact HR for account access issues</p>
+            <p className="font-sans text-xs text-white/20">Contact HR for account access issues</p>
           </div>
         </div>
 
         <div className="text-center mt-6">
-          <a href="/" className="font-sans text-[10px] tracking-widest uppercase text-white/20 hover:text-[#b08d57]/60 transition-colors">
+          <a href="/" className="font-sans text-xs tracking-widest uppercase text-white/20 hover:text-[#b08d57]/60 transition-colors">
             ← Back to Website
           </a>
         </div>

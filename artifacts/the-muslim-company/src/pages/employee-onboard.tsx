@@ -138,17 +138,17 @@ export default function EmployeeOnboard({ params }: { params: { token: string } 
 
           <div className="bg-white/[0.03] border border-white/10 rounded-lg p-4 mb-6 flex items-center justify-between flex-wrap gap-2">
             <div>
-              <p className="font-sans text-[10px] uppercase tracking-widest text-white/30">Department</p>
+              <p className="font-sans text-xs uppercase tracking-widest text-white/30">Department</p>
               <p className="font-sans text-sm text-white">{info?.department}</p>
             </div>
             {info?.position && (
               <div>
-                <p className="font-sans text-[10px] uppercase tracking-widest text-white/30">Position</p>
+                <p className="font-sans text-xs uppercase tracking-widest text-white/30">Position</p>
                 <p className="font-sans text-sm text-white">{info.position}</p>
               </div>
             )}
             <div>
-              <p className="font-sans text-[10px] uppercase tracking-widest text-white/30">Access Level</p>
+              <p className="font-sans text-xs uppercase tracking-widest text-white/30">Access Level</p>
               <p className="font-sans text-sm text-secondary">{ACCESS_LEVEL_LABELS[info?.access_level || "employee"]}</p>
             </div>
           </div>
@@ -201,7 +201,7 @@ export default function EmployeeOnboard({ params }: { params: { token: string } 
               className="w-full bg-secondary text-[#0a1a0e] font-sans text-sm font-bold uppercase tracking-widest h-12 rounded disabled:opacity-50 mt-2">
               {submitting ? "Submitting..." : "Submit for Approval"}
             </button>
-            <p className="font-sans text-[11px] text-white/30 text-center">
+            <p className="font-sans text-xs text-white/30 text-center">
               Your request will be reviewed by HR before your account is activated.
             </p>
           </form>

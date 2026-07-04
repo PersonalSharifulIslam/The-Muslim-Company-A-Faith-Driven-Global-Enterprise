@@ -25,16 +25,16 @@ function NewsCard({ post, featured }: { post: NewsPost; featured?: boolean }) {
           <a
             href={`/newsroom/category/${encodeURIComponent(post.category)}`}
             onClick={(e) => e.stopPropagation()}
-            className="font-sans text-[10px] tracking-widest uppercase text-secondary border border-secondary/30 px-2 py-0.5 hover:bg-secondary/10 transition-colors"
+            className="font-sans text-xs tracking-widest uppercase text-secondary border border-secondary/30 px-2 py-0.5 hover:bg-secondary/10 transition-colors"
           >
             {post.category}
           </a>
-          <span className="font-sans text-[10px] text-primary/40 flex items-center gap-1">
+          <span className="font-sans text-xs text-primary/65 flex items-center gap-1">
             <Calendar className="w-3 h-3" />{new Date(post.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
           </span>
         </div>
         <h3 className={`font-serif text-primary group-hover:text-secondary transition-colors leading-snug mb-2 ${featured ? "text-2xl md:text-3xl" : "text-lg"}`}>{post.title}</h3>
-        {post.excerpt && <p className="font-sans text-sm text-primary/55 leading-relaxed line-clamp-2">{post.excerpt}</p>}
+        {post.excerpt && <p className="font-sans text-sm text-primary/65 leading-relaxed line-clamp-2">{post.excerpt}</p>}
         <div className="mt-4 flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-secondary">
           Read More <ArrowRight className="w-3.5 h-3.5" />
         </div>
@@ -171,7 +171,7 @@ export default function Newsroom({ params }: { params?: { category?: string } })
               <button
                 key={c}
                 onClick={() => handleCategoryChange(c)}
-                className={`px-4 py-2 font-sans text-[10px] tracking-widest uppercase border transition-colors ${cat === c ? "bg-secondary text-primary border-secondary" : "border-primary/15 text-primary/50 hover:border-secondary/50"}`}
+                className={`px-4 py-2 font-sans text-xs tracking-widest uppercase border transition-colors ${cat === c ? "bg-secondary text-primary border-secondary" : "border-primary/15 text-primary/65 hover:border-secondary/50"}`}
               >
                 {c}
               </button>
@@ -190,7 +190,7 @@ export default function Newsroom({ params }: { params?: { category?: string } })
             <div className="text-center py-20">
               <Newspaper className="w-10 h-10 text-secondary/40 mx-auto mb-4" />
               <h3 className="font-serif text-2xl text-primary mb-3">No Articles Found</h3>
-              <p className="font-sans text-sm text-primary/50">{posts.length === 0 ? "No news published yet." : "No results match your search."}</p>
+              <p className="font-sans text-sm text-primary/65">{posts.length === 0 ? "No news published yet." : "No results match your search."}</p>
             </div>
           ) : (
             <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.07 } } }}>

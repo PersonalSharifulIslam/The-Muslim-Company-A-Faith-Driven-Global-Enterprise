@@ -90,7 +90,7 @@ export default function AdminOrgChart() {
           <Network className="w-6 h-6 text-secondary" />
           <h1 className="font-serif text-2xl text-primary">Organization Chart</h1>
         </div>
-        <p className="font-sans text-xs text-primary/50 mb-6">
+        <p className="font-sans text-xs text-primary/65 mb-6">
           The Muslim Company's reporting hierarchy — grouped by corporate tier, then by department.
         </p>
 
@@ -100,7 +100,7 @@ export default function AdminOrgChart() {
             <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
           </div>
         ) : employees.length === 0 ? (
-          <div className="text-center py-12 text-primary/40 font-sans text-sm">No employees yet</div>
+          <div className="text-center py-12 text-primary/65 font-sans text-sm">No employees yet</div>
         ) : (
           <div className="space-y-6">
             {orderedTiers.map(tier => {
@@ -111,7 +111,7 @@ export default function AdminOrgChart() {
                 <div key={tier} className={`border rounded-lg p-5 ${TIER_COLORS[tier] || "border-white/10"}`}>
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="font-serif text-lg text-primary">{TIER_LABELS[tier] || tier}</h2>
-                    <span className="font-sans text-[10px] uppercase tracking-widest text-primary/40 flex items-center gap-1.5">
+                    <span className="font-sans text-xs uppercase tracking-widest text-primary/65 flex items-center gap-1.5">
                       <Users className="w-3 h-3" /> {tierEmployees.length}
                     </span>
                   </div>
@@ -121,8 +121,8 @@ export default function AdminOrgChart() {
                       {tierEmployees.map(e => (
                         <div key={e.id} className="bg-card border border-primary/10 rounded p-3">
                           <p className="font-sans text-sm text-primary font-medium">{e.name}</p>
-                          <p className="font-sans text-xs text-primary/50">{e.position}</p>
-                          <p className="font-sans text-[10px] text-primary/30 mt-1">{e.department}</p>
+                          <p className="font-sans text-xs text-primary/65">{e.position}</p>
+                          <p className="font-sans text-xs text-primary/30 mt-1">{e.department}</p>
                         </div>
                       ))}
                     </div>
@@ -137,8 +137,8 @@ export default function AdminOrgChart() {
                               className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-primary/5 transition-colors">
                               <span className="font-sans text-sm text-primary">{dept}</span>
                               <span className="flex items-center gap-2">
-                                <span className="font-sans text-[10px] text-primary/40">{emps.length}</span>
-                                {isOpen ? <ChevronDown className="w-3.5 h-3.5 text-primary/40" /> : <ChevronRight className="w-3.5 h-3.5 text-primary/40" />}
+                                <span className="font-sans text-xs text-primary/65">{emps.length}</span>
+                                {isOpen ? <ChevronDown className="w-3.5 h-3.5 text-primary/65" /> : <ChevronRight className="w-3.5 h-3.5 text-primary/65" />}
                               </span>
                             </button>
                             {isOpen && (
@@ -146,7 +146,7 @@ export default function AdminOrgChart() {
                                 {emps.map(e => (
                                   <div key={e.id} className="bg-background border border-primary/5 rounded p-2.5">
                                     <p className="font-sans text-xs text-primary font-medium">{e.name}</p>
-                                    <p className="font-sans text-[10px] text-primary/40">{e.position}</p>
+                                    <p className="font-sans text-xs text-primary/65">{e.position}</p>
                                   </div>
                                 ))}
                               </div>

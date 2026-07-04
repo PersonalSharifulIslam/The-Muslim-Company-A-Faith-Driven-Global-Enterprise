@@ -79,7 +79,7 @@ export default function AdminExits() {
         {showForm && (
           <form onSubmit={handleSave} className="mb-6 p-6 border border-secondary/30 bg-card grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Employee *</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Employee *</label>
               <select required value={form.employee_id} onChange={e => setForm(f => ({ ...f, employee_id: e.target.value }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                 <option value="">Select employee</option>
@@ -88,31 +88,31 @@ export default function AdminExits() {
               {form.employee_id && (() => {
                 const emp = employees.find(e => e.employee_id === form.employee_id);
                 return emp?.joining_date ? (
-                  <p className="font-sans text-[11px] text-primary/40 mt-1.5">
+                  <p className="font-sans text-xs text-primary/65 mt-1.5">
                     Joined on {new Date(emp.joining_date).toLocaleDateString("en-GB", { dateStyle: "long" })}
                   </p>
                 ) : null;
               })()}
             </div>
             <div>
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Exit Type *</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Exit Type *</label>
               <select value={form.exit_type} onChange={e => setForm(f => ({ ...f, exit_type: e.target.value }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary">
                 {Object.entries(TYPE_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
               </select>
             </div>
             <div>
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Notice Date</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Notice Date</label>
               <input type="date" value={form.notice_date} onChange={e => setForm(f => ({ ...f, notice_date: e.target.value }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
             </div>
             <div>
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Last Working Date</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Last Working Date</label>
               <input type="date" value={form.last_working_date} onChange={e => setForm(f => ({ ...f, last_working_date: e.target.value }))}
                 className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
             </div>
             <div className="sm:col-span-2">
-              <label className="font-sans text-xs text-primary/50 mb-1 block">Reason</label>
+              <label className="font-sans text-xs text-primary/65 mb-1 block">Reason</label>
               <textarea rows={2} value={form.reason} onChange={e => setForm(f => ({ ...f, reason: e.target.value }))}
                 className="w-full px-3 py-2 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary resize-none" />
             </div>
@@ -128,7 +128,7 @@ export default function AdminExits() {
         {loading ? (
           <div className="flex justify-center py-12"><div style={{ width: 32, height: 32, border: "2px solid #b08d57", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} /><style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style></div>
         ) : exits.length === 0 ? (
-          <p className="text-center py-12 text-primary/40 font-sans text-sm">No exits recorded</p>
+          <p className="text-center py-12 text-primary/65 font-sans text-sm">No exits recorded</p>
         ) : (
           <div className="space-y-3">
             {exits.map(ex => (
@@ -136,9 +136,9 @@ export default function AdminExits() {
                 <div className="flex items-start justify-between mb-2">
                   <div>
                     <p className="font-sans text-sm text-primary font-medium">{ex.employees?.name || ex.employee_id} — {TYPE_LABELS[ex.exit_type]}</p>
-                    <p className="font-sans text-xs text-primary/40">{ex.employees?.department} · Notice: {ex.notice_date} {ex.last_working_date && `· Last day: ${ex.last_working_date}`}</p>
+                    <p className="font-sans text-xs text-primary/65">{ex.employees?.department} · Notice: {ex.notice_date} {ex.last_working_date && `· Last day: ${ex.last_working_date}`}</p>
                   </div>
-                  <span className={`font-sans text-[10px] uppercase tracking-widest px-2 py-0.5 rounded ${STATUS_COLORS[ex.status]}`}>{ex.status}</span>
+                  <span className={`font-sans text-xs uppercase tracking-widest px-2 py-0.5 rounded ${STATUS_COLORS[ex.status]}`}>{ex.status}</span>
                 </div>
                 {ex.reason && <p className="font-sans text-xs text-primary/60 mb-2">{ex.reason}</p>}
                 {ex.status !== "completed" && (

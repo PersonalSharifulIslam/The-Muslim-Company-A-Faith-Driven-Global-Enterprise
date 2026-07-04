@@ -76,7 +76,7 @@ export default function TMCFoundationPage() {
         "description": desc,
         "url": "https://www.themuslim.company/the-muslim-company-foundation",
         "parentOrganization": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company" },
-        "areaServed": ["Bangladesh", "India", "Pakistan", "United Arab Emirates", "Nigeria", "Ghana"],
+        "areaServed": ["Bangladesh", "India", "Pakistan", "United Arab Emirates", "Nigeria", "Ghana", "Gambia"],
         "logo": "https://www.themuslim.company/favicon.png"
       }
     ];
@@ -190,10 +190,23 @@ export default function TMCFoundationPage() {
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Impact & Case Studies</p>
+              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Impact & Reach</p>
               <p className="font-serif text-2xl text-primary mb-6 max-w-2xl">
-                Where support is directed — and where impact stories will be published as projects launch.
+                Real relief work, already reaching people across multiple countries.
               </p>
+              <div className="p-6 border border-primary/10 bg-card mb-6">
+                <p className="font-sans text-xs tracking-widest uppercase text-primary/40 mb-4">Where we've helped:</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {["Bangladesh", "Pakistan", "Nigeria", "Ghana", "Gambia", "and other African nations"].map((c, i) => (
+                    <span key={i} className="font-sans text-xs tracking-wide bg-background border border-primary/10 text-primary/65 px-3 py-1.5">{c}</span>
+                  ))}
+                </div>
+                <p className="font-sans text-sm text-primary/65 leading-relaxed">
+                  Through The Muslim Company Foundation, we have provided humanitarian relief and community support to people
+                  across these countries. This work has been made possible in part by individuals from multiple countries
+                  who have personally donated directly to support it — a trust we take as an amanah in its own right.
+                </p>
+              </div>
               <div className="p-6 border border-primary/10 bg-card mb-6">
                 <p className="font-sans text-xs tracking-widest uppercase text-primary/40 mb-4">Our impact areas include:</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -208,7 +221,9 @@ export default function TMCFoundationPage() {
               <div className="p-5 border border-secondary/30 bg-secondary/5">
                 <p className="font-sans text-xs text-primary/60 leading-relaxed">
                   <span className="text-secondary font-bold uppercase tracking-widest text-[10px]">Note — </span>
-                  The Muslim Company was founded in January 2025 and the Foundation is in its establishment phase. As individual relief, education, and environmental projects launch, verified case studies and beneficiary impact numbers will be published here and in our <a href="/transparency" className="text-secondary hover:underline">Transparency Reports</a>.
+                  The Muslim Company was founded in January 2025, and the Foundation is formalizing this ongoing
+                  humanitarian work under a single accountable structure. Verified, detailed case studies and beneficiary
+                  numbers for each project will be published here and in our <a href="/transparency" className="text-secondary hover:underline">Transparency Reports</a> as documentation is finalized.
                 </p>
               </div>
             </motion.div>
@@ -261,7 +276,7 @@ export default function TMCFoundationPage() {
                     <h3 className="font-serif text-lg text-primary">Global Reach</h3>
                   </div>
                   <p className="font-sans text-sm text-primary/65 leading-relaxed">
-                    The Foundation extends across every country where The Muslim Company operates — including Bangladesh, India, Pakistan, the United Arab Emirates, Nigeria, and Ghana — with more regions planned as the company grows.
+                    The Foundation extends across every country where The Muslim Company operates and has provided relief across Bangladesh, India, Pakistan, the United Arab Emirates, Nigeria, Ghana, and Gambia — with support from donors across multiple countries and more regions planned as the company grows.
                   </p>
                 </div>
               </div>

@@ -46,6 +46,7 @@ export async function onRequestGet(context: any) {
   const staticUrls = [
     url(`${BASE}/`,                     'daily',   '1.0', now),
     url(`${BASE}/about`,                'monthly', '0.9', now),
+    url(`${BASE}/faq`,                  'monthly', '0.8', now),
     url(`${BASE}/careers`,              'weekly',  '0.9', now),
     url(`${BASE}/newsroom`,             'weekly',  '0.8', now),
     url(`${BASE}/blog`,                 'weekly',  '0.8', now),

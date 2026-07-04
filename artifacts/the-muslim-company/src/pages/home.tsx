@@ -243,6 +243,7 @@ const NAV_COL2 = [
       { label: "Careers", href: "/careers" },
       { label: "Get Involved", href: "/get-involved" },
       { label: "Contact", href: "/contact" },
+      { label: "FAQ", href: "/faq" },
     ],
   },
 ];

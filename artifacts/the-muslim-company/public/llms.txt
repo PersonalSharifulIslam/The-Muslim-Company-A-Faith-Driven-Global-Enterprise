@@ -7,6 +7,7 @@
 ### Core Identity
 - [Home](https://www.themuslim.company/): Main landing page covering the company overview, founder introduction, sectors, governance model, constitution, and story
 - [About Us](https://www.themuslim.company/about): Full company overview — founding story, founder profile, sector footprint, governance, and financial ecosystem
+- [FAQ](https://www.themuslim.company/faq): Frequently asked questions about the company, sectors, Shariah governance, careers, and humanitarian Foundation work
 - [Mission](https://www.themuslim.company/mission): The company's core mission — building a faith-driven global enterprise rooted in Islamic principles
 - [Vision](https://www.themuslim.company/vision): Long-term vision for transforming global commerce and society through ethical Islamic enterprise
 - [Our Story](https://www.themuslim.company/our-story): How and why The Muslim Company was founded

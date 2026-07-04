@@ -1246,7 +1246,7 @@ export default function Home() {
         label="Founder & CEO"
         summary="Shariful Islam's personal aspiration is not wealth or fame — but to seek the pleasure of Allah and leave behind something ethical, beneficial, and just."
         summaryNode={
-          <InlineQuote author="Shariful Islam, Founder & CEO">True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.</InlineQuote>
+          <InlineQuote author="Shariful Islam, Founder & CEO">Wealth, fame, and power were never the goal — what matters is Allah's acceptance and a legacy that benefits humanity.</InlineQuote>
         }
       >
         <div className="space-y-8">

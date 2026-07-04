@@ -24,6 +24,7 @@
 - [Humanitarian Development](https://www.themuslim.company/humanitarian): 10% of monthly net profit funds disaster relief, orphan and widow support, education, healthcare, and housing
 - [Technology & AI Ethics](https://www.themuslim.company/technology): The company's ethical policy on AI, privacy, and human-centered technology
 - [The Muslim Company Foundation](https://www.themuslim.company/the-muslim-company-foundation): The company's dedicated humanitarian and environmental arm — funded by zakat, sadaqah, and 10% of monthly net profit, covering relief, orphan care, healthcare, education, and environmental restoration
+- [Why The Muslim Company](https://www.themuslim.company/why-us): How the company structurally differs from conventional business — riba-free finance, Shariah Board oversight, built-in charity, and constitutional protection of its mission
 
 ### Sectors
 - [Sector Detail](https://www.themuslim.company/sectors/:slug): Individual pages for each of the company's operating sectors (e.g. Technology & AI, Media, Education, Renewable Energy, Ethical Commerce, Humanitarian Development, Governance)

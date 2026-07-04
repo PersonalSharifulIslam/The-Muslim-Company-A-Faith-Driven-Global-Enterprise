@@ -66,6 +66,7 @@ const ContactPage = lazy(() => import("@/pages/contact"));
 const TransparencyPage = lazy(() => import("@/pages/transparency"));
 const TMCFoundationPage = lazy(() => import("@/pages/tmc-foundation"));
 const GetInvolvedPage = lazy(() => import("@/pages/get-involved"));
+const WhyUsPage = lazy(() => import("@/pages/why-us"));
 const PrivacyPolicy = lazy(() => import("@/pages/privacy-policy"));
 const TermsOfService = lazy(() => import("@/pages/terms-of-service"));
 import { AdminRoute, EmployeeRoute } from "@/lib/protected-routes";
@@ -114,6 +115,7 @@ function Router() {
       <Route path="/transparency" component={TransparencyPage} />
       <Route path="/the-muslim-company-foundation" component={TMCFoundationPage} />
       <Route path="/get-involved" component={GetInvolvedPage} />
+      <Route path="/why-us" component={WhyUsPage} />
       <Route path="/employee/onboard/:token" component={({ params }) => <EmployeeOnboard params={params} />} />
 
       {/* Unified login */}

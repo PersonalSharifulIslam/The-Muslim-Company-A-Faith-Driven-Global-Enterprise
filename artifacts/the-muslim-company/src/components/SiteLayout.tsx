@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/images/logo.png";
 
 const NAV_COL1 = [
@@ -54,6 +54,8 @@ const NAV_COL2 = [
   },
 ];
 
+const NAV_ALL = [...NAV_COL1, ...NAV_COL2];
+
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   const [navOpen, setNavOpen] = useState(false);
   const [, navigate] = useLocation();
@@ -83,19 +85,50 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className="min-h-screen w-full bg-background text-foreground flex flex-col">
       <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary-foreground/10">
-        <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-14">
+        <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between h-14 lg:h-20">
           <a href="/" className="flex items-center gap-3">
-            <img src={logo} alt="The Muslim Company" className="w-7 h-7 opacity-90 flex-shrink-0" />
-            <span className="font-serif text-sm font-bold tracking-widest uppercase text-primary-foreground whitespace-nowrap">
+            <img src={logo} alt="The Muslim Company" className="w-7 h-7 lg:w-9 lg:h-9 opacity-90 flex-shrink-0" />
+            <span className="font-serif text-sm lg:text-base font-bold tracking-widest uppercase text-primary-foreground whitespace-nowrap">
               The Muslim Company
             </span>
           </a>
+
+          {/* Desktop nav — hidden below lg, mobile hamburger below is untouched */}
+          <div className="hidden lg:flex items-center gap-1">
+            {NAV_ALL.map(group => (
+              <div key={group.title} className="relative group">
+                <button className="flex items-center gap-1 px-4 h-20 font-sans text-xs tracking-widest uppercase text-primary-foreground/70 group-hover:text-secondary transition-colors">
+                  {group.title}
+                  <ChevronDown className="w-3 h-3 transition-transform group-hover:rotate-180" />
+                </button>
+                <div className="absolute top-full left-0 min-w-[220px] bg-primary border border-primary-foreground/10 shadow-2xl opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-150 py-3">
+                  {group.links.map(link => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={(e) => handleHashLink(link.href, e)}
+                      className="block px-5 py-2.5 font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary hover:bg-primary-foreground/5 transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
+            <a
+              href="/contact"
+              className="ml-4 bg-secondary text-primary font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 flex items-center hover:bg-secondary/90 transition-colors"
+            >
+              Join Us
+            </a>
+          </div>
+
           <button
   data-testid="nav-mobile-toggle"
   aria-label={navOpen ? "Close navigation menu" : "Open navigation menu"}
   aria-expanded={navOpen}
   aria-controls="mobile-nav-menu"
-  className="text-primary-foreground/70 hover:text-secondary transition-colors"
+  className="lg:hidden text-primary-foreground/70 hover:text-secondary transition-colors"
   onClick={() => setNavOpen(!navOpen)}
 >
             {navOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -108,7 +141,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="bg-primary border-t border-primary-foreground/10 overflow-hidden"
+              className="lg:hidden bg-primary border-t border-primary-foreground/10 overflow-hidden"
             >
               <div className="container mx-auto px-6 py-5 max-h-[75vh] overflow-y-auto grid grid-cols-2 gap-x-10">
                 {/* Left column */}
@@ -168,7 +201,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         </AnimatePresence>
       </nav>
 
-      <main className="flex-1 pt-14">{children}</main>
+      <main className="flex-1 pt-14 lg:pt-20">{children}</main>
 
       <footer className="bg-primary text-primary-foreground border-t border-primary-foreground/10 py-10 px-6 lg:px-12">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-xs font-sans text-primary-foreground/60">

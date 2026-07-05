@@ -13,6 +13,9 @@ import {
   ShoppingCart, Shirt, Sparkles
 } from "lucide-react";
 import heroBg from "@/assets/images/hero-bg.webp";
+import peaceTvLogo from "@/assets/images/partners/peacetv.png";
+import islamNetLogo from "@/assets/images/partners/islamnet.png";
+import hudaTvLogo from "@/assets/images/partners/hudatv.png";
 import heroBgMobile from "@/assets/images/hero-bg-mobile.webp";
 import heroBgDesktop from "@/assets/images/hero-bg-desktop.webp";
 import heroBgRetina from "@/assets/images/hero-bg-retina.webp";
@@ -1420,11 +1423,15 @@ export default function Home() {
                 Partner With Us
               </Button>
             </div>
-            <div className="mt-8 flex items-center justify-center gap-x-10 gap-y-4 flex-wrap opacity-70">
-              {["PeaceTV", "IslamNet", "HudaTV"].map((name) => (
-                <span key={name} className="font-serif text-lg text-primary-foreground/70 tracking-wide">
-                  {name}
-                </span>
+            <div className="mt-8 flex items-center justify-center gap-5 flex-wrap">
+              {[
+                { src: peaceTvLogo, alt: "Peace TV" },
+                { src: islamNetLogo, alt: "IslamNet" },
+                { src: hudaTvLogo, alt: "Huda TV" },
+              ].map((p) => (
+                <div key={p.alt} className="bg-white px-5 py-3 h-16 flex items-center justify-center">
+                  <img src={p.src} alt={p.alt} loading="lazy" className="max-h-9 max-w-[110px] object-contain" />
+                </div>
               ))}
             </div>
           </div>

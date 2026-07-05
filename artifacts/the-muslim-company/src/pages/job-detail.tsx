@@ -21,6 +21,15 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
   }, [params.slug]);
 
   useEffect(() => {
+    if (loading || job) return;
+    // Job truly not found (deleted/invalid slug) — tell search engines this
+    // isn't real content, so it isn't flagged as a soft-404.
+    const _rob = document.querySelector('meta[name="robots"]');
+    if (_rob) _rob.setAttribute('content', 'noindex, nofollow');
+    else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'noindex, nofollow'; document.head.appendChild(_rl); }
+  }, [loading, job]);
+
+  useEffect(() => {
     if (!job) return;
     const pageUrl = `https://www.themuslim.company/careers/${params.slug}`;
     const desc = `${job.title} — ${job.department || 'The Muslim Company'}. Apply now at The Muslim Company.`;

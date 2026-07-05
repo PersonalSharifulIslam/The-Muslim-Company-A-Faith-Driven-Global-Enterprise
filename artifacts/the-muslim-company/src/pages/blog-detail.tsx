@@ -21,6 +21,13 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
   }, [params.slug]);
 
   useEffect(() => {
+    if (loading || post) return;
+    const _rob = document.querySelector('meta[name="robots"]');
+    if (_rob) _rob.setAttribute('content', 'noindex, nofollow');
+    else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'noindex, nofollow'; document.head.appendChild(_rl); }
+  }, [loading, post]);
+
+  useEffect(() => {
     if (!post) return;
     const pageUrl = `https://www.themuslim.company/blog/${params.slug}`;
     const ogImage = post.image_url || "https://www.themuslim.company/og-image.png";

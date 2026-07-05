@@ -62,7 +62,6 @@ export async function onRequestGet(context: any) {
   <meta name="twitter:image" content="${image}" />
   <meta name="twitter:site" content="@officialtmchq" />
   <link rel="canonical" href="${url}" />
-  <meta http-equiv="refresh" content="0;url=${url}" />
 </head>
 <body>
   <p>Redirecting to <a href="${url}">${title}</a></p>

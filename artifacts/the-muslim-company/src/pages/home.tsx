@@ -581,7 +581,7 @@ export default function Home() {
         summary="Serving humanity through ethical business, knowledge, justice, and the revival of Islamic civilization."
         summaryNode={
           <p className="font-serif text-2xl md:text-3xl text-primary leading-tight max-w-3xl">
-            "To build a civilization-driven global company inspired by the Quran, authentic Sunnah, and the Prophetic model — empowering humanity through ethical business, knowledge, innovation, justice, sustainability, and social development."
+            A global enterprise guided by the Quran, authentic Sunnah, and the Prophetic model — advancing humanity through ethics, knowledge, justice, and service.
           </p>
         }
       >
@@ -1177,7 +1177,7 @@ export default function Home() {
             <p className="font-sans text-xs tracking-[0.4em] uppercase text-secondary mb-5">Long-Term Vision</p>
             <h2 className="text-4xl md:text-6xl font-serif text-primary-foreground mb-6">The Future is Ethical</h2>
             <p className="font-sans text-lg text-primary-foreground/75 max-w-2xl mx-auto">
-              Universities. Research centers. Hospitals. Innovation hubs. Ethical AI institutions. Civilization-scale development — guided by faith, knowledge, and justice.
+              A century-long roadmap toward universities, hospitals, research centers, and ethical institutions built on faith and knowledge.
             </p>
           </motion.div>
         </div>
@@ -1278,7 +1278,7 @@ export default function Home() {
         label="Founder & CEO"
         summary="Shariful Islam's personal aspiration is not wealth or fame — but to seek the pleasure of Allah and leave behind something ethical, beneficial, and just."
         summaryNode={
-          <InlineQuote author="Shariful Islam, Founder & CEO">True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.</InlineQuote>
+          <InlineQuote author="Shariful Islam, Founder & CEO">Wealth, fame, and power were never the goal — what matters is Allah's acceptance and a legacy that benefits humanity.</InlineQuote>
         }
       >
         <div className="space-y-8">

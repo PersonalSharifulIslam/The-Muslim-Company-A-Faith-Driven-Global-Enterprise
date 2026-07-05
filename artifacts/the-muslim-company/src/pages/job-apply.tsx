@@ -172,7 +172,7 @@ export default function JobApply({ params }: { params: { slug: string } }) {
         "error-callback": () => setTurnstileToken(""),
       });
     }
-  }, [turnstileReady, submitted]);
+  }, [turnstileReady, submitted, loading, job]);
 
   useEffect(() => {
     document.title = "Apply — Careers at The Muslim Company";

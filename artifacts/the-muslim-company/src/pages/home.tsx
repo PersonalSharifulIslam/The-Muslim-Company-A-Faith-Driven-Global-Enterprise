@@ -1420,15 +1420,12 @@ export default function Home() {
                 Partner With Us
               </Button>
             </div>
-            <div className="mt-14 pt-8 border-t border-primary-foreground/10">
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-primary-foreground/35 mb-5">In Partnership With</p>
-              <div className="flex items-center justify-center gap-x-10 gap-y-4 flex-wrap opacity-70">
-                {["PeaceTV", "IslamNet", "HudaTV"].map((name) => (
-                  <span key={name} className="font-serif text-lg text-primary-foreground/70 tracking-wide">
-                    {name}
-                  </span>
-                ))}
-              </div>
+            <div className="mt-8 flex items-center justify-center gap-x-10 gap-y-4 flex-wrap opacity-70">
+              {["PeaceTV", "IslamNet", "HudaTV"].map((name) => (
+                <span key={name} className="font-serif text-lg text-primary-foreground/70 tracking-wide">
+                  {name}
+                </span>
+              ))}
             </div>
           </div>
 

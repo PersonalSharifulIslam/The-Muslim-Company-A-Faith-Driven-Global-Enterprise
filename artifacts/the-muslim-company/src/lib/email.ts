@@ -24,7 +24,7 @@ export async function sendInterviewEmail(data: {
   interviewType: string
   interviewLocation: string
 }) {
-  const isOnline = data.interviewType === 'Online (Google Meet)'
+  const isOnline = data.interviewType?.toLowerCase().includes('online')
 
   const [datePart, timePart] = data.interviewDatetime.split('T')
   const [year, month, day] = datePart.split('-').map(Number)

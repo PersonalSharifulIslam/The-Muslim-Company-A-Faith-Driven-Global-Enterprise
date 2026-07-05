@@ -254,7 +254,7 @@ export default function RecruitmentStatus() {
                     <div>
                       <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/55 mb-1">Interview Type</p>
                       <div className="flex items-center gap-2">
-                        {app.interview_type === "online"
+                        {app.interview_type?.toLowerCase().includes("online")
                           ? <><Video className="w-4 h-4 text-secondary" /><span className="font-sans text-sm text-primary-foreground">Online (Google Meet)</span></>
                           : <><MapPin className="w-4 h-4 text-secondary" /><span className="font-sans text-sm text-primary-foreground">In-Person (Office)</span></>
                         }
@@ -265,7 +265,11 @@ export default function RecruitmentStatus() {
                       {app.interview_location?.startsWith("http")
                         ? <a href={app.interview_location} target="_blank" rel="noreferrer"
                             className="font-sans text-sm text-secondary underline break-all">{app.interview_location}</a>
-                        : <p className="font-sans text-sm text-primary-foreground">{app.interview_location || "Details sent to your email"}</p>
+                        : <p className="font-sans text-sm text-primary-foreground">
+                            {app.interview_location || (app.interview_type?.toLowerCase().includes("online")
+                              ? "Meeting link will be sent to your email before the interview"
+                              : "Details sent to your email")}
+                          </p>
                       }
                     </div>
                   </div>

@@ -37,6 +37,8 @@ export default function AdminApplications() {
   const [interviewType, setInterviewType] = useState("In-Person (Office Address)");
   const [interviewLocation, setInterviewLocation] = useState("");
   const [schedulingInterview, setSchedulingInterview] = useState(false);
+  const [sendingMeetLink, setSendingMeetLink] = useState(false);
+  const [meetLinkDraft, setMeetLinkDraft] = useState("");
   const [showMessageModal, setShowMessageModal] = useState(false);
   const [msgSubject, setMsgSubject] = useState("");
   const [msgBody, setMsgBody] = useState("");
@@ -104,12 +106,36 @@ export default function AdminApplications() {
     setShowInterviewModal(true);
   };
 
+  const sendMeetLink = async (app: App) => {
+    if (!meetLinkDraft.trim()) return;
+    setSendingMeetLink(true);
+    try {
+      await supabase.from('applications').update({
+        interview_location: meetLinkDraft.trim(),
+      }).eq('id', app.id);
+      await sendInterviewEmail({
+        to: app.email, name: app.name, position: app.job_title,
+        reference: app.reference_number,
+        interviewDatetime: app.interview_datetime || '',
+        interviewType: app.interview_type || 'Online (Google Meet)',
+        interviewLocation: meetLinkDraft.trim(),
+      });
+      await load();
+      setMeetLinkDraft("");
+      if (selected) setSelected(prev => prev ? { ...prev, interview_location: meetLinkDraft.trim() } : null);
+      alert('Meet link sent to applicant.');
+    } catch (err: any) {
+      alert('Failed: ' + err.message);
+    }
+    setSendingMeetLink(false);
+  };
+
   const scheduleInterview = async () => {
     if (!interviewDatetime) return;
     setSchedulingInterview(true);
     try {
       const location = interviewType === 'Online (Google Meet)'
-        ? interviewLocation
+        ? interviewLocation.trim()
         : 'The Muslim Company HQ, Dhaka, Bangladesh';
       const targets = apps.filter(a => selectedIds.includes(a.id));
       for (const app of targets) {
@@ -359,19 +385,20 @@ export default function AdminApplications() {
               </div>
               {interviewType === 'Online (Google Meet)' && (
                 <div>
-                  <label className="font-sans text-xs font-semibold text-gray-700 block mb-2">Google Meet Link *</label>
+                  <label className="font-sans text-xs font-semibold text-gray-700 block mb-2">Google Meet Link (optional)</label>
                   <input
                     type="url"
-                    placeholder="https://meet.google.com/..."
+                    placeholder="https://meet.google.com/... (leave blank to send later)"
                     value={interviewLocation}
                     onChange={(e) => setInterviewLocation(e.target.value)}
                     className="w-full h-10 px-3 border border-gray-300 rounded font-sans text-sm text-gray-900 focus:outline-none focus:border-blue-500"
                   />
+                  <p className="font-sans text-xs text-gray-500 mt-1">If the link isn't ready yet, leave this blank — you can send it later from the applicant's profile.</p>
                 </div>
               )}
               <div className="flex gap-3 pt-2">
                 <button onClick={scheduleInterview}
-                  disabled={schedulingInterview || !interviewDatetime || (interviewType === 'Online (Google Meet)' && !interviewLocation)}
+                  disabled={schedulingInterview || !interviewDatetime}
                   className="flex-1 bg-blue-600 text-white rounded font-sans text-sm font-semibold h-10 disabled:opacity-50 hover:bg-blue-700">
                   {schedulingInterview ? "Scheduling..." : "Schedule & Send Email"}
                 </button>
@@ -519,7 +546,25 @@ export default function AdminApplications() {
                   </p>
                   <p className="font-sans text-xs text-primary/70 mb-1"><strong>Date & Time:</strong> {new Date(selected.interview_datetime).toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' })}</p>
                   <p className="font-sans text-xs text-primary/70 mb-1"><strong>Type:</strong> {selected.interview_type}</p>
-                  <p className="font-sans text-xs text-primary/70 mb-3"><strong>Location:</strong> {selected.interview_location}</p>
+                  <p className="font-sans text-xs text-primary/70 mb-3"><strong>Location:</strong> {selected.interview_location || (selected.interview_type?.toLowerCase().includes('online') ? "Not sent yet" : "")}</p>
+                  {selected.interview_type?.toLowerCase().includes('online') && !selected.interview_location && (
+                    <div className="mb-3 p-3 bg-amber-50 border border-amber-300/40">
+                      <p className="font-sans text-xs font-semibold text-amber-700 mb-2">Meet link not sent yet — add it below to send now</p>
+                      <div className="flex gap-2">
+                        <input
+                          type="url"
+                          placeholder="https://meet.google.com/..."
+                          value={meetLinkDraft}
+                          onChange={(e) => setMeetLinkDraft(e.target.value)}
+                          className="flex-1 h-9 px-2 border border-gray-300 rounded font-sans text-xs text-gray-900 focus:outline-none focus:border-blue-500"
+                        />
+                        <Button onClick={() => sendMeetLink(selected)} disabled={sendingMeetLink || !meetLinkDraft.trim()}
+                          className="bg-amber-600 text-white hover:bg-amber-700 rounded-none uppercase tracking-widest font-sans text-[10px] h-9 px-3 disabled:opacity-50">
+                          {sendingMeetLink ? "Sending..." : "Send Link"}
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                   <Button onClick={() => openInterviewModal(selected)}
                     className="w-full bg-blue-600 text-white hover:bg-blue-700 rounded-none uppercase tracking-widest font-sans text-xs h-9">
                     Reschedule Interview

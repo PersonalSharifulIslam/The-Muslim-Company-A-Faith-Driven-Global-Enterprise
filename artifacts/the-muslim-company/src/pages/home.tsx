@@ -429,7 +429,7 @@ export default function Home() {
               </div>
             ))}
             <a
-              href="/contact"
+              href="/get-involved"
               className="ml-4 bg-secondary text-primary font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 flex items-center hover:bg-secondary/90 transition-colors"
             >
               Join Us
@@ -502,7 +502,7 @@ export default function Home() {
                       </div>
                     </div>
                   ))}
-                  <a href="/contact" onClick={() => setNavOpen(false)}
+                  <a href="/get-involved" onClick={() => setNavOpen(false)}
                     className="font-sans text-xs tracking-widest uppercase text-secondary hover:text-secondary/80 transition-colors font-bold">
                     Join Us →
                   </a>

@@ -33,6 +33,7 @@ const AdminTasks = lazy(() => import("@/pages/admin-tasks"));
 const AdminPayroll = lazy(() => import("@/pages/admin-payroll"));
 const AdminDepartments = lazy(() => import("@/pages/admin-departments"));
 const AdminAuditLog = lazy(() => import("@/pages/admin-audit-log"));
+const AdminDeleteLogs = lazy(() => import("@/pages/admin-delete-logs"));
 const AdminOrgChart = lazy(() => import("@/pages/admin-org-chart"));
 const AdminInvites = lazy(() => import("@/pages/admin-invites"));
 const AdminDocuments = lazy(() => import("@/pages/admin-documents"));
@@ -174,6 +175,9 @@ function Router() {
       </Route>
       <Route path="/admin/audit-log">
         <AdminRoute><AdminAuditLog /></AdminRoute>
+      </Route>
+      <Route path="/admin/delete-logs">
+        <AdminRoute><AdminDeleteLogs /></AdminRoute>
       </Route>
       <Route path="/admin/org-chart">
         <AdminRoute><AdminOrgChart /></AdminRoute>

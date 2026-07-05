@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { Search, X, ExternalLink, Send, Clock, Calendar, CheckSquare, Square, MessageSquare } from "lucide-react";
+import { Search, X, ExternalLink, Send, Clock, Calendar, CheckSquare, Square, MessageSquare, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminLayout from "@/components/AdminLayout";
 import { supabase } from "@/lib/supabase";
+import { useAuth } from "@/lib/auth-context";
 import { sendInterviewEmail, sendOfferEmail, sendCustomMessage } from "@/lib/email";
 import { STATUS_LABELS, STATUS_COLORS } from "@/lib/supabase";
 
@@ -22,6 +23,7 @@ type App = {
 
 export default function AdminApplications() {
   const [, setLocation] = useLocation();
+  const { role } = useAuth();
   const [apps, setApps] = useState<App[]>([]);
   const [jobs, setJobs] = useState<{id: number, job_id: number, title: string}[]>([]);
   const [jobFilter, setJobFilter] = useState("all");
@@ -74,6 +76,25 @@ export default function AdminApplications() {
       if (selected?.id === id) setSelected((prev) => prev ? { ...prev, status } : null);
     } catch {}
     setUpdating(false);
+  };
+
+  const [deleting, setDeleting] = useState(false);
+  const deleteApplication = async (app: App) => {
+    if (role !== 'admin') return;
+    const confirmed = window.confirm(
+      `Permanently delete the application from "${app.name}" (${app.reference_number})?\n\nThis cannot be undone from here, but a full record is kept in Delete Logs.`
+    );
+    if (!confirmed) return;
+    setDeleting(true);
+    try {
+      const { error } = await supabase.from('applications').delete().eq('id', app.id);
+      if (error) throw error;
+      setSelected(null);
+      await load();
+    } catch (e: any) {
+      alert(e.message || "Failed to delete application.");
+    }
+    setDeleting(false);
   };
 
   const bulkUpdateStatus = async (status: string) => {
@@ -311,10 +332,22 @@ export default function AdminApplications() {
                     </span>
                   </td>
                   <td className="px-4 py-4" onClick={(e) => e.stopPropagation()}>
-                    <select value={a.status} onChange={(e) => updateStatus(a.id, e.target.value)} disabled={updating}
-                      className="h-8 px-2 bg-background border border-primary/15 font-sans text-xs text-primary focus:outline-none focus:border-secondary">
-                      {ALL_STATUSES.map((s) => <option key={s} value={s}>{STATUS_LABELS[s]}</option>)}
-                    </select>
+                    <div className="flex items-center gap-2">
+                      <select value={a.status} onChange={(e) => updateStatus(a.id, e.target.value)} disabled={updating}
+                        className="h-8 px-2 bg-background border border-primary/15 font-sans text-xs text-primary focus:outline-none focus:border-secondary">
+                        {ALL_STATUSES.map((s) => <option key={s} value={s}>{STATUS_LABELS[s]}</option>)}
+                      </select>
+                      {role === 'admin' && (
+                        <button
+                          onClick={() => deleteApplication(a)}
+                          disabled={deleting}
+                          title="Delete application (Admin only)"
+                          className="text-red-500/60 hover:text-red-500 disabled:opacity-40 transition-colors flex-shrink-0"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -462,7 +495,19 @@ export default function AdminApplications() {
             className="w-full max-w-lg bg-background h-full overflow-y-auto shadow-2xl">
             <div className="flex items-center justify-between px-6 py-4 border-b border-primary/10 sticky top-0 bg-background">
               <h2 className="font-serif text-lg text-primary">Application Details</h2>
-              <button onClick={() => setSelected(null)} className="text-primary/65 hover:text-primary"><X className="w-5 h-5" /></button>
+              <div className="flex items-center gap-4">
+                {role === 'admin' && (
+                  <button
+                    onClick={() => deleteApplication(selected)}
+                    disabled={deleting}
+                    title="Delete application (Admin only)"
+                    className="text-red-500/70 hover:text-red-500 disabled:opacity-40 transition-colors"
+                  >
+                    <Trash2 className="w-4.5 h-4.5" />
+                  </button>
+                )}
+                <button onClick={() => setSelected(null)} className="text-primary/65 hover:text-primary"><X className="w-5 h-5" /></button>
+              </div>
             </div>
             <div className="p-6 space-y-5">
               <div className="bg-primary text-primary-foreground p-5">

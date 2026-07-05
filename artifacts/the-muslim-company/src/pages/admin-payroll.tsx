@@ -51,6 +51,12 @@ export default function AdminPayroll() {
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault(); setSaving(true); setMsg(null);
+    const basic = Number(form.basic_salary), allow = Number(form.allowances || 0), deduct = Number(form.deductions || 0);
+    if (basic < 0 || allow < 0 || deduct < 0) {
+      setMsg({ type: "err", text: "Salary, allowances, and deductions cannot be negative." });
+      setSaving(false);
+      return;
+    }
     try {
       if (editing) await api.put(`/admin/payroll/${editing.id}`, form, true);
       else await api.post("/admin/payroll", form, true);
@@ -187,17 +193,17 @@ export default function AdminPayroll() {
               </div>
               <div>
                 <label className="font-sans text-xs text-primary/65 mb-1 block">Basic Salary *</label>
-                <input type="number" value={form.basic_salary} onChange={e => setForm(f => ({ ...f, basic_salary: e.target.value }))} required
+                <input type="number" min="0" step="0.01" value={form.basic_salary} onChange={e => setForm(f => ({ ...f, basic_salary: e.target.value }))} required
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div>
                 <label className="font-sans text-xs text-primary/65 mb-1 block">Allowances</label>
-                <input type="number" value={form.allowances} onChange={e => setForm(f => ({ ...f, allowances: e.target.value }))}
+                <input type="number" min="0" step="0.01" value={form.allowances} onChange={e => setForm(f => ({ ...f, allowances: e.target.value }))}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div>
                 <label className="font-sans text-xs text-primary/65 mb-1 block">Deductions</label>
-                <input type="number" value={form.deductions} onChange={e => setForm(f => ({ ...f, deductions: e.target.value }))}
+                <input type="number" min="0" step="0.01" value={form.deductions} onChange={e => setForm(f => ({ ...f, deductions: e.target.value }))}
                   className="w-full h-9 px-3 bg-background border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
               </div>
               <div className="sm:col-span-3">

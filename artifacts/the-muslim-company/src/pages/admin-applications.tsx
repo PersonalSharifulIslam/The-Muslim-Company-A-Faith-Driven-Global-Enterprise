@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { Search, X, ExternalLink, Send, Clock, Calendar, CheckSquare, Square, MessageSquare } from "lucide-react";
+import { Search, X, ExternalLink, Send, Clock, Calendar, CheckSquare, Square, MessageSquare, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AdminLayout from "@/components/AdminLayout";
 import { supabase } from "@/lib/supabase";
 import { sendInterviewEmail, sendOfferEmail, sendCustomMessage } from "@/lib/email";
 import { STATUS_LABELS, STATUS_COLORS } from "@/lib/supabase";
+import { exportToCSV } from "@/lib/csv-export";
 
 const ALL_STATUSES = ["submitted", "reviewing", "shortlisted", "interview", "offered", "offer_accepted", "hired", "joined", "rejected"];
 
@@ -240,6 +241,20 @@ export default function AdminApplications() {
           <h1 className="font-serif text-3xl text-primary mb-1">Applications</h1>
           <p className="font-sans text-sm text-primary/65">{apps.length} total applications</p>
         </div>
+        <button onClick={() => exportToCSV("applications", filtered.map(a => ({
+          Name: a.name,
+          Email: a.email,
+          Phone: a.phone,
+          Position: a.job_title,
+          Reference: a.reference_number,
+          Status: STATUS_LABELS[a.status] || a.status,
+          "Applied On": new Date(a.created_at).toLocaleDateString("en-GB"),
+          "Interview Date": a.interview_datetime ? new Date(a.interview_datetime).toLocaleString("en-GB") : "",
+          "Interview Type": a.interview_type || "",
+        })))}
+          className="flex items-center gap-2 border border-primary/20 text-primary font-sans text-xs uppercase tracking-widest h-9 px-4 hover:border-secondary transition-colors">
+          <Download className="w-4 h-4" /> Export CSV
+        </button>
         {selectedIds.length > 0 && (
           <div className="flex gap-2 flex-wrap items-center">
             <select

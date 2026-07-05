@@ -1423,15 +1423,13 @@ export default function Home() {
                 Partner With Us
               </Button>
             </div>
-            <div className="mt-8 flex items-center justify-center gap-5 flex-wrap">
+            <div className="mt-8 flex items-center justify-center gap-8 flex-wrap">
               {[
                 { src: peaceTvLogo, alt: "Peace TV" },
                 { src: islamNetLogo, alt: "IslamNet" },
                 { src: hudaTvLogo, alt: "Huda TV" },
               ].map((p) => (
-                <div key={p.alt} className="bg-white px-5 py-3 h-16 flex items-center justify-center">
-                  <img src={p.src} alt={p.alt} loading="lazy" className="max-h-9 max-w-[110px] object-contain" />
-                </div>
+                <img key={p.alt} src={p.src} alt={p.alt} loading="lazy" className="max-h-10 max-w-[120px] object-contain" />
               ))}
             </div>
           </div>

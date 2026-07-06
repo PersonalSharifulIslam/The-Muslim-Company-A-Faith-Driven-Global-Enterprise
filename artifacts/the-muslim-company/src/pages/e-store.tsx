@@ -20,6 +20,7 @@ export default function EStore() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [preorderProduct, setPreorderProduct] = useState<Product | null>(null);
+  const [detailProduct, setDetailProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     document.title = "E-Store — Pre-Order Products | The Muslim Company";
@@ -90,7 +91,8 @@ export default function EStore() {
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {products.map((p) => (
                   <motion.div key={p.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-                    className="bg-card border border-primary/10 hover:border-secondary/40 transition-colors overflow-hidden flex flex-col">
+                    onClick={() => setDetailProduct(p)}
+                    className="bg-card border border-primary/10 hover:border-secondary/40 transition-colors overflow-hidden flex flex-col cursor-pointer">
                     <div className="h-52 bg-background flex items-center justify-center overflow-hidden">
                       {p.image_url ? (
                         <img src={p.image_url} alt={p.name} loading="lazy" className="w-full h-full object-cover" />
@@ -107,7 +109,7 @@ export default function EStore() {
                           {p.price != null ? `${p.currency} ${p.price.toLocaleString()}` : "Price on request"}
                         </p>
                         <button
-                          onClick={() => setPreorderProduct(p)}
+                          onClick={(e) => { e.stopPropagation(); setPreorderProduct(p); }}
                           className="bg-secondary text-primary font-sans text-xs font-bold uppercase tracking-widest h-9 px-4 hover:bg-secondary/90 transition-colors"
                         >
                           Pre-Order
@@ -122,10 +124,58 @@ export default function EStore() {
         </section>
       </div>
 
+      {detailProduct && (
+        <ProductDetailModal
+          product={detailProduct}
+          onClose={() => setDetailProduct(null)}
+          onPreorder={() => { setPreorderProduct(detailProduct); setDetailProduct(null); }}
+        />
+      )}
       {preorderProduct && (
         <PreorderModal product={preorderProduct} onClose={() => setPreorderProduct(null)} />
       )}
     </SiteLayout>
+  );
+}
+
+function ProductDetailModal({ product, onClose, onPreorder }: { product: Product; onClose: () => void; onPreorder: () => void }) {
+  return (
+    <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-background max-w-lg w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-primary/10 sticky top-0 bg-background">
+          <h2 className="font-serif text-lg text-primary">Product Details</h2>
+          <button onClick={onClose} className="text-primary/65 hover:text-primary"><X className="w-5 h-5" /></button>
+        </div>
+        <div className="h-64 bg-card flex items-center justify-center overflow-hidden">
+          {product.image_url ? (
+            <img src={product.image_url} alt={product.name} className="w-full h-full object-cover" />
+          ) : (
+            <ImageIcon className="w-12 h-12 text-primary/15" />
+          )}
+        </div>
+        <div className="p-6">
+          {product.category && <p className="font-sans text-[10px] tracking-widest uppercase text-secondary/70 mb-2">{product.category}</p>}
+          <h3 className="font-serif text-2xl text-primary mb-3">{product.name}</h3>
+          <p className="font-sans text-base text-secondary font-medium mb-4">
+            {product.price != null ? `${product.currency} ${product.price.toLocaleString()}` : "Price on request"}
+          </p>
+          {product.description ? (
+            <p className="font-sans text-sm text-primary/65 leading-relaxed whitespace-pre-line mb-4">{product.description}</p>
+          ) : (
+            <p className="font-sans text-sm text-primary/40 italic mb-4">No additional description provided.</p>
+          )}
+          {product.min_qty > 1 && (
+            <p className="font-sans text-xs text-primary/50 mb-4">Minimum pre-order quantity: {product.min_qty}</p>
+          )}
+          <button
+            onClick={onPreorder}
+            className="w-full bg-secondary text-primary font-sans text-xs font-bold uppercase tracking-widest h-11 hover:bg-secondary/90 transition-colors"
+          >
+            Pre-Order This Product
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -71,6 +71,7 @@ export async function onRequestGet(context: any) {
     url(`${BASE}/get-involved`,         'monthly', '0.7', now),
     url(`${BASE}/recruitment-status`,   'monthly', '0.6'),
     url(`${BASE}/baytalmalbank`,        'monthly', '0.8', now),
+    url(`${BASE}/e-store`,              'weekly',  '0.8', now),
     url(`${BASE}/privacy-policy`,       'yearly',  '0.3'),
     url(`${BASE}/terms-of-service`,     'yearly',  '0.3'),
   ].join('\n')

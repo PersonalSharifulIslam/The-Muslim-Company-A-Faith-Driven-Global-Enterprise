@@ -438,24 +438,10 @@ export default function Home() {
             >
               Join Us
             </a>
-            <button
-              aria-label="Search the site"
-              onClick={() => setSearchOpen(true)}
-              className="ml-2 text-primary-foreground/60 hover:text-secondary transition-colors"
-            >
-              <Search className="w-4 h-4" />
-            </button>
           </div>
 
           {/* Right */}
-          <div className="lg:hidden flex items-center gap-4 justify-end">
-            <button
-              aria-label="Search the site"
-              onClick={() => setSearchOpen(true)}
-              className="text-primary-foreground/70 hover:text-secondary transition-colors"
-            >
-              <Search className="w-5 h-5" />
-            </button>
+          <div className="lg:hidden flex justify-end">
             <button
               data-testid="nav-mobile-toggle"
               aria-label={navOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -476,7 +462,15 @@ export default function Home() {
               exit={{ height: 0, opacity: 0 }}
               className="lg:hidden bg-primary border-t border-primary-foreground/10 overflow-hidden"
             >
-              <div className="container mx-auto px-6 py-5 max-h-[75vh] overflow-y-auto grid grid-cols-2 gap-x-10">
+              <div className="container mx-auto px-6 py-5 max-h-[75vh] overflow-y-auto">
+                <button
+                  onClick={() => { setSearchOpen(true); setNavOpen(false); }}
+                  className="w-full flex items-center gap-3 px-4 h-11 mb-6 bg-primary-foreground/5 border border-primary-foreground/15 hover:border-secondary/40 transition-colors"
+                >
+                  <Search className="w-4 h-4 text-secondary flex-shrink-0" />
+                  <span className="font-sans text-xs tracking-widest uppercase text-primary-foreground/50">Search the site...</span>
+                </button>
+                <div className="grid grid-cols-2 gap-x-10">
                 {/* Left column */}
                 <div className="flex flex-col gap-6">
                   {NAV_COL1.map(group => (
@@ -524,6 +518,7 @@ export default function Home() {
                     className="font-sans text-xs tracking-widest uppercase text-secondary hover:text-secondary/80 transition-colors font-bold">
                     Join Us →
                   </a>
+                </div>
                 </div>
               </div>
             </motion.div>

@@ -119,13 +119,6 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                 </div>
               </div>
             ))}
-            <button
-              aria-label="Search the site"
-              onClick={() => setSearchOpen(true)}
-              className="ml-2 text-primary-foreground/60 hover:text-secondary transition-colors"
-            >
-              <Search className="w-4 h-4" />
-            </button>
             <a
               href="/get-involved"
               className="ml-4 bg-secondary text-primary font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 flex items-center hover:bg-secondary/90 transition-colors"
@@ -134,25 +127,16 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
             </a>
           </div>
 
-          <div className="flex items-center gap-4 lg:hidden">
-            <button
-              aria-label="Search the site"
-              onClick={() => setSearchOpen(true)}
-              className="text-primary-foreground/70 hover:text-secondary transition-colors"
-            >
-              <Search className="w-5 h-5" />
-            </button>
-            <button
+          <button
   data-testid="nav-mobile-toggle"
   aria-label={navOpen ? "Close navigation menu" : "Open navigation menu"}
   aria-expanded={navOpen}
   aria-controls="mobile-nav-menu"
-  className="text-primary-foreground/70 hover:text-secondary transition-colors"
+  className="lg:hidden text-primary-foreground/70 hover:text-secondary transition-colors"
   onClick={() => setNavOpen(!navOpen)}
 >
             {navOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
-          </div>
         </div>
         <AnimatePresence>
           {navOpen && (
@@ -163,7 +147,15 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
               exit={{ height: 0, opacity: 0 }}
               className="lg:hidden bg-primary border-t border-primary-foreground/10 overflow-hidden"
             >
-              <div className="container mx-auto px-6 py-5 max-h-[75vh] overflow-y-auto grid grid-cols-2 gap-x-10">
+              <div className="container mx-auto px-6 py-5 max-h-[75vh] overflow-y-auto">
+                <button
+                  onClick={() => { setSearchOpen(true); setNavOpen(false); }}
+                  className="w-full flex items-center gap-3 px-4 h-11 mb-6 bg-primary-foreground/5 border border-primary-foreground/15 hover:border-secondary/40 transition-colors"
+                >
+                  <Search className="w-4 h-4 text-secondary flex-shrink-0" />
+                  <span className="font-sans text-xs tracking-widest uppercase text-primary-foreground/50">Search the site...</span>
+                </button>
+                <div className="grid grid-cols-2 gap-x-10">
                 {/* Left column */}
                 <div className="flex flex-col gap-6">
                   {NAV_COL1.map(group => (
@@ -214,6 +206,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                   >
                     Join Us →
                   </a>
+                </div>
                 </div>
               </div>
             </motion.div>

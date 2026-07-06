@@ -83,11 +83,62 @@ export default function RecruitmentStatus() {
   const [searching, setSearching] = useState(false);
   const [searched, setSearched] = useState(false);
   const [accepting, setAccepting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileReady, setTurnstileReady] = useState(false);
+
+  useEffect(() => {
+    if (document.getElementById("cf-turnstile-script")) {
+      // @ts-ignore
+      if (window.turnstile) setTurnstileReady(true);
+      return;
+    }
+    const script = document.createElement("script");
+    script.id = "cf-turnstile-script";
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => setTurnstileReady(true);
+    document.body.appendChild(script);
+  }, []);
+
+  useEffect(() => {
+    if (!turnstileReady) return;
+    const container = document.getElementById("recruitment-turnstile-container");
+    if (!container || container.childElementCount > 0) return;
+    // @ts-ignore
+    if (window.turnstile) {
+      // @ts-ignore
+      window.turnstile.render(container, {
+        sitekey: "0x4AAAAAADsybnAg1p4qZ5qL",
+        theme: "light",
+        callback: (token: string) => setTurnstileToken(token),
+        "expired-callback": () => setTurnstileToken(""),
+        "error-callback": () => setTurnstileToken(""),
+      });
+    }
+  }, [turnstileReady]);
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!ref.trim()) return;
+    if (!ref.trim() || !turnstileToken) return;
     setSearching(true); setSearched(false);
+    try {
+      const verifyRes = await fetch("/api/verify-turnstile", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: turnstileToken }),
+      });
+      const verifyData = await verifyRes.json();
+      if (!verifyData.success) {
+        setResult("not_found");
+        setSearched(true); setSearching(false);
+        return;
+      }
+    } catch {
+      setResult("not_found");
+      setSearched(true); setSearching(false);
+      return;
+    }
     const { data, error } = await supabase
       .from("applications")
       .select("*")
@@ -170,11 +221,12 @@ export default function RecruitmentStatus() {
               <input type="text" value={ref} onChange={e => setRef(e.target.value)}
                 placeholder="e.g. TMC/SI/10925/2026/ABC123"
                 className="flex-1 h-12 px-4 bg-background border border-primary/15 font-mono text-sm text-primary placeholder:text-primary/25 focus:outline-none focus:border-secondary tracking-wider" />
-              <Button type="submit" disabled={searching || !ref.trim()}
+              <Button type="submit" disabled={searching || !ref.trim() || !turnstileToken}
                 className="bg-secondary text-primary hover:bg-secondary/90 rounded-none uppercase tracking-widest font-sans h-12 px-8 text-xs font-bold disabled:opacity-50">
                 {searching ? "Searching..." : <><Search className="w-4 h-4 mr-2" />Search</>}
               </Button>
             </div>
+            <div id="recruitment-turnstile-container" className="mt-4" />
             <p className="font-sans text-xs text-primary/35 mt-2">Reference numbers are case-insensitive. Format: TMC/XX/XXXXX/XXXX/XXXXXX</p>
           </form>
 

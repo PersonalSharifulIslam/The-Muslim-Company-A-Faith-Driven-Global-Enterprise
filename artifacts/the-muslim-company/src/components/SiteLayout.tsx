@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Search } from "lucide-react";
 import logo from "@/assets/images/logo.png";
+import SiteSearch from "@/components/SiteSearch";
 
 const NAV_COL1 = [
   {
@@ -48,6 +49,7 @@ const NAV_COL2 = [
     title: "Connect",
     links: [
       { label: "Careers", href: "/careers" },
+      { label: "Application Status", href: "/recruitment-status" },
       { label: "Get Involved", href: "/get-involved" },
       { label: "Contact", href: "/contact" },
       { label: "FAQ", href: "/faq" },
@@ -59,6 +61,7 @@ const NAV_ALL = [...NAV_COL1, ...NAV_COL2];
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   const [navOpen, setNavOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [, navigate] = useLocation();
 
   const handleHashLink = (href: string, e: React.MouseEvent) => {
@@ -116,6 +119,13 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
                 </div>
               </div>
             ))}
+            <button
+              aria-label="Search the site"
+              onClick={() => setSearchOpen(true)}
+              className="ml-2 text-primary-foreground/60 hover:text-secondary transition-colors"
+            >
+              <Search className="w-4 h-4" />
+            </button>
             <a
               href="/get-involved"
               className="ml-4 bg-secondary text-primary font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 flex items-center hover:bg-secondary/90 transition-colors"
@@ -124,16 +134,25 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
             </a>
           </div>
 
-          <button
+          <div className="flex items-center gap-4 lg:hidden">
+            <button
+              aria-label="Search the site"
+              onClick={() => setSearchOpen(true)}
+              className="text-primary-foreground/70 hover:text-secondary transition-colors"
+            >
+              <Search className="w-5 h-5" />
+            </button>
+            <button
   data-testid="nav-mobile-toggle"
   aria-label={navOpen ? "Close navigation menu" : "Open navigation menu"}
   aria-expanded={navOpen}
   aria-controls="mobile-nav-menu"
-  className="lg:hidden text-primary-foreground/70 hover:text-secondary transition-colors"
+  className="text-primary-foreground/70 hover:text-secondary transition-colors"
   onClick={() => setNavOpen(!navOpen)}
 >
             {navOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
+          </div>
         </div>
         <AnimatePresence>
           {navOpen && (
@@ -311,6 +330,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
           </>
         )}
       </AnimatePresence>
+      <SiteSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
     </div>
   );
 }

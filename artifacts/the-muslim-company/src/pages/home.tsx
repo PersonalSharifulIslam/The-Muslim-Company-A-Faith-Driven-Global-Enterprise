@@ -9,9 +9,10 @@ import {
   TreePine, Zap, FlaskConical, Truck, ShoppingBag, Factory,
   DollarSign, BookMarked, Atom, HandHeart, Radio, Bot, Ship,
   Home as LucideHome, UserCheck, Baby, Clock, Award, Briefcase, Shield,
-  Gavel, Globe, Flame, Check, Quote, Menu, X, Plus, Minus, ChevronDown,
+  Gavel, Globe, Flame, Check, Quote, Menu, X, Plus, Minus, Search,
   ShoppingCart, Shirt, Sparkles
 } from "lucide-react";
+import SiteSearch from "@/components/SiteSearch";
 import heroBg from "@/assets/images/hero-bg.webp";
 import peaceTvLogo from "@/assets/images/partners/peacetv.png";
 import islamNetLogo from "@/assets/images/partners/islamnet.png";
@@ -245,6 +246,7 @@ const NAV_COL2 = [
     title: "Connect",
     links: [
       { label: "Careers", href: "/careers" },
+      { label: "Application Status", href: "/recruitment-status" },
       { label: "Get Involved", href: "/get-involved" },
       { label: "Contact", href: "/contact" },
       { label: "FAQ", href: "/faq" },
@@ -308,6 +310,7 @@ export default function Home() {
   const { scrollYProgress } = useScroll();
   const yHero = useTransform(scrollYProgress, [0, 0.3], ["0%", "30%"]);
   const [navOpen, setNavOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -435,10 +438,24 @@ export default function Home() {
             >
               Join Us
             </a>
+            <button
+              aria-label="Search the site"
+              onClick={() => setSearchOpen(true)}
+              className="ml-2 text-primary-foreground/60 hover:text-secondary transition-colors"
+            >
+              <Search className="w-4 h-4" />
+            </button>
           </div>
 
           {/* Right */}
-          <div className="lg:hidden flex justify-end">
+          <div className="lg:hidden flex items-center gap-4 justify-end">
+            <button
+              aria-label="Search the site"
+              onClick={() => setSearchOpen(true)}
+              className="text-primary-foreground/70 hover:text-secondary transition-colors"
+            >
+              <Search className="w-5 h-5" />
+            </button>
             <button
               data-testid="nav-mobile-toggle"
               aria-label={navOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -1539,6 +1556,7 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
+      <SiteSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
 
     </div>
   );

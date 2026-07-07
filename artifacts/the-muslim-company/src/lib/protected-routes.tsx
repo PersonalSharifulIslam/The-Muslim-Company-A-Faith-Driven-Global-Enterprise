@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'wouter'
 import { useAuth } from './auth-context'
-import { isAdminAreaRole as _isAdminAreaRole } from './supabase'
+import { isAdminAreaRole as _isAdminAreaRole } from './roles'
 
 function Spinner() {
   return (
@@ -22,9 +22,9 @@ function Spinner() {
 }
 
 // Single source of truth for which roles can reach /admin/* lives in
-// src/lib/supabase.ts (ADMIN_AREA_ROLES / isAdminAreaRole), re-exported
+// src/lib/roles.ts (ADMIN_AREA_ROLES / isAdminAreaRole), re-exported
 // here for convenience so existing imports from protected-routes keep working.
-export { ADMIN_AREA_ROLES, isAdminAreaRole } from './supabase'
+export { ADMIN_AREA_ROLES, isAdminAreaRole } from './roles'
 
 export function AdminRoute({ children }: { children: React.ReactNode }) {
   const { loading, role, session } = useAuth()

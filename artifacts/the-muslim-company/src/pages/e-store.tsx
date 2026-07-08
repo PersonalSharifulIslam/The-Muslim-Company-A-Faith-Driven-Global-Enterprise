@@ -49,6 +49,54 @@ export default function EStore() {
     return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
   }, []);
 
+  useEffect(() => {
+    if (products.length === 0) return;
+    document.querySelectorAll('script[data-product-schema]').forEach(el => el.remove());
+
+    const itemListSchema = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": products.map((p, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": buildProductSchema(p),
+      })),
+    };
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.setAttribute('data-product-schema', 'true');
+    s.textContent = JSON.stringify(itemListSchema);
+    document.head.appendChild(s);
+
+    return () => { document.querySelectorAll('script[data-product-schema]').forEach(el => el.remove()); };
+  }, [products]);
+
+  function buildProductSchema(p: Product) {
+    const url = `https://www.themuslim.company/e-store#${p.slug}`;
+    const schema: any = {
+      "@type": "Product",
+      "name": p.name,
+      "url": url,
+      "description": p.description || `${p.name} — available for pre-order from The Muslim Company.`,
+      "brand": { "@type": "Brand", "name": "The Muslim Company" },
+    };
+    if (p.image_url) schema.image = p.image_url;
+    // This is a pre-order-only storefront (no live checkout), so PreOrder is the
+    // accurate availability status rather than InStock — the price shown, where
+    // given, is indicative and confirmed directly with the customer afterward.
+    if (p.price != null) {
+      schema.offers = {
+        "@type": "Offer",
+        "url": url,
+        "priceCurrency": p.currency,
+        "price": p.price,
+        "availability": "https://schema.org/PreOrder",
+        "seller": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company" },
+      };
+    }
+    return schema;
+  }
+
   async function load() {
     setLoading(true);
     const { data } = await supabase.from("store_products").select("*").eq("active", true).order("created_at", { ascending: false });
@@ -90,7 +138,7 @@ export default function EStore() {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {products.map((p) => (
-                  <motion.div key={p.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+                  <motion.div key={p.id} id={p.slug} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
                     onClick={() => setDetailProduct(p)}
                     className="bg-card border border-primary/10 hover:border-secondary/40 transition-colors overflow-hidden flex flex-col cursor-pointer">
                     <div className="h-52 bg-background flex items-center justify-center overflow-hidden">

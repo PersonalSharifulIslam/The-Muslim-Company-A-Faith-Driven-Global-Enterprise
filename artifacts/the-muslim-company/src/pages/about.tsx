@@ -380,6 +380,56 @@ export default function AboutPage() {
               </div>
             </motion.div>
 
+            {/* A Note on Our Scale and Vision */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="p-8 bg-primary text-primary-foreground">
+              <h2 className="font-serif text-2xl mb-5">A Note on Our Scale and Vision</h2>
+              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed mb-4">
+                The Muslim Company is currently in an early stage of growth. Our presence across 20+ sectors today
+                operates at a small scale, as we build our own brand identity and operational foundation in each area
+                we enter.
+              </p>
+              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed mb-4">
+                This website describes a great deal about who we are and where we intend to go — and we say so
+                candidly: our vision is highly ambitious, and not everything described here is achievable or
+                available today. Much of what you read reflects our roadmap for the future, not exclusively our
+                current day-to-day scale of operations.
+              </p>
+              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed mb-2">
+                Our Founder, Shariful Islam, has always believed in thinking big — because when the intention
+                (niyyah) behind an ambition is sincere and made purely for the sake of Allah (ikhlas), He makes the
+                path easier, and the reward for a good intention begins the moment it is made, even before the work
+                is complete.
+              </p>
+
+              <div className="border-l-4 border-secondary pl-5 py-1 my-6">
+                <p className="font-serif text-lg italic leading-relaxed text-primary-foreground/90">
+                  "Actions are judged by their intentions."
+                </p>
+                <p className="mt-2 font-sans text-xs tracking-widest uppercase text-secondary/70">— Prophet Muhammad ﷺ, Sahih al-Bukhari 1</p>
+              </div>
+              <div className="border-l-4 border-secondary pl-5 py-1 my-6">
+                <p className="font-serif text-lg italic leading-relaxed text-primary-foreground/90">
+                  "And whoever fears Allah, He will make for him a way out."
+                </p>
+                <p className="mt-2 font-sans text-xs tracking-widest uppercase text-secondary/70">— Surah At-Talaq 65:2</p>
+              </div>
+              <div className="border-l-4 border-secondary pl-5 py-1 my-6">
+                <p className="font-serif text-lg italic leading-relaxed text-primary-foreground/90">
+                  "Indeed, with hardship comes ease."
+                </p>
+                <p className="mt-2 font-sans text-xs tracking-widest uppercase text-secondary/70">— Surah Ash-Sharh 94:6</p>
+              </div>
+
+              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed">
+                It is this belief — that a sincere intention made for Allah's sake invites His help — that allows us
+                to state our ambitions boldly and work toward them patiently, one stage at a time. We believe in
+                stating our direction and intent clearly and publicly, and holding ourselves accountable to it over
+                time, rather than waiting until every ambition is fully realized to speak about it. We will continue
+                to update this website, and our Transparency Reports, as each part of this vision becomes reality.
+              </p>
+            </motion.div>
+
             {/* Leadership CTA */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-card border border-primary/10 text-center">
@@ -433,56 +483,6 @@ export default function AboutPage() {
                   Contact Us
                 </a>
               </div>
-            </motion.div>
-
-            {/* A Note on Our Scale and Vision */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="p-8 bg-primary text-primary-foreground">
-              <h2 className="font-serif text-2xl mb-5">A Note on Our Scale and Vision</h2>
-              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed mb-4">
-                The Muslim Company is currently in an early stage of growth. Our presence across 20+ sectors today
-                operates at a small scale, as we build our own brand identity and operational foundation in each area
-                we enter.
-              </p>
-              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed mb-4">
-                This website describes a great deal about who we are and where we intend to go — and we say so
-                candidly: our vision is highly ambitious, and not everything described here is achievable or
-                available today. Much of what you read reflects our roadmap for the future, not exclusively our
-                current day-to-day scale of operations.
-              </p>
-              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed mb-2">
-                Our Founder, Shariful Islam, has always believed in thinking big — because when the intention
-                (niyyah) behind an ambition is sincere and made purely for the sake of Allah (ikhlas), He makes the
-                path easier, and the reward for a good intention begins the moment it is made, even before the work
-                is complete.
-              </p>
-
-              <div className="border-l-4 border-secondary pl-5 py-1 my-6">
-                <p className="font-serif text-lg italic leading-relaxed text-primary-foreground/90">
-                  "Actions are judged by their intentions."
-                </p>
-                <p className="mt-2 font-sans text-xs tracking-widest uppercase text-secondary/70">— Prophet Muhammad ﷺ, Sahih al-Bukhari 1</p>
-              </div>
-              <div className="border-l-4 border-secondary pl-5 py-1 my-6">
-                <p className="font-serif text-lg italic leading-relaxed text-primary-foreground/90">
-                  "And whoever fears Allah, He will make for him a way out."
-                </p>
-                <p className="mt-2 font-sans text-xs tracking-widest uppercase text-secondary/70">— Surah At-Talaq 65:2</p>
-              </div>
-              <div className="border-l-4 border-secondary pl-5 py-1 my-6">
-                <p className="font-serif text-lg italic leading-relaxed text-primary-foreground/90">
-                  "Indeed, with hardship comes ease."
-                </p>
-                <p className="mt-2 font-sans text-xs tracking-widest uppercase text-secondary/70">— Surah Ash-Sharh 94:6</p>
-              </div>
-
-              <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed">
-                It is this belief — that a sincere intention made for Allah's sake invites His help — that allows us
-                to state our ambitions boldly and work toward them patiently, one stage at a time. We believe in
-                stating our direction and intent clearly and publicly, and holding ourselves accountable to it over
-                time, rather than waiting until every ambition is fully realized to speak about it. We will continue
-                to update this website, and our Transparency Reports, as each part of this vision becomes reality.
-              </p>
             </motion.div>
 
           </div>

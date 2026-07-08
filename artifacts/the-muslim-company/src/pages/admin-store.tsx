@@ -8,9 +8,10 @@ type Product = {
   id: number; name: string; slug: string; description: string | null;
   price: number | null; currency: string; image_url: string | null;
   category: string | null; min_qty: number; active: boolean; created_at: string;
+  availability_date: string | null; shipping_price: number;
 };
-type Form = { name: string; slug: string; description: string; price: string; currency: string; image_url: string; category: string; min_qty: number; active: boolean };
-const BLANK: Form = { name: "", slug: "", description: "", price: "", currency: "BDT", image_url: "", category: "", min_qty: 1, active: true };
+type Form = { name: string; slug: string; description: string; price: string; currency: string; image_url: string; category: string; min_qty: number; active: boolean; availability_date: string; shipping_price: string };
+const BLANK: Form = { name: "", slug: "", description: "", price: "", currency: "BDT", image_url: "", category: "", min_qty: 1, active: true, availability_date: "", shipping_price: "0" };
 
 function slugify(s: string) { return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""); }
 
@@ -38,6 +39,7 @@ export default function AdminStore() {
     setForm({
       name: p.name, slug: p.slug, description: p.description || "", price: p.price?.toString() || "",
       currency: p.currency, image_url: p.image_url || "", category: p.category || "", min_qty: p.min_qty, active: p.active,
+      availability_date: p.availability_date || "", shipping_price: p.shipping_price?.toString() || "0",
     });
     setEditingId(p.id);
     setModal(true);
@@ -85,6 +87,8 @@ export default function AdminStore() {
       category: form.category.trim() || null,
       min_qty: form.min_qty || 1,
       active: form.active,
+      availability_date: form.availability_date || null,
+      shipping_price: form.shipping_price ? parseFloat(form.shipping_price) : 0,
       updated_at: new Date().toISOString(),
     };
     try {
@@ -219,6 +223,19 @@ export default function AdminStore() {
                     <option value="BDT">BDT</option>
                     <option value="USD">USD</option>
                   </select>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="font-sans text-xs uppercase tracking-widest text-primary/50 mb-1.5 block">Available From (for pre-order)</label>
+                  <input type="date" value={form.availability_date} onChange={(e) => setForm(f => ({ ...f, availability_date: e.target.value }))}
+                    className="w-full h-10 px-3 bg-card border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
+                  <p className="font-sans text-[10px] text-primary/40 mt-1">Required by Google Merchant Center for pre-order items.</p>
+                </div>
+                <div>
+                  <label className="font-sans text-xs uppercase tracking-widest text-primary/50 mb-1.5 block">Shipping Cost</label>
+                  <input type="number" step="0.01" min={0} value={form.shipping_price} onChange={(e) => setForm(f => ({ ...f, shipping_price: e.target.value }))}
+                    className="w-full h-10 px-3 bg-card border border-primary/15 font-sans text-sm text-primary focus:outline-none focus:border-secondary" />
                 </div>
               </div>
               <div>

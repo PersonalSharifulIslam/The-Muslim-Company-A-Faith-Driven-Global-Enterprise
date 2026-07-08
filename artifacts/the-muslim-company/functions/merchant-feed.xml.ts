@@ -29,7 +29,7 @@ export async function onRequestGet(context: any) {
   let products: any[] = []
   try {
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/store_products?select=id,name,slug,description,price,currency,image_url,category&active=eq.true&price=not.is.null&order=created_at.desc`,
+      `${SUPABASE_URL}/rest/v1/store_products?select=id,name,slug,description,price,currency,image_url,category,availability_date,shipping_price&active=eq.true&price=not.is.null&order=created_at.desc`,
       { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
     )
     if (res.ok) products = await res.json()
@@ -40,6 +40,13 @@ export async function onRequestGet(context: any) {
   const items = products.map((p) => {
     const link = `${BASE}/e-store#${p.slug}`
     const description = p.description || `${p.name} — available for pre-order from The Muslim Company.`
+    // Google requires availability_date for items marked "preorder". If the
+    // admin hasn't set one for this product yet, default to 30 days out
+    // rather than leaving it missing (which gets the item rejected outright).
+    const availabilityDate = p.availability_date
+      ? new Date(p.availability_date).toISOString().split('T')[0]
+      : new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+    const shippingCost = Number(p.shipping_price || 0).toFixed(2)
     return `    <item>
       <g:id>${escapeXml(String(p.id))}</g:id>
       <title>${escapeXml(p.name)}</title>
@@ -47,10 +54,15 @@ export async function onRequestGet(context: any) {
       <link>${escapeXml(link)}</link>
       ${p.image_url ? `<g:image_link>${escapeXml(p.image_url)}</g:image_link>` : ''}
       <g:availability>preorder</g:availability>
+      <g:availability_date>${availabilityDate}T00:00:00Z</g:availability_date>
       <g:price>${Number(p.price).toFixed(2)} ${escapeXml(p.currency || 'BDT')}</g:price>
       <g:brand>The Muslim Company</g:brand>
       <g:condition>new</g:condition>
       <g:identifier_exists>no</g:identifier_exists>
+      <g:shipping>
+        <g:country>BD</g:country>
+        <g:price>${shippingCost} ${escapeXml(p.currency || 'BDT')}</g:price>
+      </g:shipping>
       ${p.category ? `<g:product_type>${escapeXml(p.category)}</g:product_type>` : ''}
     </item>`
   }).join('\n')

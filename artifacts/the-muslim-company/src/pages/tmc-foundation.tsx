@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  HandHeart, Heart, TreePine, Globe2, Users, Droplets,
+  HandHeart, Heart, TreePine, Globe2, Users, Droplets, PawPrint,
   GraduationCap, Stethoscope, ShieldCheck, Mail, ArrowUpRight
 } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
@@ -21,15 +21,17 @@ const PILLARS = [
   { icon: <Users className="w-5 h-5" />, title: "Orphan & Widow Care", desc: "Sponsorship, housing support, and long-term welfare programs for orphans and widows across our operating regions." },
   { icon: <Stethoscope className="w-5 h-5" />, title: "Healthcare Access", desc: "Medical camps, essential treatment support, and health education for underserved populations." },
   { icon: <GraduationCap className="w-5 h-5" />, title: "Education & Scholarships", desc: "Scholarships, school supplies, and literacy programs to break cycles of poverty through knowledge." },
-  { icon: <TreePine className="w-5 h-5" />, title: "Environmental Stewardship", desc: "Reforestation, renewable energy adoption, and wildlife protection — honoring the earth as a trust from Allah." },
-  { icon: <Droplets className="w-5 h-5" />, title: "Clean Water & Sanitation", desc: "Wells, water purification, and sanitation infrastructure for communities without reliable access." },
+  { icon: <TreePine className="w-5 h-5" />, title: "Environmental & Plant Life", desc: "Reforestation, tree planting, and ecological restoration — honoring the earth, its soil, and every living plant as a trust from Allah." },
+  { icon: <PawPrint className="w-5 h-5" />, title: "Animal & Wildlife Welfare", desc: "Protection, feeding, rescue, and habitat preservation for animals, birds, and all creatures — following the Prophetic teaching that kindness to every living being is an act of worship." },
+  { icon: <Droplets className="w-5 h-5" />, title: "Clean Water & Sanitation", desc: "Wells, water purification, and sanitation infrastructure for communities without reliable access — for people, livestock, and wildlife alike." },
 ];
 
 const IMPACT_AREAS = [
   "Disaster relief response within 72 hours of qualifying emergencies",
   "Orphan sponsorship covering education, healthcare, and housing",
   "Community water wells in underserved rural areas",
-  "Reforestation and ecological restoration projects",
+  "Reforestation, tree planting, and ecological restoration projects",
+  "Animal rescue, feeding programs, and wildlife habitat protection",
   "Medical camps providing free consultations and essential medicine",
   "Scholarship funding for students unable to afford education",
 ];
@@ -40,7 +42,7 @@ export default function TMCFoundationPage() {
 
     document.title = "The Muslim Company Foundation — Humanitarian & Environmental Arm";
 
-    const desc = "The Muslim Company Foundation is the humanitarian and environmental arm of The Muslim Company — funded by zakat, sadaqah, and 10% of monthly net profit, serving humanity and protecting creation across every country we operate in.";
+    const desc = "The Muslim Company Foundation is the humanitarian and environmental arm of The Muslim Company — funded by zakat, sadaqah, and 10% of monthly net profit, serving all of Allah's creation: people, animals, birds, and nature, across every country we operate in.";
 
     const upsertMeta = (selector: string, attr: string, value: string, make: () => HTMLElement) => {
       const el = document.querySelector(selector);
@@ -107,7 +109,7 @@ export default function TMCFoundationPage() {
                 Serving Humanity, Protecting Creation — For the Sake of Allah
               </h1>
               <p className="font-sans text-base text-primary-foreground/60 max-w-2xl leading-relaxed mb-8">
-                The Muslim Company Foundation is the dedicated humanitarian and environmental arm of The Muslim Company — channeling zakat, sadaqah, waqf, and 10% of monthly net profit directly into relief, education, healthcare, orphan care, and environmental restoration across every country we operate in.
+                The Muslim Company Foundation is the dedicated humanitarian and environmental arm of The Muslim Company — channeling zakat, sadaqah, waqf, and 10% of monthly net profit directly into the welfare of every creation of Allah: human beings, animals, birds, and all living creatures, as well as trees, plants, and the natural world itself, across every country we operate in.
               </p>
               <div className="border-l-4 border-secondary pl-6 py-1">
                 <p className="font-serif text-lg italic text-primary-foreground/80 leading-relaxed">
@@ -129,10 +131,10 @@ export default function TMCFoundationPage() {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <p className="font-sans text-sm text-primary/70 leading-relaxed">
-                  Every sector of The Muslim Company — from technology to manufacturing to finance — exists not only to operate ethically, but to fund a permanent channel of good. The Foundation is that channel: an interdisciplinary effort spanning humanitarian relief, orphan and widow care, healthcare access, education, and environmental restoration.
+                  Every sector of The Muslim Company — from technology to manufacturing to finance — exists not only to operate ethically, but to fund a permanent channel of good. The Foundation is that channel: caring not only for human beings, but for every creature Allah has created — animals, birds, insects, and wildlife — and for the earth itself, its trees, plants, soil, and water.
                 </p>
                 <p className="font-sans text-sm text-primary/70 leading-relaxed">
-                  The Prophet ﷺ said: <span className="italic">"The best of people are those most beneficial to people."</span> Guided by this model, the Foundation operates with full accountability under the company's Supreme Shariah Board and publishes its activity through The Muslim Company's transparency reporting.
+                  The Prophet ﷺ taught that mercy extends to every living being — describing how a man was forgiven for giving water to a thirsty dog, and how a woman was held accountable for letting a cat starve. Guided by this model, the Foundation operates with full accountability under the company's Supreme Shariah Board and publishes its activity through The Muslim Company's transparency reporting.
                 </p>
               </div>
             </motion.div>

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   HandHeart, Heart, TreePine, Globe2, Users, Droplets, PawPrint,
-  GraduationCap, Stethoscope, ShieldCheck, Mail, ArrowUpRight
+  GraduationCap, Stethoscope, ShieldCheck, Mail, ArrowUpRight, Home
 } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 
@@ -18,6 +18,7 @@ const stagger = {
 
 const PILLARS = [
   { icon: <HandHeart className="w-5 h-5" />, title: "Humanitarian Relief", desc: "Emergency disaster response, refugee assistance, and food security programs for the most vulnerable communities." },
+  { icon: <Home className="w-5 h-5" />, title: "Street Children & Poverty Relief", desc: "Direct support for street children and impoverished families — meeting basic needs of food, clothing, and shelter, alongside pathways to education and a safe upbringing." },
   { icon: <Users className="w-5 h-5" />, title: "Orphan & Widow Care", desc: "Sponsorship, housing support, and long-term welfare programs for orphans and widows across our operating regions." },
   { icon: <Stethoscope className="w-5 h-5" />, title: "Healthcare Access", desc: "Medical camps, essential treatment support, and health education for underserved populations." },
   { icon: <GraduationCap className="w-5 h-5" />, title: "Education & Scholarships", desc: "Scholarships, school supplies, and literacy programs to break cycles of poverty through knowledge." },
@@ -28,6 +29,7 @@ const PILLARS = [
 
 const IMPACT_AREAS = [
   "Disaster relief response within 72 hours of qualifying emergencies",
+  "Food, clothing, and shelter support for street children and poor families",
   "Orphan sponsorship covering education, healthcare, and housing",
   "Community water wells in underserved rural areas",
   "Reforestation, tree planting, and ecological restoration projects",
@@ -109,7 +111,7 @@ export default function TMCFoundationPage() {
                 Serving Humanity, Protecting Creation — For the Sake of Allah
               </h1>
               <p className="font-sans text-base text-primary-foreground/60 max-w-2xl leading-relaxed mb-8">
-                The Muslim Company Foundation is the dedicated humanitarian and environmental arm of The Muslim Company — channeling zakat, sadaqah, waqf, and 10% of monthly net profit directly into the welfare of every creation of Allah: human beings, animals, birds, and all living creatures, as well as trees, plants, and the natural world itself, across every country we operate in.
+                The Muslim Company Foundation is the dedicated humanitarian and environmental arm of The Muslim Company — channeling zakat, sadaqah, waqf, and 10% of monthly net profit directly into the welfare of every creation of Allah. We work to meet the basic needs of street children, orphans, and the poor — food, clothing, shelter, education, and healthcare — while also caring for animals, birds, and all living creatures, and for the trees, plants, and natural world entrusted to us, across every country we operate in.
               </p>
               <div className="border-l-4 border-secondary pl-6 py-1">
                 <p className="font-serif text-lg italic text-primary-foreground/80 leading-relaxed">

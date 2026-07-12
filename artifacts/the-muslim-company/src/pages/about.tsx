@@ -112,6 +112,7 @@ export default function AboutPage() {
         "@context": "https://schema.org", "@type": "Person",
         "@id": "https://www.themuslim.company/ceo/Sharifulislam#person",
         "name": "Shariful Islam", "givenName": "Shariful", "familyName": "Islam",
+        "alternateName": "Shariful Islam Naik",
         "jobTitle": "Founder, Chairman, Managing Director & CEO",
         "description": "Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur. He is the Founder, Chairman, Managing Director, and CEO of The Muslim Company — a faith-driven global enterprise built on Islamic principles and prophetic values. He is also a Peace Ambassador for the Global Peace Chain (Bangladesh).",
         "url": "https://www.themuslim.company/founder",

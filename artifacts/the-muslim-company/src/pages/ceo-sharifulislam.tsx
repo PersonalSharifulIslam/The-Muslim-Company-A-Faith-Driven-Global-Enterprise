@@ -119,9 +119,10 @@ const PERSON_SCHEMA = {
   "url": "https://www.themuslim.company/ceo/Sharifulislam",
   "image": {
     "@type": "ImageObject",
-    "url": "https://www.themuslim.company/og-image.png",
-    "width": 1200,
-    "height": 630
+    "url": "https://www.themuslim.company/shariful-islam-ceo.png",
+    "width": 1122,
+    "height": 1160,
+    "caption": "Shariful Islam — Founder & CEO, The Muslim Company"
   },
   "worksFor": {
     "@type": "Organization",

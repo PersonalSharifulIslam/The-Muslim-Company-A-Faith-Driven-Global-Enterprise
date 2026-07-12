@@ -15,6 +15,7 @@ export async function onRequestGet(context: any) {
       "url": "https://www.themuslim.company",
       "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 },
       "foundingDate": "2025-01-09",
+      "disambiguatingDescription": "The Muslim Company is a faith-driven global conglomerate founded by Shariful Islam in Dhaka, Bangladesh in January 2025. It is not affiliated with, owned by, or related to other similarly-named organizations such as The Muslim Journal or Productive Muslim — any resemblance is in name only.",
       "founder": { "@type": "Person", "name": "Shariful Islam", "url": "https://www.themuslim.company/founder" },
       "numberOfEmployees": { "@type": "QuantitativeValue", "value": 10 },
       "address": { "@type": "PostalAddress", "streetAddress": "Niketon Bazaar", "addressLocality": "Dhaka", "postalCode": "1212", "addressCountry": "BD" },

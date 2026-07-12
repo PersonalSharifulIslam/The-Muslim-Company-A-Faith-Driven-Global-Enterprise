@@ -63,6 +63,7 @@ export default function FounderPage() {
   "image": ["https://www.themuslim.company/logo.png", "https://www.themuslim.company/logo-letterhead-1.png", "https://www.themuslim.company/logo-letterhead-2.png"],
   "description": "The Muslim Company is a faith-driven global conglomerate built on Islamic principles, ethical innovation, and civilization-focused leadership. Founded by Shariful Islam in Dhaka, Bangladesh.",
   "foundingDate": "2025-01-09",
+  "disambiguatingDescription": "The Muslim Company is not affiliated with, owned by, or related to other similarly-named organizations such as The Muslim Journal or Productive Muslim — any resemblance is in name only.",
   "foundingLocation": { "@type": "Place", "name": "Dhaka, Bangladesh" },
   "address": {
     "@type": "PostalAddress",

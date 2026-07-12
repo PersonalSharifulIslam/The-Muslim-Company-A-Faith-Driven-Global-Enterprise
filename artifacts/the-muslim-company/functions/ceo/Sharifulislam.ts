@@ -26,7 +26,15 @@ export async function onRequestGet(context: any) {
   <meta name="twitter:site" content="@officialtmchq" />
   <link rel="canonical" href="https://www.themuslim.company/ceo/Sharifulislam" />
 </head>
-<body><p><a href="https://www.themuslim.company/ceo/Sharifulislam">Shariful Islam – CEO of The Muslim Company</a></p></body>
+<body>
+  <header><h1>Shariful Islam — Chief Executive Officer</h1><p>The Muslim Company — Dhaka, Bangladesh</p></header>
+  <main>
+    <p>Shariful Islam is the Founder &amp; Chief Executive Officer of The Muslim Company, a faith-driven global conglomerate headquartered in Dhaka, Bangladesh. Born in Jamalpur, Bangladesh, he holds a Bachelor of Engineering in Electrical Engineering from the University of Burdwan, India.</p>
+    <p>Shariful Islam, Founder &amp; CEO of The Muslim Company, is a Bangladeshi electrical engineer and entrepreneur — not related to or the same person as the Bangladeshi cricketer of the same name.</p>
+    <p>He serves as a Peace Ambassador for the Global Peace Chain (Bangladesh), and holds professional memberships with the Society of Satellite Professionals International (SSPI), the International Association of Engineers (IAENG), and the International Human Rights Commission (IHRC).</p>
+    <nav><a href="https://www.themuslim.company/">Home</a> | <a href="https://www.themuslim.company/founder">Founder</a> | <a href="https://www.themuslim.company/about">About</a></nav>
+  </main>
+</body>
 </html>`
     return new Response(html, {
       headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=3600' }

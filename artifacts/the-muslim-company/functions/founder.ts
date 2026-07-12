@@ -26,7 +26,15 @@ export async function onRequestGet(context: any) {
   <meta name="twitter:site" content="@officialtmchq" />
   <link rel="canonical" href="https://www.themuslim.company/founder" />
 </head>
-<body><p><a href="https://www.themuslim.company/founder">Founder & CEO — Shariful Islam — The Muslim Company</a></p></body>
+<body>
+  <header><h1>Founder & CEO — Shariful Islam</h1><p>The Muslim Company — Dhaka, Bangladesh</p></header>
+  <main>
+    <p>Shariful Islam is the Founder of The Muslim Company — a diversified, faith-driven global conglomerate built on Islamic principles, ethical leadership, and long-term civilizational impact. Born in Jamalpur, Bangladesh, he holds a Bachelor of Engineering in Electrical Engineering from the University of Burdwan, India.</p>
+    <p>Shariful Islam founded The Muslim Company in January 2025 with the explicit intent of building an institution — not merely a business — governed by Islamic ethical principle at every level of decision-making. The company now operates across more than twenty sectors and extends across Bangladesh, India, Pakistan, the United Arab Emirates, Nigeria, and Ghana.</p>
+    <p>He also serves as a Peace Ambassador for the Global Peace Chain (Bangladesh) and holds professional memberships with the Society of Satellite Professionals International (SSPI), the International Association of Engineers (IAENG), and the International Human Rights Commission (IHRC).</p>
+    <nav><a href="https://www.themuslim.company/">Home</a> | <a href="https://www.themuslim.company/ceo/Sharifulislam">CEO Profile</a> | <a href="https://www.themuslim.company/about">About</a></nav>
+  </main>
+</body>
 </html>`
     return new Response(html, {
       headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=3600' }

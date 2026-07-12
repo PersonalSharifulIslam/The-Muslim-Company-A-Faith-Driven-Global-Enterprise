@@ -90,7 +90,15 @@ export async function onRequestGet(context: any) {
   <script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}</script>
   <script type="application/ld+json">${JSON.stringify(faqSchema)}</script>
 </head>
-<body><p><a href="https://www.themuslim.company/about">About Us — The Muslim Company</a></p></body>
+<body>
+  <header><h1>About The Muslim Company</h1><p>A Faith-Driven Global Conglomerate</p></header>
+  <main>
+    <p>The Muslim Company is a faith-driven global conglomerate headquartered in Dhaka, Bangladesh, founded in January 2025 by Shariful Islam. The company operates across 20+ sectors — including Technology, Artificial Intelligence, Manufacturing, Renewable Energy, Healthcare, Education, Media, and Humanitarian Development — with a growing presence across Bangladesh, India, Pakistan, the United Arab Emirates, Nigeria, and Ghana, united under a single ethical framework rooted in the Quran, authentic Sunnah, and the Prophetic model.</p>
+    <p>Governance: Every major decision is reviewed by a Supreme Shariah Board under an Amanah-based leadership and Shura consultative framework, protected by a permanent constitutional structure that binds all future leadership to the founding mission.</p>
+    <p>10% of monthly net profit is directed to The Muslim Company Foundation, the company's humanitarian and environmental arm, alongside annual zakat and voluntary sadaqah.</p>
+    <nav><a href="https://www.themuslim.company/">Home</a> | <a href="https://www.themuslim.company/founder">Founder</a> | <a href="https://www.themuslim.company/governance">Governance</a> | <a href="https://www.themuslim.company/sectors">Sectors</a></nav>
+  </main>
+</body>
 </html>`
     return new Response(html, {
       headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=3600' }

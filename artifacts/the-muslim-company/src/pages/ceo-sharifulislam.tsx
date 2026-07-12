@@ -103,6 +103,7 @@ const PERSON_SCHEMA = {
     { "@language": "en", "@value": "Shariful Islam" },
     { "@language": "bn", "@value": "শরিফুল ইসলাম" }
   ],
+  "alternateName": "Shariful Islam Naik",
   "givenName": "Shariful",
   "familyName": "Islam",
   "birthDate": "2001",

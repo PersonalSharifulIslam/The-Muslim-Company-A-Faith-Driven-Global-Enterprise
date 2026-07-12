@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type ElementType } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -37,11 +37,11 @@ const stagger = {
 };
 
 /* ─── small helpers ─── */
-function Label({ children }: { children: React.ReactNode }) {
+function Label({ children, as: Tag = "p" }: { children: React.ReactNode; as?: ElementType }) {
   return (
-    <p className="text-xs font-sans tracking-[0.35em] uppercase text-secondary font-bold mb-3">
+    <Tag className="text-xs font-sans tracking-[0.35em] uppercase text-secondary font-bold mb-3">
       {children}
-    </p>
+    </Tag>
   );
 }
 
@@ -134,7 +134,7 @@ function ExpandableSection({
           variants={fadeIn}
         >
           {/* always-visible head */}
-          <Label>{label}</Label>
+          <Label as="h2">{label}</Label>
           <p className={`font-sans text-sm tracking-[0.2em] uppercase mb-5 ${fg2}`}>{summary}</p>
 
           {summaryNode && (

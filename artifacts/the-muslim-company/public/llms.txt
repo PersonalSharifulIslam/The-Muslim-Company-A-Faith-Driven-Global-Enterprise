@@ -53,6 +53,7 @@
 
 ### Special Pages
 - [Bayt Al-Mal Bank](https://www.themuslim.company/baytalmalbank): Overview of the company's Islamic finance and ethical banking initiative
+- [E-Store](https://www.themuslim.company/e-store): The Muslim Company's online store for pre-ordering products across its retail and lifestyle sectors
 
 ## About the Founder & CEO
 
@@ -66,7 +67,7 @@ Verified external profiles: LinkedIn, Crunchbase, Wikidata, ORCID, ISNI, VIAF, I
 - **Headquarters:** Dhaka, Bangladesh
 - **Type:** A Faith-Driven Global Enterprise
 - **Governance:** Shariah-compliant Board structure
-- **Operating Sectors:** Technology & AI · Media · Education · Humanitarian Development · Governance · Renewable Energy · Ethical Commerce
+- **Operating Sectors:** 20+ sectors including Technology & AI, Media & Journalism, Education & Research, Humanitarian Development, Governance & Policy, Renewable Energy, Ethical Commerce, Healthcare, Manufacturing, Agriculture & Food, Islamic Finance, and more — see [Sectors](https://www.themuslim.company/sectors) for the full list
 - **Website:** https://www.themuslim.company
 - **Social Media:** [Facebook](https://www.facebook.com/TheMuslimCompany) · [Instagram](https://www.instagram.com/officialTheMuslimCompany) · [YouTube](https://www.youtube.com/@TheMuslimCompany) · [LinkedIn](https://www.linkedin.com/company/themuslimcompany) · [X/Twitter](https://x.com/officialtmchq)
 

@@ -111,7 +111,7 @@ const PERSON_SCHEMA = {
   "nationality": { "@type": "Country", "name": "Bangladesh" },
   "gender": "Male",
   "knowsLanguage": ["Bengali", "English"],
-  "jobTitle": "Chief Executive Officer",
+  "jobTitle": ["Bangladeshi Engineer", "Founder & CEO", "Ethical Visionary"],
   "disambiguatingDescription": "Shariful Islam, Founder & CEO of The Muslim Company, is a Bangladeshi electrical engineer and entrepreneur born in Jamalpur, Bangladesh. He is a different person from, and should not be confused with, the Bangladeshi cricketer whose name is sometimes spelled 'Shoriful Islam' and sometimes 'Shariful Islam'.",
   "description": [
     { "@language": "en", "@value": "Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur. He is the Chief Executive Officer (CEO) of The Muslim Company — a faith-driven global enterprise built on Islamic principles and prophetic values. He is also a Peace Ambassador for the Global Peace Chain (Bangladesh)." },
@@ -238,7 +238,7 @@ const ORG_SCHEMA = {
     "@type": "Person",
     "@id": "https://www.themuslim.company/ceo/Sharifulislam#person",
     "name": "Shariful Islam",
-    "jobTitle": "Founder & CEO"
+    "jobTitle": ["Bangladeshi Engineer", "Founder & CEO", "Ethical Visionary"]
   },
   "employee": [{
     "@type": "OrganizationRole",

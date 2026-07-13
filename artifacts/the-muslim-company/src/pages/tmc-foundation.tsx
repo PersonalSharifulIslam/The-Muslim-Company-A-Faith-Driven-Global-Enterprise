@@ -127,7 +127,7 @@ export default function TMCFoundationPage() {
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Our Purpose</p>
+              <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Our Purpose</h2>
               <p className="font-serif text-2xl md:text-3xl text-primary mb-8 max-w-3xl leading-tight">
                 One institution, two missions: build ethical enterprise, and serve those in need.
               </p>
@@ -147,7 +147,7 @@ export default function TMCFoundationPage() {
         <section className="py-20 px-6 lg:px-12 bg-card border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Areas of Work</p>
+              <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Areas of Work</h2>
               <p className="font-serif text-2xl md:text-3xl text-primary mb-10 max-w-3xl leading-tight">
                 Six pillars through which the Foundation serves humanity and creation.
               </p>
@@ -169,7 +169,7 @@ export default function TMCFoundationPage() {
         <section className="py-20 px-6 lg:px-12 bg-primary border-b border-primary-foreground/10">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">How It Is Funded</p>
+              <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">How It Is Funded</h2>
               <p className="font-serif text-2xl text-primary-foreground mb-10 max-w-2xl">
                 Giving is not optional — it is structurally built into the company's financial model.
               </p>
@@ -194,7 +194,7 @@ export default function TMCFoundationPage() {
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Impact & Reach</p>
+              <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Impact & Reach</h2>
               <p className="font-serif text-2xl text-primary mb-6 max-w-2xl">
                 Real relief work, already reaching people across multiple countries.
               </p>
@@ -238,7 +238,7 @@ export default function TMCFoundationPage() {
         <section className="py-20 px-6 lg:px-12 bg-card border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Support the Foundation</p>
+              <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Support the Foundation</h2>
               <p className="font-serif text-2xl md:text-3xl text-primary mb-6 max-w-2xl leading-tight">
                 Formal individual-donor channels are being finalized. In the meantime, reach out directly.
               </p>

@@ -192,7 +192,7 @@ export default function ContactPage() {
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-2">How Can We Help?</p>
+              <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-2">How Can We Help?</h2>
               <p className="font-serif text-2xl text-primary mb-10 max-w-2xl">Select the nature of your inquiry and we will connect you with the right team.</p>
             </motion.div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -223,7 +223,7 @@ export default function ContactPage() {
         <section className="py-20 px-6 lg:px-12 bg-primary border-b border-primary-foreground/10">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-2">Partnership Opportunities</p>
+              <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-2">Partnership Opportunities</h2>
               <p className="font-serif text-2xl text-primary-foreground mb-8 max-w-2xl">Select the type of partnership you are interested in.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-primary-foreground/15">
                 {PARTNER_TYPES.map((p, i) => (
@@ -245,7 +245,7 @@ export default function ContactPage() {
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-8">Company Information</p>
+              <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-8">Company Information</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="p-6 bg-card border border-primary/10">
                   <Building2 className="w-5 h-5 text-secondary mb-3" />
@@ -276,7 +276,7 @@ export default function ContactPage() {
         <section className="py-20 px-6 lg:px-12 bg-card border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-8">Email Directory</p>
+              <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-8">Email Directory</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-primary/10">
                 {[
                   { dept: "General Support", email: "help@themuslim.company" },
@@ -307,7 +307,7 @@ export default function ContactPage() {
         <section className="py-20 px-6 lg:px-12 bg-primary">
           <div className="container mx-auto max-w-3xl text-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-6">Our Commitment</p>
+              <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-6">Our Commitment</h2>
               <blockquote className="font-serif text-2xl md:text-3xl text-primary-foreground/85 italic leading-relaxed mb-6">
                 "Every message we receive is a trust. We respond with honesty, respect, and care — because in Islam, fulfilling amanah is not optional."
               </blockquote>

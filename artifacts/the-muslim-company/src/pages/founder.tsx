@@ -208,7 +208,7 @@ export default function FounderPage() {
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
               className="p-6 bg-card border border-primary/10">
-              <h3 className="font-serif text-lg text-primary mb-3">About Shariful Islam</h3>
+              <h2 className="font-serif text-lg text-primary mb-3">About Shariful Islam</h2>
               <p className="font-sans text-sm text-primary/65 leading-relaxed">
                 Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur dedicated to ethical innovation, humanitarian development, knowledge-driven progress, and civilization-focused institution building. From an early age he developed strong interests in technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies. He is also the founder of The Bayt Al-Mal Bank, an Islamic banking initiative operating under The Muslim Company, established to advance Shariah-compliant financial services as part of the company's broader civilizational mission.
               </p>
@@ -218,7 +218,7 @@ export default function FounderPage() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-primary text-primary-foreground">
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-4">Our Story</p>
-              <h3 className="font-serif text-2xl mb-6">How The Muslim Company Began</h3>
+              <h2 className="font-serif text-2xl mb-6">How The Muslim Company Began</h2>
 
               <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed mb-5">
                 Shariful Islam spent his early career studying global business, technology, and economic systems closely — observing how many of the world's most powerful institutions optimized for profit and market dominance while overlooking ethics, equity, and long-term human welfare. At the same time, he recognized a distinct gap in the global market: practicing professionals, ethical entrepreneurs, and faith-conscious consumers had limited access to institutions built around transparency, accountability, and Shariah-compliant principles at scale.

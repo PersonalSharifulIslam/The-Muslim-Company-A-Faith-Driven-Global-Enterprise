@@ -121,7 +121,7 @@ export default function Careers() {
       <section className="bg-primary text-primary-foreground py-20 lg:py-28 px-6 lg:px-12">
         <div className="container mx-auto max-w-5xl">
           <motion.div initial="hidden" animate="visible" variants={fadeIn}>
-            <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Join the Mission</p>
+            <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Join the Mission</h2>
             <h1 className="font-serif text-4xl md:text-6xl text-primary-foreground mb-5">Careers at<br />The Muslim Company</h1>
             <p className="font-sans text-sm text-primary-foreground/55 max-w-2xl leading-relaxed mb-8">
               We are building a faith-driven global enterprise. Every role here is an opportunity to contribute to something greater — a civilization-scale mission guided by ethics, knowledge, and justice.

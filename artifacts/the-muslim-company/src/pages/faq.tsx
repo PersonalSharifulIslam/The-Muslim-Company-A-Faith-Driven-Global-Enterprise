@@ -26,6 +26,7 @@ const FAQ_GROUPS = [
       { q: "What sectors does The Muslim Company operate in?", a: "The company works across 20+ beneficial and halal sectors, including Technology & AI, Healthcare, Renewable Energy, Manufacturing, Education, Islamic Finance & FinTech, Media, and Humanitarian & Social Welfare." },
       { q: "What is The Bayt Al-Mal Bank?", a: "The Bayt Al-Mal Bank is The Muslim Company's Islamic banking arm, offering interest-free (riba-free), Shariah-compliant banking, savings, and financing products, alongside its fintech app DinarX and the Dirham Payment Gateway." },
       { q: "Is The Muslim Company publicly traded?", a: "No. The Muslim Company is privately held. Business inquiries and partnership requests can be directed to our Contact page." },
+      { q: "Where can I see the company's financial transparency reports?", a: "Annual and periodic Transparency Reports covering finances, zakat distribution, and governance are published on our Transparency page." },
     ],
   },
   {
@@ -34,6 +35,8 @@ const FAQ_GROUPS = [
       { q: "Is The Muslim Company Shariah-compliant?", a: "Yes. Every entity under the group is overseen by a Supreme Shariah Board and reviewed against the Maqasid al-Shariah (the higher objectives of Islamic law). Operations are completely free from riba (interest), bribery, and exploitation." },
       { q: "How are new products and services approved?", a: "New products, services, and technologies follow a three-stage pipeline: Research & Development builds and documents the initiative, the Council of Ethical Scholars, Scientists & Experts independently analyzes its scientific validity and safety, and the Supreme Shariah Board gives final approval against Quran, Sunnah, and Maqasid al-Shariah." },
       { q: "Where can I read the company's governance structure?", a: "Full details are published on our Governance and Constitution pages, along with our Transparency Reports." },
+      { q: "Is The Muslim Company a legally registered company?", a: "Yes, The Muslim Company is registered in Bangladesh as The Muslim Company LTD." },
+      { q: "How can I report an ethical concern or complaint?", a: "A confidential internal division monitors compliance, investigates ethical concerns, and maintains whistleblower protection, reporting directly to the founder and insulated from commercial pressure. Concerns can be raised via help@themuslim.company." },
     ],
   },
   {
@@ -41,6 +44,8 @@ const FAQ_GROUPS = [
     items: [
       { q: "How do I apply for a job at The Muslim Company?", a: "Open roles are listed on our Careers page. You can also reach the recruitment team directly at careers@themuslim.company." },
       { q: "Does The Muslim Company hire internationally?", a: "The Muslim Company operates and hires across multiple countries as the business grows. Check the Careers page for current openings and their locations." },
+      { q: "How do I check my job application status?", a: "You can track your application anytime on our Application Status page using the reference number provided when you applied." },
+      { q: "What employee benefits does The Muslim Company offer?", a: "Employees receive fair wages, dignified workplaces with separate facilities for women, extended maternity leave (1–1.5 years), long-term pension qualification, and family welfare programs." },
     ],
   },
   {
@@ -49,7 +54,16 @@ const FAQ_GROUPS = [
       { q: "What is The Muslim Company Foundation?", a: "The Muslim Company Foundation is the company's dedicated humanitarian and environmental arm, funded by zakat, sadaqah, and 10% of monthly net profit — directed toward relief, education, healthcare, orphan care, and environmental work." },
       { q: "Which countries has the Foundation helped?", a: "The Foundation has provided humanitarian relief and community support to people in Bangladesh, Pakistan, Nigeria, Ghana, Gambia, and other African nations, with support from individual donors across multiple countries." },
       { q: "Does The Muslim Company give back to the community?", a: "Yes. The company commits 10% of monthly net profit to Fi Sabilillah — for Allah's path — in addition to fully distributing annual zakat, supporting mosques, madrasas, education scholarships, healthcare, and orphan care." },
+      { q: "Does the Foundation support animal welfare and environmental causes?", a: "Yes. Alongside humanitarian relief for people, the Foundation protects, feeds, and rescues animals, birds, and wildlife, and works on reforestation, tree planting, and ecological restoration — caring for all of Allah's creation." },
+      { q: "How is zakat calculated and distributed?", a: "Zakat is calculated annually on all eligible company assets and fully distributed by a qualified Shariah scholar, with distribution details published in our Transparency Reports." },
       { q: "How can I donate or get involved?", a: "Visit our Get Involved or Foundation pages, or email help@themuslim.company. Formal individual-donor channels are being finalized." },
+    ],
+  },
+  {
+    title: "Contact & Media",
+    items: [
+      { q: "How do I contact The Muslim Company?", a: "You can reach us at help@themuslim.company, or visit our Contact page for department-specific contacts and our Dhaka office address." },
+      { q: "Is there a separate contact for press and media inquiries?", a: "Yes. Journalists and media professionals can reach us at media@themuslim.company, or visit our Newsroom for press releases and company updates." },
     ],
   },
 ];

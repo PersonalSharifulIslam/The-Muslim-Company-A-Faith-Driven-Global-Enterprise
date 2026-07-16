@@ -34,7 +34,7 @@ export async function onRequestGet(context: any) {
   }
 
   const ua = request.headers.get('user-agent') || ''
-  const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Slackbot|TelegramBot|Googlebot|bingbot/i.test(ua)
+  const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Slackbot|TelegramBot|Googlebot|bingbot|DuckDuckBot|GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-Web|anthropic-ai|PerplexityBot|Perplexity-User|CCBot|Google-Extended|Bytespider|Applebot|Amazonbot|Meta-ExternalAgent/i.test(ua)
 
   const title = `${sector.label} — The Muslim Company`
   const description = `${sector.tagline} — Explore The Muslim Company's ${sector.label} sector and its long-term goals rooted in Islamic ethics and innovation.`

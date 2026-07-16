@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   HandHeart, Heart, TreePine, Globe2, Users, Droplets, PawPrint,
-  GraduationCap, Stethoscope, ShieldCheck, Mail, ArrowUpRight, Home
+  GraduationCap, Stethoscope, ShieldCheck, Mail, ArrowUpRight, Home, ScrollText
 } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 
@@ -264,7 +264,7 @@ export default function TMCFoundationPage() {
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                   <div className="flex items-center gap-2 mb-3">
                     <ShieldCheck className="w-5 h-5 text-secondary" />
@@ -281,6 +281,15 @@ export default function TMCFoundationPage() {
                   </div>
                   <p className="font-sans text-sm text-primary/65 leading-relaxed">
                     The Foundation extends across every country where The Muslim Company operates and has provided relief across Bangladesh, India, Pakistan, the United Arab Emirates, Nigeria, Ghana, and Gambia — with support from donors across multiple countries and more regions planned as the company grows.
+                  </p>
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <ScrollText className="w-5 h-5 text-secondary" />
+                    <h3 className="font-serif text-lg text-primary">Legal Structure</h3>
+                  </div>
+                  <p className="font-sans text-sm text-primary/65 leading-relaxed">
+                    The Muslim Company Foundation is being formally registered as a non-profit organization, controlled by The Muslim Company under the oversight of its Founder &amp; Chairman — ensuring the Foundation's mission remains permanently insulated from commercial pressure.
                   </p>
                 </div>
               </div>

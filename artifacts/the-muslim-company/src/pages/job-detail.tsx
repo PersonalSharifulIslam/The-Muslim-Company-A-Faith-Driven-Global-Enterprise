@@ -12,6 +12,7 @@ const fadeIn = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, tra
 export default function JobDetail({ params }: { params: { slug: string } }) {
   const [job, setJob] = useState<Job | null>(null);
   const [loading, setLoading] = useState(true);
+  const isExpired = job ? new Date(job.deadline) < new Date() : false;
 
   useEffect(() => {
     api.get(`/jobs/${params.slug}`)
@@ -75,108 +76,119 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
     });
 
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
-    const schemas = [
-      { "@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
-          { "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://www.themuslim.company/careers" },
-          { "@type": "ListItem", "position": 3, "name": job.title, "item": pageUrl }
-        ]
+
+    const breadcrumbSchema = {
+      "@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/" },
+        { "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://www.themuslim.company/careers" },
+        { "@type": "ListItem", "position": 3, "name": job.title, "item": pageUrl }
+      ]
+    };
+
+    const jobPostingSchema = {
+      "@context": "https://schema.org",
+      "@type": "JobPosting",
+      "title": job.title,
+      "description": job.description || desc,
+      "datePosted": job.created_at ? job.created_at.split("T")[0] : new Date().toISOString().split("T")[0],
+      "validThrough": job.deadline || new Date(Date.now() + 90*24*60*60*1000).toISOString().split("T")[0],
+      "employmentType": job.type ? job.type.toUpperCase().replace(" ", "_") : "FULL_TIME",
+      "url": pageUrl,
+      "directApply": true,
+      "applicationContact": {
+        "@type": "ContactPoint",
+        "url": pageUrl + "/apply",
+        "contactType": "Job Application",
+        "email": "careers@themuslim.company"
       },
-      {
-        "@context": "https://schema.org",
-        "@type": "JobPosting",
-        "title": job.title,
-        "description": job.description || desc,
-        "datePosted": job.created_at ? job.created_at.split("T")[0] : new Date().toISOString().split("T")[0],
-        "validThrough": job.deadline || new Date(Date.now() + 90*24*60*60*1000).toISOString().split("T")[0],
-        "employmentType": job.type ? job.type.toUpperCase().replace(" ", "_") : "FULL_TIME",
-        "url": pageUrl,
-        "directApply": true,
-        "applicationContact": {
-          "@type": "ContactPoint",
-          "url": pageUrl + "/apply",
-          "contactType": "Job Application",
-          "email": "careers@themuslim.company"
+      "hiringOrganization": {
+        "@type": "Organization",
+        "name": "The Muslim Company",
+        "sameAs": "https://www.themuslim.company",
+        "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 }
+      },
+      "jobLocation": {
+        "@type": "Place",
+        "name": "The Muslim Company",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Niketon Bazaar",
+          "addressLocality": "Dhaka",
+          "addressRegion": "Dhaka Division",
+          "postalCode": "1212",
+          "addressCountry": "BD"
+        }
+      },
+      "baseSalary": job.salary ? {
+        "@type": "MonetaryAmount",
+        "currency": "BDT",
+        "value": {
+          "@type": "QuantitativeValue",
+          "value": parseFloat(job.salary.replace(/[^0-9.]/g, "")) || 50000,
+          "unitText": "MONTH"
         },
-        "hiringOrganization": {
-          "@type": "Organization",
-          "name": "The Muslim Company",
-          "sameAs": "https://www.themuslim.company",
-          "logo": { "@type": "ImageObject", "url": "https://www.themuslim.company/favicon.png", "width": 512, "height": 512 }
+        "description": job.salary
+      } : {
+        "@type": "MonetaryAmount",
+        "currency": "BDT",
+        "value": {
+          "@type": "QuantitativeValue",
+          "value": 50000,
+          "unitText": "MONTH"
         },
-        "jobLocation": {
-          "@type": "Place",
-          "name": "The Muslim Company",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Niketon Bazaar",
-            "addressLocality": "Dhaka",
-            "addressRegion": "Dhaka Division",
-            "postalCode": "1212",
-            "addressCountry": "BD"
+        "description": "Competitive"
+      },
+      "applicantLocationRequirements": { "@type": "Country", "name": "Bangladesh" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl }
+    };
+
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the " + job.title + " role at The Muslim Company?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": job.description || ("The Muslim Company is hiring for " + job.title + ". Join a global conglomerate building long-term civilizational impact.")
           }
         },
-        "baseSalary": job.salary ? {
-          "@type": "MonetaryAmount",
-          "currency": "BDT",
-          "value": {
-            "@type": "QuantitativeValue",
-            "value": parseFloat(job.salary.replace(/[^0-9.]/g, "")) || 50000,
-            "unitText": "MONTH"
-          },
-          "description": job.salary
-        } : {
-          "@type": "MonetaryAmount",
-          "currency": "BDT",
-          "value": {
-            "@type": "QuantitativeValue",
-            "value": 50000,
-            "unitText": "MONTH"
-          },
-          "description": "Competitive"
-        },
-        "applicantLocationRequirements": { "@type": "Country", "name": "Bangladesh" },
-        "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl }
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is the " + job.title + " role at The Muslim Company?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": job.description || ("The Muslim Company is hiring for " + job.title + ". Join a global conglomerate building long-term civilizational impact.")
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How can I apply for this position?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Apply at https://www.themuslim.company/careers/" + params.slug + "/apply or email careers@themuslim.company."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Where is this job located?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "This position is based in " + (job.location || "Dhaka, Bangladesh") + " at The Muslim Company."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What is the employment type?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "This is a " + (job.type || "Full Time") + " position at The Muslim Company."
-            }
+        {
+          "@type": "Question",
+          "name": "How can I apply for this position?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Apply at https://www.themuslim.company/careers/" + params.slug + "/apply or email careers@themuslim.company."
           }
-        ]
-      }
-    ];
+        },
+        {
+          "@type": "Question",
+          "name": "Where is this job located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This position is based in " + (job.location || "Dhaka, Bangladesh") + " at The Muslim Company."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the employment type?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This is a " + (job.type || "Full Time") + " position at The Muslim Company."
+          }
+        }
+      ]
+    };
+
+    // Expired jobs must not carry JobPosting structured data — per Google's
+    // job-posting policy, this prevents "expired job" structured-data
+    // violations and soft-404 flags. This is automatic for every future job.
+    const schemas = isExpired
+      ? [breadcrumbSchema, faqSchema]
+      : [breadcrumbSchema, jobPostingSchema, faqSchema];
+
     schemas.forEach(schema => {
       const s = document.createElement('script'); s.type = 'application/ld+json';
       s.setAttribute('data-page-schema', 'true'); s.textContent = JSON.stringify(schema);
@@ -187,9 +199,7 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
       const c = document.querySelector('link[rel="canonical"]');
       if (c) c.setAttribute('href', 'https://www.themuslim.company/');
     };
-  }, [job, params.slug]);
-
-  const isExpired = job ? new Date(job.deadline) < new Date() : false;
+  }, [job, params.slug, isExpired]);
 
   return (
     <SiteLayout>

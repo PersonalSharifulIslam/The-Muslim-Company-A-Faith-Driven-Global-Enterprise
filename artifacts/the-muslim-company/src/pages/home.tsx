@@ -36,6 +36,17 @@ const stagger = {
   visible: { opacity: 1, transition: { staggerChildren: 0.07 } },
 };
 
+/* ─── crawler detection ───
+   Search engine / social crawlers don't scroll, so whileInView animations
+   never fire for them and the content stays invisible (opacity: 0).
+   For these user agents we skip straight to the "visible" state so the
+   content is present at first paint, while regular visitors still get
+   the full scroll-triggered fade-in experience. */
+function isCrawlerUA() {
+  if (typeof navigator === "undefined") return false;
+  return /bot|googlebot|bingbot|duckduckbot|baiduspider|yandexbot|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegrambot|slackbot|applebot|petalbot|semrushbot|ahrefsbot|mj12bot|google-extended|gptbot|claudebot|perplexitybot|ccbot|crawler|spider/i.test(navigator.userAgent);
+}
+
 /* ─── small helpers ─── */
 function Label({ children, as: Tag = "p" }: { children: React.ReactNode; as?: ElementType }) {
   return (
@@ -117,6 +128,7 @@ function ExpandableSection({
   dark?: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const [isBot] = useState(isCrawlerUA);
   const fg = dark ? "text-primary-foreground" : "text-primary";
   const fg2 = dark ? "text-primary-foreground/60" : "text-primary/60";
   const border = dark ? "border-primary-foreground/15" : "border-primary/10";
@@ -128,8 +140,9 @@ function ExpandableSection({
     >
       <div className="container mx-auto max-w-5xl">
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={isBot ? "visible" : "hidden"}
+          animate={isBot ? "visible" : undefined}
+          whileInView={isBot ? undefined : "visible"}
           viewport={{ once: true, margin: "-60px" }}
           variants={fadeIn}
         >
@@ -312,6 +325,7 @@ export default function Home() {
   const [navOpen, setNavOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
+  const [isBot] = useState(isCrawlerUA);
 
   useEffect(() => {
     if (!navOpen) return;
@@ -421,7 +435,7 @@ export default function Home() {
                 </button>
                 <div className="absolute top-full left-0 min-w-[220px] bg-primary border border-primary-foreground/10 shadow-2xl opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-150 py-3">
                   {group.links.map(link => (
-                    <a
+                    
                       key={link.href}
                       href={link.href}
                       className="block px-5 py-2.5 font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary hover:bg-primary-foreground/5 transition-colors"
@@ -432,7 +446,7 @@ export default function Home() {
                 </div>
               </div>
             ))}
-            <a
+            
               href="/get-involved"
               className="ml-4 bg-secondary text-primary font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 flex items-center hover:bg-secondary/90 transition-colors"
             >
@@ -480,7 +494,7 @@ export default function Home() {
                       </p>
                       <div className="flex flex-col gap-2.5">
                         {group.links.map(link => (
-                          <a
+                          
                             key={link.href}
                             href={link.href}
                             onClick={() => setNavOpen(false)}
@@ -502,7 +516,7 @@ export default function Home() {
                       </p>
                       <div className="flex flex-col gap-2.5">
                         {group.links.map(link => (
-                          <a
+                          
                             key={link.href}
                             href={link.href}
                             onClick={() => setNavOpen(false)}
@@ -814,7 +828,7 @@ export default function Home() {
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-primary/10">
           {SECTORS.map((sector, idx) => (
-            <a
+            
               key={idx}
               href={`/sectors/${sector.label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`}
               data-testid={`sector-${idx}`}
@@ -1175,7 +1189,9 @@ export default function Home() {
       {/* ── VISION (image break) ── */}
       <section id="vision" className="relative h-[65svh] flex items-center justify-center overflow-hidden bg-primary">
         <motion.div className="absolute inset-0 z-0"
-          initial={{ scale: 1.08 }} whileInView={{ scale: 1 }}
+          initial={{ scale: 1.08 }}
+          animate={isBot ? { scale: 1 } : undefined}
+          whileInView={isBot ? undefined : { scale: 1 }}
           transition={{ duration: 1.5 }} viewport={{ once: true }}
         >
           <div className="absolute inset-0 bg-primary/70 z-10" />
@@ -1189,7 +1205,12 @@ export default function Home() {
           />
         </motion.div>
         <div className="relative z-10 container px-6 mx-auto text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isBot ? { opacity: 1, y: 0 } : undefined}
+            whileInView={isBot ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 1 }}
+          >
             <p className="font-sans text-xs tracking-[0.4em] uppercase text-secondary mb-5">Long-Term Vision</p>
             <h2 className="text-4xl md:text-6xl font-serif text-primary-foreground mb-6">The Future is Ethical</h2>
             <p className="font-sans text-lg text-primary-foreground/75 max-w-2xl mx-auto">
@@ -1332,7 +1353,7 @@ export default function Home() {
               Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur dedicated to ethical innovation, humanitarian development, knowledge-driven progress, and civilization-focused institution building. From an early age he developed strong interests in technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies.
             </p>
             <div className="mt-5">
-              <a
+              
                 href="/ceo/Sharifulislam"
                 className="inline-flex items-center gap-2 font-sans text-xs font-bold uppercase tracking-widest text-secondary hover:text-secondary/80 transition-colors"
               >
@@ -1400,7 +1421,11 @@ export default function Home() {
         summary="The Muslim Company seeks a future where faith and technology work together, business and morality remain connected, and economic systems serve humanity rather than exploit it."
         summaryNode={
           <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            initial={isCrawlerUA() ? "visible" : "hidden"}
+            animate={isCrawlerUA() ? "visible" : undefined}
+            whileInView={isCrawlerUA() ? undefined : "visible"}
+            viewport={{ once: true }}
+            variants={stagger}
             className="space-y-3 max-w-2xl"
           >
             {["Faith and technology work together", "Business and morality remain connected", "Human development remains ethical", "Nature and civilization remain balanced", "Knowledge, justice, and compassion guide leadership", "Economic systems serve humanity rather than exploit it"].map((item, i) => (

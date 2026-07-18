@@ -17,7 +17,7 @@ export async function onRequestGet(context: any) {
     let products: any[] = []
     try {
       const res = await fetch(
-        `${SUPABASE_URL}/rest/v1/store_products?select=name,slug,description,price,currency,category&active=eq.true&order=created_at.desc`,
+        `${SUPABASE_URL}/rest/v1/store_products?select=name,slug,description,price,currency,category,image_url&active=eq.true&order=created_at.desc`,
         { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
       )
       if (res.ok) products = await res.json()
@@ -46,6 +46,7 @@ export async function onRequestGet(context: any) {
           "name": p.name,
           "url": `https://www.themuslim.company/e-store#${p.slug}`,
           "description": p.description || `${p.name} — available for pre-order from The Muslim Company.`,
+          "image": p.image_url || "https://www.themuslim.company/opengraph.jpg",
           "brand": { "@type": "Brand", "name": "The Muslim Company" },
           ...(p.price != null ? {
             offers: {
@@ -53,6 +54,45 @@ export async function onRequestGet(context: any) {
               "priceCurrency": p.currency || "BDT",
               "price": p.price,
               "availability": "https://schema.org/PreOrder",
+              "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingRate": {
+                  "@type": "MonetaryAmount",
+                  "value": "50",
+                  "currency": "BDT"
+                },
+                "shippingDestination": {
+                  "@type": "DefinedRegion",
+                  "addressCountry": "BD"
+                },
+                "deliveryTime": {
+                  "@type": "ShippingDeliveryTime",
+                  "handlingTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 1,
+                    "maxValue": 3,
+                    "unitCode": "DAY"
+                  },
+                  "transitTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 2,
+                    "maxValue": 7,
+                    "unitCode": "DAY"
+                  }
+                }
+              },
+              "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                "merchantReturnDays": 7,
+                "returnMethod": "https://schema.org/ReturnByMail",
+                "returnFees": "https://schema.org/ReturnShippingFees",
+                "returnShippingFeesAmount": {
+                  "@type": "MonetaryAmount",
+                  "value": "50",
+                  "currency": "BDT"
+                }
+              },
             }
           } : {}),
         },

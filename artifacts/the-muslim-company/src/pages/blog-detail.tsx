@@ -9,6 +9,64 @@ import type { BlogPost } from "@/lib/supabase";
 
 const fadeIn = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 
+/**
+ * Lightweight markdown -> semantic HTML renderer for blog content.
+ * Converts "## Heading" -> <h2>, "### Heading" -> <h3>, "**bold**" -> <strong>,
+ * and blank-line-separated blocks -> <p>. No external dependency required.
+ */
+function renderContent(content: string) {
+  if (!content) return null;
+
+  const blocks = content.split(/\n\s*\n/);
+
+  function renderInline(text: string, keyPrefix: string) {
+    const parts = text.split(/(\*\*[^*]+\*\*)/g);
+    return parts.map((part, j) => {
+      const boldMatch = part.match(/^\*\*([^*]+)\*\*$/);
+      if (boldMatch) {
+        return <strong key={`${keyPrefix}-${j}`}>{boldMatch[1]}</strong>;
+      }
+      return <span key={`${keyPrefix}-${j}`}>{part}</span>;
+    });
+  }
+
+  return blocks.map((block, i) => {
+    const trimmed = block.trim();
+    if (!trimmed) return null;
+
+    const h2Match = trimmed.match(/^##\s+(.*)/);
+    const h3Match = trimmed.match(/^###\s+(.*)/);
+
+    if (h2Match) {
+      return (
+        <h2 key={i} className="font-serif text-2xl text-primary mt-10 mb-4">
+          {renderInline(h2Match[1], `h2-${i}`)}
+        </h2>
+      );
+    }
+    if (h3Match) {
+      return (
+        <h3 key={i} className="font-serif text-xl text-primary mt-8 mb-3">
+          {renderInline(h3Match[1], `h3-${i}`)}
+        </h3>
+      );
+    }
+
+    // Preserve single line breaks within a paragraph block
+    const lines = trimmed.split("\n");
+    return (
+      <p key={i} className="mb-4">
+        {lines.map((line, li) => (
+          <span key={li}>
+            {renderInline(line, `p-${i}-${li}`)}
+            {li < lines.length - 1 && <br />}
+          </span>
+        ))}
+      </p>
+    );
+  });
+}
+
 export default function BlogDetail({ params }: { params: { slug: string } }) {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
@@ -190,8 +248,8 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
               {post.excerpt && (
                 <p className="font-sans text-base text-primary/70 leading-relaxed mb-8 italic border-l-4 border-secondary pl-5">{post.excerpt}</p>
               )}
-              <div className="font-sans text-sm text-primary/70 leading-relaxed whitespace-pre-line space-y-4">
-                {post.content}
+              <div className="font-sans text-sm text-primary/70 leading-relaxed">
+                {renderContent(post.content)}
               </div>
               <div className="mt-10 pt-8 border-t border-primary/10">
                 <ShareButtons url={`https://www.themuslim.company/blog/${params.slug}`} title={post.title} />

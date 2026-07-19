@@ -379,7 +379,7 @@ export default function CeoSharifulIslamPage() {
               {/* CTA Buttons */}
               <motion.div variants={fadeIn} className="mt-10 flex flex-wrap justify-center items-center gap-3">
                 <a
-                  href="https://g.co/kgs/4n3CijW"
+                  href="https://www.google.com/search?kgmid=/g/11n_vfnlwt"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-secondary text-primary font-sans text-xs font-bold uppercase tracking-widest h-11 px-7 hover:bg-secondary/90 transition-colors"

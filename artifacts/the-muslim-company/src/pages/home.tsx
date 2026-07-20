@@ -1353,7 +1353,7 @@ export default function Home() {
               Shariful Islam is a Bangladeshi Engineer, Ethical Visionary, and Entrepreneur dedicated to ethical innovation, humanitarian development, knowledge-driven progress, and civilization-focused institution building. From an early age he developed strong interests in technology, engineering, Islamic ethics, global affairs, media and journalism, education, research, humanitarian development, renewable energy, and future civilization studies.
             </p>
             <div className="mt-5">
-              
+              <a
                 href="/ceo/Sharifulislam"
                 className="inline-flex items-center gap-2 font-sans text-xs font-bold uppercase tracking-widest text-secondary hover:text-secondary/80 transition-colors"
               >

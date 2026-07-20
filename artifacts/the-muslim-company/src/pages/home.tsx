@@ -828,7 +828,7 @@ export default function Home() {
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-primary/10">
           {SECTORS.map((sector, idx) => (
-            
+            <a
               key={idx}
               href={`/sectors/${sector.label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`}
               data-testid={`sector-${idx}`}

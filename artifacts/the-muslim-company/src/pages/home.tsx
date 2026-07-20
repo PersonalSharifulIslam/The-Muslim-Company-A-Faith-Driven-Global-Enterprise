@@ -516,7 +516,7 @@ export default function Home() {
                       </p>
                       <div className="flex flex-col gap-2.5">
                         {group.links.map(link => (
-                          
+                          <a
                             key={link.href}
                             href={link.href}
                             onClick={() => setNavOpen(false)}

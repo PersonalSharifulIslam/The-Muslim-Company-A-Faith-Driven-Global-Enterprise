@@ -435,7 +435,7 @@ export default function Home() {
                 </button>
                 <div className="absolute top-full left-0 min-w-[220px] bg-primary border border-primary-foreground/10 shadow-2xl opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-150 py-3">
                   {group.links.map(link => (
-                    
+                    <a
                       key={link.href}
                       href={link.href}
                       className="block px-5 py-2.5 font-sans text-xs tracking-widest uppercase text-primary-foreground/60 hover:text-secondary hover:bg-primary-foreground/5 transition-colors"

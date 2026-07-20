@@ -446,7 +446,7 @@ export default function Home() {
                 </div>
               </div>
             ))}
-            
+            <a
               href="/get-involved"
               className="ml-4 bg-secondary text-primary font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 flex items-center hover:bg-secondary/90 transition-colors"
             >
@@ -494,7 +494,7 @@ export default function Home() {
                       </p>
                       <div className="flex flex-col gap-2.5">
                         {group.links.map(link => (
-                          
+                          <a
                             key={link.href}
                             href={link.href}
                             onClick={() => setNavOpen(false)}

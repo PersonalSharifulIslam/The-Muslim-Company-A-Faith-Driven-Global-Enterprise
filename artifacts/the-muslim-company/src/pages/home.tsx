@@ -127,8 +127,8 @@ function ExpandableSection({
   children: React.ReactNode;
   dark?: boolean;
 }) {
-  const [open, setOpen] = useState(false);
   const [isBot] = useState(isCrawlerUA);
+  const [open, setOpen] = useState(isBot);
   const fg = dark ? "text-primary-foreground" : "text-primary";
   const fg2 = dark ? "text-primary-foreground/60" : "text-primary/60";
   const border = dark ? "border-primary-foreground/15" : "border-primary/10";

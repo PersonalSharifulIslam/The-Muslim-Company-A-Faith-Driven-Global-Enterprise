@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { Quote, Globe, Award, BookOpen, Briefcase, GraduationCap, Building2, Star, ExternalLink, Linkedin, Newspaper, Calendar, TrendingUp } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
+import { isCrawlerUA } from "@/lib/isCrawler";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 28 },
@@ -292,6 +293,7 @@ const PROFILE_PAGE_SCHEMA = {
 };
 
 export default function CeoSharifulIslamPage() {
+  const [isBot] = useState(isCrawlerUA);
   useEffect(() => {
     document.title = "Shariful Islam – CEO of The Muslim Company";
     const metaDesc = document.querySelector('meta[name="description"]');
@@ -441,7 +443,10 @@ export default function CeoSharifulIslamPage() {
           <div className="container mx-auto max-w-5xl space-y-16">
 
             {/* —— BIOGRAPHY —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-card border border-primary/10">
               <SectionLabel>Biography</SectionLabel>
               <h2 className="font-serif text-2xl text-primary mb-5">
@@ -469,7 +474,10 @@ export default function CeoSharifulIslamPage() {
             </motion.div>
 
             {/* —— STATEMENT + PROFILE CARD —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="grid grid-cols-1 gap-6">
               <div className="lg:col-span-2 p-7 bg-card border border-primary/10">
                 <SectionLabel>Executive Profile</SectionLabel>
@@ -490,7 +498,10 @@ export default function CeoSharifulIslamPage() {
             </motion.div>
 
             {/* —— LEADERSHIP PILLARS —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={stagger}>
               <SectionLabel>Executive Leadership</SectionLabel>
               <h2 className="font-serif text-2xl text-primary mb-8">Leadership Pillars</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -528,7 +539,10 @@ export default function CeoSharifulIslamPage() {
             </motion.div>
 
             {/* —— CAREER TIMELINE —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-20">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={stagger} className="mb-20">
               <SectionLabel>Leadership Journey</SectionLabel>
               <h2 className="font-serif text-3xl md:text-4xl text-primary mb-10">Career Timeline</h2>
               <div className="space-y-8">
@@ -551,7 +565,10 @@ export default function CeoSharifulIslamPage() {
             </motion.div>
 
             {/* —— GUIDING PHILOSOPHY —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="mb-20 p-8 bg-card border border-primary/10">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn} className="mb-20 p-8 bg-card border border-primary/10">
               <SectionLabel>Guiding Philosophy</SectionLabel>
               <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">Leadership Rooted in Faith</h2>
               <p className="font-sans text-sm text-primary/65 leading-relaxed mb-4">
@@ -563,7 +580,10 @@ export default function CeoSharifulIslamPage() {
             </motion.div>
 
             {/* —— IN THE NEWS —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="mb-20">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn} className="mb-20">
               <SectionLabel>Media Coverage</SectionLabel>
               <h2 className="font-serif text-3xl md:text-4xl text-primary mb-8">In the News</h2>
               <div className="space-y-4">
@@ -601,7 +621,10 @@ export default function CeoSharifulIslamPage() {
             </motion.div>
 
             {/* —— ACADEMIC + INSPIRATIONS —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="p-7 bg-card border border-primary/10">
                 <GraduationCap className="w-5 h-5 text-secondary mb-4" />
@@ -650,7 +673,10 @@ export default function CeoSharifulIslamPage() {
             </motion.div>
 
             {/* —— ASPIRATIONS DARK BLOCK —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-primary text-primary-foreground">
               <SectionLabel>Vision Statement</SectionLabel>
               <h2 className="font-serif text-2xl text-primary-foreground mb-6">The Aspiration</h2>
@@ -668,7 +694,10 @@ export default function CeoSharifulIslamPage() {
               </div>
             </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <div className="border-l-4 border-secondary pl-6 py-2">
                 <Quote className="w-7 h-7 text-secondary/40 mb-5" />
                 <p className="font-serif text-xl md:text-2xl italic text-primary/85 leading-relaxed mb-6">
@@ -679,7 +708,10 @@ export default function CeoSharifulIslamPage() {
             </motion.div>
 
             {/* —— VISION QUOTE —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="border-l-4 border-secondary pl-8 py-3">
               <SectionLabel>Founding Vision</SectionLabel>
               <p className="font-serif text-xl md:text-2xl italic text-primary/80 leading-relaxed">
@@ -689,7 +721,10 @@ export default function CeoSharifulIslamPage() {
             </motion.div>
 
             {/* —— SECOND QUOTE —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="border-l-4 border-secondary pl-8 py-2">
               <p className="font-serif text-xl italic text-primary/80 leading-relaxed">
                 &ldquo;Allah is the owner of everything. Rizq, honor, power, and success come only from Allah.&rdquo;
@@ -700,7 +735,10 @@ export default function CeoSharifulIslamPage() {
             </motion.div>
 
             {/* —— VERIFIED EXTERNAL PROFILES —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={stagger}>
               <SectionLabel>Official Presence</SectionLabel>
               <h2 className="font-serif text-2xl text-primary mb-7">Verified External Profiles</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -734,7 +772,10 @@ export default function CeoSharifulIslamPage() {
             </motion.div>
 
             {/* —— CONNECT —— */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="flex flex-col md:flex-row items-center justify-between gap-6 py-10 border-t border-primary/10">
               <div>
                 <p className="font-sans text-xs tracking-widest uppercase text-secondary mb-2">Connect</p>

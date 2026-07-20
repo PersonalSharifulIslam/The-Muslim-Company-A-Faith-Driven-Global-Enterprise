@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { BookOpen, ShieldCheck, Scale, Users, Building2, Target, Compass, Award, HeartHandshake, Trophy, Mail, Briefcase, HelpCircle, Landmark } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
+import { isCrawlerUA } from "@/lib/isCrawler";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
@@ -60,6 +61,7 @@ const FAQS = [
 ];
 
 export default function AboutPage() {
+  const [isBot] = useState(isCrawlerUA);
   useEffect(() => {
     document.title = "About Us — The Muslim Company | Faith-Driven Global Conglomerate";
 
@@ -178,7 +180,10 @@ export default function AboutPage() {
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-5xl space-y-16">
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div className="lg:col-span-2">
                 <h2 className="font-serif text-3xl text-primary mb-5">Who We Are</h2>
@@ -217,7 +222,10 @@ export default function AboutPage() {
             </motion.div>
 
             {/* Core Values */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-serif text-3xl text-primary mb-8 text-center">Our Guiding Principles</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {VALUES.map((v, i) => (
@@ -231,7 +239,10 @@ export default function AboutPage() {
             </motion.div>
 
             {/* Mission & Vision */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-8 bg-primary text-primary-foreground">
                 <div className="flex items-center gap-2 mb-4">
@@ -256,7 +267,10 @@ export default function AboutPage() {
             </motion.div>
 
             {/* Sectors */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <div className="flex items-center gap-2 mb-6 justify-center">
                 <Building2 className="w-5 h-5 text-secondary" />
                 <h2 className="font-serif text-3xl text-primary text-center">Sectors We Operate In</h2>
@@ -277,7 +291,10 @@ export default function AboutPage() {
             </motion.div>
 
             {/* Governance & Compliance */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-primary text-primary-foreground">
               <div className="flex items-center gap-2 mb-6">
                 <Scale className="w-5 h-5 text-secondary" />
@@ -315,7 +332,10 @@ export default function AboutPage() {
             </motion.div>
 
             {/* Financial Ecosystem / Sub-brands */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <div className="flex items-center gap-2 mb-3 justify-center">
                 <Landmark className="w-5 h-5 text-secondary" />
                 <h2 className="font-serif text-3xl text-primary text-center">Our Financial Ecosystem</h2>
@@ -335,7 +355,10 @@ export default function AboutPage() {
             </motion.div>
 
             {/* Recognition */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-card border border-primary/10 text-center">
               <Trophy className="w-6 h-6 text-secondary mx-auto mb-4" />
               <h2 className="font-serif text-2xl text-primary mb-3">Recognition</h2>
@@ -345,7 +368,10 @@ export default function AboutPage() {
             </motion.div>
 
             {/* Social Responsibility */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-primary text-primary-foreground">
               <div className="flex items-center gap-2 mb-4">
                 <HeartHandshake className="w-5 h-5 text-secondary" />
@@ -364,7 +390,10 @@ export default function AboutPage() {
             </motion.div>
 
             {/* Milestones */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <div className="flex items-center gap-2 mb-8 justify-center">
                 <Award className="w-5 h-5 text-secondary" />
                 <h2 className="font-serif text-3xl text-primary text-center">Our Journey</h2>
@@ -383,7 +412,10 @@ export default function AboutPage() {
             </motion.div>
 
             {/* A Note on Our Scale and Vision */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-primary text-primary-foreground">
               <h2 className="font-serif text-2xl mb-5">A Note on Our Scale and Vision</h2>
               <p className="font-sans text-sm text-primary-foreground/70 leading-relaxed mb-4">
@@ -433,7 +465,10 @@ export default function AboutPage() {
             </motion.div>
 
             {/* Leadership CTA */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-card border border-primary/10 text-center">
               <Users className="w-6 h-6 text-secondary mx-auto mb-4" />
               <h2 className="font-serif text-2xl text-primary mb-3">Meet Our Leadership</h2>
@@ -451,7 +486,10 @@ export default function AboutPage() {
             </motion.div>
 
             {/* FAQ */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <div className="flex items-center gap-2 mb-8 justify-center">
                 <HelpCircle className="w-5 h-5 text-secondary" />
                 <h2 className="font-serif text-3xl text-primary text-center">Frequently Asked Questions</h2>
@@ -467,7 +505,10 @@ export default function AboutPage() {
             </motion.div>
 
             {/* Careers & Contact CTA */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-8 bg-primary text-primary-foreground text-center">
                 <Briefcase className="w-6 h-6 text-secondary mx-auto mb-4" />

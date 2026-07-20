@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { ChevronDown } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
+import { isCrawlerUA } from "@/lib/isCrawler";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
@@ -97,6 +98,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 export default function FAQPage() {
+  const [isBot] = useState(isCrawlerUA);
   useEffect(() => {
     document.title = "Frequently Asked Questions — The Muslim Company";
     const desc = "Answers to common questions about The Muslim Company — our business, sectors, Shariah governance, careers, and humanitarian Foundation work.";
@@ -153,7 +155,10 @@ export default function FAQPage() {
       <section className="py-16 px-6 bg-background">
         <div className="container mx-auto max-w-3xl space-y-12">
           {FAQ_GROUPS.map(group => (
-            <motion.div key={group.title} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div key={group.title} initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-serif text-xl text-primary mb-4">{group.title}</h2>
               <div className="space-y-3">
                 {group.items.map((item, i) => (

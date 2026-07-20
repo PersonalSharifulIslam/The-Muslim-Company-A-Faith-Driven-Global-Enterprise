@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowLeft, ArrowUpRight, ShieldCheck, Globe2, Scale, Landmark, Leaf, HeartHandshake } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
+import { isCrawlerUA } from "@/lib/isCrawler";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
@@ -125,6 +126,7 @@ const FAQ_SCHEMA = {
 };
 
 export default function BaytAlMalBankPage() {
+  const [isBot] = useState(isCrawlerUA);
   useEffect(() => {
     document.title = "The Bayt Al-Mal Bank — The Muslim Company";
 
@@ -212,7 +214,10 @@ export default function BaytAlMalBankPage() {
         {/* What is Bayt Al-Mal */}
         <section className="py-20 px-6 bg-card border-b border-primary/10">
           <div className="container mx-auto max-w-4xl text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-4">Historical Foundation</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">What is Bayt Al-Mal?</h2>
               <p className="font-sans text-sm text-primary/65 leading-relaxed max-w-3xl mx-auto mb-6">
@@ -228,7 +233,10 @@ export default function BaytAlMalBankPage() {
         {/* Development Status */}
         <section className="py-16 px-6 border-b border-primary/10">
           <div className="container mx-auto max-w-3xl text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-4">Our Journey</p>
               <h2 className="font-serif text-2xl md:text-3xl text-primary mb-5">Currently in Development</h2>
               <p className="font-sans text-sm text-primary/60 leading-relaxed max-w-2xl mx-auto mb-8">
@@ -259,11 +267,17 @@ export default function BaytAlMalBankPage() {
         {/* Core Pillars */}
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-6xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">Our Foundation</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary">Core Pillars</h2>
             </motion.div>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={stagger}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {PILLARS.map((p, i) => (
                 <motion.div key={i} variants={fadeIn} className="p-6 bg-card border border-primary/10">
@@ -279,14 +293,20 @@ export default function BaytAlMalBankPage() {
         {/* Services */}
         <section className="py-20 px-6 bg-card">
           <div className="container mx-auto max-w-6xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">What We Offer</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary">Banking Services</h2>
               <p className="font-sans text-sm text-primary/65 mt-4 max-w-2xl mx-auto">
                 A comprehensive suite of Shariah-compliant financial products and services designed for individuals, businesses, and institutions.
               </p>
             </motion.div>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={stagger}
               className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {SERVICES.map((s, i) => (
                 <motion.div key={i} variants={fadeIn} className="p-7 bg-background border border-primary/10">
@@ -308,14 +328,20 @@ export default function BaytAlMalBankPage() {
         {/* Ecosystem */}
         <section className="py-20 px-6 bg-card">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">Powered By</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary">A Connected Financial Ecosystem</h2>
               <p className="font-sans text-sm text-primary/65 mt-4 max-w-2xl mx-auto">
                 The Bayt Al-Mal Bank operates as part of an integrated financial ecosystem within The Muslim Company, built to serve customers globally — online and offline.
               </p>
             </motion.div>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={stagger}
               className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <motion.div variants={fadeIn} className="p-7 bg-background border border-primary/10">
                 <h3 className="font-serif text-xl text-primary mb-3">DinarX</h3>
@@ -338,7 +364,10 @@ export default function BaytAlMalBankPage() {
         {/* Quote */}
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-3xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="border-l-4 border-secondary pl-6 py-2">
               <p className="font-serif text-xl italic text-primary/80 leading-relaxed">
                 "Wealth belongs to Allah. We are only trustees. The Bayt Al-Mal Bank is our commitment to fulfill that trust — building financial systems that serve humanity, uphold justice, and reflect the highest values of Islamic civilization."
@@ -351,11 +380,17 @@ export default function BaytAlMalBankPage() {
         {/* Comparison */}
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-4xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-12">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn} className="text-center mb-12">
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">The Difference</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary">Conventional Banking vs. The Bayt Al-Mal Bank</h2>
             </motion.div>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="overflow-x-auto">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn} className="overflow-x-auto">
               <table className="w-full border border-primary/10 text-left">
                 <thead>
                   <tr className="border-b border-primary/10 bg-card">
@@ -388,14 +423,20 @@ export default function BaytAlMalBankPage() {
         {/* Who We Serve */}
         <section className="py-20 px-6 bg-card">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn} className="text-center mb-14">
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">Built For Everyone</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary">Who We Serve</h2>
               <p className="font-sans text-sm text-primary/65 mt-4 max-w-2xl mx-auto">
                 The Bayt Al-Mal Bank is designed to serve every segment of society — locally and globally, online and offline.
               </p>
             </motion.div>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={stagger}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 { title: "Individuals", desc: "Personal banking, savings, and home/asset financing for everyday life." },
@@ -415,11 +456,17 @@ export default function BaytAlMalBankPage() {
         {/* Why Different */}
         <section className="py-20 px-6 bg-primary">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-12">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn} className="text-center mb-12">
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">Our Difference</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary-foreground">Why The Bayt Al-Mal Bank?</h2>
             </motion.div>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={stagger}
               className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { title: "Zero Riba", desc: "Absolutely no interest-based products. Every transaction is structured on Shariah-approved contracts." },
@@ -438,7 +485,10 @@ export default function BaytAlMalBankPage() {
         {/* Backed By */}
         <section className="py-20 px-6 bg-card">
           <div className="container mx-auto max-w-3xl text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-4">Trust & Credibility</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">Backed by The Muslim Company</h2>
               <p className="font-sans text-sm text-primary/60 leading-relaxed max-w-2xl mx-auto mb-8">
@@ -454,7 +504,10 @@ export default function BaytAlMalBankPage() {
         {/* Shariah Advisory Board */}
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-3xl text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-4">Governance</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">Shariah Advisory Board</h2>
               <p className="font-sans text-sm text-primary/60 leading-relaxed max-w-2xl mx-auto">
@@ -467,11 +520,17 @@ export default function BaytAlMalBankPage() {
         {/* FAQ */}
         <section className="py-20 px-6 bg-card">
           <div className="container mx-auto max-w-3xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="text-center mb-12">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn} className="text-center mb-12">
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-3">Common Questions</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary">Frequently Asked Questions</h2>
             </motion.div>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="space-y-6">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={stagger} className="space-y-6">
               {[
                 { q: "Is The Bayt Al-Mal Bank open for customers yet?", a: "Not yet. The Bayt Al-Mal Bank is currently in development, building its Shariah governance framework and pursuing regulatory licensing before public launch." },
                 { q: "When will The Bayt Al-Mal Bank launch?", a: "The Bayt Al-Mal Bank is targeting its first public launch in 2031, following the completion of its Shariah governance framework and regulatory licensing process." },
@@ -491,7 +550,10 @@ export default function BaytAlMalBankPage() {
         {/* CTA */}
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-3xl text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-4">Get Involved</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">Be Part of the Movement</h2>
               <p className="font-sans text-sm text-primary/60 leading-relaxed mb-8 max-w-xl mx-auto">

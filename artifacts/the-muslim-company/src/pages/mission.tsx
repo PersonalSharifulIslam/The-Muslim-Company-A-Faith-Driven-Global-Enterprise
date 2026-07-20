@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import SiteLayout from "@/components/SiteLayout";
+import { isCrawlerUA } from "@/lib/isCrawler";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
@@ -22,6 +23,7 @@ function Bullets({ items }: { items: string[] }) {
 }
 
 export default function MissionPage() {
+  const [isBot] = useState(isCrawlerUA);
   useEffect(() => {
     document.title = "Our Mission — The Muslim Company";
 
@@ -99,7 +101,10 @@ export default function MissionPage() {
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-5xl space-y-12">
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div>
                 <h3 className="font-serif text-2xl text-primary mb-5">What We Are Here to Do</h3>
@@ -128,14 +133,20 @@ export default function MissionPage() {
               </div>
             </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-card border border-primary/10">
               <p className="font-sans text-sm text-primary/60 leading-relaxed">
                 The purpose of the company is not only commercial success, but also the development of humanity, establishment of justice, protection of moral values, advancement of knowledge, and rebuilding a strong ethical civilization. The company seeks to contribute toward restoring the Muslim world's historical excellence in science, philosophy, literature, medicine, economics, technology, education, governance, and social development.
               </p>
             </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-primary text-primary-foreground">
               <h3 className="font-serif text-2xl mb-4">Serving humanity through:</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">

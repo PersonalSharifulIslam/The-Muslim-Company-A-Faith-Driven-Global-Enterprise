@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Check, X, ShieldCheck, HandHeart, Users, ScrollText, Scale } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
+import { isCrawlerUA } from "@/lib/isCrawler";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
@@ -65,6 +66,7 @@ const PRINCIPLES = [
 ];
 
 export default function WhyUsPage() {
+  const [isBot] = useState(isCrawlerUA);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     document.title = "Why The Muslim Company — A Different Kind of Enterprise";
@@ -128,14 +130,20 @@ export default function WhyUsPage() {
         {/* ── COMPARISON TABLE ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="mb-10">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn} className="mb-10">
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">The Difference</p>
               <p className="font-serif text-2xl md:text-3xl text-primary max-w-2xl leading-tight">
                 Not every business claiming "ethics" builds it into the structure. Here's what's actually different.
               </p>
             </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="space-y-3">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={stagger} className="space-y-3">
               <div className="hidden md:grid grid-cols-[1fr_1.3fr_1.3fr] gap-4 px-5 pb-2">
                 <p className="font-sans text-[11px] tracking-widest uppercase text-primary/40 font-bold">Area</p>
                 <p className="font-sans text-[11px] tracking-widest uppercase text-primary/40 font-bold">Conventional Business</p>
@@ -165,13 +173,19 @@ export default function WhyUsPage() {
         {/* ── PRINCIPLES ── */}
         <section className="py-20 px-6 lg:px-12 bg-card border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">What Actually Drives This</p>
               <p className="font-serif text-2xl md:text-3xl text-primary mb-10 max-w-3xl leading-tight">
                 Five principles behind every decision we make.
               </p>
             </motion.div>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {PRINCIPLES.map((p, i) => (
                 <motion.div key={i} variants={fadeIn} className="p-6 border border-primary/10 bg-background">
                   <div className="text-secondary mb-4">{p.icon}</div>
@@ -186,7 +200,10 @@ export default function WhyUsPage() {
         {/* ── CLOSING ── */}
         <section className="py-24 px-6 lg:px-12 bg-primary">
           <div className="container mx-auto max-w-3xl text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-serif text-2xl md:text-3xl text-primary-foreground italic leading-relaxed mb-6">
                 "The best of people are those most beneficial to people."
               </p>

@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Heart, GraduationCap, FlaskConical, BookOpen, Users, Lightbulb, Globe2, MoveRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SiteLayout from "@/components/SiteLayout";
+import { isCrawlerUA } from "@/lib/isCrawler";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
@@ -78,6 +79,7 @@ const INVOLVEMENT_TYPES = [
 ];
 
 export default function GetInvolvedPage() {
+  const [isBot] = useState(isCrawlerUA);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -180,13 +182,19 @@ export default function GetInvolvedPage() {
         {/* ── WHY GET INVOLVED ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Why This Matters</p>
               <p className="font-serif text-2xl md:text-3xl text-primary mb-10 max-w-3xl leading-tight">
                 The Muslim world needs builders, thinkers, scholars, and servants. This is your invitation.
               </p>
             </motion.div>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={stagger}
               className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
@@ -218,7 +226,10 @@ export default function GetInvolvedPage() {
         {/* ── INVOLVEMENT TYPES ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Ways to Contribute</p>
               <p className="font-serif text-2xl text-primary mb-10 max-w-2xl">
                 Six pathways to join The Muslim Company's mission — each meaningful, each necessary.
@@ -228,8 +239,9 @@ export default function GetInvolvedPage() {
               {INVOLVEMENT_TYPES.map((type, i) => (
                 <motion.div
                   key={i}
-                  initial="hidden"
-                  whileInView="visible"
+                  initial={isBot ? "visible" : "hidden"}
+                  animate={isBot ? "visible" : undefined}
+                  whileInView={isBot ? undefined : "visible"}
                   viewport={{ once: true }}
                   variants={fadeIn}
                   className="border border-primary/10 bg-card p-8 group"
@@ -272,7 +284,10 @@ export default function GetInvolvedPage() {
         {/* ── WHO WE WANT ── */}
         <section className="py-20 px-6 lg:px-12 bg-primary border-b border-primary-foreground/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Who We Welcome</p>
               <p className="font-serif text-2xl text-primary-foreground mb-8 max-w-2xl">
                 We do not look only at qualifications. We look at character, intention, and commitment.
@@ -325,7 +340,10 @@ export default function GetInvolvedPage() {
         {/* ── CTA ── */}
         <section className="py-24 px-6 lg:px-12 bg-background">
           <div className="container mx-auto max-w-3xl text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-6">Your Next Step</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary mb-4">
                 The Door Is Open.

@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRoute, Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowUpRight, ArrowLeft, MoveRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SiteLayout from "@/components/SiteLayout";
+import { isCrawlerUA } from "@/lib/isCrawler";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
@@ -796,6 +797,7 @@ export function getAllSectors(): SectorData[] {
 }
 
 export default function SectorDetail() {
+  const [isBot] = useState(isCrawlerUA);
   const [, params] = useRoute("/sectors/:slug");
   const slug = params?.slug ?? "";
   const sector = getSectorBySlug(slug);
@@ -993,7 +995,10 @@ export default function SectorDetail() {
         {/* ── OVERVIEW ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-4">Overview</p>
               <p className="font-serif text-2xl md:text-3xl text-primary leading-relaxed mb-8 max-w-3xl">{sector.overview}</p>
             </motion.div>
@@ -1003,7 +1008,10 @@ export default function SectorDetail() {
         {/* ── ISLAMIC CONTEXT ── */}
         <section className="py-20 px-6 lg:px-12 bg-primary border-b border-primary-foreground/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-4">Islamic Foundation</p>
               <div className="border-l-4 border-secondary pl-6 py-2">
                 <p className="font-serif text-lg text-primary-foreground/85 leading-relaxed italic">{sector.islamicContext}</p>
@@ -1016,7 +1024,10 @@ export default function SectorDetail() {
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+              <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
                 <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-6">What We Do</p>
                 <div className="space-y-3">
                   {sector.activities.map((item, i) => (
@@ -1027,7 +1038,10 @@ export default function SectorDetail() {
                   ))}
                 </div>
               </motion.div>
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+              <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
                 <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-6">Our Approach</p>
                 <div className="space-y-3">
                   {sector.approach.map((item, i) => (
@@ -1045,7 +1059,10 @@ export default function SectorDetail() {
         {/* ── WHY IT MATTERS ── */}
         <section className="py-20 px-6 lg:px-12 bg-card border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-4">Why It Matters</p>
               <p className="font-serif text-2xl text-primary leading-relaxed mb-6 max-w-3xl">{sector.whyItMatters}</p>
               <div className="p-6 border border-primary/10 bg-background">
@@ -1059,7 +1076,10 @@ export default function SectorDetail() {
         {/* ── GOALS ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-8">Goals & Vision</p>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                 <div>
@@ -1093,7 +1113,10 @@ export default function SectorDetail() {
         {sector.slug === "islamic-finance-fintech" && (
           <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
             <div className="container mx-auto max-w-5xl">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+              <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
                 <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-6">Featured Initiative</p>
                 <Link href="/baytalmalbank" className="block p-8 lg:p-10 bg-card border border-primary/10 hover:border-secondary/40 transition-colors group">
                   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
@@ -1120,7 +1143,10 @@ export default function SectorDetail() {
         {sector.slug === "social-welfare-humanitarian-work" && (
           <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
             <div className="container mx-auto max-w-5xl">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+              <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
                 <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-6">Featured Initiative</p>
                 <Link href="/the-muslim-company-foundation" className="block p-8 lg:p-10 bg-card border border-primary/10 hover:border-secondary/40 transition-colors group">
                   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
@@ -1150,7 +1176,10 @@ export default function SectorDetail() {
         {/* ── RELATED SECTORS ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10 bg-card">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-6">Related Sectors</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-primary/10">
                 {relatedSectors.map((s, i) => (
@@ -1172,7 +1201,10 @@ export default function SectorDetail() {
         {/* ── CTA ── */}
         <section className="py-24 px-6 lg:px-12 bg-primary">
           <div className="container mx-auto max-w-3xl text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-4">Get Involved</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary-foreground mb-4">Join This Mission</h2>
               <p className="font-sans text-sm text-primary-foreground/60 mb-8 max-w-xl mx-auto">

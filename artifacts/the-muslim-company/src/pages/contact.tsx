@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { MoveRight, Mail, MapPin, Globe, Phone, ArrowUpRight, Building2, Users, Briefcase, HeartHandshake, Megaphone, FlaskConical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SiteLayout from "@/components/SiteLayout";
+import { isCrawlerUA } from "@/lib/isCrawler";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
@@ -66,6 +67,7 @@ const PARTNER_TYPES = [
 ];
 
 export default function ContactPage() {
+  const [isBot] = useState(isCrawlerUA);
   const [selected, setSelected] = useState<string | null>(null);
 
   useEffect(() => {
@@ -191,7 +193,10 @@ export default function ContactPage() {
         {/* ── CONTACT TYPES ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-2">How Can We Help?</h2>
               <p className="font-serif text-2xl text-primary mb-10 max-w-2xl">Select the nature of your inquiry and we will connect you with the right team.</p>
             </motion.div>
@@ -199,8 +204,9 @@ export default function ContactPage() {
               {CONTACT_TYPES.map((type, i) => (
                 <motion.button
                   key={i}
-                  initial="hidden"
-                  whileInView="visible"
+                  initial={isBot ? "visible" : "hidden"}
+                  animate={isBot ? "visible" : undefined}
+                  whileInView={isBot ? undefined : "visible"}
                   viewport={{ once: true }}
                   variants={fadeIn}
                   onClick={() => handleEmail(type.email, type.subject)}
@@ -222,7 +228,10 @@ export default function ContactPage() {
         {/* ── PARTNERSHIP ── */}
         <section className="py-20 px-6 lg:px-12 bg-primary border-b border-primary-foreground/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-2">Partnership Opportunities</h2>
               <p className="font-serif text-2xl text-primary-foreground mb-8 max-w-2xl">Select the type of partnership you are interested in.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-primary-foreground/15">
@@ -244,7 +253,10 @@ export default function ContactPage() {
         {/* ── COMPANY INFO ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-8">Company Information</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="p-6 bg-card border border-primary/10">
@@ -275,7 +287,10 @@ export default function ContactPage() {
         {/* ── EMAIL DIRECTORY ── */}
         <section className="py-20 px-6 lg:px-12 bg-card border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-8">Email Directory</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-primary/10">
                 {[
@@ -306,7 +321,10 @@ export default function ContactPage() {
         {/* ── QUOTE ── */}
         <section className="py-20 px-6 lg:px-12 bg-primary">
           <div className="container mx-auto max-w-3xl text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-6">Our Commitment</h2>
               <blockquote className="font-serif text-2xl md:text-3xl text-primary-foreground/85 italic leading-relaxed mb-6">
                 "Every message we receive is a trust. We respond with honesty, respect, and care — because in Islam, fulfilling amanah is not optional."

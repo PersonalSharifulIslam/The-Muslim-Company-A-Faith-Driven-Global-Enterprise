@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { ShoppingBag, X, Check, ImageIcon, Loader2 } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 import { supabase } from "@/lib/supabase";
+import { isCrawlerUA } from "@/lib/isCrawler";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
@@ -17,6 +18,7 @@ type Product = {
 };
 
 export default function EStore() {
+  const [isBot] = useState(isCrawlerUA);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [preorderProduct, setPreorderProduct] = useState<Product | null>(null);
@@ -138,7 +140,10 @@ export default function EStore() {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {products.map((p) => (
-                  <motion.div key={p.id} id={p.slug} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+                  <motion.div key={p.id} id={p.slug} initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
                     onClick={() => setDetailProduct(p)}
                     className="bg-card border border-primary/10 hover:border-secondary/40 transition-colors overflow-hidden flex flex-col cursor-pointer">
                     <div className="h-52 bg-background flex items-center justify-center overflow-hidden">

@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import SiteLayout from "@/components/SiteLayout";
 import visionBg from "@/assets/images/vision.webp";
+import { isCrawlerUA } from "@/lib/isCrawler";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
@@ -23,6 +24,7 @@ function Bullets({ items }: { items: string[] }) {
 }
 
 export default function VisionPage() {
+  const [isBot] = useState(isCrawlerUA);
   useEffect(() => {
     document.title = "Our Vision — The Muslim Company";
 
@@ -106,14 +108,20 @@ export default function VisionPage() {
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-5xl space-y-12">
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Our Vision</p>
               <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">
                 To become a globally recognized faith-driven institution demonstrating how Islamic values and modern innovation can work together to solve humanity's greatest challenges.
               </h2>
             </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {[
                 { title: "Corporate University & Academies", items: ["Universities & leadership academies", "Islamic economics institutes", "AI research centers", "Technology training institutes"] },
@@ -130,7 +138,10 @@ export default function VisionPage() {
               ))}
             </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-primary text-primary-foreground">
               <h3 className="font-serif text-2xl mb-6">The Global Civilization Blueprint</h3>
               <div className="flex flex-wrap gap-3">

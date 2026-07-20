@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   HandHeart, Heart, TreePine, Globe2, Users, Droplets, PawPrint,
   GraduationCap, Stethoscope, ShieldCheck, Mail, ArrowUpRight, Home, ScrollText
 } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
+import { isCrawlerUA } from "@/lib/isCrawler";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
@@ -39,6 +40,7 @@ const IMPACT_AREAS = [
 ];
 
 export default function TMCFoundationPage() {
+  const [isBot] = useState(isCrawlerUA);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -126,7 +128,10 @@ export default function TMCFoundationPage() {
         {/* ── ABOUT ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Our Purpose</h2>
               <p className="font-serif text-2xl md:text-3xl text-primary mb-8 max-w-3xl leading-tight">
                 One institution, two missions: build ethical enterprise, and serve those in need.
@@ -146,13 +151,19 @@ export default function TMCFoundationPage() {
         {/* ── PILLARS ── */}
         <section className="py-20 px-6 lg:px-12 bg-card border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Areas of Work</h2>
               <p className="font-serif text-2xl md:text-3xl text-primary mb-10 max-w-3xl leading-tight">
                 Six pillars through which the Foundation serves humanity and creation.
               </p>
             </motion.div>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={stagger}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {PILLARS.map((item, i) => (
                 <motion.div key={i} variants={fadeIn} className="p-6 border border-primary/10 bg-background">
@@ -168,7 +179,10 @@ export default function TMCFoundationPage() {
         {/* ── FUNDING MODEL ── */}
         <section className="py-20 px-6 lg:px-12 bg-primary border-b border-primary-foreground/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">How It Is Funded</h2>
               <p className="font-serif text-2xl text-primary-foreground mb-10 max-w-2xl">
                 Giving is not optional — it is structurally built into the company's financial model.
@@ -193,7 +207,10 @@ export default function TMCFoundationPage() {
         {/* ── IMPACT AREAS (honest, no fabricated stats — company is newly founded) ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Impact & Reach</h2>
               <p className="font-serif text-2xl text-primary mb-6 max-w-2xl">
                 Real relief work, already reaching people across multiple countries.
@@ -237,7 +254,10 @@ export default function TMCFoundationPage() {
         {/* ── DONATE / SUPPORT ── */}
         <section className="py-20 px-6 lg:px-12 bg-card border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Support the Foundation</h2>
               <p className="font-serif text-2xl md:text-3xl text-primary mb-6 max-w-2xl leading-tight">
                 Formal individual-donor channels are being finalized. In the meantime, reach out directly.
@@ -263,7 +283,10 @@ export default function TMCFoundationPage() {
         {/* ── GOVERNANCE & TRUST ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                   <div className="flex items-center gap-2 mb-3">
@@ -300,7 +323,10 @@ export default function TMCFoundationPage() {
         {/* ── CLOSING QUOTE ── */}
         <section className="py-24 px-6 lg:px-12 bg-primary">
           <div className="container mx-auto max-w-3xl text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <Heart className="w-8 h-8 text-secondary mx-auto mb-6" />
               <p className="font-serif text-2xl md:text-3xl text-primary-foreground italic leading-relaxed mb-6">
                 "Whoever saves a life, it is as if he had saved all of mankind."

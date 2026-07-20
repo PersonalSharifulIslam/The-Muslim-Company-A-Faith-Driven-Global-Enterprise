@@ -1,9 +1,10 @@
 import { Link } from "wouter";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { Quote, Linkedin, Twitter, Globe2, Award } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
+import { isCrawlerUA } from "@/lib/isCrawler";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
@@ -33,6 +34,7 @@ function InlineQuote({ children, author }: { children: React.ReactNode; author?:
 }
 
 export default function FounderPage() {
+  const [isBot] = useState(isCrawlerUA);
   useEffect(() => {
     document.title = "Founder & CEO — Shariful Islam — The Muslim Company";
     const _rob = document.querySelector('meta[name="robots"]');
@@ -206,7 +208,10 @@ export default function FounderPage() {
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-5xl space-y-12">
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="p-6 bg-card border border-primary/10">
               <h2 className="font-serif text-lg text-primary mb-3">About Shariful Islam</h2>
               <p className="font-sans text-sm text-primary/65 leading-relaxed">
@@ -215,7 +220,10 @@ export default function FounderPage() {
             </motion.div>
 
             {/* Our Story */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="p-8 bg-primary text-primary-foreground">
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-4">Our Story</p>
               <h2 className="font-serif text-2xl mb-6">How The Muslim Company Began</h2>
@@ -259,7 +267,10 @@ export default function FounderPage() {
               </div>
             </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 p-8 bg-card border border-primary/10">
                 <Quote className="w-8 h-8 text-secondary/40 mb-4" />
@@ -286,7 +297,10 @@ export default function FounderPage() {
               </div>
             </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-6 bg-card border border-primary/10">
                 <h4 className="font-serif text-base text-primary mb-4">Academic & Intellectual Interests</h4>
@@ -315,7 +329,10 @@ export default function FounderPage() {
               </div>
             </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="p-6 bg-card border border-primary/10">
               <h4 className="font-serif text-lg text-primary mb-4">Board & Leadership Roles</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -332,7 +349,10 @@ export default function FounderPage() {
               </div>
             </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}
               className="p-6 bg-card border border-primary/10">
               <h4 className="font-serif text-lg text-primary mb-4">Personal Aspiration</h4>
               <Bullets items={[
@@ -342,7 +362,10 @@ export default function FounderPage() {
               ]} />
             </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <InlineQuote author="Shariful Islam">True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.</InlineQuote>
               <InlineQuote author="Shariful Islam">Allah is the owner of everything. Rizq, honor, power, and success come only from Allah.</InlineQuote>
             </motion.div>

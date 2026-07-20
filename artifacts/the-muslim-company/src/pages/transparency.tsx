@@ -4,6 +4,7 @@ import { ArrowUpRight, Check, Shield, Scale, Heart, TreePine, Users, BookOpen, G
 import SiteLayout from "@/components/SiteLayout";
 import { api } from "@/lib/api";
 import type { TransparencyReport } from "@/lib/supabase";
+import { isCrawlerUA } from "@/lib/isCrawler";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 24 },
@@ -16,6 +17,7 @@ const stagger = {
 };
 
 export default function TransparencyPage() {
+  const [isBot] = useState(isCrawlerUA);
   const [reports, setReports] = useState<TransparencyReport[]>([]);
 
   useEffect(() => {
@@ -165,7 +167,10 @@ export default function TransparencyPage() {
         {/* ── TRANSPARENCY REPORTS (prominent, right after hero) ── */}
         <section className="py-16 px-6 lg:px-12 bg-card border-b-2 border-secondary/40">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <div className="flex items-center gap-3 mb-3">
                 <FileText className="w-5 h-5 text-secondary" />
                 <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold">Official Reports</p>
@@ -240,13 +245,19 @@ export default function TransparencyPage() {
         {/* ── PILLARS ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Our Commitment</h2>
               <p className="font-serif text-2xl md:text-3xl text-primary mb-10 max-w-3xl leading-tight">
                 Six pillars of accountability that govern everything The Muslim Company does.
               </p>
             </motion.div>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={stagger}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
                 { icon: <Landmark className="w-5 h-5" />, title: "Financial Transparency", desc: "All revenue, expenditure, profit distribution, zakat, and charitable giving fully documented and publicly summarized." },
@@ -269,7 +280,10 @@ export default function TransparencyPage() {
         {/* ── CHARITY ── */}
         <section className="py-20 px-6 lg:px-12 bg-primary border-b border-primary-foreground/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Charitable Giving</h2>
               <p className="font-serif text-2xl text-primary-foreground mb-10 max-w-2xl">
                 Giving is not optional — it is woven into the financial DNA of The Muslim Company.
@@ -306,7 +320,10 @@ export default function TransparencyPage() {
         {/* ── FINANCIAL ETHICS ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Financial Ethics</h2>
               <p className="font-serif text-2xl text-primary mb-8 max-w-2xl">
                 Our financial system is built on what Allah permitted — and firmly closed to what He prohibited.
@@ -362,7 +379,10 @@ export default function TransparencyPage() {
         {/* ── GOVERNANCE ── */}
         <section className="py-20 px-6 lg:px-12 bg-card border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Governance Transparency</h2>
               <p className="font-serif text-2xl text-primary mb-8 max-w-2xl">
                 Governance is not a boardroom formality — it is an Islamic obligation of the highest order.
@@ -399,7 +419,10 @@ export default function TransparencyPage() {
         {/* ── WORKER WELFARE ── */}
         <section className="py-20 px-6 lg:px-12 border-b border-primary/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Worker Welfare</h2>
               <p className="font-serif text-2xl text-primary mb-8 max-w-2xl">
                 Workers are not resources. They are human beings — and they carry rights before Allah.
@@ -441,7 +464,10 @@ export default function TransparencyPage() {
         {/* ── ENVIRONMENT ── */}
         <section className="py-20 px-6 lg:px-12 bg-primary border-b border-primary-foreground/10">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-sans text-xs tracking-[0.35em] uppercase text-secondary font-bold mb-3">Environmental Accountability</h2>
               <p className="font-serif text-2xl text-primary-foreground mb-8 max-w-2xl">
                 The earth is a trust from Allah. We are answerable for how we treat it.
@@ -466,7 +492,10 @@ export default function TransparencyPage() {
         {/* ── CLOSING QUOTE ── */}
         <section className="py-24 px-6 lg:px-12 bg-primary">
           <div className="container mx-auto max-w-3xl text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-6">Our Final Accountability</p>
               <blockquote className="font-serif text-2xl md:text-3xl text-primary-foreground/85 italic leading-relaxed mb-6">
                 "Institutions are not judged only by their profits. They are judged by their honesty, their justice, their care for people, and their answerable relationship with their Creator."

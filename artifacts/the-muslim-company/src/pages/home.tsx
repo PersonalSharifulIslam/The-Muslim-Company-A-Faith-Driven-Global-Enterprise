@@ -13,6 +13,7 @@ import {
   ShoppingCart, Shirt, Sparkles
 } from "lucide-react";
 import SiteSearch from "@/components/SiteSearch";
+import { isCrawlerUA } from "@/lib/isCrawler";
 import heroBg from "@/assets/images/hero-bg.webp";
 import peaceTvLogo from "@/assets/images/partners/peacetv.png";
 import islamNetLogo from "@/assets/images/partners/islamnet.png";
@@ -35,17 +36,6 @@ const stagger = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.07 } },
 };
-
-/* ─── crawler detection ───
-   Search engine / social crawlers don't scroll, so whileInView animations
-   never fire for them and the content stays invisible (opacity: 0).
-   For these user agents we skip straight to the "visible" state so the
-   content is present at first paint, while regular visitors still get
-   the full scroll-triggered fade-in experience. */
-function isCrawlerUA() {
-  if (typeof navigator === "undefined") return false;
-  return /bot|googlebot|bingbot|duckduckbot|baiduspider|yandexbot|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegrambot|slackbot|applebot|petalbot|semrushbot|ahrefsbot|mj12bot|google-extended|gptbot|claudebot|perplexitybot|ccbot|crawler|spider/i.test(navigator.userAgent);
-}
 
 /* ─── small helpers ─── */
 function Label({ children, as: Tag = "p" }: { children: React.ReactNode; as?: ElementType }) {

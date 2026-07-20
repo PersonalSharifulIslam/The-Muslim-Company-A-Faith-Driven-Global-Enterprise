@@ -149,7 +149,7 @@ export default function FounderPage() {
               </p>
               <div className="mt-8">
                 <a
-                  href="https://g.co/kgs/4n3CijW"
+                  href="https://www.google.com/search?kgmid=/g/11n_vfnlwt"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-secondary text-primary hover:bg-secondary/90 font-sans text-xs font-bold uppercase tracking-widest h-12 px-8 transition-colors"

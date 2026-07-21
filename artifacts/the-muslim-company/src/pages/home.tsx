@@ -533,7 +533,7 @@ export default function Home() {
       {/* ── HERO ── */}
       <section id="hero" className="relative h-[100svh] w-full flex items-center justify-center overflow-hidden">
         <motion.div className="absolute inset-0 z-0" style={{ y: yHero }}>
-          <div className="absolute inset-0 bg-primary/80 z-10" />
+          <div className="absolute inset-0 bg-primary/75 mix-blend-multiply z-10" />
           <img
             src={heroBgDesktop}
             srcSet={`${heroBgMobile} 640w, ${heroBgDesktop} 1280w, ${heroBgRetina} 1200w`}

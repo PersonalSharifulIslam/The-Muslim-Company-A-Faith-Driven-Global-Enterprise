@@ -9,7 +9,7 @@ import {
   TreePine, Zap, FlaskConical, Truck, ShoppingBag, Factory,
   DollarSign, BookMarked, Atom, HandHeart, Radio, Bot, Ship,
   Home as LucideHome, UserCheck, Baby, Clock, Award, Briefcase, Shield,
-  Gavel, Globe, Flame, Check, Quote, Menu, X, Plus, Minus, Search,
+  Gavel, Globe, Flame, Check, Menu, X, Plus, Minus, Search,
   ShoppingCart, Shirt, Sparkles
 } from "lucide-react";
 import SiteSearch from "@/components/SiteSearch";
@@ -1310,15 +1310,8 @@ export default function Home() {
       >
         <div className="space-y-8">
 
-          {/* Bio card */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 p-8 bg-card border border-primary/10">
-              <Quote className="w-8 h-8 text-secondary/40 mb-4" />
-              <p className="font-serif text-xl italic text-primary/85 leading-relaxed mb-5">
-                "I do not know whether this company will fully succeed, how far it will go, or whether I will be able to implement every part of this vision. But my intention is to seek the pleasure of Allah and, by following the teachings and ethics of Prophet Muhammad ﷺ as much as possible, try to build something beneficial for humanity."
-              </p>
-              <p className="font-sans text-xs tracking-widest uppercase text-secondary/60">— Shariful Islam, Founder & CEO</p>
-            </div>
+          {/* Profile card */}
+          <div className="max-w-md">
             <div className="p-6 bg-card border border-primary/10 space-y-3">
               <h4 className="font-serif text-base text-primary mb-2">Profile</h4>
               {[
@@ -1352,21 +1345,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Areas of interest */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-6 bg-card border border-primary/10">
-              <h4 className="font-serif text-base text-primary mb-4">Academic & Intellectual Interests</h4>
-              <Bullets items={[
-                "Electrical engineering & smart power grid systems",
-                "Solar and photovoltaic (PV) technology",
-                "Renewable and green energy",
-                "Artificial intelligence & ethical technology",
-                "International business and relations",
-                "Media, journalism & humanitarian development",
-                "Islamic civilization, education & research",
-                "Future-focused ethical innovation",
-              ]} />
-            </div>
+          {/* Inspirations */}
+          <div className="max-w-xl">
             <div className="p-6 bg-card border border-primary/10">
               <h4 className="font-serif text-base text-primary mb-4">Inspirations & Influences</h4>
               <p className="font-sans text-sm text-primary/65 leading-relaxed mb-4">

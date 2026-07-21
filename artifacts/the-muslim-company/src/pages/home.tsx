@@ -72,7 +72,8 @@ function InlineQuote({ children, author, light = false }: { children: React.Reac
 }
 
 function AccordionItem({ title, children, light = false }: { title: string; children: React.ReactNode; light?: boolean }) {
-  const [open, setOpen] = useState(false);
+  const [isBot] = useState(isCrawlerUA);
+  const [open, setOpen] = useState(isBot);
   return (
     <div className={`border-b ${light ? "border-primary-foreground/15" : "border-primary/10"}`}>
       <button
@@ -86,7 +87,7 @@ function AccordionItem({ title, children, light = false }: { title: string; chil
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
+            initial={isBot ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}

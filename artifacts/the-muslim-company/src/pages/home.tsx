@@ -319,6 +319,32 @@ export default function Home() {
   const [isBot] = useState(isCrawlerUA);
 
   useEffect(() => {
+    document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
+    const HOME_FAQS = [
+      { q: "What is The Muslim Company?", a: "The Muslim Company is a faith-driven global conglomerate headquartered in Dhaka, Bangladesh, founded in January 2025 by Shariful Islam. It operates across 20+ halal, Shariah-compliant sectors — including Technology & AI, Healthcare, Renewable Energy, Manufacturing, Education, Islamic Finance, and Humanitarian Development — guided by the Quran, authentic Sunnah, and the Prophetic model." },
+      { q: "What is the mission of The Muslim Company?", a: "The Muslim Company's mission is to serve humanity through ethical, Shariah-compliant business — building a global Islamic ethical business ecosystem, ensuring social justice, supporting research and innovation, and reviving the historical excellence of Muslim civilization in science, education, and social development." },
+      { q: "Who is the founder and CEO of The Muslim Company?", a: "The Muslim Company was founded by Shariful Islam, a Bangladeshi electrical engineer and entrepreneur, who serves as its Founder and CEO. He also holds the role of Peace Ambassador for the Global Peace Chain (Bangladesh)." },
+      { q: "Is The Muslim Company Shariah-compliant and halal?", a: "Yes. Every operation is guided by a Supreme Shariah Board and reviewed against the Maqasid al-Shariah (higher objectives of Islamic law), and is completely free from riba (interest), bribery, corruption, and exploitation." },
+      { q: "How much of The Muslim Company's profit goes to charity?", a: "The Muslim Company commits 10% of its monthly net profit to charity and humanitarian causes, fully distributes annual zakat, and funds disaster relief, orphan and widow support, education, and healthcare access." },
+      { q: "Does The Muslim Company have safeguards to protect its mission long-term?", a: "Yes. A permanent constitutional framework — including a Supreme Shariah Board, mission preservation obligations, and constitutional safeguards against hostile takeover — protects the company from corruption and ethical drift for generations to come." },
+      { q: "What sectors does The Muslim Company operate in?", a: "The Muslim Company works across 20+ beneficial and halal sectors, including Agriculture & Food, Education & Research, Technology & AI, Healthcare & Medicine, Renewable Energy, Islamic Finance & FinTech, and Media & Journalism." },
+    ];
+    [
+      {
+        "@context": "https://schema.org", "@type": "FAQPage",
+        "mainEntity": HOME_FAQS.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } })),
+      },
+    ].forEach(schema => {
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.setAttribute('data-page-schema', 'true');
+      s.textContent = JSON.stringify(schema);
+      document.head.appendChild(s);
+    });
+    return () => { document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove()); };
+  }, []);
+
+  useEffect(() => {
     if (!navOpen) return;
     function handleOutsideClick(e: MouseEvent) {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {

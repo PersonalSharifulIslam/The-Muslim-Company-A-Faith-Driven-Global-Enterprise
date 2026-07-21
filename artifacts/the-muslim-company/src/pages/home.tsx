@@ -1464,20 +1464,6 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-primary-foreground/10 pt-14 mb-14">
-            {[
-              { v: "20+", l: "Sectors of Work" },
-              { v: "10%", l: "Monthly Profit to Charity" },
-              { v: "1.5 Yrs", l: "Maternity Leave" },
-              { v: "15 Yrs", l: "Pension Threshold" },
-            ].map((stat, i) => (
-              <div key={i} className="text-center" data-testid={`stat-${i}`}>
-                <p className="font-serif text-3xl text-secondary mb-1">{stat.v}</p>
-                <p className="font-sans text-xs tracking-widest uppercase text-primary-foreground/65">{stat.l}</p>
-              </div>
-            ))}
-          </div>
-
           <div className="border-t border-primary-foreground/10 pt-10 flex flex-col md:flex-row justify-between items-center text-xs font-sans text-primary-foreground/60">
             <div>
               <p className="font-serif text-base text-primary-foreground/50 mb-1">The Muslim Company</p>

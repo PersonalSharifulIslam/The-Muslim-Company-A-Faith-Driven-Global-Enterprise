@@ -70,7 +70,8 @@ const FAQ_GROUPS = [
 ];
 
 function FaqItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
+  const [isBot] = useState(isCrawlerUA);
+  const [open, setOpen] = useState(isBot);
   return (
     <div className="border border-primary/10 bg-card">
       <button
@@ -83,7 +84,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
+            initial={isBot ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}

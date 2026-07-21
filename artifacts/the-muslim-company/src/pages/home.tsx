@@ -1375,9 +1375,6 @@ export default function Home() {
             ]} />
           </div>
 
-          <InlineQuote author="Shariful Islam">Allah is the owner of everything. Rizq, honor, power, and success come only from Allah.</InlineQuote>
-          <InlineQuote author="Shariful Islam">True success is not only wealth, fame, or power. True success is becoming accepted by Allah and leaving behind benefit for humanity.</InlineQuote>
-
           <p className="font-sans text-sm text-primary/65 leading-relaxed">
             The Muslim Company does not claim perfection. The company will correct mistakes when discovered, accept truth when it becomes clear, protect ethics and justice, benefit humanity, and keep accountability and humility. The journey continues through tawakkul upon Allah, sincerity, halal effort, Prophetic ethics, and continuous striving for goodness. <span className="font-serif italic text-secondary">InshaAllah, as far as Allah allows.</span>
           </p>

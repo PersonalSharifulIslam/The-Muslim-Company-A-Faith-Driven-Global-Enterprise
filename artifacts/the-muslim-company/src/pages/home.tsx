@@ -546,7 +546,7 @@ export default function Home() {
         </motion.div>
         <div className="relative z-10 container px-6 mx-auto flex flex-col items-center text-center">
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={isBot ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             className="font-sans text-xs tracking-[0.4em] uppercase text-secondary mb-8"
@@ -554,7 +554,7 @@ export default function Home() {
             Faith — Knowledge — Justice — Civilization
           </motion.p>
           <motion.h1
-            initial={{ opacity: 0, y: 40 }}
+            initial={isBot ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.2 }}
             className="text-5xl md:text-7xl lg:text-9xl font-serif text-primary-foreground max-w-5xl leading-[0.9]"
@@ -562,7 +562,7 @@ export default function Home() {
             Building Human Civilization
           </motion.h1>
           <motion.p
-            initial={{ opacity: 0 }}
+            initial={isBot ? { opacity: 1 } : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
             className="mt-8 text-lg md:text-xl text-primary-foreground/80 max-w-3xl font-sans font-light"
@@ -570,7 +570,7 @@ export default function Home() {
             A Faith-Driven, Civilization-oriented Global Conglomerate Built upon Islamic Ethics and the Prophetic Model — Advancing Human Prosperity, Justice, and Sustainable Development Across the World.
           </motion.p>
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={isBot ? { opacity: 1 } : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.2 }}
             className="mt-12 flex gap-4 flex-wrap justify-center"
@@ -1179,7 +1179,7 @@ export default function Home() {
       {/* ── VISION (image break) ── */}
       <section id="vision" className="relative h-[65svh] flex items-center justify-center overflow-hidden bg-primary">
         <motion.div className="absolute inset-0 z-0"
-          initial={{ scale: 1.08 }}
+          initial={isBot ? { scale: 1 } : { scale: 1.08 }}
           animate={isBot ? { scale: 1 } : undefined}
           whileInView={isBot ? undefined : { scale: 1 }}
           transition={{ duration: 1.5 }} viewport={{ once: true }}
@@ -1196,7 +1196,7 @@ export default function Home() {
         </motion.div>
         <div className="relative z-10 container px-6 mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={isBot ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             animate={isBot ? { opacity: 1, y: 0 } : undefined}
             whileInView={isBot ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 1 }}

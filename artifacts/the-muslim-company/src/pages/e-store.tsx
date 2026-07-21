@@ -117,7 +117,7 @@ export default function EStore() {
       <div className="bg-background min-h-screen">
         <section className="bg-primary py-20 px-6">
           <div className="container mx-auto max-w-3xl text-center">
-            <motion.div initial="hidden" animate="visible" variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"} animate="visible" variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.4em] uppercase text-secondary mb-4">E-Store</p>
               <h1 className="font-serif text-4xl md:text-5xl text-primary-foreground mb-4">Pre-Order Our Products</h1>
               <p className="font-sans text-sm text-primary-foreground/60 max-w-xl mx-auto">

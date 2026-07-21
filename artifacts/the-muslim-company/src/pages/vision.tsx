@@ -88,13 +88,13 @@ export default function VisionPage() {
         {/* Hero */}
         <section className="relative h-[50vh] flex items-center justify-center overflow-hidden bg-primary">
           <motion.div className="absolute inset-0 z-0"
-            initial={{ scale: 1.08 }} animate={{ scale: 1 }}
+            initial={isBot ? { scale: 1 } : { scale: 1.08 }} animate={{ scale: 1 }}
             transition={{ duration: 1.5 }}>
             <div className="absolute inset-0 bg-primary/70 z-10" />
             <img src={visionBg} alt="Vision" className="w-full h-full object-cover" />
           </motion.div>
           <div className="relative z-10 container px-6 mx-auto text-center">
-            <motion.div initial="hidden" animate="visible" variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"} animate="visible" variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.4em] uppercase text-secondary mb-5">Long-Term Vision</p>
               <h1 className="text-4xl md:text-6xl font-serif text-primary-foreground mb-6">The Future is Ethical</h1>
               <p className="font-sans text-lg text-primary-foreground/75 max-w-2xl mx-auto">

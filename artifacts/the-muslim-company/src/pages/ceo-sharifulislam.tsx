@@ -357,7 +357,7 @@ export default function CeoSharifulIslamPage() {
             }}
           />
           <div className="relative container mx-auto max-w-5xl px-6 py-28 md:py-36">
-            <motion.div initial="hidden" animate="visible" variants={stagger} className="flex flex-col items-center text-center">
+            <motion.div initial={isBot ? "visible" : "hidden"} animate="visible" variants={stagger} className="flex flex-col items-center text-center">
 
               {/* CEO Photo */}
               <motion.div variants={fadeIn} className="mb-6">

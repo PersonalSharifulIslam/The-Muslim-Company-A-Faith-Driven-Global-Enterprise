@@ -149,7 +149,7 @@ export default function AboutPage() {
         {/* Hero */}
         <section className="bg-primary py-24 px-6">
           <div className="container mx-auto max-w-4xl text-center">
-            <motion.div initial="hidden" animate="visible" variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"} animate="visible" variants={fadeIn}>
               <p className="font-sans text-xs tracking-[0.4em] uppercase text-secondary mb-4">About Us</p>
               <h1 className="font-serif text-5xl md:text-6xl text-primary-foreground mb-6">The Muslim Company</h1>
               <p className="font-serif text-xl md:text-2xl text-primary-foreground/80 max-w-3xl mx-auto leading-relaxed">

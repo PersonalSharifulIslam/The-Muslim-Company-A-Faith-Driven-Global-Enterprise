@@ -104,7 +104,7 @@ export default function TMCFoundationPage() {
         {/* ── HERO ── */}
         <section className="bg-primary pt-32 pb-24 px-6 lg:px-12">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
+            <motion.div initial={isBot ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
               <div className="flex items-center gap-2 mb-4">
                 <HandHeart className="w-5 h-5 text-secondary" />
                 <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary">The Muslim Company Foundation</p>

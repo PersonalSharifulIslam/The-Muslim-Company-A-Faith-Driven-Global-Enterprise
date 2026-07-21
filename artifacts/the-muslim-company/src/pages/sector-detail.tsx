@@ -980,7 +980,7 @@ export default function SectorDetail() {
         {/* ── HERO ── */}
         <section className="bg-primary pt-32 pb-20 px-6 lg:px-12">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+            <motion.div initial={isBot ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
               <Link href="/sectors" className="inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase text-primary-foreground/55 hover:text-secondary transition-colors mb-8">
                 <ArrowLeft className="w-3 h-3" /> All Sectors
               </Link>

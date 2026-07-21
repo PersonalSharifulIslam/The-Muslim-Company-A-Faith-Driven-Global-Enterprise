@@ -134,7 +134,7 @@ export default function FounderPage() {
         {/* Hero */}
         <section className="bg-primary py-24 px-6">
           <div className="container mx-auto max-w-4xl text-center">
-            <motion.div initial="hidden" animate="visible" variants={fadeIn}>
+            <motion.div initial={isBot ? "visible" : "hidden"} animate="visible" variants={fadeIn}>
               <div className="mb-8 flex justify-center">
                 <img
                   src="/images/shariful-islam.jpg"
@@ -149,7 +149,7 @@ export default function FounderPage() {
               </p>
               <div className="mt-8">
                 <a
-                  href="https://www.google.com/search?kgmid=/g/11n_vfnlwt"
+                  href="https://g.co/kgs/4n3CijW"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-secondary text-primary hover:bg-secondary/90 font-sans text-xs font-bold uppercase tracking-widest h-12 px-8 transition-colors"

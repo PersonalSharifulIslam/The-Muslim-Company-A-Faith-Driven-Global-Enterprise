@@ -180,7 +180,7 @@ export default function ContactPage() {
         {/* ── HERO ── */}
         <section className="bg-primary pt-32 pb-20 px-6 lg:px-12">
           <div className="container mx-auto max-w-5xl">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+            <motion.div initial={isBot ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
               <p className="font-sans text-xs tracking-[0.35em] uppercase text-secondary mb-4">Get In Touch</p>
               <h1 className="font-serif text-4xl md:text-6xl text-primary-foreground mb-6 leading-tight">Contact Us</h1>
               <p className="font-sans text-lg text-primary-foreground/60 max-w-2xl leading-relaxed">

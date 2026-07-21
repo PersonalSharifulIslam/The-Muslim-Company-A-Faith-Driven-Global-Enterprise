@@ -186,7 +186,7 @@ export default function BaytAlMalBankPage() {
         {/* Hero */}
         <section className="bg-primary py-28 px-6 relative overflow-hidden">
           <div className="container mx-auto max-w-5xl relative z-10">
-            <motion.div initial="hidden" animate="visible" variants={stagger} className="text-center">
+            <motion.div initial={isBot ? "visible" : "hidden"} animate="visible" variants={stagger} className="text-center">
               <motion.p variants={fadeIn} className="font-sans text-xs tracking-[0.4em] uppercase text-secondary mb-3">
                 A Division of The Muslim Company
               </motion.p>

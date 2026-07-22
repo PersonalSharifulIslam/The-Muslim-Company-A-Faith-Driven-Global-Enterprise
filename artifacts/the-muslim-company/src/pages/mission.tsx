@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import { Link } from "wouter";
+import { MoveRight } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 import { isCrawlerUA } from "@/lib/isCrawler";
 
@@ -154,6 +156,31 @@ export default function MissionPage() {
                   <div key={i} className="px-4 py-3 border border-secondary/30 text-center">
                     <p className="font-sans text-xs tracking-wide text-secondary/80">{v}</p>
                   </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
+              <h3 className="font-serif text-2xl text-primary mb-5">Continue Exploring</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-primary/10">
+                {[
+                  { href: "/vision", label: "Our Vision", desc: "A century-long roadmap toward an ethical civilization." },
+                  { href: "/foundation", label: "Islamic Foundation", desc: "The Quranic and Prophetic basis for every decision we make." },
+                  { href: "/founder", label: "Founder & CEO", desc: "Meet Shariful Islam and the story behind The Muslim Company." },
+                  { href: "/sectors", label: "Areas of Work", desc: "20+ halal, Shariah-compliant sectors we operate in." },
+                  { href: "/constitution", label: "Constitutional Framework", desc: "How our mission is protected for generations to come." },
+                  { href: "/humanitarian", label: "Humanitarian Development", desc: "10% of monthly profit to charity and disaster relief." },
+                ].map((item, i) => (
+                  <Link key={i} href={item.href} className="py-5 px-6 border-b border-r-0 sm:border-r border-primary/10 flex justify-between items-center group hover:bg-card transition-colors">
+                    <div>
+                      <span className="font-serif text-lg text-primary group-hover:text-secondary transition-colors block">{item.label}</span>
+                      <span className="font-sans text-xs text-primary/55">{item.desc}</span>
+                    </div>
+                    <MoveRight className="w-4 h-4 text-primary/20 group-hover:text-secondary transition-colors flex-shrink-0 ml-4" />
+                  </Link>
                 ))}
               </div>
             </motion.div>

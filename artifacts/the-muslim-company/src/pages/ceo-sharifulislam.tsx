@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { Quote, Globe, Award, BookOpen, Briefcase, GraduationCap, Building2, Star, ExternalLink, Linkedin, Newspaper, Calendar, TrendingUp } from "lucide-react";
+import { Link } from "wouter";
+import { Quote, Globe, Award, BookOpen, Briefcase, GraduationCap, Building2, Star, ExternalLink, Linkedin, Newspaper, Calendar, TrendingUp, MoveRight } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 import { isCrawlerUA } from "@/lib/isCrawler";
 
@@ -800,6 +801,21 @@ export default function CeoSharifulIslamPage() {
                   </a>
                 ))}
               </div>
+            </motion.div>
+
+            {/* —— RELATED —— */}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
+              <Link href="/founder" className="group flex items-center justify-between p-6 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
+                <div>
+                  <p className="font-sans text-xs tracking-widest uppercase text-secondary mb-2">Founder Story</p>
+                  <p className="font-serif text-xl">Read the Full Founder & CEO Profile →</p>
+                  <p className="font-sans text-sm text-primary-foreground/65 mt-1">The vision, aspirations, and journey behind The Muslim Company.</p>
+                </div>
+                <MoveRight className="w-5 h-5 text-secondary group-hover:translate-x-1 transition-transform flex-shrink-0 ml-4" />
+              </Link>
             </motion.div>
 
           </div>

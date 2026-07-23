@@ -218,11 +218,11 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
 
       <footer className="bg-primary text-primary-foreground border-t border-primary-foreground/10 py-10 px-6 lg:px-12">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-xs font-sans text-primary-foreground/60">
-          <div>
+          <div className="text-center">
             <p className="font-serif text-base text-primary-foreground/50 mb-1">The Muslim Company</p>
             <p className="text-primary-foreground/50 mb-1">A Prophetic Model Business Group™</p>
             <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
-            <div className="flex items-center gap-4 mt-3">
+            <div className="flex items-center justify-center gap-4 mt-3">
               <a href="https://www.facebook.com/TheMuslimCompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/55 hover:text-secondary transition-colors" aria-label="Facebook">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
               </a>

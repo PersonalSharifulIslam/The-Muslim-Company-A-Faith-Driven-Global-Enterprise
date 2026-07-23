@@ -138,10 +138,10 @@ export default function AboutPage() {
   return (
     <SiteLayout>
       <Helmet>
-        <title>About Us — The Muslim Company | Faith-Driven Global Conglomerate</title>
-        <meta name="description" content="About The Muslim Company — a faith-driven global conglomerate founded by Shariful Islam in Dhaka, Bangladesh, operating across 20+ sectors, governed by Amanah, Ilm, and Rahmah." />
+        <title>About - The Muslim Company - A Prophetic Model Business Group</title>
+        <meta name="description" content="About The Muslim Company — A Prophetic Model Business Group founded by Shariful Islam, operating across 20+ halal sectors guided by Amanah, Ilm & Rahmah." />
         <link rel="canonical" href="https://www.themuslim.company/about" />
-        <meta property="og:title" content="About Us | The Muslim Company" />
+        <meta property="og:title" content="About - The Muslim Company - A Prophetic Model Business Group" />
         <meta property="og:url" content="https://www.themuslim.company/about" />
       </Helmet>
 

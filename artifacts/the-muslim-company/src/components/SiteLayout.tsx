@@ -220,6 +220,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-xs font-sans text-primary-foreground/60">
           <div>
             <p className="font-serif text-base text-primary-foreground/50 mb-1">The Muslim Company</p>
+            <p className="text-primary-foreground/50 mb-1">A Prophetic Model Business Group™</p>
             <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
             <div className="flex items-center gap-4 mt-3">
               <a href="https://www.facebook.com/TheMuslimCompany" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/55 hover:text-secondary transition-colors" aria-label="Facebook">

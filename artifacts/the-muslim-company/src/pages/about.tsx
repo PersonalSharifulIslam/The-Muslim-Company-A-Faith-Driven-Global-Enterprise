@@ -34,7 +34,8 @@ const SECTORS = [
 ];
 
 const VALUES = [
-  { icon: <ShieldCheck className="w-5 h-5" />, title: "Amanah — Trust & Integrity", desc: "Every decision, contract, and partnership is held to the standard of trust placed in us by Allah, our stakeholders, and the communities we serve." },
+  { icon: <ShieldCheck className="w-5 h-5" />, title: "Amanah — Trust & Integrity", desc: "Prophet Muhammad ﷺ was known before his prophethood as Al-Amin — 'the trustworthy' — for his honesty in trade. Every decision, contract, and partnership at The Muslim Company is held to that same standard of trust." },
+  { icon: <Scale className="w-5 h-5" />, title: "Adl — Justice & Fair Dealing", desc: "Fair pricing, honest weights and measures, and equitable treatment of employees, customers, and suppliers — following the Prophetic model of trade free from deception or exploitation." },
   { icon: <BookOpen className="w-5 h-5" />, title: "Ilm — Knowledge & Excellence", desc: "We invest in research, education, and continuous learning, believing that knowledge and ethics must always advance together." },
   { icon: <HeartHandshake className="w-5 h-5" />, title: "Rahmah — Mercy & Service", desc: "Compassion toward employees, customers, and the wider world guides how we build products, treat people, and give back." },
 ];
@@ -191,7 +192,10 @@ export default function AboutPage() {
                   The Muslim Company is a faith-driven global conglomerate headquartered in Dhaka, Bangladesh, founded in January 2025 by <a href="/founder" className="text-secondary hover:underline font-medium">Shariful Islam</a>. The company operates across 20+ sectors — including Technology, Artificial Intelligence, Manufacturing, Renewable Energy, Healthcare, Education, Media, and Humanitarian Development — with a growing presence across Bangladesh, India, Pakistan, the United Arab Emirates, Nigeria, Ghana, and the wider African continent, united under a single ethical framework rooted in the Quran, authentic Sunnah, and the Prophetic model.
                 </p>
                 <p className="font-sans text-sm text-primary/70 leading-relaxed mb-4">
-                  Rather than a conventional business group, The Muslim Company was envisioned as a civilization-scale institution: one built on transparency, halal economics, knowledge, research, technology, and humanitarian responsibility. Every entity under the group — from <a href="/baytalmalbank" className="text-secondary hover:underline">The Bayt Al Mal Bank</a> to The Muslim Souq and The Muslim Company Foundation — is governed by the same Shariah-compliant standards and overseen by a Supreme Shariah Board.
+                  This is what sets The Muslim Company apart from a conventional conglomerate: profit is treated as a means, not the end. Every entity under the group — from <a href="/baytalmalbank" className="text-secondary hover:underline">The Bayt Al Mal Bank</a> (targeting public launch in 2031) to The Muslim Souq and The Muslim Company Foundation — is governed by the same Shariah-compliant standards and overseen by a Supreme Shariah Board, built on transparency, halal economics, knowledge, research, technology, and humanitarian responsibility rather than market domination alone.
+                </p>
+                <p className="font-sans text-sm text-primary/70 leading-relaxed mb-4">
+                  The Supreme Shariah Board is composed of qualified Islamic scholars alongside senior business and technical advisors, and reviews every major product, investment, and partnership before launch, with continuing authority to pause or reverse a decision if new evidence of harm emerges. This oversight is modeled on the trade practices of Prophet Muhammad ﷺ, who was known even before his prophethood as Al-Amin — "the trustworthy" — for his honesty, fair dealing, and refusal to deceive in business.
                 </p>
                 <p className="font-sans text-sm text-primary/70 leading-relaxed">
                   Led by Founder, Chairman, Managing Director, and CEO <a href="/ceo/Sharifulislam" className="text-secondary hover:underline font-medium">Shariful Islam</a>, the company commits 10% of monthly net profit to Fi Sabilillah — for Allah's path — in addition to annual zakat, reflecting its belief that ethical wealth carries barakah only when it serves people beyond shareholders.
@@ -227,7 +231,7 @@ export default function AboutPage() {
  whileInView={isBot ? undefined : "visible"}
  viewport={{ once: true }} variants={fadeIn}>
               <h2 className="font-serif text-3xl text-primary mb-8 text-center">Our Guiding Principles</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 {VALUES.map((v, i) => (
                   <div key={i} className="p-6 bg-card border border-primary/10">
                     <div className="text-secondary mb-3">{v.icon}</div>
@@ -509,13 +513,21 @@ export default function AboutPage() {
  animate={isBot ? "visible" : undefined}
  whileInView={isBot ? undefined : "visible"}
  viewport={{ once: true }} variants={fadeIn}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="p-8 bg-primary text-primary-foreground text-center">
                 <Briefcase className="w-6 h-6 text-secondary mx-auto mb-4" />
                 <h3 className="font-serif text-xl mb-2">Join Our Team</h3>
                 <p className="font-sans text-sm text-primary-foreground/65 mb-5">Build a career with purpose across 20+ ethical, halal industries.</p>
                 <a href="/careers" className="inline-flex items-center bg-secondary text-primary font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 hover:bg-secondary/90 transition-colors">
                   View Careers
+                </a>
+              </div>
+              <div className="p-8 bg-card border border-primary/10 text-center">
+                <Landmark className="w-6 h-6 text-secondary mx-auto mb-4" />
+                <h3 className="font-serif text-xl text-primary mb-2">Partner or Invest</h3>
+                <p className="font-sans text-sm text-primary/60 mb-5">Explore Shariah-compliant partnership and investment opportunities.</p>
+                <a href="/get-involved" className="inline-flex items-center border border-primary/20 text-primary font-sans text-xs font-bold uppercase tracking-widest h-10 px-6 hover:border-secondary transition-colors">
+                  Get Involved
                 </a>
               </div>
               <div className="p-8 bg-card border border-primary/10 text-center">

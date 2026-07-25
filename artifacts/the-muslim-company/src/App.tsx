@@ -10,8 +10,6 @@ const NotFound = lazy(() => import("@/pages/not-found"));
 const Home = lazy(() => import("@/pages/home"));
 const AboutPage = lazy(() => import("@/pages/about"));
 const FAQPage = lazy(() => import("@/pages/faq"));
-const AdminStore = lazy(() => import("@/pages/admin-store"));
-const AdminPreorders = lazy(() => import("@/pages/admin-preorders"));
 const Careers = lazy(() => import("@/pages/careers"));
 const JobDetail = lazy(() => import("@/pages/job-detail"));
 const JobApply = lazy(() => import("@/pages/job-apply"));
@@ -177,12 +175,6 @@ function Router() {
       </Route>
       <Route path="/admin/audit-log">
         <AdminRoute><AdminAuditLog /></AdminRoute>
-      </Route>
-      <Route path="/admin/store">
-        <AdminRoute><AdminStore /></AdminRoute>
-      </Route>
-      <Route path="/admin/preorders">
-        <AdminRoute><AdminPreorders /></AdminRoute>
       </Route>
       <Route path="/admin/delete-logs">
         <AdminRoute><AdminDeleteLogs /></AdminRoute>

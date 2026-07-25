@@ -53,8 +53,6 @@
 
 ### Special Pages
 - [Bayt Al-Mal Bank](https://www.themuslim.company/baytalmalbank): Overview of the company's Islamic finance and ethical banking initiative
-- [E-Store](https://www.themuslim.company/e-store): Pre-order storefront for The Muslim Company's products — browse, submit a pre-order request, no live checkout
-- [E-Store](https://www.themuslim.company/e-store): The Muslim Company's online store for pre-ordering products across its retail and lifestyle sectors
 
 ## About the Founder & CEO
 

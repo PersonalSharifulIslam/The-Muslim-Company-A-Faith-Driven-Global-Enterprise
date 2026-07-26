@@ -91,7 +91,7 @@ export default function AboutPage() {
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
 
-    const desc = "About The Muslim Company — a faith-driven global conglomerate founded by Shariful Islam in Dhaka, Bangladesh, operating across 20+ sectors including Technology, AI, Renewable Energy, Healthcare, and Humanitarian Development, governed by Amanah, Ilm, and Rahmah. Inspired by the Prophet Muhammad's (ﷺ) Principles of Commerce, Ethics, and leadership.";
+    const desc = "About The Muslim Company — a faith-driven global conglomerate founded by Shariful Islam in Dhaka, Bangladesh, operating across 20+ sectors including Technology, AI, Renewable Energy, Healthcare, and Humanitarian Development, governed by Amanah, Ilm, and Rahmah.";
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', desc);
     const _ogt = document.querySelector('meta[property="og:title"]');
@@ -505,6 +505,18 @@ export default function AboutPage() {
                     <p className="font-sans text-sm text-primary/60 leading-relaxed">{f.a}</p>
                   </div>
                 ))}
+              </div>
+            </motion.div>
+
+            {/* A Note on Humility */}
+            <motion.div initial={isBot ? "visible" : "hidden"}
+ animate={isBot ? "visible" : undefined}
+ whileInView={isBot ? undefined : "visible"}
+ viewport={{ once: true }} variants={fadeIn}>
+              <div className="max-w-3xl mx-auto p-8 bg-card border border-primary/10 text-center">
+                <p className="font-sans text-sm text-primary/70 leading-relaxed">
+                  The Muslim Company does not claim perfection. The company will correct mistakes when discovered, accept truth when it becomes clear, protect ethics and justice, benefit humanity, and keep accountability and humility. The journey continues through tawakkul upon Allah, sincerity, halal effort, Prophetic ethics, and continuous striving for goodness. <span className="font-serif italic text-secondary">InshaAllah, as far as Allah allows.</span>
+                </p>
               </div>
             </motion.div>
 

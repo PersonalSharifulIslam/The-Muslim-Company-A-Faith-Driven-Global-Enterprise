@@ -249,8 +249,6 @@ const NAV_COL2 = [
     title: "Connect",
     links: [
       { label: "Careers", href: "/careers" },
-      { label: "Application Status", href: "/recruitment-status" },
-      { label: "Get Involved", href: "/get-involved" },
       { label: "Contact", href: "/contact" },
       { label: "FAQ", href: "/faq" },
     ],

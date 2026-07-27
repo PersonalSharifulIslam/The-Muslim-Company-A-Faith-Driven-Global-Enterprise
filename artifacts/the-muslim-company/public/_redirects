@@ -1,15 +1,8 @@
-# Redirect non-www to www (301 permanent forced)
-https://themuslim.company/*    https://www.themuslim.company/:splat    301!
-
-# Redirect http to https www (forced)
-http://themuslim.company/*     https://www.themuslim.company/:splat    301!
-http://www.themuslim.company/* https://www.themuslim.company/:splat    301!
-
 # Fix case-mismatched URL flagged by Google (soft-404 fix)
-/BaytAlMalBank    /baytalmalbank    301!
+/BaytAlMalBank    /baytalmalbank    301
 
 # E-Store removed — redirect any indexed/linked URLs to homepage
-/e-store    /    301!
+/e-store    /    301
 
 # SPA routing — all routes serve index.html
 /*    /index.html    200

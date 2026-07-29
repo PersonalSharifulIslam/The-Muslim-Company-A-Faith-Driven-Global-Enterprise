@@ -1,4 +1,5 @@
+import { serveSectionSEO } from "./_shared/section-seo";
+
 export async function onRequestGet(context: any) {
-  const { request, env } = context
-  return env.ASSETS.fetch(request)
+  return serveSectionSEO(context, "/humanitarian");
 }

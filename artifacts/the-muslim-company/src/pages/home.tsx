@@ -261,47 +261,47 @@ const NAV_ALL = [...NAV_COL1, ...NAV_COL2];
 const SECTION_SEO: Record<string, { title: string; description: string; path: string }> = {
   "/our-story": {
     title: "Our Story — The Muslim Company",
-    description: "From observing a world drifting from ethics to envisioning a civilization-scale ethical enterprise — this is how The Muslim Company was born.",
+    description: "The story of how The Muslim Company began — from Shariful Islam's vision for an ethical, faith-driven enterprise to its founding in Dhaka, Bangladesh in 2025.",
     path: "/our-story",
   },
   "/foundation": {
     title: "Islamic Foundation — The Muslim Company",
-    description: "Every operation follows the Quran, authentic Hadith, and the Prophetic Model — completely free from riba, bribery, corruption, and exploitation.",
+    description: "The Islamic foundation behind The Muslim Company — how the Quran, authentic Hadith, and the Prophetic Model guide every operation, free from riba and corruption.",
     path: "/foundation",
   },
   "/sectors": {
     title: "Areas of Work & Sectors — The Muslim Company",
-    description: "The company works across 20 beneficial and halal sectors — from agriculture and healthcare to AI, renewable energy, and Islamic finance.",
+    description: "The Muslim Company's halal business sectors — Manufacturing, Retail, Fashion & Apparel, Electronics, Technology, and Humanitarian Development, among 20+ others.",
     path: "/sectors",
   },
   "/governance": {
     title: "Governance Structure — The Muslim Company",
-    description: "Governed by a Supreme Shariah Board, Amanah-based leadership, Shura consultation, and the higher objectives of Shariah (Maqasid al-Shariah).",
+    description: "How The Muslim Company is governed — a Supreme Shariah Board, Amanah-based leadership, and Shura consultation overseeing every major decision.",
     path: "/governance",
   },
   "/constitution": {
     title: "Constitutional Framework — The Muslim Company",
-    description: "A permanent constitutional framework protects the company's mission from corruption, hostile takeover, and ethical drift — for generations to come.",
+    description: "The constitutional framework that protects The Muslim Company's mission — permanent safeguards against corruption, hostile takeover, and ethical drift.",
     path: "/constitution",
   },
   "/our-people": {
     title: "Our People — The Muslim Company",
-    description: "Fair wages, dignified workplaces, separate facilities for women, extended maternity leave, and long-term pension and family welfare programs.",
+    description: "How The Muslim Company treats its people — fair wages, dignified workplaces, extended maternity leave, and long-term welfare programs for every employee.",
     path: "/our-people",
   },
   "/environment": {
     title: "Environmental Stewardship — The Muslim Company",
-    description: "Nature is a trust from Allah. The company supports renewable energy, wildlife protection, reforestation, and ecological restoration in every operation.",
+    description: "The Muslim Company's environmental commitments — renewable energy, wildlife protection, reforestation, and ecological restoration across every operation.",
     path: "/environment",
   },
   "/humanitarian": {
     title: "Humanitarian Development — The Muslim Company",
-    description: "10% of monthly net profit goes to charity — funding disaster relief, orphan and widow support, education access, healthcare, and housing worldwide.",
+    description: "The Muslim Company's humanitarian work — 10% of monthly profit funds disaster relief, orphan and widow support, education, and healthcare worldwide.",
     path: "/humanitarian",
   },
   "/technology": {
     title: "Technology & AI Ethics — The Muslim Company",
-    description: "Technology stays under ethical supervision. The company opposes harmful AI, addiction-based systems, privacy abuse, and mass misinformation.",
+    description: "The Muslim Company's approach to technology and AI ethics — rejecting harmful AI, addiction-based systems, privacy abuse, and mass misinformation.",
     path: "/technology",
   },
 };

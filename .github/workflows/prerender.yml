@@ -1,0 +1,63 @@
+name: Prerender for bots
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "artifacts/the-muslim-company/src/**"
+      - "artifacts/the-muslim-company/index.html"
+      - "artifacts/the-muslim-company/scripts/prerender.mjs"
+  schedule:
+    # Catch new blog posts / job listings / newsroom posts published via the
+    # admin panel (which don't trigger a git push) every 6 hours.
+    - cron: "0 */6 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  prerender:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: artifacts/the-muslim-company
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Build app (so there is something to prerender)
+        run: pnpm run build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+
+      - name: Prerender all routes
+        run: node scripts/prerender.mjs
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+
+      - name: Commit prerendered HTML
+        run: |
+          git config user.name "prerender-bot"
+          git config user.email "actions@github.com"
+          git add public/prerendered
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "chore: update prerendered HTML snapshots [skip ci]"
+          git push

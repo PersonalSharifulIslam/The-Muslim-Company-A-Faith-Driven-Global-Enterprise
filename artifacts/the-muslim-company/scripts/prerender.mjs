@@ -88,30 +88,38 @@ async function fetchSlugs(table) {
   }
 }
 
+// Poll the actual port with real HTTP requests instead of grepping stdout —
+// grepping for "Local:"/"ready in" text was unreliable and let the script
+// "proceed anyway" via a 15s fallback even when the server never came up.
+// That caused every route to fail with ERR_CONNECTION_REFUSED and the job
+// to hang for hours.
+async function waitForServer(url, { timeoutMs = 30000, intervalMs = 300 } = {}) {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    try {
+      const res = await fetch(url, { method: "GET" });
+      if (res.ok || res.status < 500) return true;
+    } catch {
+      // connection refused / not up yet — keep polling
+    }
+    await new Promise((r) => setTimeout(r, intervalMs));
+  }
+  return false;
+}
+
 function startPreviewServer() {
-  return new Promise((resolve, reject) => {
-    const proc = spawn("pnpm", ["run", "serve", "--", "--port", String(PORT), "--strictPort"], {
-      cwd: ROOT,
-      stdio: "pipe",
-    });
-    let ready = false;
-    const onData = (data) => {
-      const text = data.toString();
-      if (!ready && /Local:|ready in/i.test(text)) {
-        ready = true;
-        resolve(proc);
-      }
-    };
-    proc.stdout.on("data", onData);
-    proc.stderr.on("data", onData);
-    proc.on("error", reject);
-    setTimeout(() => {
-      if (!ready) {
-        ready = true;
-        resolve(proc); // proceed anyway; the retry loop in renderRoute will catch a not-ready server
-      }
-    }, 15000);
+  const proc = spawn("pnpm", ["run", "serve", "--", "--port", String(PORT), "--strictPort"], {
+    cwd: ROOT,
+    stdio: "pipe",
   });
+  let output = "";
+  proc.stdout.on("data", (d) => (output += d.toString()));
+  proc.stderr.on("data", (d) => (output += d.toString()));
+  proc.on("error", (err) => {
+    console.error("[prerender] Failed to spawn preview server:", err.message);
+  });
+  proc.getOutput = () => output;
+  return proc;
 }
 
 async function renderRoute(browser, route) {
@@ -137,8 +145,16 @@ async function renderRoute(browser, route) {
 
 async function main() {
   console.log("[prerender] Starting preview server...");
-  const serverProc = await startPreviewServer();
-  await new Promise((r) => setTimeout(r, 2000)); // small buffer after "ready" line
+  const serverProc = startPreviewServer();
+
+  const up = await waitForServer(BASE_URL, { timeoutMs: 30000 });
+  if (!up) {
+    console.error("[prerender] Preview server never became reachable at " + BASE_URL);
+    console.error("[prerender] Server output so far:\n" + serverProc.getOutput());
+    serverProc.kill();
+    process.exit(1);
+  }
+  console.log("[prerender] Preview server is up.");
 
   console.log("[prerender] Fetching dynamic slugs from Supabase...");
   const [blogSlugs, jobSlugs, newsSlugs] = await Promise.all([

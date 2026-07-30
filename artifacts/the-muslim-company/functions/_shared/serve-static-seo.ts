@@ -3,7 +3,13 @@
 // every remaining static page. Each route file calls serveStaticSEO(context,
 // "/path") directly instead of routing through a global middleware, so there
 // is no dependency on Pages middleware behavior.
+//
+// Bots (search engines, social crawlers, AI/LLM crawlers) get the FULL
+// prerendered HTML for the page (built by scripts/prerender.mjs and shipped
+// as a static asset under /prerendered/*.html) — no JavaScript required.
+// Everyone else still gets the normal SPA shell with corrected meta tags.
 import { STATIC_PAGE_SEO } from "./static-page-seo";
+import { isBotRequest } from "./bot-detect";
 
 const BASE = "https://www.themuslim.company";
 
@@ -23,6 +29,12 @@ class SetAttribute {
 
 export async function serveStaticSEO(context: any, routePath: string): Promise<Response> {
   const { request, env } = context;
+
+  if (isBotRequest(request)) {
+    const prerendered = await tryServePrerendered(env, routePath);
+    if (prerendered) return prerendered;
+  }
+
   const res = await env.ASSETS.fetch(request);
 
   const meta = STATIC_PAGE_SEO[routePath];
@@ -52,5 +64,19 @@ export async function serveStaticSEO(context: any, routePath: string): Promise<R
     // If anything goes wrong with the rewrite, fail safe: serve the
     // original page instead of crashing the whole route.
     return res;
+  }
+}
+
+export async function tryServePrerendered(env: any, routePath: string): Promise<Response | null> {
+  try {
+    const prerenderedUrl = `${BASE}/prerendered${routePath}.html`;
+    const res = await env.ASSETS.fetch(new Request(prerenderedUrl));
+    if (!res.ok) return null;
+    return new Response(res.body, {
+      status: 200,
+      headers: { "content-type": "text/html; charset=utf-8" },
+    });
+  } catch {
+    return null;
   }
 }

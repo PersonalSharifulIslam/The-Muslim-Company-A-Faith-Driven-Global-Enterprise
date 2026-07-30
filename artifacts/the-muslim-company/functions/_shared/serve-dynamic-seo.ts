@@ -3,6 +3,11 @@
 // ...) directly (same proven HTMLRewriter approach as section-seo.ts) so
 // crawlers that don't run JavaScript see the real post/job title instead of
 // the home page's default meta tags.
+//
+// Bots additionally get the FULL prerendered HTML (built by
+// scripts/prerender.mjs) when a snapshot exists for that slug.
+import { isBotRequest } from "./bot-detect";
+
 const BASE = "https://www.themuslim.company";
 
 class SetInnerContent {
@@ -40,6 +45,22 @@ export async function serveDynamicSEO(
   titleSuffix: string,
 ): Promise<Response> {
   const { request, env } = context;
+
+  if (isBotRequest(request) && slug) {
+    try {
+      const prerenderedUrl = `${BASE}/prerendered${pathPrefix}/${slug}.html`;
+      const preRes = await env.ASSETS.fetch(new Request(prerenderedUrl));
+      if (preRes.ok) {
+        return new Response(preRes.body, {
+          status: 200,
+          headers: { "content-type": "text/html; charset=utf-8" },
+        });
+      }
+    } catch {
+      // fall through to normal handling below
+    }
+  }
+
   const res = await env.ASSETS.fetch(request);
 
   const SUPABASE_URL = env.VITE_SUPABASE_URL || env.SUPABASE_URL;

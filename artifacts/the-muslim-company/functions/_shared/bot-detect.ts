@@ -4,8 +4,13 @@
 const BOT_UA_PATTERNS: RegExp[] = [
   // Search engines
   /Googlebot/i,
+  /Google-InspectionTool/i, // Search Console "URL Inspection" / Live Test
+  /GoogleOther/i,
   /Google-Extended/i,
+  /Storebot-Google/i,
+  /AdsBot-Google/i,
   /Bingbot/i,
+  /BingPreview/i,
   /Applebot/i,
   /DuckDuckBot/i,
   /YandexBot/i,

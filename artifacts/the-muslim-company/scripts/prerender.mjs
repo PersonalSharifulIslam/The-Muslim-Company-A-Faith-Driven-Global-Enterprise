@@ -108,8 +108,9 @@ async function waitForServer(url, { timeoutMs = 30000, intervalMs = 300 } = {}) 
 }
 
 function startPreviewServer() {
-  const proc = spawn("pnpm", ["run", "serve", "--", "--port", String(PORT), "--strictPort"], {
+  const proc = spawn("pnpm", ["run", "serve"], {
     cwd: ROOT,
+    env: { ...process.env, PORT: String(PORT) },
     stdio: "pipe",
   });
   let output = "";

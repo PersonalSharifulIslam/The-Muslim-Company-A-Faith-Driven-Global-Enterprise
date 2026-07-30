@@ -1,4 +1,5 @@
+import { serveStaticSEO } from "./_shared/serve-static-seo";
+
 export async function onRequestGet(context: any) {
-  const { request, env } = context
-  return env.ASSETS.fetch(request)
+  return serveStaticSEO(context, "/mission");
 }

@@ -18,8 +18,10 @@ const SLUG_REDIRECTS: Record<string, string> = {
     'navigating-a-multipolar-world-opportunities-risks-and-the-future-of-global-cooperation',
 }
 
+import { serveDynamicSEO } from "../_shared/serve-dynamic-seo";
+
 export async function onRequestGet(context: any) {
-  const { request, env, params } = context
+  const { params } = context
   const slug = params.slug as string
 
   // 301 redirect legacy slugs to their new canonical URL
@@ -27,5 +29,5 @@ export async function onRequestGet(context: any) {
     return Response.redirect(`https://www.themuslim.company/blog/${SLUG_REDIRECTS[slug]}`, 301)
   }
 
-  return env.ASSETS.fetch(request)
+  return serveDynamicSEO(context, "blog_posts", slug, "/blog", "The Muslim Company Blog")
 }

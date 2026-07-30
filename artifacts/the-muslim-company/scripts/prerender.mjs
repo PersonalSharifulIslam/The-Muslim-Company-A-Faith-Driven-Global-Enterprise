@@ -52,6 +52,7 @@ const STATIC_ROUTES = [
   "/constitution",
   "/our-people",
   "/our-story",
+  "/foundation",
   "/environment",
   "/humanitarian",
   "/technology",

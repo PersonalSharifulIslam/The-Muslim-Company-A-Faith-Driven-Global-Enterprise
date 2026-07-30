@@ -1,4 +1,7 @@
 // Shared SEO metadata + HTMLRewriter helper for the "section routes"
+import { isBotRequest } from "./bot-detect";
+import { tryServePrerendered } from "./serve-static-seo";
+
 export const SECTION_SEO: Record<string, { title: string; description: string }> = {
   "/our-story": {
     title: "Our Story — The Muslim Company",
@@ -63,6 +66,12 @@ class SetAttribute {
 
 export async function serveSectionSEO(context: any, routePath: string): Promise<Response> {
   const { request, env } = context;
+
+  if (isBotRequest(request)) {
+    const prerendered = await tryServePrerendered(env, routePath);
+    if (prerendered) return prerendered;
+  }
+
   const res = await env.ASSETS.fetch(request);
 
   const meta = SECTION_SEO[routePath];

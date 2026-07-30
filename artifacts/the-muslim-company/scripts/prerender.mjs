@@ -112,6 +112,15 @@ function startPreviewServer() {
     cwd: ROOT,
     env: { ...process.env, PORT: String(PORT) },
     stdio: "pipe",
+    // `pnpm run serve` is itself a wrapper that spawns the real server
+    // (vite preview) as a *grandchild* process. Killing just `proc` only
+    // ever signals the pnpm wrapper — the grandchild holding port 4173
+    // keeps running and keeps its stdio pipes open, which leaves a
+    // dangling handle in the event loop and hangs the whole job even
+    // after prerendering has finished. `detached: true` puts the wrapper
+    // in its own process group so we can kill the *entire* group (wrapper
+    // + real server) with one signal — see killPreviewServer() below.
+    detached: true,
   });
   let output = "";
   proc.stdout.on("data", (d) => (output += d.toString()));
@@ -123,10 +132,29 @@ function startPreviewServer() {
   return proc;
 }
 
+function killPreviewServer(proc) {
+  try {
+    // Negative pid = signal the whole process group (wrapper + its children).
+    process.kill(-proc.pid, "SIGTERM");
+  } catch {
+    // Fallback in case the group is already gone or detached isn't supported.
+    try {
+      proc.kill("SIGTERM");
+    } catch {
+      // already dead — nothing to do
+    }
+  }
+}
+
 async function renderRoute(browser, route) {
   const page = await browser.newPage();
   try {
-    await page.goto(`${BASE_URL}${route}`, { waitUntil: "networkidle", timeout: 30000 });
+    // "load" instead of "networkidle": some routes (e.g. /recruitment-status)
+    // keep a connection open (polling / live status checks) that never goes
+    // idle, which made networkidle time out at 30s and fail the route.
+    // "load" plus the extra waitForTimeout below is enough for hydration
+    // and lazy-loaded content.
+    await page.goto(`${BASE_URL}${route}`, { waitUntil: "load", timeout: 30000 });
     // Give React a little extra time for any lazy-loaded / async content.
     await page.waitForTimeout(800);
     const html = await page.content();
@@ -152,7 +180,7 @@ async function main() {
   if (!up) {
     console.error("[prerender] Preview server never became reachable at " + BASE_URL);
     console.error("[prerender] Server output so far:\n" + serverProc.getOutput());
-    serverProc.kill();
+    killPreviewServer(serverProc);
     process.exit(1);
   }
   console.log("[prerender] Preview server is up.");
@@ -180,10 +208,14 @@ async function main() {
     if (success) ok++;
   }
   await browser.close();
-  serverProc.kill();
+  killPreviewServer(serverProc);
 
   console.log(`[prerender] Done: ${ok}/${routes.length} routes rendered → ${OUT_DIR}`);
-  if (ok < routes.length) process.exitCode = 1;
+  // Force-exit instead of letting the event loop drain naturally: any
+  // lingering handle (e.g. a socket the killed server didn't release fast
+  // enough) would otherwise keep the process — and the GitHub Actions job —
+  // alive for hours.
+  process.exit(ok < routes.length ? 1 : 0);
 }
 
 main().catch((err) => {

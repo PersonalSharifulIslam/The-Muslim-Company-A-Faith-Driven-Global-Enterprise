@@ -3,6 +3,3 @@
 
 # E-Store removed — redirect any indexed/linked URLs to homepage
 /e-store    /    301
-
-# SPA routing — all routes serve index.html
-/*    /index.html    200

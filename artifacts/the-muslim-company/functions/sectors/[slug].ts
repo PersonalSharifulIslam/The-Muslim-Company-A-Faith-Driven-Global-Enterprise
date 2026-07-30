@@ -1,20 +1,4 @@
 import { SECTOR_DETAIL_SEO } from "../_shared/sector-detail-seo";
-
-class SetInnerContent {
-  constructor(private text: string) {}
-  element(el: any) {
-    el.setInnerContent(this.text);
-  }
-}
-
-class SetAttribute {
-  constructor(private attr: string, private value: string) {}
-  element(el: any) {
-    el.setAttribute(this.attr, this.value);
-  }
-}
-
-import { SECTOR_DETAIL_SEO } from "../_shared/sector-detail-seo";
 import { isBotRequest } from "../_shared/bot-detect";
 import { tryServePrerendered } from "../_shared/serve-static-seo";
 

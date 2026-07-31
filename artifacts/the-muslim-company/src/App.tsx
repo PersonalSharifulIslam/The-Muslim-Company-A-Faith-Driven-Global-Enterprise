@@ -85,22 +85,31 @@ function PageLoader() {
 }
 
 function Router() {
+  // /, /our-story, /foundation, /sectors, /governance, /constitution,
+  // /our-people, /environment, /humanitarian, /technology all render the
+  // same Home component. Wouter's <Switch> doesn't unmount/remount a
+  // component just because a different Route (mapping to that same
+  // component) now matches — so client-side navigation between these paths
+  // was leaving stale document.title/meta/scroll state from whichever one
+  // was visited first. `key={location}` forces a full remount on every
+  // path change among them, so all of Home's mount-time effects rerun fresh.
+  const [location] = useLocation();
   return (
     <Suspense fallback={<PageLoader />}>
     <Switch>
       {/* Public routes */}
-      <Route path="/" component={Home} />
+      <Route path="/" component={() => <Home key={location} />} />
       <Route path="/about" component={AboutPage} />
       <Route path="/faq" component={FAQPage} />
-      <Route path="/our-story" component={Home} />
-      <Route path="/foundation" component={Home} />
-      <Route path="/sectors" component={Home} />
-      <Route path="/governance" component={Home} />
-      <Route path="/constitution" component={Home} />
-      <Route path="/our-people" component={Home} />
-      <Route path="/environment" component={Home} />
-      <Route path="/humanitarian" component={Home} />
-      <Route path="/technology" component={Home} />
+      <Route path="/our-story" component={() => <Home key={location} />} />
+      <Route path="/foundation" component={() => <Home key={location} />} />
+      <Route path="/sectors" component={() => <Home key={location} />} />
+      <Route path="/governance" component={() => <Home key={location} />} />
+      <Route path="/constitution" component={() => <Home key={location} />} />
+      <Route path="/our-people" component={() => <Home key={location} />} />
+      <Route path="/environment" component={() => <Home key={location} />} />
+      <Route path="/humanitarian" component={() => <Home key={location} />} />
+      <Route path="/technology" component={() => <Home key={location} />} />
       <Route path="/careers" component={Careers} />
       <Route path="/careers/:slug" component={JobDetail} />
       <Route path="/careers/:slug/apply" component={JobApply} />

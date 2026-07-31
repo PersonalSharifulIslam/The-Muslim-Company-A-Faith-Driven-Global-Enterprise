@@ -215,6 +215,7 @@ const NAV_COL1 = [
       { label: "Vision", href: "/vision" },
       { label: "Founder", href: "/founder" },
       { label: "CEO", href: "/ceo/Sharifulislam" },
+      { label: "Our Story", href: "/our-story" },
     ],
   },
   {
@@ -234,7 +235,7 @@ const NAV_COL2 = [
     links: [
       { label: "Governance", href: "/governance" },
       { label: "Constitution", href: "/constitution" },
-      { label: "Our Story", href: "/our-story" },
+      { label: "Shariah Board", href: "/shariah-board" },
     ],
   },
   {
@@ -242,7 +243,7 @@ const NAV_COL2 = [
     links: [
       { label: "Sectors", href: "/sectors" },
       { label: "The Bayt Al-Mal Bank", href: "/baytalmalbank" },
-      { label: "Foundation", href: "/the-muslim-company-foundation" },
+      { label: "TMC Foundation", href: "/the-muslim-company-foundation" },
     ],
   },
   {

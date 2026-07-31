@@ -79,6 +79,10 @@ export default function Careers() {
     if (_ogt) _ogt.setAttribute('content', "Explore career opportunities at The Muslim Company — a faith-driven global conglomerate committed to ethical innovation, humanitarian development, and civilizational leadership. Join our team in Dhaka, Bangladesh.");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "Join The Muslim Company — explore career opportunities in a faith-driven, ethical, and civilization-focused global enterprise. Open positions in technology, research, media, and more.");
+    const _twt_fix = document.querySelector('meta[name="twitter:title"]');
+    if (_twt_fix) _twt_fix.setAttribute('content', "Explore career opportunities at The Muslim Company — a faith-driven global conglomerate committed to ethical innovation, humanitarian development, and civilizational leadership. Join our team in Dhaka, Bangladesh.");
+    const _twd_fix = document.querySelector('meta[name="twitter:description"]');
+    if (_twd_fix) _twd_fix.setAttribute('content', "Join The Muslim Company — explore career opportunities in a faith-driven, ethical, and civilization-focused global enterprise. Open positions in technology, research, media, and more.");
     const _ogi = document.querySelector('meta[property="og:image"]');
     if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-careers.png');
     const _twi = document.querySelector('meta[name="twitter:image"]');

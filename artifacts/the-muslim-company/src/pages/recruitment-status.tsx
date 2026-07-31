@@ -64,6 +64,10 @@ export default function RecruitmentStatus() {
     if (md) md.setAttribute('content', 'Track your job application status at The Muslim Company using your reference number.');
     const ogt = document.querySelector('meta[property="og:title"]');
     if (ogt) ogt.setAttribute('content', 'Recruitment Status — The Muslim Company');
+    const _twt_fix = document.querySelector('meta[name="twitter:title"]');
+    if (_twt_fix) _twt_fix.setAttribute('content', 'Recruitment Status — The Muslim Company');
+    const _twd_fix = document.querySelector('meta[name="twitter:description"]');
+    if (_twd_fix) _twd_fix.setAttribute('content', "Track the status of your job application at The Muslim Company. Enter your reference number to check where you are in our recruitment process.");
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
     const s = document.createElement('script'); s.type = 'application/ld+json';
     s.setAttribute('data-page-schema', 'true');

@@ -150,6 +150,10 @@ export default function ContactPage() {
     if (_ogt2) _ogt2.setAttribute('content', 'Contact — The Muslim Company');
     const _ogd2 = document.querySelector('meta[property="og:description"]');
     if (_ogd2) _ogd2.setAttribute('content', 'Get in touch with The Muslim Company — for partnerships, careers, media, research, or support.');
+    const _twt_fix = document.querySelector('meta[name="twitter:title"]');
+    if (_twt_fix) _twt_fix.setAttribute('content', 'Contact — The Muslim Company');
+    const _twd_fix = document.querySelector('meta[name="twitter:description"]');
+    if (_twd_fix) _twd_fix.setAttribute('content', 'Get in touch with The Muslim Company — for partnerships, careers, media, research, or support.');
     const _ogu2 = document.querySelector('meta[property="og:url"]');
     if (_ogu2) _ogu2.setAttribute('content', 'https://www.themuslim.company/contact');
     const metaDesc = document.querySelector('meta[name="description"]');

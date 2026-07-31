@@ -123,6 +123,10 @@ export default function GetInvolvedPage() {
     if (ogt) ogt.setAttribute("content", "Get Involved — The Muslim Company");
     const ogd = document.querySelector('meta[property="og:description"]');
     if (ogd) ogd.setAttribute("content", "Volunteer, intern, research, mentor, or advise. Join a faith-driven global enterprise building ethical civilization.");
+    const _twt_fix = document.querySelector('meta[name="twitter:title"]');
+    if (_twt_fix) _twt_fix.setAttribute('content', "Get Involved — The Muslim Company");
+    const _twd_fix = document.querySelector('meta[name="twitter:description"]');
+    if (_twd_fix) _twd_fix.setAttribute('content', "Volunteer, intern, research, mentor, or advise. Join a faith-driven global enterprise building ethical civilization.");
 
     const schemas = [
       {

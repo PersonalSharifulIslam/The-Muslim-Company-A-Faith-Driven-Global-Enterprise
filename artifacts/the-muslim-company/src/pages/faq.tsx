@@ -114,6 +114,10 @@ export default function FAQPage() {
     if (_ogt) _ogt.setAttribute('content', "Frequently Asked Questions — The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', desc);
+    const _twt_fix = document.querySelector('meta[name="twitter:title"]');
+    if (_twt_fix) _twt_fix.setAttribute('content', "Frequently Asked Questions — The Muslim Company");
+    const _twd_fix = document.querySelector('meta[name="twitter:description"]');
+    if (_twd_fix) _twd_fix.setAttribute('content', desc);
     const _ogu = document.querySelector('meta[property="og:url"]');
     if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/faq");
 

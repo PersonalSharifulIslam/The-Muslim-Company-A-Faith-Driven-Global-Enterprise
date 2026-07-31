@@ -108,6 +108,10 @@ export default function TransparencyPage() {
     if (ogt) ogt.setAttribute("content", "Transparency & Accountability — The Muslim Company");
     const ogd = document.querySelector('meta[property="og:description"]');
     if (ogd) ogd.setAttribute("content", "Full transparency in charity, zakat, humanitarian impact, governance, and ethical finance.");
+    const _twt_fix = document.querySelector('meta[name="twitter:title"]');
+    if (_twt_fix) _twt_fix.setAttribute('content', "Transparency & Accountability — The Muslim Company");
+    const _twd_fix = document.querySelector('meta[name="twitter:description"]');
+    if (_twd_fix) _twd_fix.setAttribute('content', "Full transparency in charity, zakat, humanitarian impact, governance, and ethical finance.");
 
     const schemas = [
       {

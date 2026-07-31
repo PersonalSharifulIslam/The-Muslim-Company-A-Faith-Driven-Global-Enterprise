@@ -88,6 +88,10 @@ export default function Newsroom({ params }: { params?: { category?: string } })
     if (_ogt) _ogt.setAttribute('content', urlCategory ? `${urlCategory} — Newsroom — The Muslim Company` : "Newsroom & Press — The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', description);
+    const _twt_fix = document.querySelector('meta[name="twitter:title"]');
+    if (_twt_fix) _twt_fix.setAttribute('content', urlCategory ? `${urlCategory} — Newsroom — The Muslim Company` : "Newsroom & Press — The Muslim Company");
+    const _twd_fix = document.querySelector('meta[name="twitter:description"]');
+    if (_twd_fix) _twd_fix.setAttribute('content', description);
     const _ogi = document.querySelector('meta[property="og:image"]');
     if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-newsroom.png');
     const _twi = document.querySelector('meta[name="twitter:image"]');

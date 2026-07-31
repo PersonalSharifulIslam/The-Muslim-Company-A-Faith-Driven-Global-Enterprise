@@ -42,7 +42,7 @@ const NAV_COL2 = [
     links: [
       { label: "Sectors", href: "/sectors" },
       { label: "The Bayt Al-Mal Bank", href: "/baytalmalbank" },
-      { label: "Foundation", href: "/the-muslim-company-foundation" },
+      { label: "TMC Foundation", href: "/the-muslim-company-foundation" },
     ],
   },
   {

@@ -59,6 +59,7 @@ export async function onRequestGet(context: any) {
     url(`${BASE}/foundation`,           'monthly', '0.7', now),
     url(`${BASE}/sectors`,              'monthly', '0.7', now),
     url(`${BASE}/governance`,           'monthly', '0.7', now),
+    url(`${BASE}/shariah-board`,        'monthly', '0.8', now),
     url(`${BASE}/constitution`,         'monthly', '0.7', now),
     url(`${BASE}/our-people`,           'monthly', '0.7', now),
     url(`${BASE}/environment`,          'monthly', '0.7', now),

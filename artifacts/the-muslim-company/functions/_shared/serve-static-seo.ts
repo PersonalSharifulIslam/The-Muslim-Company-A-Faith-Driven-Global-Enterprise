@@ -42,15 +42,16 @@ export async function serveStaticSEO(context: any, routePath: string): Promise<R
 
   try {
     const canonicalUrl = `${BASE}${routePath}`;
+    const socialDescription = meta.ogDescription || meta.description;
 
     const rewriter = new HTMLRewriter()
       .on("title", new SetInnerContent(meta.title))
       .on('meta[name="description"]', new SetAttribute("content", meta.description))
       .on('meta[property="og:title"]', new SetAttribute("content", meta.title))
-      .on('meta[property="og:description"]', new SetAttribute("content", meta.description))
+      .on('meta[property="og:description"]', new SetAttribute("content", socialDescription))
       .on('meta[property="og:url"]', new SetAttribute("content", canonicalUrl))
       .on('meta[name="twitter:title"]', new SetAttribute("content", meta.title))
-      .on('meta[name="twitter:description"]', new SetAttribute("content", meta.description))
+      .on('meta[name="twitter:description"]', new SetAttribute("content", socialDescription))
       .on('link[rel="canonical"]', new SetAttribute("href", canonicalUrl));
 
     if (meta.image) {

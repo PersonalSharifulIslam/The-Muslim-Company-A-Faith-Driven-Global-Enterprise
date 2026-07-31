@@ -9,7 +9,7 @@
 
 export const STATIC_PAGE_SEO: Record<
   string,
-  { title: string; description: string; image?: string }
+  { title: string; description: string; ogDescription?: string; image?: string }
 > = {
   "/about": {
     title: "About Us — The Muslim Company | Faith-Driven Global Conglomerate",
@@ -110,5 +110,12 @@ export const STATIC_PAGE_SEO: Record<
     title: "Newsroom & Press — The Muslim Company",
     description:
       "Press releases and official announcements from The Muslim Company, a faith-driven global conglomerate headquartered in Dhaka, Bangladesh.",
+  },
+  "/shariah-board": {
+    title: "Our Shariah Board — Scholars Guiding The Muslim Company",
+    description:
+      "The Supreme Shariah Board of The Muslim Company — scholars ensuring full Shariah compliance across every product, service, operation & finance.",
+    ogDescription:
+      "Meet the Supreme Shariah Board of The Muslim Company — the Islamic scholars who review and approve every product, service, operation, and financial decision across all 20+ sectors, ensuring complete Shariah compliance from end to end.",
   },
 };

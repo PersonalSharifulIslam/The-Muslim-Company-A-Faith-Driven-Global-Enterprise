@@ -48,6 +48,7 @@ const STATIC_ROUTES = [
   "/blog",
   "/careers",
   "/newsroom",
+  "/shariah-board",
   "/governance",
   "/constitution",
   "/our-people",

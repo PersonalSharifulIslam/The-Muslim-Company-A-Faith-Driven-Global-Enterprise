@@ -388,20 +388,26 @@ export default function Home() {
   }, []);
 
   // Section-specific URLs (/our-story, /foundation, /sectors, /governance, /constitution)
-  // render this same Home page — just scroll straight to that section
+  // render this same Home page. For real visitors, we just scroll straight
+  // to that section (unchanged behavior). For bots/crawlers, each of these
+  // URLs previously served the ENTIRE home page (all sections) with only the
+  // <title>/meta differing — a duplicate-content problem for SEO/AI crawling.
+  // So for bots specifically, we render ONLY the matching section.
+  const SECTION_BY_PATH: Record<string, string> = {
+    "/our-story": "our-story",
+    "/foundation": "foundation",
+    "/sectors": "sectors",
+    "/governance": "governance",
+    "/constitution": "constitution",
+    "/our-people": "people",
+    "/environment": "environment",
+    "/humanitarian": "humanitarian",
+    "/technology": "technology",
+  };
+  const activeBotSection = isBot ? SECTION_BY_PATH[window.location.pathname] : undefined;
+
   useEffect(() => {
-    const sectionByPath: Record<string, string> = {
-      "/our-story": "our-story",
-      "/foundation": "foundation",
-      "/sectors": "sectors",
-      "/governance": "governance",
-      "/constitution": "constitution",
-      "/our-people": "people",
-      "/environment": "environment",
-      "/humanitarian": "humanitarian",
-      "/technology": "technology",
-    };
-    const targetId = sectionByPath[window.location.pathname];
+    const targetId = SECTION_BY_PATH[window.location.pathname];
     if (targetId) {
       const t = setTimeout(() => {
         document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
@@ -662,6 +668,7 @@ export default function Home() {
         </p>
       </ExpandableSection>
 
+      {(!activeBotSection || activeBotSection === "our-story") && (<>
       {/* ── OUR STORY ── */}
       <ExpandableSection
         id="our-story"
@@ -755,7 +762,9 @@ export default function Home() {
 
         </div>
       </ExpandableSection>
+      </>)}
 
+      {(!activeBotSection || activeBotSection === "foundation") && (<>
       {/* ── ISLAMIC FOUNDATION ── */}
       <ExpandableSection
         id="foundation"
@@ -822,7 +831,9 @@ export default function Home() {
           <InlineQuote light>Businesses that maintain honesty, justice, charity, and the pleasure of Allah receive barakah and long-term stability.</InlineQuote>
         </div>
       </ExpandableSection>
+      </>)}
 
+      {(!activeBotSection || activeBotSection === "sectors") && (<>
       {/* ── SECTORS ── */}
       <ExpandableSection
         id="sectors"
@@ -861,7 +872,9 @@ export default function Home() {
           The company believes no beneficial and halal sector should remain outside ethical development. The goal is to build an integrated civilization-scale ecosystem where every domain of human life is guided by faith, justice, and responsibility.
         </p>
       </ExpandableSection>
+      </>)}
 
+      {(!activeBotSection || activeBotSection === "governance") && (<>
       {/* ── GOVERNANCE ── */}
       <ExpandableSection
         id="governance"
@@ -945,7 +958,9 @@ export default function Home() {
           <p className="font-sans text-sm text-primary-foreground/60 mb-4">Annual reports may publicly include: revenue & expenditure summaries, zakat & charity distributions, tax & VAT payments, welfare activities, humanitarian achievements, ethical governance updates, environmental projects, and audit summaries.</p>
         </div>
       </ExpandableSection>
+      </>)}
 
+      {(!activeBotSection || activeBotSection === "people") && (<>
       {/* ── OUR PEOPLE ── */}
       <ExpandableSection
         id="people"
@@ -1018,7 +1033,9 @@ export default function Home() {
           <InlineQuote>Institutions are not built only by founders and executives, but also by the workers, staff, and ordinary people who dedicated their time, effort, and loyalty.</InlineQuote>
         </div>
       </ExpandableSection>
+      </>)}
 
+      {(!activeBotSection || activeBotSection === "environment") && (<>
       {/* ── ENVIRONMENT ── */}
       <ExpandableSection
         id="environment"
@@ -1049,7 +1066,9 @@ export default function Home() {
           <p className="font-sans text-sm text-primary/65 mb-4">Inspired by Quranic teachings against wastefulness: sustainable production, minimal waste systems, responsible energy use, food waste reduction, water conservation, long-lasting product design, and repair and recycling systems. The company believes resources are blessings and trusts from Allah.</p>
         </div>
       </ExpandableSection>
+      </>)}
 
+      {(!activeBotSection || activeBotSection === "humanitarian") && (<>
       {/* ── HUMANITARIAN ── */}
       <ExpandableSection
         id="humanitarian"
@@ -1102,7 +1121,9 @@ export default function Home() {
           </div>
         </div>
       </ExpandableSection>
+      </>)}
 
+      {(!activeBotSection || activeBotSection === "technology") && (<>
       {/* ── TECHNOLOGY & AI ── */}
       <ExpandableSection
         id="technology"
@@ -1148,6 +1169,7 @@ export default function Home() {
           </div>
         </div>
       </ExpandableSection>
+      </>)}
 
       {/* ── FINANCE & COMMERCE ── */}
       <ExpandableSection
@@ -1273,6 +1295,7 @@ export default function Home() {
         </div>
       </ExpandableSection>
 
+      {(!activeBotSection || activeBotSection === "constitution") && (<>
       {/* ── CONSTITUTION ── */}
       <ExpandableSection
         id="constitution"
@@ -1323,6 +1346,7 @@ export default function Home() {
           </div>
         </div>
       </ExpandableSection>
+      </>)}
 
       {/* ── FOUNDER ── */}
       <ExpandableSection

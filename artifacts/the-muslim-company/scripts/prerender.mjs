@@ -149,7 +149,14 @@ function killPreviewServer(proc) {
 }
 
 async function renderRoute(browser, route) {
-  const page = await browser.newPage();
+  // Explicitly force a bot-recognizable UA. isCrawlerUA() (src/lib/isCrawler.ts)
+  // matches /headlesschrome/i among other patterns, but newer Chrome/Playwright
+  // headless modes don't reliably include "HeadlessChrome" in the default UA
+  // string anymore — so we set it explicitly rather than depending on that.
+  const page = await browser.newPage({
+    userAgent:
+      "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/125.0.0.0 Safari/537.36 (TMC-Prerender-Bot)",
+  });
   try {
     // "load" instead of "networkidle": some routes (e.g. /recruitment-status)
     // keep a connection open (polling / live status checks) that never goes

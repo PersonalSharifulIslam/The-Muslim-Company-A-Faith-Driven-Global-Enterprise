@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
 import SiteLayout from "@/components/SiteLayout";
 import visionBg from "@/assets/images/vision.webp";
 import { isCrawlerUA } from "@/lib/isCrawler";
@@ -53,11 +52,11 @@ export default function VisionPage() {
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "The Muslim Company's long-term vision: building universities, research centers, hospitals, and ethical institutions guided by faith, knowledge, and justice.");
     const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', "The Muslim Company's long-term vision: building universities, research centers, hospitals, and ethical institutions guided by faith, knowledge, and justice.");
+    if (_ogt) _ogt.setAttribute('content', "Our Vision | The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "The Muslim Company's long-term vision: universities, research centers, hospitals, ethical AI institutions, and civilization-scale development guided by faith, knowledge, and justice.");
     const _twt_fix = document.querySelector('meta[name="twitter:title"]');
-    if (_twt_fix) _twt_fix.setAttribute('content', "The Muslim Company's long-term vision: building universities, research centers, hospitals, and ethical institutions guided by faith, knowledge, and justice.");
+    if (_twt_fix) _twt_fix.setAttribute('content', "Our Vision | The Muslim Company");
     const _twd_fix = document.querySelector('meta[name="twitter:description"]');
     if (_twd_fix) _twd_fix.setAttribute('content', "The Muslim Company's long-term vision: universities, research centers, hospitals, ethical AI institutions, and civilization-scale development guided by faith, knowledge, and justice.");
     const _ogi = document.querySelector('meta[property="og:image"]');
@@ -68,6 +67,8 @@ export default function VisionPage() {
     else { const _tl = document.createElement('meta'); _tl.setAttribute('name', 'twitter:image'); _tl.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); document.head.appendChild(_tl); }
     const _ogu = document.querySelector('meta[property="og:url"]');
     if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/vision");
+    const _can = document.querySelector('link[rel="canonical"]');
+    if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/vision'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/vision'; document.head.appendChild(_cl); }
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
     [{"@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Vision", "item": "https://www.themuslim.company/vision"}]}, {"@context": "https://schema.org", "@type": "WebPage", "name": "Vision \u2014 The Muslim Company", "description": "The Muslim Company's long-term vision for ethical civilization-scale development.", "url": "https://www.themuslim.company/vision", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {
       const s = document.createElement('script');
@@ -81,13 +82,6 @@ export default function VisionPage() {
 
   return (
     <SiteLayout>
-      <Helmet>
-        <title>Our Vision — The Muslim Company</title>
-        <meta name="description" content="The Muslim Company's long-term vision: building universities, research centers, hospitals, and ethical institutions guided by faith, knowledge, and justice." />
-        <link rel="canonical" href="https://www.themuslim.company/vision" />
-        <meta property="og:title" content="Our Vision | The Muslim Company" />
-        <meta property="og:url" content="https://www.themuslim.company/vision" />
-      </Helmet>
       <div className="bg-background min-h-screen">
         {/* Hero */}
         <section className="relative h-[50vh] flex items-center justify-center overflow-hidden bg-primary">

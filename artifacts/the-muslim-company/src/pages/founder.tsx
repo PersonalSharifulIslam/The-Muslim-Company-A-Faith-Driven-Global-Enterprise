@@ -1,7 +1,6 @@
 import { Link } from "wouter";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
 import { Quote, Linkedin, Twitter, Globe2, Award } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 import { isCrawlerUA } from "@/lib/isCrawler";
@@ -42,11 +41,11 @@ export default function FounderPage() {
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a global conglomerate built on ethical leadership and long-term civilizational impact. Dhaka, Bangladesh.");
     const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a global conglomerate built on ethical leadership and long-term civilizational impact. Dhaka, Bangladesh.");
+    if (_ogt) _ogt.setAttribute('content', "Shariful Islam – Founder & CEO | The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a diversified global conglomerate built on Islamic principles, ethical leadership, and civilizational impact. Based in Dhaka, Bangladesh.");
     const _twt_fix = document.querySelector('meta[name="twitter:title"]');
-    if (_twt_fix) _twt_fix.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a global conglomerate built on ethical leadership and long-term civilizational impact. Dhaka, Bangladesh.");
+    if (_twt_fix) _twt_fix.setAttribute('content', "Shariful Islam – Founder & CEO | The Muslim Company");
     const _twd_fix = document.querySelector('meta[name="twitter:description"]');
     if (_twd_fix) _twd_fix.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a diversified global conglomerate built on Islamic principles, ethical leadership, and civilizational impact. Based in Dhaka, Bangladesh.");
     const _ogi = document.querySelector('meta[property="og:image"]');
@@ -57,6 +56,8 @@ export default function FounderPage() {
     else { const _tl = document.createElement('meta'); _tl.setAttribute('name', 'twitter:image'); _tl.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); document.head.appendChild(_tl); }
     const _ogu = document.querySelector('meta[property="og:url"]');
     if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/founder");
+    const _can = document.querySelector('link[rel="canonical"]');
+    if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/founder'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/founder'; document.head.appendChild(_cl); }
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
     [{
   "@context": "https://schema.org",
@@ -127,13 +128,6 @@ export default function FounderPage() {
 
   return (
     <SiteLayout>
-      <Helmet>
-        <title>Shariful Islam – Founder & CEO | The Muslim Company</title>
-        <meta name="description" content="Shariful Islam is the Founder of The Muslim Company — a global conglomerate built on ethical leadership and long-term civilizational impact. Dhaka, Bangladesh." />
-        <link rel="canonical" href="https://www.themuslim.company/founder" />
-        <meta property="og:title" content="Shariful Islam – Founder & CEO | The Muslim Company" />
-        <meta property="og:url" content="https://www.themuslim.company/founder" />
-      </Helmet>
       <div className="bg-background min-h-screen">
         {/* Hero */}
         <section className="bg-primary py-24 px-6">

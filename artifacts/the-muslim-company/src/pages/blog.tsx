@@ -90,11 +90,11 @@ export default function Blog({ params }: { params?: { category?: string } }) {
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', urlCategory ? `${urlCategory} Articles — The Muslim Company Blog` : "Read the latest insights, thought leadership, and in-depth articles from The Muslim Company — covering Islamic business, ethical innovation, and civilization-focused leadership.");
+    if (_ogt) _ogt.setAttribute('content', urlCategory ? `${urlCategory} Articles — The Muslim Company Blog` : "Blog & Insights — The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', description);
     const _twt_fix = document.querySelector('meta[name="twitter:title"]');
-    if (_twt_fix) _twt_fix.setAttribute('content', urlCategory ? `${urlCategory} Articles — The Muslim Company Blog` : "Read the latest insights, thought leadership, and in-depth articles from The Muslim Company — covering Islamic business, ethical innovation, and civilization-focused leadership.");
+    if (_twt_fix) _twt_fix.setAttribute('content', urlCategory ? `${urlCategory} Articles — The Muslim Company Blog` : "Blog & Insights — The Muslim Company");
     const _twd_fix = document.querySelector('meta[name="twitter:description"]');
     if (_twd_fix) _twd_fix.setAttribute('content', description);
     const _ogi = document.querySelector('meta[property="og:image"]');

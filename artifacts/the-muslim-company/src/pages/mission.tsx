@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
 import { Link } from "wouter";
 import { MoveRight } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
@@ -54,11 +53,11 @@ export default function MissionPage() {
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', "The Muslim Company's mission: building a civilization-driven global conglomerate inspired by ethical leadership — empowering humanity through innovation.");
     const _ogt = document.querySelector('meta[property="og:title"]');
-    if (_ogt) _ogt.setAttribute('content', "The Muslim Company's mission: building a civilization-driven global conglomerate inspired by ethical leadership — empowering humanity through innovation.");
+    if (_ogt) _ogt.setAttribute('content', "Our Mission | The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');
     if (_ogd) _ogd.setAttribute('content', "The Muslim Company's mission: to build a civilization-driven global company inspired by the Quran, authentic Sunnah, and the Prophetic model — empowering humanity through ethical business, knowledge, innovation, and justice.");
     const _twt_fix = document.querySelector('meta[name="twitter:title"]');
-    if (_twt_fix) _twt_fix.setAttribute('content', "The Muslim Company's mission: building a civilization-driven global conglomerate inspired by ethical leadership — empowering humanity through innovation.");
+    if (_twt_fix) _twt_fix.setAttribute('content', "Our Mission | The Muslim Company");
     const _twd_fix = document.querySelector('meta[name="twitter:description"]');
     if (_twd_fix) _twd_fix.setAttribute('content', "The Muslim Company's mission: to build a civilization-driven global company inspired by the Quran, authentic Sunnah, and the Prophetic model — empowering humanity through ethical business, knowledge, innovation, and justice.");
     const _ogi = document.querySelector('meta[property="og:image"]');
@@ -69,6 +68,8 @@ export default function MissionPage() {
     else { const _tl = document.createElement('meta'); _tl.setAttribute('name', 'twitter:image'); _tl.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); document.head.appendChild(_tl); }
     const _ogu = document.querySelector('meta[property="og:url"]');
     if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/mission");
+    const _can = document.querySelector('link[rel="canonical"]');
+    if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/mission'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/mission'; document.head.appendChild(_cl); }
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
     [{"@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Mission", "item": "https://www.themuslim.company/mission"}]}, {"@context": "https://schema.org", "@type": "WebPage", "name": "Mission \u2014 The Muslim Company", "description": "The mission of The Muslim Company: faith-driven, civilization-oriented global development.", "url": "https://www.themuslim.company/mission", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {
       const s = document.createElement('script');
@@ -82,13 +83,6 @@ export default function MissionPage() {
 
   return (
     <SiteLayout>
-      <Helmet>
-        <title>Our Mission — The Muslim Company</title>
-        <meta name="description" content="The Muslim Company's mission: building a civilization-driven global conglomerate inspired by ethical leadership — empowering humanity through innovation." />
-        <link rel="canonical" href="https://www.themuslim.company/mission" />
-        <meta property="og:title" content="Our Mission | The Muslim Company" />
-        <meta property="og:url" content="https://www.themuslim.company/mission" />
-      </Helmet>
       <div className="bg-background min-h-screen">
         {/* Hero */}
         <section className="bg-primary py-24 px-6">

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
 import { BookOpen, ShieldCheck, Scale, Users, Building2, Target, Compass, Award, HeartHandshake, Trophy, Mail, Briefcase, HelpCircle, Landmark } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 import { isCrawlerUA } from "@/lib/isCrawler";
@@ -110,6 +109,8 @@ export default function AboutPage() {
     else { const _tl = document.createElement('meta'); _tl.setAttribute('name', 'twitter:image'); _tl.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); document.head.appendChild(_tl); }
     const _ogu = document.querySelector('meta[property="og:url"]');
     if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/about");
+    const _can = document.querySelector('link[rel="canonical"]');
+    if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/about'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/about'; document.head.appendChild(_cl); }
 
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
     [
@@ -142,14 +143,6 @@ export default function AboutPage() {
 
   return (
     <SiteLayout>
-      <Helmet>
-        <title>About - The Muslim Company - A Prophetic Model Business Group</title>
-        <meta name="description" content="About The Muslim Company — A Prophetic Model Business Group founded by Shariful Islam, operating across 20+ halal sectors guided by Amanah, Ilm & Rahmah." />
-        <link rel="canonical" href="https://www.themuslim.company/about" />
-        <meta property="og:title" content="About - The Muslim Company - A Prophetic Model Business Group" />
-        <meta property="og:url" content="https://www.themuslim.company/about" />
-      </Helmet>
-
       <div className="bg-background min-h-screen">
         {/* Hero */}
         <section className="bg-primary py-24 px-6">

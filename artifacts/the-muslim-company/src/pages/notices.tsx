@@ -20,7 +20,7 @@ export default function Notices() {
       "@context": "https://schema.org",
       "@type": "ItemList",
       "name": "Notices & Events — The Muslim Company",
-      "description": "Official notices, announcements, and upcoming events from The Muslim Company.",
+      "description": "Official notices, public announcements, and upcoming events from The Muslim Company — governance updates, community programs, and organizational news.",
       "url": "https://www.themuslim.company/notices",
       "itemListElement": [
         {
@@ -58,9 +58,9 @@ export default function Notices() {
     document.head.appendChild(eventScript);
 
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Official notices, announcements, and upcoming events from The Muslim Company. Stay informed on corporate updates, policy changes, and organizational milestones.");
+    if (_md) _md.setAttribute('content', "Official notices, public announcements, and upcoming events from The Muslim Company — governance updates, community programs, and organizational news.");
     const _ogt_d = document.querySelector('meta[property="og:description"]');
-    if (_ogt_d) _ogt_d.setAttribute('content', "Official notices, announcements, and upcoming events from The Muslim Company. Stay informed on corporate updates, policy changes, and organizational milestones.");
+    if (_ogt_d) _ogt_d.setAttribute('content', "Official notices, public announcements, and upcoming events from The Muslim Company — governance updates, community programs, and organizational news.");
     const _can = document.querySelector('link[rel="canonical"]');
     if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/notices'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/notices'; document.head.appendChild(_cl); }
     const _ogu_c = document.querySelector('meta[property="og:url"]');
@@ -70,11 +70,11 @@ export default function Notices() {
     const _ogt = document.querySelector('meta[property="og:title"]');
     if (_ogt) _ogt.setAttribute('content', "Notices & Events — The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');
-    if (_ogd) _ogd.setAttribute('content', "Official notices, announcements, and upcoming events from The Muslim Company.");
+    if (_ogd) _ogd.setAttribute('content', "Official notices, public announcements, and upcoming events from The Muslim Company — governance updates, community programs, and organizational news.");
     const _twt_fix = document.querySelector('meta[name="twitter:title"]');
     if (_twt_fix) _twt_fix.setAttribute('content', "Notices & Events — The Muslim Company");
     const _twd_fix = document.querySelector('meta[name="twitter:description"]');
-    if (_twd_fix) _twd_fix.setAttribute('content', "Official notices, announcements, and upcoming events from The Muslim Company.");
+    if (_twd_fix) _twd_fix.setAttribute('content', "Official notices, public announcements, and upcoming events from The Muslim Company — governance updates, community programs, and organizational news.");
     const _ogi = document.querySelector('meta[property="og:image"]');
     if (_ogi) _ogi.setAttribute('content', 'https://www.themuslim.company/og-notices.png');
     const _twi = document.querySelector('meta[name="twitter:image"]');
@@ -83,7 +83,7 @@ export default function Notices() {
         if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/notices");
 
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
-    [{"@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Notices & Events", "item": "https://www.themuslim.company/notices"}]}, {"@context": "https://schema.org", "@type": "WebPage", "name": "Notices & Events \u2014 The Muslim Company", "description": "Official notices, announcements, and upcoming events from The Muslim Company.", "url": "https://www.themuslim.company/notices", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {
+    [{"@context": "https://schema.org", "@type": "BreadcrumbList", "name": "Breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.themuslim.company/"}, {"@type": "ListItem", "position": 2, "name": "Notices & Events", "item": "https://www.themuslim.company/notices"}]}, {"@context": "https://schema.org", "@type": "WebPage", "name": "Notices & Events \u2014 The Muslim Company", "description": "Official notices, public announcements, and upcoming events from The Muslim Company — governance updates, community programs, and organizational news.", "url": "https://www.themuslim.company/notices", "publisher": {"@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company"}}].forEach(schema => {
       const s = document.createElement('script');
       s.type = 'application/ld+json';
       s.setAttribute('data-page-schema', 'true');

@@ -61,7 +61,7 @@ export default function RecruitmentStatus() {
     const _ogt_d = document.querySelector('meta[property="og:description"]');
     if (_ogt_d) _ogt_d.setAttribute('content', "Track the status of your job application at The Muslim Company. Enter your reference number to check where you are in our recruitment process.");
     const md = document.querySelector('meta[name="description"]');
-    if (md) md.setAttribute('content', 'Track your job application status at The Muslim Company using your reference number.');
+    if (md) md.setAttribute('content', 'Check your job application status at The Muslim Company in real time using your recruitment reference number — fast, secure, no login required.');
     const ogt = document.querySelector('meta[property="og:title"]');
     if (ogt) ogt.setAttribute('content', 'Recruitment Status — The Muslim Company');
     const _twt_fix = document.querySelector('meta[name="twitter:title"]');

@@ -55,18 +55,18 @@ export const STATIC_PAGE_SEO: Record<
   "/why-us": {
     title: "Why The Muslim Company — A Different Kind of Enterprise",
     description:
-      "How The Muslim Company differs from conventional business: riba-free finance, Shariah Board oversight, structural charity, and a constitutional framework protecting its ethical mission permanently.",
+      "Why The Muslim Company is different: riba-free finance, independent Shariah Board oversight, structural charity, and a constitution protecting its ethical mission.",
   },
   "/transparency": {
     title: "Transparency & Accountability — The Muslim Company",
     description:
-      "Full transparency in charity, zakat, humanitarian impact, governance, and ethical finance.",
+      "The Muslim Company's transparency reports — zakat/sadaqah disbursement, humanitarian impact, Foundation spending, and Shariah Board oversight, published openly.",
     image: "https://www.themuslim.company/og-transparency.png",
   },
   "/notices": {
     title: "Notices & Events — The Muslim Company",
     description:
-      "Official notices, announcements, and upcoming events from The Muslim Company.",
+      "Official notices, public announcements, and upcoming events from The Muslim Company — governance updates, community programs, and organizational news.",
     image: "https://www.themuslim.company/og-notices.png",
   },
   "/privacy-policy": {
@@ -84,12 +84,12 @@ export const STATIC_PAGE_SEO: Record<
   "/recruitment-status": {
     title: "Recruitment Status — The Muslim Company",
     description:
-      "Track your job application status at The Muslim Company using your reference number.",
+      "Check your job application status at The Muslim Company in real time using your recruitment reference number — fast, secure, no login required.",
   },
   "/the-muslim-company-foundation": {
     title: "The Muslim Company Foundation — Humanitarian & Environmental Arm",
     description:
-      "The Muslim Company Foundation is the humanitarian and environmental arm of The Muslim Company — funded by zakat, sadaqah, and 10% of monthly net profit, serving all of Allah's creation across every country we operate in.",
+      "The Muslim Company Foundation — funded by zakat, sadaqah, and 10% of monthly profit, serving humanitarian and environmental needs in every country we operate.",
   },
   "/baytalmalbank": {
     title: "The Bayt Al-Mal Bank — The Muslim Company",

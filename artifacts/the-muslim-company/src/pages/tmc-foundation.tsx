@@ -46,7 +46,7 @@ export default function TMCFoundationPage() {
 
     document.title = "The Muslim Company Foundation — Humanitarian & Environmental Arm";
 
-    const desc = "The Muslim Company Foundation is the humanitarian and environmental arm of The Muslim Company — funded by zakat, sadaqah, and 10% of monthly net profit, serving all of Allah's creation: people, animals, birds, and nature, across every country we operate in.";
+    const desc = "The Muslim Company Foundation — funded by zakat, sadaqah, and 10% of monthly profit, serving humanitarian and environmental needs in every country we operate.";
 
     const upsertMeta = (selector: string, attr: string, value: string, make: () => HTMLElement) => {
       const el = document.querySelector(selector);

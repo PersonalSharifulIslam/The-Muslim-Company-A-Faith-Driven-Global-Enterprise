@@ -71,7 +71,7 @@ export default function WhyUsPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
     document.title = "Why The Muslim Company — A Different Kind of Enterprise";
 
-    const desc = "How The Muslim Company differs from conventional business: riba-free finance, Shariah Board oversight, structural charity, and a constitutional framework protecting its ethical mission permanently.";
+    const desc = "Why The Muslim Company is different: riba-free finance, independent Shariah Board oversight, structural charity, and a constitution protecting its ethical mission.";
 
     const upsertMeta = (selector: string, attr: string, value: string, make: () => HTMLElement) => {
       const el = document.querySelector(selector);

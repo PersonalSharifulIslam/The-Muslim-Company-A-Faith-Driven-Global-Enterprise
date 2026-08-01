@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, type ElementType } from "react";
-import { Helmet } from "react-helmet-async";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -418,21 +417,43 @@ export default function Home() {
 
   const sectionMeta = SECTION_SEO[window.location.pathname];
 
+  useEffect(() => {
+    if (!sectionMeta) return;
+    const url = `https://www.themuslim.company${sectionMeta.path}`;
+
+    document.title = sectionMeta.title;
+
+    const upsert = (selector: string, attr: string, value: string, make: () => HTMLElement) => {
+      const el = document.querySelector(selector);
+      if (el) el.setAttribute(attr, value);
+      else document.head.appendChild(make());
+    };
+
+    upsert('meta[name="description"]', "content", sectionMeta.description, () => {
+      const m = document.createElement("meta"); m.setAttribute("name", "description"); m.setAttribute("content", sectionMeta.description); return m;
+    });
+    upsert('link[rel="canonical"]', "href", url, () => {
+      const l = document.createElement("link"); l.setAttribute("rel", "canonical"); l.setAttribute("href", url); return l;
+    });
+    upsert('meta[property="og:title"]', "content", sectionMeta.title, () => {
+      const m = document.createElement("meta"); m.setAttribute("property", "og:title"); m.setAttribute("content", sectionMeta.title); return m;
+    });
+    upsert('meta[property="og:description"]', "content", sectionMeta.description, () => {
+      const m = document.createElement("meta"); m.setAttribute("property", "og:description"); m.setAttribute("content", sectionMeta.description); return m;
+    });
+    upsert('meta[property="og:url"]', "content", url, () => {
+      const m = document.createElement("meta"); m.setAttribute("property", "og:url"); m.setAttribute("content", url); return m;
+    });
+    upsert('meta[name="twitter:title"]', "content", sectionMeta.title, () => {
+      const m = document.createElement("meta"); m.setAttribute("name", "twitter:title"); m.setAttribute("content", sectionMeta.title); return m;
+    });
+    upsert('meta[name="twitter:description"]', "content", sectionMeta.description, () => {
+      const m = document.createElement("meta"); m.setAttribute("name", "twitter:description"); m.setAttribute("content", sectionMeta.description); return m;
+    });
+  }, []);
+
   return (
     <div className="w-full bg-background text-foreground overflow-hidden">
-      {sectionMeta && (
-        <Helmet>
-          <title>{sectionMeta.title}</title>
-          <meta name="description" content={sectionMeta.description} />
-          <link rel="canonical" href={`https://www.themuslim.company${sectionMeta.path}`} />
-          <meta property="og:title" content={sectionMeta.title} />
-          <meta property="og:description" content={sectionMeta.description} />
-          <meta property="og:url" content={`https://www.themuslim.company${sectionMeta.path}`} />
-          <meta name="twitter:title" content={sectionMeta.title} />
-          <meta name="twitter:description" content={sectionMeta.description} />
-        </Helmet>
-      )}
-
 
       {/* ── NAV ── */}
       <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary-foreground/10">

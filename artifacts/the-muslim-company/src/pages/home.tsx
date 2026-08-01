@@ -450,6 +450,12 @@ export default function Home() {
     upsert('meta[property="og:description"]', "content", meta.description, () => {
       const m = document.createElement("meta"); m.setAttribute("property", "og:description"); m.setAttribute("content", meta.description); return m;
     });
+    upsert('meta[property="og:image"]', "content", "https://www.themuslim.company/opengraph.jpg", () => {
+      const m = document.createElement("meta"); m.setAttribute("property", "og:image"); m.setAttribute("content", "https://www.themuslim.company/opengraph.jpg"); return m;
+    });
+    upsert('meta[name="twitter:image"]', "content", "https://www.themuslim.company/opengraph.jpg", () => {
+      const m = document.createElement("meta"); m.setAttribute("name", "twitter:image"); m.setAttribute("content", "https://www.themuslim.company/opengraph.jpg"); return m;
+    });
     upsert('meta[property="og:url"]', "content", url, () => {
       const m = document.createElement("meta"); m.setAttribute("property", "og:url"); m.setAttribute("content", url); return m;
     });

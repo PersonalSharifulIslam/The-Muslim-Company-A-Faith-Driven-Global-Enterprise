@@ -5,10 +5,15 @@
 // the home page's default meta tags.
 //
 // Bots additionally get the FULL prerendered HTML (built by
-// scripts/prerender.mjs) when a snapshot exists for that slug.
+// scripts/prerender.mjs) when a snapshot exists for that slug. This
+// fallback path (used when no prerendered snapshot exists yet — e.g. a
+// post published minutes ago, before the next prerender run) also sets
+// og:image/twitter:image to the post's own uploaded image when available,
+// matching what the client-side page itself shows real visitors.
 import { isBotRequest } from "./bot-detect";
 
 const BASE = "https://www.themuslim.company";
+const DEFAULT_IMAGE = "https://www.themuslim.company/opengraph.jpg";
 
 class SetInnerContent {
   constructor(private text: string) {}
@@ -24,15 +29,17 @@ class SetAttribute {
   }
 }
 
-function rewrite(res: Response, title: string, description: string, canonicalUrl: string): Response {
+function rewrite(res: Response, title: string, description: string, canonicalUrl: string, image: string): Response {
   return new HTMLRewriter()
     .on("title", new SetInnerContent(title))
     .on('meta[name="description"]', new SetAttribute("content", description))
     .on('meta[property="og:title"]', new SetAttribute("content", title))
     .on('meta[property="og:description"]', new SetAttribute("content", description))
     .on('meta[property="og:url"]', new SetAttribute("content", canonicalUrl))
+    .on('meta[property="og:image"]', new SetAttribute("content", image))
     .on('meta[name="twitter:title"]', new SetAttribute("content", title))
     .on('meta[name="twitter:description"]', new SetAttribute("content", description))
+    .on('meta[name="twitter:image"]', new SetAttribute("content", image))
     .on('link[rel="canonical"]', new SetAttribute("href", canonicalUrl))
     .transform(res);
 }
@@ -67,7 +74,7 @@ export async function serveDynamicSEO(
   const SUPABASE_KEY = env.VITE_SUPABASE_ANON_KEY || env.SUPABASE_ANON_KEY;
   if (!SUPABASE_URL || !SUPABASE_KEY || !slug) return res;
 
-  const select = table === "jobs" ? "title,description,department" : "title,excerpt";
+  const select = table === "jobs" ? "title,description,department" : "title,excerpt,image_url";
 
   try {
     const dbRes = await fetch(
@@ -86,12 +93,13 @@ export async function serveDynamicSEO(
       const description = row.description
         ? String(row.description).slice(0, 300)
         : `${row.title} — ${row.department || "The Muslim Company"}. Apply now at The Muslim Company.`;
-      return rewrite(res, title, description, canonicalUrl);
+      return rewrite(res, title, description, canonicalUrl, DEFAULT_IMAGE);
     }
 
     const title = `${row.title} — ${titleSuffix}`;
     const description = row.excerpt || row.title;
-    return rewrite(res, title, description, canonicalUrl);
+    const image = row.image_url || DEFAULT_IMAGE;
+    return rewrite(res, title, description, canonicalUrl, image);
   } catch {
     // Fail safe: never break the page over a meta-tag rewrite.
     return res;

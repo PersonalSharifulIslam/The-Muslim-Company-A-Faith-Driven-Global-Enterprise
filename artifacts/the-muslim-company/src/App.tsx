@@ -111,17 +111,17 @@ function Router() {
       <Route path="/humanitarian" component={() => <Home key={location} />} />
       <Route path="/technology" component={() => <Home key={location} />} />
       <Route path="/careers" component={Careers} />
-      <Route path="/careers/:slug" component={JobDetail} />
+      <Route path="/careers/:slug" component={({ params }) => <JobDetail key={params.slug} params={params} />} />
       <Route path="/careers/:slug/apply" component={JobApply} />
       <Route path="/recruitment-status" component={RecruitmentStatus} />
       <Route path="/newsroom" component={Newsroom} />
       <Route path="/newsroom/category/:category" component={Newsroom} />
-      <Route path="/newsroom/:slug" component={NewsDetail} />
+      <Route path="/newsroom/:slug" component={({ params }) => <NewsDetail key={params.slug} params={params} />} />
       <Route path="/notices" component={Notices} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/category/:category" component={Blog} />
-      <Route path="/blog/:slug" component={({ params }) => <BlogDetail params={params} />} />
-      <Route path="/sectors/:slug" component={SectorDetail} />
+      <Route path="/blog/:slug" component={({ params }) => <BlogDetail key={params.slug} params={params} />} />
+      <Route path="/sectors/:slug" component={({ params }) => <SectorDetail key={params.slug} params={params} />} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/transparency" component={TransparencyPage} />
       <Route path="/the-muslim-company-foundation" component={TMCFoundationPage} />

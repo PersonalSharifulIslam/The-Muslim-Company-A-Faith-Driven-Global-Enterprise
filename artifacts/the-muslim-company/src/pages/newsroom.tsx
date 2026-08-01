@@ -138,7 +138,7 @@ export default function Newsroom({ params }: { params?: { category?: string } })
   });
 
   const featured = filtered.find((p) => p.featured);
-  const rest = filtered.filter((p) => !p.featured);
+  const rest = filtered.filter((p) => p.id !== featured?.id);
 
   return (
     <SiteLayout>

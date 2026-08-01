@@ -35,14 +35,28 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          "vendor-react": ["react", "react-dom"],
-          "vendor-motion": ["framer-motion"],
-          "vendor-icons": ["lucide-react", "react-icons"],
-          "vendor-supabase": ["@supabase/supabase-js"],
-          "vendor-pdf": ["jspdf"],
-          "vendor-charts": ["recharts"],
-          "vendor-query": ["@tanstack/react-query"],
+        manualChunks(id) {
+          if (id.includes("node_modules/react-dom") || id.includes("node_modules/react/")) {
+            return "vendor-react";
+          }
+          if (id.includes("node_modules/framer-motion")) {
+            return "vendor-motion";
+          }
+          if (id.includes("node_modules/lucide-react") || id.includes("node_modules/react-icons")) {
+            return "vendor-icons";
+          }
+          if (id.includes("node_modules/@supabase/supabase-js")) {
+            return "vendor-supabase";
+          }
+          if (id.includes("node_modules/jspdf")) {
+            return "vendor-pdf";
+          }
+          if (id.includes("node_modules/recharts")) {
+            return "vendor-charts";
+          }
+          if (id.includes("node_modules/@tanstack/react-query")) {
+            return "vendor-query";
+          }
         },
       },
     },

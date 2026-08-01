@@ -417,11 +417,20 @@ export default function Home() {
 
   const sectionMeta = SECTION_SEO[window.location.pathname];
 
-  useEffect(() => {
-    if (!sectionMeta) return;
-    const url = `https://www.themuslim.company${sectionMeta.path}`;
+  const HOME_DEFAULT = {
+    title: "The Muslim Company | A Prophetic Model Business Group",
+    description: "The Muslim Company — A Faith-Driven Global Conglomerate in Bangladesh, Building Human Civilization across 20+ sectors & Humanitarian work Worldwide.",
+    ogTitle: "The Muslim Company",
+    path: "/",
+  };
 
-    document.title = sectionMeta.title;
+  useEffect(() => {
+    const meta = sectionMeta
+      ? { title: sectionMeta.title, description: sectionMeta.description, ogTitle: sectionMeta.title, path: sectionMeta.path }
+      : HOME_DEFAULT;
+    const url = `https://www.themuslim.company${meta.path === "/" ? "/" : meta.path}`;
+
+    document.title = meta.title;
 
     const upsert = (selector: string, attr: string, value: string, make: () => HTMLElement) => {
       const el = document.querySelector(selector);
@@ -429,26 +438,26 @@ export default function Home() {
       else document.head.appendChild(make());
     };
 
-    upsert('meta[name="description"]', "content", sectionMeta.description, () => {
-      const m = document.createElement("meta"); m.setAttribute("name", "description"); m.setAttribute("content", sectionMeta.description); return m;
+    upsert('meta[name="description"]', "content", meta.description, () => {
+      const m = document.createElement("meta"); m.setAttribute("name", "description"); m.setAttribute("content", meta.description); return m;
     });
     upsert('link[rel="canonical"]', "href", url, () => {
       const l = document.createElement("link"); l.setAttribute("rel", "canonical"); l.setAttribute("href", url); return l;
     });
-    upsert('meta[property="og:title"]', "content", sectionMeta.title, () => {
-      const m = document.createElement("meta"); m.setAttribute("property", "og:title"); m.setAttribute("content", sectionMeta.title); return m;
+    upsert('meta[property="og:title"]', "content", meta.ogTitle, () => {
+      const m = document.createElement("meta"); m.setAttribute("property", "og:title"); m.setAttribute("content", meta.ogTitle); return m;
     });
-    upsert('meta[property="og:description"]', "content", sectionMeta.description, () => {
-      const m = document.createElement("meta"); m.setAttribute("property", "og:description"); m.setAttribute("content", sectionMeta.description); return m;
+    upsert('meta[property="og:description"]', "content", meta.description, () => {
+      const m = document.createElement("meta"); m.setAttribute("property", "og:description"); m.setAttribute("content", meta.description); return m;
     });
     upsert('meta[property="og:url"]', "content", url, () => {
       const m = document.createElement("meta"); m.setAttribute("property", "og:url"); m.setAttribute("content", url); return m;
     });
-    upsert('meta[name="twitter:title"]', "content", sectionMeta.title, () => {
-      const m = document.createElement("meta"); m.setAttribute("name", "twitter:title"); m.setAttribute("content", sectionMeta.title); return m;
+    upsert('meta[name="twitter:title"]', "content", meta.ogTitle, () => {
+      const m = document.createElement("meta"); m.setAttribute("name", "twitter:title"); m.setAttribute("content", meta.ogTitle); return m;
     });
-    upsert('meta[name="twitter:description"]', "content", sectionMeta.description, () => {
-      const m = document.createElement("meta"); m.setAttribute("name", "twitter:description"); m.setAttribute("content", sectionMeta.description); return m;
+    upsert('meta[name="twitter:description"]', "content", meta.description, () => {
+      const m = document.createElement("meta"); m.setAttribute("name", "twitter:description"); m.setAttribute("content", meta.description); return m;
     });
   }, []);
 

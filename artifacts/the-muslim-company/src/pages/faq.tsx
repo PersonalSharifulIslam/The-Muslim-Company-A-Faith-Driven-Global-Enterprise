@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Helmet } from "react-helmet-async";
 import { ChevronDown } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
 import { isCrawlerUA } from "@/lib/isCrawler";
@@ -138,12 +137,6 @@ export default function FAQPage() {
 
   return (
     <SiteLayout>
-      <Helmet>
-        <title>Frequently Asked Questions — The Muslim Company</title>
-        <meta name="description" content="Answers to common questions about The Muslim Company — our business, sectors, Shariah governance, careers, and humanitarian Foundation work." />
-        <link rel="canonical" href="https://www.themuslim.company/faq" />
-      </Helmet>
-
       <section className="bg-primary py-20 px-6">
         <div className="container mx-auto max-w-3xl text-center">
           <motion.div initial={isBot ? "visible" : "hidden"} animate="visible" variants={fadeIn}>

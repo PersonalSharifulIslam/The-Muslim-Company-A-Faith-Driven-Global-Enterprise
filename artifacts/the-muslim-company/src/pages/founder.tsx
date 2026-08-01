@@ -49,11 +49,11 @@ export default function FounderPage() {
     const _twd_fix = document.querySelector('meta[name="twitter:description"]');
     if (_twd_fix) _twd_fix.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a diversified global conglomerate built on Islamic principles, ethical leadership, and civilizational impact. Based in Dhaka, Bangladesh.");
     const _ogi = document.querySelector('meta[property="og:image"]');
-    if (_ogi) { _ogi.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); }
-    else { const _il = document.createElement('meta'); _il.setAttribute('property', 'og:image'); _il.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); document.head.appendChild(_il); }
+    if (_ogi) { _ogi.setAttribute('content', 'https://www.themuslim.company/images/shariful-islam.jpg'); }
+    else { const _il = document.createElement('meta'); _il.setAttribute('property', 'og:image'); _il.setAttribute('content', 'https://www.themuslim.company/images/shariful-islam.jpg'); document.head.appendChild(_il); }
     const _twi = document.querySelector('meta[name="twitter:image"]');
-    if (_twi) { _twi.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); }
-    else { const _tl = document.createElement('meta'); _tl.setAttribute('name', 'twitter:image'); _tl.setAttribute('content', 'https://www.themuslim.company/opengraph.jpg'); document.head.appendChild(_tl); }
+    if (_twi) { _twi.setAttribute('content', 'https://www.themuslim.company/images/shariful-islam.jpg'); }
+    else { const _tl = document.createElement('meta'); _tl.setAttribute('name', 'twitter:image'); _tl.setAttribute('content', 'https://www.themuslim.company/images/shariful-islam.jpg'); document.head.appendChild(_tl); }
     const _ogu = document.querySelector('meta[property="og:url"]');
     if (_ogu) _ogu.setAttribute('content', "https://www.themuslim.company/founder");
     const _can = document.querySelector('link[rel="canonical"]');

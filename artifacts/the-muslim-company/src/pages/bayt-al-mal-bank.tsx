@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowLeft, ArrowUpRight, ShieldCheck, Globe2, Scale, Landmark, Leaf, HeartHandshake } from "lucide-react";
@@ -146,6 +145,15 @@ export default function BaytAlMalBankPage() {
     const _ogu = document.querySelector('meta[property="og:url"]');
     if (_ogu) _ogu.setAttribute('content', _url);
 
+    const _ogi = document.querySelector('meta[property="og:image"]');
+    if (_ogi) _ogi.setAttribute('content', "https://www.themuslim.company/opengraph.jpg");
+    const _twi = document.querySelector('meta[name="twitter:image"]');
+    if (_twi) _twi.setAttribute('content', "https://www.themuslim.company/opengraph.jpg");
+    const _twt = document.querySelector('meta[name="twitter:title"]');
+    if (_twt) _twt.setAttribute('content', "The Bayt Al-Mal Bank — The Muslim Company");
+    const _twd = document.querySelector('meta[name="twitter:description"]');
+    if (_twd) _twd.setAttribute('content', "A Shariah-compliant ethical bank under The Muslim Company.");
+
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
 
@@ -163,24 +171,6 @@ export default function BaytAlMalBankPage() {
 
   return (
     <SiteLayout>
-      <Helmet>
-        <title>The Bayt Al-Mal Bank — The Muslim Company</title>
-        <meta name="description" content="The Bayt Al-Mal Bank — an international Shariah-compliant financial institution under The Muslim Company, offering ethical, interest-free banking worldwide." />
-        <link rel="canonical" href="https://www.themuslim.company/baytalmalbank" />
-        <meta property="og:title" content="The Bayt Al-Mal Bank — The Muslim Company" />
-        <meta property="og:description" content="A Shariah-compliant ethical bank under The Muslim Company — built on Islamic principles of wealth justice, interest-free finance, and civilizational economic development." />
-        <meta property="og:url" content="https://www.themuslim.company/baytalmalbank" />
-        <meta property="og:image" content="https://www.themuslim.company/opengraph.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="The Bayt Al-Mal Bank — The Muslim Company" />
-        <meta name="twitter:description" content="A Shariah-compliant ethical bank under The Muslim Company." />
-        <meta name="twitter:image" content="https://www.themuslim.company/opengraph.jpg" />
-        <meta name="robots" content="index, follow" />
-        <meta name="keywords" content="The Bayt Al-Mal Bank, TBMB, Islamic Bank, Shariah Bank, Halal Banking, Islamic Finance, The Muslim Company, Shariah Compliant Bank, Bangladesh Islamic Bank, Ethical Banking" />
-      </Helmet>
-
       <div className="bg-background min-h-screen">
 
         {/* Hero */}

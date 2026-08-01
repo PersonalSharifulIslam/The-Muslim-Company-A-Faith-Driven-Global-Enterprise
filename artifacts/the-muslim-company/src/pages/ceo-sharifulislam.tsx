@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
 import { Link } from "wouter";
 import { Quote, Globe, Award, BookOpen, Briefcase, GraduationCap, Building2, Star, ExternalLink, Linkedin, Newspaper, Calendar, TrendingUp, MoveRight } from "lucide-react";
 import SiteLayout from "@/components/SiteLayout";
@@ -296,9 +295,56 @@ const PROFILE_PAGE_SCHEMA = {
 export default function CeoSharifulIslamPage() {
   const [isBot] = useState(isCrawlerUA);
   useEffect(() => {
-    document.title = "Shariful Islam – CEO of The Muslim Company";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute("content", "Shariful Islam serves as the Chief Executive Officer (CEO) of The Muslim Company, a diversified global conglomerate committed to innovation, long-term value creation, and ethical leadership.");
+    const url = "https://www.themuslim.company/ceo/Sharifulislam";
+    const title = "Shariful Islam – CEO of The Muslim Company";
+    const description = "Shariful Islam serves as the Chief Executive Officer (CEO) of The Muslim Company, a diversified global conglomerate committed to innovation, long-term value creation, and ethical leadership.";
+    const ogDescription = "Shariful Islam serves as CEO of The Muslim Company — a global conglomerate committed to innovation, long-term value creation, and ethical leadership.";
+    const twitterDescription = "Chief Executive Officer (CEO) of The Muslim Company.";
+    const image = "https://www.themuslim.company/shariful-islam-ceo.png";
+
+    document.title = title;
+
+    const upsert = (selector: string, attr: string, value: string, make: () => HTMLElement) => {
+      const el = document.querySelector(selector);
+      if (el) el.setAttribute(attr, value);
+      else document.head.appendChild(make());
+    };
+    const metaProp = (property: string, content: string) =>
+      upsert(`meta[property="${property}"]`, "content", content, () => {
+        const m = document.createElement("meta"); m.setAttribute("property", property); m.setAttribute("content", content); return m;
+      });
+    const metaName = (name: string, content: string) =>
+      upsert(`meta[name="${name}"]`, "content", content, () => {
+        const m = document.createElement("meta"); m.setAttribute("name", name); m.setAttribute("content", content); return m;
+      });
+
+    metaName("description", description);
+    upsert('link[rel="canonical"]', "href", url, () => {
+      const l = document.createElement("link"); l.setAttribute("rel", "canonical"); l.setAttribute("href", url); return l;
+    });
+
+    metaProp("og:type", "profile");
+    metaProp("og:title", title);
+    metaProp("og:description", ogDescription);
+    metaProp("og:url", url);
+    metaProp("og:image", image);
+    metaProp("og:image:width", "1200");
+    metaProp("og:image:height", "630");
+    metaProp("profile:first_name", "Shariful");
+    metaProp("profile:last_name", "Islam");
+
+    metaName("twitter:card", "summary_large_image");
+    metaName("twitter:title", title);
+    metaName("twitter:description", twitterDescription);
+    metaName("twitter:image", image);
+    metaName("twitter:site", "@PersonalSIslam");
+    metaName("twitter:creator", "@PersonalSIslam");
+
+    if (!document.querySelector('link[rel="me"][href="https://www.linkedin.com/in/personalsharifulislam"]')) {
+      const l1 = document.createElement("link"); l1.setAttribute("rel", "me"); l1.setAttribute("href", "https://www.linkedin.com/in/personalsharifulislam"); document.head.appendChild(l1);
+      const l2 = document.createElement("link"); l2.setAttribute("rel", "me"); l2.setAttribute("href", "https://x.com/PersonalSIslam"); document.head.appendChild(l2);
+      const l3 = document.createElement("link"); l3.setAttribute("rel", "me"); l3.setAttribute("href", "https://www.facebook.com/PersonalSharifulIslam/"); document.head.appendChild(l3);
+    }
 
     document.querySelectorAll("script[data-page-schema]").forEach(el => el.remove());
     [PERSON_SCHEMA, ORG_SCHEMA, PROFILE_PAGE_SCHEMA, FAQ_SCHEMA].forEach(schema => {
@@ -313,39 +359,6 @@ export default function CeoSharifulIslamPage() {
 
   return (
     <SiteLayout>
-      <Helmet>
-        <title>Shariful Islam – CEO of The Muslim Company</title>
-        <meta name="description" content="Shariful Islam serves as CEO of The Muslim Company — a global conglomerate committed to innovation, long-term value creation, and ethical leadership." />
-        <link rel="canonical" href="https://www.themuslim.company/ceo/Sharifulislam" />
-        {/* Open Graph */}
-        <meta property="og:type" content="profile" />
-        <meta property="og:title" content="Shariful Islam – CEO of The Muslim Company" />
-        <meta property="og:description" content="Shariful Islam serves as CEO of The Muslim Company — a global conglomerate committed to innovation, long-term value creation, and ethical leadership." />
-        <meta property="og:url" content="https://www.themuslim.company/ceo/Sharifulislam" />
-        <meta property="og:image" content="https://www.themuslim.company/shariful-islam-ceo.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:site_name" content="The Muslim Company" />
-        <meta property="og:locale" content="en_US" />
-        <meta property="profile:first_name" content="Shariful" />
-        <meta property="profile:last_name" content="Islam" />
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Shariful Islam – CEO of The Muslim Company" />
-        <meta name="twitter:description" content="Chief Executive Officer (CEO) of The Muslim Company." />
-        <meta name="twitter:image" content="https://www.themuslim.company/og-image.png" />
-        <meta name="twitter:site" content="@PersonalSIslam" />
-        <meta name="twitter:creator" content="@PersonalSIslam" />
-        {/* SEO */}
-        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-        <meta name="keywords" content="Shariful Islam, Shariful Islam CEO, CEO Shariful Islam, CEO of The Muslim Company, Chief Executive Officer The Muslim Company, The Muslim Company CEO, Bangladeshi CEO, Muslim Entrepreneur, Islamic Business Leader, Ethical Leadership, The Muslim Company, TMC CEO, Shariful Islam Engineer" />
-        <meta name="author" content="Shariful Islam" />
-        {/* rel=me for Knowledge Panel entity disambiguation */}
-        <link rel="me" href="https://www.linkedin.com/in/personalsharifulislam" />
-        <link rel="me" href="https://x.com/PersonalSIslam" />
-        <link rel="me" href="https://www.facebook.com/PersonalSharifulIslam/" />
-      </Helmet>
-
       <div className="bg-background min-h-screen">
 
         {/* ══════════════════════════════ HERO ══════════════════════════════ */}

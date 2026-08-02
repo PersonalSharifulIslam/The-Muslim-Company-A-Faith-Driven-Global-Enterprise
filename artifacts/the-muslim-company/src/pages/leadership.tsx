@@ -32,8 +32,8 @@ const BOARD_MEMBERS: PersonEntry[] = [
   },
   {
     name: "Edward Henry Philips",
-    role: "Co-founder",
-    bio: "Co-founder of The Muslim Company, contributing to the company's founding direction and long-term strategic development.",
+    role: "Independent Director",
+    bio: "Independent Director on the Board of The Muslim Company, contributing objective oversight and strategic guidance to the company's long-term direction.",
     joined: "2025",
   },
 ];

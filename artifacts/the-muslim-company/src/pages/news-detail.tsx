@@ -30,7 +30,7 @@ export default function NewsDetail({ params }: { params: { slug: string } }) {
   useEffect(() => {
     if (!post) return;
     const pageUrl = `https://www.themuslim.company/newsroom/${params.slug}`;
-    const ogImage = post.image_url || post.thumbnail || "https://www.themuslim.company/og-image.png";
+    const ogImage = post.image_url || post.thumbnail || "https://www.themuslim.company/opengraph.jpg";
     const desc = post.excerpt || post.title;
 
     document.title = `${post.title} — The Muslim Company Newsroom`;

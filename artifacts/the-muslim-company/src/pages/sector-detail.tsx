@@ -893,7 +893,7 @@ export default function SectorDetail() {
 
     // Dynamic SEO
     const pageUrl = `https://www.themuslim.company/sectors/${sector.slug}`;
-    const ogImage = "https://www.themuslim.company/og-image.png";
+    const ogImage = "https://www.themuslim.company/opengraph.jpg";
 
     document.title = `${sector.label} — The Muslim Company`;
 

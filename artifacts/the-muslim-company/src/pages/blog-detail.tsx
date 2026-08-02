@@ -88,7 +88,7 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
   useEffect(() => {
     if (!post) return;
     const pageUrl = `https://www.themuslim.company/blog/${params.slug}`;
-    const ogImage = post.image_url || "https://www.themuslim.company/og-image.png";
+    const ogImage = post.image_url || "https://www.themuslim.company/opengraph.jpg";
     const desc = post.excerpt || post.title;
 
     document.title = `${post.title} — The Muslim Company Blog`;

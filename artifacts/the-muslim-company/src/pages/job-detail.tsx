@@ -34,7 +34,7 @@ export default function JobDetail({ params }: { params: { slug: string } }) {
     if (!job) return;
     const pageUrl = `https://www.themuslim.company/careers/${params.slug}`;
     const desc = `${job.title} — ${job.department || 'The Muslim Company'}. Apply now at The Muslim Company.`;
-    const ogImage = "https://www.themuslim.company/og-image.png";
+    const ogImage = "https://www.themuslim.company/opengraph.jpg";
 
     document.title = `${job.title} — Careers at The Muslim Company`;
     const _rob = document.querySelector('meta[name="robots"]');

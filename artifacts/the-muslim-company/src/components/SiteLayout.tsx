@@ -35,6 +35,7 @@ const NAV_COL2 = [
       { label: "Governance", href: "/governance" },
       { label: "Constitution", href: "/constitution" },
       { label: "Shariah Board", href: "/shariah-board" },
+      { label: "Leadership", href: "/leadership" },
     ],
   },
   {

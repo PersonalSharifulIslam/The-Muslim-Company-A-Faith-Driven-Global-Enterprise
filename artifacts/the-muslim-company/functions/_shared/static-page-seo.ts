@@ -116,6 +116,11 @@ export const STATIC_PAGE_SEO: Record<
     description:
       "Press releases, official announcements, and media coverage of The Muslim Company, a faith-driven global conglomerate headquartered in Dhaka, Bangladesh. Journalists and media professionals can find company news and press contact information here.",
   },
+  "/leadership": {
+    title: "Board of Directors, Investors & Partners | The Muslim Company",
+    description:
+      "Meet the Board of Directors, investors, and strategic partners of The Muslim Company — the leadership team and outside collaborators guiding our faith-driven global conglomerate across 20+ sectors.",
+  },
   "/shariah-board": {
     title: "Our Shariah Board — Scholars Guiding The Muslim Company",
     description:

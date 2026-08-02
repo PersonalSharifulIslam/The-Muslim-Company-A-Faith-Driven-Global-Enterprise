@@ -102,13 +102,25 @@ export default function LeadershipPage() {
 
     document.querySelectorAll('script[data-page-schema]').forEach(el => el.remove());
 
-    const personSchema = (p: PersonEntry) => ({
-      "@type": "Person",
-      "name": p.name,
-      "jobTitle": p.role,
-      "description": p.bio,
-      "worksFor": { "@type": "Organization", "name": "The Muslim Company", "url": "https://www.themuslim.company" },
-    });
+    const ORG_ID = "https://www.themuslim.company/#organization";
+    const SAME_AS: Record<string, string[]> = {
+      "Jason Barnard": ["https://kalicube.com", "https://jasonbarnard.com"],
+      "Ameer Al-Khatahtbeh": ["https://muslim.co", "https://x.com/ameer"],
+    };
+
+    const personSchema = (p: PersonEntry) => {
+      const entry: any = {
+        "@type": "Person",
+        "name": p.name,
+        "jobTitle": p.role,
+        "description": p.bio,
+        "worksFor": { "@type": "Organization", "@id": ORG_ID, "name": "The Muslim Company", "url": "https://www.themuslim.company" },
+      };
+      if (SAME_AS[p.name]) entry.sameAs = SAME_AS[p.name];
+      return entry;
+    };
+
+    const allPeople = [...BOARD_MEMBERS, ...STRATEGIC_PARTNERS];
 
     const schemas = [
       {
@@ -120,11 +132,19 @@ export default function LeadershipPage() {
       },
       {
         "@context": "https://schema.org",
-        "@type": "AboutPage",
+        "@type": "CollectionPage",
         "name": title,
         "description": description,
         "url": url,
-        "mainEntity": [...BOARD_MEMBERS, ...STRATEGIC_PARTNERS].map(personSchema),
+        "isPartOf": { "@type": "Organization", "@id": ORG_ID, "name": "The Muslim Company", "url": "https://www.themuslim.company" },
+        "mainEntity": {
+          "@type": "ItemList",
+          "itemListElement": allPeople.map((p, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "item": personSchema(p),
+          })),
+        },
       },
     ];
     schemas.forEach(schema => {

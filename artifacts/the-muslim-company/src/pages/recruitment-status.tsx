@@ -35,6 +35,10 @@ function CountdownTimer({ expiresAt, label }: { expiresAt: string; label?: strin
 export default function RecruitmentStatus() {
   useEffect(() => {
     document.title = "Recruitment Status — The Muslim Company";
+    const _can = document.querySelector('link[rel="canonical"]');
+    if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/recruitment-status'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/recruitment-status'; document.head.appendChild(_cl); }
+    const _ogu = document.querySelector('meta[property="og:url"]');
+    if (_ogu) { _ogu.setAttribute('content', 'https://www.themuslim.company/recruitment-status'); } else { const _ol = document.createElement('meta'); _ol.setAttribute('property', 'og:url'); _ol.setAttribute('content', 'https://www.themuslim.company/recruitment-status'); document.head.appendChild(_ol); }
 
     // Organization Schema — consistent across all pages
     document.querySelectorAll('script[data-org-schema]').forEach(el => el.remove());

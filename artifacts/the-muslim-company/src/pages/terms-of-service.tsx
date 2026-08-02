@@ -43,9 +43,9 @@ export default function TermsOfService() {
     orgScript.textContent = JSON.stringify(orgSchema);
     document.head.appendChild(orgScript);
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Review The Muslim Company's Terms of Service — the legal terms governing your use of our website, platforms, and services.");
+    if (_md) _md.setAttribute('content', "The Terms of Service governing use of The Muslim Company's websites, platforms, and digital services — including user obligations, acceptable use, intellectual property, and the legal agreement between you and the company.");
     const _ogt_d = document.querySelector('meta[property="og:description"]');
-    if (_ogt_d) _ogt_d.setAttribute('content', "Review The Muslim Company's Terms of Service — the legal terms governing your use of our website, platforms, and services.");
+    if (_ogt_d) _ogt_d.setAttribute('content', "The Terms of Service governing use of The Muslim Company's websites, platforms, and digital services — including user obligations, acceptable use, intellectual property, and the legal agreement between you and the company.");
     const _can = document.querySelector('link[rel="canonical"]');
     if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/terms-of-service'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/terms-of-service'; document.head.appendChild(_cl); }
     const _ogu_c = document.querySelector('meta[property="og:url"]');

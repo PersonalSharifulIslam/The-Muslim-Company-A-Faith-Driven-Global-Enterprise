@@ -50,7 +50,7 @@ export default function VisionPage() {
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "The Muslim Company's long-term vision: building universities, research centers, hospitals, and ethical institutions guided by faith, knowledge, and justice.");
+    if (_md) _md.setAttribute('content', "The Muslim Company's long-term vision extends beyond commerce: establishing universities, research centers, hospitals, and ethical AI institutions, and pursuing civilization-scale humanitarian and scientific development guided by Islamic principles of faith, knowledge, and justice.");
     const _ogt = document.querySelector('meta[property="og:title"]');
     if (_ogt) _ogt.setAttribute('content', "Our Vision | The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');

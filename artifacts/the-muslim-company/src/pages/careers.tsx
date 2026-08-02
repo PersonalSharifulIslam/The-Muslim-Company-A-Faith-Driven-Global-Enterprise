@@ -66,9 +66,9 @@ export default function Careers() {
     orgScript.textContent = JSON.stringify(orgSchema);
     document.head.appendChild(orgScript);
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Explore career opportunities at The Muslim Company — a global conglomerate committed to ethical leadership and long-term impact. Based in Dhaka, Bangladesh.");
+    if (_md) _md.setAttribute('content', "Explore open job opportunities at The Muslim Company, a faith-driven global conglomerate operating across 20+ sectors including technology, healthcare, finance, and manufacturing. Learn about employee benefits, our hiring process, and how to apply for a role building long-term ethical and civilizational impact.");
     const _ogt_d = document.querySelector('meta[property="og:description"]');
-    if (_ogt_d) _ogt_d.setAttribute('content', "Explore career opportunities at The Muslim Company — a global conglomerate committed to ethical leadership and long-term impact. Based in Dhaka, Bangladesh.");
+    if (_ogt_d) _ogt_d.setAttribute('content', "Explore open job opportunities at The Muslim Company, a faith-driven global conglomerate operating across 20+ sectors including technology, healthcare, finance, and manufacturing. Learn about employee benefits, our hiring process, and how to apply for a role building long-term ethical and civilizational impact.");
     const _can = document.querySelector('link[rel="canonical"]');
     if (_can) { _can.setAttribute('href', 'https://www.themuslim.company/careers'); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/careers'; document.head.appendChild(_cl); }
     const _ogu_c = document.querySelector('meta[property="og:url"]');

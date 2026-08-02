@@ -78,7 +78,7 @@ export default function Blog({ params }: { params?: { category?: string } }) {
     const canonicalUrl = urlCategory ? `https://www.themuslim.company/blog/category/${encodeURIComponent(urlCategory)}` : 'https://www.themuslim.company/blog';
     const description = urlCategory
       ? `Articles in "${urlCategory}" — insights and thought leadership from The Muslim Company.`
-      : "Insights, thought leadership, and articles from The Muslim Company — covering Islamic business, ethical innovation, and civilization-focused leadership.";
+      : "Read articles and insights from The Muslim Company on ethical business practices, Islamic finance, faith-driven entrepreneurship, technology, and civilization-building — perspectives from a Shariah-compliant global conglomerate operating across 20+ sectors.";
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', description);
     const _ogt_d = document.querySelector('meta[property="og:description"]');

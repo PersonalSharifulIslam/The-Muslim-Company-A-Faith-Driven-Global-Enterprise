@@ -106,9 +106,9 @@ export default function GetInvolvedPage() {
     orgScript.textContent = JSON.stringify(orgSchema);
     document.head.appendChild(orgScript);
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Partner with or support The Muslim Company. Discover opportunities to contribute to a faith-driven global conglomerate building long-term civilizational impact.");
+    if (_md) _md.setAttribute('content', "Ways to get involved with The Muslim Company — volunteer with our humanitarian Foundation, apply for an internship, contribute as a researcher or subject-matter expert, or join our advisory network. Discover how individuals and organizations can partner with a faith-driven enterprise building ethical civilization.");
     const _ogt_d = document.querySelector('meta[property="og:description"]');
-    if (_ogt_d) _ogt_d.setAttribute('content', "Partner with or support The Muslim Company. Discover opportunities to contribute to a faith-driven global conglomerate building long-term civilizational impact.");
+    if (_ogt_d) _ogt_d.setAttribute('content', "Ways to get involved with The Muslim Company — volunteer with our humanitarian Foundation, apply for an internship, contribute as a researcher or subject-matter expert, or join our advisory network. Discover how individuals and organizations can partner with a faith-driven enterprise building ethical civilization.");
     const _can = document.querySelector('link[rel="canonical"]');
     if (_can) _can.setAttribute('href', 'https://www.themuslim.company/get-involved');
     else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/get-involved'; document.head.appendChild(_cl); }
@@ -118,7 +118,7 @@ export default function GetInvolvedPage() {
     if (_rob) _rob.setAttribute('content', 'index, follow');
     else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const md = document.querySelector('meta[name="description"]');
-    if (md) md.setAttribute("content", "Join The Muslim Company's mission — volunteer, intern, research, advise, or mentor. The best of people are those most beneficial to people.");
+    if (md) md.setAttribute("content", "Ways to get involved with The Muslim Company — volunteer with our humanitarian Foundation, apply for an internship, contribute as a researcher or subject-matter expert, or join our advisory network. Discover how individuals and organizations can partner with a faith-driven enterprise building ethical civilization.");
     const ogt = document.querySelector('meta[property="og:title"]');
     if (ogt) ogt.setAttribute("content", "Get Involved — The Muslim Company");
     const ogd = document.querySelector('meta[property="og:description"]');

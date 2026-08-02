@@ -90,7 +90,7 @@ export default function AboutPage() {
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
 
-    const desc = "About The Muslim Company — a faith-driven global conglomerate founded by Shariful Islam in Dhaka, Bangladesh, operating across 20+ sectors including Technology, AI, Renewable Energy, Healthcare, and Humanitarian Development, governed by Amanah, Ilm, and Rahmah.";
+    const desc = "The Muslim Company is a faith-driven global conglomerate founded by Shariful Islam in January 2025, headquartered in Dhaka, Bangladesh. Learn our story, our guiding principles of Amanah (trust), Ilm (knowledge), and Rahmah (mercy), and how we operate across 20+ Shariah-compliant sectors — from technology and healthcare to agriculture and Islamic finance — under independent Shariah Board oversight.";
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', desc);
     const _ogt = document.querySelector('meta[property="og:title"]');

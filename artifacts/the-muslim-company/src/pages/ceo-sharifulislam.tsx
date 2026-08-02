@@ -297,7 +297,7 @@ export default function CeoSharifulIslamPage() {
   useEffect(() => {
     const url = "https://www.themuslim.company/ceo/Sharifulislam";
     const title = "Shariful Islam – CEO of The Muslim Company";
-    const description = "Shariful Islam serves as the Chief Executive Officer (CEO) of The Muslim Company, a diversified global conglomerate committed to innovation, long-term value creation, and ethical leadership.";
+    const description = "Shariful Islam serves as Chief Executive Officer of The Muslim Company, a diversified global conglomerate operating across 20+ sectors. Learn about his background as a Bangladeshi engineer and ethical entrepreneur, his role leading the company's Shariah-compliant operations, and his vision for innovation, ethical leadership, and long-term value creation.";
     const ogDescription = "Shariful Islam serves as CEO of The Muslim Company — a global conglomerate committed to innovation, long-term value creation, and ethical leadership.";
     const twitterDescription = "Chief Executive Officer (CEO) of The Muslim Company.";
     const image = "https://www.themuslim.company/shariful-islam-ceo.png";

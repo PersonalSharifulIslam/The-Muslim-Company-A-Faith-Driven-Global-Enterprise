@@ -45,7 +45,7 @@ const BANK_SCHEMA = {
   "name": "The Bayt Al-Mal Bank",
   "legalName": "The Bayt Al-Mal Bank",
   "url": "https://www.themuslim.company/baytalmalbank",
-  "description": "The Bayt Al-Mal Bank — an international Shariah-compliant financial institution under The Muslim Company, offering ethical, interest-free banking worldwide.",
+  "description": "The Bayt Al-Mal Bank is The Muslim Company's Islamic banking arm — an international, Shariah-compliant financial institution offering interest-free (riba-free) banking, savings, and financing products, along with its fintech app DinarX and the Dirham Payment Gateway, built on the principles of ethical, wealth-just Islamic finance.",
   "parentOrganization": {
     "@type": "Organization",
     "name": "The Muslim Company",
@@ -134,7 +134,7 @@ export default function BaytAlMalBankPage() {
     if (_can) { _can.setAttribute('href', _url); } else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = _url; document.head.appendChild(_cl); }
 
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "The Bayt Al-Mal Bank — an international Shariah-compliant financial institution under The Muslim Company, offering ethical, interest-free banking worldwide.");
+    if (_md) _md.setAttribute('content', "The Bayt Al-Mal Bank is The Muslim Company's Islamic banking arm — an international, Shariah-compliant financial institution offering interest-free (riba-free) banking, savings, and financing products, along with its fintech app DinarX and the Dirham Payment Gateway, built on the principles of ethical, wealth-just Islamic finance.");
 
     const _ogt = document.querySelector('meta[property="og:title"]');
     if (_ogt) _ogt.setAttribute('content', "The Bayt Al-Mal Bank — The Muslim Company");

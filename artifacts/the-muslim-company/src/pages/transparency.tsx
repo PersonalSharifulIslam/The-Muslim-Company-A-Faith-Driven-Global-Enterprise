@@ -79,9 +79,9 @@ export default function TransparencyPage() {
     orgScript.textContent = JSON.stringify(orgSchema);
     document.head.appendChild(orgScript);
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "The Muslim Company's commitment to transparency, ethical governance, and accountability. Explore our corporate policies, values, and operational standards.");
+    if (_md) _md.setAttribute('content', "The Muslim Company's public transparency reports — how zakat and sadaqah are calculated and distributed, humanitarian and environmental impact from our Foundation's work, detailed spending breakdowns, and independent Shariah Board oversight of our finances, published openly for anyone to review.");
     const _ogt_d = document.querySelector('meta[property="og:description"]');
-    if (_ogt_d) _ogt_d.setAttribute('content', "The Muslim Company's commitment to transparency, ethical governance, and accountability. Explore our corporate policies, values, and operational standards.");
+    if (_ogt_d) _ogt_d.setAttribute('content', "The Muslim Company's public transparency reports — how zakat and sadaqah are calculated and distributed, humanitarian and environmental impact from our Foundation's work, detailed spending breakdowns, and independent Shariah Board oversight of our finances, published openly for anyone to review.");
     const _can = document.querySelector('link[rel="canonical"]');
     if (_can) _can.setAttribute('href', 'https://www.themuslim.company/transparency');
     else { const _cl = document.createElement('link'); _cl.rel = 'canonical'; _cl.href = 'https://www.themuslim.company/transparency'; document.head.appendChild(_cl); }
@@ -103,7 +103,7 @@ export default function TransparencyPage() {
       _t.setAttribute('content', 'https://www.themuslim.company/og-transparency.png'); document.head.appendChild(_t);
     }
     const md = document.querySelector('meta[name="description"]');
-    if (md) md.setAttribute("content", "The Muslim Company's commitment to full transparency — charity distribution, zakat, humanitarian impact, governance, and financial ethics — all accountable to Allah and humanity.");
+    if (md) md.setAttribute("content", "The Muslim Company's public transparency reports — how zakat and sadaqah are calculated and distributed, humanitarian and environmental impact from our Foundation's work, detailed spending breakdowns, and independent Shariah Board oversight of our finances, published openly for anyone to review.");
     const ogt = document.querySelector('meta[property="og:title"]');
     if (ogt) ogt.setAttribute("content", "Transparency & Accountability — The Muslim Company");
     const ogd = document.querySelector('meta[property="og:description"]');

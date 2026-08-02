@@ -73,7 +73,7 @@ export default function Newsroom({ params }: { params?: { category?: string } })
     const canonicalUrl = urlCategory ? `https://www.themuslim.company/newsroom/category/${encodeURIComponent(urlCategory)}` : 'https://www.themuslim.company/newsroom';
     const description = urlCategory
       ? `${urlCategory} news and press releases from The Muslim Company.`
-      : "Official press releases, media coverage, and corporate announcements from The Muslim Company — a global conglomerate based in Dhaka, Bangladesh.";
+      : "Press releases, official announcements, and media coverage of The Muslim Company, a faith-driven global conglomerate headquartered in Dhaka, Bangladesh. Journalists and media professionals can find company news and press contact information here.";
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', description);
     const _ogt_d = document.querySelector('meta[property="og:description"]');

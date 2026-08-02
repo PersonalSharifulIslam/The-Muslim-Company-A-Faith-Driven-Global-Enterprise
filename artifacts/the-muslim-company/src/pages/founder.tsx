@@ -39,7 +39,7 @@ export default function FounderPage() {
     const _rob = document.querySelector('meta[name="robots"]');
     if (_rob) { _rob.setAttribute('content', 'index, follow'); } else { const _rl = document.createElement('meta'); _rl.name = 'robots'; _rl.content = 'index, follow'; document.head.appendChild(_rl); }
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Shariful Islam is the Founder of The Muslim Company — a global conglomerate built on ethical leadership and long-term civilizational impact. Dhaka, Bangladesh.");
+    if (_md) _md.setAttribute('content', "Shariful Islam is the Founder, Chairman, Managing Director, and CEO of The Muslim Company. A Bangladeshi electrical engineer, entrepreneur, and peace activist born in Jamalpur, Bangladesh, he founded the company in January 2025 to build an ethical, Shariah-compliant global conglomerate rooted in Islamic principles and long-term civilizational impact.");
     const _ogt = document.querySelector('meta[property="og:title"]');
     if (_ogt) _ogt.setAttribute('content', "Shariful Islam – Founder & CEO | The Muslim Company");
     const _ogd = document.querySelector('meta[property="og:description"]');

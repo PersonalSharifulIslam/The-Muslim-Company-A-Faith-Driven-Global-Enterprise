@@ -125,7 +125,7 @@ export default function ContactPage() {
     orgScript.textContent = JSON.stringify(orgSchema);
     document.head.appendChild(orgScript);
     const _md = document.querySelector('meta[name="description"]');
-    if (_md) _md.setAttribute('content', "Get in touch with The Muslim Company — a global conglomerate based in Dhaka, Bangladesh. Reach us for partnerships, media, or career inquiries.");
+    if (_md) _md.setAttribute('content', "Get in touch with The Muslim Company for general inquiries, business partnerships, media and press questions, career opportunities, or research collaboration. Find our Dhaka, Bangladesh office address, department-specific email contacts, and a direct contact form to reach the right team quickly.");
     const _ogt_d = document.querySelector('meta[property="og:description"]');
     if (_ogt_d) _ogt_d.setAttribute('content', "Get in touch with The Muslim Company — a global conglomerate based in Dhaka, Bangladesh. Reach us for partnerships, media, or career inquiries.");
     const _can = document.querySelector('link[rel="canonical"]');
@@ -157,7 +157,7 @@ export default function ContactPage() {
     const _ogu2 = document.querySelector('meta[property="og:url"]');
     if (_ogu2) _ogu2.setAttribute('content', 'https://www.themuslim.company/contact');
     const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', 'Get in touch with The Muslim Company — for general inquiries, partnerships, media, careers, research, or customer support.');
+    if (metaDesc) metaDesc.setAttribute('content', "Get in touch with The Muslim Company for general inquiries, business partnerships, media and press questions, career opportunities, or research collaboration. Find our Dhaka, Bangladesh office address, department-specific email contacts, and a direct contact form to reach the right team quickly.");
 
     document.querySelectorAll('script[data-contact-schema]').forEach(el => el.remove());
     schemas.forEach(schema => {

@@ -132,7 +132,7 @@ export default function FAQPage() {
   const [isBot] = useState(isCrawlerUA);
   useEffect(() => {
     document.title = "Frequently Asked Questions — The Muslim Company";
-    const desc = "Answers to common questions about The Muslim Company — our business, sectors, Shariah governance, careers, and humanitarian Foundation work.";
+    const desc = "Frequently asked questions about The Muslim Company answered in detail — what the company does, who leads it, how our Shariah Board approves new products, how to apply for jobs and check your application status, how our humanitarian Foundation is funded, and how to reach us for business, careers, or media inquiries.";
 
     const _md = document.querySelector('meta[name="description"]');
     if (_md) _md.setAttribute('content', desc);

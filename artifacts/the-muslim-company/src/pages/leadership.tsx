@@ -136,7 +136,7 @@ export default function LeadershipPage() {
         "name": title,
         "description": description,
         "url": url,
-        "isPartOf": { "@type": "Organization", "@id": ORG_ID, "name": "The Muslim Company", "url": "https://www.themuslim.company" },
+        "publisher": { "@type": "Organization", "@id": ORG_ID, "name": "The Muslim Company", "url": "https://www.themuslim.company" },
         "mainEntity": {
           "@type": "ItemList",
           "itemListElement": allPeople.map((p, i) => ({

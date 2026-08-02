@@ -6,47 +6,47 @@ export const SECTION_SEO: Record<string, { title: string; description: string }>
   "/our-story": {
     title: "Our Story — The Muslim Company",
     description:
-      "The story of how The Muslim Company began — from Shariful Islam's vision for an ethical, faith-driven enterprise to its founding in Dhaka, Bangladesh in 2025.",
+      "The story of how The Muslim Company began — from Shariful Islam's observation of ethical drift in modern business to his vision for a Prophetic Model enterprise, founded in Dhaka, Bangladesh in January 2025 and built to grow into a civilization-scale, faith-driven global conglomerate.",
   },
   "/foundation": {
     title: "Islamic Foundation — The Muslim Company",
     description:
-      "The Islamic foundation behind The Muslim Company — how the Quran, authentic Hadith, and the Prophetic Model guide every operation, free from riba and corruption.",
+      "The Islamic foundation behind The Muslim Company — how the Quran, authentic Hadith, Ijma, and Qiyas guide every business decision, and how the company structures itself to remain completely free from riba (interest), bribery, and exploitative practices at every level of operation.",
   },
   "/sectors": {
     title: "Areas of Work & Sectors — The Muslim Company",
     description:
-      "The Muslim Company's halal business sectors — Manufacturing, Retail, Fashion & Apparel, Electronics, Technology, and Humanitarian Development, among 20+ others.",
+      "The Muslim Company operates across 20+ Shariah-compliant business sectors — including Agriculture & Food, Technology & AI, Healthcare, Renewable Energy, Manufacturing, Islamic Finance & FinTech, Media, Education, and Humanitarian & Social Welfare — each governed by the same ethical and religious standards.",
   },
   "/governance": {
     title: "Governance Structure — The Muslim Company",
     description:
-      "How The Muslim Company is governed — a Supreme Shariah Board, Amanah-based leadership, and Shura consultation overseeing every major decision.",
+      "How The Muslim Company is governed — an Independent Supreme Shariah Board with real authority, Amanah-based (trust-centered) leadership, and Shura (consultative) decision-making overseeing every major product, investment, and partnership before it moves forward.",
   },
   "/constitution": {
     title: "Constitutional Framework — The Muslim Company",
     description:
-      "A permanent constitutional framework protects The Muslim Company's mission — permanent safeguards against corruption, hostile takeover, and ethical drift.",
+      "The permanent constitutional framework that protects The Muslim Company's ethical mission — structural safeguards against corruption, hostile takeover, and mission drift, ensuring every future leader remains bound by the same Islamic principles the company was founded on.",
   },
   "/our-people": {
     title: "Our People — The Muslim Company",
     description:
-      "How The Muslim Company treats its people — fair wages, dignified workplaces, extended maternity leave, and long-term welfare programs for every employee.",
+      "How The Muslim Company treats its people — fair wages, dignified workplaces with separate facilities for women, extended maternity leave of 1 to 1.5 years, long-term pension qualification, and family welfare programs built into how the company operates.",
   },
   "/environment": {
     title: "Environmental Stewardship — The Muslim Company",
     description:
-      "The Muslim Company's environmental commitments — renewable energy, wildlife protection, reforestation, and ecological restoration across every operation.",
+      "The Muslim Company's environmental commitments as stewards of Allah's creation — investment in renewable energy, protection of wildlife and animals, reforestation and tree planting, and ecological restoration woven into operations across every sector.",
   },
   "/humanitarian": {
     title: "Humanitarian Development — The Muslim Company",
     description:
-      "The Muslim Company's humanitarian work — 10% of monthly profit funds disaster relief, orphan and widow support, education, and healthcare worldwide.",
+      "The Muslim Company's humanitarian development work — 10% of monthly net profit funds disaster relief, orphan and widow support, education access, and healthcare programs for vulnerable communities in Bangladesh and beyond, alongside full annual zakat distribution.",
   },
   "/technology": {
     title: "Technology & AI Ethics — The Muslim Company",
     description:
-      "The Muslim Company's approach to technology and AI ethics — rejecting harmful AI, addiction-based systems, privacy abuse, and mass misinformation.",
+      "The Muslim Company's ethical framework for technology and artificial intelligence — a firm rejection of harmful AI applications, addiction-engineered systems, privacy-abusive data practices, and mass misinformation tools, in favor of technology that genuinely serves humanity.",
   },
 };
 
